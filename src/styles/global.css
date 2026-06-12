@@ -270,6 +270,46 @@ body {
   font-weight: 600;
 }
 
+/* stagger 예제: 같은 요소 여러 개의 시작 간격을 비교 */
+.stagger-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.stagger-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+}
+
+/* grid stagger 예제: DOM 순서가 행/열 분배의 기준이 된다 */
+.stagger-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 48px);
+  gap: 10px;
+  justify-content: center;
+}
+
+.stagger-cell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

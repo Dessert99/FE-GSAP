@@ -13,6 +13,7 @@ import { TimelineBasicsPage } from './timeline-basics/TimelineBasicsPage'
 import { TimelineControlsPage } from './timeline-controls/TimelineControlsPage'
 import { CallbacksPage } from './callbacks/CallbacksPage'
 import { KeyframesPage } from './keyframes/KeyframesPage'
+import { StaggerPage } from './stagger/StaggerPage'
 
 export type Lesson = {
   slug: string
@@ -36,4 +37,5 @@ export const lessons: Lesson[] = [
   { slug: 'timeline-controls', title: '타임라인 제어', Page: TimelineControlsPage },
   { slug: 'callbacks', title: '콜백', Page: CallbacksPage },
   { slug: 'keyframes', title: 'keyframes', Page: KeyframesPage },
+  { slug: 'stagger', title: 'stagger', Page: StaggerPage },
 ]
