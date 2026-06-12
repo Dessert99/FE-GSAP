@@ -4,17 +4,21 @@ import { CodeBlock } from './CodeBlock'
 
 type Props = {
   title: string
+  description?: string // 예제가 다루는 API나 옵션의 기능과 역할 설명
   code: string // 예제 소스를 ?raw로 불러온 문자열
   children: ReactNode // 실제로 실행되는 데모
 }
 
-export function ExamplePanel({ title, code, children }: Props) {
+export function ExamplePanel({ title, description, code, children }: Props) {
   const [runKey, setRunKey] = useState(0) // 값을 바꾸면 데모가 remount되어 애니메이션이 처음부터 다시 실행된다
 
   return (
     <section className="example">
       <div className="example__bar">
-        <h3 className="example__title">{title}</h3>
+        <div className="example__heading">
+          <h3 className="example__title">{title}</h3>
+          {description ? <p className="example__desc">{description}</p> : null}
+        </div>
         <button className="example__replay" onClick={() => setRunKey((n) => n + 1)}>
           다시 재생
         </button>
