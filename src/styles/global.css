@@ -230,6 +230,30 @@ body {
   border-radius: 8px;
 }
 
+/* 예제 내부에서 상태를 바꾸거나 이벤트 핸들러를 실행하는 작은 컨트롤 */
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.demo-button {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.demo-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {
