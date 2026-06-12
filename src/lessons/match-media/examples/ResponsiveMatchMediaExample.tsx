@@ -9,7 +9,7 @@ export function ResponsiveMatchMediaExample() {
   const readout = useRef<HTMLSpanElement>(null)
 
   useGSAP(
-    (context) => {
+    () => {
       // matchMedia 인스턴스는 여러 미디어쿼리별 GSAP context를 관리한다.
       const mm = gsap.matchMedia()
 
@@ -39,9 +39,9 @@ export function ResponsiveMatchMediaExample() {
       )
 
       // matchMedia는 전역 리스너를 가지므로 컴포넌트 cleanup에서 직접 되돌린다.
-      context.add(() => {
+      return () => {
         mm.revert()
-      })
+      }
     },
     { scope: container }, // useGSAP 자체 셀렉터도 container 안으로 한정
   )

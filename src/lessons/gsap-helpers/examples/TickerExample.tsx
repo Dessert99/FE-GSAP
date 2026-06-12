@@ -9,7 +9,7 @@ export function TickerExample() {
   const readout = useRef<HTMLSpanElement>(null)
 
   useGSAP(
-    (context) => {
+    () => {
       let frame = 0 // ticker 콜백이 호출된 횟수
 
       // ticker 콜백은 GSAP의 requestAnimationFrame 루프마다 실행된다.
@@ -27,9 +27,9 @@ export function TickerExample() {
       gsap.ticker.add(update) // GSAP 전역 ticker에 콜백을 등록한다
 
       // 전역 ticker는 context가 자동으로 제거하지 않으므로 cleanup에서 직접 remove한다.
-      context.add(() => {
+      return () => {
         gsap.ticker.remove(update)
-      })
+      }
     },
     { scope: container }, // 셀렉터를 container 안으로 한정
   )
