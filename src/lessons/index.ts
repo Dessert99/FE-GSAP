@@ -15,6 +15,7 @@ import { CallbacksPage } from './callbacks/CallbacksPage'
 import { KeyframesPage } from './keyframes/KeyframesPage'
 import { StaggerPage } from './stagger/StaggerPage'
 import { GsapUtilsPage } from './gsap-utils/GsapUtilsPage'
+import { GsapHelpersPage } from './gsap-helpers/GsapHelpersPage'
 
 export type Lesson = {
   slug: string
@@ -40,4 +41,5 @@ export const lessons: Lesson[] = [
   { slug: 'keyframes', title: 'keyframes', Page: KeyframesPage },
   { slug: 'stagger', title: 'stagger', Page: StaggerPage },
   { slug: 'gsap-utils', title: 'gsap.utils', Page: GsapUtilsPage },
+  { slug: 'gsap-helpers', title: 'GSAP 헬퍼 메서드', Page: GsapHelpersPage },
 ]

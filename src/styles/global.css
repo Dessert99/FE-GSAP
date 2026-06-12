@@ -400,6 +400,56 @@ body {
   left: 0;
 }
 
+/* GSAP 헬퍼 메서드 예제: 고빈도 업데이트와 ticker 결과를 보여준다 */
+.helper-pointer {
+  width: 100%;
+  max-width: 360px;
+}
+
+.helper-pointer__track {
+  position: relative;
+  height: 72px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  cursor: ew-resize;
+}
+
+.helper-dot {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.helper-ticker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.helper-ticker__dial {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--panel);
+}
+
+.helper-ticker__needle {
+  position: absolute;
+  top: 12px;
+  left: 46px;
+  width: 4px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--accent);
+  transform-origin: 50% 36px;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {
