@@ -1,0 +1,171 @@
+:root {
+  --bg: #0f172a;
+  --panel: #1e293b;
+  --stage: #0b1220;
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --accent: #38bdf8;
+  --border: #334155;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* 사이드바 */
+.sidebar {
+  border-right: 1px solid var(--border);
+  padding: 20px 12px;
+}
+
+.sidebar__title {
+  margin: 0 0 16px;
+  padding: 0 12px;
+  font-size: 18px;
+}
+
+.sidebar__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar__item {
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.sidebar__item:hover {
+  background: var(--panel);
+  color: var(--text);
+}
+
+.sidebar__item[data-active='true'] {
+  background: var(--panel);
+  color: var(--accent);
+}
+
+/* 콘텐츠 */
+.content {
+  padding: 32px 40px;
+  overflow-x: hidden;
+}
+
+/* 레슨 */
+.lesson__header {
+  margin-bottom: 24px;
+}
+
+.lesson__title {
+  margin: 0 0 8px;
+  font-size: 28px;
+}
+
+.lesson__desc {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.lesson__examples {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 예제 패널 */
+.example {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.example__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.example__title {
+  margin: 0;
+  font-size: 15px;
+}
+
+.example__replay {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #0f172a;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.example__replay:hover {
+  filter: brightness(1.1);
+}
+
+.example__body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.example__demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: 24px;
+  background: var(--stage);
+}
+
+.example__stage {
+  width: 100%;
+}
+
+/* 예제에서 공통으로 움직이는 박스 */
+.box {
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  background: var(--accent);
+}
+
+/* 코드 */
+/* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
+.code-block {
+  margin: 0;
+  padding: 16px 20px;
+  border-left: 1px solid var(--border);
+  overflow: auto;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  tab-size: 2;
+}

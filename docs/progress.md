@@ -1,0 +1,104 @@
+# 진행 현황 (Progress)
+
+이 문서는 GSAP 학습 코드북의 **진행 상태**를 추적한다. 학습 원칙과 커리큘럼 정의는 `project-plan.md`를 따른다. 이 문서는 그 위에 "어디까지 했는가"만 얹는다.
+
+**갱신 규칙**
+
+- 작업을 마치면 해당 항목 `[ ]` → `[x]`로 바꾸고, 아래 "현재 상태"를 갱신한다.
+- 세션을 시작할 때 이 문서를 먼저 읽어 진행률을 파악한다.
+- 큰 항목(예: ScrollTrigger)은 하위 항목이 모두 끝나야 단계 전체를 완료로 본다.
+
+## 현재 상태
+
+- 마지막 업데이트: 2026-06-12
+- 완료: 앱 스캐폴딩(Vite + React + TS), 학습용 공통 컴포넌트, `gsap.to` / `gsap.from` 레슨, 코드 문법 하이라이트(prism-react-renderer), 예제 전체 주석화
+- 진행 중: 없음
+- 다음 후보: 0단계(useGSAP 통합 페이지) 또는 1단계 나머지(`fromTo`, `set`, 핵심 속성)
+
+## 인프라 (레슨 외 골격)
+
+- [x] Vite + React + TS 스캐폴딩, `gsap` · `@gsap/react` 설치
+- [x] 사이드바 + 상태 기반 내비게이션 (`lessons/index.ts` 레지스트리)
+- [x] 공통 컴포넌트 — `LessonLayout` / `ExamplePanel` / `CodeBlock` / `Sidebar`
+- [x] `?raw` 코드 표시 + 문법 하이라이트(prism-react-renderer) (화면 코드 = 실제 실행 소스)
+- [x] 다시 재생 + 레슨 전환 시 초기화 (key remount)
+- [ ] README (앱 실행 방법)
+
+## 커리큘럼
+
+### 0단계 · 셋업과 React 통합
+
+- [ ] `gsap.registerPlugin()` — 플러그인 등록
+- [ ] `useGSAP()` — 적용 지점, cleanup, `contextSafe`, `scope`, 의존성 배열
+
+### 1단계 · 트윈 기초
+
+- [x] `gsap.to()`
+- [x] `gsap.from()`
+- [ ] `gsap.fromTo()`
+- [ ] `gsap.set()`
+- [ ] 핵심 속성 — `duration`, `delay`, `repeat`, `yoyo`, `repeatDelay`, `overwrite`, `immediateRender`
+- [ ] 값 표현 — 상대값(`"+=100"`), transform 단축속성(`x`, `y`, `rotation`, `scale`, `skew`, `transformOrigin`)
+
+### 2단계 · 이징
+
+- [ ] 내장 ease 전종류 (`power`, `back`, `elastic`, `bounce`, `steps`, `circ`, `expo`, `sine` 등)
+- [ ] `EasePack` — `RoughEase`, `SlowMo`, `ExpoScaleEase`
+- [ ] `CustomEase` / `CustomBounce` / `CustomWiggle`
+
+### 3단계 · 타임라인
+
+- [ ] `gsap.timeline()` — 생성, position parameter, 라벨, `defaults`, 중첩
+- [ ] 제어 — `play()` / `pause()` / `reverse()` / `restart()` / `seek()` / `timeScale()` / `progress()`
+
+### 4단계 · 콜백과 키프레임
+
+- [ ] 콜백 — `onStart` / `onUpdate` / `onComplete` / `onRepeat` / `onReverseComplete`, 파라미터, `callbackScope`
+- [ ] `keyframes` — 배열 문법과 객체 문법
+
+### 5단계 · stagger
+
+- [ ] 기본 stagger
+- [ ] 고급 객체 — `amount` / `each`, `from`, `grid`, `axis`, `ease`
+
+### 6단계 · 유틸리티와 헬퍼
+
+- [ ] `gsap.utils` — `toArray`, `selector`, `snap`, `clamp`, `mapRange`, `interpolate`, `wrap` / `wrapYoyo`, `distribute`, `random`, `pipe`, `unitize`, `normalize`
+- [ ] `gsap.getProperty()` / `gsap.quickTo()` / `gsap.quickSetter()` / `gsap.delayedCall()` / `gsap.ticker`
+- [ ] `gsap.matchMedia()` — 반응형 분기
+- [ ] `gsap.registerEffect()` — 재사용 효과
+- [ ] `ModifiersPlugin` — 값 가공
+
+### 7단계 · ScrollTrigger
+
+- [ ] 기본 트리거와 `toggleActions`
+- [ ] `start` / `end`, `markers`
+- [ ] `scrub`
+- [ ] `pin`
+- [ ] `snap`
+- [ ] 콜백 — `onEnter` / `onLeave` / `onEnterBack` / `onLeaveBack`
+- [ ] `ScrollTrigger.batch()`
+- [ ] 반응형 (`matchMedia`)
+- [ ] `ScrollToPlugin`
+- [ ] `ScrollSmoother`
+
+### 8단계 · 인터랙션 플러그인
+
+- [ ] `Draggable` (+ `InertiaPlugin`)
+- [ ] `Observer`
+- [ ] `Flip`
+
+### 9단계 · SVG와 텍스트
+
+- [ ] `DrawSVGPlugin`
+- [ ] `MorphSVGPlugin`
+- [ ] `MotionPathPlugin` (+ `MotionPathHelper`)
+- [ ] `SplitText`
+- [ ] `TextPlugin`
+- [ ] `ScrambleTextPlugin`
+
+### 10단계 · 고급과 디버깅
+
+- [ ] `Physics2DPlugin` / `PhysicsPropsPlugin`
+- [ ] `GSDevTools` — 타임라인 디버깅
+- [ ] `prefers-reduced-motion` 대응 — 접근성 실무 패턴
