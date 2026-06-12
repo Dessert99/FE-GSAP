@@ -513,6 +513,38 @@ body {
   );
 }
 
+/* ScrollTrigger 예제: 페이지 전체가 아니라 예제 내부 scroller를 사용한다 */
+.scroll-demo {
+  width: 100%;
+  max-width: 360px;
+  height: 240px;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #111827;
+}
+
+.scroll-spacer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  color: var(--muted);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+}
+
+.scroll-card {
+  width: 160px;
+  margin: 0 auto;
+  padding: 18px 14px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+  text-align: center;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

@@ -19,6 +19,7 @@ import { GsapHelpersPage } from './gsap-helpers/GsapHelpersPage'
 import { MatchMediaPage } from './match-media/MatchMediaPage'
 import { RegisterEffectPage } from './register-effect/RegisterEffectPage'
 import { ModifiersPluginPage } from './modifiers-plugin/ModifiersPluginPage'
+import { ScrollTriggerBasicsPage } from './scroll-trigger-basics/ScrollTriggerBasicsPage'
 
 export type Lesson = {
   slug: string
@@ -48,4 +49,5 @@ export const lessons: Lesson[] = [
   { slug: 'match-media', title: 'gsap.matchMedia()', Page: MatchMediaPage },
   { slug: 'register-effect', title: 'gsap.registerEffect()', Page: RegisterEffectPage },
   { slug: 'modifiers-plugin', title: 'ModifiersPlugin', Page: ModifiersPluginPage },
+  { slug: 'scroll-trigger-basics', title: 'ScrollTrigger 기본', Page: ScrollTriggerBasicsPage },
 ]
