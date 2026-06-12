@@ -185,6 +185,34 @@ body {
   border-radius: 8px;
 }
 
+/* 트윈 속성 예제: 여러 박스를 같은 폭의 레인 위에서 비교 */
+.tween-lanes {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.tween-lanes__row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tween-lanes__label {
+  color: var(--muted);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+}
+
+/* 이동 거리와 반복 흐름을 읽기 쉽게 만드는 기준선 */
+.tween-lanes__track {
+  height: 64px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

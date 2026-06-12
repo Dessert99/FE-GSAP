@@ -3,6 +3,7 @@ import { GsapToPage } from './gsap-to/GsapToPage'
 import { GsapFromPage } from './gsap-from/GsapFromPage'
 import { GsapFromToPage } from './gsap-from-to/GsapFromToPage'
 import { GsapSetPage } from './gsap-set/GsapSetPage'
+import { TweenPropertiesPage } from './tween-properties/TweenPropertiesPage'
 
 export type Lesson = {
   slug: string
@@ -16,4 +17,5 @@ export const lessons: Lesson[] = [
   { slug: 'gsap-from', title: 'gsap.from()', Page: GsapFromPage },
   { slug: 'gsap-from-to', title: 'gsap.fromTo()', Page: GsapFromToPage },
   { slug: 'gsap-set', title: 'gsap.set()', Page: GsapSetPage },
+  { slug: 'tween-properties', title: '트윈 핵심 속성', Page: TweenPropertiesPage },
 ]
