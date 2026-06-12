@@ -8,6 +8,7 @@ import { TweenValuesPage } from './tween-values/TweenValuesPage'
 import { ReactIntegrationPage } from './react-integration/ReactIntegrationPage'
 import { BuiltInEasesPage } from './built-in-eases/BuiltInEasesPage'
 import { EasePackPage } from './ease-pack/EasePackPage'
+import { CustomEasesPage } from './custom-eases/CustomEasesPage'
 
 export type Lesson = {
   slug: string
@@ -26,4 +27,5 @@ export const lessons: Lesson[] = [
   { slug: 'tween-values', title: '트윈 값 표현', Page: TweenValuesPage },
   { slug: 'built-in-eases', title: '내장 ease', Page: BuiltInEasesPage },
   { slug: 'ease-pack', title: 'EasePack', Page: EasePackPage },
+  { slug: 'custom-eases', title: 'Custom Eases', Page: CustomEasesPage },
 ]
