@@ -450,6 +450,32 @@ body {
   transform-origin: 50% 36px;
 }
 
+/* registerEffect 예제: 재사용 effect가 적용되는 작은 시퀀스 */
+.effect-sequence {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.effect-title,
+.effect-step {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.effect-title {
+  color: var(--accent);
+}
+
+.effect-step {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

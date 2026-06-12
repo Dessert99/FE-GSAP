@@ -17,6 +17,7 @@ import { StaggerPage } from './stagger/StaggerPage'
 import { GsapUtilsPage } from './gsap-utils/GsapUtilsPage'
 import { GsapHelpersPage } from './gsap-helpers/GsapHelpersPage'
 import { MatchMediaPage } from './match-media/MatchMediaPage'
+import { RegisterEffectPage } from './register-effect/RegisterEffectPage'
 
 export type Lesson = {
   slug: string
@@ -44,4 +45,5 @@ export const lessons: Lesson[] = [
   { slug: 'gsap-utils', title: 'gsap.utils', Page: GsapUtilsPage },
   { slug: 'gsap-helpers', title: 'GSAP 헬퍼 메서드', Page: GsapHelpersPage },
   { slug: 'match-media', title: 'gsap.matchMedia()', Page: MatchMediaPage },
+  { slug: 'register-effect', title: 'gsap.registerEffect()', Page: RegisterEffectPage },
 ]
