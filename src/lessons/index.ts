@@ -20,6 +20,15 @@ import { MatchMediaPage } from './match-media/MatchMediaPage'
 import { RegisterEffectPage } from './register-effect/RegisterEffectPage'
 import { ModifiersPluginPage } from './modifiers-plugin/ModifiersPluginPage'
 import { ScrollTriggerBasicsPage } from './scroll-trigger-basics/ScrollTriggerBasicsPage'
+import { ScrollTriggerStartEndPage } from './scroll-trigger-start-end/ScrollTriggerStartEndPage'
+import { ScrollTriggerScrubPage } from './scroll-trigger-scrub/ScrollTriggerScrubPage'
+import { ScrollTriggerPinPage } from './scroll-trigger-pin/ScrollTriggerPinPage'
+import { ScrollTriggerSnapPage } from './scroll-trigger-snap/ScrollTriggerSnapPage'
+import { ScrollTriggerCallbacksPage } from './scroll-trigger-callbacks/ScrollTriggerCallbacksPage'
+import { ScrollTriggerBatchPage } from './scroll-trigger-batch/ScrollTriggerBatchPage'
+import { ScrollTriggerMatchMediaPage } from './scroll-trigger-match-media/ScrollTriggerMatchMediaPage'
+import { ScrollToPluginPage } from './scroll-to-plugin/ScrollToPluginPage'
+import { ScrollSmootherPage } from './scroll-smoother/ScrollSmootherPage'
 
 export type Lesson = {
   slug: string
@@ -50,4 +59,13 @@ export const lessons: Lesson[] = [
   { slug: 'register-effect', title: 'gsap.registerEffect()', Page: RegisterEffectPage },
   { slug: 'modifiers-plugin', title: 'ModifiersPlugin', Page: ModifiersPluginPage },
   { slug: 'scroll-trigger-basics', title: 'ScrollTrigger 기본', Page: ScrollTriggerBasicsPage },
+  { slug: 'scroll-trigger-start-end', title: 'ScrollTrigger start/end', Page: ScrollTriggerStartEndPage },
+  { slug: 'scroll-trigger-scrub', title: 'ScrollTrigger scrub', Page: ScrollTriggerScrubPage },
+  { slug: 'scroll-trigger-pin', title: 'ScrollTrigger pin', Page: ScrollTriggerPinPage },
+  { slug: 'scroll-trigger-snap', title: 'ScrollTrigger snap', Page: ScrollTriggerSnapPage },
+  { slug: 'scroll-trigger-callbacks', title: 'ScrollTrigger 콜백', Page: ScrollTriggerCallbacksPage },
+  { slug: 'scroll-trigger-batch', title: 'ScrollTrigger.batch()', Page: ScrollTriggerBatchPage },
+  { slug: 'scroll-trigger-match-media', title: 'ScrollTrigger matchMedia', Page: ScrollTriggerMatchMediaPage },
+  { slug: 'scroll-to-plugin', title: 'ScrollToPlugin', Page: ScrollToPluginPage },
+  { slug: 'scroll-smoother', title: 'ScrollSmoother', Page: ScrollSmootherPage },
 ]
