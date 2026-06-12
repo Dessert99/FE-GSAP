@@ -9,6 +9,8 @@ import { ReactIntegrationPage } from './react-integration/ReactIntegrationPage'
 import { BuiltInEasesPage } from './built-in-eases/BuiltInEasesPage'
 import { EasePackPage } from './ease-pack/EasePackPage'
 import { CustomEasesPage } from './custom-eases/CustomEasesPage'
+import { TimelineBasicsPage } from './timeline-basics/TimelineBasicsPage'
+import { TimelineControlsPage } from './timeline-controls/TimelineControlsPage'
 
 export type Lesson = {
   slug: string
@@ -28,4 +30,6 @@ export const lessons: Lesson[] = [
   { slug: 'built-in-eases', title: '내장 ease', Page: BuiltInEasesPage },
   { slug: 'ease-pack', title: 'EasePack', Page: EasePackPage },
   { slug: 'custom-eases', title: 'Custom Eases', Page: CustomEasesPage },
+  { slug: 'timeline-basics', title: '타임라인 기본', Page: TimelineBasicsPage },
+  { slug: 'timeline-controls', title: '타임라인 제어', Page: TimelineControlsPage },
 ]
