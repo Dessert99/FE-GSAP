@@ -14,6 +14,7 @@ import { TimelineControlsPage } from './timeline-controls/TimelineControlsPage'
 import { CallbacksPage } from './callbacks/CallbacksPage'
 import { KeyframesPage } from './keyframes/KeyframesPage'
 import { StaggerPage } from './stagger/StaggerPage'
+import { GsapUtilsPage } from './gsap-utils/GsapUtilsPage'
 
 export type Lesson = {
   slug: string
@@ -38,4 +39,5 @@ export const lessons: Lesson[] = [
   { slug: 'callbacks', title: '콜백', Page: CallbacksPage },
   { slug: 'keyframes', title: 'keyframes', Page: KeyframesPage },
   { slug: 'stagger', title: 'stagger', Page: StaggerPage },
+  { slug: 'gsap-utils', title: 'gsap.utils', Page: GsapUtilsPage },
 ]
