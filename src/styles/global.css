@@ -476,6 +476,43 @@ body {
   color: var(--text);
 }
 
+/* ModifiersPlugin 예제: 최종 출력값 보정 결과를 보여준다 */
+.modifier-window {
+  width: 280px;
+  overflow: hidden;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+.modifier-strip {
+  position: relative;
+  height: 72px;
+}
+
+.modifier-item {
+  position: absolute;
+  top: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.modifier-grid-track {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent 39px,
+    rgba(148, 163, 184, 0.35) 39px,
+    rgba(148, 163, 184, 0.35) 40px
+  );
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {
