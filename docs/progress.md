@@ -11,9 +11,9 @@
 ## 현재 상태
 
 - 마지막 업데이트: 2026-06-12
-- 완료: 앱 스캐폴딩(Vite + React + TS), 학습용 공통 컴포넌트, `gsap.to` / `gsap.from` 레슨, 코드 문법 하이라이트(prism-react-renderer), 예제 전체 주석화
+- 완료: 앱 스캐폴딩(Vite + React + TS), 학습용 공통 컴포넌트, 코드 문법 하이라이트(prism-react-renderer), 예제 전체 주석화, 트윈 기초 4종(`to`/`from`/`fromTo`/`set`)
 - 진행 중: 없음
-- 다음 후보: 0단계(useGSAP 통합 페이지) 또는 1단계 나머지(`fromTo`, `set`, 핵심 속성)
+- 다음 후보: 1단계 나머지(핵심 속성, 값 표현) 또는 0단계(useGSAP 통합 페이지)
 
 ## 인프라 (레슨 외 골격)
 
@@ -35,8 +35,8 @@
 
 - [x] `gsap.to()`
 - [x] `gsap.from()`
-- [ ] `gsap.fromTo()`
-- [ ] `gsap.set()`
+- [x] `gsap.fromTo()`
+- [x] `gsap.set()`
 - [ ] 핵심 속성 — `duration`, `delay`, `repeat`, `yoyo`, `repeatDelay`, `overwrite`, `immediateRender`
 - [ ] 값 표현 — 상대값(`"+=100"`), transform 단축속성(`x`, `y`, `rotation`, `scale`, `skew`, `transformOrigin`)
 

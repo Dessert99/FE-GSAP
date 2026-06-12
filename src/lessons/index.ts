@@ -1,6 +1,8 @@
 import type { ComponentType } from 'react'
 import { GsapToPage } from './gsap-to/GsapToPage'
 import { GsapFromPage } from './gsap-from/GsapFromPage'
+import { GsapFromToPage } from './gsap-from-to/GsapFromToPage'
+import { GsapSetPage } from './gsap-set/GsapSetPage'
 
 export type Lesson = {
   slug: string
@@ -12,4 +14,6 @@ export type Lesson = {
 export const lessons: Lesson[] = [
   { slug: 'gsap-to', title: 'gsap.to()', Page: GsapToPage },
   { slug: 'gsap-from', title: 'gsap.from()', Page: GsapFromPage },
+  { slug: 'gsap-from-to', title: 'gsap.fromTo()', Page: GsapFromToPage },
+  { slug: 'gsap-set', title: 'gsap.set()', Page: GsapSetPage },
 ]

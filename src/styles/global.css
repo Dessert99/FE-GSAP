@@ -157,6 +157,34 @@ body {
   background: var(--accent);
 }
 
+/* gsap.set 예제: set/to 박스를 트랙(레인) 위에서 나란히 비교 */
+.set-compare {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.set-compare__row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.set-compare__label {
+  color: var(--muted);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+}
+
+/* 박스가 그 위를 이동하는 레인. 빈 왼쪽 구간이 출발점→도착점을 드러낸다 */
+.set-compare__track {
+  height: 64px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {
