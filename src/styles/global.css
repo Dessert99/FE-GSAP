@@ -254,6 +254,22 @@ body {
   color: var(--accent);
 }
 
+/* 콜백 예제에서 이벤트 실행 결과를 짧게 표시하는 영역 */
+.callback-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+  color: var(--muted);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 12px;
+}
+
+.callback-readout strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

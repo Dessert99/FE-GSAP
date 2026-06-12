@@ -11,6 +11,8 @@ import { EasePackPage } from './ease-pack/EasePackPage'
 import { CustomEasesPage } from './custom-eases/CustomEasesPage'
 import { TimelineBasicsPage } from './timeline-basics/TimelineBasicsPage'
 import { TimelineControlsPage } from './timeline-controls/TimelineControlsPage'
+import { CallbacksPage } from './callbacks/CallbacksPage'
+import { KeyframesPage } from './keyframes/KeyframesPage'
 
 export type Lesson = {
   slug: string
@@ -32,4 +34,6 @@ export const lessons: Lesson[] = [
   { slug: 'custom-eases', title: 'Custom Eases', Page: CustomEasesPage },
   { slug: 'timeline-basics', title: '타임라인 기본', Page: TimelineBasicsPage },
   { slug: 'timeline-controls', title: '타임라인 제어', Page: TimelineControlsPage },
+  { slug: 'callbacks', title: '콜백', Page: CallbacksPage },
+  { slug: 'keyframes', title: 'keyframes', Page: KeyframesPage },
 ]
