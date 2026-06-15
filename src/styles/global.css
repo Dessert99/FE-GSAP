@@ -798,6 +798,104 @@ body {
   height: 112px;
 }
 
+/* SVG와 텍스트 플러그인 예제: path, shape, 텍스트 단위 애니메이션을 작게 보여준다 */
+.svg-demo,
+.text-demo {
+  width: 100%;
+  max-width: 360px;
+}
+
+.svg-stage {
+  display: block;
+  width: 100%;
+  min-height: 180px;
+  overflow: visible;
+}
+
+.svg-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.svg-line--muted {
+  stroke: rgba(148, 163, 184, 0.55);
+  stroke-width: 4;
+}
+
+.svg-fill-shape {
+  fill: var(--accent);
+}
+
+.motion-demo {
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  height: 220px;
+}
+
+.motion-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.motion-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 34px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.split-title,
+.text-line {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.split-title {
+  overflow: hidden;
+  font-size: 36px;
+}
+
+.split-word {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.split-char {
+  display: inline-block;
+}
+
+.text-line {
+  min-height: 58px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 16px;
+}
+
+.text-line--code {
+  color: var(--accent);
+  letter-spacing: 0;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

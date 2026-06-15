@@ -32,6 +32,12 @@ import { ScrollSmootherPage } from './scroll-smoother/ScrollSmootherPage'
 import { DraggablePage } from './draggable/DraggablePage'
 import { ObserverPage } from './observer/ObserverPage'
 import { FlipPage } from './flip/FlipPage'
+import { DrawSvgPluginPage } from './draw-svg-plugin/DrawSvgPluginPage'
+import { MorphSvgPluginPage } from './morph-svg-plugin/MorphSvgPluginPage'
+import { MotionPathPluginPage } from './motion-path-plugin/MotionPathPluginPage'
+import { SplitTextPage } from './split-text/SplitTextPage'
+import { TextPluginPage } from './text-plugin/TextPluginPage'
+import { ScrambleTextPluginPage } from './scramble-text-plugin/ScrambleTextPluginPage'
 
 export type Lesson = {
   slug: string
@@ -74,4 +80,10 @@ export const lessons: Lesson[] = [
   { slug: 'draggable', title: 'Draggable', Page: DraggablePage },
   { slug: 'observer', title: 'Observer', Page: ObserverPage },
   { slug: 'flip', title: 'Flip', Page: FlipPage },
+  { slug: 'draw-svg-plugin', title: 'DrawSVGPlugin', Page: DrawSvgPluginPage },
+  { slug: 'morph-svg-plugin', title: 'MorphSVGPlugin', Page: MorphSvgPluginPage },
+  { slug: 'motion-path-plugin', title: 'MotionPathPlugin', Page: MotionPathPluginPage },
+  { slug: 'split-text', title: 'SplitText', Page: SplitTextPage },
+  { slug: 'text-plugin', title: 'TextPlugin', Page: TextPluginPage },
+  { slug: 'scramble-text-plugin', title: 'ScrambleTextPlugin', Page: ScrambleTextPluginPage },
 ]
