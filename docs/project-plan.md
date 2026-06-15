@@ -40,15 +40,18 @@
 ```txt
 src/
   app/
-    App.tsx                 # /lessons/:slug 경로와 선택된 레슨 렌더링
+    App.tsx                 # /lessons/:slug, /practices/:slug 경로와 탭별 화면 렌더링
   components/
     learning/
-      Sidebar.tsx           # lessons/index.ts 목록으로 레슨 링크 표시
+      Header.tsx            # API / 실습 탭 전환
+      PracticeNav.tsx       # 실습 탭에서 practiceLessons를 태그형 링크로 표시
+      Sidebar.tsx           # API 탭에서만 apiLessons 목록 표시
       LessonLayout.tsx
-      ExamplePanel.tsx      # 데모 + 코드 + 다시 재생 컨트롤
+      ExamplePanel.tsx      # API 레슨용 좌우 데모 + 코드 + 다시 재생 컨트롤
+      PracticePanel.tsx     # 실습용 상하 렌더링 결과 + 코드 + 다시 재생 컨트롤
       CodeBlock.tsx         # ?raw로 받은 소스 문자열 표시
   lessons/
-    index.ts                # 레슨 등록(슬러그·제목·페이지 컴포넌트)
+    index.ts                # apiLessons / practiceLessons 등록
     gsap-to/
       GsapToPage.tsx
       examples/
@@ -58,7 +61,7 @@ src/
     global.css
 ```
 
-- `lessons/index.ts`는 사이드바와 레슨 라우트의 단일 소스다. 레슨 슬러그·제목·페이지 컴포넌트를 한 배열로 등록한다.
+- `lessons/index.ts`는 API 레슨과 실습 레슨의 단일 소스다. API는 `apiLessons`, 실습은 `practiceLessons`에 슬러그·제목·페이지 컴포넌트를 등록한다.
 - `lessons/<lesson-slug>/`는 하나의 GSAP 메서드나 개념을 다루는 단위다.
 - `examples/`에는 해당 학습 페이지에서 실제로 렌더링되는 예제 컴포넌트만 둔다.
 - `components/learning/`에는 여러 학습 페이지에서 반복해서 쓰는 화면 구성 컴포넌트만 둔다.
@@ -78,7 +81,7 @@ src/
 - GSAP React 예제는 `@gsap/react`의 `useGSAP()` 사용을 우선한다.
 - 단순 GSAP 문법과 React에서 안전하게 쓰는 패턴을 구분해서 보여준다.
 - 문법 기준은 GSAP 공식 문서를 우선하고, 예제 구성은 실무에서 자주 쓰이는 방식에 맞춘다.
-- 레슨 간 이동은 `/lessons/:slug` 경로를 사용한다. 별도 라우터 의존성 없이 `lessons/index.ts` 등록 목록이 사이드바 링크와 경로 매칭을 모두 구동한다.
+- API 레슨 간 이동은 `/lessons/:slug`, 실습 간 이동은 `/practices/:slug` 경로를 사용한다. 별도 라우터 의존성 없이 `lessons/index.ts` 등록 목록이 탭, 사이드바 링크, 경로 매칭을 구동한다.
 
 ## 커리큘럼 (GSAP 전체)
 
@@ -157,6 +160,14 @@ GSAP 고유 기능 전체를 기초 → 고급 순서로 단계화한다. 각 �
 - `Physics2DPlugin` / `PhysicsPropsPlugin`
 - `GSDevTools` — 타임라인 디버깅
 - `prefers-reduced-motion` 대응 — 접근성을 지키는 실무 표준 패턴
+
+## 실무 실습 트랙
+
+기본 API 커리큘럼을 끝낸 뒤에는 `docs/practice-plan.md`의 실무 실습 트랙으로 넘어간다. 기존 레슨이 API 단위 학습이라면, 실무 실습은 여러 API를 조합해 하나의 UI 요구사항을 끝까지 구현하는 연습이다.
+
+앱 화면은 상단 헤더 탭으로 `API`와 `실습`을 분리한다. `API` 탭에서는 기존처럼 왼쪽 사이드바로 API 레슨을 이동하고, 각 예제는 데모와 코드를 좌우로 나란히 본다. `실습` 탭에서는 헤더 바로 아래에 실습 route를 태그형 링크로 쌓고, 사이드바를 숨긴다. 실습 본문은 위에는 실제 렌더링 결과를 크게 보여주며 아래에는 같은 소스의 코드 스니펫을 보여준다.
+
+실무 실습의 주석은 코드의 정체보다 코드의 영향을 우선 설명한다. 예를 들어 "timeline 생성"보다 "이 timeline이 히어로 요소의 등장 순서를 한 재생 단위로 묶는다"처럼 화면, 상태, cleanup에 생기는 변화를 적는다.
 
 ## 첫 마일스톤
 

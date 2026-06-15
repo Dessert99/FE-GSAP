@@ -41,6 +41,9 @@ import { ScrambleTextPluginPage } from './scramble-text-plugin/ScrambleTextPlugi
 import { PhysicsPluginsPage } from './physics-plugins/PhysicsPluginsPage'
 import { GSDevToolsPage } from './gs-dev-tools/GSDevToolsPage'
 import { ReducedMotionPage } from './reduced-motion/ReducedMotionPage'
+import { PracticeHeroIntroPage } from './practice-hero-intro/PracticeHeroIntroPage'
+
+export type Section = 'api' | 'practice'
 
 export type Lesson = {
   slug: string
@@ -48,8 +51,8 @@ export type Lesson = {
   Page: ComponentType
 }
 
-// 사이드바와 페이지 전환의 단일 소스. 새 레슨은 여기에 등록한다.
-export const lessons: Lesson[] = [
+// API 탭의 사이드바와 페이지 전환의 단일 소스. 새 API 레슨은 여기에 등록한다.
+export const apiLessons: Lesson[] = [
   { slug: 'react-integration', title: 'React 통합', Page: ReactIntegrationPage },
   { slug: 'gsap-to', title: 'gsap.to()', Page: GsapToPage },
   { slug: 'gsap-from', title: 'gsap.from()', Page: GsapFromPage },
@@ -92,4 +95,9 @@ export const lessons: Lesson[] = [
   { slug: 'physics-plugins', title: 'Physics 플러그인', Page: PhysicsPluginsPage },
   { slug: 'gs-dev-tools', title: 'GSDevTools', Page: GSDevToolsPage },
   { slug: 'reduced-motion', title: 'prefers-reduced-motion', Page: ReducedMotionPage },
+]
+
+// 실습 탭의 단일 소스. 실습은 사이드바 없이 상단 결과/하단 코드 레이아웃으로 보여준다.
+export const practiceLessons: Lesson[] = [
+  { slug: 'practice-hero-intro', title: '실무 실습: Hero Intro', Page: PracticeHeroIntroPage },
 ]
