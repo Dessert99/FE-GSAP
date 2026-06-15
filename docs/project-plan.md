@@ -51,7 +51,7 @@ src/
       PracticePanel.tsx     # 실습용 상하 렌더링 결과 + 코드 + 다시 재생 컨트롤
       CodeBlock.tsx         # ?raw로 받은 소스 문자열 표시
   lessons/
-    index.ts                # apiLessons / practiceLessons 등록
+    index.ts                # apiLessons / practiceLessons 등록, 페이지는 lazy import
     gsap-to/
       GsapToPage.tsx
       examples/
@@ -61,7 +61,7 @@ src/
     global.css
 ```
 
-- `lessons/index.ts`는 API 레슨과 실습 레슨의 단일 소스다. API는 `apiLessons`, 실습은 `practiceLessons`에 슬러그·제목·페이지 컴포넌트를 등록한다.
+- `lessons/index.ts`는 API 레슨과 실습 레슨의 단일 소스다. API는 `apiLessons`, 실습은 `practiceLessons`에 슬러그·제목·lazy page loader를 등록한다.
 - `lessons/<lesson-slug>/`는 하나의 GSAP 메서드나 개념을 다루는 단위다.
 - `examples/`에는 해당 학습 페이지에서 실제로 렌더링되는 예제 컴포넌트만 둔다.
 - `components/learning/`에는 여러 학습 페이지에서 반복해서 쓰는 화면 구성 컴포넌트만 둔다.
@@ -81,7 +81,7 @@ src/
 - GSAP React 예제는 `@gsap/react`의 `useGSAP()` 사용을 우선한다.
 - 단순 GSAP 문법과 React에서 안전하게 쓰는 패턴을 구분해서 보여준다.
 - 문법 기준은 GSAP 공식 문서를 우선하고, 예제 구성은 실무에서 자주 쓰이는 방식에 맞춘다.
-- API 레슨 간 이동은 `/lessons/:slug`, 실습 간 이동은 `/practices/:slug` 경로를 사용한다. 별도 라우터 의존성 없이 `lessons/index.ts` 등록 목록이 탭, 사이드바 링크, 경로 매칭을 구동한다.
+- API 레슨 간 이동은 `/lessons/:slug`, 실습 간 이동은 `/practices/:slug` 경로를 사용한다. 별도 라우터 의존성 없이 `lessons/index.ts` 등록 목록이 탭, 사이드바 링크, 경로 매칭을 구동한다. 페이지 컴포넌트는 `React.lazy()`로 route 단위 chunk에 분리해 첫 번들에 모든 레슨과 `?raw` 코드 문자열이 한꺼번에 들어가지 않게 한다.
 
 ## 커리큘럼 (GSAP 전체)
 

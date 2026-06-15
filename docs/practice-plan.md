@@ -31,9 +31,9 @@
 
 - 목표: `ScrollTrigger`, `pin`, `scrub`, `batch`, `matchMedia`를 제품 소개 스크롤 섹션으로 조합한다.
 - 완료 기준:
-  - 데스크톱은 pin/scrub을 사용한다.
-  - 모바일은 pin 없이 순차 등장으로 단순화한다.
-  - resize와 route change 후 ScrollTrigger가 중복되지 않는다.
+  - 데스크톱은 pin/scrub을 사용한다. `[완료]`
+  - 모바일은 pin 없이 순차 등장으로 단순화한다. `[완료]`
+  - resize와 route change 후 ScrollTrigger가 중복되지 않는다. `[완료: useGSAP scope + matchMedia revert]`
 
 ### 3. Interactive Gallery
 

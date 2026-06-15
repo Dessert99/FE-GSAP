@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Header } from '../components/learning/Header'
 import { PracticeNav } from '../components/learning/PracticeNav'
 import { Sidebar } from '../components/learning/Sidebar'
@@ -111,8 +111,10 @@ export function App() {
           />
         ) : null}
         <main className={activeRoute.section === 'api' ? 'content content--api' : 'content content--practice'}>
-          {/* key=section+slug: 탭이나 페이지를 바꾸면 이전 GSAP 데모가 정리되고 새 화면은 초기 상태에서 시작한다 */}
-          <ActivePage key={`${activeRoute.section}-${active.slug}`} />
+          <Suspense fallback={<div className="route-loading">페이지를 불러오는 중...</div>}>
+            {/* key=section+slug: 탭이나 페이지를 바꾸면 이전 GSAP 데모가 정리되고 새 화면은 초기 상태에서 시작한다 */}
+            <ActivePage key={`${activeRoute.section}-${active.slug}`} />
+          </Suspense>
         </main>
       </div>
     </div>
