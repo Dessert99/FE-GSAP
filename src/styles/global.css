@@ -896,6 +896,60 @@ body {
   letter-spacing: 0;
 }
 
+/* 고급과 디버깅 예제: 물리 기반 움직임과 timeline 디버그 UI */
+.physics-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.physics-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.physics-stage {
+  position: relative;
+  height: 132px;
+  overflow: hidden;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: #111827;
+}
+
+.physics-ball {
+  position: absolute;
+  top: 12px;
+  left: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.physics-ball--props {
+  border-radius: 10px;
+  background: #22c55e;
+}
+
+.devtools-demo {
+  width: 100%;
+  max-width: 420px;
+}
+
+.devtools-panel {
+  position: relative;
+  min-height: 76px;
+  margin-top: 14px;
+  overflow: visible;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #111827;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

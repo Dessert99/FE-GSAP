@@ -38,6 +38,9 @@ import { MotionPathPluginPage } from './motion-path-plugin/MotionPathPluginPage'
 import { SplitTextPage } from './split-text/SplitTextPage'
 import { TextPluginPage } from './text-plugin/TextPluginPage'
 import { ScrambleTextPluginPage } from './scramble-text-plugin/ScrambleTextPluginPage'
+import { PhysicsPluginsPage } from './physics-plugins/PhysicsPluginsPage'
+import { GSDevToolsPage } from './gs-dev-tools/GSDevToolsPage'
+import { ReducedMotionPage } from './reduced-motion/ReducedMotionPage'
 
 export type Lesson = {
   slug: string
@@ -86,4 +89,7 @@ export const lessons: Lesson[] = [
   { slug: 'split-text', title: 'SplitText', Page: SplitTextPage },
   { slug: 'text-plugin', title: 'TextPlugin', Page: TextPluginPage },
   { slug: 'scramble-text-plugin', title: 'ScrambleTextPlugin', Page: ScrambleTextPluginPage },
+  { slug: 'physics-plugins', title: 'Physics 플러그인', Page: PhysicsPluginsPage },
+  { slug: 'gs-dev-tools', title: 'GSDevTools', Page: GSDevToolsPage },
+  { slug: 'reduced-motion', title: 'prefers-reduced-motion', Page: ReducedMotionPage },
 ]
