@@ -704,6 +704,100 @@ body {
   background: #111827;
 }
 
+/* 인터랙션 플러그인 예제: pointer/touch 입력을 확인할 수 있는 제한된 작업 영역 */
+.drag-area {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  height: 220px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: #111827;
+  touch-action: none;
+}
+
+.drag-card,
+.observer-card,
+.flip-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: 700;
+  user-select: none;
+}
+
+.drag-card {
+  position: absolute;
+  top: 72px;
+  left: 126px;
+  width: 88px;
+  height: 72px;
+  cursor: grab;
+}
+
+.drag-card:active {
+  cursor: grabbing;
+}
+
+.observer-pad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 340px;
+  height: 220px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: #111827;
+  touch-action: none;
+}
+
+.observer-card {
+  width: 112px;
+  height: 72px;
+}
+
+.flip-demo {
+  width: 100%;
+  max-width: 420px;
+}
+
+.flip-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 14px;
+  align-items: stretch;
+}
+
+.flip-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: #111827;
+}
+
+.flip-slot--wide {
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 18px;
+}
+
+.flip-card {
+  width: 84px;
+  height: 64px;
+}
+
+.flip-card--wide {
+  width: 180px;
+  height: 112px;
+}
+
 /* 코드 */
 /* 배경/토큰 색은 prism 테마(인라인 style)가 담당하고, 여기선 여백·폰트·스크롤만 잡는다 */
 .code-block {

@@ -29,6 +29,9 @@ import { ScrollTriggerBatchPage } from './scroll-trigger-batch/ScrollTriggerBatc
 import { ScrollTriggerMatchMediaPage } from './scroll-trigger-match-media/ScrollTriggerMatchMediaPage'
 import { ScrollToPluginPage } from './scroll-to-plugin/ScrollToPluginPage'
 import { ScrollSmootherPage } from './scroll-smoother/ScrollSmootherPage'
+import { DraggablePage } from './draggable/DraggablePage'
+import { ObserverPage } from './observer/ObserverPage'
+import { FlipPage } from './flip/FlipPage'
 
 export type Lesson = {
   slug: string
@@ -68,4 +71,7 @@ export const lessons: Lesson[] = [
   { slug: 'scroll-trigger-match-media', title: 'ScrollTrigger matchMedia', Page: ScrollTriggerMatchMediaPage },
   { slug: 'scroll-to-plugin', title: 'ScrollToPlugin', Page: ScrollToPluginPage },
   { slug: 'scroll-smoother', title: 'ScrollSmoother', Page: ScrollSmootherPage },
+  { slug: 'draggable', title: 'Draggable', Page: DraggablePage },
+  { slug: 'observer', title: 'Observer', Page: ObserverPage },
+  { slug: 'flip', title: 'Flip', Page: FlipPage },
 ]
