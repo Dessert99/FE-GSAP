@@ -11,14 +11,14 @@
 ## 현재 상태
 
 - 마지막 업데이트: 2026-06-15
-- 완료: 앱 스캐폴딩(Vite + React + TS), 학습용 공통 컴포넌트, 코드 문법 하이라이트(prism-react-renderer), 예제 전체 주석화, 0단계 React 통합(`registerPlugin`/`useGSAP`), 트윈 기초 4종(`to`/`from`/`fromTo`/`set`), 트윈 핵심 속성(속성별 개별 예제), 트윈 값 표현(상대값·transform 단축속성), 2단계 이징(내장 ease, `EasePack`, Custom ease 계열), 3단계 타임라인, 4단계 콜백과 키프레임, 5단계 stagger, 6단계 유틸리티와 헬퍼, 7단계 ScrollTrigger 전체(기본 트리거, `toggleActions`, `start` / `end`, `markers`, `scrub`, `pin`, `snap`, 콜백, `batch`, 반응형, `ScrollToPlugin`, `ScrollSmoother`), 8단계 인터랙션 플러그인(`Draggable`, `Observer`, `Flip`), 9단계 SVG와 텍스트 플러그인(`DrawSVGPlugin`, `MorphSVGPlugin`, `MotionPathPlugin`, `SplitText`, `TextPlugin`, `ScrambleTextPlugin`), 10단계 고급과 디버깅(`Physics2DPlugin`, `PhysicsPropsPlugin`, `GSDevTools`, `prefers-reduced-motion`), 기존 레슨 설명 컨벤션 반영
+- 완료: 앱 스캐폴딩(Vite + React + TS), 학습용 공통 컴포넌트, `/lessons/:slug` 레슨별 경로와 열고 닫는 사이드바 내비게이션, 코드 문법 하이라이트(prism-react-renderer), 예제 전체 주석화, 0단계 React 통합(`registerPlugin`/`useGSAP`), 트윈 기초 4종(`to`/`from`/`fromTo`/`set`), 트윈 핵심 속성(속성별 개별 예제), 트윈 값 표현(상대값·transform 단축속성), 2단계 이징(내장 ease, `EasePack`, Custom ease 계열), 3단계 타임라인, 4단계 콜백과 키프레임, 5단계 stagger, 6단계 유틸리티와 헬퍼, 7단계 ScrollTrigger 전체(기본 트리거, `toggleActions`, `start` / `end`, `markers`, `scrub`, `pin`, `snap`, 콜백, `batch`, 반응형, `ScrollToPlugin`, `ScrollSmoother`), 8단계 인터랙션 플러그인(`Draggable`, `Observer`, `Flip`), 9단계 SVG와 텍스트 플러그인(`DrawSVGPlugin`, `MorphSVGPlugin`, `MotionPathPlugin`, `SplitText`, `TextPlugin`, `ScrambleTextPlugin`), 10단계 고급과 디버깅(`Physics2DPlugin`, `PhysicsPropsPlugin`, `GSDevTools`, `prefers-reduced-motion`), 기존 레슨 설명 컨벤션 반영
 - 진행 중: 없음
 - 다음 후보: README (앱 실행 방법)
 
 ## 인프라 (레슨 외 골격)
 
 - [x] Vite + React + TS 스캐폴딩, `gsap` · `@gsap/react` 설치
-- [x] 사이드바 + 상태 기반 내비게이션 (`lessons/index.ts` 레지스트리)
+- [x] 레슨별 경로(`/lessons/:slug`) + 열고 닫는 사이드바 내비게이션 (`lessons/index.ts` 레지스트리)
 - [x] 공통 컴포넌트 — `LessonLayout` / `ExamplePanel` / `CodeBlock` / `Sidebar`
 - [x] `?raw` 코드 표시 + 문법 하이라이트(prism-react-renderer) (화면 코드 = 실제 실행 소스)
 - [x] 다시 재생 + 레슨 전환 시 초기화 (key remount)

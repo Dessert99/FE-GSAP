@@ -40,10 +40,10 @@
 ```txt
 src/
   app/
-    App.tsx                 # 사이드바 + 선택된 레슨 렌더링
+    App.tsx                 # /lessons/:slug 경로와 선택된 레슨 렌더링
   components/
     learning/
-      Sidebar.tsx           # lessons/index.ts 목록으로 레슨 전환
+      Sidebar.tsx           # lessons/index.ts 목록으로 레슨 링크 표시
       LessonLayout.tsx
       ExamplePanel.tsx      # 데모 + 코드 + 다시 재생 컨트롤
       CodeBlock.tsx         # ?raw로 받은 소스 문자열 표시
@@ -58,7 +58,7 @@ src/
     global.css
 ```
 
-- `lessons/index.ts`는 사이드바와 페이지 전환의 단일 소스다. 레슨 슬러그·제목·페이지 컴포넌트를 한 배열로 등록한다.
+- `lessons/index.ts`는 사이드바와 레슨 라우트의 단일 소스다. 레슨 슬러그·제목·페이지 컴포넌트를 한 배열로 등록한다.
 - `lessons/<lesson-slug>/`는 하나의 GSAP 메서드나 개념을 다루는 단위다.
 - `examples/`에는 해당 학습 페이지에서 실제로 렌더링되는 예제 컴포넌트만 둔다.
 - `components/learning/`에는 여러 학습 페이지에서 반복해서 쓰는 화면 구성 컴포넌트만 둔다.
@@ -78,7 +78,7 @@ src/
 - GSAP React 예제는 `@gsap/react`의 `useGSAP()` 사용을 우선한다.
 - 단순 GSAP 문법과 React에서 안전하게 쓰는 패턴을 구분해서 보여준다.
 - 문법 기준은 GSAP 공식 문서를 우선하고, 예제 구성은 실무에서 자주 쓰이는 방식에 맞춘다.
-- 레슨 간 이동은 라우터 없이 사이드바 + 상태로 처리한다. `lessons/index.ts` 등록 목록이 사이드바와 전환을 모두 구동한다.
+- 레슨 간 이동은 `/lessons/:slug` 경로를 사용한다. 별도 라우터 의존성 없이 `lessons/index.ts` 등록 목록이 사이드바 링크와 경로 매칭을 모두 구동한다.
 
 ## 커리큘럼 (GSAP 전체)
 
