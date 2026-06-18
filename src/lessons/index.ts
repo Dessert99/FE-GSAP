@@ -67,4 +67,8 @@ export const apiLessons: Lesson[] = [
 export const practiceLessons: Lesson[] = [
   { slug: 'practice-hero-intro', title: '실무 실습: Hero Intro', Page: lazyPage(() => import('./practice-hero-intro/PracticeHeroIntroPage'), 'PracticeHeroIntroPage') },
   { slug: 'practice-scroll-product', title: '실무 실습: Scroll Product', Page: lazyPage(() => import('./practice-scroll-product/PracticeScrollProductPage'), 'PracticeScrollProductPage') },
+  { slug: 'practice-interactive-gallery', title: '실무 실습: Interactive Gallery', Page: lazyPage(() => import('./practice-interactive-gallery/PracticeInteractiveGalleryPage'), 'PracticeInteractiveGalleryPage') },
+  { slug: 'practice-svg-text-motion', title: '실무 실습: SVG / Text Motion', Page: lazyPage(() => import('./practice-svg-text-motion/PracticeSvgTextMotionPage'), 'PracticeSvgTextMotionPage') },
+  { slug: 'practice-navigation-modal', title: '실무 실습: Navigation / Modal', Page: lazyPage(() => import('./practice-navigation-modal/PracticeNavigationModalPage'), 'PracticeNavigationModalPage') },
+  { slug: 'practice-performance-debugging', title: '실무 실습: Performance Debugging', Page: lazyPage(() => import('./practice-performance-debugging/PracticePerformanceDebuggingPage'), 'PracticePerformanceDebuggingPage') },
 ]
