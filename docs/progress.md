@@ -11,7 +11,7 @@
 ## 현재 상태
 
 - 마지막 업데이트: 2026-06-18
-- 완료: 앱 스캐폴딩(Vite + React + TS), 학습용 공통 컴포넌트, `/lessons/:slug` 레슨별 경로와 열고 닫는 사이드바 내비게이션, 코드 문법 하이라이트(prism-react-renderer), 예제 전체 주석화, 0단계 React 통합(`registerPlugin`/`useGSAP`), 트윈 기초 4종(`to`/`from`/`fromTo`/`set`), 트윈 핵심 속성(속성별 개별 예제), 트윈 값 표현(상대값·transform 단축속성), 2단계 이징(내장 ease, `EasePack`, Custom ease 계열), 3단계 타임라인, 4단계 콜백과 키프레임, 5단계 stagger, 6단계 유틸리티와 헬퍼, 7단계 ScrollTrigger 전체(기본 트리거, `toggleActions`, `start` / `end`, `markers`, `scrub`, `pin`, `snap`, 콜백, `batch`, 반응형, `ScrollToPlugin`, `ScrollSmoother`), 8단계 인터랙션 플러그인(`Draggable`, `Observer`, `Flip`), 9단계 SVG와 텍스트 플러그인(`DrawSVGPlugin`, `MorphSVGPlugin`, `MotionPathPlugin`, `SplitText`, `TextPlugin`, `ScrambleTextPlugin`), 10단계 고급과 디버깅(`Physics2DPlugin`, `PhysicsPropsPlugin`, `GSDevTools`, `prefers-reduced-motion`), 기존 레슨 설명 컨벤션 반영, API/실습 헤더 탭 분리, 실습 태그 내비게이션, route 단위 lazy loading, 실습 상하 레이아웃, 실무 실습 트랙 계획, Hero Intro Sequence, Scroll Product Story, Interactive Gallery, SVG / Text Motion Section, Navigation / Modal Microinteractions, Performance & Debugging Clinic
+- 완료: 앱 스캐폴딩(Vite + React + TS), 학습용 공통 컴포넌트, `/lessons/:slug` 레슨별 경로와 열고 닫는 사이드바 내비게이션, 코드 문법 하이라이트(prism-react-renderer), 예제 전체 주석화, 0단계 React 통합(`registerPlugin`/`useGSAP`), 트윈 기초 4종(`to`/`from`/`fromTo`/`set`), 트윈 핵심 속성(속성별 개별 예제), 트윈 값 표현(상대값·transform 단축속성), 2단계 이징(내장 ease, `EasePack`, Custom ease 계열), 3단계 타임라인, 4단계 콜백과 키프레임, 5단계 stagger, 6단계 유틸리티와 헬퍼, 7단계 ScrollTrigger 전체(기본 트리거, `toggleActions`, `start` / `end`, `markers`, `scrub`, `pin`, `snap`, 콜백, `batch`, 반응형, `ScrollToPlugin`, `ScrollSmoother`), 8단계 인터랙션 플러그인(`Draggable`, `Observer`, `Flip`), 9단계 SVG와 텍스트 플러그인(`DrawSVGPlugin`, `MorphSVGPlugin`, `MotionPathPlugin`, `SplitText`, `TextPlugin`, `ScrambleTextPlugin`), 10단계 고급과 디버깅(`Physics2DPlugin`, `PhysicsPropsPlugin`, `GSDevTools`, `prefers-reduced-motion`), 기존 레슨 설명 컨벤션 반영, API/실습 헤더 탭 분리, 실습 태그 내비게이션, route 단위 lazy loading, 실습 상하 레이아웃, 실무 실습 트랙 계획, Hero Intro Sequence, Scroll Product Story, Interactive Gallery, SVG / Text Motion Section, Navigation / Modal Microinteractions, Performance & Debugging Clinic, Page / Route Transition, Image Sequence / Canvas Scroll, Video Sync, Cursor / Magnetic UI, Form Validation Motion, Toast / Notification Queue, List Reorder / Filtering, Accessibility Audit
 - 진행 중: 없음
 - 다음 후보: README (앱 실행 방법)
 
@@ -114,3 +114,11 @@
 - [x] SVG / Text Motion Section — SVG·텍스트 플러그인 조합
 - [x] Navigation / Modal Microinteractions — enter/exit, 상태 연타, focus 흐름
 - [x] Performance & Debugging Clinic — 고빈도 업데이트와 timeline 디버깅
+- [x] Page / Route Transition — 페이지 전환, 이전 애니메이션 cleanup
+- [x] Image Sequence / Canvas Scroll — 스크롤 기반 제품 회전, 프레임 시퀀스
+- [x] Video Sync — 스크롤이나 timeline으로 영상 진행 제어
+- [x] Cursor / Magnetic UI — `quickTo`, `Observer`, hover interaction 조합
+- [x] Form Validation Motion — 오류 메시지, shake, focus 이동
+- [x] Toast / Notification Queue — 여러 알림이 쌓이고 사라지는 흐름
+- [x] List Reorder / Filtering — 데이터 필터링 + `Flip`
+- [x] Accessibility Audit — `prefers-reduced-motion`, focus, keyboard 조작 검증

@@ -66,3 +66,67 @@
   - pointer-follow 같은 고빈도 업데이트에서 불필요한 tween 생성을 피한다.
   - timeline을 `GSDevTools`로 확인할 수 있다.
   - cleanup 누락이나 animation overlap을 재현하고 고친다.
+
+### 7. Page / Route Transition
+
+- 목표: 페이지 전환, 이전 화면 exit, 새 화면 enter, 이전 애니메이션 cleanup을 route 변경 흐름으로 조합한다.
+- 완료 기준:
+  - 빠르게 route를 바꿔도 오래된 transition이 새 화면을 덮지 않는다.
+  - 페이지 전환 후 새 화면은 항상 초기 상태에서 enter된다.
+  - route change나 다시 재생 시 이전 timeline이 kill된다.
+
+### 8. Image Sequence / Canvas Scroll
+
+- 목표: 스크롤 진행률을 canvas frame index에 연결해 제품 회전이나 프레임 시퀀스 패턴을 익힌다.
+- 완료 기준:
+  - 내부 scroller 진행률이 frame index를 정수 단위로 갱신한다.
+  - canvas는 빈 화면 없이 첫 프레임부터 그려진다.
+  - route change 후 오래된 ScrollTrigger가 이전 canvas에 쓰지 않는다.
+
+### 9. Video Sync
+
+- 목표: timeline 진행률을 영상 시간, progress UI, 주변 상태와 동기화하는 구조를 익힌다.
+- 완료 기준:
+  - play, pause, seek가 같은 timeline progress를 기준으로 동작한다.
+  - 실제 영상에서는 `video.currentTime`에 연결할 위치가 코드에 드러난다.
+  - cleanup 시 timeline이 중복 실행되지 않는다.
+
+### 10. Cursor / Magnetic UI
+
+- 목표: `quickTo`, `Observer`, hover interaction을 고빈도 pointer UI로 조합한다.
+- 완료 기준:
+  - pointer move마다 새 tween을 만들지 않는다.
+  - 커서와 magnetic target이 stage 안 입력에만 반응한다.
+  - hover end 후 target transform이 원위치로 돌아간다.
+
+### 11. Form Validation Motion
+
+- 목표: 검증 실패 시 오류 메시지, shake, 첫 오류 focus 이동을 사용성 힌트로 연결한다.
+- 완료 기준:
+  - 잘못된 필드만 shake한다.
+  - 오류 메시지는 `aria-describedby`와 함께 렌더링된다.
+  - 첫 오류 필드로 focus가 이동한다.
+
+### 12. Toast / Notification Queue
+
+- 목표: 여러 알림이 쌓이고 사라지는 queue를 enter/exit 모션과 연결한다.
+- 완료 기준:
+  - 새 알림은 stack 맨 위에 등장한다.
+  - 제거는 exit 애니메이션 이후 데이터 배열에서 반영된다.
+  - 자동 제거 타이머는 언마운트 시 정리된다.
+
+### 13. List Reorder / Filtering
+
+- 목표: 데이터 필터링과 정렬로 바뀐 DOM 위치를 `Flip`으로 자연스럽게 이어준다.
+- 완료 기준:
+  - 상태 변경 전 `Flip.getState()`를 기록한다.
+  - 상태 변경 후 `Flip.from()`으로 남은 항목 위치가 이어진다.
+  - 필터로 들어오고 나가는 항목의 enter/leave가 분리된다.
+
+### 14. Accessibility Audit
+
+- 목표: `prefers-reduced-motion`, focus, keyboard 조작을 모션 완료 기준으로 같이 검증한다.
+- 완료 기준:
+  - reduced motion 사용자는 indicator 이동을 즉시 상태 변경으로 본다.
+  - 좌우 방향키로 tab focus와 선택 상태를 이동할 수 있다.
+  - `role`, `aria-selected`, `tabIndex`가 active state와 함께 갱신된다.

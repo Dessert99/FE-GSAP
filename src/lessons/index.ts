@@ -71,4 +71,12 @@ export const practiceLessons: Lesson[] = [
   { slug: 'practice-svg-text-motion', title: '실무 실습: SVG / Text Motion', Page: lazyPage(() => import('./practice-svg-text-motion/PracticeSvgTextMotionPage'), 'PracticeSvgTextMotionPage') },
   { slug: 'practice-navigation-modal', title: '실무 실습: Navigation / Modal', Page: lazyPage(() => import('./practice-navigation-modal/PracticeNavigationModalPage'), 'PracticeNavigationModalPage') },
   { slug: 'practice-performance-debugging', title: '실무 실습: Performance Debugging', Page: lazyPage(() => import('./practice-performance-debugging/PracticePerformanceDebuggingPage'), 'PracticePerformanceDebuggingPage') },
+  { slug: 'practice-page-route-transition', title: '실무 실습: Page Transition', Page: lazyPage(() => import('./practice-page-route-transition/PracticePageRouteTransitionPage'), 'PracticePageRouteTransitionPage') },
+  { slug: 'practice-image-sequence-canvas', title: '실무 실습: Image Sequence', Page: lazyPage(() => import('./practice-image-sequence-canvas/PracticeImageSequenceCanvasPage'), 'PracticeImageSequenceCanvasPage') },
+  { slug: 'practice-video-sync', title: '실무 실습: Video Sync', Page: lazyPage(() => import('./practice-video-sync/PracticeVideoSyncPage'), 'PracticeVideoSyncPage') },
+  { slug: 'practice-cursor-magnetic-ui', title: '실무 실습: Cursor / Magnetic', Page: lazyPage(() => import('./practice-cursor-magnetic-ui/PracticeCursorMagneticUiPage'), 'PracticeCursorMagneticUiPage') },
+  { slug: 'practice-form-validation-motion', title: '실무 실습: Form Validation', Page: lazyPage(() => import('./practice-form-validation-motion/PracticeFormValidationMotionPage'), 'PracticeFormValidationMotionPage') },
+  { slug: 'practice-toast-notification-queue', title: '실무 실습: Toast Queue', Page: lazyPage(() => import('./practice-toast-notification-queue/PracticeToastNotificationQueuePage'), 'PracticeToastNotificationQueuePage') },
+  { slug: 'practice-list-reorder-filtering', title: '실무 실습: List Flip', Page: lazyPage(() => import('./practice-list-reorder-filtering/PracticeListReorderFilteringPage'), 'PracticeListReorderFilteringPage') },
+  { slug: 'practice-accessibility-audit', title: '실무 실습: Accessibility Audit', Page: lazyPage(() => import('./practice-accessibility-audit/PracticeAccessibilityAuditPage'), 'PracticeAccessibilityAuditPage') },
 ]
