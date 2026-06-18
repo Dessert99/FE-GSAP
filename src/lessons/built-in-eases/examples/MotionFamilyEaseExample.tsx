@@ -29,7 +29,7 @@ export function MotionFamilyEaseExample() {
           <div className="box box--sine" />
         </div>
       </div>
-      {/* circ: 둥근 감속이 더 강한 변화 */}
+      {/* circ: 중간 속도 변화가 더 뚜렷한 곡선 */}
       <div className="tween-lanes__row">
         <span className="tween-lanes__label">circ.inOut</span>
         <div className="tween-lanes__track">

@@ -33,7 +33,7 @@ export function BuiltInEasesPage() {
       </ExamplePanel>
       <ExamplePanel
         title="sine / circ / expo"
-        description="sine은 부드럽고, circ는 둥근 감속이 강하며, expo는 빠르게 치고 나가는 느낌이 크다. 화면 전환과 강조 모션의 감도를 조절할 때 비교한다."
+        description="sine은 가장 부드럽고, circ는 중간 구간에서 속도가 급격히 바뀌며, expo는 시작과 끝이 강하게 눌리고 중간이 폭발적이다. 화면 전환과 강조 모션의 감도를 조절할 때 비교한다."
         code={motionFamilyEaseSource}
       >
         <MotionFamilyEaseExample />
