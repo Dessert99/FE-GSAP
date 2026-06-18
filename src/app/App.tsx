@@ -4,39 +4,10 @@ import { PracticeNav } from '../components/learning/PracticeNav'
 import { Sidebar } from '../components/learning/Sidebar'
 import { apiLessons, practiceLessons } from '../lessons'
 import type { Section } from '../lessons'
-
-const lessonRoutePrefix = '/lessons/'
-const practiceRoutePrefix = '/practices/'
-
-type ActiveRoute = {
-  section: Section
-  slug: string
-}
-
-function getActiveRouteByPath(pathname: string): ActiveRoute {
-  if (pathname.startsWith(practiceRoutePrefix)) {
-    const slug = decodeURIComponent(pathname.slice(practiceRoutePrefix.length).split('/')[0])
-    const activePractice = practiceLessons.find((lesson) => lesson.slug === slug) ?? practiceLessons[0]
-
-    return { section: 'practice', slug: activePractice.slug }
-  }
-
-  if (pathname.startsWith(lessonRoutePrefix)) {
-    const slug = decodeURIComponent(pathname.slice(lessonRoutePrefix.length).split('/')[0])
-    const activeLesson = apiLessons.find((lesson) => lesson.slug === slug) ?? apiLessons[0]
-
-    return { section: 'api', slug: activeLesson.slug }
-  }
-
-  return { section: 'api', slug: apiLessons[0].slug }
-}
-
-function getRoutePath(section: Section, slug: string) {
-  return section === 'api' ? `${lessonRoutePrefix}${slug}` : `${practiceRoutePrefix}${slug}`
-}
+import { getActiveRouteByPath, getRoutePath } from './routes'
 
 export function App() {
-  const [activeRoute, setActiveRoute] = useState(() => getActiveRouteByPath(window.location.pathname))
+  const [activeRoute, setActiveRoute] = useState(() => getActiveRouteByPath(window.location.pathname, apiLessons, practiceLessons))
   const [lastApiSlug, setLastApiSlug] = useState(() => (activeRoute.section === 'api' ? activeRoute.slug : apiLessons[0].slug))
   const [lastPracticeSlug, setLastPracticeSlug] = useState(() =>
     activeRoute.section === 'practice' ? activeRoute.slug : practiceLessons[0].slug,
@@ -56,7 +27,7 @@ export function App() {
 
   useEffect(() => {
     const handlePopState = () => {
-      const nextRoute = getActiveRouteByPath(window.location.pathname)
+      const nextRoute = getActiveRouteByPath(window.location.pathname, apiLessons, practiceLessons)
 
       setActiveRoute(nextRoute)
 
