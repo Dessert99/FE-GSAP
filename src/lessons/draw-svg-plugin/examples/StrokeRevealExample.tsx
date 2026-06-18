@@ -1,7 +1,7 @@
-import { useRef } from 'react' // DOM 요소를 가리키는 ref를 만드는 React 훅
-import gsap from 'gsap' // GSAP 코어 — DrawSVGPlugin이 확장한 tween 속성을 실행한다
-import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin' // SVG stroke의 표시 구간을 제어하는 공식 플러그인
-import { useGSAP } from '@gsap/react' // React에서 GSAP 실행과 cleanup을 묶어주는 훅
+import { useGSAP } from '@gsap/react'; // React에서 GSAP 실행과 cleanup을 묶어주는 훅
+import gsap from 'gsap'; // GSAP 코어 — DrawSVGPlugin이 확장한 tween 속성을 실행한다
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'; // SVG stroke의 표시 구간을 제어하는 공식 플러그인
+import { useRef } from 'react'; // DOM 요소를 가리키는 ref를 만드는 React 훅
 
 gsap.registerPlugin(DrawSVGPlugin) // drawSVG 속성을 쓰기 전에 플러그인을 등록한다
 
@@ -10,18 +10,10 @@ export function StrokeRevealExample() {
   const container = useRef<HTMLDivElement>(null)
   // drawSVG가 적용될 stroke path다.
   const path = useRef<SVGPathElement>(null)
-  // path 전체 길이를 화면에 표시할 텍스트다.
-  const lengthText = useRef<HTMLSpanElement>(null)
 
   useGSAP(
     () => {
       if (!path.current) return
-
-      const length = DrawSVGPlugin.getLength(path.current) // stroke 길이를 계산해 디버깅이나 타이밍 기준으로 쓸 수 있다
-
-      if (lengthText.current) {
-        lengthText.current.textContent = `${Math.round(length)}px`
-      }
 
       gsap.fromTo(
         path.current,
@@ -29,7 +21,7 @@ export function StrokeRevealExample() {
         {
           drawSVG: '100%', // 전체 stroke가 보일 때까지 구간을 넓힌다
           duration: 1.4,
-          ease: 'power2.inOut',
+          ease: 'power4.in',
         },
       )
     },
@@ -47,10 +39,6 @@ export function StrokeRevealExample() {
           pathLength="1"
         />
       </svg>
-      <div className="callback-readout">
-        <span>length</span>
-        <strong ref={lengthText}>measuring...</strong>
-      </div>
     </div>
   )
 }
