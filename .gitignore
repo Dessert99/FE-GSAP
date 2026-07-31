@@ -25,3 +25,6 @@ pnpm-debug.log*
 # OS / 에디터
 .DS_Store
 .idea/
+
+# Superpowers 브레인스토밍 화면
+.superpowers/

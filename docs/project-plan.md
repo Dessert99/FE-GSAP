@@ -1,189 +1,102 @@
 # GSAP 학습 프로젝트 계획
 
+전체 설계 결정은 [GSAP 학습 프로젝트 재설계](./superpowers/specs/2026-08-01-gsap-learning-project-redesign-design.md)를 따른다. 이 문서는 새 레슨을 만들 때 바로 확인할 운영 원칙만 정리한다.
+
 ## 프로젝트 목적
 
-이 프로젝트는 GSAP을 단계적으로 학습하기 위한 코드북이다. 목표는 GSAP 고유 기능 전체(코어 + 공식 플러그인)를 빠짐없이 다루는 것이며, 기초 문법부터 고급 플러그인까지 실행 화면과 코드로 함께 보면서 익힌다. 외부 라이브러리 전용 어댑터(PixiPlugin, EaselPlugin, CSSRulePlugin)는 범위에서 제외한다.
+이 프로젝트는 GSAP의 문법과 실제 동작을 단계적으로 학습하는 실험실이다.
 
-## 예제 작성 원칙
+- 웹 브라우저에서는 GSAP의 실제 결과와 필요한 조작만 확인한다.
+- 예제 코드는 저장소에서 직접 읽으며 GSAP 호출, React 생명주기, cleanup 흐름을 학습한다.
+- 화면에 소스 코드나 코드 하이라이터를 렌더링하지 않는다.
+- 장식만을 위한 예제보다 문법 차이와 실무 역할이 분명한 예제를 우선한다.
 
-- GSAP 공식 API는 빈도와 무관하게 전부 다룬다. 단, 문법은 공식 문서를 기준으로 정확하게 쓴다.
-- "전부 다룬다"는 커버 범위의 기준이지 예제 분량의 기준이 아니다. 각 API는 그 동작을 명확히 보여주는 최소 예제로 보여준다.
-- 같은 기능을 부풀린 장식성 애니메이션, 과한 추상화, 불필요한 설정 가능성은 추가하지 않는다.
-- 하나의 예제는 하나의 핵심 문법이나 실무 패턴을 보여주는 데 집중한다.
-- 옵션이나 속성은 기본적으로 하나씩 분리해서 예제를 만든다. `yoyo`처럼 `repeat`가 있어야 의미가 드러나는 경우에만 필요한 보조 옵션을 함께 쓰고, 주석에서 어떤 옵션이 주제인지 명확히 밝힌다.
-- 한 옵션 안에서도 값에 따라 동작이 달라지는 경우, 대표 값 2~3개를 같은 예제 안에 나란히 배치해 차이를 비교할 수 있게 한다.
-- 각 예제 패널에는 해당 메서드·옵션·속성이 무엇을 하는지와 실무에서 어떤 역할로 쓰이는지 짧게 설명한다.
-- React 예제에서는 GSAP 적용 지점, DOM 참조, cleanup 흐름이 명확하게 보이도록 작성한다.
+## 학습 트랙
 
-## 페이지 구성 원칙
+### 기본
 
-- 하나의 메서드나 개념을 하나의 학습 페이지에서 다룬다.
-- 한 페이지에는 같은 개념을 다른 상황에서 쓰는 여러 예제를 배치한다.
-- 각 예제는 실행되는 애니메이션과 실제 코드가 함께 보이도록 구성한다.
-- 화면은 기본적으로 왼쪽에 데모, 오른쪽에 코드와 주석을 배치한다.
-- 각 예제에는 애니메이션을 다시 볼 수 있는 "다시 재생" 컨트롤을 둔다. 마운트 시 한 번 재생되고 끝나면 반복 학습이 어렵다.
-- 다른 레슨으로 이동하면 이전 데모의 애니메이션은 정리(cleanup)되고 새 데모는 초기 상태에서 시작한다.
+공식 API의 메서드·옵션·대표 값 형태와 자주 만나는 상황을 함께 다룬다.
 
-## 코드 표시 방식
+- 하나의 페이지는 하나의 API 또는 밀접한 개념에 집중한다.
+- 페이지 안에서 `공식 API 항목`과 `상황별 예제`를 구분한다.
+- 값이나 옵션에 따라 결과가 달라지면 차이를 관찰할 수 있는 별도 예제로 만든다.
+- 예제 수를 임의로 줄이지 않되, 학습 차이가 없는 장식성 변형은 만들지 않는다.
 
-- 화면에 보여주는 코드는 예제 컴포넌트의 소스 파일 자체를 Vite의 `?raw` import로 불러와 표시한다.
-- 이렇게 하면 실행되는 코드와 화면의 코드가 항상 같은 단일 소스이며, 코드 문자열을 따로 복제하지 않아 어긋날 일이 없다.
-- 예: `import source from './examples/BasicToExample.tsx?raw'`를 `CodeBlock`에 넘긴다.
-- `?raw`는 파일 전체(import 문 포함)를 문자열로 준다. 예제 파일은 학습 초점이 흐려지지 않게 한 개념만 담아 짧게 유지한다.
-- `?raw` 모듈 타입은 `vite/client`에 포함된다. 타입 에러가 나면 `vite-env.d.ts`에 `/// <reference types="vite/client" />`를 둔다.
-- 코드 패널은 `prism-react-renderer`로 TSX 문법을 하이라이트한다. 테마가 JS 객체라 전역 CSS를 오염시키지 않는다.
+### 패턴
 
-## 폴더 구조 원칙
+여러 GSAP 기능을 조합하지만 특정 완성 디자인에는 종속되지 않는 구현 패턴을 다룬다. timeline 구성, 연속 입력, 상태 전환, cleanup, 반응형 분기, reduced motion 등을 중심으로 한다.
 
-앱 구조는 학습 단위가 바로 보이도록 단순하게 유지한다.
+### 실무
 
-```txt
+페이지나 컴포넌트 단위의 완성된 결과물을 만든다. 디자인뿐 아니라 반응형, 키보드와 포커스, reduced motion, cleanup, 성능까지 함께 검증한다.
+
+## 화면 원칙
+
+- 상단의 `기본`, `패턴`, `실무` 탭으로 트랙을 전환한다.
+- 현재 트랙의 레슨 목차는 화면 왼쪽 상단에 고정된 원형 버튼으로 연다.
+- 원형 버튼은 데스크톱에서 약 40px, 터치 환경에서 최소 44px로 유지한다.
+- 목차 항목을 선택하면 해당 레슨으로 이동하고 목차는 자동으로 접힌다.
+- 목차는 원형 닫기 버튼, 바깥 클릭, `Escape`로도 닫힌다.
+- 기본 트랙은 많은 데모를 읽기 쉬운 단일 열로 배치한다.
+- 패턴과 실무 트랙은 필요한 경우 더 넓은 작업 영역을 사용한다.
+- 각 데모에는 제목, 짧은 설명, 실제 동작, 필요한 조작, 다시 재생 기능을 둔다.
+
+## 소스 코드 원칙
+
+- GSAP 로직을 범용 설정 객체나 래퍼 뒤로 숨기지 않는다.
+- import, DOM 참조, GSAP context, tween 또는 timeline, 이벤트 연결, cleanup의 이유를 가까운 위치에 한국어 주석으로 설명한다.
+- 코드를 그대로 읽는 주석보다 화면과 생명주기에 미치는 영향을 설명한다.
+- 하나의 예제는 하나의 핵심 차이에 집중한다.
+- 예제 간 코드가 조금 반복되더라도 추상화가 학습 흐름을 가리면 명시적인 코드를 유지한다.
+
+## CSS 원칙
+
+- `src/styles/global.css`: reset, 디자인 토큰, 문서 기본값만 담당한다.
+- `src/app/app.css`: 상단 탭, 고정형 목차, 콘텐츠 폭 같은 앱 골격만 담당한다.
+- 공통 컴포넌트 스타일은 컴포넌트 파일 옆에 둔다.
+- 레슨 전용 스타일은 해당 레슨 폴더에 둔다.
+- CSS Modules는 사용하지 않고 레슨별 접두사로 클래스 충돌을 막는다.
+- `opacity`, `visibility`, `transform-origin`, `overflow`, `position`처럼 애니메이션 결과에 영향을 주는 초기 상태만 이유를 주석으로 설명한다.
+- 순수 장식 속성에는 설명을 반복하지 않는다.
+
+## 폴더 구조
+
+```text
 src/
-  app/
-    App.tsx                 # /lessons/:slug, /practices/:slug 경로와 탭별 화면 렌더링
+  app/                  # route 상태와 전체 학습 화면
   components/
-    learning/
-      Header.tsx            # API / 실습 탭 전환
-      PracticeNav.tsx       # 실습 탭에서 practiceLessons를 태그형 링크로 표시
-      Sidebar.tsx           # API 탭에서만 apiLessons 목록 표시
-      LessonLayout.tsx
-      ExamplePanel.tsx      # API 레슨용 좌우 데모 + 코드 + 다시 재생 컨트롤
-      PracticePanel.tsx     # 실습용 상하 렌더링 결과 + 코드 + 다시 재생 컨트롤
-      CodeBlock.tsx         # ?raw로 받은 소스 문자열 표시
-  lessons/
-    index.ts                # apiLessons / practiceLessons 등록, 페이지는 lazy import
-    gsap-to/
-      GsapToPage.tsx
-      examples/
-        BasicToExample.tsx
-        MultiplePropertiesExample.tsx
-  styles/
-    global.css
+    learning/           # 트랙 탭과 원형 목차
+    demo/               # 다시 재생 가능한 공통 데모 프레임
+  fundamentals/         # 기본 문법
+  patterns/             # 조합 패턴
+  showcases/            # 실무 페이지와 컴포넌트
+  styles/               # 전역 reset과 토큰
 ```
 
-- `lessons/index.ts`는 API 레슨과 실습 레슨의 단일 소스다. API는 `apiLessons`, 실습은 `practiceLessons`에 슬러그·제목·lazy page loader를 등록한다.
-- `lessons/<lesson-slug>/`는 하나의 GSAP 메서드나 개념을 다루는 단위다.
-- `examples/`에는 해당 학습 페이지에서 실제로 렌더링되는 예제 컴포넌트만 둔다.
-- `components/learning/`에는 여러 학습 페이지에서 반복해서 쓰는 화면 구성 컴포넌트만 둔다.
-- 공통화할 이유가 분명하지 않으면 `shared`, `utils`, `hooks` 같은 범용 폴더를 미리 만들지 않는다.
-- 예제에서 한 번만 쓰는 코드는 해당 lesson 폴더 안에 둔다.
+- 트랙과 레슨 등록은 `src/app/routes.ts`를 단일 소스로 사용한다.
+- 페이지는 route 단위로 lazy loading한다.
+- 새 레슨은 페이지, 예제 컴포넌트, 레슨 CSS를 같은 레슨 폴더에 둔다.
+- 실제 반복이 확인되기 전에는 공통 유틸리티나 범용 컴포넌트를 만들지 않는다.
 
-## 주석 원칙
+## 현재 마일스톤
 
-- 화면에 보이는 예제 코드는 학습 자료다. 모든 import·변수·설정 값·JSX 요소가 각각 어떤 역할을 하는지 주석으로 정의한다.
-- 주석은 해당 코드 바로 옆이나 위에 한 줄로 짧게 단다. 파일 상단에 설명을 몰아서 쓰지 않는다.
-- 코드를 그대로 옮긴 주석(`x: 200, // x를 200으로`)은 쓰지 않는다. 그 값·호출이 무슨 역할을 하고 왜 쓰는지를 적는다.
-- GSAP 메서드와 옵션 키의 의미를 우선 설명하고, 실무에서 주의할 점이 있으면 해당 코드 가까이에 덧붙인다.
+새 구조의 수직 슬라이스를 완성한 뒤 기본 문법 범위를 확장한다.
 
-## 기술 기본값
+1. Vite + React + TypeScript + GSAP 앱과 테스트 환경을 유지한다.
+2. 상단 트랙 탭과 고정형 원형 목차의 키보드·포인터 동작을 검증한다.
+3. `gsap.to()`의 공식 API와 상황별 예제를 충분히 채운다.
+4. `gsap.to()` 범위가 정리된 뒤 `gsap.from()`으로 이동한다.
 
-- 앱 골격은 `Vite + React + TypeScript`를 기본값으로 둔다.
-- GSAP React 예제는 `@gsap/react`의 `useGSAP()` 사용을 우선한다.
-- 단순 GSAP 문법과 React에서 안전하게 쓰는 패턴을 구분해서 보여준다.
-- 문법 기준은 GSAP 공식 문서를 우선하고, 예제 구성은 실무에서 자주 쓰이는 방식에 맞춘다.
-- API 레슨 간 이동은 `/lessons/:slug`, 실습 간 이동은 `/practices/:slug` 경로를 사용한다. 별도 라우터 의존성 없이 `lessons/index.ts` 등록 목록이 탭, 사이드바 링크, 경로 매칭을 구동한다. 페이지 컴포넌트는 `React.lazy()`로 route 단위 chunk에 분리해 첫 번들에 모든 레슨과 `?raw` 코드 문자열이 한꺼번에 들어가지 않게 한다.
+## 검증 명령
 
-## 커리큘럼 (GSAP 전체)
+```bash
+npm test
+npm run build
+```
 
-GSAP 고유 기능 전체를 기초 → 고급 순서로 단계화한다. 각 단계는 앞 단계를 전제로 한다. 한 단계 안의 항목은 보통 항목당 한 학습 페이지가 되며, ScrollTrigger처럼 큰 항목은 여러 페이지로 쪼갠다. 진행하면서 항목이 추가·세분화될 수 있다.
+레슨을 마칠 때는 다음도 확인한다.
 
-### 0단계 · 셋업과 React 통합
-
-- 설치와 `gsap.registerPlugin()`
-- `@gsap/react`의 `useGSAP()` — 적용 지점, cleanup, `contextSafe`, `scope`, 의존성 배열
-
-### 1단계 · 트윈 기초
-
-- `gsap.to()` / `gsap.from()` / `gsap.fromTo()` / `gsap.set()`
-- 핵심 속성 — `duration`, `delay`, `repeat`, `yoyo`, `repeatDelay`, `overwrite`, `immediateRender`
-- 값 표현 — 상대값(`"+=100"`), 변형 단축속성(`x`, `y`, `rotation`, `scale`, `skew`, `transformOrigin`)
-
-### 2단계 · 이징
-
-- 내장 ease 전종류 — `power`, `back`, `elastic`, `bounce`, `steps`, `circ`, `expo`, `sine` 등
-- `EasePack` — `RoughEase`, `SlowMo`, `ExpoScaleEase`
-- `CustomEase` / `CustomBounce` / `CustomWiggle`
-
-### 3단계 · 타임라인
-
-- `gsap.timeline()` — 생성, position parameter, 라벨, `defaults`, 중첩
-- 제어 — `play()` / `pause()` / `reverse()` / `restart()` / `seek()` / `timeScale()` / `progress()`
-
-### 4단계 · 콜백과 키프레임
-
-- 콜백 — `onStart` / `onUpdate` / `onComplete` / `onRepeat` / `onReverseComplete`, 파라미터, `callbackScope`
-- `keyframes` — 배열 문법과 객체 문법
-
-### 5단계 · stagger
-
-- 기본 stagger
-- 고급 객체 — `amount` / `each`, `from`, `grid`, `axis`, `ease`
-
-### 6단계 · 유틸리티와 헬퍼
-
-- `gsap.utils` — `toArray`, `selector`, `snap`, `clamp`, `mapRange`, `interpolate`, `wrap` / `wrapYoyo`, `distribute`, `random`, `pipe`, `unitize`, `normalize`
-- `gsap.getProperty()` / `gsap.quickTo()` / `gsap.quickSetter()` / `gsap.delayedCall()` / `gsap.ticker`
-- `gsap.matchMedia()` — 반응형 분기
-- `gsap.registerEffect()` — 재사용 효과
-- `ModifiersPlugin` — 값 가공
-
-### 7단계 · ScrollTrigger
-
-- 기본 트리거와 `toggleActions`
-- `start` / `end`, `markers`
-- `scrub`
-- `pin`
-- `snap`
-- 콜백 — `onEnter` / `onLeave` / `onEnterBack` / `onLeaveBack`
-- `ScrollTrigger.batch()`
-- 반응형(`matchMedia`)
-- `ScrollToPlugin`
-- `ScrollSmoother`
-
-### 8단계 · 인터랙션 플러그인
-
-- `Draggable` (+ `InertiaPlugin`)
-- `Observer`
-- `Flip`
-
-### 9단계 · SVG와 텍스트
-
-- `DrawSVGPlugin`
-- `MorphSVGPlugin`
-- `MotionPathPlugin` (+ `MotionPathHelper`)
-- `SplitText`
-- `TextPlugin`
-- `ScrambleTextPlugin`
-
-### 10단계 · 고급과 디버깅
-
-- `Physics2DPlugin` / `PhysicsPropsPlugin`
-- `GSDevTools` — 타임라인 디버깅
-- `prefers-reduced-motion` 대응 — 접근성을 지키는 실무 표준 패턴
-
-## 실무 실습 트랙
-
-기본 API 커리큘럼을 끝낸 뒤에는 `docs/practice-plan.md`의 실무 실습 트랙으로 넘어간다. 기존 레슨이 API 단위 학습이라면, 실무 실습은 여러 API를 조합해 하나의 UI 요구사항을 끝까지 구현하는 연습이다.
-
-앱 화면은 상단 헤더 탭으로 `API`와 `실습`을 분리한다. `API` 탭에서는 기존처럼 왼쪽 사이드바로 API 레슨을 이동하고, 각 예제는 데모와 코드를 좌우로 나란히 본다. `실습` 탭에서는 헤더 바로 아래에 실습 route를 태그형 링크로 쌓고, 사이드바를 숨긴다. 실습 본문은 위에는 실제 렌더링 결과를 크게 보여주며 아래에는 같은 소스의 코드 스니펫을 보여준다.
-
-실무 실습의 주석은 코드의 정체보다 코드의 영향을 우선 설명한다. 예를 들어 "timeline 생성"보다 "이 timeline이 히어로 요소의 등장 순서를 한 재생 단위로 묶는다"처럼 화면, 상태, cleanup에 생기는 변화를 적는다.
-
-## 첫 마일스톤
-
-기능을 넓히기 전에 "한 레슨이 끝까지 도는" 수직 슬라이스를 먼저 완성한다.
-
-1. Vite + React + TS 앱을 스캐폴딩하고 `gsap`, `@gsap/react`를 설치한다. → 검증: 빈 화면이 뜬다.
-2. `gsap-to` 레슨 하나를 데모 + `?raw` 코드 표시 + 다시 재생까지 완성한다. → 검증: 애니메이션이 보이고, 옆 코드가 실제 소스와 일치하며, 다시 재생이 동작한다.
-3. 사이드바에 레슨을 1개 이상 등록하고 전환을 확인한다. → 검증: 레슨을 바꾸면 데모가 초기화되어 새로 재생된다.
-
-이 슬라이스가 검증되면 나머지 레슨은 같은 틀을 복제해 채운다.
-
-## 작업 기준
-
-- 새 학습 페이지를 만들기 전에 이 문서를 먼저 확인한다.
-- 사용 빈도가 낮은 API도 GSAP 고유 기능이면 다룬다. 빠뜨리지 않는 것이 목표다.
-- 다만 한 API를 장식적으로 부풀린 보여주기식 예제는 만들지 않는다. 커버 범위는 넓게, 예제는 짧게.
-- 더 단순한 코드로 같은 학습 목표를 달성할 수 있으면 단순한 쪽을 선택한다.
-- 예제 작성 컨벤션이 바뀌면 이미 완료한 레슨에도 같은 기준을 적용할 수 있는지 확인하고 필요한 범위만 보정한다.
-- README는 앱 실행 방법이 생긴 뒤에 작성한다.
+- 다시 재생과 route 전환 시 이전 GSAP 인스턴스가 cleanup되는가?
+- 데스크톱과 모바일에서 목차와 데모가 겹치거나 잘리지 않는가?
+- 예제 소스만 읽어도 GSAP 호출과 React 연결 흐름을 이해할 수 있는가?
+- 화면에 코드 패널이나 코드 표시용 의존성이 다시 추가되지 않았는가?
