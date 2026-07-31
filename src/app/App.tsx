@@ -1,93 +1,91 @@
-import { Suspense, useEffect, useState } from 'react'
-import { Header } from '../components/learning/Header'
-import { PracticeNav } from '../components/learning/PracticeNav'
-import { Sidebar } from '../components/learning/Sidebar'
-import { apiLessons, practiceLessons } from '../lessons'
-import type { Section } from '../lessons'
-import { getActiveRouteByPath, getRoutePath } from './routes'
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
+import type { MouseEvent } from 'react'
+import { FloatingToc } from '../components/learning/FloatingToc'
+import { TrackTabs } from '../components/learning/TrackTabs'
+import { TrackOverviewPage } from '../pages/TrackOverviewPage'
+import { resolveRoute, tracks } from './routes'
 
 export function App() {
-  const [activeRoute, setActiveRoute] = useState(() => getActiveRouteByPath(window.location.pathname, apiLessons, practiceLessons))
-  const [lastApiSlug, setLastApiSlug] = useState(() => (activeRoute.section === 'api' ? activeRoute.slug : apiLessons[0].slug))
-  const [lastPracticeSlug, setLastPracticeSlug] = useState(() =>
-    activeRoute.section === 'practice' ? activeRoute.slug : practiceLessons[0].slug,
-  )
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-  const activeList = activeRoute.section === 'api' ? apiLessons : practiceLessons
-  const active = activeList.find((lesson) => lesson.slug === activeRoute.slug) ?? activeList[0]
-  const ActivePage = active.Page
+  const [pathname, setPathname] = useState(() => window.location.pathname)
+  const shouldFocusMain = useRef(false)
+  const mainRef = useRef<HTMLElement>(null)
+  const route = useMemo(() => resolveRoute(pathname), [pathname])
+  const ActivePage = route.lesson?.Page
+  const lessonIndex = route.track.lessons.findIndex(({ slug }) => slug === route.lessonSlug)
+  const progressLabel = route.lesson
+    ? `${String(lessonIndex + 1).padStart(2, '0')} / ${String(route.track.lessons.length).padStart(2, '0')}`
+    : route.track.label
 
   useEffect(() => {
-    const activePath = getRoutePath(activeRoute.section, active.slug)
-
-    if (window.location.pathname !== activePath) {
-      window.history.replaceState(null, '', activePath)
+    if (window.location.pathname !== route.canonicalPath) {
+      window.history.replaceState(null, '', route.canonicalPath)
     }
-  }, [active.slug, activeRoute.section])
+  }, [route.canonicalPath])
 
   useEffect(() => {
     const handlePopState = () => {
-      const nextRoute = getActiveRouteByPath(window.location.pathname, apiLessons, practiceLessons)
-
-      setActiveRoute(nextRoute)
-
-      if (nextRoute.section === 'api') {
-        setLastApiSlug(nextRoute.slug)
-      } else {
-        setLastPracticeSlug(nextRoute.slug)
-      }
+      shouldFocusMain.current = true
+      setPathname(window.location.pathname)
     }
 
     window.addEventListener('popstate', handlePopState)
 
-    return () => {
-      window.removeEventListener('popstate', handlePopState)
-    }
+    return () => window.removeEventListener('popstate', handlePopState)
   }, [])
 
-  const navigateTo = (section: Section, slug: string) => {
-    const nextPath = getRoutePath(section, slug)
+  useEffect(() => {
+    if (!shouldFocusMain.current) return
+    shouldFocusMain.current = false
+    mainRef.current?.focus({ preventScroll: true })
+  }, [route.canonicalPath])
 
-    if (window.location.pathname !== nextPath) {
-      window.history.pushState(null, '', nextPath)
+  const navigate = (path: string) => {
+    if (window.location.pathname !== path) {
+      window.history.pushState(null, '', path)
     }
 
-    setActiveRoute({ section, slug })
-
-    if (section === 'api') {
-      setLastApiSlug(slug)
-    } else {
-      setLastPracticeSlug(slug)
-    }
+    shouldFocusMain.current = true
+    setPathname(path)
   }
 
-  const handleTabNavigate = (section: Section) => {
-    navigateTo(section, section === 'api' ? lastApiSlug : lastPracticeSlug)
+  const handleLinkNavigate = (event: MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
+
+    event.preventDefault()
+    navigate(path)
   }
 
   return (
-    <div className="app" data-section={activeRoute.section} data-sidebar-open={isSidebarOpen}>
-      <Header activeSection={activeRoute.section} onNavigate={handleTabNavigate} />
-      {activeRoute.section === 'practice' ? (
-        <PracticeNav practices={practiceLessons} activeSlug={active.slug} onNavigate={(slug) => navigateTo('practice', slug)} />
+    <div className="learning-app" data-track={route.trackId}>
+      <header className="learning-header">
+        <a
+          className="learning-header__brand"
+          href="/fundamentals/gsap-to"
+          onClick={(event) => handleLinkNavigate(event, '/fundamentals/gsap-to')}
+        >
+          GSAP Study
+        </a>
+        <TrackTabs tracks={tracks} activeTrackId={route.trackId} onNavigate={handleLinkNavigate} />
+        <span className="learning-header__progress">{progressLabel}</span>
+      </header>
+
+      {route.track.lessons.length > 0 ? (
+        <FloatingToc track={route.track} activeLessonSlug={route.lessonSlug} onNavigate={navigate} />
       ) : null}
-      <div className="app__body">
-        {activeRoute.section === 'api' ? (
-          <Sidebar
-            lessons={apiLessons}
-            activeSlug={active.slug}
-            isOpen={isSidebarOpen}
-            onNavigate={(slug) => navigateTo('api', slug)}
-            onToggle={() => setIsSidebarOpen((isOpen) => !isOpen)}
-          />
-        ) : null}
-        <main className={activeRoute.section === 'api' ? 'content content--api' : 'content content--practice'}>
-          <Suspense fallback={<div className="route-loading">페이지를 불러오는 중...</div>}>
-            {/* key=section+slug: 탭이나 페이지를 바꾸면 이전 GSAP 데모가 정리되고 새 화면은 초기 상태에서 시작한다 */}
-            <ActivePage key={`${activeRoute.section}-${active.slug}`} />
-          </Suspense>
-        </main>
-      </div>
+
+      <main
+        ref={mainRef}
+        className={`learning-content learning-content--${route.trackId}`}
+        tabIndex={-1}
+      >
+        <Suspense fallback={<p className="route-loading">페이지를 불러오는 중입니다.</p>}>
+          {ActivePage ? (
+            <ActivePage key={`${route.trackId}-${route.lessonSlug}`} />
+          ) : (
+            <TrackOverviewPage label={route.track.label} description={route.track.description} />
+          )}
+        </Suspense>
+      </main>
     </div>
   )
 }
