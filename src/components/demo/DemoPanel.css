@@ -29,6 +29,15 @@
   line-height: 1.55;
 }
 
+.demo-panel__actions {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
 .demo-panel__replay {
   display: inline-flex;
   flex: 0 0 auto;
@@ -80,6 +89,10 @@
     flex-direction: column;
     gap: 14px;
     padding: 16px;
+  }
+
+  .demo-panel__actions {
+    justify-content: flex-start;
   }
 
   .demo-panel__stage {
