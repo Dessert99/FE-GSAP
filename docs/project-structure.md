@@ -8,12 +8,7 @@ fe-gsap/
 │   ├── main.ts                      # Storybook React·Vite 설정
 │   └── preview.ts                   # 전역 스타일과 공통 preview 설정
 ├── docs/
-│   ├── project-plan.md              # 프로젝트 목적과 운영 원칙
-│   ├── project-structure.md         # 현재 폴더 구조
-│   ├── progress.md                  # 구현 진행 현황
-│   └── superpowers/
-│       ├── plans/                   # 구현 계획 기록
-│       └── specs/                   # 설계 결정 기록
+│   └── project-structure.md         # 현재 폴더 구조와 배치 원칙
 ├── public/
 │   └── favicon.svg
 ├── src/
