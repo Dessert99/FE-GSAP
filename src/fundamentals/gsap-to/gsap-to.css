@@ -11,6 +11,13 @@
   letter-spacing: 0.16em;
 }
 
+.gsap-to-page__title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px;
+}
+
 .gsap-to-page__header h1 {
   margin: 0;
   font-size: clamp(54px, 9vw, 96px);
