@@ -68,8 +68,12 @@
 src/
   app/                  # route 상태와 전체 학습 화면
   components/
-    learning/           # 트랙 탭과 원형 목차
-    demo/               # 다시 재생 가능한 공통 데모 프레임
+    demo/               # 데모 프레임과 공식 자료 액션
+      DemoPanel/
+      OfficialDocsLink/
+    navigation/         # 트랙 탭과 원형 목차
+      FloatingToc/
+      TrackTabs/
   fundamentals/         # 기본 문법
   patterns/             # 조합 패턴
   showcases/            # 실무 페이지와 컴포넌트
@@ -77,6 +81,7 @@ src/
 ```
 
 - 트랙과 레슨 등록은 `src/app/routes.ts`를 단일 소스로 사용한다.
+- 공통 컴포넌트는 역할별 영역 아래 컴포넌트 이름의 폴더를 만들고 관련 파일을 함께 둔다.
 - 페이지는 route 단위로 lazy loading한다.
 - 새 레슨은 페이지, 예제 컴포넌트, 레슨 CSS를 같은 레슨 폴더에 둔다.
 - 새 레슨의 공식 자료가 여러 개면 레슨별 참조 파일에서 링크 배열로 관리한다.

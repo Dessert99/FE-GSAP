@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { LessonDefinition, TrackDefinition } from '../../app/routes'
+import type { LessonDefinition, TrackDefinition } from '../../../app/routes'
 
 type Props = {
   track: TrackDefinition

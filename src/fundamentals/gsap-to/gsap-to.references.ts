@@ -1,4 +1,4 @@
-import type { OfficialReference } from '../../components/learning/OfficialDocsLink'
+import type { OfficialReference } from '../../components/demo/OfficialDocsLink/OfficialDocsLink'
 
 export const gsapToReferences = {
   method: {

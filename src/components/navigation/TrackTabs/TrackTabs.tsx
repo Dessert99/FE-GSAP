@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react'
-import { getTrackHref } from '../../app/routes'
-import type { TrackDefinition, TrackId } from '../../app/routes'
+import { getTrackHref } from '../../../app/routes'
+import type { TrackDefinition, TrackId } from '../../../app/routes'
 
 type Props = {
   tracks: TrackDefinition[]

@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { tracks } from '../../app/routes'
+import { tracks } from '../../../app/routes'
 import { TrackTabs } from './TrackTabs'
 
 function preventNavigation(event: MouseEvent<HTMLAnchorElement>) {
@@ -8,7 +8,7 @@ function preventNavigation(event: MouseEvent<HTMLAnchorElement>) {
 }
 
 const meta = {
-  title: 'Components/Learning/TrackTabs',
+  title: 'Components/Navigation/TrackTabs',
   component: TrackTabs,
   argTypes: {
     tracks: { control: false },

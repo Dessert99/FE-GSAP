@@ -1,5 +1,5 @@
-import { DemoPanel } from '../../components/demo/DemoPanel'
-import { OfficialDocsLink } from '../../components/learning/OfficialDocsLink'
+import { DemoPanel } from '../../components/demo/DemoPanel/DemoPanel'
+import { OfficialDocsLink } from '../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { BasicMovementExample } from './examples/BasicMovementExample'
 import { CardFeedbackExample } from './examples/CardFeedbackExample'
 import { FunctionValueExample } from './examples/FunctionValueExample'

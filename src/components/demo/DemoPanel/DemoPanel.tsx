@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 import {
   OfficialDocsLink,
   type OfficialReference,
-} from '../learning/OfficialDocsLink'
+} from '../OfficialDocsLink/OfficialDocsLink'
 import './DemoPanel.css'
 
 type Props = {

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { OfficialDocsLink } from './OfficialDocsLink'
 
 const meta = {
-  title: 'Components/Learning/OfficialDocsLink',
+  title: 'Components/Demo/OfficialDocsLink',
   component: OfficialDocsLink,
   args: {
     label: 'gsap.to()',

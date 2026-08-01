@@ -25,20 +25,24 @@ fe-gsap/
 │   │   └── app.css                  # 앱 골격 스타일
 │   ├── components/
 │   │   ├── demo/
-│   │   │   ├── DemoPanel.tsx        # 공통 데모 프레임
-│   │   │   ├── DemoPanel.stories.tsx
-│   │   │   ├── DemoPanel.test.tsx
-│   │   │   └── DemoPanel.css
-│   │   ├── learning/
-│   │   │   ├── FloatingToc.tsx      # 원형 레슨 목차
-│   │   │   ├── FloatingToc.stories.tsx
-│   │   │   ├── FloatingToc.test.tsx
-│   │   │   ├── OfficialDocsLink.tsx # GSAP 공식 자료 링크
-│   │   │   ├── OfficialDocsLink.stories.tsx
-│   │   │   ├── OfficialDocsLink.test.tsx
-│   │   │   ├── OfficialDocsLink.css
-│   │   │   ├── TrackTabs.tsx        # 학습 트랙 탭
-│   │   │   └── TrackTabs.stories.tsx
+│   │   │   ├── DemoPanel/
+│   │   │   │   ├── DemoPanel.tsx    # 공통 데모 프레임
+│   │   │   │   ├── DemoPanel.stories.tsx
+│   │   │   │   ├── DemoPanel.test.tsx
+│   │   │   │   └── DemoPanel.css
+│   │   │   └── OfficialDocsLink/
+│   │   │       ├── OfficialDocsLink.tsx # GSAP 공식 자료 링크
+│   │   │       ├── OfficialDocsLink.stories.tsx
+│   │   │       ├── OfficialDocsLink.test.tsx
+│   │   │       └── OfficialDocsLink.css
+│   │   ├── navigation/
+│   │   │   ├── FloatingToc/
+│   │   │   │   ├── FloatingToc.tsx  # 원형 레슨 목차
+│   │   │   │   ├── FloatingToc.stories.tsx
+│   │   │   │   └── FloatingToc.test.tsx
+│   │   │   └── TrackTabs/
+│   │   │       ├── TrackTabs.tsx    # 학습 트랙 탭
+│   │   │       └── TrackTabs.stories.tsx
 │   │   └── storybook.test.ts        # Storybook 카탈로그 계약
 │   ├── fundamentals/
 │   │   └── gsap-to/

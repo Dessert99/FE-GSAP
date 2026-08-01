@@ -2,7 +2,7 @@ import { lazy } from 'react'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
-import type { TrackDefinition } from '../../app/routes'
+import type { TrackDefinition } from '../../../app/routes'
 import { FloatingToc } from './FloatingToc'
 
 const Page = lazy(async () => ({ default: () => null }))

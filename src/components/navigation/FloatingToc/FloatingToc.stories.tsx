@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { tracks } from '../../app/routes'
+import { tracks } from '../../../app/routes'
 import { FloatingToc } from './FloatingToc'
 
 const meta = {
-  title: 'Components/Learning/FloatingToc',
+  title: 'Components/Navigation/FloatingToc',
   component: FloatingToc,
   parameters: {
     layout: 'fullscreen',

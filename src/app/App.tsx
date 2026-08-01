@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import type { MouseEvent } from 'react'
-import { FloatingToc } from '../components/learning/FloatingToc'
-import { TrackTabs } from '../components/learning/TrackTabs'
+import { FloatingToc } from '../components/navigation/FloatingToc/FloatingToc'
+import { TrackTabs } from '../components/navigation/TrackTabs/TrackTabs'
 import { TrackOverviewPage } from '../pages/TrackOverviewPage'
 import { resolveRoute, tracks } from './routes'
 

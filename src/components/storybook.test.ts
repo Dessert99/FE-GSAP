@@ -26,15 +26,15 @@ describe('Storybook component catalog', () => {
         stories: ['Default', 'WithOfficialReferences'],
       },
       {
-        title: 'Components/Learning/FloatingToc',
-        stories: ['Closed', 'Open'],
-      },
-      {
-        title: 'Components/Learning/OfficialDocsLink',
+        title: 'Components/Demo/OfficialDocsLink',
         stories: ['Default', 'LongLabel'],
       },
       {
-        title: 'Components/Learning/TrackTabs',
+        title: 'Components/Navigation/FloatingToc',
+        stories: ['Closed', 'Open'],
+      },
+      {
+        title: 'Components/Navigation/TrackTabs',
         stories: ['Fundamentals', 'Patterns', 'Showcases'],
       },
     ])
