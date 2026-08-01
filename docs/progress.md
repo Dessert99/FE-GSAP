@@ -5,7 +5,7 @@
 ## 현재 상태
 
 - 마지막 업데이트: 2026-08-01
-- 완료: 새 3트랙 구조, 클라이언트 route 전환, 고정형 원형 목차, 웹 코드 표시 제거, CSS 책임 분리, Vitest 환경, 첫 `gsap.to()` 수직 슬라이스, 예제별 GSAP 공식 문서 링크, 프로젝트 구조 문서와 필수 참조 연결
+- 완료: 새 3트랙 구조, 클라이언트 route 전환, 고정형 원형 목차, 웹 코드 표시 제거, CSS 책임 분리, Vitest 환경, 첫 `gsap.to()` 수직 슬라이스, 예제별 GSAP 공식 문서 링크, 프로젝트 구조 문서와 필수 참조 연결, 공용 컴포넌트 Storybook
 - 진행 중: `gsap.to()` 기본 문법의 공식 API와 상황별 예제 범위 확장
 - 다음: `gsap.to()` 예제 매트릭스를 완료한 뒤 `gsap.from()` 시작
 
@@ -22,6 +22,8 @@
 - [x] 공식 자료 공용 링크 UI와 레슨별 URL 관리
 - [x] 전역·앱·공통 컴포넌트·레슨 CSS 분리
 - [x] `?raw`·`CodeBlock`·`prism-react-renderer` 제거
+- [x] Storybook React·Vite 실행 환경
+- [x] `DemoPanel`·`FloatingToc`·`OfficialDocsLink`·`TrackTabs` 스토리
 
 ## 기본 트랙
 
@@ -69,7 +71,10 @@
 
 ## 검증 현황
 
-- [x] `npm test` — 6개 테스트 파일, 14개 테스트 통과
+- [x] `npm test` — 7개 테스트 파일, 15개 테스트 통과
 - [x] `npm run build` — TypeScript 및 Vite 프로덕션 빌드 성공
+- [x] `npm run build-storybook` — Storybook 10.5.5 정적 빌드 성공
+- [x] Storybook 인덱스 검증 — 공용 컴포넌트 4개, 스토리 9개 등록
+- [ ] Storybook 브라우저 시각 검증 — 현재 세션에 연결 가능한 브라우저 없음
 - [ ] 데스크톱 브라우저 시각 검증 — 현재 세션에 연결 가능한 브라우저 없음
 - [ ] 모바일 브라우저 시각 검증 — 현재 세션에 연결 가능한 브라우저 없음

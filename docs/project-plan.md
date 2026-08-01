@@ -56,6 +56,7 @@
 - `src/styles/global.css`: reset, 디자인 토큰, 문서 기본값만 담당한다.
 - `src/app/app.css`: 상단 탭, 고정형 목차, 콘텐츠 폭 같은 앱 골격만 담당한다.
 - 공통 컴포넌트 스타일은 컴포넌트 파일 옆에 둔다.
+- 공통 컴포넌트의 대표 상태는 컴포넌트 파일 옆의 Storybook 스토리로 유지한다.
 - 레슨 전용 스타일은 해당 레슨 폴더에 둔다.
 - CSS Modules는 사용하지 않고 레슨별 접두사로 클래스 충돌을 막는다.
 - `opacity`, `visibility`, `transform-origin`, `overflow`, `position`처럼 애니메이션 결과에 영향을 주는 초기 상태만 이유를 주석으로 설명한다.
@@ -95,6 +96,7 @@ src/
 ```bash
 npm test
 npm run build
+npm run build-storybook
 ```
 
 레슨을 마칠 때는 다음도 확인한다.

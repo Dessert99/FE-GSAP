@@ -4,6 +4,9 @@
 
 ```text
 fe-gsap/
+├── .storybook/
+│   ├── main.ts                      # Storybook React·Vite 설정
+│   └── preview.ts                   # 전역 스타일과 공통 preview 설정
 ├── docs/
 │   ├── project-plan.md              # 프로젝트 목적과 운영 원칙
 │   ├── project-structure.md         # 현재 폴더 구조
@@ -23,15 +26,20 @@ fe-gsap/
 │   ├── components/
 │   │   ├── demo/
 │   │   │   ├── DemoPanel.tsx        # 공통 데모 프레임
+│   │   │   ├── DemoPanel.stories.tsx
 │   │   │   ├── DemoPanel.test.tsx
 │   │   │   └── DemoPanel.css
-│   │   └── learning/
-│   │       ├── FloatingToc.tsx      # 원형 레슨 목차
-│   │       ├── FloatingToc.test.tsx
-│   │       ├── OfficialDocsLink.tsx # GSAP 공식 자료 링크
-│   │       ├── OfficialDocsLink.test.tsx
-│   │       ├── OfficialDocsLink.css
-│   │       └── TrackTabs.tsx        # 학습 트랙 탭
+│   │   ├── learning/
+│   │   │   ├── FloatingToc.tsx      # 원형 레슨 목차
+│   │   │   ├── FloatingToc.stories.tsx
+│   │   │   ├── FloatingToc.test.tsx
+│   │   │   ├── OfficialDocsLink.tsx # GSAP 공식 자료 링크
+│   │   │   ├── OfficialDocsLink.stories.tsx
+│   │   │   ├── OfficialDocsLink.test.tsx
+│   │   │   ├── OfficialDocsLink.css
+│   │   │   ├── TrackTabs.tsx        # 학습 트랙 탭
+│   │   │   └── TrackTabs.stories.tsx
+│   │   └── storybook.test.ts        # Storybook 카탈로그 계약
 │   ├── fundamentals/
 │   │   └── gsap-to/
 │   │       ├── examples/            # gsap.to() 개별 예제
@@ -54,6 +62,7 @@ fe-gsap/
 │   ├── main.tsx                     # 앱 진입점
 │   └── vite-env.d.ts
 ├── AGENTS.md                        # 작업 기본 지침
+├── .gitignore
 ├── index.html
 ├── package.json
 ├── package-lock.json
