@@ -31,7 +31,7 @@
 
 컨트롤, 실제 GSAP vars, 화면에 표시하는 코드는 동일한 상태와 설정 생성 함수에서 파생한다. 표시된 코드와 실행 설정이 달라질 수 있는 중복 조립을 없앤다.
 
-미리보기에는 현재 방향과 시작·종료 상태를 표시해 `delay`, `startAt`, `runBackwards`, `reversed`, `yoyoEase`를 조작했을 때 무엇이 바뀌었는지 확인할 수 있게 한다.
+미리보기에는 현재 방향과 시작·종료 상태를 표시해 `delay`, `startAt`, `runBackwards`, `reversed`, `easeReverse`를 조작했을 때 무엇이 바뀌었는지 확인할 수 있게 한다.
 
 ## 글자 크기
 
@@ -45,7 +45,11 @@
 - 페이지 섹션: `src/content/gsap/methods/gsap-to/sections/`
 - 독립 실행 예제: `src/content/gsap/methods/gsap-to/examples/<ExampleName>/`
 
-한 파일에 하나의 React 컴포넌트만 정의하고, 예제별 상태와 GSAP 실행 코드는 해당 예제 폴더에 둔다.
+한 파일에 하나의 React 컴포넌트만 정의한다. 예제별 React 컴포넌트에는 조작 UI, 미리보기, 코드 패널, 속성 표, 관찰점과 설명을 두고, GSAP 실행에 필요한 상태와 생명주기는 같은 폴더의 `use<ExampleName>Animation.ts` 훅으로 추출한다.
+
+커스텀 훅은 GSAP 대상과 연결되는 className, `useGSAP`, `gsap.set()`·`gsap.to()`, Tween 참조와 제어 메서드, 재실행 상태, reduced-motion 분기를 소유한다. 패널의 제목·설명·속성 표·관찰점은 훅에 넣지 않는다. 화면에 표시하는 코드는 훅이 제공하는 동일한 상태와 정규화된 설정에서 파생한다.
+
+예제 화면의 소스 경로는 React 패널 파일이 아니라 학습자가 GSAP 동작만 읽을 수 있는 커스텀 훅 파일을 가리킨다.
 
 ## 검증
 
