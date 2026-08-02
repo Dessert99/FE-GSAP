@@ -94,6 +94,36 @@ LLM이 코딩할 때 흔히 저지르는 실수를 줄이기 위한 행동 지�
 - 안 다는 곳: 다시 내보내기만 하는 `index.ts`, 읽으면 바로 아는 줄. `export`가 하나뿐인 파일은 맨 위 한 줄로 갈음한다.
 - `examples/` 아래는 GSAP 문법 설명 자체가 학습 목적이므로 문법을 풀어 써도 된다.
 
+### 7. GSAP 학습 코드는 단계마다 주석을 단다
+
+**대상: `examples/` 아래의 예제 컴포넌트와 `use*Animation.ts` 훅.** 여기서는 코드가 곧 교재이므로, 위에서 아래로 읽기만 해도 애니메이션이 어떻게 조립되는지 따라올 수 있어야 한다. 나머지 파일은 6번 규칙만 따른다.
+
+- **선언마다 한 줄** — `ref`, `useState`, 상수, config 객체 등 모든 선언 위에 `//` 한 줄로 *이 값이 GSAP에서 맡는 역할*을 쓴다. 타입 별칭과 config 타입도 포함한다.
+- **실행 단계마다 한 줄** — `useGSAP` 콜백 안의 `gsap.set` / `gsap.to` / timeline 체인은 실행 순서대로 각 줄 위에 *이 단계에서 화면에 무슨 일이 일어나는지*를 쓴다.
+- **옵션 객체 한 줄** — `useGSAP`의 `{ scope, dependencies, revertOnUpdate }`처럼 역할이 섞인 옵션은 그 줄 위에 한 줄로 왜 그 조합인지 쓴다.
+- **반환 객체는 한 줄로 갈음** — 각 키는 이미 위에서 설명했으므로 소비처가 무엇을 받는지만 한 줄로 쓴다.
+- 길이는 6번과 같이 **한 줄 이내**, 한국어로 쓴다. 두 줄이 필요하면 값을 쪼개거나 이름을 바꾼다.
+
+```ts
+// 애니메이션이 적용될 DOM 범위 — useGSAP이 이 안에서만 선택자를 찾고 정리한다
+const scope = useRef<HTMLDivElement>(null)
+// gsap.to에 넘길 선택자이자 JSX className — 실행과 표시가 같은 문자열을 쓴다
+const targetClassName = 'keyframes-example__target'
+// 배열형 keyframes와 퍼센트형 keyframes 중 무엇을 실행할지 결정한다
+const [mode, setMode] = useState<KeyframeMode>('array')
+
+useGSAP(
+  () => {
+    // 재생 전 이전 tween이 남긴 transform을 지워 항상 같은 지점에서 출발시킨다
+    gsap.set(`.${targetClassName}`, { x: 0, y: 0, rotation: 0, scale: 1 })
+    // keyframes를 순서대로 이어 붙여 하나의 tween으로 재생한다
+    gsap.to(`.${targetClassName}`, animationConfig)
+  },
+  // mode·모션 설정·replay 중 하나만 바뀌어도 이전 tween을 되돌리고 처음부터 다시 만든다
+  { scope, dependencies: [mode, reducedMotion, runKey], revertOnUpdate: true },
+)
+```
+
 ---
 
 **이 지침이 잘 작동하고 있다는 신호:** diff에 불필요한 변경이 줄고, 과한 복잡함 때문에 다시 쓰는 일이 줄며, 명확화 질문이 실수 뒤가 아니라 구현 전에 나온다.
