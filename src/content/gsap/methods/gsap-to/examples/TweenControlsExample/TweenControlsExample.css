@@ -1,0 +1,8 @@
+.tween-controls-example { width: min(100%, 600px); }
+.tween-controls-example__lane { height: 74px; padding: 10px; border-radius: 12px; background: rgb(255 255 255 / 3%); }
+.tween-controls-example__target { display: grid; width: 58px; height: 54px; place-items: center; border-radius: 11px; background: var(--color-accent); color: var(--color-accent-ink); font-size: 12px; font-weight: 800; }
+.tween-controls-example > p { margin: 12px 0 0; color: var(--color-muted); font-size: 15px; }
+.tween-controls-example > p output { color: var(--color-accent); font-variant-numeric: tabular-nums; }
+.tween-controls-example__buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
+.tween-controls-example__buttons button { padding: 8px; border: 1px solid var(--color-border); border-radius: 8px; background: #11161d; color: var(--color-text); font: 600 15px/1 monospace; cursor: pointer; }
+.tween-controls-example__buttons button:hover { border-color: rgb(200 241 105 / 40%); }

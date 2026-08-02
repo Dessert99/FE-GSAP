@@ -1,0 +1,2 @@
+.overwrite-example { position: relative; width: min(100%, 560px); height: 88px; border-bottom: 1px solid var(--color-border); }
+.overwrite-example__target { position: absolute; bottom: 10px; left: 0; display: grid; width: 52px; height: 52px; place-items: center; border-radius: 12px; background: linear-gradient(135deg, var(--color-accent), #78d6ff); color: var(--color-accent-ink); font-weight: 900; }

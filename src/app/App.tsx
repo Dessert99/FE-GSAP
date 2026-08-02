@@ -1,3 +1,4 @@
+/** URL·학습 트랙·레슨 화면을 동기화하고 앱 공통 탐색 UI를 조립한다. */
 import { Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import type { MouseEvent } from 'react'
 import { FloatingToc } from '../components/navigation/FloatingToc/FloatingToc'
@@ -17,6 +18,7 @@ export function App() {
     : route.track.label
 
   useEffect(() => {
+    // 알 수 없는 경로도 계산된 정규 경로로 교체해 새 히스토리를 만들지 않는다.
     if (window.location.pathname !== route.canonicalPath) {
       window.history.replaceState(null, '', route.canonicalPath)
     }
@@ -34,6 +36,7 @@ export function App() {
   }, [])
 
   useEffect(() => {
+    // 사용자가 탐색한 경우에만 본문으로 초점을 옮겨 초기 진입의 초점을 빼앗지 않는다.
     if (!shouldFocusMain.current) return
     shouldFocusMain.current = false
     mainRef.current?.focus({ preventScroll: true })
@@ -49,6 +52,7 @@ export function App() {
   }
 
   const handleLinkNavigate = (event: MouseEvent<HTMLAnchorElement>, path: string) => {
+    // 새 탭 열기와 보조 클릭은 브라우저 기본 동작을 유지한다.
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return
 
     event.preventDefault()

@@ -1,8 +1,11 @@
+/** 학습 콘텐츠 등록 정보와 URL 해석 규칙을 한곳에서 관리한다. */
 import { lazy } from 'react'
 import type { ComponentType, LazyExoticComponent } from 'react'
 
+/** 앱 상단에서 전환할 수 있는 학습 관점의 고정 식별자다. */
 export type TrackId = 'fundamentals' | 'patterns' | 'showcases'
 
+/** 목차 항목과 지연 로딩할 학습 페이지를 연결한다. */
 export type LessonDefinition = {
   slug: string
   title: string
@@ -10,6 +13,7 @@ export type LessonDefinition = {
   Page: LazyExoticComponent<ComponentType>
 }
 
+/** 한 트랙의 소개와 소속 레슨을 탐색 UI에 전달한다. */
 export type TrackDefinition = {
   id: TrackId
   label: string
@@ -17,6 +21,7 @@ export type TrackDefinition = {
   lessons: LessonDefinition[]
 }
 
+/** 요청 경로를 화면 렌더링에 필요한 정규화된 상태로 바꾼 결과다. */
 export type ResolvedRoute = {
   track: TrackDefinition
   trackId: TrackId
@@ -26,9 +31,10 @@ export type ResolvedRoute = {
 }
 
 const GsapToPage = lazy(() =>
-  import('../fundamentals/gsap-to/GsapToPage').then(({ GsapToPage }) => ({ default: GsapToPage })),
+  import('../content/gsap/methods/gsap-to/GsapToPage').then(({ GsapToPage }) => ({ default: GsapToPage })),
 )
 
+/** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
     id: 'fundamentals',
@@ -50,12 +56,14 @@ export const tracks: TrackDefinition[] = [
   },
 ]
 
+/** 레슨이 있으면 첫 학습 페이지로, 없으면 트랙 소개로 연결한다. */
 export function getTrackHref(track: TrackDefinition) {
   const firstLesson = track.lessons[0]
 
   return firstLesson ? `/${track.id}/${firstLesson.slug}` : `/${track.id}`
 }
 
+/** 모르는 경로도 첫 트랙·첫 레슨으로 흡수해 학습 흐름이 끊기지 않게 한다. */
 export function resolveRoute(pathname: string): ResolvedRoute {
   const [trackSegment, lessonSegment] = pathname.split('/').filter(Boolean)
   const track = tracks.find(({ id }) => id === trackSegment) ?? tracks[0]

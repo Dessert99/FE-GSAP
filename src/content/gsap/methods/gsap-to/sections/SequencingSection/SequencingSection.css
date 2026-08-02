@@ -1,0 +1,8 @@
+.sequencing-section { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.sequencing-section article { min-width: 0; padding: 18px; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.sequencing-section__recommended { border-color: rgb(200 241 105 / 32%) !important; }
+.sequencing-section article > span { color: var(--color-accent); font-size: 12px; font-weight: 750; }
+.sequencing-section h3 { margin: 7px 0 13px; font-size: 18px; }
+.sequencing-section pre { margin: 0; padding: 14px; overflow-x: auto; border-radius: 9px; background: #090c10; color: #dbe5ee; font-size: 15px; line-height: 1.65; }
+.sequencing-section article > p { margin: 13px 0 0; color: var(--color-muted); font-size: 15px; line-height: 1.6; }
+@media (max-width: 680px) { .sequencing-section { grid-template-columns: 1fr; } }

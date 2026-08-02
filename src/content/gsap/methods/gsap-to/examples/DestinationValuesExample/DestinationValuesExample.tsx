@@ -1,0 +1,94 @@
+/** 목표값과 duration·ease가 결과와 움직임에 주는 차이를 비교한다. */
+import { InteractiveExample } from '../../../../../../components/demo/InteractiveExample/InteractiveExample'
+import './DestinationValuesExample.css'
+import { useDestinationValuesAnimation } from './useDestinationValuesAnimation'
+
+const eases = ['none', 'power1.out', 'power2.out', 'back.out(1.7)'] as const
+
+export function DestinationValuesExample() {
+  const { scope, targetClassName, x, setX, rotation, setRotation, duration, setDuration, animationDuration, ease, setEase, reducedMotion, replay } = useDestinationValuesAnimation()
+
+  const code = `gsap.to('.box', {
+  x: ${x},
+  rotation: ${rotation},
+  duration: ${animationDuration.toFixed(1)},
+  ease: '${ease}'
+})`
+
+  return (
+    <div ref={scope}>
+      <InteractiveExample
+        title="도착값과 움직임의 느낌"
+        description="x와 rotation은 도착 상태를, duration과 ease는 그곳까지 가는 과정을 결정합니다."
+        sourcePath="src/content/gsap/methods/gsap-to/examples/DestinationValuesExample/useDestinationValuesAnimation.ts"
+        reducedMotion={reducedMotion}
+        controls={
+          <div className="interactive-example__control-list">
+            <label className="interactive-example__control">
+              <span className="interactive-example__control-heading">
+                <span>x</span>
+                <output>{x}px</output>
+              </span>
+              <input type="range" min="40" max="240" step="10" value={x} onChange={(event) => setX(Number(event.target.value))} />
+            </label>
+            <label className="interactive-example__control">
+              <span className="interactive-example__control-heading">
+                <span>rotation</span>
+                <output>{rotation}°</output>
+              </span>
+              <input type="range" min="0" max="360" step="15" value={rotation} onChange={(event) => setRotation(Number(event.target.value))} />
+            </label>
+            <label className="interactive-example__control">
+              <span className="interactive-example__control-heading">
+                <span>duration</span>
+                <output>{duration.toFixed(1)}s</output>
+              </span>
+              <input type="range" min="0.2" max="2.4" step="0.1" value={duration} onChange={(event) => setDuration(Number(event.target.value))} />
+            </label>
+            <label className="interactive-example__control">
+              <span className="interactive-example__control-heading">
+                <span>ease</span>
+              </span>
+              <select value={ease} onChange={(event) => setEase(event.target.value as (typeof eases)[number])}>
+                {eases.map((value) => (
+                  <option key={value}>{value}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+        }
+        preview={
+          <div className="destination-values-example">
+            <div className="destination-values-example__track">
+              <span>현재값</span>
+              <span>목표값</span>
+              <div className={targetClassName}>to</div>
+            </div>
+          </div>
+        }
+        code={code}
+        propertyDetails={[
+          { name: 'x', type: 'number | string | function', defaultValue: '현재 x', acceptedValues: '숫자는 px, 단위 문자열, +=·-= 상대값, 함수' },
+          { name: 'rotation', type: 'number | string | function', defaultValue: '현재 rotation', acceptedValues: '숫자는 degree, deg·rad 문자열, 함수' },
+          { name: 'duration', type: 'number | string | function', defaultValue: '0.5초', acceptedValues: '0 이상의 초 단위 값' },
+          { name: 'ease', type: 'string | function', defaultValue: 'power1.out', acceptedValues: '내장 ease 이름, 설정 문자열, 사용자 함수' },
+        ]}
+        changes={[
+          `x가 0에서 ${x}px로, rotation이 0°에서 ${rotation}°로 바뀝니다.`,
+          `같은 도착값도 ${duration.toFixed(1)}초와 ${ease} 조합에 따라 움직이는 느낌이 달라집니다.`,
+        ]}
+        watchFor={[
+          'x를 바꿨을 때 시작점이 아니라 도착점만 이동하는지 확인합니다.',
+          'ease를 none과 back.out으로 바꿔 일정한 속도와 도착점 초과 움직임을 비교합니다.',
+        ]}
+        explanation={
+          <p>
+            <code>gsap.to()</code>는 실행 순간의 현재값을 읽고 vars 객체에 적힌 목표값까지 보간합니다. CSS의 <code>x</code>와{' '}
+            <code>rotation</code>은 transform으로 적용되고, <code>duration</code>과 <code>ease</code>는 값 자체가 아니라 변화의 시간과 속도 곡선을 정합니다.
+          </p>
+        }
+        onReplay={replay}
+      />
+    </div>
+  )
+}

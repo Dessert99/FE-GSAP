@@ -1,3 +1,4 @@
+/** DemoPanel의 기본 상태와 공식 참조가 있는 상태를 독립적으로 확인한다. */
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { DemoPanel } from './DemoPanel'
 
@@ -37,11 +38,14 @@ const meta = {
   },
 } satisfies Meta<typeof DemoPanel>
 
+/** DemoPanel 스토리를 데모 컴포넌트 분류에 등록한다. */
 export default meta
 type Story = StoryObj<typeof meta>
 
+/** 참조 링크 없이 데모의 기본 골격만 확인한다. */
 export const Default: Story = {}
 
+/** 여러 공식 자료가 함께 배치될 때의 레이아웃을 확인한다. */
 export const WithOfficialReferences: Story = {
   args: {
     references: [

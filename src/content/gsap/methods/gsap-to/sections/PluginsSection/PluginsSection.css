@@ -1,0 +1,6 @@
+.plugins-section { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 14px; }
+.plugins-section > div { min-width: 0; overflow: hidden; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); }
+.plugins-section__label { margin: 0; padding: 12px 16px; border-bottom: 1px solid var(--color-border); color: var(--color-accent); font-size: 12px; font-weight: 750; }
+.plugins-section pre { margin: 0; padding: 18px; overflow-x: auto; background: #090c10; color: #dbe5ee; font-size: 15px; line-height: 1.65; }
+.plugins-section > span { color: var(--color-accent); }
+@media (max-width: 680px) { .plugins-section { grid-template-columns: 1fr; } .plugins-section > span { transform: rotate(90deg); text-align: center; } }

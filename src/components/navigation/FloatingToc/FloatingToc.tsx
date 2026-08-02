@@ -1,3 +1,4 @@
+/** 현재 트랙의 레슨을 그룹별로 접어 탐색할 수 있는 부유 목차를 제공한다. */
 import { useEffect, useRef, useState } from 'react'
 import type { LessonDefinition, TrackDefinition } from '../../../app/routes'
 

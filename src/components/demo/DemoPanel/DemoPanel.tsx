@@ -1,3 +1,4 @@
+/** 공식 참조와 재실행 기능을 갖춘 공용 데모 무대를 제공한다. */
 import { useState } from 'react'
 import type { ReactNode } from 'react'
 import {

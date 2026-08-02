@@ -1,3 +1,4 @@
+/** 학습 관점을 전환하면서 브라우저 기본 링크 동작도 보존하는 탭을 제공한다. */
 import type { MouseEvent } from 'react'
 import { getTrackHref } from '../../../app/routes'
 import type { TrackDefinition, TrackId } from '../../../app/routes'

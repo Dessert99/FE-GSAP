@@ -1,3 +1,4 @@
+/** 아직 레슨이 없는 트랙에서도 학습 범위를 빈 화면 대신 안내한다. */
 type Props = {
   label: string
   description: string

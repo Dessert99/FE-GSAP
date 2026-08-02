@@ -1,0 +1,35 @@
+.value-modes-example {
+  display: grid;
+  gap: 12px;
+  width: min(100%, 600px);
+}
+
+.value-modes-example__row {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+}
+
+.value-modes-example__row > span {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.value-modes-example__lane {
+  position: relative;
+  height: 32px;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 3%);
+}
+
+.value-modes-example__bar {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 44px;
+  height: 20px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--color-accent), #78d6ff);
+}
