@@ -159,7 +159,10 @@ create: page/meta/catalog/CSS, SectionHeading/PageCoverage, MentalModel/RawEased
 ### verificationEvidence
 
 - `2026-08-03 npm run build` — `tsc && vite build`, 171 modules, `TweenPlayheadPage` JS/CSS chunk 생성, exit 0.
+- `2026-08-03` 최종 통합 build — 189 modules, 확정 5개 route의 page chunk 포함, exit 0.
+- `2026-08-03 npm run build-storybook` — 327 modules, exit 0; 기존 500 kB size warning만 발생.
 - static integration — `/fundamentals/tween-playhead` lazy route와 lesson group 등록 확인.
+- local HTTP — 최종 Vite server에서 route `200` 응답 확인.
 - Browser discovery — `agent.browsers.list()`가 `[]`; keyboard·390px·control 실조작은 미실행.
 - 독립 review — IR-CORE14-001~004 수정 후 재검수 모두 PASS; seek true→false callback 0→1, paused true 보존 확인.
 - cross-page review — dark theme 상속과 320px target 범위를 수정 후 재검수 PASS.

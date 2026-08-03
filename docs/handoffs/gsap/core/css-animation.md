@@ -215,15 +215,17 @@ modify: 이 handoff evidence. `src/app/routes.ts`는 공유 파일 충돌 방지
 | COMMENT-CORE06-001 | ADDRESSED | exported type 6개를 한 줄 한국어 JSDoc으로 수정 후 재검수 PASS | comment gate 통과 | none |
 | A11Y-CORE06-001 | ADDRESSED | clearProps x를 shared descriptor에서 120→60으로 줄여 320px 범위 126..244 확보 | small-screen 정적 blocker 해소 | Browser 390px 실조작 필요 |
 | MOTION-CORE06-001 | ADDRESSED | 세 runtime이 마지막 replay key를 기억해 reduced-motion dependency 변경에는 baseline만 준비 | 설정 전환 자동재생 차단 | none |
-| IR-CORE06-FINAL | PASS | independent reviewer가 52/52, 20행 quick reference, learning/runtime/route/build와 수정 2건 재검수 | 정적 release gate 통과 | Browser gate만 남음 |
+| IR-CORE06-FINAL | PASS | independent reviewer가 52/52, 20행 quick reference, learning/runtime/route/build와 comment·layout·motion 수정을 재검수 | 정적 release gate 통과 | Browser gate만 남음 |
 
 ### verificationEvidence
 
 - `rg -o "id: 'CSS-(S|EX)[0-9]{3}'" css-animation.reference.ts | wc -l` → `52`
 - Quick reference literal row count → `20`
-- `2026-08-03 npm run build` → `tsc && vite build`, 최종 196 modules, 신규 5개 page chunk 포함, exit 0
+- `2026-08-03 npm run build` → `tsc && vite build`, 최종 189 modules, 확정 5개 route의 page chunk 포함, exit 0
+- `2026-08-03 npm run build-storybook` → 327 modules, exit 0; 기존 500 kB size warning만 발생
 - `npm run lint -- --max-warnings=0` → package에 lint script가 없어 실행 불가; build의 TypeScript 검사는 통과
 - independent review — coverage/learning/runtime/route/build PASS; comment와 320px clearProps overflow 수정 후 재검수 PASS
+- local HTTP — 최종 Vite server에서 `/fundamentals/css-animation` `200` 응답 확인
 - cross-page review — 세 runtime의 replay-key guard 추가 후 reduced-motion 변경 no-autoplay 재검수 PASS
 - Browser discovery — `agent.browsers.list()`가 `[]`; keyboard·390px·세 example runtime·reduced-motion 실조작 미실행
 

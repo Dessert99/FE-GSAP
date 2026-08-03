@@ -149,8 +149,10 @@ modify: `src/app/routes.ts`, 이 handoff의 coverage/findings/verification/relea
 - `2026-08-03 npm run build` — exit 2. core04 diagnostic 전 도달한 실패는 동시 구현 중인 `css-animation` section 6개와 `easing` example 3개의 missing import이며, core04 파일의 오류는 보고되지 않았다.
 - `src/app/routes.ts` — `/root`의 공유 파일 충돌 방지 지시에 따라 이 구현에서는 변경하지 않았다.
 - Browser·독립 coverage/learning/structure/accessibility review — 미실행.
-- `2026-08-03` 통합 `npm run build` — 196 modules, 신규 5개 page chunk 포함, exit 0.
+- `2026-08-03` 최종 통합 `npm run build` — 189 modules, 확정 5개 route의 page chunk 포함, exit 0.
+- `2026-08-03` 최종 `npm run build-storybook` — 327 modules, exit 0; 기존 500 kB size warning만 발생.
 - route integration — `/fundamentals/tween-start-end-values` lazy import와 `트윈 기초` lesson 등록.
+- local HTTP — 최종 Vite server에서 route `200` 응답 확인.
 - independent review — coverage/learning/structure/runtime sync/comment PASS; 320px overflow 수정 후 A11Y 재검수 PASS.
 - cross-page review — mount/control 자동 실행을 replay-key guard로 수정 후 no-autoplay 재검수 PASS.
 - Browser discovery — `agent.browsers.list()`가 `[]`; keyboard·390px·control 실조작 미실행.

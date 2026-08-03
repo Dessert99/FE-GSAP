@@ -132,7 +132,10 @@ create: page/meta/catalog/CSS, SectionHeading/PageCoverage, model/families/steps
 ### verificationEvidence
 
 - `2026-08-03 npm run build` — `tsc && vite build`, 171 modules, `EasingPage` JS/CSS chunk 생성, exit 0.
+- `2026-08-03` 최종 통합 build — 189 modules, 확정 5개 route의 page chunk 포함, exit 0.
+- `2026-08-03 npm run build-storybook` — 327 modules, exit 0; 기존 500 kB size warning만 발생.
 - static integration — `/fundamentals/easing` lazy route와 lesson group 등록 확인.
+- local HTTP — 최종 Vite server에서 route `200` 응답 확인.
 - Browser discovery — `agent.browsers.list()`가 `[]`; keyboard·390px·control 실조작은 미실행.
 - 독립 review — coverage/learning/structure/accessibility/build PASS; runtime/display·comment 3건 수정 후 재검수 PASS.
 

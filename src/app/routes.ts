@@ -38,6 +38,26 @@ const GsapCoreMapPage = lazy(() =>
   import('../content/gsap/fundamentals/gsap-core-map/GsapCoreMapPage').then(({ GsapCoreMapPage }) => ({ default: GsapCoreMapPage })),
 )
 
+const TweenStartEndValuesPage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-start-end-values/TweenStartEndValuesPage').then(({ TweenStartEndValuesPage }) => ({ default: TweenStartEndValuesPage })),
+)
+
+const CssAnimationPage = lazy(() =>
+  import('../content/gsap/fundamentals/css-animation/CssAnimationPage').then(({ CssAnimationPage }) => ({ default: CssAnimationPage })),
+)
+
+const EasingPage = lazy(() =>
+  import('../content/gsap/fundamentals/easing/EasingPage').then(({ EasingPage }) => ({ default: EasingPage })),
+)
+
+const TweenPlayheadPage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-playhead/TweenPlayheadPage').then(({ TweenPlayheadPage }) => ({ default: TweenPlayheadPage })),
+)
+
+const ReusableEffectsPage = lazy(() =>
+  import('../content/gsap/fundamentals/reusable-effects/ReusableEffectsPage').then(({ ReusableEffectsPage }) => ({ default: ReusableEffectsPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -47,6 +67,11 @@ export const tracks: TrackDefinition[] = [
     lessons: [
       { slug: 'gsap-core-map', title: 'GSAP Core 지도', group: '시작하기', Page: GsapCoreMapPage },
       { slug: 'gsap-to', title: 'gsap.to()', group: '트윈 기초', Page: GsapToPage },
+      { slug: 'tween-start-end-values', title: 'Tween 시작·끝 값', group: '트윈 기초', Page: TweenStartEndValuesPage },
+      { slug: 'css-animation', title: 'CSS animation', group: '값과 움직임', Page: CssAnimationPage },
+      { slug: 'easing', title: 'Easing', group: '값과 움직임', Page: EasingPage },
+      { slug: 'tween-playhead', title: 'Tween playhead', group: '트윈 제어', Page: TweenPlayheadPage },
+      { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
     ],
   },
   {
