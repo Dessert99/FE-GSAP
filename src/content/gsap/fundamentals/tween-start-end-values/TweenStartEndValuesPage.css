@@ -1,0 +1,325 @@
+/** 시작·끝 값 비교표와 실행 예제를 작은 화면에서도 순서대로 읽히게 배치한다. */
+.tween-values-page {
+  --page-content-width: 1080px;
+}
+
+.tween-values-page__header {
+  max-width: 860px;
+  margin-bottom: 72px;
+}
+
+.tween-values-page__eyebrow,
+.tween-values-page__kicker {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tween-values-page__header h1 {
+  max-width: 820px;
+  margin: 0;
+  font-size: clamp(50px, 8vw, 88px);
+  line-height: 0.98;
+  letter-spacing: -0.065em;
+}
+
+.tween-values-page__summary {
+  max-width: 66ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.tween-values-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.tween-values-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.tween-values-page__path span,
+.tween-values-page__reviewed {
+  color: var(--color-muted);
+}
+
+.tween-values-page__path code {
+  color: var(--color-accent);
+}
+
+.tween-values-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.tween-values-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.tween-values-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.tween-values-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.tween-values-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tween-values-coverage__summary span,
+.tween-values-coverage__summary p,
+.tween-values-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.tween-values-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.tween-values-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.tween-values-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.tween-values-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.tween-values-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.tween-values-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.tween-values-page__section {
+  scroll-margin-top: 82px;
+}
+
+.tween-values-page__section + .tween-values-page__section {
+  margin-top: 96px;
+}
+
+.tween-values-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.tween-values-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+}
+
+.tween-values-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(24px, 4vw, 34px);
+  letter-spacing: -0.045em;
+}
+
+.tween-values-page__section-heading p {
+  max-width: 70ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.tween-values-page__matrix-wrap,
+.tween-values-page__reference-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.tween-values-page__matrix,
+.tween-values-page__reference {
+  width: 100%;
+  min-width: 690px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.tween-values-page__matrix th,
+.tween-values-page__matrix td,
+.tween-values-page__reference th,
+.tween-values-page__reference td {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--color-border);
+  vertical-align: top;
+}
+
+.tween-values-page__matrix tr:last-child > *,
+.tween-values-page__reference tr:last-child > * {
+  border-bottom: 0;
+}
+
+.tween-values-page__matrix thead th,
+.tween-values-page__reference thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+}
+
+.tween-values-page__matrix tbody th,
+.tween-values-page__reference tbody th {
+  color: var(--color-accent);
+}
+
+.tween-values-page__matrix td,
+.tween-values-page__reference td {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.tween-values-page__card-grid,
+.tween-values-page__choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tween-values-page__card,
+.tween-values-page__choice-grid article,
+.tween-values-page__note {
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 15px;
+  background: var(--color-surface);
+}
+
+.tween-values-page__card h3,
+.tween-values-page__choice-grid h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.tween-values-page__card p,
+.tween-values-page__choice-grid p,
+.tween-values-page__note,
+.tween-values-page__bullet-list {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.tween-values-page__card pre,
+.tween-values-page__code {
+  margin: 16px 0 0;
+  padding: 18px;
+  overflow-x: auto;
+  border-radius: 11px;
+  background: #080b0f;
+  color: #dbe5ee;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.tween-values-page__note {
+  margin-top: 18px;
+}
+
+.tween-values-page__note strong,
+.tween-values-page__card strong,
+.tween-values-page__choice-grid strong,
+.tween-values-page__bullet-list strong {
+  color: var(--color-text);
+}
+
+.tween-values-page__bullet-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.tween-values-page__related-link {
+  display: inline-flex;
+  margin-top: 18px;
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+:where(.tween-values-coverage a, .tween-values-page__related-link):focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .tween-values-page__header {
+    margin-bottom: 58px;
+  }
+
+  .tween-values-coverage__summary,
+  .tween-values-coverage ol,
+  .tween-values-page__card-grid,
+  .tween-values-page__choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tween-values-coverage__summary p {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .tween-values-page__section + .tween-values-page__section {
+    margin-top: 72px;
+  }
+}
