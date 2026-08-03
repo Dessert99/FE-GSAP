@@ -88,6 +88,19 @@ export const tracks: TrackDefinition[] = [
   },
 ]
 
+/** 배포 환경마다 달라지는 base를 끝 슬래시 없는 접두사로 통일한다. */
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, '')
+
+/** 앱 내부 경로에 배포 base를 붙여 실제 브라우저 주소로 만든다. */
+export function toHref(path: string) {
+  return `${basePath}${path}`
+}
+
+/** 브라우저 주소에서 배포 base를 걷어내 앱 내부 경로로 되돌린다. */
+export function toAppPath(pathname: string) {
+  return pathname.startsWith(basePath) ? pathname.slice(basePath.length) || '/' : pathname
+}
+
 /** 레슨이 있으면 첫 학습 페이지로, 없으면 트랙 소개로 연결한다. */
 export function getTrackHref(track: TrackDefinition) {
   const firstLesson = track.lessons[0]

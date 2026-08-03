@@ -3,5 +3,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  // GitHub Pages 프로젝트 사이트는 레포 이름 하위 경로로 서비스된다.
+  base: '/FE-GSAP/',
   plugins: [react()],
 })
