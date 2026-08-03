@@ -1,0 +1,15 @@
+/** Timeline effect 예제의 position marker·단일 target·parent 관찰값을 구분한다. */
+.timeline-effect-example { display: grid; gap: 1.15rem; width: min(100%, 36rem); }
+.timeline-effect-example__track { display: grid; grid-template-columns: auto 1fr 1fr 1fr; gap: .35rem; align-items: center; }
+.timeline-effect-example__track span { padding: .55rem; border: 1px solid var(--color-border); border-radius: .5rem; color: var(--color-muted); font-size: .68rem; text-align: center; }
+.timeline-effect-example__track .timeline-effect-example__marker { border-color: var(--color-accent); background: rgb(200 241 105 / 9%); color: var(--color-accent); font-weight: 800; }
+.timeline-effect-example__target { display: grid; gap: .35rem; justify-self: center; min-width: min(100%, 18rem); padding: 1.2rem 1.4rem; border: 1px solid rgb(200 241 105 / 42%); border-radius: 1rem; background: rgb(200 241 105 / 8%); text-align: center; will-change: transform, opacity; }
+.timeline-effect-example__target span { color: var(--color-accent); font-size: .7rem; font-weight: 800; letter-spacing: .12em; }
+.timeline-effect-example dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border: 1px solid var(--color-border); border-radius: .8rem; }
+.timeline-effect-example dl div { display: grid; gap: .3rem; padding: .75rem; text-align: center; }
+.timeline-effect-example dl div + div { border-left: 1px solid var(--color-border); }
+.timeline-effect-example dt, .timeline-effect-example dd { margin: 0; font-size: .72rem; }
+.timeline-effect-example dt { color: var(--color-muted); }
+.timeline-effect-example dd { color: var(--color-text); font-weight: 700; }
+.timeline-effect-example > p { min-height: 2.8rem; margin: 0; color: var(--color-muted); font-size: .8rem; line-height: 1.6; text-align: center; }
+@media (max-width: 36rem) { .timeline-effect-example__track { grid-template-columns: 1fr 1fr; } .timeline-effect-example dl { grid-template-columns: 1fr; } .timeline-effect-example dl div + div { border-top: 1px solid var(--color-border); border-left: 0; } }

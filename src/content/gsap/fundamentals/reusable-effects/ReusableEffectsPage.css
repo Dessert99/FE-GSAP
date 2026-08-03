@@ -1,0 +1,43 @@
+/** reusable effect의 recipe 흐름·계약 표·두 실행 예제를 긴 문서에서도 읽기 쉽게 배치한다. */
+.reusable-effects-page { --effects-ink: var(--color-text); --effects-muted: var(--color-muted); --effects-line: var(--color-border); display: grid; gap: 4rem; max-width: 74rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem) 6rem; color: var(--effects-ink); }
+.reusable-effects-page__header { display: grid; gap: 1rem; max-width: 58rem; }
+.reusable-effects-page__eyebrow, .reusable-effects-page__reviewed { margin: 0; color: var(--color-accent); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.reusable-effects-page h1 { max-width: 16ch; margin: 0; font-size: clamp(2.3rem, 6vw, 4.8rem); line-height: .98; letter-spacing: -.055em; }
+.reusable-effects-page__summary { max-width: 46rem; margin: 0; color: var(--effects-muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.75; }
+.reusable-effects-page__official-links, .reusable-effects-page__related { display: flex; flex-wrap: wrap; gap: .65rem; }
+.reusable-effects-page__path { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; color: var(--effects-muted); font-size: .84rem; }
+.reusable-effects-page__path code { max-width: 100%; overflow-wrap: anywhere; color: var(--effects-ink); }
+.reusable-effects-page__coverage { display: grid; grid-template-columns: minmax(9rem, .35fr) 1fr; gap: 1.5rem; padding: clamp(1.2rem, 3vw, 2rem); border: 1px solid var(--effects-line); border-radius: 1.5rem; background: var(--color-surface); }
+.reusable-effects-page__coverage p, .reusable-effects-page__coverage h2 { margin: 0; }
+.reusable-effects-page__coverage p { color: var(--color-accent); font-size: .72rem; font-weight: 800; letter-spacing: .08em; }
+.reusable-effects-page__coverage h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+.reusable-effects-page__coverage ul { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; }
+.reusable-effects-page__coverage li { display: grid; gap: .2rem; }
+.reusable-effects-page__coverage span { overflow-wrap: anywhere; color: var(--effects-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; line-height: 1.55; }
+.reusable-effects-page__section { display: grid; gap: 1.5rem; scroll-margin-top: 2rem; }
+.reusable-effects-page__section-heading { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; align-items: start; }
+.reusable-effects-page__section-heading > p { margin: .25rem 0 0; color: var(--color-accent); font-weight: 800; }
+.reusable-effects-page__section-heading h2 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.8rem); letter-spacing: -.035em; }
+.reusable-effects-page__section-heading div > p { max-width: 50rem; margin: .55rem 0 0; color: var(--effects-muted); line-height: 1.7; }
+.reusable-effects-page__section > p, .reusable-effects-page__prose p, .reusable-effects-page__signature p, .reusable-effects-page__boundary-grid p { max-width: 58rem; margin: 0; color: var(--effects-muted); line-height: 1.8; }
+.reusable-effects-page__recipe-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap: 1rem; align-items: center; }
+.reusable-effects-page__recipe-flow div { display: grid; gap: .35rem; min-height: 7rem; padding: 1.2rem; place-content: center; border: 1px solid var(--effects-line); border-radius: 1rem; background: var(--color-surface); text-align: center; }
+.reusable-effects-page__recipe-flow small { color: var(--effects-muted); }
+.reusable-effects-page__recipe-flow > span { color: var(--color-accent); font-size: 1.5rem; }
+.reusable-effects-page__prose { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.reusable-effects-page__table-wrap { overflow-x: auto; }
+.reusable-effects-page__table-wrap table { width: 100%; min-width: 42rem; border-collapse: collapse; }
+.reusable-effects-page__table-wrap th, .reusable-effects-page__table-wrap td { padding: .85rem; border-bottom: 1px solid var(--effects-line); text-align: left; vertical-align: top; }
+.reusable-effects-page__table-wrap thead th { color: var(--effects-muted); font-size: .75rem; letter-spacing: .05em; }
+.reusable-effects-page__section > pre, .reusable-effects-page__code-grid pre, .reusable-effects-page__boundary-grid pre { max-width: 100%; margin: 0; padding: 1rem; overflow-x: auto; border-radius: 1rem; background: #111827; color: #e0e7ff; line-height: 1.7; }
+.reusable-effects-page__note, .reusable-effects-page__warning, .reusable-effects-page__signature { padding: 1.15rem; border: 1px solid var(--effects-line); border-radius: 1rem; background: var(--color-surface); }
+.reusable-effects-page__warning { border-color: rgb(255 184 107 / 42%); }
+.reusable-effects-page__code-grid, .reusable-effects-page__boundary-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.reusable-effects-page__code-grid article, .reusable-effects-page__boundary-grid article { display: grid; gap: 1rem; min-width: 0; padding: 1.2rem; border: 1px solid var(--effects-line); border-radius: 1rem; background: var(--color-surface); }
+.reusable-effects-page__code-grid h3, .reusable-effects-page__boundary-grid h3 { margin: 0; font-size: 1.1rem; }
+.reusable-effects-page__signature { display: grid; gap: .8rem; }
+.reusable-effects-page__signature > code { color: var(--color-accent); font-size: clamp(.85rem, 2vw, 1.1rem); overflow-wrap: anywhere; }
+.reusable-effects-page__related a { padding: .65rem .8rem; border: 1px solid var(--effects-line); border-radius: .65rem; color: var(--effects-ink); text-decoration: none; }
+.reusable-effects-page :where(button, a, input, select):focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+@media (max-width: 48rem) { .reusable-effects-page { gap: 3rem; } .reusable-effects-page__coverage, .reusable-effects-page__prose, .reusable-effects-page__code-grid, .reusable-effects-page__boundary-grid { grid-template-columns: 1fr; } .reusable-effects-page__recipe-flow { grid-template-columns: 1fr; } .reusable-effects-page__recipe-flow > span { transform: rotate(90deg); text-align: center; } .reusable-effects-page__section-heading { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .reusable-effects-page *, .reusable-effects-page *::before, .reusable-effects-page *::after { scroll-behavior: auto !important; } }

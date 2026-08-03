@@ -1,0 +1,17 @@
+/** direct effect 예제의 단일 target과 callback 관찰값을 명확히 구분한다. */
+.registered-effect-example { display: grid; gap: 1.25rem; width: min(100%, 34rem); }
+.registered-effect-example__target { display: grid; gap: .35rem; justify-self: center; min-width: min(100%, 18rem); padding: 1.2rem 1.4rem; border: 1px solid rgb(200 241 105 / 42%); border-radius: 1rem; background: rgb(200 241 105 / 8%); text-align: center; will-change: transform, opacity; }
+.registered-effect-example__target span { color: var(--color-accent); font-size: .7rem; font-weight: 800; letter-spacing: .12em; }
+.registered-effect-example dl { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; border: 1px solid var(--color-border); border-radius: .8rem; }
+.registered-effect-example dl div { display: grid; gap: .3rem; padding: .75rem; text-align: center; }
+.registered-effect-example dl div + div { border-left: 1px solid var(--color-border); }
+.registered-effect-example dt, .registered-effect-example dd { margin: 0; font-size: .72rem; }
+.registered-effect-example dt { color: var(--color-muted); }
+.registered-effect-example dd { color: var(--color-text); font-weight: 700; }
+.registered-effect-example > p { min-height: 2.8rem; margin: 0; color: var(--color-muted); font-size: .8rem; line-height: 1.6; text-align: center; }
+.registered-effect-example__fieldset { display: grid; gap: .8rem; margin: 0; padding: 0; border: 0; }
+.registered-effect-example__fieldset legend { margin-bottom: .7rem; font-weight: 750; }
+.registered-effect-example__fieldset label { display: grid; grid-template-columns: auto 1fr auto; gap: .55rem; align-items: center; }
+.registered-effect-example__fieldset input { accent-color: var(--color-accent); }
+.registered-effect-example__fieldset output { color: var(--color-accent); font-variant-numeric: tabular-nums; }
+@media (max-width: 34rem) { .registered-effect-example dl { grid-template-columns: 1fr; } .registered-effect-example dl div + div { border-top: 1px solid var(--color-border); border-left: 0; } }
