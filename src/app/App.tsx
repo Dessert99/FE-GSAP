@@ -4,7 +4,7 @@ import type { MouseEvent } from 'react'
 import { FloatingToc } from '../components/navigation/FloatingToc/FloatingToc'
 import { TrackTabs } from '../components/navigation/TrackTabs/TrackTabs'
 import { TrackOverviewPage } from '../pages/TrackOverviewPage'
-import { resolveRoute, tracks } from './routes'
+import { getTrackHref, resolveRoute, tracks } from './routes'
 
 export function App() {
   const [pathname, setPathname] = useState(() => window.location.pathname)
@@ -13,6 +13,7 @@ export function App() {
   const route = useMemo(() => resolveRoute(pathname), [pathname])
   const ActivePage = route.lesson?.Page
   const lessonIndex = route.track.lessons.findIndex(({ slug }) => slug === route.lessonSlug)
+  const homeHref = getTrackHref(tracks[0])
   const progressLabel = route.lesson
     ? `${String(lessonIndex + 1).padStart(2, '0')} / ${String(route.track.lessons.length).padStart(2, '0')}`
     : route.track.label
@@ -64,8 +65,8 @@ export function App() {
       <header className="learning-header">
         <a
           className="learning-header__brand"
-          href="/fundamentals/gsap-to"
-          onClick={(event) => handleLinkNavigate(event, '/fundamentals/gsap-to')}
+          href={homeHref}
+          onClick={(event) => handleLinkNavigate(event, homeHref)}
         >
           GSAP Study
         </a>

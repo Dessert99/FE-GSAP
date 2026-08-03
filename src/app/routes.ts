@@ -34,13 +34,20 @@ const GsapToPage = lazy(() =>
   import('../content/gsap/methods/gsap-to/GsapToPage').then(({ GsapToPage }) => ({ default: GsapToPage })),
 )
 
+const GsapCoreMapPage = lazy(() =>
+  import('../content/gsap/fundamentals/gsap-core-map/GsapCoreMapPage').then(({ GsapCoreMapPage }) => ({ default: GsapCoreMapPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
     id: 'fundamentals',
     label: '기본',
     description: '공식 API와 자주 만나는 상황을 작은 예제로 깊게 확인합니다.',
-    lessons: [{ slug: 'gsap-to', title: 'gsap.to()', group: '트윈 기초', Page: GsapToPage }],
+    lessons: [
+      { slug: 'gsap-core-map', title: 'GSAP Core 지도', group: '시작하기', Page: GsapCoreMapPage },
+      { slug: 'gsap-to', title: 'gsap.to()', group: '트윈 기초', Page: GsapToPage },
+    ],
   },
   {
     id: 'patterns',
