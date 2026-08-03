@@ -1,0 +1,36 @@
+/** transform 선언 순서 비교 target과 고정 적용 순서를 같은 preview에 배치한다. */
+.transform-order-example {
+  display: grid;
+  gap: 24px;
+  width: min(100%, 520px);
+}
+
+.transform-order-example__lane {
+  position: relative;
+  height: 126px;
+  border-radius: 14px;
+  background: linear-gradient(90deg, rgb(200 241 105 / 8%), rgb(120 214 255 / 5%));
+}
+
+.transform-order-example__target {
+  position: absolute;
+  top: 28px;
+  left: 24px;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--color-accent), #78d6ff);
+  color: #11170a;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.transform-order-example p {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: center;
+}

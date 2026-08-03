@@ -1,0 +1,28 @@
+/** autoAlpha와 clearProps의 실행 target과 style 관찰 결과를 함께 배치한다. */
+.css-lifecycle-example {
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+  width: min(100%, 460px);
+}
+
+.css-lifecycle-example__target {
+  display: grid;
+  place-items: center;
+  width: 118px;
+  height: 86px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--color-accent), #78d6ff);
+  color: #11170a;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.css-lifecycle-example p {
+  min-height: 3em;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: center;
+}

@@ -1,0 +1,27 @@
+/** CSS value mode별 target과 실제 style 관찰값을 같은 preview에 배치한다. */
+.css-value-example {
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+  width: min(100%, 420px);
+}
+
+.css-value-example__target {
+  display: grid;
+  place-items: center;
+  width: 50%;
+  min-width: 96px;
+  height: 92px;
+  border-radius: 12% 12%;
+  background: hsl(var(--css-demo-hue, 20) 72% 54%);
+  color: #10150b;
+  font-weight: 850;
+}
+
+.css-value-example p {
+  min-height: 1.5em;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: center;
+}
