@@ -1,0 +1,34 @@
+/** Tween playhead의 수치·표·실행 예제를 긴 문서에서도 읽기 쉽게 배치한다. */
+.tween-playhead-page { --playhead-ink: var(--color-text); --playhead-muted: var(--color-muted); --playhead-line: var(--color-border); display: grid; gap: 4rem; max-width: 74rem; margin: 0 auto; padding: clamp(2rem, 6vw, 5rem) clamp(1rem, 4vw, 3rem) 6rem; color: var(--playhead-ink); }
+.tween-playhead-page__header { display: grid; gap: 1rem; max-width: 58rem; }
+.tween-playhead-page__eyebrow, .tween-playhead-page__reviewed { margin: 0; color: var(--color-accent); font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.tween-playhead-page h1 { max-width: 16ch; margin: 0; font-size: clamp(2.3rem, 6vw, 4.8rem); line-height: .98; letter-spacing: -.055em; }
+.tween-playhead-page__summary { max-width: 44rem; margin: 0; color: var(--playhead-muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.75; }
+.tween-playhead-page__official-links { display: flex; flex-wrap: wrap; gap: .65rem; }
+.tween-playhead-page__path { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: center; color: var(--playhead-muted); font-size: .84rem; }
+.tween-playhead-page__path code { max-width: 100%; overflow-wrap: anywhere; color: var(--playhead-ink); }
+.tween-playhead-page__coverage { display: grid; grid-template-columns: minmax(9rem, .35fr) 1fr; gap: 1.5rem; padding: clamp(1.2rem, 3vw, 2rem); border: 1px solid var(--color-border); border-radius: 1.5rem; background: var(--color-surface); }
+.tween-playhead-page__coverage p, .tween-playhead-page__coverage h2 { margin: 0; }
+.tween-playhead-page__coverage p { color: var(--color-accent); font-size: .72rem; font-weight: 800; letter-spacing: .08em; }
+.tween-playhead-page__coverage h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+.tween-playhead-page__coverage ul { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; }
+.tween-playhead-page__coverage li { display: grid; gap: .2rem; }
+.tween-playhead-page__coverage span { overflow-wrap: anywhere; color: var(--playhead-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; line-height: 1.55; }
+.tween-playhead-page__section { display: grid; gap: 1.5rem; scroll-margin-top: 2rem; }
+.tween-playhead-page__section-heading { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; align-items: start; }
+.tween-playhead-page__section-heading > p { margin: .25rem 0 0; color: var(--color-accent); font-weight: 800; }
+.tween-playhead-page__section-heading h2 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.8rem); letter-spacing: -.035em; }
+.tween-playhead-page__section-heading div > p { max-width: 48rem; margin: .55rem 0 0; color: var(--playhead-muted); line-height: 1.7; }
+.tween-playhead-page__section > p { max-width: 58rem; margin: 0; line-height: 1.8; }
+.tween-playhead-page__timeline { display: grid; grid-template-columns: 2fr 1fr 2fr; overflow: hidden; border: 1px solid var(--playhead-line); border-radius: 1rem; }
+.tween-playhead-page__timeline span { padding: 1rem; text-align: center; font-weight: 700; }
+.tween-playhead-page__timeline span:nth-child(2) { border-inline: 1px dashed var(--color-muted); background: var(--color-surface-raised); color: var(--playhead-muted); }
+.tween-playhead-page__equation { padding: 1.2rem; overflow-x: auto; border-radius: 1rem; background: #111827; color: #e0e7ff; }
+.tween-playhead-page__table-wrap { overflow-x: auto; }
+.tween-playhead-page__table-wrap table { width: 100%; min-width: 42rem; border-collapse: collapse; }
+.tween-playhead-page__table-wrap th, .tween-playhead-page__table-wrap td { padding: .8rem; border-bottom: 1px solid var(--playhead-line); text-align: left; }
+.tween-playhead-page__boundary-list { display: grid; gap: .8rem; margin: 0; padding-left: 1.25rem; line-height: 1.7; }
+.tween-playhead-page pre { max-width: 100%; padding: 1rem; overflow-x: auto; border-radius: 1rem; background: #111827; color: #e0e7ff; }
+.tween-playhead-page button:focus-visible, .tween-playhead-page a:focus-visible, .tween-playhead-page input:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+@media (max-width: 42rem) { .tween-playhead-page { gap: 3rem; } .tween-playhead-page__coverage { grid-template-columns: 1fr; } .tween-playhead-page__section-heading { grid-template-columns: 1fr; } .tween-playhead-page__timeline { grid-template-columns: 1fr; } .tween-playhead-page__timeline span:nth-child(2) { border: 0; border-block: 1px dashed #9ca3af; } }
+@media (prefers-reduced-motion: reduce) { .tween-playhead-page *, .tween-playhead-page *::before, .tween-playhead-page *::after { scroll-behavior: auto !important; } }

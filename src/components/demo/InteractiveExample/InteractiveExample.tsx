@@ -22,6 +22,7 @@ type Props = {
   watchFor: string[]
   explanation: ReactNode
   onReplay: () => void
+  replayLabel?: string
   reducedMotion?: boolean
 }
 
@@ -38,6 +39,7 @@ export function InteractiveExample({
   watchFor,
   explanation,
   onReplay,
+  replayLabel = '현재 값으로 실행',
   reducedMotion = false,
 }: Props) {
   return (
@@ -50,7 +52,7 @@ export function InteractiveExample({
         </div>
         <button type="button" className="interactive-example__replay" onClick={onReplay}>
           <span aria-hidden="true">↻</span>
-          현재 값으로 실행
+          {replayLabel}
         </button>
       </header>
 
