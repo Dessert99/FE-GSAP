@@ -25,8 +25,18 @@
 - `PASS`: 담당 범위에 release를 막는 문제가 없으며 확인 근거가 있다.
 - `BLOCK`: 공식 기술 내용 누락, 단순 번역·요약, runtime/display 불일치, 페이지 유형과 맞지 않는 실행 구조, 접근성·motion 결함, build 실패처럼 release 전에 반드시 고쳐야 한다.
 - `ADVISORY`: 현재 계약과 release를 막지는 않지만 후속 개선 가치가 있다. `BLOCK`을 advisory로 낮추려면 해당 전문 검수자의 재판정이 필요하다.
+- `DEFERRED`: 저장소 소유자가 나중에 직접 확인하기로 한 항목이다. release를 막지 않지만 확인된 것으로 주장하지도 않는다.
 
 미해결 `BLOCK`, 근거 없는 `PASS`, 검증하지 않은 변경이 하나라도 있으면 release review는 `BLOCK`이다.
+
+## Browser 실조작 검수 유예
+
+저장소 소유자가 전체 학습 페이지를 만든 뒤 브라우저 실조작을 일괄 검수하고 피드백하기로 했다. 그래서 브라우저를 열 수 없다는 이유만으로 페이지를 `BLOCK`하지 않는다.
+
+- 키보드·`prefers-reduced-motion`·작은 화면·실제 control 조작처럼 브라우저가 있어야만 확인되는 항목은 `DEFERRED`로 기록한다.
+- 코드·CSS·마크업만 읽어도 판정할 수 있는 정적 Accessibility/Motion 검수는 유예 대상이 아니다. 평소대로 `PASS` 또는 `BLOCK`을 낸다.
+- 브라우저 항목이 전부 `DEFERRED`이고 다른 미해결 `BLOCK`이 없으면 Independent Release Reviewer는 `PASS`를 낼 수 있다.
+- 실조작을 하지 않았으면서 `PASS`로 적지 않는다. 확인한 사람과 날짜를 근거에 남긴다.
 
 ## 독립성 규칙
 

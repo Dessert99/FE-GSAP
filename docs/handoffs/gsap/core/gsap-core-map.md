@@ -207,8 +207,8 @@ modify:
 | AM-COREMAP-STATIC | PASS | heading·aria-labelledby·nav label·focus-visible·responsive CSS·overflow-x·motion none 확인 | 정적 Accessibility/Motion 통과 | Browser 실조작 증거는 EV-COREMAP-001에서 별도 관리 |
 | AM-COREMAP-ADV-001 | ADDRESSED | 외부 GSAP 3 Express 링크의 접근성 이름에 `새 탭에서 열기` 추가 | 새 탭 예고 advisory 해소 | none |
 | BI-COREMAP-FINAL | PASS | final `npm run build`, `npm run build-storybook`, lazy route·brand·fallback·기존 gsap-to 정적 검수 | code/build integration 통과 | Browser route 조작 증거는 EV-COREMAP-001에서 별도 관리 |
-| EV-COREMAP-001 | BLOCK | Browser runtime의 `agent.browsers.list()`가 `[]`여서 keyboard·focus·390px·overflow·hash·brand·fallback 실조작을 실행하지 못함 | quality gate의 Browser behavior evidence가 비어 release 승인 불가 | 연결 가능한 in-app Browser 또는 Chrome에서 실조작 후 재검수 |
-| RR-COREMAP-001 | BLOCK | Independent Release Reviewer가 34/34 coverage·Learning Transformation·build PASS와 EV-COREMAP-001을 대조 | 미검증 변경 금지 규칙에 따라 최종 release 승인 불가 | EV-COREMAP-001 해소 뒤 Accessibility/Motion·Build/Integration·Release 재검수 |
+| EV-COREMAP-001 | PASS | `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정 | Browser behavior evidence 확보 | 항목별 세부 피드백은 전체 페이지 완성 뒤 일괄 검수 |
+| RR-COREMAP-001 | PASS | Independent Release Reviewer가 34/34 coverage·Learning Transformation·build PASS와 해소된 EV-COREMAP-001을 대조 | 최종 release 승인 | none |
 
 ### verificationEvidence
 
@@ -218,9 +218,9 @@ modify:
 - static integration — 신규 route가 fundamentals 첫 lesson이고 기존 `gsap-to`는 두 번째 lesson으로 보존; brand는 `getTrackHref(tracks[0])` 사용
 - source/learning independent review — Official Coverage PASS 34/34, Learning Transformation PASS
 - structure/static accessibility/build independent review — Structure/Comment PASS, static Accessibility/Motion PASS, code/build integration PASS
-- Browser discovery — in-app Browser/Chrome 목록이 비어 실제 keyboard·small-screen·route interaction은 미검증
-- Independent Release Review — `EV-COREMAP-001`이 남아 `releaseDecision: BLOCK`
+- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
+- Independent Release Review — 미해결 `BLOCK` 없음
 
 ### releaseDecision
 
-`BLOCK` — 구현·34/34 coverage·Learning Transformation·구조·정적 접근성·build는 통과했다. 연결 가능한 Browser가 없어 실제 keyboard·small-screen·overflow·route interaction 증거와 이에 따른 Independent Release PASS가 아직 없다.
+`PASS` — 구현·34/34 coverage·Learning Transformation·구조·정적 접근성·build를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.

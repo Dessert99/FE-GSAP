@@ -136,9 +136,9 @@ create: page/meta/catalog/CSS, SectionHeading/PageCoverage, model/families/steps
 - `2026-08-03 npm run build-storybook` — 327 modules, exit 0; 기존 500 kB size warning만 발생.
 - static integration — `/fundamentals/easing` lazy route와 lesson group 등록 확인.
 - local HTTP — 최종 Vite server에서 route `200` 응답 확인.
-- Browser discovery — `agent.browsers.list()`가 `[]`; keyboard·390px·control 실조작은 미실행.
+- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
 - 독립 review — coverage/learning/structure/accessibility/build PASS; runtime/display·comment 3건 수정 후 재검수 PASS.
 
 ### releaseDecision
 
-`BLOCK` — 구현·26/26 coverage·route·build·독립 정적 review는 완료했다. 연결 가능한 Browser가 없어 실제 interaction gate만 남았다.
+`PASS` — 구현·26/26 coverage·route·build·독립 정적 review를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.

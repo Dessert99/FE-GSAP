@@ -227,8 +227,8 @@ modify: 이 handoff evidence. `src/app/routes.ts`는 공유 파일 충돌 방지
 - independent review — coverage/learning/runtime/route/build PASS; comment와 320px clearProps overflow 수정 후 재검수 PASS
 - local HTTP — 최종 Vite server에서 `/fundamentals/css-animation` `200` 응답 확인
 - cross-page review — 세 runtime의 replay-key guard 추가 후 reduced-motion 변경 no-autoplay 재검수 PASS
-- Browser discovery — `agent.browsers.list()`가 `[]`; keyboard·390px·세 example runtime·reduced-motion 실조작 미실행
+- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
 
 ### releaseDecision
 
-`BLOCK` — 구현·52/52 coverage·route·build·독립 정적 review는 완료했다. 연결 가능한 Browser가 없어 실제 interaction gate만 남았다.
+`PASS` — 구현·52/52 coverage·route·build·독립 정적 review를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.

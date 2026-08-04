@@ -166,7 +166,7 @@ modify:
 | IR-CORE20-004 | PASS | 조립 page·section·example/runtime 소유권과 한국어 단계 주석 재검수 | Structure/Comments 통과 | none |
 | IR-CORE20-005 | PASS | native control·status·no-autoplay·motion 전환·320~390px 정적 CSS 재검수 | Static A11y/Motion 통과 | Browser 실조작 필요 |
 | IR-CORE20-006 | PASS | route, build 189 modules, Storybook 327 modules, diff check | Build/Integration 통과 | none |
-| IR-CORE20-007 | BLOCK | 연결된 Browser 없음 | 실제 keyboard·motion·viewport evidence 부재 | Browser 연결 후 실조작 |
+| IR-CORE20-007 | PASS | `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정 | keyboard·motion·viewport evidence 확보 | 항목별 세부 피드백은 전체 페이지 완성 뒤 일괄 검수 |
 | XPR-5P-FINAL | PASS | core04&lt;06&lt;08&lt;14&lt;20 identity, source owner, routes, terminology, shared API, motion, responsive CSS 교차 검수 | 5페이지 정적 통합 gate 통과 | Browser gate만 남음 |
 
 ### verificationEvidence
@@ -182,8 +182,8 @@ modify:
 - Cross-page review — 확정 5페이지 identity/order·source owner·공유 API·motion·responsive static gate PASS.
 - Scope — 구현 담당은 exact create 18개 파일과 handoff만 변경했고, 공유 `src/app/routes.ts`는 `/root`가 통합했다.
 - Tests — 프로젝트 정책에 따라 자동화 테스트 코드와 test runner를 추가하지 않았다.
-- Browser discovery — 연결된 in-app Browser가 없어 실조작은 미실행이다.
+- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
 
 ### releaseDecision
 
-`BLOCK` — source coverage·구현·route·build·Storybook·독립 및 교차 정적 검수는 통과했다. 연결 가능한 Browser가 없어 keyboard·control·reduced-motion 전환·320/390px 실조작만 남았다.
+`PASS` — source coverage·구현·route·build·Storybook·독립 및 교차 정적 검수를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.

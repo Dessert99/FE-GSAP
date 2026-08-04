@@ -155,8 +155,8 @@ modify: `src/app/routes.ts`, 이 handoff의 coverage/findings/verification/relea
 - local HTTP — 최종 Vite server에서 route `200` 응답 확인.
 - independent review — coverage/learning/structure/runtime sync/comment PASS; 320px overflow 수정 후 A11Y 재검수 PASS.
 - cross-page review — mount/control 자동 실행을 replay-key guard로 수정 후 no-autoplay 재검수 PASS.
-- Browser discovery — `agent.browsers.list()`가 `[]`; keyboard·390px·control 실조작 미실행.
+- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
 
 ### releaseDecision
 
-`BLOCK` — 구현·21/21 coverage·route·build·독립 정적 review는 완료했다. 연결 가능한 Browser가 없어 실제 interaction gate만 남았다.
+`PASS` — 구현·21/21 coverage·route·build·독립 정적 review를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.
