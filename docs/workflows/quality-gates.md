@@ -25,18 +25,62 @@
 - `PASS`: 담당 범위에 release를 막는 문제가 없으며 확인 근거가 있다.
 - `BLOCK`: 공식 기술 내용 누락, 단순 번역·요약, runtime/display 불일치, 페이지 유형과 맞지 않는 실행 구조, 접근성·motion 결함, build 실패처럼 release 전에 반드시 고쳐야 한다.
 - `ADVISORY`: 현재 계약과 release를 막지는 않지만 후속 개선 가치가 있다. `BLOCK`을 advisory로 낮추려면 해당 전문 검수자의 재판정이 필요하다.
-- `DEFERRED`: 저장소 소유자가 나중에 직접 확인하기로 한 항목이다. release를 막지 않지만 확인된 것으로 주장하지도 않는다.
+- `ADDRESSED`: Integrator가 고쳤고 해당 검수자의 재판정을 기다리는 상태다. 원래 상태와 해결 근거를 함께 남기며, 재검수 전에는 `PASS`로 취급하지 않는다.
+- `DEFERRED`: 아래 [Browser 실조작 검수 유예](#browser-실조작-검수-유예)가 열거한 항목에만 쓴다. 그 밖의 어떤 검수도 이 상태로 미루지 않는다.
 
-미해결 `BLOCK`, 근거 없는 `PASS`, 검증하지 않은 변경이 하나라도 있으면 release review는 `BLOCK`이다.
+미해결 `BLOCK`, 근거 없는 `PASS`, 검증하지 않은 변경이 하나라도 있으면 release review는 `BLOCK`이다. 유일한 예외는 유예 규칙을 지킨 `DEFERRED` 항목이다.
+
+`BLOCK`을 `PASS`로 바꾸는 것은 해당 검수자의 재검수 결과로만 가능하다. Integrator가 직접 바꾸지 않는다.
 
 ## Browser 실조작 검수 유예
 
-저장소 소유자가 전체 학습 페이지를 만든 뒤 브라우저 실조작을 일괄 검수하고 피드백하기로 했다. 그래서 브라우저를 열 수 없다는 이유만으로 페이지를 `BLOCK`하지 않는다.
+저장소 소유자가 전체 학습 페이지를 만든 뒤 브라우저 실조작을 일괄 검수하고 피드백하기로 했다(2026-08-04 승인). 그래서 브라우저를 열 수 없다는 이유만으로 페이지를 `BLOCK`하지 않는다.
 
-- 키보드·`prefers-reduced-motion`·작은 화면·실제 control 조작처럼 브라우저가 있어야만 확인되는 항목은 `DEFERRED`로 기록한다.
+유예할 수 있는 항목은 다음 넷뿐이다. 실제 브라우저에서 사람이 조작해야만 확인되는 것들이다.
+
+1. 키보드 이동·포커스 표시·control 조작
+2. `prefers-reduced-motion` 실제 전환 동작
+3. 작은 화면(320/390px)의 실제 레이아웃과 overflow
+4. 실행 예제 control의 실제 조작 결과
+
+나머지 규칙:
+
 - 코드·CSS·마크업만 읽어도 판정할 수 있는 정적 Accessibility/Motion 검수는 유예 대상이 아니다. 평소대로 `PASS` 또는 `BLOCK`을 낸다.
-- 브라우저 항목이 전부 `DEFERRED`이고 다른 미해결 `BLOCK`이 없으면 Independent Release Reviewer는 `PASS`를 낼 수 있다.
+- build 실패, coverage 누락, runtime/display 불일치, 구조 위반은 유예 대상이 아니다. 위 4개 밖의 항목에 `DEFERRED`를 쓰면 그 자체가 `BLOCK`이다.
+- 위 항목이 전부 `DEFERRED`이고 다른 미해결 `BLOCK`이 없으면 Independent Release Reviewer는 `PASS`를 낼 수 있다.
+- 이때 `releaseDecision`에 미해결 `DEFERRED` 항목을 반드시 나열한다. 판정값만 보고 완전 검수로 오해하지 않게 하기 위해서다. 소유자는 `grep -rl DEFERRED docs/handoffs/`로 일괄 검수 대상을 찾는다.
 - 실조작을 하지 않았으면서 `PASS`로 적지 않는다. 확인한 사람과 날짜를 근거에 남긴다.
+
+## Codex 독립 검수
+
+구현자와 검수자가 같은 컨텍스트면 자기 코드를 자기가 통과시키게 되므로, 구현 후 전문 검수는 Codex CLI에 맡겨 실제로 다른 컨텍스트에서 판정하게 한다.
+
+- **검수 단위는 학습 페이지 하나다.** handoff·coverage map·release 판정이 모두 페이지 단위이고, 여러 페이지를 묶으면 diff가 커져 검수 정확도가 떨어진다.
+- 커밋 전에 작업 트리 상태로 검수를 요청한다. `-s read-only`로 검수자가 구현을 고칠 수 없게 막는다.
+
+  ```bash
+  handoff="docs/handoffs/gsap/core/easing.md"
+  # 읽기에 실패하면 일반 코드 리뷰가 정상 검수처럼 기록되므로 여기서 즉시 중단한다
+  handoffText=$(cat "$handoff") || { echo "handoff를 읽지 못했다: $handoff" >&2; exit 1; }
+
+  # 경로만 주면 검수자가 실제로 읽었는지 보장할 수 없어 내용을 stdin으로 직접 주입한다
+  printf '%s' "$handoffText" | codex exec -s read-only -o /tmp/review-coverage.md "당신은 이 레포의 독립 검수자다. 구현을 수정하지 말고 Official Coverage 관점만 판정한다.
+  고정된 계약은 stdin으로 준 $handoff 의 전체 내용이다.
+  읽을 계약 문서: AGENTS.md, docs/workflows/source-coverage.md, docs/workflows/quality-gates.md
+  handoff의 sourceManifest 모든 항목이 coverageMap에서 로컬 근거에 연결됐는지 대조하고,
+  각 finding을 [ID, 상태, 근거 파일:행, 영향, 필수조치] 형식으로 한국어로 쓴다.
+  근거에는 handoff의 sourceItemId를 그대로 인용한다."
+  ```
+
+- 돌아온 finding이 handoff의 `sourceItemId`를 하나도 인용하지 않으면 검수자가 계약을 읽지 않은 것으로 보고 결과를 버린 뒤 다시 실행한다.
+
+- **관점마다 별도 실행을 쓴다.** Official Coverage, Learning Transformation, Runtime/Display Sync, Structure/Comment, 정적 Accessibility/Motion을 한 번에 시키지 않는다. 한 실행이 여러 관점을 겸하면 독립성 규칙이 깨지고 관점별 판정 근거도 섞인다.
+- **최종 release 검수는 또 다른 새 실행으로 한다.** 앞선 관점 검수와 같은 실행에서 release를 판정하지 않는다.
+- 각 실행이 어떤 관점을 맡았는지 handoff의 `reviewAssignments`에 남긴다.
+- 프롬프트에는 handoff 경로, 단일 검수 관점, 계약 문서 경로를 실제 문자열로 넣는다. 관점을 지정하지 않으면 일반 코드 리뷰가 돌아와 Official Coverage와 Learning Transformation을 판정하지 못한다.
+- 받은 finding은 handoff의 `findings` 표에 `CDX-` 접두 ID로 기록한다. 고친 항목은 원래 상태를 보존한 채 `ADDRESSED`와 해결 근거를 남기고, 받아들이지 않은 항목은 이유를 남기고 그대로 둔다. finding을 지우지 않는다.
+- 수정 후 해당 관점을 새 실행으로 재검수하고, 미해결 `BLOCK`이 없을 때 release를 판정한다.
+- Codex가 프로젝트 계약이 아니라 일반 관행을 근거로 지적하면 그대로 따르지 않는다. `AGENTS.md`와 `docs/workflows/`가 우선이며, 판단 근거를 finding에 남긴다.
 
 ## 독립성 규칙
 
