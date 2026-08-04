@@ -38,9 +38,9 @@ description: Use when adding, modifying, auditing, or handing off GSAP official-
 5. source item마다 학습자가 막힐 지점과 로컬 설명 방식을 정한다.
 6. coverage map의 모든 기술 항목을 로컬 근거에 연결한다.
 7. 컨텍스트 handoff를 고정한 뒤 구현한다.
-8. 구현과 독립된 전문 검수를 실행한다.
-9. 모든 `BLOCK`을 수정하고 영향받은 검수를 다시 받는다.
-10. 독립 Release Reviewer가 두 최상위 조건과 실행 증거를 승인한다.
+8. 관점별 자기 검증을 실행하고, 공식 문서가 침묵하는 동작은 runtime probe로 확인한다.
+9. 모든 `BLOCK`을 수정하고 영향받은 관점을 다시 판정한다.
+10. 두 최상위 조건과 실행 증거를 대조해 release를 판정한다.
 
 ## Official Coverage 계약
 
@@ -142,27 +142,29 @@ handoff에는 최소한 다음을 남긴다.
 
 다른 컨텍스트는 기억이나 대화 요약 대신 이 handoff와 저장소 파일을 기준으로 이어서 작업한다.
 
-## 독립 검수 orchestration
+## 검증 orchestration
 
-서브 에이전트를 사용할 수 있으면 다음 역할을 서로 다른 컨텍스트에 배정한다.
-구현 전:
+독립 검수자를 두지 않는다. 구현한 컨텍스트가 아래 순서를 직접 수행한다.
+
+구현 전에 확정할 것:
 
 - **Source Curator** — 전체 source manifest와 기술 제외 여부를 확정한다.
 - **Content Architect** — 페이지 모듈, 학습 순서, 초보자 질문을 확정한다.
 
-구현 후:
+구현 후에 관점마다 따로 판정할 것:
 
-- **Official Coverage Reviewer**
-- **Learning Transformation Reviewer**
-- **Runtime/Display Sync Reviewer** — 실행 예제가 있을 때만 배정한다.
-- **Structure/Comment Reviewer**
-- **Accessibility/Motion Reviewer** — 인터랙티브 UI가 있을 때 배정한다.
-- **Build/Integration Reviewer**
-- **Cross-page Consistency Reviewer** — 둘 이상의 공식 페이지를 작업할 때 배정한다.
+- **Official Coverage**
+- **Learning Transformation**
+- **Runtime/Display Sync** — 실행 예제가 있을 때만 판정한다.
+- **Pedagogy**
+- **Structure/Comment**
+- **Accessibility/Motion** — 인터랙티브 UI가 있을 때 판정한다.
+- **Build/Integration**
+- **Cross-page Consistency** — 둘 이상의 공식 페이지를 연속 작업할 때 판정한다.
 
-검수자는 구현을 수정하지 않는다. Integrator만 finding을 수정하고 해당 검수자에게 재판정을 요청한다.
+여러 관점을 한 판정으로 뭉치지 않는다. 관점마다 근거를 따로 남긴다.
 
-Release Reviewer는 구현자, Integrator, 앞선 검수자와 다른 컨텍스트를 사용한다.
+공식 문서가 명시하지 않은 기본값·상속 범위·부작용은 추측하지 말고 runtime probe로 확인한다.
 
 세부 판정과 finding 형식은 `docs/workflows/quality-gates.md`를 따른다.
 
@@ -184,11 +186,12 @@ Release Reviewer는 구현자, Integrator, 앞선 검수자와 다른 컨텍스�
 
 - source manifest와 100% 기술 coverage map
 - Learning Transformation finding
-- 해당 페이지 유형에 필요한 독립 finding
+- 해당 페이지 유형에 필요한 관점별 finding
+- 공식 문서가 침묵한 항목의 runtime probe 결과
 - TypeScript·Vite build 결과
 - Storybook build 결과
 - 인터랙티브 페이지의 브라우저·키보드·작은 화면·reduced-motion 결과
 - Cross-page finding 또는 단일 페이지라는 근거
-- 미해결 `BLOCK`이 없다는 독립 Release 판정
+- 미해결 `BLOCK`이 없다는 release 판정
 
 자동화 테스트 코드와 테스트 실행 환경은 추가하지 않는다.

@@ -27,10 +27,10 @@ nonGoals[]
 preserve[]
 ```
 
-## 검수 계약
+## 검증 계약
 
 ```text
-reviewAssignments[]
+verifiedPerspectives[]
 findings[]: ID, status, evidence, impact, requiredAction
 verificationEvidence[]
 releaseDecision: PASS | BLOCK
