@@ -78,6 +78,22 @@ const TweenPlayheadPage = lazy(() =>
   import('../content/gsap/fundamentals/tween-playhead/TweenPlayheadPage').then(({ TweenPlayheadPage }) => ({ default: TweenPlayheadPage })),
 )
 
+const TweenPlaybackControlsPage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-playback-controls/TweenPlaybackControlsPage').then(({ TweenPlaybackControlsPage }) => ({ default: TweenPlaybackControlsPage })),
+)
+
+const GsapRootClockPage = lazy(() =>
+  import('../content/gsap/fundamentals/gsap-root-clock/GsapRootClockPage').then(({ GsapRootClockPage }) => ({ default: GsapRootClockPage })),
+)
+
+const GsapContextPage = lazy(() =>
+  import('../content/gsap/fundamentals/gsap-context/GsapContextPage').then(({ GsapContextPage }) => ({ default: GsapContextPage })),
+)
+
+const ResponsiveMotionPage = lazy(() =>
+  import('../content/gsap/fundamentals/responsive-motion/ResponsiveMotionPage').then(({ ResponsiveMotionPage }) => ({ default: ResponsiveMotionPage })),
+)
+
 const TweenInstancePage = lazy(() =>
   import('../content/gsap/fundamentals/tween-instance/TweenInstancePage').then(({ TweenInstancePage }) => ({ default: TweenInstancePage })),
 )
@@ -129,12 +145,16 @@ export const tracks: TrackDefinition[] = [
       { slug: 'custom-bounce-wiggle', title: '튕김과 흔들림', group: '값과 움직임', Page: CustomBounceWigglePage },
       { slug: 'ease-pack', title: '특수 ease 모음', group: '값과 움직임', Page: EasePackPage },
       { slug: 'tween-instance', title: 'Tween에 남는 것', group: '트윈 제어', Page: TweenInstancePage },
+      { slug: 'tween-playback-controls', title: '재생·정지·역재생', group: '트윈 제어', Page: TweenPlaybackControlsPage },
       { slug: 'tween-playhead', title: 'Tween playhead', group: '트윈 제어', Page: TweenPlayheadPage },
       { slug: 'tween-timing-math', title: '시간 계산', group: '트윈 제어', Page: TweenTimingMathPage },
       { slug: 'tween-repeats', title: '반복과 값 재계산', group: '트윈 제어', Page: TweenRepeatsPage },
       { slug: 'tween-callbacks-promise', title: '콜백 교체와 완료 대기', group: '트윈 제어', Page: TweenCallbacksPromisePage },
       { slug: 'find-stop-animations', title: '찾아서 멈추기', group: '트윈 제어', Page: FindStopAnimationsPage },
       { slug: 'high-frequency-updates', title: '잦은 입력에 반응하기', group: '트윈 제어', Page: HighFrequencyUpdatesPage },
+      { slug: 'gsap-root-clock', title: '누가 매 frame 진행시키나', group: '엔진과 정리', Page: GsapRootClockPage },
+      { slug: 'gsap-context', title: '한 영역을 함께 되돌리기', group: '엔진과 정리', Page: GsapContextPage },
+      { slug: 'responsive-motion', title: '조건별 animation', group: '엔진과 정리', Page: ResponsiveMotionPage },
       { slug: 'react-use-gsap', title: 'React 안에서 쓰기', group: '통합', Page: ReactUseGsapPage },
       { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
     ],

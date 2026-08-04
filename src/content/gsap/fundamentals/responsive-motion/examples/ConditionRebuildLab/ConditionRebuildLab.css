@@ -1,0 +1,260 @@
+/** 조건 재실행 예제의 무대·조건 표·관찰 목록·컨트롤·코드 패널 배치를 소유한다. */
+.condition-rebuild-lab {
+  margin-top: 28px;
+  padding: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.condition-rebuild-lab h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.condition-rebuild-lab__goal {
+  max-width: 70ch;
+  margin: 0 0 22px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.condition-rebuild-lab__goal strong,
+.condition-rebuild-lab__panels strong,
+.condition-rebuild-lab__note strong {
+  color: var(--color-text);
+}
+
+.condition-rebuild-lab__body {
+  display: grid;
+  gap: 18px;
+}
+
+.condition-rebuild-lab__stage {
+  display: flex;
+  align-items: center;
+  min-height: 132px;
+  padding: 20px 24px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface-raised);
+}
+
+.condition-rebuild-lab__box {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  background: var(--color-accent);
+}
+
+.condition-rebuild-lab__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+.condition-rebuild-lab__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.condition-rebuild-lab__table caption {
+  padding: 14px 18px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.condition-rebuild-lab__table th,
+.condition-rebuild-lab__table td {
+  padding: 12px 18px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.condition-rebuild-lab__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.condition-rebuild-lab__table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.condition-rebuild-lab__table td {
+  color: var(--color-muted);
+}
+
+.condition-rebuild-lab__table code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.condition-rebuild-lab__observation {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.condition-rebuild-lab__observation > div {
+  display: grid;
+  gap: 6px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface-raised);
+}
+
+.condition-rebuild-lab__observation dt {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.condition-rebuild-lab__observation dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.condition-rebuild-lab__controls {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px 14px;
+  margin: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+.condition-rebuild-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.condition-rebuild-lab__controls label {
+  font-size: 14px;
+}
+
+.condition-rebuild-lab__controls output {
+  color: var(--color-accent);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.condition-rebuild-lab__controls input[type='range'] {
+  width: 100%;
+  accent-color: var(--color-accent);
+}
+
+.condition-rebuild-lab__controls button {
+  padding: 9px 16px;
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.condition-rebuild-lab__status {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.condition-rebuild-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.condition-rebuild-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.condition-rebuild-lab__panels article {
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface-raised);
+}
+
+.condition-rebuild-lab__panels h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.condition-rebuild-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.condition-rebuild-lab__note {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+
+.condition-rebuild-lab__note p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.condition-rebuild-lab__source {
+  margin: 18px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.condition-rebuild-lab__source code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 860px) {
+  .condition-rebuild-lab__observation,
+  .condition-rebuild-lab__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .condition-rebuild-lab__controls {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+}
+
+/** 모션 감소를 요청한 사용자에게는 예제 무대의 잔여 전환까지 없앤다 */
+@media (prefers-reduced-motion: reduce) {
+  .condition-rebuild-lab__box {
+    transition: none;
+  }
+}
