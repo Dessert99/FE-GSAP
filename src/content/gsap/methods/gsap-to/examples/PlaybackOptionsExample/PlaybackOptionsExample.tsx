@@ -3,11 +3,16 @@ import { InteractiveExample } from '../../../../../../components/demo/Interactiv
 import './PlaybackOptionsExample.css'
 import { type ReverseEase, usePlaybackOptionsAnimation } from './usePlaybackOptionsAnimation'
 
+// select가 boolean 의미와 특정 역방향 ease를 모두 비교하게 한다.
 const reverseEases = ['false', 'true', 'power3.out', 'back.out(1.7)'] as const
 
+// 실제 실행 설정을 재조립하지 않고 GSAP 문법으로만 직렬화한다.
 function createPlaybackCode(config: ReturnType<typeof usePlaybackOptionsAnimation>['animationConfig'], manuallyReversed: boolean) {
+  // easeReverse의 boolean과 문자열 표현을 실행값 그대로 코드에 표시한다.
   const easeReverse = typeof config.easeReverse === 'string' ? `'${config.easeReverse}'` : String(config.easeReverse)
+  // startAt의 존재 여부와 값을 실제 실행 설정 그대로 코드에 표시한다.
   const startAt = config.startAt ? `{ x: ${config.startAt.x}, opacity: ${config.startAt.opacity} }` : 'undefined'
+  // 생성 뒤 실제로 호출한 playhead 제어만 표시 코드에 덧붙인다.
   const followUpCalls = [
     config.reversed ? 'tween.progress(1).resume() // 끝에서 시작점 쪽으로 재생' : '',
     manuallyReversed ? 'tween.reverse() // 현재 위치에서 시작점 쪽으로 전환' : '',
@@ -27,10 +32,14 @@ function createPlaybackCode(config: ReturnType<typeof usePlaybackOptionsAnimatio
 
 /** 비슷해 보이는 값의 역전과 재생 방향의 역전을 화면 상태와 함께 구분한다. */
 export function PlaybackOptionsExample() {
+  // Hook이 실행한 상태와 설정을 그대로 받아 화면 설명과 표시 코드를 맞춘다.
   const { scope, targetClassName, options, updateOption, manuallyReversed, reducedMotion, animationConfig, replay, reverseFromCurrentPosition } = usePlaybackOptionsAnimation()
 
+  // runBackwards가 결정한 시작값과 목표값의 배치를 읽기 쉬운 문장으로 바꾼다.
   const valueDirection = options.runBackwards ? 'to 목표값 → 시작값' : '시작값 → to 목표값'
+  // reversed 옵션과 reverse() 호출이 결정한 현재 playhead 방향을 표시한다.
   const playheadDirection = manuallyReversed || options.reversed ? '끝점 → 시작점' : '시작점 → 끝점'
+  // 값 배치와 playhead 방향이 겹쳐 만든 실제 화면 이동 방향을 설명한다.
   const visibleDirection = options.runBackwards === (manuallyReversed || options.reversed)
     ? '화면에서는 오른쪽으로 이동'
     : '화면에서는 왼쪽으로 이동'
@@ -77,11 +86,11 @@ export function PlaybackOptionsExample() {
         )}
         code={createPlaybackCode(animationConfig, manuallyReversed)}
         propertyDetails={[
-          { name: 'delay', type: 'number', defaultValue: '0초', acceptedValues: '0 이상의 초' },
-          { name: 'startAt', type: 'object', defaultValue: '지정 안 함', acceptedValues: '시작 직전 적용할 vars' },
-          { name: 'runBackwards', type: 'boolean', defaultValue: 'false', acceptedValues: 'true면 시작값과 목표값의 배치를 교환' },
-          { name: 'reversed', type: 'boolean', defaultValue: 'false', acceptedValues: 'true면 playhead를 역방향으로 설정' },
-          { name: 'easeReverse', type: 'boolean | string | function', defaultValue: 'false', acceptedValues: 'true 또는 역방향에서 사용할 ease' },
+          { name: 'delay', type: '공식 gsap.to(): 초 단위 숫자', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): 시작 전 기다릴 초' },
+          { name: 'startAt', type: '공식 gsap.to(): vars 객체', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): 초기화할 속성의 vars 객체' },
+          { name: 'runBackwards', type: '공식 gsap.to(): boolean', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): true | false' },
+          { name: 'reversed', type: '공식 gsap.to(): boolean', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): true | false' },
+          { name: 'easeReverse', type: '공식 gsap.to(): true | 특정 ease', defaultValue: '공식 gsap.to(): false', acceptedValues: '공식 gsap.to(): true 또는 역방향에 적용할 ease' },
         ]}
         changes={[
           options.startAt ? 'Tween이 출발하기 직전에 공을 x -55, opacity 0.35 상태로 놓습니다.' : '공의 현재 DOM 상태인 x 0에서 출발합니다.',
@@ -91,9 +100,11 @@ export function PlaybackOptionsExample() {
         watchFor={[
           '상태 안내의 값 배치와 playhead 방향이 공의 실제 이동 방향을 어떻게 함께 결정하는지 봅니다.',
           'runBackwards와 reversed를 모두 켜면 두 번 뒤집혀 화면 이동이 다시 정방향처럼 보이는지 확인합니다.',
+          'runBackwards는 값의 배치만 바꾸며 ease 곡선을 뒤집지 않습니다. 역방향 속도감은 easeReverse로 따로 정합니다.',
+          'easeReverse는 GSAP 3.15에서 추가된 옵션이며, 방향이 바뀌는 순간부터 남은 거리에 역방향 ease를 적용합니다.',
           'reverse()를 누른 뒤 easeReverse를 바꾸면 방향 전환 직후의 속도감이 어떻게 달라지는지 봅니다.',
         ]}
-        explanation={<p><code>runBackwards</code>는 시작값과 목표값의 자리를 바꾸고, <code>reversed</code>와 <code>reverse()</code>는 시간축을 읽는 방향을 바꿉니다. 두 종류의 역전이 겹치면 눈에 보이는 이동 방향은 다시 원래 방향처럼 보일 수 있습니다.</p>}
+        explanation={<p><code>runBackwards</code>는 시작값과 목표값의 자리만 바꾸며 <code>ease</code> 곡선은 뒤집지 않습니다. <code>reversed</code>와 <code>reverse()</code>는 시간축을 읽는 방향을 바꾸고, GSAP 3.15에서 추가된 <code>easeReverse</code>가 역방향 속도 곡선을 정합니다. 값과 시간의 두 역전이 겹치면 눈에 보이는 이동 방향은 다시 원래 방향처럼 보일 수 있습니다.</p>}
         onReplay={replay}
       />
     </div>

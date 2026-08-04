@@ -3,13 +3,19 @@ import { InteractiveExample } from '../../../../../../components/demo/Interactiv
 import './MultipleTargetsExample.css'
 import { useMultipleTargetsAnimation } from './useMultipleTargetsAnimation'
 
+// preview에 그릴 다섯 target의 표시 순서를 고정한다.
 const targets = ['A', 'B', 'C', 'D', 'E']
+// stagger의 첫 출발 위치로 선택할 수 있는 값을 고정한다.
 const origins = ['start', 'center', 'edges', 'random'] as const
 
+/** 여러 target에 같은 vars를 적용하고 시작 시각만 나누는 stagger를 설명한다. */
 export function MultipleTargetsExample() {
+  // controls·preview·표시 코드가 공유할 실제 stagger 실행 상태를 받는다.
   const { scope, targetClassName, x, setX, duration, setDuration, animationDuration, stagger, setStagger, animationStagger, from, setFrom, reducedMotion, replay } = useMultipleTargetsAnimation()
 
-  const startWindow = stagger * (targets.length - 1)
+  // 첫 target과 마지막 target의 시작 시각 차이를 계산한다.
+  const startWindow = animationStagger * (targets.length - 1)
+  // 실제 정규화된 duration과 stagger 값을 그대로 코드 문법으로 표시한다.
   const code = `gsap.to('.dot', {
   x: ${x},
   duration: ${animationDuration.toFixed(1)},
@@ -72,17 +78,19 @@ export function MultipleTargetsExample() {
         }
         code={code}
         propertyDetails={[
-          { name: 'x', type: 'number | string | function', defaultValue: '각 대상의 현재 x', acceptedValues: '숫자는 px, 단위 문자열, 상대값, 함수' },
-          { name: 'duration', type: 'number | string | function', defaultValue: '0.5초', acceptedValues: '0 이상의 초 단위 값' },
-          { name: 'stagger', type: 'number | function | object', defaultValue: '0', acceptedValues: '대상 사이의 초, 계산 함수, from·grid·ease 등을 가진 객체' },
-          { name: 'ease', type: 'string | function', defaultValue: 'power1.out', acceptedValues: '내장 ease 이름, 설정 문자열, 사용자 함수' },
+          { name: 'x', type: '연결된 CSSPlugin: number | string | function', defaultValue: '공식 gsap.to(): 각 대상의 현재값 자동 읽기', acceptedValues: '연결된 CSSPlugin: translateX 단축 속성, 숫자는 px·단위 문자열·상대값·함수' },
+          { name: 'duration', type: '공식 gsap.to(): 초 단위 숫자', defaultValue: '공식 gsap.to(): 0.5초', acceptedValues: '공식 gsap.to(): 재생 시간(초)' },
+          { name: 'stagger', type: '공식 gsap.to(): number | 고급 설정 객체', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): 시작 간격 숫자 또는 고급 stagger 객체' },
+          { name: 'ease', type: '공식 gsap.to(): 문자열 | 정규화 함수', defaultValue: '공식 gsap.to(): power1.out', acceptedValues: '공식 gsap.to(): ease 이름 또는 정규화 함수' },
         ]}
         changes={[
-          `다섯 대상은 모두 ${x}px 이동하지만 ${from} 기준으로 ${stagger.toFixed(2)}초 간격으로 출발합니다.`,
+          `다섯 대상은 모두 ${x}px 이동하고 실제 stagger ${animationStagger.toFixed(2)}초로 ${from} 기준에서 출발합니다.`,
           `첫 출발과 마지막 출발 사이의 전체 시작 범위는 ${startWindow.toFixed(2)}초입니다.`,
         ]}
         watchFor={[
-          'from을 start, center, edges, random으로 바꾸며 첫 출발 대상이 어떻게 달라지는지 봅니다.',
+          animationStagger === 0
+            ? '실제 stagger가 0초이므로 from 순서와 관계없이 다섯 대상이 동시에 안정된 도착 상태에 놓이는지 봅니다.'
+            : 'from을 start, center, edges, random으로 바꾸며 첫 출발 대상이 어떻게 달라지는지 봅니다.',
           'stagger는 각 대상의 duration을 바꾸는 값이 아니라 시작 시점의 간격이라는 점을 봅니다.',
         ]}
         explanation={

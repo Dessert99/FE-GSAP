@@ -16,7 +16,14 @@ gsap.to('.b', { x: 100, delay: 0.5 })`}</code></pre><p>두 번째 동작의 시�
   .to('.b', { y: 100, ease: 'elastic' })
   .to('.c', { rotation: 180 })`}</code></pre><p>앞 Tween의 시간이 바뀌어도 뒤 순서가 자동으로 따라가고, 전체를 한 번에 제어할 수 있습니다.</p></article>
       </div>
-      <div className="gsap-method-page__note"><p><strong>판단 기준</strong> 여러 delay 값을 서로 계산하기 시작했다면 Timeline으로 옮길 시점입니다. 중첩과 중첩 Timeline은 전용 페이지에서 다룹니다.</p><OfficialDocsLink label="공식 Timeline 문서" href={officialLinks.timeline} /></div>
+      <div className="gsap-method-page__note">
+        <p>
+          <strong>판단 기준</strong> 여러 delay 값을 서로 계산하기 시작했다면 Timeline으로 옮길 시점입니다. Timeline은
+          <code> to()</code>·<code>from()</code>·<code>fromTo()</code>를 이어 쓰고, Tween을 겹치거나 Timeline 안에 다른
+          Timeline을 중첩해도 전체를 하나처럼 제어할 수 있습니다. 정확한 배치 문법은 Timeline 학습 페이지에서 다룹니다.
+        </p>
+        <OfficialDocsLink label="공식 Timeline 문서" href={officialLinks.timeline} />
+      </div>
     </section>
   )
 }

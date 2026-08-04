@@ -27,7 +27,14 @@ gsap.to('.box', {
 })`}</code></pre>
         </div>
       </div>
-      <div className="gsap-method-page__note"><p><strong>이 페이지의 범위</strong> 플러그인의 존재와 vars 확장 원리까지 설명합니다. 각 플러그인의 옵션은 해당 공식 페이지와 1:1인 별도 로컬 페이지에서 다룹니다.</p><OfficialDocsLink label="공식 Plugins 문서" href={officialLinks.plugins} /></div>
+      <div className="gsap-method-page__note">
+        <p>
+          <strong>왜 플러그인으로 나눌까요?</strong> GSAP Core는 작게 유지하고, 렌더링 라이브러리 연결·도형
+          변형·드래그처럼 필요한 기능만 추가하기 위해서입니다. 이 페이지는 플러그인이 vars를 확장한다는 원리까지만
+          설명하며, 각 플러그인의 등록·옵션·정리 방법은 그 source를 소유한 학습 페이지에서 다룹니다.
+        </p>
+        <OfficialDocsLink label="공식 Plugins 문서" href={officialLinks.plugins} />
+      </div>
     </section>
   )
 }

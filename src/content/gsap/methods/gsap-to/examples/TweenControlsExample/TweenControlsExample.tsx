@@ -3,9 +3,12 @@ import { InteractiveExample } from '../../../../../../components/demo/Interactiv
 import './TweenControlsExample.css'
 import { useTweenControlsAnimation } from './useTweenControlsAnimation'
 
+/** 저장한 Tween 인스턴스의 playhead 제어를 조작 가능한 학습 패널로 보여준다. */
 export function TweenControlsExample() {
+  // Hook이 만든 Tween 설정과 제어 메서드를 그대로 받아 실행 결과와 코드를 맞춘다.
   const { scope, targetClassName, meter, duration, setDuration, reducedMotion, animationConfig, play, pause, reverse, restart, seekToHalfDuration, showHalfProgress, replay } = useTweenControlsAnimation()
 
+  // 실제 Tween 설정과 호출 가능한 인스턴스 메서드를 GSAP 문법으로 직렬화한다.
   const code = `const tween = gsap.to('.box', {
   x: ${animationConfig.x},
   rotation: ${animationConfig.rotation},
@@ -55,9 +58,9 @@ tween.restart()   // 0초로 돌아가 재생`
         }
         code={code}
         propertyDetails={[
-          { name: 'paused', type: 'boolean', defaultValue: 'false', acceptedValues: 'true면 생성 직후 0초에서 대기' },
-          { name: 'id', type: 'string', defaultValue: '지정 안 함', acceptedValues: 'gsap.getById()로 찾을 고유 문자열' },
-          { name: 'data', type: 'unknown', defaultValue: '지정 안 함', acceptedValues: 'Tween에 붙일 임의의 값' },
+          { name: 'paused', type: '공식 gsap.to(): boolean', defaultValue: '공식 gsap.to(): false', acceptedValues: '공식 gsap.to(): true면 생성 직후 0초에서 대기' },
+          { name: 'id', type: '공식 페이지에 명시 없음', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): gsap.getById()로 찾을 식별자' },
+          { name: 'data', type: '공식 페이지에 명시 없음', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): Tween에 붙일 임의의 데이터' },
         ]}
         changes={['paused: true라서 페이지가 열려도 자동 재생되지 않습니다.', '버튼은 새 애니메이션을 만들지 않고 같은 Tween의 playhead를 제어합니다.']}
         watchFor={['seek()는 초 단위, progress()는 0~1 비율을 사용합니다.', 'reverse()를 누른 위치에서 바로 방향이 바뀌는지 확인합니다.']}

@@ -25,7 +25,10 @@ export function GsapToPage() {
         <p className="gsap-method-page__reviewed">공식 문서 대조일 · {gsapToPageMeta.reviewedAt}</p>
       </header>
 
-      <PageCoverageSection />
+      <aside className="gsap-method-page__section gsap-method-page__note" aria-label="첫 예제를 읽기 위한 핵심 용어">
+        <p><strong>예제 전에 이 세 가지만 기억하세요.</strong> <code>targets</code>는 움직일 대상, <code>vars</code>는 목표값과 실행 조건을 담는 객체, <code>Tween</code>은 <code>gsap.to()</code>가 돌려주는 애니메이션 제어 객체입니다.</p>
+      </aside>
+
       <OverviewSection />
       <MethodAnatomySection />
       <SpecialPropertiesSection />
@@ -36,6 +39,7 @@ export function GsapToPage() {
       <SequencingSection />
       <KeyframesSection />
       <CallbacksSection />
+      <PageCoverageSection />
     </article>
   )
 }
