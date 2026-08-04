@@ -1,4 +1,5 @@
 /** 생성 method가 공유하는 vars 상세를 기존 단일 owner로 연결한다. */
+import { toHref } from '../../../../../../app/routes'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 
 /** 이 페이지는 값 소유권에 집중하고 34개 special property를 복제하지 않는다. */
@@ -17,7 +18,7 @@ export function SharedVarsSection() {
         <li><strong>공통 value mode:</strong> function, random 문자열, +=·-= 상대값, stagger, plugin vars는 기존 catalog에서 한 번만 설명합니다.</li>
         <li><strong>다음 경계:</strong> 여러 animation의 복잡한 순서는 Timeline, callback 상세는 Tween lifecycle owner에서 이어집니다.</li>
       </ul>
-      <a className="tween-values-page__related-link" href="/fundamentals/gsap-to">gsap.to()의 34개 special property 전체 보기</a>
+      <a className="tween-values-page__related-link" href={toHref('/fundamentals/gsap-to')}>gsap.to()의 34개 special property 전체 보기</a>
     </section>
   )
 }
