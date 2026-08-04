@@ -1,0 +1,376 @@
+/** CSS가 아닌 값 페이지의 배치와 채널 비교 표·경고 블록·실행 확인 블록의 표시 규칙을 소유한다. */
+.non-css-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.non-css-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.non-css-page__header h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(46px, 8vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.non-css-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.non-css-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.non-css-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.non-css-page__path span,
+.non-css-page__reviewed {
+  color: var(--color-muted);
+}
+
+.non-css-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.non-css-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.non-css-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.non-css-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.non-css-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.non-css-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.non-css-coverage__summary span,
+.non-css-coverage__summary p,
+.non-css-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.non-css-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.non-css-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.non-css-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.non-css-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.non-css-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.non-css-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.non-css-page__section {
+  scroll-margin-top: 82px;
+}
+
+.non-css-page__section + .non-css-page__section {
+  margin-top: 100px;
+}
+
+.non-css-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.non-css-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.non-css-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+
+.non-css-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.non-css-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.non-css-page__split > div,
+.non-css-page__prose {
+  min-width: 0;
+}
+
+.non-css-page__prose {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.non-css-page__prose p,
+.non-css-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.non-css-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.non-css-page__prose strong,
+.non-css-page__note strong,
+.non-css-page__warning strong {
+  color: var(--color-text);
+}
+
+.non-css-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.non-css-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.non-css-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.non-css-page__note,
+.non-css-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.non-css-page__note h3,
+.non-css-page__warning h3 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.non-css-page__note p,
+.non-css-page__warning p {
+  margin: 0;
+}
+
+.non-css-page__note p + p,
+.non-css-page__warning p + p {
+  margin-top: 10px;
+}
+
+.non-css-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+.non-css-page__note--probe {
+  border-style: dashed;
+}
+
+.non-css-page__provenance {
+  font-size: 13px;
+}
+
+.non-css-page__table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.non-css-page__channel-table,
+.non-css-page__rules-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.non-css-page__channel-table caption,
+.non-css-page__rules-table caption {
+  padding: 16px 20px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.non-css-page__channel-table th,
+.non-css-page__channel-table td,
+.non-css-page__rules-table th,
+.non-css-page__rules-table td {
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.non-css-page__channel-table thead th,
+.non-css-page__rules-table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.non-css-page__channel-table tbody th,
+.non-css-page__rules-table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.non-css-page__channel-table tbody th small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.non-css-page__channel-table td,
+.non-css-page__rules-table td {
+  color: var(--color-muted);
+}
+
+.non-css-page__channel-table code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.non-css-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.non-css-page__list a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .non-css-coverage__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .non-css-coverage__summary p {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .non-css-coverage ol,
+  .non-css-page__split {
+    grid-template-columns: 1fr;
+  }
+}

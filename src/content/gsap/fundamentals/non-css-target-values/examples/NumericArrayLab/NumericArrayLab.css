@@ -1,0 +1,173 @@
+/** 배열 채널 예제의 index 표·컨트롤·코드 패널 배치를 소유한다. */
+.numeric-array-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.numeric-array-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.numeric-array-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.numeric-array-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 18px;
+  align-items: start;
+}
+
+.numeric-array-lab__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.numeric-array-lab__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.numeric-array-lab__table caption {
+  padding: 12px 16px;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-align: left;
+}
+
+.numeric-array-lab__table th,
+.numeric-array-lab__table td {
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.numeric-array-lab__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.numeric-array-lab__table tbody th {
+  color: var(--color-accent);
+}
+
+.numeric-array-lab__controls {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.numeric-array-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.numeric-array-lab__controls > label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.numeric-array-lab__controls output {
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.numeric-array-lab__controls input[type='range'] {
+  width: 100%;
+}
+
+.numeric-array-lab__radio-group {
+  display: grid;
+  gap: 6px;
+}
+
+.numeric-array-lab__radio-group p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.numeric-array-lab__radio-group label {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.numeric-array-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.numeric-array-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.numeric-array-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.numeric-array-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.numeric-array-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.numeric-array-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.numeric-array-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .numeric-array-lab__body,
+  .numeric-array-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}

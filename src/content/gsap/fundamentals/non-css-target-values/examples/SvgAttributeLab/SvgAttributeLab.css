@@ -1,0 +1,208 @@
+/** attribute 채널 예제의 무대·컨트롤·관찰 패널 배치를 소유한다. */
+.svg-attribute-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.svg-attribute-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.svg-attribute-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.svg-attribute-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 18px;
+  align-items: start;
+}
+
+.svg-attribute-lab__stage {
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+
+.svg-attribute-lab__stage svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.svg-attribute-lab__baseline {
+  fill: none;
+  stroke: var(--color-muted);
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+}
+
+.svg-attribute-lab__circle {
+  fill: var(--color-accent);
+}
+
+.svg-attribute-lab__legend {
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.svg-attribute-lab__legend-baseline,
+.svg-attribute-lab__legend-live {
+  font-weight: 700;
+}
+
+.svg-attribute-lab__controls {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.svg-attribute-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.svg-attribute-lab__controls label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.svg-attribute-lab__controls output {
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.svg-attribute-lab__controls input[type='range'] {
+  width: 100%;
+}
+
+.svg-attribute-lab__controls button {
+  margin-top: 4px;
+  padding: 9px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 6%);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.svg-attribute-lab__status {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.svg-attribute-lab__observation {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 16px 0 0;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.svg-attribute-lab__observation > div {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-right: 1px solid var(--color-border);
+}
+
+.svg-attribute-lab__observation dt {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.svg-attribute-lab__observation dd {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 15px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.svg-attribute-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.svg-attribute-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.svg-attribute-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.svg-attribute-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.svg-attribute-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.svg-attribute-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.svg-attribute-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .svg-attribute-lab__body,
+  .svg-attribute-lab__observation,
+  .svg-attribute-lab__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .svg-attribute-lab__observation > div {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
