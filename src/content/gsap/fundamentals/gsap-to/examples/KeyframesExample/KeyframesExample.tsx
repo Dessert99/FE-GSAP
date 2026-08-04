@@ -49,7 +49,7 @@ export function KeyframesExample() {
       <InteractiveExample
         title="한 Tween 안의 여러 도착 상태"
         description="먼저 gsap.to() 공식 페이지의 to-style vars 배열을 익히고, 백분율 객체는 linked Keyframes guide가 넓혀 주는 별도 형식으로 비교합니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/KeyframesExample/useKeyframesAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/KeyframesExample/useKeyframesAnimation.ts"
         reducedMotion={reducedMotion}
         controls={<div className="interactive-example__control-list"><label className="interactive-example__control"><span className="interactive-example__control-heading"><span>keyframes 형식</span></span><select value={mode} onChange={(event) => setMode(event.target.value as typeof mode)}>{modes.map((value) => <option key={value} value={value}>{value === 'array' ? '공식 gsap.to() · vars 배열' : 'linked guide 확장 · 백분율 객체'}</option>)}</select></label></div>}
         preview={<div className="keyframes-example"><div className="keyframes-example__path" /><div className={targetClassName}>KF</div></div>}

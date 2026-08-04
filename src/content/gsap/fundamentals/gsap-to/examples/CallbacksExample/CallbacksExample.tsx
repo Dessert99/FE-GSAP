@@ -45,7 +45,7 @@ tween.kill()`
       <InteractiveExample
         title="콜백이 호출되는 실제 순서"
         description="시작·갱신·반복·완료·역방향 완료·중단 이벤트와 Params, callbackScope를 한 로그에서 확인합니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/CallbacksExample/useCallbacksAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/CallbacksExample/useCallbacksAnimation.ts"
         reducedMotion={reducedMotion}
         controls={<div className="callbacks-example__actions"><button type="button" onClick={restart}>restart()</button><button type="button" onClick={reverse}>reverse()</button><button type="button" onClick={kill}>kill()</button></div>}
         preview={<div className="callbacks-example"><div className="callbacks-example__lane"><div className={targetClassName} /></div><p>progress <output ref={meter}>0%</output></p><ol aria-live="polite">{logs.length ? logs.map((log, index) => <li key={`${log}-${index}`}>{log}</li>) : <li>콜백을 기다리는 중…</li>}</ol></div>}

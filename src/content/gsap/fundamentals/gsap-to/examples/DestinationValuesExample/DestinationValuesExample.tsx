@@ -24,7 +24,7 @@ export function DestinationValuesExample() {
       <InteractiveExample
         title="도착값과 움직임의 느낌"
         description="x와 rotation은 도착 상태를, duration과 ease는 그곳까지 가는 과정을 결정합니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/DestinationValuesExample/useDestinationValuesAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/DestinationValuesExample/useDestinationValuesAnimation.ts"
         reducedMotion={reducedMotion}
         controls={
           <div className="interactive-example__control-list">

@@ -32,7 +32,7 @@ tween.restart()   // 0초로 돌아가 재생`
       <InteractiveExample
         title="반환된 Tween을 나중에 제어하기"
         description="gsap.to()의 반환값을 저장하면 재생 위치와 방향을 버튼으로 바꿀 수 있습니다. 그냥 실행할 때는 변수에 담지 않아도 됩니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/TweenControlsExample/useTweenControlsAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/TweenControlsExample/useTweenControlsAnimation.ts"
         reducedMotion={reducedMotion}
         controls={
           <div className="interactive-example__control-list">

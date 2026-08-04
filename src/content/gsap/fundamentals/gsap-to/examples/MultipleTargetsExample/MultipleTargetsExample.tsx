@@ -31,7 +31,7 @@ export function MultipleTargetsExample() {
       <InteractiveExample
         title="여러 대상과 stagger"
         description="같은 vars 객체를 다섯 대상에 적용하고 시작 시점만 일정한 간격으로 나눕니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/MultipleTargetsExample/useMultipleTargetsAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/MultipleTargetsExample/useMultipleTargetsAnimation.ts"
         reducedMotion={reducedMotion}
         controls={
           <div className="interactive-example__control-list">

@@ -42,8 +42,8 @@
 기존 페이지 경계를 유지한다.
 
 - 공통 실행 틀: `src/components/demo/InteractiveExample/`
-- 페이지 섹션: `src/content/gsap/methods/gsap-to/sections/`
-- 독립 실행 예제: `src/content/gsap/methods/gsap-to/examples/<ExampleName>/`
+- 페이지 섹션: `src/content/gsap/fundamentals/gsap-to/sections/`
+- 독립 실행 예제: `src/content/gsap/fundamentals/gsap-to/examples/<ExampleName>/`
 
 한 파일에 하나의 React 컴포넌트만 정의한다. 예제별 React 컴포넌트에는 조작 UI, 미리보기, 코드 패널, 속성 표, 관찰점과 설명을 두고, GSAP 실행에 필요한 상태와 생명주기는 같은 폴더의 `use<ExampleName>Animation.ts` 훅으로 추출한다.
 

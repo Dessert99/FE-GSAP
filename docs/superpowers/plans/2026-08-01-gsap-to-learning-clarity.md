@@ -21,13 +21,13 @@
 
 **Files:**
 - Modify: `src/components/demo/InteractiveExample/InteractiveExample.css`
-- Modify: `src/content/gsap/methods/gsap-to/GsapToPage.css`
-- Modify: `src/content/gsap/methods/gsap-to/sections/MethodAnatomySection/MethodAnatomySection.css`
-- Modify: `src/content/gsap/methods/gsap-to/sections/PageCoverageSection/PageCoverageSection.css`
-- Modify: `src/content/gsap/methods/gsap-to/sections/PluginsSection/PluginsSection.css`
-- Modify: `src/content/gsap/methods/gsap-to/sections/SequencingSection/SequencingSection.css`
-- Modify: `src/content/gsap/methods/gsap-to/sections/SpecialPropertiesSection/SpecialPropertiesSection.css`
-- Modify: `src/content/gsap/methods/gsap-to/examples/*/*.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/GsapToPage.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/sections/MethodAnatomySection/MethodAnatomySection.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/sections/PageCoverageSection/PageCoverageSection.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/sections/PluginsSection/PluginsSection.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/sections/SequencingSection/SequencingSection.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/sections/SpecialPropertiesSection/SpecialPropertiesSection.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/examples/*/*.css`
 
 **Interfaces:**
 - Consumes: 기존 `--color-*` 토큰과 클래스 이름
@@ -35,7 +35,7 @@
 
 - [ ] **Step 1: 작은 글자 위치 확인**
 
-Run: `rg -n "font-size:\\s*([0-9]|1[0-4])px" src/components/demo/InteractiveExample src/content/gsap/methods/gsap-to`
+Run: `rg -n "font-size:\\s*([0-9]|1[0-4])px" src/components/demo/InteractiveExample src/content/gsap/fundamentals/gsap-to`
 
 - [ ] **Step 2: 학습 본문과 조작부 크기 조정**
 
@@ -43,14 +43,14 @@ Run: `rg -n "font-size:\\s*([0-9]|1[0-4])px" src/components/demo/InteractiveExam
 
 - [ ] **Step 3: 작은 글자 잔여 확인**
 
-Run: `rg -n "font-size:\\s*([0-9]|1[01])px" src/components/demo/InteractiveExample src/content/gsap/methods/gsap-to`
+Run: `rg -n "font-size:\\s*([0-9]|1[01])px" src/components/demo/InteractiveExample src/content/gsap/fundamentals/gsap-to`
 Expected: 결과 없음
 
 ### Task 2: 시간·방향 예제 동기화
 
 **Files:**
-- Modify: `src/content/gsap/methods/gsap-to/examples/PlaybackOptionsExample/PlaybackOptionsExample.tsx`
-- Modify: `src/content/gsap/methods/gsap-to/examples/PlaybackOptionsExample/PlaybackOptionsExample.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/examples/PlaybackOptionsExample/PlaybackOptionsExample.tsx`
+- Modify: `src/content/gsap/fundamentals/gsap-to/examples/PlaybackOptionsExample/PlaybackOptionsExample.css`
 
 **Interfaces:**
 - Consumes: `PlaybackOptionsState`의 `delay`, `startAt`, `runBackwards`, `reversed`, `easeReverse`
@@ -72,8 +72,8 @@ Expected: TypeScript 오류 없음
 ### Task 3: repeatRefresh 단계형 예제
 
 **Files:**
-- Modify: `src/content/gsap/methods/gsap-to/examples/RepeatRefreshExample/RepeatRefreshExample.tsx`
-- Modify: `src/content/gsap/methods/gsap-to/examples/RepeatRefreshExample/RepeatRefreshExample.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/examples/RepeatRefreshExample/RepeatRefreshExample.tsx`
+- Modify: `src/content/gsap/fundamentals/gsap-to/examples/RepeatRefreshExample/RepeatRefreshExample.css`
 
 **Interfaces:**
 - Consumes: `RepeatRefreshStep` 네 단계와 `gsap.utils.random(40, 230, 10)` 함수 기반 목표값
@@ -99,9 +99,9 @@ Expected: TypeScript 오류 없음
 ### Task 4: 특수 속성 34개의 실제 사용처 보강
 
 **Files:**
-- Modify: `src/content/gsap/methods/gsap-to/gsap-to.properties.ts`
-- Modify: `src/content/gsap/methods/gsap-to/sections/SpecialPropertiesSection/SpecialPropertiesSection.tsx`
-- Modify: `src/content/gsap/methods/gsap-to/sections/SpecialPropertiesSection/SpecialPropertiesSection.css`
+- Modify: `src/content/gsap/fundamentals/gsap-to/gsap-to.properties.ts`
+- Modify: `src/content/gsap/fundamentals/gsap-to/sections/SpecialPropertiesSection/SpecialPropertiesSection.tsx`
+- Modify: `src/content/gsap/fundamentals/gsap-to/sections/SpecialPropertiesSection/SpecialPropertiesSection.css`
 
 **Interfaces:**
 - Consumes: 공식 특수 속성 34개의 기존 타입·기본값·설명·조합 데이터

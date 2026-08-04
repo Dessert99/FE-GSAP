@@ -10,7 +10,7 @@ function ExampleStory() {
     <InteractiveExample
       title="x 목표값"
       description="슬라이더 값과 코드가 함께 바뀌는 학습 예제 프레임입니다."
-      sourcePath="src/content/gsap/methods/gsap-to/examples/DestinationValuesExample/DestinationValuesExample.tsx"
+      sourcePath="src/content/gsap/fundamentals/gsap-to/examples/DestinationValuesExample/DestinationValuesExample.tsx"
       controls={
         <div className="interactive-example__control-list">
           <label className="interactive-example__control">

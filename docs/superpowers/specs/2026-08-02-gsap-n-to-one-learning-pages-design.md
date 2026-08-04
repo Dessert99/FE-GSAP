@@ -384,7 +384,7 @@ A reviewer cannot waive an ownership conflict as advisory. Duplicate ownership, 
 The current folder and route remain:
 
 ```text
-src/content/gsap/methods/gsap-to/
+src/content/gsap/fundamentals/gsap-to/
 /fundamentals/gsap-to
 ```
 

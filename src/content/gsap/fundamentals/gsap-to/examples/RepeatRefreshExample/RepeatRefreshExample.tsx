@@ -89,7 +89,7 @@ gsap.to('.box', {
       <InteractiveExample
         title="repeatRefresh는 반복 전에 목적지를 다시 계산합니다"
         description="repeat는 같은 Tween을 다시 실행하고, random()은 호출될 때 목적지 하나를 뽑습니다. repeatRefresh는 새 회차 전에 그 값을 다시 뽑을지 결정합니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/RepeatRefreshExample/useRepeatRefreshAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/RepeatRefreshExample/useRepeatRefreshAnimation.ts"
         reducedMotion={reducedMotion}
         controls={(
           <div className="repeat-refresh-example__controls">

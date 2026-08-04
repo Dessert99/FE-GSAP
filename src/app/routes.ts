@@ -31,7 +31,7 @@ export type ResolvedRoute = {
 }
 
 const GsapToPage = lazy(() =>
-  import('../content/gsap/methods/gsap-to/GsapToPage').then(({ GsapToPage }) => ({ default: GsapToPage })),
+  import('../content/gsap/fundamentals/gsap-to/GsapToPage').then(({ GsapToPage }) => ({ default: GsapToPage })),
 )
 
 const GsapCoreMapPage = lazy(() =>

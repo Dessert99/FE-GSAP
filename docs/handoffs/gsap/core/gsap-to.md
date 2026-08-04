@@ -19,14 +19,14 @@ canonical 페이지가 사실의 authority다. 링크된 다른 공식 페이지
 
 ### localPage
 
-- localPath: `src/content/gsap/methods/gsap-to/`
+- localPath: `src/content/gsap/fundamentals/gsap-to/`
 - route: `/fundamentals/gsap-to`
 
-`localPath`가 `methods/`인 것은 이 페이지만의 예외다. 나머지 학습 페이지는 `fundamentals/` 아래에 있다. route는 inventory와 같은 `/fundamentals/gsap-to`이며 폴더 위치와 무관하다. 이 불일치는 별도 정리 대상으로 남아 있다.
+이 페이지는 원래 `src/content/gsap/methods/gsap-to/`에 있어 나머지 학습 페이지의 `fundamentals/` 규약과 어긋나 있었다. 2026-08-04에 `fundamentals/`로 옮겨 정리했다. route는 처음부터 inventory와 같은 `/fundamentals/gsap-to`였고 이동으로 바뀌지 않았다.
 
 ### sourceManifest
 
-**이 페이지의 manifest와 coverage map은 `src/content/gsap/methods/gsap-to/gsap-to.meta.ts`의 `officialCoverageItems` 배열이 authority다.** 55개 item 각각이 `sourceItemId`, `officialItem`, `sourceLocation`, `sourceStatus`, `localEvidence[]`, `localStatus`를 갖는다.
+**이 페이지의 manifest와 coverage map은 `src/content/gsap/fundamentals/gsap-to/gsap-to.meta.ts`의 `officialCoverageItems` 배열이 authority다.** 55개 item 각각이 `sourceItemId`, `officialItem`, `sourceLocation`, `sourceStatus`, `localEvidence[]`, `localStatus`를 갖는다.
 
 markdown에 55행을 복제하지 않는 이유는 두 곳이 어긋날 수 있기 때문이다. TS 배열은 페이지가 실제로 렌더링하는 값이라 화면과 문서가 분리되지 않는다. 다른 페이지는 markdown manifest를 쓰지만, 이 페이지는 구현 시점에 coverage map을 코드로 소유하도록 만들어졌고 그 구조를 유지한다.
 
@@ -88,7 +88,7 @@ markdown에 55행을 복제하지 않는 이유는 두 곳이 어긋날 수 있�
 
 ### exactFiles
 
-11개 섹션과 10개 예제로 구성된다. 전체 목록은 `src/content/gsap/methods/gsap-to/` 아래 파일 트리가 authority다.
+11개 섹션과 10개 예제로 구성된다. 전체 목록은 `src/content/gsap/fundamentals/gsap-to/` 아래 파일 트리가 authority다.
 
 sections: `OverviewSection`, `MethodAnatomySection`, `SpecialPropertiesSection`, `PluginsSection`, `ValueModesSection`, `StaggersSection`, `SequencingSection`, `KeyframesSection`, `CallbacksSection`, `PropertyExamplesSection`, `PageCoverageSection`
 
@@ -128,7 +128,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Structure/Comm
 | OC-GSAPTO-002 | PASS | 2026-08-04 기계 대조: 55개 item, `covered` 55, `planned` 0, 중복 ID 0 | Official Coverage 통과 | none |
 | BUILD-GSAPTO-001 | PASS | `npx tsc --noEmit` exit 0 (2026-08-04) | 타입 통과 | none |
 | A11Y-GSAPTO-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 10개 예제 control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
-| STRUCT-GSAPTO-001 | ADVISORY | `localPath`가 `src/content/gsap/methods/`이고 나머지 9개 페이지는 `fundamentals/`다. route는 일치한다. | 폴더 규약 불일치 | 별도 정리 작업으로 분리 |
+| STRUCT-GSAPTO-001 | ADVISORY → ADDRESSED | `localPath`가 `src/content/gsap/methods/`여서 나머지 9개 페이지의 `fundamentals/` 규약과 어긋났다 / 2026-08-04에 `git mv`로 이동하고 route import·`sourcePath` 표시 문자열·문서 참조를 모두 갱신했다. 상위 폴더 깊이가 같아 상대 import는 변경되지 않았다. | 폴더 규약 불일치 | none |
 
 이 페이지는 2026-08-04 소유자 브라우저 일괄 검수 대상 6개(`a710460`)에 **포함되지 않았다**. 브라우저 실조작을 했다고 주장하지 않는다.
 
@@ -141,4 +141,4 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Structure/Comm
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-GSAPTO-001 — 소유자 브라우저 일괄 검수 대상 / `ADVISORY` 1건: STRUCT-GSAPTO-001 폴더 위치)
+`PASS` (미해결 `DEFERRED` 1건: A11Y-GSAPTO-001 — 소유자 브라우저 일괄 검수 대상)

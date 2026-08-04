@@ -49,7 +49,7 @@ export function ValueModesExample() {
     <InteractiveExample
       title="Function · Random · Relative values"
       description="함수 인자, random 문법과 함께 '+=' + 변수·템플릿 리터럴 상대값을 비교하고, Tween 시작 시 현재값을 기준으로 삼는 시점을 확인합니다."
-      sourcePath="src/content/gsap/methods/gsap-to/examples/ValueModesExample/useValueModesAnimation.ts"
+      sourcePath="src/content/gsap/fundamentals/gsap-to/examples/ValueModesExample/useValueModesAnimation.ts"
       reducedMotion={reducedMotion}
       controls={<div className="interactive-example__control-list">
         <label className="interactive-example__control"><span className="interactive-example__control-heading"><span>값 표현 방식</span></span><select value={mode} onChange={(event) => setMode(event.target.value as ValueMode)}>{(Object.keys(modeLabels) as ValueMode[]).map((value) => <option key={value} value={value}>{modeLabels[value]}</option>)}</select></label>

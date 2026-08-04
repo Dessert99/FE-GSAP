@@ -32,7 +32,7 @@ export function OverwriteExample() {
       <InteractiveExample
         title="같은 target의 Tween이 겹칠 때"
         description={description}
-        sourcePath="src/content/gsap/methods/gsap-to/examples/OverwriteExample/useOverwriteAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/OverwriteExample/useOverwriteAnimation.ts"
         reducedMotion={reducedMotion}
         controls={<div className="interactive-example__control-list"><label className="interactive-example__control"><span className="interactive-example__control-heading"><span>overwrite</span></span><select value={overwrite} onChange={(event) => setOverwrite(event.target.value as OverwriteValue)}>{overwriteValues.map((value) => <option key={value}>{value}</option>)}</select></label></div>}
         preview={<div className="overwrite-example"><div className={targetClassName}>↗</div></div>}

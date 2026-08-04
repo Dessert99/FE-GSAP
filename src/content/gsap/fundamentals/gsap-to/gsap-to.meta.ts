@@ -18,7 +18,7 @@ export const gsapToPageMeta = {
   title: 'gsap.to()',
   category: 'GSAP · Methods',
   officialUrl: 'https://gsap.com/docs/v3/GSAP/gsap.to%28%29/',
-  sourcePath: 'src/content/gsap/methods/gsap-to/',
+  sourcePath: 'src/content/gsap/fundamentals/gsap-to/',
   summary: '대상이 지금 있는 모습에서 내가 정한 위치나 모습까지 자연스럽게 바뀌게 합니다.',
   reviewedAt: '2026-08-02',
 } as const

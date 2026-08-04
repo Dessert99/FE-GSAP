@@ -21,9 +21,9 @@
 ### Task 1: 기본 값·대상·키프레임 예제 훅 분리
 
 **Files:**
-- Create: `src/content/gsap/methods/gsap-to/examples/DestinationValuesExample/useDestinationValuesAnimation.ts`
-- Create: `src/content/gsap/methods/gsap-to/examples/MultipleTargetsExample/useMultipleTargetsAnimation.ts`
-- Create: `src/content/gsap/methods/gsap-to/examples/KeyframesExample/useKeyframesAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/DestinationValuesExample/useDestinationValuesAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/MultipleTargetsExample/useMultipleTargetsAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/KeyframesExample/useKeyframesAnimation.ts`
 - Modify: 각 폴더의 기존 `*Example.tsx`
 
 **Interfaces:**
@@ -37,10 +37,10 @@
 ### Task 2: 반복·값 표현·overwrite 예제 훅 분리
 
 **Files:**
-- Create: `src/content/gsap/methods/gsap-to/examples/RepeatYoyoExample/useRepeatYoyoAnimation.ts`
-- Create: `src/content/gsap/methods/gsap-to/examples/RepeatRefreshExample/useRepeatRefreshAnimation.ts`
-- Create: `src/content/gsap/methods/gsap-to/examples/ValueModesExample/useValueModesAnimation.ts`
-- Create: `src/content/gsap/methods/gsap-to/examples/OverwriteExample/useOverwriteAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/RepeatYoyoExample/useRepeatYoyoAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/RepeatRefreshExample/useRepeatRefreshAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/ValueModesExample/useValueModesAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/OverwriteExample/useOverwriteAnimation.ts`
 - Modify: 각 폴더의 기존 `*Example.tsx`
 
 **Interfaces:**
@@ -54,9 +54,9 @@
 ### Task 3: Tween 제어·콜백·재생 옵션 예제 훅 분리
 
 **Files:**
-- Create: `src/content/gsap/methods/gsap-to/examples/TweenControlsExample/useTweenControlsAnimation.ts`
-- Create: `src/content/gsap/methods/gsap-to/examples/CallbacksExample/useCallbacksAnimation.ts`
-- Create: `src/content/gsap/methods/gsap-to/examples/PlaybackOptionsExample/usePlaybackOptionsAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/TweenControlsExample/useTweenControlsAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/CallbacksExample/useCallbacksAnimation.ts`
+- Create: `src/content/gsap/fundamentals/gsap-to/examples/PlaybackOptionsExample/usePlaybackOptionsAnimation.ts`
 - Modify: 각 폴더의 기존 `*Example.tsx`
 
 **Interfaces:**
@@ -88,7 +88,7 @@
 ### Task 5: 전체 검증
 
 **Files:**
-- Verify: `src/content/gsap/methods/gsap-to/examples/`
+- Verify: `src/content/gsap/fundamentals/gsap-to/examples/`
 - Verify: `.agents/skills/creating-gsap-learning-pages/`
 - Verify: `docs/workflows/`
 

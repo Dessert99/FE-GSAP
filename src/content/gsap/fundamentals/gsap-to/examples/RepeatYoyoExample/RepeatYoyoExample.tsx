@@ -32,7 +32,7 @@ export function RepeatYoyoExample() {
       <InteractiveExample
         title="repeat와 yoyo의 반복 방향"
         description="반복 횟수, 반복 사이의 대기 시간, 왕복 여부를 한 번에 비교합니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/RepeatYoyoExample/useRepeatYoyoAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/RepeatYoyoExample/useRepeatYoyoAnimation.ts"
         reducedMotion={reducedMotion}
         controls={
           <div className="interactive-example__control-list">

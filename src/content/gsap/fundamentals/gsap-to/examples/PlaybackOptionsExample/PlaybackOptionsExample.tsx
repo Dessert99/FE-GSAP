@@ -49,7 +49,7 @@ export function PlaybackOptionsExample() {
       <InteractiveExample
         title="시작값과 재생 방향은 서로 다른 설정입니다"
         description="runBackwards는 어떤 값을 출발점으로 쓸지 바꾸고, reversed는 Tween의 재생 순서를 바꿉니다. 아래 상태 안내와 공의 움직임을 함께 확인합니다."
-        sourcePath="src/content/gsap/methods/gsap-to/examples/PlaybackOptionsExample/usePlaybackOptionsAnimation.ts"
+        sourcePath="src/content/gsap/fundamentals/gsap-to/examples/PlaybackOptionsExample/usePlaybackOptionsAnimation.ts"
         reducedMotion={reducedMotion}
         controls={(
           <div className="interactive-example__control-list">

@@ -177,7 +177,7 @@ modify:
 
 - master inventory의 sourcePageId·owner·route
 - 기존 `/fundamentals/gsap-to`, lazy loading, resolveRoute fallback, popstate·focus semantics
-- `src/content/gsap/methods/gsap-to/**`와 공용 컴포넌트 API·style
+- `src/content/gsap/fundamentals/gsap-to/**`와 공용 컴포넌트 API·style
 - 기존 untracked inventory와 관련 없는 사용자 변경
 
 ## 검수 계약
