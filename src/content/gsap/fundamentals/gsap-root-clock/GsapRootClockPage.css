@@ -1,0 +1,520 @@
+/** root clock 페이지의 배치와 흐름도·트리·표·경고 블록·실행 확인 블록의 표시 규칙을 소유한다. */
+.root-clock-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.root-clock-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.root-clock-page__header h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(34px, 5.6vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+}
+
+.root-clock-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.root-clock-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.root-clock-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.root-clock-page__path span,
+.root-clock-page__reviewed {
+  color: var(--color-muted);
+}
+
+.root-clock-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.root-clock-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.root-clock-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.root-clock-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.root-clock-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.root-clock-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.root-clock-coverage__summary span,
+.root-clock-coverage__summary p,
+.root-clock-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.root-clock-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.root-clock-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.root-clock-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.root-clock-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.root-clock-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.root-clock-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.root-clock-page__section {
+  scroll-margin-top: 82px;
+}
+
+.root-clock-page__section + .root-clock-page__section {
+  margin-top: 100px;
+}
+
+.root-clock-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.root-clock-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.root-clock-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(24px, 3.6vw, 34px);
+  letter-spacing: -0.045em;
+}
+
+.root-clock-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.root-clock-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.root-clock-page__split > div,
+.root-clock-page__split > pre,
+.root-clock-page__prose {
+  min-width: 0;
+}
+
+.root-clock-page__prose {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.root-clock-page__prose p,
+.root-clock-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.root-clock-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.root-clock-page__prose strong,
+.root-clock-page__note strong,
+.root-clock-page__warning strong {
+  color: var(--color-text);
+}
+
+.root-clock-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.root-clock-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.root-clock-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.root-clock-page__signature {
+  margin: 18px 0 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  border: 1px solid rgb(200 241 105 / 26%);
+  border-radius: 12px;
+  background: #07090c;
+  color: var(--color-accent);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.root-clock-page__note,
+.root-clock-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.root-clock-page__note h3,
+.root-clock-page__warning h3 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.root-clock-page__note p,
+.root-clock-page__warning p {
+  margin: 0;
+}
+
+.root-clock-page__note p + p,
+.root-clock-page__warning p + p {
+  margin-top: 10px;
+}
+
+.root-clock-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+.root-clock-page__note--probe {
+  border-style: dashed;
+}
+
+.root-clock-page__provenance {
+  font-size: 13px;
+}
+
+/** 한 frame이 만들어지는 순서를 왼쪽에서 오른쪽으로 읽게 한다 */
+.root-clock-page__chain {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: chain-step;
+}
+
+.root-clock-page__chain li {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.root-clock-page__chain li::before {
+  counter-increment: chain-step;
+  content: counter(chain-step) '단계';
+  color: var(--color-accent);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.root-clock-page__chain strong {
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.root-clock-page__chain span {
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/** root와 그 자식들의 부모 관계를 들여쓰기로 드러낸다 */
+.root-clock-page__tree {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.root-clock-page__tree-root {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid rgb(200 241 105 / 30%);
+  border-radius: 12px;
+  background: rgb(200 241 105 / 6%);
+}
+
+.root-clock-page__tree-root strong {
+  color: var(--color-accent);
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+
+.root-clock-page__tree-root span,
+.root-clock-page__tree li span {
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.root-clock-page__tree ul {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0 0 0 22px;
+  list-style: none;
+  border-left: 1px solid var(--color-border);
+}
+
+.root-clock-page__tree li {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.root-clock-page__tree li code {
+  color: var(--color-accent);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/** 기본 흐름과 바뀐 흐름을 같은 형식으로 나란히 읽게 한다 */
+.root-clock-page__compare {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.root-clock-page__compare li {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface);
+}
+
+.root-clock-page__compare strong {
+  color: var(--color-accent);
+  font-size: 13px;
+}
+
+.root-clock-page__compare span {
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.root-clock-page__table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.root-clock-page__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.root-clock-page__table caption {
+  padding: 16px 20px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.root-clock-page__table th,
+.root-clock-page__table td {
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.root-clock-page__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.root-clock-page__table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.root-clock-page__table tbody th small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.root-clock-page__table td {
+  color: var(--color-muted);
+}
+
+.root-clock-page__table code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.root-clock-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.root-clock-page__list a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+@media (max-width: 980px) {
+  .root-clock-page__chain {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .root-clock-coverage__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .root-clock-coverage__summary p {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .root-clock-coverage ol,
+  .root-clock-page__split,
+  .root-clock-page__chain {
+    grid-template-columns: 1fr;
+  }
+
+  .root-clock-page__compare li {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

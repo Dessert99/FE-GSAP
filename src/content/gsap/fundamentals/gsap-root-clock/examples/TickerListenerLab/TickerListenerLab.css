@@ -1,0 +1,177 @@
+/** ticker listener 예제의 관찰 패널·컨트롤·코드 패널 배치를 소유한다. */
+.ticker-listener-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.ticker-listener-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.ticker-listener-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.ticker-listener-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 18px;
+  align-items: start;
+}
+
+.ticker-listener-lab__observation {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.ticker-listener-lab__observation > div {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ticker-listener-lab__count {
+  grid-column: 1 / -1;
+}
+
+.ticker-listener-lab__observation dt {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.ticker-listener-lab__observation dd {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.ticker-listener-lab__controls {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ticker-listener-lab__controls fieldset {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.ticker-listener-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.ticker-listener-lab__controls label {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.ticker-listener-lab__controls button {
+  padding: 9px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 6%);
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ticker-listener-lab__controls button:disabled {
+  color: var(--color-muted);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.ticker-listener-lab__status {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.ticker-listener-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ticker-listener-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.ticker-listener-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.ticker-listener-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.ticker-listener-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.ticker-listener-lab__note,
+.ticker-listener-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.ticker-listener-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .ticker-listener-lab__body,
+  .ticker-listener-lab__observation,
+  .ticker-listener-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}
