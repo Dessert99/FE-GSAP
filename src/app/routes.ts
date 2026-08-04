@@ -46,6 +46,10 @@ const TweenStartEndValuesPage = lazy(() =>
   import('../content/gsap/fundamentals/tween-start-end-values/TweenStartEndValuesPage').then(({ TweenStartEndValuesPage }) => ({ default: TweenStartEndValuesPage })),
 )
 
+const TweenConfigurationPage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-configuration/TweenConfigurationPage').then(({ TweenConfigurationPage }) => ({ default: TweenConfigurationPage })),
+)
+
 const CssAnimationPage = lazy(() =>
   import('../content/gsap/fundamentals/css-animation/CssAnimationPage').then(({ CssAnimationPage }) => ({ default: CssAnimationPage })),
 )
@@ -73,6 +77,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'installation', title: 'GSAP 가져오기와 등록하기', group: '시작하기', Page: InstallationPage },
       { slug: 'gsap-to', title: 'gsap.to()', group: '트윈 기초', Page: GsapToPage },
       { slug: 'tween-start-end-values', title: 'Tween 시작·끝 값', group: '트윈 기초', Page: TweenStartEndValuesPage },
+      { slug: 'tween-configuration', title: '설정은 어디서 오나', group: '트윈 기초', Page: TweenConfigurationPage },
       { slug: 'css-animation', title: 'CSS animation', group: '값과 움직임', Page: CssAnimationPage },
       { slug: 'easing', title: 'Easing', group: '값과 움직임', Page: EasingPage },
       { slug: 'tween-playhead', title: 'Tween playhead', group: '트윈 제어', Page: TweenPlayheadPage },

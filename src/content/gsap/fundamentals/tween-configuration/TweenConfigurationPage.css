@@ -1,0 +1,457 @@
+/** 설정 페이지 전용 배치와 명세 표·비교 카드·경고 블록의 표시 규칙을 소유한다. */
+.tween-config-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.tween-config-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tween-config-page__header h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(46px, 8vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.tween-config-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.tween-config-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.tween-config-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.tween-config-page__path span,
+.tween-config-page__reviewed {
+  color: var(--color-muted);
+}
+
+.tween-config-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.tween-config-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.tween-config-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.tween-config-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.tween-config-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.tween-config-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tween-config-coverage__summary span,
+.tween-config-coverage__summary p,
+.tween-config-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.tween-config-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.tween-config-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.tween-config-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.tween-config-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.tween-config-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.tween-config-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.tween-config-page__section {
+  scroll-margin-top: 82px;
+}
+
+.tween-config-page__section + .tween-config-page__section {
+  margin-top: 100px;
+}
+
+.tween-config-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.tween-config-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.tween-config-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+
+.tween-config-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.tween-config-page__lead {
+  max-width: 76ch;
+  margin: 0 0 24px;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.tween-config-page__lead strong,
+.tween-config-page__note strong,
+.tween-config-page__warning strong,
+.tween-config-page__prose strong {
+  color: var(--color-text);
+}
+
+.tween-config-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.tween-config-page__split > article,
+.tween-config-page__prose {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.tween-config-page__split > article h3,
+.tween-config-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.tween-config-page__split p,
+.tween-config-page__prose p,
+.tween-config-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.tween-config-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.tween-config-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.tween-config-page__note,
+.tween-config-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.tween-config-page__note p,
+.tween-config-page__warning p {
+  margin: 0;
+}
+
+.tween-config-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+.tween-config-page__property-list {
+  display: grid;
+  gap: 14px;
+}
+
+.tween-config-page__property-list article {
+  padding: 20px 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.tween-config-page__property-list h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+}
+
+.tween-config-page__property-list h3 code {
+  color: var(--color-accent);
+}
+
+.tween-config-page__property-list dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0 0 12px;
+}
+
+.tween-config-page__property-list dt {
+  margin-bottom: 3px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.tween-config-page__property-list dd {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.tween-config-page__property-list p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.tween-config-page__use-case {
+  margin-top: 8px !important;
+  font-size: 13px !important;
+}
+
+.tween-config-page__cases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.tween-config-page__cases article {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.tween-config-page__cases h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.tween-config-page__cases p {
+  margin: 10px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.tween-config-page__case-result strong {
+  color: var(--color-accent);
+}
+
+.tween-config-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.tween-config-page__token-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tween-config-page__token-list li {
+  padding: 7px 9px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 12px;
+}
+
+.tween-config-page__token-list code {
+  color: var(--color-muted);
+}
+
+.tween-config-page__related-link {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--color-accent);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.tween-config-page__roadmap {
+  margin: 24px 0 0;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+  list-style: none;
+}
+
+.tween-config-page__roadmap li {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tween-config-page__roadmap li:last-child {
+  border-bottom: 0;
+}
+
+.tween-config-page__roadmap li > span {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.tween-config-page__roadmap a {
+  color: var(--color-accent);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.tween-config-page__roadmap p {
+  margin: 5px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+:where(.tween-config-coverage a, .tween-config-page__roadmap a, .tween-config-page__related-link):focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .tween-config-page__header {
+    margin-bottom: 58px;
+  }
+
+  .tween-config-page__header h1 {
+    font-size: clamp(40px, 13vw, 62px);
+  }
+
+  .tween-config-coverage__summary,
+  .tween-config-coverage ol,
+  .tween-config-page__split,
+  .tween-config-page__cases,
+  .tween-config-page__property-list dl {
+    grid-template-columns: 1fr;
+  }
+
+  .tween-config-coverage__summary {
+    gap: 12px;
+  }
+
+  .tween-config-coverage__summary p {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .tween-config-page__section + .tween-config-page__section {
+    margin-top: 76px;
+  }
+
+  .tween-config-page__roadmap li {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
