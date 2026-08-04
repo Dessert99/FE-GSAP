@@ -1,0 +1,376 @@
+/** ease-pack 페이지의 배치와 문제 유형 표·경고 블록·실행 확인 블록의 표시 규칙을 소유한다. */
+.ease-pack-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.ease-pack-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.ease-pack-page__header h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(46px, 8vw, 84px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+.ease-pack-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.ease-pack-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.ease-pack-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.ease-pack-page__path span,
+.ease-pack-page__reviewed {
+  color: var(--color-muted);
+}
+
+.ease-pack-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.ease-pack-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.ease-pack-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.ease-pack-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.ease-pack-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.ease-pack-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ease-pack-coverage__summary span,
+.ease-pack-coverage__summary p,
+.ease-pack-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.ease-pack-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.ease-pack-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.ease-pack-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.ease-pack-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.ease-pack-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.ease-pack-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.ease-pack-page__section {
+  scroll-margin-top: 82px;
+}
+
+.ease-pack-page__section + .ease-pack-page__section {
+  margin-top: 100px;
+}
+
+.ease-pack-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.ease-pack-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.ease-pack-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+
+.ease-pack-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.ease-pack-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.ease-pack-page__split > div,
+.ease-pack-page__prose {
+  min-width: 0;
+}
+
+.ease-pack-page__prose {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.ease-pack-page__prose p,
+.ease-pack-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.ease-pack-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.ease-pack-page__prose strong,
+.ease-pack-page__note strong,
+.ease-pack-page__warning strong {
+  color: var(--color-text);
+}
+
+.ease-pack-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.ease-pack-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.ease-pack-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.ease-pack-page__note,
+.ease-pack-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.ease-pack-page__note h3,
+.ease-pack-page__warning h3 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.ease-pack-page__note p,
+.ease-pack-page__warning p {
+  margin: 0;
+}
+
+.ease-pack-page__note p + p,
+.ease-pack-page__warning p + p {
+  margin-top: 10px;
+}
+
+.ease-pack-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+.ease-pack-page__note--probe {
+  border-style: dashed;
+}
+
+.ease-pack-page__provenance {
+  font-size: 13px;
+}
+
+.ease-pack-page__table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.ease-pack-page__problem-table,
+.ease-pack-page__rules-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.ease-pack-page__problem-table caption,
+.ease-pack-page__rules-table caption {
+  padding: 16px 20px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.ease-pack-page__problem-table th,
+.ease-pack-page__problem-table td,
+.ease-pack-page__rules-table th,
+.ease-pack-page__rules-table td {
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.ease-pack-page__problem-table thead th,
+.ease-pack-page__rules-table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ease-pack-page__problem-table tbody th,
+.ease-pack-page__rules-table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ease-pack-page__problem-table tbody th small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.ease-pack-page__problem-table td,
+.ease-pack-page__rules-table td {
+  color: var(--color-muted);
+}
+
+.ease-pack-page__problem-table code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.ease-pack-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.ease-pack-page__list a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .ease-pack-coverage__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ease-pack-coverage__summary p {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .ease-pack-coverage ol,
+  .ease-pack-page__split {
+    grid-template-columns: 1fr;
+  }
+}

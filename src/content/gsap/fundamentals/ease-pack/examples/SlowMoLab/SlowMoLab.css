@@ -1,0 +1,240 @@
+/** SlowMo 예제의 이동 트랙·구간 요약·곡선 표·코드 패널 배치를 소유한다. */
+.slow-mo-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.slow-mo-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.slow-mo-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.slow-mo-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 18px;
+  align-items: start;
+}
+
+.slow-mo-lab__stage {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+
+.slow-mo-lab__track {
+  overflow: hidden;
+  padding: 24px 0;
+}
+
+.slow-mo-lab__target {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-accent);
+}
+
+.slow-mo-lab__segments {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.slow-mo-lab__segments li {
+  display: grid;
+  gap: 3px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.slow-mo-lab__segments span {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.slow-mo-lab__segments strong {
+  color: var(--color-accent);
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.slow-mo-lab__controls {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.slow-mo-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.slow-mo-lab__controls > label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.slow-mo-lab__controls output {
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.slow-mo-lab__controls input[type='range'] {
+  width: 100%;
+}
+
+.slow-mo-lab__controls button {
+  margin-top: 4px;
+  padding: 9px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: var(--color-accent);
+  color: #0a0d11;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.slow-mo-lab__check {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.slow-mo-lab__status {
+  margin: 14px 0 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.slow-mo-lab__table-wrap {
+  margin-top: 14px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.slow-mo-lab__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.slow-mo-lab__table caption {
+  padding: 12px 16px;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.slow-mo-lab__table th,
+.slow-mo-lab__table td {
+  padding: 9px 16px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.slow-mo-lab__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.slow-mo-lab__table tbody th {
+  color: var(--color-accent);
+}
+
+.slow-mo-lab__table tbody td {
+  color: var(--color-muted);
+}
+
+.slow-mo-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.slow-mo-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.slow-mo-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.slow-mo-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.slow-mo-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.slow-mo-lab__panels strong {
+  color: var(--color-text);
+}
+
+.slow-mo-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.slow-mo-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .slow-mo-lab__body,
+  .slow-mo-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}
