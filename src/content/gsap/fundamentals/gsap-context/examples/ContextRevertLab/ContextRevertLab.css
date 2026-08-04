@@ -1,0 +1,245 @@
+/** 모아서 되돌리기 예제의 무대·컨트롤·관찰 표·학습 패널 배치를 소유한다. */
+.context-revert-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.context-revert-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.context-revert-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.context-revert-lab__goal strong {
+  color: var(--color-text);
+}
+
+.context-revert-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 18px;
+  align-items: start;
+}
+
+.context-revert-lab__stage {
+  display: grid;
+  gap: 16px;
+  padding: 24px 20px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+
+.context-revert-lab__box {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.context-revert-lab__side {
+  display: grid;
+  gap: 12px;
+}
+
+.context-revert-lab__observation {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.context-revert-lab__observation > div {
+  display: grid;
+  gap: 3px;
+}
+
+.context-revert-lab__observation dt {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.context-revert-lab__observation dd {
+  margin: 0;
+}
+
+.context-revert-lab__observation output {
+  color: var(--color-accent);
+  font-size: 17px;
+  font-variant-numeric: tabular-nums;
+}
+
+.context-revert-lab__controls {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.context-revert-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.context-revert-lab__controls button {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.context-revert-lab__controls button:hover:not(:disabled) {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.context-revert-lab__controls button:disabled {
+  color: var(--color-muted);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.context-revert-lab__table-wrap {
+  margin-top: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.context-revert-lab__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.context-revert-lab__table caption {
+  padding: 14px 18px 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-align: left;
+}
+
+.context-revert-lab__table th,
+.context-revert-lab__table td {
+  padding: 12px 18px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.context-revert-lab__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.context-revert-lab__table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.context-revert-lab__table td {
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.context-revert-lab__table code {
+  color: var(--color-accent);
+}
+
+.context-revert-lab__status {
+  margin: 14px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.context-revert-lab__code {
+  margin: 14px 0 0;
+  padding: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+  tab-size: 2;
+}
+
+.context-revert-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.context-revert-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+
+.context-revert-lab__panels h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.context-revert-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.context-revert-lab__panels strong {
+  color: var(--color-text);
+}
+
+.context-revert-lab__panels code,
+.context-revert-lab__goal code,
+.context-revert-lab__source code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.context-revert-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 860px) {
+  .context-revert-lab__body,
+  .context-revert-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}
