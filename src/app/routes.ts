@@ -38,6 +38,10 @@ const GsapCoreMapPage = lazy(() =>
   import('../content/gsap/fundamentals/gsap-core-map/GsapCoreMapPage').then(({ GsapCoreMapPage }) => ({ default: GsapCoreMapPage })),
 )
 
+const InstallationPage = lazy(() =>
+  import('../content/gsap/fundamentals/installation/InstallationPage').then(({ InstallationPage }) => ({ default: InstallationPage })),
+)
+
 const TweenStartEndValuesPage = lazy(() =>
   import('../content/gsap/fundamentals/tween-start-end-values/TweenStartEndValuesPage').then(({ TweenStartEndValuesPage }) => ({ default: TweenStartEndValuesPage })),
 )
@@ -66,6 +70,7 @@ export const tracks: TrackDefinition[] = [
     description: '공식 API와 자주 만나는 상황을 작은 예제로 깊게 확인합니다.',
     lessons: [
       { slug: 'gsap-core-map', title: 'GSAP Core 지도', group: '시작하기', Page: GsapCoreMapPage },
+      { slug: 'installation', title: 'GSAP 가져오기와 등록하기', group: '시작하기', Page: InstallationPage },
       { slug: 'gsap-to', title: 'gsap.to()', group: '트윈 기초', Page: GsapToPage },
       { slug: 'tween-start-end-values', title: 'Tween 시작·끝 값', group: '트윈 기초', Page: TweenStartEndValuesPage },
       { slug: 'css-animation', title: 'CSS animation', group: '값과 움직임', Page: CssAnimationPage },
