@@ -62,8 +62,24 @@ const EasingPage = lazy(() =>
   import('../content/gsap/fundamentals/easing/EasingPage').then(({ EasingPage }) => ({ default: EasingPage })),
 )
 
+const CustomEasePage = lazy(() =>
+  import('../content/gsap/fundamentals/custom-ease/CustomEasePage').then(({ CustomEasePage }) => ({ default: CustomEasePage })),
+)
+
+const CustomBounceWigglePage = lazy(() =>
+  import('../content/gsap/fundamentals/custom-bounce-wiggle/CustomBounceWigglePage').then(({ CustomBounceWigglePage }) => ({ default: CustomBounceWigglePage })),
+)
+
+const EasePackPage = lazy(() =>
+  import('../content/gsap/fundamentals/ease-pack/EasePackPage').then(({ EasePackPage }) => ({ default: EasePackPage })),
+)
+
 const TweenPlayheadPage = lazy(() =>
   import('../content/gsap/fundamentals/tween-playhead/TweenPlayheadPage').then(({ TweenPlayheadPage }) => ({ default: TweenPlayheadPage })),
+)
+
+const TweenCallbacksPromisePage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-callbacks-promise/TweenCallbacksPromisePage').then(({ TweenCallbacksPromisePage }) => ({ default: TweenCallbacksPromisePage })),
 )
 
 const ReusableEffectsPage = lazy(() =>
@@ -85,7 +101,11 @@ export const tracks: TrackDefinition[] = [
       { slug: 'css-animation', title: 'CSS animation', group: '값과 움직임', Page: CssAnimationPage },
       { slug: 'non-css-target-values', title: 'CSS가 아닌 값', group: '값과 움직임', Page: NonCssTargetValuesPage },
       { slug: 'easing', title: 'Easing', group: '값과 움직임', Page: EasingPage },
+      { slug: 'custom-ease', title: '속도 곡선 직접 만들기', group: '값과 움직임', Page: CustomEasePage },
+      { slug: 'custom-bounce-wiggle', title: '튕김과 흔들림', group: '값과 움직임', Page: CustomBounceWigglePage },
+      { slug: 'ease-pack', title: '특수 ease 모음', group: '값과 움직임', Page: EasePackPage },
       { slug: 'tween-playhead', title: 'Tween playhead', group: '트윈 제어', Page: TweenPlayheadPage },
+      { slug: 'tween-callbacks-promise', title: '콜백 교체와 완료 대기', group: '트윈 제어', Page: TweenCallbacksPromisePage },
       { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
     ],
   },
