@@ -1,0 +1,283 @@
+/** 시간 계산 예제의 시간축 막대·컨트롤·getter 표·코드 패널 배치를 소유한다. */
+.timing-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.timing-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.timing-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.timing-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 18px;
+  align-items: start;
+}
+
+.timing-lab__stage {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.timing-lab__axis-caption {
+  margin: 0 0 12px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.timing-lab__axis {
+  position: relative;
+  height: 54px;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 4%);
+}
+
+.timing-lab__segment {
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  outline: 1px solid var(--color-border);
+  outline-offset: -1px;
+}
+
+/** 모션 감소 설정이 아닐 때만 막대가 새 위치로 미끄러지게 한다 */
+.timing-lab__segment--animated {
+  transition:
+    left 220ms ease,
+    width 220ms ease;
+}
+
+.timing-lab__segment em {
+  padding: 0 6px;
+  overflow: hidden;
+  font-size: 11px;
+  font-style: normal;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/** delay 칸은 빗금으로, 재생 칸은 채움으로, 대기 칸은 점선으로 구분해 색 없이도 읽히게 한다 */
+.timing-lab__segment--delay {
+  background: repeating-linear-gradient(45deg, rgb(255 255 255 / 6%) 0 6px, transparent 6px 12px);
+  color: var(--color-muted);
+}
+
+.timing-lab__segment--cycle {
+  background: rgb(200 241 105 / 18%);
+  color: var(--color-text);
+}
+
+.timing-lab__segment--repeat-delay {
+  border: 1px dashed var(--color-border);
+  color: var(--color-muted);
+}
+
+.timing-lab__axis-legend {
+  display: grid;
+  gap: 6px;
+  margin: 14px 0 0;
+  padding-left: 20px;
+  font-size: 12px;
+}
+
+.timing-lab__axis-legend li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+}
+
+.timing-lab__axis-legend span {
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.timing-lab__controls {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.timing-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.timing-lab__controls > label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.timing-lab__controls output {
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.timing-lab__controls input[type='range'] {
+  width: 100%;
+}
+
+.timing-lab__radio-group {
+  display: grid;
+  gap: 6px;
+}
+
+.timing-lab__radio-group p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.timing-lab__radio-group label {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.timing-lab__table-wrap {
+  margin-top: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.timing-lab__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.timing-lab__table caption {
+  padding: 12px 16px;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-align: left;
+}
+
+.timing-lab__table th,
+.timing-lab__table td {
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  line-height: 1.6;
+}
+
+.timing-lab__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.timing-lab__table tbody th {
+  white-space: nowrap;
+}
+
+.timing-lab__table tbody th code {
+  color: var(--color-accent);
+}
+
+.timing-lab__table tbody td:first-of-type {
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.timing-lab__table tbody td + td {
+  color: var(--color-muted);
+}
+
+.timing-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.timing-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.timing-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.timing-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.timing-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.timing-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.timing-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+/** 운영체제 설정만으로도 막대 전환이 멈추도록 CSS 쪽에도 같은 규칙을 둔다 */
+@media (prefers-reduced-motion: reduce) {
+  .timing-lab__segment--animated {
+    transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .timing-lab__body,
+  .timing-lab__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .timing-lab__segment em {
+    display: none;
+  }
+}
