@@ -1,0 +1,188 @@
+/** ease 그래프 예제의 캔버스·컨트롤·코드 패널 배치를 소유한다. */
+.ease-graph-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.ease-graph-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.ease-graph-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.ease-graph-lab__goal code,
+.ease-graph-lab__legend code {
+  color: var(--color-accent);
+}
+
+.ease-graph-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 18px;
+  align-items: start;
+}
+
+.ease-graph-lab__canvas {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.ease-graph-lab__canvas svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ease-graph-lab__frame {
+  fill: rgb(255 255 255 / 4%);
+  stroke: var(--color-border);
+  stroke-width: 1;
+}
+
+.ease-graph-lab__curve {
+  fill: none;
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.ease-graph-lab__legend {
+  margin: 12px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ease-graph-lab__legend strong {
+  color: var(--color-text);
+}
+
+.ease-graph-lab__controls {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.ease-graph-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.ease-graph-lab__controls > label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ease-graph-lab__controls output {
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ease-graph-lab__controls input[type='range'] {
+  width: 100%;
+}
+
+.ease-graph-lab__radio-group {
+  display: grid;
+  gap: 6px;
+}
+
+.ease-graph-lab__radio-group p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ease-graph-lab__radio-group label {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+/** 반환되는 d 문자열이 한 줄로 아주 길어질 수 있어 가로 스크롤 대신 줄바꿈으로 보여 준다 */
+.ease-graph-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.ease-graph-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.ease-graph-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.ease-graph-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.ease-graph-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.ease-graph-lab__panels strong {
+  color: var(--color-text);
+}
+
+.ease-graph-lab__panels code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.ease-graph-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.ease-graph-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .ease-graph-lab__body,
+  .ease-graph-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}
