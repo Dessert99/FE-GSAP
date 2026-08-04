@@ -1,0 +1,390 @@
+/** 조회·중단 페이지의 배치와 범위 비교 표·인자 표·시그니처 블록·경고 블록·실행 확인 블록의 표시 규칙을 소유한다. */
+.find-stop-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.find-stop-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.find-stop-page__header h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(38px, 6.4vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+}
+
+.find-stop-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.find-stop-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.find-stop-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.find-stop-page__path span,
+.find-stop-page__reviewed {
+  color: var(--color-muted);
+}
+
+.find-stop-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.find-stop-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.find-stop-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.find-stop-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.find-stop-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.find-stop-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.find-stop-coverage__summary span,
+.find-stop-coverage__summary p,
+.find-stop-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.find-stop-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.find-stop-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.find-stop-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.find-stop-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.find-stop-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.find-stop-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.find-stop-page__section {
+  scroll-margin-top: 82px;
+}
+
+.find-stop-page__section + .find-stop-page__section {
+  margin-top: 100px;
+}
+
+.find-stop-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.find-stop-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.find-stop-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+
+.find-stop-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.find-stop-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.find-stop-page__split > div,
+.find-stop-page__prose {
+  min-width: 0;
+}
+
+.find-stop-page__prose {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.find-stop-page__prose p,
+.find-stop-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.find-stop-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.find-stop-page__prose strong,
+.find-stop-page__note strong,
+.find-stop-page__warning strong {
+  color: var(--color-text);
+}
+
+.find-stop-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.find-stop-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.find-stop-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.find-stop-page__signature {
+  margin: 18px 0 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  border: 1px solid rgb(200 241 105 / 26%);
+  border-radius: 12px;
+  background: #07090c;
+  color: var(--color-accent);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.find-stop-page__note,
+.find-stop-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.find-stop-page__note h3,
+.find-stop-page__warning h3 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.find-stop-page__note p,
+.find-stop-page__warning p {
+  margin: 0;
+}
+
+.find-stop-page__note p + p,
+.find-stop-page__warning p + p {
+  margin-top: 10px;
+}
+
+.find-stop-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+.find-stop-page__note--probe {
+  border-style: dashed;
+}
+
+.find-stop-page__provenance {
+  font-size: 13px;
+}
+
+.find-stop-page__table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.find-stop-page__scope-table,
+.find-stop-page__params-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.find-stop-page__scope-table caption,
+.find-stop-page__params-table caption {
+  padding: 16px 20px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.find-stop-page__scope-table th,
+.find-stop-page__scope-table td,
+.find-stop-page__params-table th,
+.find-stop-page__params-table td {
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.find-stop-page__scope-table thead th,
+.find-stop-page__params-table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.find-stop-page__scope-table tbody th,
+.find-stop-page__params-table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.find-stop-page__scope-table tbody th small,
+.find-stop-page__params-table tbody th small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.find-stop-page__scope-table td,
+.find-stop-page__params-table td {
+  color: var(--color-muted);
+}
+
+.find-stop-page__scope-table code,
+.find-stop-page__params-table code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.find-stop-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.find-stop-page__list a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .find-stop-coverage__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .find-stop-coverage__summary p {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .find-stop-coverage ol,
+  .find-stop-page__split {
+    grid-template-columns: 1fr;
+  }
+}
