@@ -78,6 +78,30 @@ const TweenPlayheadPage = lazy(() =>
   import('../content/gsap/fundamentals/tween-playhead/TweenPlayheadPage').then(({ TweenPlayheadPage }) => ({ default: TweenPlayheadPage })),
 )
 
+const TweenInstancePage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-instance/TweenInstancePage').then(({ TweenInstancePage }) => ({ default: TweenInstancePage })),
+)
+
+const TweenTimingMathPage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-timing-math/TweenTimingMathPage').then(({ TweenTimingMathPage }) => ({ default: TweenTimingMathPage })),
+)
+
+const TweenRepeatsPage = lazy(() =>
+  import('../content/gsap/fundamentals/tween-repeats/TweenRepeatsPage').then(({ TweenRepeatsPage }) => ({ default: TweenRepeatsPage })),
+)
+
+const HighFrequencyUpdatesPage = lazy(() =>
+  import('../content/gsap/fundamentals/high-frequency-updates/HighFrequencyUpdatesPage').then(({ HighFrequencyUpdatesPage }) => ({ default: HighFrequencyUpdatesPage })),
+)
+
+const FindStopAnimationsPage = lazy(() =>
+  import('../content/gsap/fundamentals/find-stop-animations/FindStopAnimationsPage').then(({ FindStopAnimationsPage }) => ({ default: FindStopAnimationsPage })),
+)
+
+const ReactUseGsapPage = lazy(() =>
+  import('../content/gsap/fundamentals/react-use-gsap/ReactUseGsapPage').then(({ ReactUseGsapPage }) => ({ default: ReactUseGsapPage })),
+)
+
 const TweenCallbacksPromisePage = lazy(() =>
   import('../content/gsap/fundamentals/tween-callbacks-promise/TweenCallbacksPromisePage').then(({ TweenCallbacksPromisePage }) => ({ default: TweenCallbacksPromisePage })),
 )
@@ -104,8 +128,14 @@ export const tracks: TrackDefinition[] = [
       { slug: 'custom-ease', title: '속도 곡선 직접 만들기', group: '값과 움직임', Page: CustomEasePage },
       { slug: 'custom-bounce-wiggle', title: '튕김과 흔들림', group: '값과 움직임', Page: CustomBounceWigglePage },
       { slug: 'ease-pack', title: '특수 ease 모음', group: '값과 움직임', Page: EasePackPage },
+      { slug: 'tween-instance', title: 'Tween에 남는 것', group: '트윈 제어', Page: TweenInstancePage },
       { slug: 'tween-playhead', title: 'Tween playhead', group: '트윈 제어', Page: TweenPlayheadPage },
+      { slug: 'tween-timing-math', title: '시간 계산', group: '트윈 제어', Page: TweenTimingMathPage },
+      { slug: 'tween-repeats', title: '반복과 값 재계산', group: '트윈 제어', Page: TweenRepeatsPage },
       { slug: 'tween-callbacks-promise', title: '콜백 교체와 완료 대기', group: '트윈 제어', Page: TweenCallbacksPromisePage },
+      { slug: 'find-stop-animations', title: '찾아서 멈추기', group: '트윈 제어', Page: FindStopAnimationsPage },
+      { slug: 'high-frequency-updates', title: '잦은 입력에 반응하기', group: '트윈 제어', Page: HighFrequencyUpdatesPage },
+      { slug: 'react-use-gsap', title: 'React 안에서 쓰기', group: '통합', Page: ReactUseGsapPage },
       { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
     ],
   },
