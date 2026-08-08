@@ -1,0 +1,28 @@
+/** P43 resizable target, command group, bounded log를 example scope에 배치한다. */
+.lifecycle-lab,
+.lifecycle-lab__controls {
+  display: grid;
+  gap: 10px;
+}
+
+.lifecycle-lab__controls {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.lifecycle-lab__target {
+  min-height: 80px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  transition: none;
+}
+
+.lifecycle-lab__target--tall {
+  min-height: 220px;
+}
+
+.lifecycle-lab ol {
+  min-height: 24px;
+  margin: 0;
+  padding-inline-start: 24px;
+}

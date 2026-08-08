@@ -1,0 +1,23 @@
+/** P43 header와 decision section의 page-local rhythm을 유지한다. */
+.scroll-trigger-lifecycle-page {
+  display: grid;
+  gap: 32px;
+}
+
+.scroll-trigger-lifecycle-page > header,
+.scroll-trigger-lifecycle-page > section {
+  display: grid;
+  gap: 12px;
+}
+
+.scroll-trigger-lifecycle-page h1,
+.scroll-trigger-lifecycle-page h2,
+.scroll-trigger-lifecycle-page p {
+  margin: 0;
+}
+
+.scroll-trigger-lifecycle-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
