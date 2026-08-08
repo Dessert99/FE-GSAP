@@ -362,6 +362,10 @@ const ScrollTriggerLifecyclePage = lazy(() =>
   import('../content/gsap/scroll/scroll-trigger-lifecycle/ScrollTriggerLifecyclePage').then(({ ScrollTriggerLifecyclePage }) => ({ default: ScrollTriggerLifecyclePage })),
 )
 
+const ScrollTriggerRegistryPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-registry/ScrollTriggerRegistryPage').then(({ ScrollTriggerRegistryPage }) => ({ default: ScrollTriggerRegistryPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -452,6 +456,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'scroll-trigger-geometry', title: 'ScrollTrigger geometry', group: 'Scroll', Page: ScrollTriggerGeometryPage },
       { slug: 'scroll-trigger-motion', title: 'ScrollTrigger motion', group: 'Scroll', Page: ScrollTriggerMotionPage },
       { slug: 'scroll-trigger-lifecycle', title: 'ScrollTrigger 생명주기', group: 'Scroll', Page: ScrollTriggerLifecyclePage },
+      { slug: 'scroll-trigger-registry', title: 'ScrollTrigger registry와 전역 상태', group: 'Scroll', Page: ScrollTriggerRegistryPage },
     ],
   },
   {

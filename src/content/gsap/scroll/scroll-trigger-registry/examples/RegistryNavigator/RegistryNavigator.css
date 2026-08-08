@@ -1,0 +1,43 @@
+/** P44 local scroller와 frozen registry table을 example scope에 배치한다. */
+.registry-navigator,
+.registry-navigator__controls {
+  display: grid;
+  gap: 12px;
+}
+
+.registry-navigator__controls {
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.registry-navigator__scroller {
+  display: grid;
+  gap: 12px;
+  max-height: 260px;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.registry-navigator__target {
+  display: grid;
+  min-height: 150px;
+  align-content: center;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+}
+
+.registry-navigator table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.registry-navigator th,
+.registry-navigator td {
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}

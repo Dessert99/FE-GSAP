@@ -1,0 +1,23 @@
+/** P44 header와 registry boundary 설명의 page-local rhythm을 유지한다. */
+.scroll-trigger-registry-page {
+  display: grid;
+  gap: 32px;
+}
+
+.scroll-trigger-registry-page > header,
+.scroll-trigger-registry-page > section {
+  display: grid;
+  gap: 12px;
+}
+
+.scroll-trigger-registry-page h1,
+.scroll-trigger-registry-page h2,
+.scroll-trigger-registry-page p {
+  margin: 0;
+}
+
+.scroll-trigger-registry-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
