@@ -1,0 +1,20 @@
+.motion-path-measure-page {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 68rem;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+.motion-path-measure-page header,
+.motion-path-measure-page section {
+  display: grid;
+  gap: 0.7rem;
+}
+.motion-path-measure-page p {
+  margin: 0;
+  line-height: 1.65;
+}
+.motion-path-measure-page section {
+  border-top: 1px solid #456;
+  padding-top: 1rem;
+}

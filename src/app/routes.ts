@@ -282,6 +282,10 @@ const MotionPathCoordinatesPage = lazy(() =>
   import('../content/gsap/svg/motion-path-coordinates/MotionPathCoordinatesPage').then(({ MotionPathCoordinatesPage }) => ({ default: MotionPathCoordinatesPage })),
 )
 
+const MotionPathMeasurePage = lazy(() =>
+  import('../content/gsap/svg/motion-path-measure/MotionPathMeasurePage').then(({ MotionPathMeasurePage }) => ({ default: MotionPathMeasurePage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -352,6 +356,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'motion-path', title: 'MotionPath 경로 이동', group: 'SVG', Page: MotionPathPage },
       { slug: 'motion-path-data', title: 'MotionPath 데이터 변환', group: 'SVG', Page: MotionPathDataPage },
       { slug: 'motion-path-coordinates', title: 'MotionPath 좌표 변환', group: 'SVG', Page: MotionPathCoordinatesPage },
+      { slug: 'motion-path-measure', title: 'MotionPath 경로 측정', group: 'SVG', Page: MotionPathMeasurePage },
     ],
   },
   {

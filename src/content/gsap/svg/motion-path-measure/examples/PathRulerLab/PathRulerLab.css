@@ -1,0 +1,57 @@
+.path-ruler-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #456;
+  border-radius: 0.75rem;
+}
+.path-ruler-lab p,
+.path-ruler-lab h2,
+.path-ruler-lab h3 {
+  margin: 0;
+}
+.path-ruler-lab svg {
+  width: 100%;
+  min-height: 12rem;
+  border: 1px dashed #789;
+}
+.path-ruler-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.path-ruler-lab__controls label {
+  display: grid;
+  gap: 0.3rem;
+}
+.path-ruler-lab dl {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+}
+.path-ruler-lab dl div {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+}
+.path-ruler-lab dd {
+  margin: 0;
+}
+.path-ruler-lab pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  background: #101820;
+}
+.path-ruler-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+@media (max-width: 40rem) {
+  .path-ruler-lab__panels {
+    grid-template-columns: 1fr;
+  }
+  .path-ruler-lab dl div {
+    grid-template-columns: 1fr;
+  }
+}
