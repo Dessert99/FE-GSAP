@@ -266,6 +266,10 @@ const MorphSvgPathDataPage = lazy(() =>
   import('../content/gsap/svg/morph-svg-path-data/MorphSvgPathDataPage').then(({ MorphSvgPathDataPage }) => ({ default: MorphSvgPathDataPage })),
 )
 
+const MotionPathHelperPage = lazy(() =>
+  import('../content/gsap/svg/motion-path-helper/MotionPathHelperPage').then(({ MotionPathHelperPage }) => ({ default: MotionPathHelperPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -332,6 +336,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'velocity-tracker-read', title: 'VelocityTracker 속도 읽기', group: 'Inertia', Page: VelocityTrackerReadPage },
       { slug: 'morph-svg', title: 'MorphSVG 모양 변환', group: 'SVG', Page: MorphSvgPage },
       { slug: 'morph-svg-path-data', title: 'MorphSVG path 데이터', group: 'SVG', Page: MorphSvgPathDataPage },
+      { slug: 'motion-path-helper', title: 'MotionPathHelper 경로 편집', group: 'SVG', Page: MotionPathHelperPage },
     ],
   },
   {

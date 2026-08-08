@@ -1,0 +1,23 @@
+/** P20 page-local section rhythm과 code card를 배치한다. */
+.motion-path-helper-page {
+  display: grid;
+  gap: 44px;
+}
+.motion-path-helper-page header,
+.motion-path-helper-page section {
+  display: grid;
+  gap: 14px;
+}
+.motion-path-helper-page h1,
+.motion-path-helper-page h2,
+.motion-path-helper-page p {
+  margin: 0;
+}
+.motion-path-helper-page header > p:first-child {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+.motion-path-helper-page header > div {
+  display: grid;
+  gap: 8px;
+}
