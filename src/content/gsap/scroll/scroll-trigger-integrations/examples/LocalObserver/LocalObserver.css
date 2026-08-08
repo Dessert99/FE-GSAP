@@ -1,0 +1,35 @@
+/** P46 architecture cards와 local input surface를 example scope로 제한한다. */
+.local-observer {
+  display: grid;
+  gap: 16px;
+}
+.local-observer__diagram {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.local-observer__diagram article,
+.local-observer__surface {
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+.local-observer__diagram h3,
+.local-observer__diagram p,
+.local-observer__surface p {
+  margin: 0 0 8px;
+}
+.local-observer pre {
+  margin: 0;
+  overflow: auto;
+  font-size: 0.78rem;
+}
+.local-observer__surface {
+  min-block-size: 120px;
+  outline-offset: 4px;
+}
+@media (max-width: 720px) {
+  .local-observer__diagram {
+    grid-template-columns: 1fr;
+  }
+}
