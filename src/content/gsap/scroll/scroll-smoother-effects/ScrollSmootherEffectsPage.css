@@ -1,0 +1,28 @@
+/** P37 page header와 section rhythm을 local class에만 적용한다. */
+.scroll-smoother-effects-page {
+  display: grid;
+  gap: 32px;
+}
+
+.scroll-smoother-effects-page > header,
+.scroll-smoother-effects-page > section {
+  display: grid;
+  gap: 12px;
+}
+
+.scroll-smoother-effects-page h1,
+.scroll-smoother-effects-page h2,
+.scroll-smoother-effects-page p {
+  margin: 0;
+}
+
+.scroll-smoother-effects-page__eyebrow,
+.scroll-smoother-effects-page__path {
+  color: var(--color-muted);
+}
+
+.scroll-smoother-effects-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
