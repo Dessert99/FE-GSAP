@@ -182,6 +182,10 @@ const UtilityCollectionsRandomPage = lazy(() =>
   import('../content/gsap/fundamentals/utility-collections-random/UtilityCollectionsRandomPage').then(({ UtilityCollectionsRandomPage }) => ({ default: UtilityCollectionsRandomPage })),
 )
 
+const UtilityDistributePage = lazy(() =>
+  import('../content/gsap/fundamentals/utility-distribute/UtilityDistributePage').then(({ UtilityDistributePage }) => ({ default: UtilityDistributePage })),
+)
+
 const ModifiersSnapWrapPage = lazy(() =>
   import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
 )
@@ -231,6 +235,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'range-interpolation', title: '값 범위 변환과 보간', group: '값 계산', Page: RangeInterpolationPage },
       { slug: 'utility-pipelines-units', title: '계산 함수와 CSS 단위 연결', group: '값 계산', Page: UtilityPipelinesUnitsPage },
       { slug: 'utility-collections-random', title: '후보 배열과 무작위 선택', group: '값 계산', Page: UtilityCollectionsRandomPage },
+      { slug: 'utility-distribute', title: '위치별 값 배분', group: '값 계산', Page: UtilityDistributePage },
       { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
     ],
   },

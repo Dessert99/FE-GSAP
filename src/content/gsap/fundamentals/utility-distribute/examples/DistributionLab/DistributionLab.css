@@ -1,0 +1,29 @@
+/** distribute() controls와 숫자 heatmap을 작은 화면에서도 읽을 수 있게 배치한다. */
+.distribution-lab { margin-top: 28px; padding: clamp(18px, 3vw, 28px); border: 1px solid var(--color-border); border-radius: 18px; background: var(--color-surface); }
+.distribution-lab > h3 { margin: 0; font-size: 21px; }
+.distribution-lab__goal { max-width: 68ch; color: var(--color-muted); line-height: 1.7; }
+.distribution-lab__layout { display: grid; grid-template-columns: minmax(220px, 280px) minmax(0, 1fr); gap: 24px; margin-top: 24px; }
+.distribution-lab__controls { display: grid; grid-template-columns: 1fr auto; gap: 9px 12px; align-content: start; margin: 0; padding: 18px; border: 1px solid var(--color-border); border-radius: 14px; }
+.distribution-lab__controls legend { padding: 0 6px; font-weight: 750; }
+.distribution-lab__controls label { color: var(--color-muted); font-size: 13px; }
+.distribution-lab__controls output { color: var(--color-accent); font-variant-numeric: tabular-nums; }
+.distribution-lab__controls select, .distribution-lab__controls input { grid-column: 1 / -1; width: 100%; }
+.distribution-lab__controls select { padding: 9px 10px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); color: var(--color-text); }
+.distribution-lab__controls small { grid-column: 1 / -1; color: var(--color-muted); }
+.distribution-lab__button-group { display: grid; grid-column: 1 / -1; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+.distribution-lab__button-group button { padding: 9px; border: 1px solid var(--color-border); border-radius: 8px; background: transparent; color: var(--color-text); cursor: pointer; }
+.distribution-lab__button-group button[aria-pressed='true'] { border-color: var(--color-accent); background: rgb(200 241 105 / 10%); color: var(--color-accent); }
+.distribution-lab__readout { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 12px; color: var(--color-muted); font-size: 13px; }
+.distribution-lab__readout strong { color: var(--color-text); font-variant-numeric: tabular-nums; }
+.distribution-lab__cells { display: grid; grid-template-columns: repeat(var(--distribution-columns), minmax(62px, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.distribution-lab__cells li { display: grid; place-items: center; min-height: 92px; padding: 9px 5px; border: 1px solid rgb(200 241 105 / 38%); border-radius: 11px; background: rgb(200 241 105 / var(--distribution-heat)); text-align: center; }
+.distribution-lab__cells span, .distribution-lab__cells small { color: var(--color-muted); font-size: 11px; }
+.distribution-lab__cells output { color: var(--color-text); font-size: clamp(15px, 2vw, 20px); font-weight: 800; font-variant-numeric: tabular-nums; }
+.distribution-lab__code { margin: 24px 0 0; padding: 18px; overflow-x: auto; border: 1px solid var(--color-border); border-radius: 12px; background: #07090c; color: #dbe5ee; font-size: 12px; line-height: 1.7; }
+.distribution-lab__panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+.distribution-lab__panels article { padding: 15px; border: 1px solid var(--color-border); border-radius: 11px; }
+.distribution-lab__panels h4 { margin: 0 0 6px; font-size: 14px; }
+.distribution-lab__panels p, .distribution-lab__source { margin: 0; color: var(--color-muted); font-size: 13px; line-height: 1.65; }
+.distribution-lab__source { margin-top: 14px; }
+@media (max-width: 760px) { .distribution-lab__layout { grid-template-columns: 1fr; } .distribution-lab__cells { grid-template-columns: repeat(var(--distribution-columns), minmax(48px, 1fr)); } .distribution-lab__panels { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .distribution-lab * { scroll-behavior: auto; } }
