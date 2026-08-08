@@ -298,6 +298,10 @@ const ObserverGestureStatePage = lazy(() =>
   import('../content/gsap/ui/observer-gesture-state/ObserverGestureStatePage').then(({ ObserverGestureStatePage }) => ({ default: ObserverGestureStatePage })),
 )
 
+const ObserverLifecyclePage = lazy(() =>
+  import('../content/gsap/ui/observer-lifecycle/ObserverLifecyclePage').then(({ ObserverLifecyclePage }) => ({ default: ObserverLifecyclePage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -372,6 +376,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'observer-create', title: 'Observer 만들기와 찾기', group: 'Observer', Page: ObserverCreatePage },
       { slug: 'observer-signals', title: 'Observer 입력 신호', group: 'Observer', Page: ObserverSignalsPage },
       { slug: 'observer-gesture-state', title: 'Observer 제스처 상태', group: 'Observer', Page: ObserverGestureStatePage },
+      { slug: 'observer-lifecycle', title: 'Observer 생명주기', group: 'Observer', Page: ObserverLifecyclePage },
     ],
   },
   {
