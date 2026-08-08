@@ -1,0 +1,20 @@
+/** toArray() lab의 scope 경계·후보·controls·결과 snapshot 배치를 소유한다. */
+.collection-normalization-lab, .random-choice-lab, .shuffle-identity-lab { margin-top: 24px; padding: 24px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+.collection-normalization-lab h3, .random-choice-lab h3, .shuffle-identity-lab h3 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
+.collection-normalization-lab__goal, .random-choice-lab__goal, .shuffle-identity-lab__goal { margin: 8px 0 20px; color: var(--color-muted); font-size: 15px; line-height: 1.7; }
+.collection-normalization-lab__decoy { margin-bottom: 12px; border-style: dashed !important; opacity: .6; }
+.collection-normalization-lab__workspace { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 14px; border: 1px solid rgb(200 241 105 / 36%); border-radius: 12px; }
+.collection-normalization-lab__candidate { padding: 14px; border: 1px solid var(--color-border); border-radius: 10px; color: var(--color-muted); text-align: center; }
+.collection-normalization-lab__controls, .random-choice-lab__controls { display: grid; gap: 10px; margin: 16px 0 0; padding: 16px; border: 1px solid var(--color-border); border-radius: 12px; }
+.collection-normalization-lab__controls legend, .random-choice-lab__controls legend { padding: 0 6px; color: var(--color-muted); font-size: 12px; }
+.collection-normalization-lab__controls label, .random-choice-lab__radios label { display: flex; gap: 8px; align-items: baseline; color: var(--color-muted); font-size: 14px; }
+.collection-normalization-lab button, .random-choice-lab button, .shuffle-identity-lab button { width: fit-content; padding: 9px 12px; border: 1px solid var(--color-accent); border-radius: 8px; background: transparent; color: var(--color-text); font: inherit; cursor: pointer; }
+.collection-normalization-lab__code, .random-choice-lab__code, .shuffle-identity-lab__code { margin: 16px 0 0; padding: 20px; overflow-x: auto; border: 1px solid var(--color-border); border-radius: 12px; background: #07090c; color: #dbe5ee; font-size: 13px; line-height: 1.7; }
+.collection-normalization-lab__result, .random-choice-lab__result { display: grid; gap: 5px; margin-top: 16px; padding: 14px 16px; border: 1px solid var(--color-border); border-radius: 12px; color: var(--color-muted); font-size: 14px; }
+.collection-normalization-lab__result p { margin: 0; }.collection-normalization-lab__result strong, .random-choice-lab__result strong { color: var(--color-accent); }
+.collection-normalization-lab__panels, .random-choice-lab__panels, .shuffle-identity-lab__panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; }
+.collection-normalization-lab__panels article, .random-choice-lab__panels article, .shuffle-identity-lab__panels article { min-width: 0; padding: 16px 18px; border: 1px solid var(--color-border); border-radius: 12px; }
+.collection-normalization-lab__panels h4, .random-choice-lab__panels h4, .shuffle-identity-lab__panels h4 { margin: 0 0 6px; color: var(--color-accent); font-size: 14px; }
+.collection-normalization-lab__panels p, .random-choice-lab__panels p, .shuffle-identity-lab__panels p { margin: 0; color: var(--color-muted); font-size: 14px; line-height: 1.7; }
+.collection-normalization-lab__source, .random-choice-lab__source, .shuffle-identity-lab__source { margin: 16px 0 0; color: var(--color-muted); font-size: 12px; overflow-wrap: anywhere; }
+@media (max-width: 720px) { .collection-normalization-lab__workspace, .collection-normalization-lab__panels { grid-template-columns: 1fr; } }

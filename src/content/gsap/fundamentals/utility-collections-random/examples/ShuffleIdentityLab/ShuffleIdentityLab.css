@@ -1,0 +1,6 @@
+/** shuffle() lab의 before·after Array와 identity badge 배치를 소유한다. */
+.shuffle-identity-lab__orders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.shuffle-identity-lab__orders > div { padding: 16px; border: 1px solid var(--color-border); border-radius: 12px; }
+.shuffle-identity-lab__orders h4 { margin: 0 0 10px; color: var(--color-muted); font-size: 13px; }.shuffle-identity-lab__orders ol { display: grid; gap: 7px; margin: 0; padding-left: 24px; }.shuffle-identity-lab__orders li { color: var(--color-text); }
+.shuffle-identity-lab__actions { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; margin-top: 16px; }.shuffle-identity-lab__actions output { color: var(--color-muted); font-size: 14px; }.shuffle-identity-lab__actions strong { color: var(--color-accent); }
+@media (max-width: 720px) { .shuffle-identity-lab__orders, .shuffle-identity-lab__panels { grid-template-columns: 1fr; } }

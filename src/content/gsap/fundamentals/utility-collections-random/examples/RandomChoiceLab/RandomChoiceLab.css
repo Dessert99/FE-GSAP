@@ -1,0 +1,5 @@
+/** random() lab의 overload controls와 실제 결과 snapshot 표시를 보완한다. */
+.random-choice-lab__radios, .random-choice-lab__buttons { display: flex; flex-wrap: wrap; gap: 10px 16px; }
+.random-choice-lab__buttons { margin-top: 4px; }
+.random-choice-lab__result { width: 100%; box-sizing: border-box; }
+@media (max-width: 720px) { .random-choice-lab__panels { grid-template-columns: 1fr; } }
