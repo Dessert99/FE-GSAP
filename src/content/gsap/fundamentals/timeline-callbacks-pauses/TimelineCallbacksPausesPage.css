@@ -1,0 +1,443 @@
+/** 예약·배치·멈춤 페이지의 배치와 signature 블록·인자 표·position 표·경고 블록의 표시 규칙을 소유한다. */
+.schedule-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.schedule-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.schedule-page__header h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(38px, 6.4vw, 68px);
+  line-height: 1.06;
+  letter-spacing: -0.05em;
+}
+
+.schedule-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.schedule-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.schedule-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.schedule-page__path span,
+.schedule-page__reviewed {
+  color: var(--color-muted);
+}
+
+.schedule-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.schedule-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.schedule-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.schedule-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.schedule-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.schedule-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.schedule-coverage__summary span,
+.schedule-coverage__summary p,
+.schedule-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.schedule-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.schedule-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.schedule-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.schedule-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.schedule-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.schedule-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.schedule-page__section {
+  scroll-margin-top: 82px;
+}
+
+.schedule-page__section + .schedule-page__section {
+  margin-top: 100px;
+}
+
+.schedule-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.schedule-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.schedule-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+
+.schedule-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.schedule-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.schedule-page__split > div,
+.schedule-page__prose {
+  min-width: 0;
+}
+
+.schedule-page__prose {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.schedule-page__prose p,
+.schedule-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.schedule-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.schedule-page__prose strong,
+.schedule-page__note strong,
+.schedule-page__warning strong {
+  color: var(--color-text);
+}
+
+.schedule-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.schedule-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.schedule-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.schedule-page__signature {
+  margin: 18px 0 0;
+  padding: 18px 20px;
+  overflow-x: auto;
+  border: 1px solid rgb(200 241 105 / 26%);
+  border-radius: 12px;
+  background: #07090c;
+  color: var(--color-accent);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.schedule-page__note,
+.schedule-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.schedule-page__note h3,
+.schedule-page__warning h3 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.schedule-page__note p,
+.schedule-page__warning p {
+  margin: 0;
+}
+
+.schedule-page__note p + p,
+.schedule-page__warning p + p {
+  margin-top: 10px;
+}
+
+.schedule-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+.schedule-page__note--probe {
+  border-style: dashed;
+}
+
+.schedule-page__provenance {
+  font-size: 13px;
+}
+
+.schedule-page__table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.schedule-page__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.schedule-page__table caption {
+  padding: 16px 20px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.schedule-page__table th,
+.schedule-page__table td {
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.schedule-page__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.schedule-page__table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.schedule-page__table tbody th small {
+  display: block;
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 400;
+  white-space: normal;
+}
+
+.schedule-page__table td {
+  color: var(--color-muted);
+}
+
+.schedule-page__table code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.schedule-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.schedule-page__list a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+/** 고정 tween과 pin 위치를 같은 비율 축 위에 겹쳐 그리는 정적 시간 막대다 */
+.schedule-page__ruler {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.schedule-page__ruler-row {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+}
+
+.schedule-page__ruler-row > span {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.schedule-page__ruler-track {
+  position: relative;
+  height: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  background: rgb(255 255 255 / 3%);
+}
+
+.schedule-page__ruler-block {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  border-radius: 5px;
+  background: rgb(200 241 105 / 22%);
+}
+
+.schedule-page__ruler-pin {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--color-accent-strong);
+}
+
+.schedule-page__ruler-pin span {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-accent-strong);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .schedule-coverage__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .schedule-coverage__summary p {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .schedule-coverage ol,
+  .schedule-page__split {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-page__ruler-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,27 @@
+/** event ruler와 이산 log를 움직임 없이 비교하도록 배치한다. */
+.timeline-event-lab { margin-top: 28px; padding: 24px; border: 1px solid var(--color-border); border-radius: 18px; background: var(--color-surface); }
+.timeline-event-lab h3, .timeline-event-lab h4 { margin-top: 0; }
+.timeline-event-lab__goal, .timeline-event-lab__log p, .timeline-event-lab__panels p { color: var(--color-muted); line-height: 1.7; }
+.timeline-event-lab__body { display: grid; gap: 24px; margin-top: 36px; }
+.timeline-event-lab__ruler { position: relative; height: 64px; margin: 0 38px; }
+.timeline-event-lab__line { position: absolute; top: 26px; right: 0; left: 0; height: 4px; border-radius: 999px; background: rgb(255 255 255 / 12%); }
+.timeline-event-lab__pin { position: absolute; top: 12px; display: grid; justify-items: center; color: var(--color-accent); transform: translateX(-50%); }
+.timeline-event-lab__pin::after { width: 3px; height: 30px; background: currentColor; content: ''; }
+.timeline-event-lab__pin small { position: absolute; top: 42px; white-space: nowrap; }
+.timeline-event-lab__pin--pause { color: var(--color-accent-strong); }
+.timeline-event-lab__pin--end { color: var(--color-muted); }
+.timeline-event-lab__controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.timeline-event-lab button { padding: 9px 12px; border: 1px solid var(--color-border); border-radius: 9px; background: rgb(255 255 255 / 4%); color: var(--color-text); }
+.timeline-event-lab button:disabled { opacity: .45; }
+.timeline-event-lab button:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.timeline-event-lab__status { color: var(--color-accent); }
+.timeline-event-lab__results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.timeline-event-lab__results div { display: grid; gap: 6px; padding: 14px; border: 1px solid var(--color-border); border-radius: 10px; }
+.timeline-event-lab__results span { color: var(--color-muted); font-size: 12px; }
+.timeline-event-lab__log { margin-top: 14px; padding: 18px; border: 1px solid var(--color-border); border-radius: 12px; }
+.timeline-event-lab__log ol { display: grid; gap: 6px; margin: 0; padding-left: 22px; }
+.timeline-event-lab__code { margin: 16px 0 0; padding: 18px; overflow-x: auto; border-radius: 12px; background: #07090c; color: #dbe5ee; line-height: 1.7; }
+.timeline-event-lab__panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.timeline-event-lab__panels article { padding: 16px; border: 1px solid var(--color-border); border-radius: 12px; }
+.timeline-event-lab__source { color: var(--color-muted); font-size: 12px; }
+@media (max-width: 680px) { .timeline-event-lab__results, .timeline-event-lab__panels { grid-template-columns: 1fr; } .timeline-event-lab__ruler { margin-right: 52px; margin-left: 30px; } }

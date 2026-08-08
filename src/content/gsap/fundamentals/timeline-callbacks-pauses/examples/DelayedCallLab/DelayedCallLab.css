@@ -1,0 +1,27 @@
+/** delayedCall의 남은 시간·control·관찰값을 좁은 화면에서도 한 흐름으로 읽게 한다. */
+.delayed-call-lab { margin-top: 28px; padding: 24px; border: 1px solid var(--color-border); border-radius: 18px; background: var(--color-surface); }
+.delayed-call-lab h3, .delayed-call-lab h4 { margin-top: 0; }
+.delayed-call-lab__goal, .delayed-call-lab__timer small, .delayed-call-lab__panels p { color: var(--color-muted); line-height: 1.7; }
+.delayed-call-lab__body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .8fr); gap: 18px; margin-top: 20px; }
+.delayed-call-lab__timer, .delayed-call-lab__controls { padding: 18px; border: 1px solid var(--color-border); border-radius: 14px; }
+.delayed-call-lab__timer { display: grid; gap: 10px; align-content: center; }
+.delayed-call-lab__timer strong { color: var(--color-accent); font-size: 30px; font-variant-numeric: tabular-nums; }
+.delayed-call-lab__track { height: 10px; overflow: hidden; border-radius: 999px; background: rgb(255 255 255 / 8%); }
+.delayed-call-lab__track span { display: block; height: 100%; background: var(--color-accent); }
+.delayed-call-lab__controls { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+.delayed-call-lab__controls input[type='range'], .delayed-call-lab__check, .delayed-call-lab__buttons { grid-column: 1 / -1; }
+.delayed-call-lab__check { display: flex; gap: 8px; align-items: center; }
+.delayed-call-lab__buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.delayed-call-lab button { padding: 9px 12px; border: 1px solid var(--color-border); border-radius: 9px; background: rgb(255 255 255 / 4%); color: var(--color-text); }
+.delayed-call-lab button:disabled { opacity: .45; }
+.delayed-call-lab button:focus-visible, .delayed-call-lab input:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.delayed-call-lab__status { margin: 16px 0 0; color: var(--color-accent); }
+.delayed-call-lab__observation { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 16px 0 0; }
+.delayed-call-lab__observation div { padding: 12px; border: 1px solid var(--color-border); border-radius: 10px; }
+.delayed-call-lab__observation dt { color: var(--color-muted); font-size: 12px; }
+.delayed-call-lab__observation dd { margin: 6px 0 0; overflow-wrap: anywhere; }
+.delayed-call-lab__code { margin: 16px 0 0; padding: 18px; overflow-x: auto; border-radius: 12px; background: #07090c; color: #dbe5ee; line-height: 1.7; }
+.delayed-call-lab__panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 16px; }
+.delayed-call-lab__panels article { padding: 16px; border: 1px solid var(--color-border); border-radius: 12px; }
+.delayed-call-lab__source { color: var(--color-muted); font-size: 12px; }
+@media (max-width: 760px) { .delayed-call-lab__body, .delayed-call-lab__panels, .delayed-call-lab__observation { grid-template-columns: 1fr; } }
