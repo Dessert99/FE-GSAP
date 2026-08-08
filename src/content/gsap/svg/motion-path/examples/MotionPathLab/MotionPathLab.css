@@ -1,0 +1,57 @@
+.motion-path-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #456;
+  border-radius: 0.75rem;
+}
+.motion-path-lab p,
+.motion-path-lab h2,
+.motion-path-lab h3 {
+  margin: 0;
+}
+.motion-path-lab__stage {
+  position: relative;
+  min-height: 12rem;
+  overflow: hidden;
+  border: 1px dashed #789;
+}
+.motion-path-lab svg {
+  width: 100%;
+  height: 12rem;
+}
+.motion-path-lab__follower {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  color: #fff;
+  background: #245;
+  border-radius: 999px;
+}
+.motion-path-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+.motion-path-lab__controls label {
+  display: grid;
+  gap: 0.3rem;
+}
+.motion-path-lab pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  background: #101820;
+}
+.motion-path-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+@media (max-width: 40rem) {
+  .motion-path-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}
