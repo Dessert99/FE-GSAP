@@ -330,6 +330,10 @@ const ReactGsapPatternsPage = lazy(() =>
   import('../content/gsap/react/react-gsap-patterns/ReactGsapPatternsPage').then(({ ReactGsapPatternsPage }) => ({ default: ReactGsapPatternsPage })),
 )
 
+const ScrollSmootherCreatePage = lazy(() =>
+  import('../content/gsap/scroll/scroll-smoother-create/ScrollSmootherCreatePage').then(({ ScrollSmootherCreatePage }) => ({ default: ScrollSmootherCreatePage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -412,6 +416,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'split-text-lifecycle', title: 'SplitText 생명주기', group: 'Text', Page: SplitTextLifecyclePage },
       { slug: 'text-plugin', title: 'TextPlugin 글자 교체', group: 'Text', Page: TextPluginPage },
       { slug: 'react-gsap-patterns', title: 'React GSAP 구성 패턴', group: 'React', Page: ReactGsapPatternsPage },
+      { slug: 'scroll-smoother-create', title: 'ScrollSmoother 구조와 생성', group: 'Scroll', Page: ScrollSmootherCreatePage },
     ],
   },
   {
