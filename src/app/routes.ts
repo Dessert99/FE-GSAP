@@ -134,6 +134,10 @@ const TimelineBasicsPage = lazy(() =>
   import('../content/gsap/fundamentals/timeline-basics/TimelineBasicsPage').then(({ TimelineBasicsPage }) => ({ default: TimelineBasicsPage })),
 )
 
+const TimelineChildPlacementPage = lazy(() =>
+  import('../content/gsap/fundamentals/timeline-child-placement/TimelineChildPlacementPage').then(({ TimelineChildPlacementPage }) => ({ default: TimelineChildPlacementPage })),
+)
+
 const ModifiersSnapWrapPage = lazy(() =>
   import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
 )
@@ -171,6 +175,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
       { slug: 'timeline-callbacks-pauses', title: 'Timeline 함수와 멈춤 예약', group: 'Timeline', Page: TimelineCallbacksPausesPage },
       { slug: 'timeline-basics', title: 'Timeline sequence 만들기', group: 'Timeline', Page: TimelineBasicsPage },
+      { slug: 'timeline-child-placement', title: 'Timeline child 배치', group: 'Timeline', Page: TimelineChildPlacementPage },
       { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
     ],
   },

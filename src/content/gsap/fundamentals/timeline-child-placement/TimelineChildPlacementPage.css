@@ -1,0 +1,467 @@
+/** Timeline child 배치 페이지의 배치와 규칙 표·경고 블록·실행 확인 블록의 표시 규칙을 소유한다. */
+.placement-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.placement-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.placement-page__header h1 {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(34px, 5.4vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.placement-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.placement-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.placement-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.placement-page__path span,
+.placement-page__reviewed {
+  color: var(--color-muted);
+}
+
+.placement-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.placement-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.placement-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.placement-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.placement-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.placement-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.placement-coverage__summary span,
+.placement-coverage__summary p,
+.placement-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.placement-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.placement-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.placement-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.placement-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.placement-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.placement-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.placement-page__section {
+  scroll-margin-top: 82px;
+}
+
+.placement-page__section + .placement-page__section {
+  margin-top: 100px;
+}
+
+.placement-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.placement-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.placement-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+
+.placement-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.placement-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.placement-page__split > div,
+.placement-page__prose {
+  min-width: 0;
+}
+
+.placement-page__prose {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.placement-page__prose p,
+.placement-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.placement-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.placement-page__prose strong,
+.placement-page__note strong,
+.placement-page__warning strong {
+  color: var(--color-text);
+}
+
+.placement-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.placement-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.placement-page__code-label {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.placement-page__code-label code {
+  color: var(--color-accent);
+}
+
+.placement-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.placement-page__note,
+.placement-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.placement-page__note h3,
+.placement-page__warning h3 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.placement-page__note p,
+.placement-page__warning p {
+  margin: 0;
+}
+
+.placement-page__note p + p,
+.placement-page__warning p + p {
+  margin-top: 10px;
+}
+
+.placement-page__note code,
+.placement-page__warning code {
+  overflow-wrap: anywhere;
+}
+
+.placement-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+.placement-page__note--probe {
+  border-style: dashed;
+}
+
+.placement-page__provenance {
+  font-size: 13px;
+}
+
+.placement-page__table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.placement-page__rules-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.placement-page__rules-table caption {
+  padding: 16px 20px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.placement-page__rules-table th,
+.placement-page__rules-table td {
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.placement-page__rules-table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.placement-page__rules-table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.placement-page__rules-table tbody th code {
+  color: var(--color-accent);
+}
+
+.placement-page__rules-table td {
+  color: var(--color-muted);
+}
+
+.placement-page__rules-table td small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.placement-page__rules-table code {
+  overflow-wrap: anywhere;
+}
+
+.placement-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.placement-page__list a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.placement-page__method-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.placement-page__method-list li {
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: var(--color-surface);
+}
+
+.placement-page__method-list code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.placement-page__links {
+  margin-top: 18px;
+  padding: 20px 20px 20px 38px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+}
+
+/** 부모 → 자식 소속 관계를 들여쓰기와 함께 글로도 읽히게 만드는 계층 목록이다 */
+.placement-page__tree {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  list-style: none;
+  font-size: 14px;
+}
+
+.placement-page__tree li {
+  display: grid;
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+  gap: 4px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.placement-page__tree li[data-depth='1'] {
+  margin-left: 24px;
+}
+
+.placement-page__tree li[data-depth='2'] {
+  margin-left: 48px;
+}
+
+.placement-page__tree code {
+  color: var(--color-accent);
+  white-space: nowrap;
+}
+
+.placement-page__tree span {
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 860px) {
+  .placement-coverage__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .placement-coverage__summary p {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .placement-coverage ol,
+  .placement-page__split,
+  .placement-page__method-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  /** 좁은 화면에서는 들여쓰기가 가로 스크롤을 만들므로 계층을 텍스트에만 맡긴다 */
+  .placement-page__tree li[data-depth='1'],
+  .placement-page__tree li[data-depth='2'] {
+    margin-left: 0;
+  }
+
+  .placement-page__tree li {
+    grid-template-columns: 1fr;
+  }
+}

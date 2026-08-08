@@ -1,0 +1,236 @@
+/** position 선택 결과를 control·두 줄 시간축·getter 수치·코드로 나란히 읽게 한다. */
+.position-lab {
+  margin-top: 28px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.position-lab header h3,
+.position-lab header p {
+  margin: 0;
+}
+
+.position-lab header h3 {
+  font-size: 21px;
+}
+
+.position-lab header p:last-child {
+  max-width: 68ch;
+  margin-top: 8px;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.position-lab__eyebrow {
+  margin-bottom: 6px !important;
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.position-lab__controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.position-lab__controls label {
+  display: grid;
+  gap: 8px;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.position-lab__controls select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: #0a0d10;
+  color: var(--color-text);
+}
+
+.position-lab__check {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  align-self: end;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.position-lab__check input {
+  width: 18px;
+  height: 18px;
+}
+
+.position-lab__status {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.position-lab__status code {
+  color: var(--color-accent);
+}
+
+.position-lab__ruler {
+  position: relative;
+  min-height: 156px;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #080b0e;
+}
+
+.position-lab__ruler::before {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), rgb(255 255 255 / 7%) 25%);
+  content: '';
+}
+
+.position-lab__label {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  border-left: 1px dashed rgb(255 191 120 / 70%);
+  color: #ffbf78;
+  transition: left 180ms ease;
+}
+
+.position-lab[data-reduced-motion='true'] .position-lab__label,
+.position-lab[data-reduced-motion='true'] .position-lab__segment {
+  transition: none;
+}
+
+.position-lab__label span,
+.position-lab__label small {
+  position: absolute;
+  left: 6px;
+  white-space: nowrap;
+}
+
+.position-lab__label span {
+  top: 4px;
+  font-size: 11px;
+}
+
+.position-lab__label small {
+  top: 18px;
+  font-size: 10px;
+}
+
+.position-lab__segment {
+  position: absolute;
+  z-index: 1;
+  display: grid;
+  align-content: center;
+  min-width: 5px;
+  height: 44px;
+  padding: 5px 8px;
+  overflow: hidden;
+  border: 1px solid rgb(200 241 105 / 50%);
+  border-radius: 8px;
+  background: rgb(200 241 105 / 16%);
+  white-space: nowrap;
+  transition: left 180ms ease, width 180ms ease;
+}
+
+.position-lab__segment[data-kind='inserted'] {
+  border-color: rgb(118 190 255 / 55%);
+  background: rgb(118 190 255 / 18%);
+}
+
+.position-lab__segment strong {
+  font-size: 12px;
+}
+
+.position-lab__segment small {
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.position-lab__readouts,
+.position-lab__explanations {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.position-lab__readouts > div,
+.position-lab__explanations article {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.position-lab__readouts span,
+.position-lab__readouts strong {
+  display: block;
+}
+
+.position-lab__readouts span {
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.position-lab__readouts strong {
+  margin-top: 3px;
+  font-size: 16px;
+}
+
+.position-lab__code {
+  margin: 14px 0 0;
+  padding: 18px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.position-lab__explanations {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.position-lab__explanations h4,
+.position-lab__explanations p {
+  margin: 0;
+}
+
+.position-lab__explanations h4 {
+  font-size: 14px;
+}
+
+.position-lab__explanations p {
+  margin-top: 6px;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.position-lab__source {
+  margin: 14px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .position-lab__controls,
+  .position-lab__readouts,
+  .position-lab__explanations {
+    grid-template-columns: 1fr;
+  }
+}
