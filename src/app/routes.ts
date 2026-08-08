@@ -230,6 +230,10 @@ const EaselPluginPage = lazy(() =>
   import('../content/gsap/other/easel-plugin/EaselPluginPage').then(({ EaselPluginPage }) => ({ default: EaselPluginPage })),
 )
 
+const FlipFirstLastPage = lazy(() =>
+  import('../content/gsap/ui/flip-first-last/FlipFirstLastPage').then(({ FlipFirstLastPage }) => ({ default: FlipFirstLastPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -287,6 +291,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'draggable-collision-momentum', title: 'Draggable 충돌과 관성', group: 'Draggable', Page: DraggableCollisionMomentumPage },
       { slug: 'draw-svg', title: 'DrawSVG stroke 그리기', group: 'SVG', Page: DrawSvgPage },
       { slug: 'easel-plugin', title: 'EaselPlugin과 canvas', group: 'Other Plugins', Page: EaselPluginPage },
+      { slug: 'flip-first-last', title: 'Flip First와 Last', group: 'Flip', Page: FlipFirstLastPage },
     ],
   },
   {
