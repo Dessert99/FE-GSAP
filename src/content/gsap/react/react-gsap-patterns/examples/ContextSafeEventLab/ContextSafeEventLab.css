@@ -1,0 +1,17 @@
+.context-safe-event {
+  display: grid;
+  gap: 0.75rem;
+}
+.context-safe-event p {
+  margin: 0;
+}
+.context-safe-event__target {
+  display: grid;
+  width: 10rem;
+  min-height: 4rem;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: #a8e6cf;
+  color: #102030;
+  font-weight: 700;
+}
