@@ -218,6 +218,10 @@ const DraggableEventsPage = lazy(() =>
   import('../content/gsap/ui/draggable-events/DraggableEventsPage').then(({ DraggableEventsPage }) => ({ default: DraggableEventsPage })),
 )
 
+const DraggableCollisionMomentumPage = lazy(() =>
+  import('../content/gsap/ui/draggable-collision-momentum/DraggableCollisionMomentumPage').then(({ DraggableCollisionMomentumPage }) => ({ default: DraggableCollisionMomentumPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -272,6 +276,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'draggable-bounds-axis', title: 'Draggable 범위와 축 제한', group: 'Draggable', Page: DraggableBoundsAxisPage },
       { slug: 'draggable-lifecycle', title: 'Draggable 생명주기', group: 'Draggable', Page: DraggableLifecyclePage },
       { slug: 'draggable-events', title: 'Draggable gesture event', group: 'Draggable', Page: DraggableEventsPage },
+      { slug: 'draggable-collision-momentum', title: 'Draggable 충돌과 관성', group: 'Draggable', Page: DraggableCollisionMomentumPage },
     ],
   },
   {
