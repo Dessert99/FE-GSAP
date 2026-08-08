@@ -1,0 +1,78 @@
+.morph-svg-page {
+  display: grid;
+  gap: 2rem;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 5rem;
+}
+.morph-svg-page header,
+.morph-svg-page section {
+  display: grid;
+  gap: 0.75rem;
+}
+.icon-morph-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  color: #f7f5ff;
+  background: #171625;
+  border-radius: 1rem;
+}
+.icon-morph-lab__stage {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) minmax(10rem, 1fr);
+  align-items: center;
+  gap: 1rem;
+}
+.icon-morph-lab svg {
+  width: min(100%, 16rem);
+  margin: auto;
+}
+.icon-morph-lab path {
+  fill: #bdf34a;
+  stroke: #fff;
+  stroke-width: 2;
+}
+.icon-morph-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.icon-morph-lab button,
+.icon-morph-lab select {
+  min-height: 2.5rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.4rem;
+}
+.icon-morph-lab button {
+  color: inherit;
+  background: transparent;
+  border: 1px solid #bdf34a;
+}
+.icon-morph-lab button:focus-visible,
+.icon-morph-lab select:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+.icon-morph-lab pre {
+  overflow: auto;
+  padding: 1rem;
+  background: #0b0a11;
+}
+.icon-morph-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.icon-morph-lab__panels p {
+  padding: 0.75rem;
+  margin: 0;
+  background: #29273b;
+  border-radius: 0.5rem;
+}
+@media (max-width: 40rem) {
+  .icon-morph-lab__stage,
+  .icon-morph-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}

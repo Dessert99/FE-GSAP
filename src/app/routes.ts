@@ -258,6 +258,10 @@ const VelocityTrackerReadPage = lazy(() =>
   import('../content/gsap/ui/velocity-tracker-read/VelocityTrackerReadPage').then(({ VelocityTrackerReadPage }) => ({ default: VelocityTrackerReadPage })),
 )
 
+const MorphSvgPage = lazy(() =>
+  import('../content/gsap/svg/morph-svg/MorphSvgPage').then(({ MorphSvgPage }) => ({ default: MorphSvgPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -322,6 +326,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'inertia', title: 'Inertia 관성 이동', group: 'Inertia', Page: InertiaPage },
       { slug: 'velocity-tracker-lifecycle', title: 'VelocityTracker 생명주기', group: 'Inertia', Page: VelocityTrackerLifecyclePage },
       { slug: 'velocity-tracker-read', title: 'VelocityTracker 속도 읽기', group: 'Inertia', Page: VelocityTrackerReadPage },
+      { slug: 'morph-svg', title: 'MorphSVG 모양 변환', group: 'SVG', Page: MorphSvgPage },
     ],
   },
   {
