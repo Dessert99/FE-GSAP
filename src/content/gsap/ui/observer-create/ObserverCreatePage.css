@@ -1,0 +1,23 @@
+/** P25 section과 actual input lab을 page-local rhythm으로 배치한다. */
+.observer-create-page {
+  display: grid;
+  gap: 44px;
+}
+.observer-create-page header,
+.observer-create-page section {
+  display: grid;
+  gap: 14px;
+}
+.observer-create-page h1,
+.observer-create-page h2,
+.observer-create-page p {
+  margin: 0;
+}
+.observer-create-page header > p:first-child {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+.observer-create-page__links {
+  display: grid;
+  gap: 8px;
+}

@@ -1,0 +1,102 @@
+/** Flip fit/absolute page의 local layout과 heading hierarchy를 정한다. */
+.flip-fit-absolute-page {
+  display: grid;
+  gap: 56px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 48px) 96px;
+  color: var(--color-text);
+}
+.flip-fit-absolute-page > header {
+  display: grid;
+  gap: 15px;
+  max-width: 900px;
+}
+.flip-fit-absolute-page > header p {
+  margin: 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.flip-fit-absolute-page h1 {
+  margin: 0;
+  font-size: clamp(38px, 7vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.flip-fit-absolute-page > header > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.flip-fit-absolute-page__coverage {
+  display: grid;
+  gap: 10px;
+  padding: 22px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+.flip-fit-absolute-page__coverage strong {
+  font-size: 34px;
+  color: var(--color-accent);
+}
+.flip-fit-absolute-page__coverage span {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+.flip-fit-absolute-page__coverage ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.flip-fit-absolute-page__coverage li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 8px;
+}
+.flip-fit-absolute-page__coverage a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 13px;
+}
+.flip-fit-absolute-page__section {
+  display: grid;
+  gap: 20px;
+  scroll-margin-top: 24px;
+}
+.flip-fit-absolute-page__section > p {
+  max-width: 880px;
+  margin: 0;
+  line-height: 1.8;
+}
+.flip-fit-absolute-page__heading {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 14px;
+}
+.flip-fit-absolute-page__heading > span {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+.flip-fit-absolute-page__heading h2 {
+  margin: 0;
+  font-size: clamp(27px, 4vw, 42px);
+  letter-spacing: -0.04em;
+}
+.flip-fit-absolute-page__heading p {
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.flip-fit-absolute-page :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .flip-fit-absolute-page__heading {
+    grid-template-columns: 1fr;
+  }
+}

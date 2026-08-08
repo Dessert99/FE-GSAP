@@ -1,0 +1,7 @@
+/** Draggable instance와 target의 1:1 관계를 먼저 정의한다. */
+import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
+
+/** pointer gesture보다 앞서 instance가 무엇을 기억하는지 설명한다. */
+export function InstanceMentalModelSection() {
+  return <section id="instance-mental-model" className="draggable-create-page__section" aria-labelledby="instance-mental-model-title"><SectionHeading number="01" id="instance-mental-model" title="target마다 Draggable instance 하나를 만든다" description="Draggable은 움직이는 CSS 효과 이름이 아니라, DOM target에 pointer·touch·mouse drag 동작을 연결해 둔 object입니다." /><div className="draggable-create-page__prose"><p><strong>target</strong>은 drag할 DOM object이고 <strong>instance</strong>는 그 target의 설정과 drag 동작을 기억하는 Draggable object입니다. 먼저 이 둘을 구분하면 <code>create()</code>가 왜 array를 돌려주는지와 <code>get()</code>이 무엇을 찾는지가 이어집니다.</p><p>공식 문서는 <code>gsap.registerPlugin(Draggable)</code> 다음 <code>Draggable.create('#yourID')</code>를 가장 작은 시작점으로 제시합니다. 이 페이지는 움직인 좌표를 읽거나 bounds를 계산하지 않습니다. 여기서는 target 하나에 instance 하나를 연결하는 순간만 봅니다.</p></div><div className="draggable-create-page__note"><h3>type은 움직임 상세가 아니라 생성 설정이다</h3><p>overview는 <code>"top,left"</code>, Config Object는 <code>"left,top"</code> 순서로 적고 둘 다 x/y 위치 pair를 뜻합니다. 나머지는 <code>"x,y"</code>, <code>"rotation"</code>, <code>"x"</code>, <code>"y"</code>, <code>"top"</code>, <code>"left"</code>입니다. 이 선택은 어떤 방식으로 drag할지를 만들 때 정하고, 좌표값 자체의 해석은 다음 Draggable 좌표 페이지가 소유합니다.</p></div></section>
+}

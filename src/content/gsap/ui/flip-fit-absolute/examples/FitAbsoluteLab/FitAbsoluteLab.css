@@ -1,0 +1,150 @@
+/** source/destination box와 flow outline을 한 화면에서 분명히 구분한다. */
+.fit-absolute-lab {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+.fit-absolute-lab h3,
+.fit-absolute-lab p {
+  margin: 0;
+}
+.fit-absolute-lab > p {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.fit-absolute-lab__stage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-height: 230px;
+}
+.fit-absolute-lab__flow,
+.fit-absolute-lab__destination {
+  position: relative;
+  min-height: 210px;
+  padding: 18px;
+  border: 1px dashed var(--color-border);
+  border-radius: 12px;
+}
+.fit-absolute-lab__source,
+.fit-absolute-lab__destination {
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-weight: 800;
+}
+.fit-absolute-lab__source {
+  width: 120px;
+  height: 72px;
+  background: var(--color-accent);
+  color: #071015;
+}
+.fit-absolute-lab__destination {
+  width: 180px;
+  height: 120px;
+  margin: 30px auto;
+  background: #364450;
+  color: var(--color-text);
+}
+.fit-absolute-lab__follower {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #1a222a;
+  color: var(--color-muted);
+}
+.fit-absolute-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.fit-absolute-lab__controls label,
+.fit-absolute-lab__controls button {
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: #111418;
+  color: var(--color-text);
+}
+.fit-absolute-lab__controls label {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+.fit-absolute-lab__controls select {
+  background: #111418;
+  color: var(--color-text);
+}
+.fit-absolute-lab__controls button {
+  cursor: pointer;
+}
+.fit-absolute-lab dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  border: 1px solid var(--color-border);
+}
+.fit-absolute-lab dl div {
+  padding: 12px;
+  border-right: 1px solid var(--color-border);
+}
+.fit-absolute-lab dt {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+.fit-absolute-lab dd {
+  margin: 5px 0 0;
+  color: var(--color-accent);
+  font-size: 13px;
+}
+.fit-absolute-lab pre {
+  margin: 0;
+  padding: 16px;
+  overflow: auto;
+  border-radius: 10px;
+  background: #07090c;
+}
+.fit-absolute-lab table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.fit-absolute-lab th,
+.fit-absolute-lab td {
+  padding: 9px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+.fit-absolute-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.fit-absolute-lab__panels article {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+.fit-absolute-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+}
+.fit-absolute-lab__panels p {
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .fit-absolute-lab__stage,
+  .fit-absolute-lab__panels {
+    grid-template-columns: 1fr;
+  }
+  .fit-absolute-lab dl {
+    grid-template-columns: 1fr;
+  }
+}

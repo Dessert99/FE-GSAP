@@ -1,0 +1,169 @@
+/** P08 header·coverage·section·reference table의 page-local 배치를 제공한다. */
+.draggable-collision-momentum-page__header {
+  max-width: 850px;
+  margin-bottom: 64px;
+}
+.draggable-collision-momentum-page__header > p:first-child {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.draggable-collision-momentum-page__header h1 {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(44px, 8vw, 78px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+.draggable-collision-momentum-page__header > p:nth-child(3) {
+  max-width: 67ch;
+  margin: 24px 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+.draggable-collision-momentum-page__header > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.draggable-collision-momentum-page__header > code {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+.draggable-collision-momentum-coverage {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 18px;
+  margin-bottom: 86px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+.draggable-collision-momentum-coverage > div {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+}
+.draggable-collision-momentum-coverage strong {
+  color: var(--color-accent);
+  font-size: 20px;
+}
+.draggable-collision-momentum-coverage span,
+.draggable-collision-momentum-coverage p,
+.draggable-collision-momentum-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+.draggable-collision-momentum-coverage p {
+  margin: 0;
+  line-height: 1.6;
+}
+.draggable-collision-momentum-coverage ol {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.draggable-collision-momentum-coverage a {
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.draggable-collision-momentum-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+.draggable-collision-momentum-page__section {
+  scroll-margin-top: 80px;
+}
+.draggable-collision-momentum-page__section + .draggable-collision-momentum-page__section {
+  margin-top: 96px;
+}
+.draggable-collision-momentum-page__heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.draggable-collision-momentum-page__heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+}
+.draggable-collision-momentum-page__heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+.draggable-collision-momentum-page__heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.draggable-collision-momentum-page__prose,
+.draggable-collision-momentum-page__note {
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  background: var(--color-surface);
+  color: var(--color-muted);
+  line-height: 1.72;
+}
+.draggable-collision-momentum-page__prose p:first-child {
+  margin-top: 0;
+}
+.draggable-collision-momentum-page__prose p:last-child {
+  margin-bottom: 0;
+}
+.draggable-collision-momentum-page__note {
+  margin: 16px 0 0;
+}
+.draggable-collision-momentum-page__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.draggable-collision-momentum-page__table-wrap table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  background: var(--color-surface);
+}
+.draggable-collision-momentum-page__table-wrap th,
+.draggable-collision-momentum-page__table-wrap td {
+  padding: 14px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+.draggable-collision-momentum-page__related {
+  margin: 20px 0 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+@media (max-width: 680px) {
+  .draggable-collision-momentum-coverage {
+    grid-template-columns: 1fr 1fr;
+  }
+  .draggable-collision-momentum-coverage p {
+    grid-column: 1 / -1;
+  }
+  .draggable-collision-momentum-coverage ol {
+    grid-template-columns: 1fr;
+  }
+}

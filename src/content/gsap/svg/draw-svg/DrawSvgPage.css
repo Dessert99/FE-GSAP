@@ -1,0 +1,213 @@
+/** DrawSVG source 설명·dash diagram·stroke lab을 dark theme와 작은 화면에서 읽기 쉽게 배치한다. */
+.draw-svg-page {
+  display: grid;
+  gap: 64px;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 48px) 96px;
+  color: var(--color-text);
+}
+.draw-svg-page__header {
+  display: grid;
+  gap: 16px;
+  max-width: 920px;
+}
+.draw-svg-page__eyebrow,
+.draw-svg-page__reviewed {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.draw-svg-page h1 {
+  max-width: 18ch;
+  margin: 0;
+  font-size: clamp(38px, 7vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+.draw-svg-page__summary {
+  max-width: 780px;
+  margin: 0;
+  color: var(--color-muted);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.75;
+}
+.draw-svg-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.draw-svg-page__path {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.draw-svg-page__path code {
+  color: var(--color-text);
+}
+.draw-svg-page__coverage {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 24px;
+  padding: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+.draw-svg-page__coverage p,
+.draw-svg-page__coverage h2 {
+  margin: 0;
+}
+.draw-svg-page__coverage p {
+  color: var(--color-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.draw-svg-page__coverage h2 {
+  font-size: 38px;
+}
+.draw-svg-page__coverage span {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+.draw-svg-page__coverage ol {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.draw-svg-page__coverage li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+.draw-svg-page__coverage a {
+  color: var(--color-text);
+  font-size: 13px;
+  text-decoration: none;
+}
+.draw-svg-page__section {
+  display: grid;
+  gap: 24px;
+  scroll-margin-top: 24px;
+}
+.draw-svg-page__section-heading {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 16px;
+}
+.draw-svg-page__section-heading > span {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+.draw-svg-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -0.04em;
+}
+.draw-svg-page__section-heading p {
+  max-width: 760px;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.draw-svg-page__prose {
+  display: grid;
+  gap: 12px;
+  max-width: 900px;
+}
+.draw-svg-page__prose p {
+  margin: 0;
+  line-height: 1.8;
+}
+.draw-svg-page__code {
+  margin: 0;
+  padding: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.draw-svg-page__warning {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid #f59e0b;
+  border-radius: 12px;
+  background: rgb(245 158 11 / 7%);
+}
+.draw-svg-page__warning h3 {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 15px;
+}
+.draw-svg-page__warning p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.draw-svg-page__diagram {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+.draw-svg-page__diagram svg {
+  width: 100%;
+}
+.draw-svg-page__diagram-track,
+.draw-svg-page__diagram-visible {
+  stroke-linecap: round;
+  stroke-width: 14;
+}
+.draw-svg-page__diagram-track {
+  stroke: #33404a;
+}
+.draw-svg-page__diagram-visible {
+  stroke: var(--color-accent);
+}
+.draw-svg-page__diagram figcaption {
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.draw-svg-page :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+@media (max-width: 780px) {
+  .draw-svg-page__coverage {
+    grid-template-columns: 1fr;
+  }
+  .draw-svg-page__section-heading {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 420px) {
+  .draw-svg-page {
+    gap: 48px;
+  }
+  .draw-svg-page__coverage li {
+    display: grid;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .draw-svg-page * {
+    scroll-behavior: auto !important;
+  }
+}

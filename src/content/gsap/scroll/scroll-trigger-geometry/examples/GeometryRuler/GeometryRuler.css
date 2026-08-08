@@ -1,0 +1,48 @@
+/** P41 local ruler·pin·snapshot table을 example scope에만 배치한다. */
+.geometry-ruler {
+  display: grid;
+  gap: 16px;
+}
+.geometry-ruler__scroller {
+  block-size: 280px;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.geometry-ruler__spacer {
+  min-block-size: 260px;
+  display: grid;
+  place-items: center;
+  color: var(--color-muted);
+}
+.geometry-ruler__trigger,
+.geometry-ruler__pin {
+  margin: 20px;
+  padding: 18px;
+  border-radius: 10px;
+}
+.geometry-ruler__trigger {
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+}
+.geometry-ruler__pin {
+  border: 1px solid var(--color-accent);
+  background: var(--color-background);
+}
+.geometry-ruler__snapshot {
+  overflow: auto;
+}
+.geometry-ruler__snapshot h3 {
+  margin: 0 0 8px;
+}
+.geometry-ruler__snapshot table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.geometry-ruler__snapshot th,
+.geometry-ruler__snapshot td {
+  padding: 7px;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  white-space: nowrap;
+}

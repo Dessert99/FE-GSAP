@@ -1,0 +1,38 @@
+/** stable target transform과 sparse query matrix를 page-local로 표시한다. */
+.velocity-gauge-lab {
+  display: grid;
+  gap: 14px;
+}
+
+.velocity-gauge-lab__stage {
+  min-height: 116px;
+  overflow: hidden;
+  padding: 28px 16px;
+  border: 1px dashed var(--color-accent);
+  border-radius: 14px;
+}
+
+.velocity-gauge-lab__target {
+  display: grid;
+  width: 100px;
+  min-height: 54px;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--color-accent);
+  color: #0b1115;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.velocity-gauge-lab__matrix {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.velocity-gauge-lab p {
+  margin: 0;
+  color: var(--color-muted);
+}

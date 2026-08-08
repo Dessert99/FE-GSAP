@@ -1,0 +1,27 @@
+/** P22의 static explanation과 utility lab을 page-local rhythm으로 배치한다. */
+.motion-path-data-page {
+  display: grid;
+  gap: 44px;
+}
+
+.motion-path-data-page header,
+.motion-path-data-page section {
+  display: grid;
+  gap: 14px;
+}
+
+.motion-path-data-page h1,
+.motion-path-data-page h2,
+.motion-path-data-page p {
+  margin: 0;
+}
+
+.motion-path-data-page header > p:first-child {
+  color: var(--color-accent);
+  font-weight: 800;
+}
+
+.motion-path-data-page__links {
+  display: grid;
+  gap: 8px;
+}

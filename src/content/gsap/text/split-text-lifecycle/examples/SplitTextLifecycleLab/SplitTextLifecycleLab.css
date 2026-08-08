@@ -1,0 +1,29 @@
+.split-text-lifecycle-lab__controls,
+.split-text-lifecycle-lab__preview,
+.split-text-lifecycle-lab__snapshots {
+  display: grid;
+  gap: 1rem;
+}
+
+.split-text-lifecycle-lab__target {
+  margin: 0;
+}
+
+.split-text-lifecycle-lab__snapshots {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.split-text-lifecycle-lab__snapshots section {
+  min-width: 0;
+}
+
+.split-text-lifecycle-lab__snapshots code {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .split-text-lifecycle-lab__snapshots {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,13 @@
+/** shared pseudo rule을 사용하는 여러 card와 rule declaration 관찰값을 표시한다. */
+.shared-rule-lab { display: grid; gap: 16px; }
+.shared-rule-lab__question, .shared-rule-lab__status, .shared-rule-lab__declaration { margin: 0; color: var(--color-muted); font-size: 14px; line-height: 1.6; }
+.shared-rule-lab__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.shared-rule-lab__card { position: relative; min-height: 116px; padding: 36px 16px 16px; overflow: hidden; border: 1px solid var(--color-border); border-radius: 12px; background: rgb(255 255 255 / 3%); }
+.shared-rule-lab__card::before { position: absolute; top: 14px; left: 16px; width: 14px; height: 14px; border-radius: 999px; background-color: #8b5cf6; content: ''; }
+.shared-rule-lab__card h4, .shared-rule-lab__card p { margin: 0; }
+.shared-rule-lab__card h4 { font-size: 15px; }
+.shared-rule-lab__card p { margin-top: 4px; color: var(--color-muted); font-size: 13px; }
+.shared-rule-lab__status { color: var(--color-accent); }
+.shared-rule-lab__declaration { display: grid; gap: 5px; padding: 12px; border: 1px solid var(--color-border); border-radius: 10px; background: rgb(0 0 0 / 18%); }
+.shared-rule-lab__declaration code { overflow-wrap: anywhere; color: var(--color-text); }
+@media (max-width: 520px) { .shared-rule-lab__cards { grid-template-columns: 1fr; } }

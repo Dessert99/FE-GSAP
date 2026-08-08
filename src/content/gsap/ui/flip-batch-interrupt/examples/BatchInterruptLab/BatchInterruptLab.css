@@ -1,0 +1,27 @@
+.batch-interrupt-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #456;
+  border-radius: 0.75rem;
+}
+.batch-interrupt-lab__cards {
+  display: flex;
+  gap: 0.75rem;
+}
+.batch-interrupt-lab__cards--reversed {
+  flex-direction: row-reverse;
+}
+.batch-interrupt-lab__card {
+  min-width: 6rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: #245;
+  color: #fff;
+}
+.batch-interrupt-lab pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  background: #101820;
+}

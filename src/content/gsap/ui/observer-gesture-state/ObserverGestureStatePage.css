@@ -1,0 +1,20 @@
+.observer-gesture-state {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 68rem;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+.observer-gesture-state header,
+.observer-gesture-state section {
+  display: grid;
+  gap: 0.7rem;
+}
+.observer-gesture-state p {
+  margin: 0;
+  line-height: 1.65;
+}
+.observer-gesture-state section {
+  border-top: 1px solid #456;
+  padding-top: 1rem;
+}

@@ -1,0 +1,17 @@
+/** P42 mode preview의 local target 모양만 정의한다. */
+.motion-mode-lab {
+  display: grid;
+  gap: 12px;
+}
+.motion-mode-lab__items {
+  display: grid;
+  gap: 8px;
+}
+.motion-mode-lab__item {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+}
+.motion-mode-lab pre {
+  overflow: auto;
+}

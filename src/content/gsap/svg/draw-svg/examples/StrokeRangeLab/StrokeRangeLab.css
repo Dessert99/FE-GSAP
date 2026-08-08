@@ -1,0 +1,217 @@
+/** single stroke range와 ruler·measurement를 작은 화면에서도 같은 순서로 배치한다. */
+.stroke-range-lab {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+.stroke-range-lab h3 {
+  margin: 0;
+  font-size: 20px;
+}
+.stroke-range-lab__goal,
+.stroke-range-lab__source {
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.stroke-range-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 18px;
+}
+.stroke-range-lab__stage {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-height: 220px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+.stroke-range-lab svg {
+  width: 100%;
+  overflow: visible;
+}
+.stroke-range-lab__guide,
+.stroke-range-lab__path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.stroke-range-lab__guide {
+  stroke: #33404a;
+  stroke-width: 12;
+}
+.stroke-range-lab__path {
+  stroke: var(--color-accent);
+  stroke-width: 12;
+}
+.stroke-range-lab__ruler {
+  position: relative;
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #33404a;
+}
+.stroke-range-lab__ruler span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+.stroke-range-lab__stage p,
+.stroke-range-lab__controls p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.stroke-range-lab__controls {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+.stroke-range-lab__controls label,
+.stroke-range-lab__controls button,
+.stroke-range-lab__controls p {
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+.stroke-range-lab__controls label {
+  display: grid;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 13px;
+}
+.stroke-range-lab__controls input[type='range'] {
+  width: 100%;
+  accent-color: var(--color-accent);
+}
+.stroke-range-lab__controls .stroke-range-lab__check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stroke-range-lab__controls button {
+  background: #111418;
+  color: var(--color-text);
+  font-weight: 800;
+  cursor: pointer;
+}
+.stroke-range-lab__measurement {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 16px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.stroke-range-lab__measurement div {
+  padding: 13px;
+  border-right: 1px solid var(--color-border);
+}
+.stroke-range-lab__measurement div:last-child {
+  border-right: 0;
+}
+.stroke-range-lab__measurement dt {
+  color: var(--color-muted);
+  font-size: 11px;
+}
+.stroke-range-lab__measurement dd {
+  margin: 4px 0 0;
+  color: var(--color-accent);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.stroke-range-lab__code {
+  margin: 16px 0 0;
+  padding: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.stroke-range-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.stroke-range-lab__panels article {
+  padding: 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+}
+.stroke-range-lab__panels h4 {
+  margin: 0 0 7px;
+  color: var(--color-accent);
+  font-size: 13px;
+}
+.stroke-range-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.stroke-range-lab__table-wrap {
+  margin-top: 16px;
+  overflow-x: auto;
+}
+.stroke-range-lab__table-wrap table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+}
+.stroke-range-lab__table-wrap caption {
+  margin-bottom: 8px;
+  text-align: left;
+  font-weight: 700;
+}
+.stroke-range-lab__table-wrap th,
+.stroke-range-lab__table-wrap td {
+  padding: 11px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+.stroke-range-lab__table-wrap th {
+  color: var(--color-text);
+}
+.stroke-range-lab__source {
+  margin: 14px 0 0;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 780px) {
+  .stroke-range-lab__body,
+  .stroke-range-lab__panels {
+    grid-template-columns: 1fr;
+  }
+  .stroke-range-lab__measurement {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stroke-range-lab__measurement div:nth-child(2) {
+    border-right: 0;
+  }
+}
+@media (max-width: 420px) {
+  .stroke-range-lab {
+    padding: 16px;
+  }
+  .stroke-range-lab__measurement {
+    grid-template-columns: 1fr;
+  }
+  .stroke-range-lab__measurement div {
+    border-right: 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+}

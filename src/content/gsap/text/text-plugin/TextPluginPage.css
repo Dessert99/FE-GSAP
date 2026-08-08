@@ -1,0 +1,27 @@
+/** P34의 page learning rhythm과 prose/code spacing을 local scope에 둔다. */
+.text-plugin-page {
+  display: grid;
+  gap: 32px;
+}
+.text-plugin-page > header,
+.text-plugin-page > section {
+  display: grid;
+  gap: 12px;
+}
+.text-plugin-page h1,
+.text-plugin-page h2,
+.text-plugin-page p,
+.text-plugin-page pre {
+  margin: 0;
+}
+.text-plugin-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.text-plugin-page pre {
+  padding: 14px;
+  overflow: auto;
+  border-radius: 10px;
+  background: #101820;
+}

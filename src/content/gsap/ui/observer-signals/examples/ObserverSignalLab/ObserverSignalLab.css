@@ -1,0 +1,117 @@
+/** P26 signal vector와 current/frozen tables를 page-local로 구분한다. */
+.observer-signal-lab {
+  display: grid;
+  gap: 14px;
+}
+
+.observer-signal-lab__controls {
+  display: grid;
+  gap: 8px;
+}
+
+.observer-signal-lab__controls p,
+.observer-signal-lab__announcement,
+.observer-signal-lab__pad + p,
+.observer-signal-lab__tables p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.observer-signal-lab__pad {
+  position: relative;
+  display: grid;
+  min-height: 180px;
+  place-items: center;
+  overflow: hidden;
+  border: 2px dashed var(--color-accent);
+  border-radius: 14px;
+  outline-offset: 4px;
+  user-select: none;
+}
+
+.observer-signal-lab__axis {
+  position: absolute;
+  background: var(--color-border);
+}
+
+.observer-signal-lab__axis--x {
+  inset-inline: 16px;
+  top: 50%;
+  height: 1px;
+}
+
+.observer-signal-lab__axis--y {
+  left: 50%;
+  inset-block: 16px;
+  width: 1px;
+}
+
+.observer-signal-lab__axis--x::after,
+.observer-signal-lab__axis--y::after {
+  position: absolute;
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+.observer-signal-lab__axis--x::after {
+  right: 0;
+  bottom: 4px;
+  content: 'x';
+}
+
+.observer-signal-lab__axis--y::after {
+  top: 0;
+  left: 4px;
+  content: 'y';
+}
+
+.observer-signal-lab__vector {
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(50% - 7px);
+  width: 14px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.observer-signal-lab__tables {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.observer-signal-lab__tables section {
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.observer-signal-lab__tables h4,
+.observer-signal-lab__tables p {
+  margin: 0;
+  padding: 12px;
+}
+
+.observer-signal-lab__tables table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.observer-signal-lab__tables th,
+.observer-signal-lab__tables td {
+  padding: 8px 12px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.observer-signal-lab__tables th {
+  color: var(--color-muted);
+}
+
+@media (max-width: 560px) {
+  .observer-signal-lab__tables {
+    grid-template-columns: 1fr;
+  }
+}

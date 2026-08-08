@@ -1,0 +1,67 @@
+/** P10 static diagram과 prose의 page-local contrast·layout을 제공한다. */
+.easel-plugin-page {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 5rem;
+  color: var(--color-text-primary, #f2f5f7);
+}
+.easel-plugin-page header,
+.easel-plugin-page section {
+  display: grid;
+  gap: 0.75rem;
+}
+.easel-plugin-page p {
+  margin: 0;
+  color: var(--color-text-secondary, #c4ced6);
+  line-height: 1.7;
+}
+.easel-plugin-page section {
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+}
+.easel-diagram {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, #173034 75%, transparent);
+}
+.easel-diagram figcaption {
+  font-weight: 700;
+}
+.easel-diagram ol {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(8rem, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.easel-diagram li {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  background: #102026;
+}
+.easel-diagram span {
+  color: var(--color-text-secondary, #c4ced6);
+  font-size: 0.88rem;
+}
+.easel-diagram pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 0.5rem;
+  background: #091318;
+  line-height: 1.55;
+}
+@media (max-width: 44rem) {
+  .easel-diagram ol {
+    grid-template-columns: 1fr;
+  }
+}

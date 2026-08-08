@@ -1,0 +1,26 @@
+.react-gsap-patterns-page {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 68rem;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+.react-gsap-patterns-page > header,
+.react-gsap-patterns-page > section {
+  display: grid;
+  gap: 0.75rem;
+}
+.react-gsap-patterns-page p,
+.react-gsap-patterns-page h2 {
+  margin: 0;
+  line-height: 1.65;
+}
+.react-gsap-patterns-page > section {
+  border-top: 1px solid #456;
+  padding-top: 1rem;
+}
+.react-gsap-patterns-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}

@@ -190,6 +190,190 @@ const ModifiersSnapWrapPage = lazy(() =>
   import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
 )
 
+const PluginsPage = lazy(() =>
+  import('../content/gsap/plugins/plugins/PluginsPage').then(({ PluginsPage }) => ({ default: PluginsPage })),
+)
+
+const CssRulePluginPage = lazy(() =>
+  import('../content/gsap/plugins-uncategorized/css-rule-plugin/CssRulePluginPage').then(({ CssRulePluginPage }) => ({ default: CssRulePluginPage })),
+)
+
+const DraggableCreatePage = lazy(() =>
+  import('../content/gsap/ui/draggable-create/DraggableCreatePage').then(({ DraggableCreatePage }) => ({ default: DraggableCreatePage })),
+)
+
+const DraggableCoordinatesPage = lazy(() =>
+  import('../content/gsap/ui/draggable-coordinates/DraggableCoordinatesPage').then(({ DraggableCoordinatesPage }) => ({ default: DraggableCoordinatesPage })),
+)
+
+const DraggableBoundsAxisPage = lazy(() =>
+  import('../content/gsap/ui/draggable-bounds-axis/DraggableBoundsAxisPage').then(({ DraggableBoundsAxisPage }) => ({ default: DraggableBoundsAxisPage })),
+)
+
+const DraggableLifecyclePage = lazy(() =>
+  import('../content/gsap/ui/draggable-lifecycle/DraggableLifecyclePage').then(({ DraggableLifecyclePage }) => ({ default: DraggableLifecyclePage })),
+)
+
+const DraggableEventsPage = lazy(() =>
+  import('../content/gsap/ui/draggable-events/DraggableEventsPage').then(({ DraggableEventsPage }) => ({ default: DraggableEventsPage })),
+)
+
+const DraggableCollisionMomentumPage = lazy(() =>
+  import('../content/gsap/ui/draggable-collision-momentum/DraggableCollisionMomentumPage').then(({ DraggableCollisionMomentumPage }) => ({ default: DraggableCollisionMomentumPage })),
+)
+
+const DrawSvgPage = lazy(() =>
+  import('../content/gsap/svg/draw-svg/DrawSvgPage').then(({ DrawSvgPage }) => ({ default: DrawSvgPage })),
+)
+
+const EaselPluginPage = lazy(() =>
+  import('../content/gsap/other/easel-plugin/EaselPluginPage').then(({ EaselPluginPage }) => ({ default: EaselPluginPage })),
+)
+
+const FlipFirstLastPage = lazy(() =>
+  import('../content/gsap/ui/flip-first-last/FlipFirstLastPage').then(({ FlipFirstLastPage }) => ({ default: FlipFirstLastPage })),
+)
+
+const FlipFitAbsolutePage = lazy(() =>
+  import('../content/gsap/ui/flip-fit-absolute/FlipFitAbsolutePage').then(({ FlipFitAbsolutePage }) => ({ default: FlipFitAbsolutePage })),
+)
+
+const FlipBatchInterruptPage = lazy(() =>
+  import('../content/gsap/ui/flip-batch-interrupt/FlipBatchInterruptPage').then(({ FlipBatchInterruptPage }) => ({ default: FlipBatchInterruptPage })),
+)
+
+const GsDevToolsPage = lazy(() =>
+  import('../content/gsap/other/gsdevtools/GsDevToolsPage').then(({ GsDevToolsPage }) => ({ default: GsDevToolsPage })),
+)
+
+const InertiaPage = lazy(() =>
+  import('../content/gsap/ui/inertia/InertiaPage').then(({ InertiaPage }) => ({ default: InertiaPage })),
+)
+
+const VelocityTrackerLifecyclePage = lazy(() =>
+  import('../content/gsap/ui/velocity-tracker-lifecycle/VelocityTrackerLifecyclePage').then(({ VelocityTrackerLifecyclePage }) => ({ default: VelocityTrackerLifecyclePage })),
+)
+
+const VelocityTrackerReadPage = lazy(() =>
+  import('../content/gsap/ui/velocity-tracker-read/VelocityTrackerReadPage').then(({ VelocityTrackerReadPage }) => ({ default: VelocityTrackerReadPage })),
+)
+
+const MorphSvgPage = lazy(() =>
+  import('../content/gsap/svg/morph-svg/MorphSvgPage').then(({ MorphSvgPage }) => ({ default: MorphSvgPage })),
+)
+
+const MorphSvgPathDataPage = lazy(() =>
+  import('../content/gsap/svg/morph-svg-path-data/MorphSvgPathDataPage').then(({ MorphSvgPathDataPage }) => ({ default: MorphSvgPathDataPage })),
+)
+
+const MotionPathHelperPage = lazy(() =>
+  import('../content/gsap/svg/motion-path-helper/MotionPathHelperPage').then(({ MotionPathHelperPage }) => ({ default: MotionPathHelperPage })),
+)
+
+const MotionPathPage = lazy(() =>
+  import('../content/gsap/svg/motion-path/MotionPathPage').then(({ MotionPathPage }) => ({ default: MotionPathPage })),
+)
+
+const MotionPathDataPage = lazy(() =>
+  import('../content/gsap/svg/motion-path-data/MotionPathDataPage').then(({ MotionPathDataPage }) => ({ default: MotionPathDataPage })),
+)
+
+const MotionPathCoordinatesPage = lazy(() =>
+  import('../content/gsap/svg/motion-path-coordinates/MotionPathCoordinatesPage').then(({ MotionPathCoordinatesPage }) => ({ default: MotionPathCoordinatesPage })),
+)
+
+const MotionPathMeasurePage = lazy(() =>
+  import('../content/gsap/svg/motion-path-measure/MotionPathMeasurePage').then(({ MotionPathMeasurePage }) => ({ default: MotionPathMeasurePage })),
+)
+
+const ObserverCreatePage = lazy(() =>
+  import('../content/gsap/ui/observer-create/ObserverCreatePage').then(({ ObserverCreatePage }) => ({ default: ObserverCreatePage })),
+)
+
+const ObserverSignalsPage = lazy(() =>
+  import('../content/gsap/ui/observer-signals/ObserverSignalsPage').then(({ ObserverSignalsPage }) => ({ default: ObserverSignalsPage })),
+)
+
+const ObserverGestureStatePage = lazy(() =>
+  import('../content/gsap/ui/observer-gesture-state/ObserverGestureStatePage').then(({ ObserverGestureStatePage }) => ({ default: ObserverGestureStatePage })),
+)
+
+const ObserverLifecyclePage = lazy(() =>
+  import('../content/gsap/ui/observer-lifecycle/ObserverLifecyclePage').then(({ ObserverLifecyclePage }) => ({ default: ObserverLifecyclePage })),
+)
+
+const PhysicsMotionPage = lazy(() =>
+  import('../content/gsap/other/physics-motion/PhysicsMotionPage').then(({ PhysicsMotionPage }) => ({ default: PhysicsMotionPage })),
+)
+
+const PixiPluginPage = lazy(() =>
+  import('../content/gsap/other/pixi-plugin/PixiPluginPage').then(({ PixiPluginPage }) => ({ default: PixiPluginPage })),
+)
+
+const ScrambleTextPage = lazy(() =>
+  import('../content/gsap/text/scramble-text/ScrambleTextPage').then(({ ScrambleTextPage }) => ({ default: ScrambleTextPage })),
+)
+
+const SplitTextCreatePage = lazy(() =>
+  import('../content/gsap/text/split-text-create/SplitTextCreatePage').then(({ SplitTextCreatePage }) => ({ default: SplitTextCreatePage })),
+)
+
+const SplitTextLifecyclePage = lazy(() =>
+  import('../content/gsap/text/split-text-lifecycle/SplitTextLifecyclePage').then(({ SplitTextLifecyclePage }) => ({ default: SplitTextLifecyclePage })),
+)
+
+const TextPluginPage = lazy(() =>
+  import('../content/gsap/text/text-plugin/TextPluginPage').then(({ TextPluginPage }) => ({ default: TextPluginPage })),
+)
+
+const ReactGsapPatternsPage = lazy(() =>
+  import('../content/gsap/react/react-gsap-patterns/ReactGsapPatternsPage').then(({ ReactGsapPatternsPage }) => ({ default: ReactGsapPatternsPage })),
+)
+
+const ScrollSmootherCreatePage = lazy(() =>
+  import('../content/gsap/scroll/scroll-smoother-create/ScrollSmootherCreatePage').then(({ ScrollSmootherCreatePage }) => ({ default: ScrollSmootherCreatePage })),
+)
+
+const ScrollSmootherEffectsPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-smoother-effects/ScrollSmootherEffectsPage').then(({ ScrollSmootherEffectsPage }) => ({ default: ScrollSmootherEffectsPage })),
+)
+
+const ScrollSmootherControlPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-smoother-control/ScrollSmootherControlPage').then(({ ScrollSmootherControlPage }) => ({ default: ScrollSmootherControlPage })),
+)
+
+const ScrollToPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-to/ScrollToPage').then(({ ScrollToPage }) => ({ default: ScrollToPage })),
+)
+
+const ScrollTriggerCreatePage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-create/ScrollTriggerCreatePage').then(({ ScrollTriggerCreatePage }) => ({ default: ScrollTriggerCreatePage })),
+)
+
+const ScrollTriggerGeometryPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-geometry/ScrollTriggerGeometryPage').then(({ ScrollTriggerGeometryPage }) => ({ default: ScrollTriggerGeometryPage })),
+)
+
+const ScrollTriggerMotionPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-motion/ScrollTriggerMotionPage').then(({ ScrollTriggerMotionPage }) => ({ default: ScrollTriggerMotionPage })),
+)
+
+const ScrollTriggerLifecyclePage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-lifecycle/ScrollTriggerLifecyclePage').then(({ ScrollTriggerLifecyclePage }) => ({ default: ScrollTriggerLifecyclePage })),
+)
+
+const ScrollTriggerRegistryPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-registry/ScrollTriggerRegistryPage').then(({ ScrollTriggerRegistryPage }) => ({ default: ScrollTriggerRegistryPage })),
+)
+
+const ScrollTriggerResponsivePage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-responsive/ScrollTriggerResponsivePage').then(({ ScrollTriggerResponsivePage }) => ({ default: ScrollTriggerResponsivePage })),
+)
+
+const ScrollTriggerIntegrationsPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-trigger-integrations/ScrollTriggerIntegrationsPage').then(({ ScrollTriggerIntegrationsPage }) => ({ default: ScrollTriggerIntegrationsPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -216,11 +400,11 @@ export const tracks: TrackDefinition[] = [
       { slug: 'tween-callbacks-promise', title: '콜백 교체와 완료 대기', group: '트윈 제어', Page: TweenCallbacksPromisePage },
       { slug: 'find-stop-animations', title: '찾아서 멈추기', group: '트윈 제어', Page: FindStopAnimationsPage },
       { slug: 'high-frequency-updates', title: '잦은 입력에 반응하기', group: '트윈 제어', Page: HighFrequencyUpdatesPage },
-      { slug: 'gsap-root-clock', title: '누가 매 frame 진행시키나', group: '엔진과 정리', Page: GsapRootClockPage },
+      { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
       { slug: 'gsap-context', title: '한 영역을 함께 되돌리기', group: '엔진과 정리', Page: GsapContextPage },
       { slug: 'responsive-motion', title: '조건별 animation', group: '엔진과 정리', Page: ResponsiveMotionPage },
       { slug: 'react-use-gsap', title: 'React 안에서 쓰기', group: '통합', Page: ReactUseGsapPage },
-      { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
+      { slug: 'gsap-root-clock', title: '누가 매 frame 진행시키나', group: '엔진과 정리', Page: GsapRootClockPage },
       { slug: 'timeline-callbacks-pauses', title: 'Timeline 함수와 멈춤 예약', group: 'Timeline', Page: TimelineCallbacksPausesPage },
       { slug: 'timeline-basics', title: 'Timeline sequence 만들기', group: 'Timeline', Page: TimelineBasicsPage },
       { slug: 'timeline-child-placement', title: 'Timeline child 배치', group: 'Timeline', Page: TimelineChildPlacementPage },
@@ -237,6 +421,52 @@ export const tracks: TrackDefinition[] = [
       { slug: 'utility-collections-random', title: '후보 배열과 무작위 선택', group: '값 계산', Page: UtilityCollectionsRandomPage },
       { slug: 'utility-distribute', title: '위치별 값 배분', group: '값 계산', Page: UtilityDistributePage },
       { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
+      { slug: 'plugins', title: 'Plugin 불러오기와 등록', group: 'Plugin 기초', Page: PluginsPage },
+      { slug: 'css-rule-plugin', title: 'CSS rule 함께 움직이기', group: 'Plugin 기초', Page: CssRulePluginPage },
+      { slug: 'draggable-create', title: 'Draggable instance 만들기', group: 'Draggable', Page: DraggableCreatePage },
+      { slug: 'draggable-coordinates', title: 'Draggable 좌표 읽기', group: 'Draggable', Page: DraggableCoordinatesPage },
+      { slug: 'draggable-bounds-axis', title: 'Draggable 범위와 축 제한', group: 'Draggable', Page: DraggableBoundsAxisPage },
+      { slug: 'draggable-lifecycle', title: 'Draggable 생명주기', group: 'Draggable', Page: DraggableLifecyclePage },
+      { slug: 'draggable-events', title: 'Draggable gesture event', group: 'Draggable', Page: DraggableEventsPage },
+      { slug: 'draggable-collision-momentum', title: 'Draggable 충돌과 관성', group: 'Draggable', Page: DraggableCollisionMomentumPage },
+      { slug: 'draw-svg', title: 'DrawSVG stroke 그리기', group: 'SVG', Page: DrawSvgPage },
+      { slug: 'easel-plugin', title: 'EaselPlugin과 canvas', group: 'Other Plugins', Page: EaselPluginPage },
+      { slug: 'flip-first-last', title: 'Flip First와 Last', group: 'Flip', Page: FlipFirstLastPage },
+      { slug: 'flip-fit-absolute', title: 'Flip 맞춤과 절대 위치', group: 'Flip', Page: FlipFitAbsolutePage },
+      { slug: 'flip-batch-interrupt', title: 'Flip batch와 중단', group: 'Flip', Page: FlipBatchInterruptPage },
+      { slug: 'gsdevtools', title: 'GSDevTools 시간 검사', group: 'Other Plugins', Page: GsDevToolsPage },
+      { slug: 'inertia', title: 'Inertia 관성 이동', group: 'Inertia', Page: InertiaPage },
+      { slug: 'velocity-tracker-lifecycle', title: 'VelocityTracker 생명주기', group: 'Inertia', Page: VelocityTrackerLifecyclePage },
+      { slug: 'velocity-tracker-read', title: 'VelocityTracker 속도 읽기', group: 'Inertia', Page: VelocityTrackerReadPage },
+      { slug: 'morph-svg', title: 'MorphSVG 모양 변환', group: 'SVG', Page: MorphSvgPage },
+      { slug: 'morph-svg-path-data', title: 'MorphSVG path 데이터', group: 'SVG', Page: MorphSvgPathDataPage },
+      { slug: 'motion-path-helper', title: 'MotionPathHelper 경로 편집', group: 'SVG', Page: MotionPathHelperPage },
+      { slug: 'motion-path', title: 'MotionPath 경로 이동', group: 'SVG', Page: MotionPathPage },
+      { slug: 'motion-path-data', title: 'MotionPath 데이터 변환', group: 'SVG', Page: MotionPathDataPage },
+      { slug: 'motion-path-coordinates', title: 'MotionPath 좌표 변환', group: 'SVG', Page: MotionPathCoordinatesPage },
+      { slug: 'motion-path-measure', title: 'MotionPath 경로 측정', group: 'SVG', Page: MotionPathMeasurePage },
+      { slug: 'observer-create', title: 'Observer 만들기와 찾기', group: 'Observer', Page: ObserverCreatePage },
+      { slug: 'observer-signals', title: 'Observer 입력 신호', group: 'Observer', Page: ObserverSignalsPage },
+      { slug: 'observer-gesture-state', title: 'Observer 제스처 상태', group: 'Observer', Page: ObserverGestureStatePage },
+      { slug: 'observer-lifecycle', title: 'Observer 생명주기', group: 'Observer', Page: ObserverLifecyclePage },
+      { slug: 'physics-motion', title: 'Physics 물리 이동', group: 'Other Plugins', Page: PhysicsMotionPage },
+      { slug: 'pixi-plugin', title: 'PixiPlugin 통합 경계', group: 'Other Plugins', Page: PixiPluginPage },
+      { slug: 'scramble-text', title: 'ScrambleText 글자 전환', group: 'Text', Page: ScrambleTextPage },
+      { slug: 'split-text-create', title: 'SplitText 만들기', group: 'Text', Page: SplitTextCreatePage },
+      { slug: 'split-text-lifecycle', title: 'SplitText 생명주기', group: 'Text', Page: SplitTextLifecyclePage },
+      { slug: 'text-plugin', title: 'TextPlugin 글자 교체', group: 'Text', Page: TextPluginPage },
+      { slug: 'react-gsap-patterns', title: 'React GSAP 구성 패턴', group: 'React', Page: ReactGsapPatternsPage },
+      { slug: 'scroll-smoother-create', title: 'ScrollSmoother 구조와 생성', group: 'Scroll', Page: ScrollSmootherCreatePage },
+      { slug: 'scroll-smoother-effects', title: 'ScrollSmoother 효과', group: 'Scroll', Page: ScrollSmootherEffectsPage },
+      { slug: 'scroll-smoother-control', title: 'ScrollSmoother 제어', group: 'Scroll', Page: ScrollSmootherControlPage },
+      { slug: 'scroll-to', title: 'ScrollToPlugin 이동', group: 'Scroll', Page: ScrollToPage },
+      { slug: 'scroll-trigger-create', title: 'ScrollTrigger 만들기', group: 'Scroll', Page: ScrollTriggerCreatePage },
+      { slug: 'scroll-trigger-geometry', title: 'ScrollTrigger geometry', group: 'Scroll', Page: ScrollTriggerGeometryPage },
+      { slug: 'scroll-trigger-motion', title: 'ScrollTrigger motion', group: 'Scroll', Page: ScrollTriggerMotionPage },
+      { slug: 'scroll-trigger-lifecycle', title: 'ScrollTrigger 생명주기', group: 'Scroll', Page: ScrollTriggerLifecyclePage },
+      { slug: 'scroll-trigger-registry', title: 'ScrollTrigger registry와 전역 상태', group: 'Scroll', Page: ScrollTriggerRegistryPage },
+      { slug: 'scroll-trigger-responsive', title: 'ScrollTrigger 반응형 스타일과 scroll memory', group: 'Scroll', Page: ScrollTriggerResponsivePage },
+      { slug: 'scroll-trigger-integrations', title: 'ScrollTrigger custom scroller와 normalized input', group: 'Scroll', Page: ScrollTriggerIntegrationsPage },
     ],
   },
   {

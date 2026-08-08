@@ -1,0 +1,41 @@
+/** P11 page와 one-card FLIP lab의 local layout을 제공한다. */
+.flip-first-last-page {
+  max-width: 900px;
+}
+.flip-first-last-page header {
+  margin-bottom: 64px;
+}
+.flip-first-last-page header > p:first-child {
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+.flip-first-last-page h1 {
+  font-size: clamp(44px, 8vw, 78px);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+.flip-first-last-page header > p:nth-child(3),
+.flip-first-last-page section > p {
+  max-width: 68ch;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.flip-first-last-page header > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.flip-first-last-page header code {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--color-accent);
+}
+.flip-first-last-page section {
+  margin-top: 84px;
+}
+.flip-first-last-page section h2 {
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.04em;
+}

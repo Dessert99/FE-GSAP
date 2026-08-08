@@ -1,0 +1,51 @@
+/** P26의 signal learning flow와 source inventory를 page-local로 구분한다. */
+.observer-signals-page {
+  display: grid;
+  gap: 32px;
+}
+
+.observer-signals-page > header,
+.observer-signals-page > section {
+  display: grid;
+  gap: 12px;
+}
+
+.observer-signals-page h1,
+.observer-signals-page h2,
+.observer-signals-page h3,
+.observer-signals-page p,
+.observer-signals-page ul {
+  margin: 0;
+}
+
+.observer-signals-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.observer-signals-page__timing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.observer-signals-page__timing-grid > div {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.observer-signals-page > section > ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 20px;
+}
+
+@media (max-width: 560px) {
+  .observer-signals-page__timing-grid {
+    grid-template-columns: 1fr;
+  }
+}

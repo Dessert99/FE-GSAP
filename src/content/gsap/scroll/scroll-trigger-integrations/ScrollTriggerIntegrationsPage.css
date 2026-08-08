@@ -1,0 +1,19 @@
+/** P46 page rhythm을 local class로만 제공한다. */
+.scroll-trigger-integrations-page {
+  display: grid;
+  gap: 32px;
+}
+.scroll-trigger-integrations-page > header,
+.scroll-trigger-integrations-page > section {
+  display: grid;
+  gap: 12px;
+}
+.scroll-trigger-integrations-page h1,
+.scroll-trigger-integrations-page p {
+  margin: 0;
+}
+.scroll-trigger-integrations-page header > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

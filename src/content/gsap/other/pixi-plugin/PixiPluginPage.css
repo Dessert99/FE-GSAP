@@ -1,0 +1,23 @@
+.pixi-plugin-page {
+  display: grid;
+  gap: 2rem;
+}
+
+.pixi-plugin-page section {
+  display: grid;
+  gap: 1rem;
+}
+
+.pixi-plugin-page table {
+  border-collapse: collapse;
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.pixi-plugin-page th,
+.pixi-plugin-page td {
+  padding: 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}

@@ -1,0 +1,22 @@
+/** P45 local snapshot panel과 static navigation timeline에만 적용하는 layout이다. */
+.responsive-restoration-lab {
+  display: grid;
+  gap: 16px;
+}
+.responsive-restoration-lab__panel {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.responsive-restoration-lab__panel p,
+.responsive-restoration-lab h4 {
+  margin: 0;
+}
+.responsive-restoration-lab ol {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-inline-start: 24px;
+}

@@ -1,0 +1,50 @@
+/** P25 pad, direction controls, registry inspector를 page-local로 표현한다. */
+.observer-input-pad {
+  display: grid;
+  gap: 14px;
+}
+.observer-input-pad__target {
+  display: grid;
+  min-height: 140px;
+  place-items: center;
+  border: 2px dashed var(--color-accent);
+  border-radius: 14px;
+  outline-offset: 4px;
+  user-select: none;
+}
+.observer-input-pad__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.observer-input-pad p,
+.observer-input-pad output {
+  margin: 0;
+  color: var(--color-muted);
+}
+.observer-input-pad dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.observer-input-pad dl div {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+.observer-input-pad dt {
+  color: var(--color-muted);
+  font-weight: 700;
+}
+.observer-input-pad dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 480px) {
+  .observer-input-pad dl {
+    grid-template-columns: 1fr;
+  }
+}

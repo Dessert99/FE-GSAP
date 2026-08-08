@@ -1,0 +1,174 @@
+/** GestureEventLab의 one-target stage·button control·event log를 page-local로 배치한다. */
+.gesture-event-lab {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, #132127 85%, transparent);
+}
+.gesture-event-lab__goal,
+.gesture-event-lab__source,
+.gesture-event-lab__controls p {
+  margin: 0;
+  color: var(--color-text-secondary, #c4ced6);
+  line-height: 1.6;
+}
+.gesture-event-lab__body {
+  display: grid;
+  grid-template-columns: minmax(15rem, 1.1fr) minmax(15rem, 0.9fr);
+  gap: 1rem;
+}
+.gesture-event-lab__stage {
+  display: grid;
+  place-items: center;
+  min-height: 15rem;
+  border-radius: 0.75rem;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 31px,
+      color-mix(in srgb, #d7fff4 10%, transparent) 32px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 31px,
+      color-mix(in srgb, #d7fff4 10%, transparent) 32px
+    );
+  touch-action: none;
+  overflow: hidden;
+}
+.gesture-event-lab__target {
+  display: grid;
+  place-items: center;
+  width: 8.5rem;
+  min-height: 6rem;
+  border-radius: 0.75rem;
+  background: #4ac5a3;
+  color: #09211c;
+  cursor: grab;
+  user-select: none;
+  text-align: center;
+}
+.gesture-event-lab__target:active {
+  cursor: grabbing;
+}
+.gesture-event-lab__target span {
+  font-size: 0.75rem;
+}
+.gesture-event-lab__controls {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+}
+.gesture-event-lab__controls > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+.gesture-event-lab__controls button {
+  min-height: 2.4rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  border-radius: 0.5rem;
+  background: #102026;
+  color: inherit;
+  cursor: pointer;
+}
+.gesture-event-lab__snapshot {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 0;
+}
+.gesture-event-lab__snapshot div,
+.gesture-event-lab__decision,
+.gesture-event-lab__log-wrap {
+  padding: 0.8rem;
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, #2a4c52 38%, transparent);
+}
+.gesture-event-lab__snapshot dt {
+  color: var(--color-text-secondary, #c4ced6);
+}
+.gesture-event-lab__snapshot dd {
+  margin: 0.3rem 0 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.gesture-event-lab__decision {
+  margin: 0;
+  line-height: 1.55;
+}
+.gesture-event-lab__code {
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 0.65rem;
+  background: #091318;
+  line-height: 1.55;
+}
+.gesture-event-lab__log-wrap h4 {
+  margin: 0;
+}
+.gesture-event-lab__log-wrap ol {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.75rem 0 0;
+  padding-left: 1.2rem;
+}
+.gesture-event-lab__log-wrap li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.gesture-event-lab__log-wrap span {
+  color: var(--color-text-secondary, #c4ced6);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+}
+.gesture-event-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.gesture-event-lab__panels article {
+  padding: 0.85rem;
+  border-left: 3px solid #4ac5a3;
+  background: color-mix(in srgb, #1a3337 65%, transparent);
+}
+.gesture-event-lab__panels p {
+  margin: 0.45rem 0 0;
+  line-height: 1.6;
+}
+.gesture-event-lab__table-wrap {
+  overflow-x: auto;
+}
+.gesture-event-lab table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.gesture-event-lab caption {
+  padding-bottom: 0.55rem;
+  text-align: left;
+  font-weight: 700;
+}
+.gesture-event-lab th,
+.gesture-event-lab td {
+  padding: 0.55rem;
+  border-top: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+  vertical-align: top;
+}
+@media (max-width: 44rem) {
+  .gesture-event-lab__body,
+  .gesture-event-lab__snapshot,
+  .gesture-event-lab__panels {
+    grid-template-columns: 1fr;
+  }
+  .gesture-event-lab__log-wrap li {
+    display: grid;
+  }
+}

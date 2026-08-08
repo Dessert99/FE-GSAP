@@ -1,0 +1,37 @@
+.inertia-page {
+  display: grid;
+  gap: 2.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 5rem;
+}
+.inertia-page header {
+  display: grid;
+  gap: 0.75rem;
+}
+.inertia-page__coverage {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border, #d8d8d8);
+  border-radius: 0.75rem;
+}
+.inertia-page__coverage ol {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding-left: 1.25rem;
+}
+.inertia-page__coverage li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.inertia-page section:not(.inertia-puck-lab) {
+  display: grid;
+  gap: 0.7rem;
+}
+.inertia-page section header p:first-child {
+  color: #6a4bcc;
+  font-weight: 700;
+}

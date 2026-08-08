@@ -1,0 +1,38 @@
+.gesture-state-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #456;
+  border-radius: 0.75rem;
+}
+.gesture-state-lab p,
+.gesture-state-lab h2 {
+  margin: 0;
+}
+.gesture-state-lab__target {
+  min-width: 12rem;
+  min-height: 6rem;
+}
+.gesture-state-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.gesture-state-lab dl {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+}
+.gesture-state-lab dl div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+}
+.gesture-state-lab dd {
+  margin: 0;
+}
+.gesture-state-lab pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  background: #101820;
+}

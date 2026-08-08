@@ -1,0 +1,69 @@
+/** two visual lanes 위에서 one stable card의 class layout을 보여준다. */
+.flip-card-lab {
+  display: grid;
+  gap: 16px;
+}
+
+.flip-card-lab ol {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.flip-card-lab__stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.flip-card-lab__lane {
+  display: grid;
+  min-height: 170px;
+  align-content: start;
+  padding: 16px;
+  border: 1px dashed var(--color-accent);
+  border-radius: 14px;
+  color: var(--color-muted);
+}
+
+.flip-card-lab__card {
+  position: absolute;
+  top: 76px;
+  width: 120px;
+  min-height: 70px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--color-accent);
+  color: #0b1115;
+  font-weight: 800;
+}
+
+.flip-card-lab__stage--left .flip-card-lab__card {
+  left: 16px;
+}
+
+.flip-card-lab__stage--right .flip-card-lab__card {
+  right: 16px;
+}
+
+.flip-card-lab p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+@media (max-width: 520px) {
+  .flip-card-lab__stage {
+    grid-template-columns: 1fr;
+  }
+
+  .flip-card-lab__card {
+    top: 108px;
+  }
+
+  .flip-card-lab__stage--right .flip-card-lab__card {
+    right: 16px;
+    top: 292px;
+  }
+}

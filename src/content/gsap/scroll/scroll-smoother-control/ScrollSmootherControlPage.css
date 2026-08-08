@@ -1,0 +1,23 @@
+/** P38 header와 source-backed state sections에만 적용하는 local layout이다. */
+.scroll-smoother-control-page {
+  display: grid;
+  gap: 32px;
+}
+.scroll-smoother-control-page > header,
+.scroll-smoother-control-page > section {
+  display: grid;
+  gap: 12px;
+}
+.scroll-smoother-control-page h1,
+.scroll-smoother-control-page h2,
+.scroll-smoother-control-page p {
+  margin: 0;
+}
+.scroll-smoother-control-page__eyebrow {
+  color: var(--color-muted);
+}
+.scroll-smoother-control-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

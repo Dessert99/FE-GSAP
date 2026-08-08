@@ -1,0 +1,59 @@
+/** P34 text target, class spans, token alignment representation을 local lab에 한정한다. */
+.token-alignment-lab {
+  display: grid;
+  gap: 16px;
+}
+.token-alignment-lab__controls {
+  display: grid;
+  gap: 12px;
+}
+.token-alignment-lab__controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.token-alignment-lab__target-wrap {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+.token-alignment-lab__target {
+  min-height: 2.4rem;
+  color: var(--color-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(1.2rem, 4vw, 2rem);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.token-alignment-lab__accessible {
+  margin: 0;
+}
+.token-alignment-lab__new-text {
+  color: var(--color-accent);
+}
+.token-alignment-lab__old-text {
+  color: var(--color-muted);
+}
+.token-alignment-lab__tokens {
+  display: grid;
+  gap: 10px;
+}
+.token-alignment-lab__tokens div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+.token-alignment-lab__tokens strong {
+  inline-size: 8rem;
+}
+@media (max-width: 560px) {
+  .token-alignment-lab__tokens strong {
+    inline-size: 100%;
+  }
+}

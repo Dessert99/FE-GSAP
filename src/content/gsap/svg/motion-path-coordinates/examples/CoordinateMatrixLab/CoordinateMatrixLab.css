@@ -1,0 +1,41 @@
+.coordinate-matrix-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  background: #171625;
+  color: #fff;
+  border-radius: 1rem;
+}
+.coordinate-matrix-lab svg {
+  width: 100%;
+  background: #26243a;
+}
+.coordinate-matrix-lab circle {
+  fill: #bdf34a;
+  stroke: #fff;
+}
+.coordinate-matrix-lab rect,
+.coordinate-matrix-lab line {
+  stroke: #d7d2ff;
+}
+.coordinate-matrix-lab button {
+  min-height: 2.5rem;
+  width: max-content;
+}
+.coordinate-matrix-lab table {
+  border-collapse: collapse;
+}
+.coordinate-matrix-lab th,
+.coordinate-matrix-lab td {
+  padding: 0.45rem;
+  text-align: left;
+  border-bottom: 1px solid #666;
+}
+.coordinate-matrix-lab pre {
+  overflow: auto;
+}
+@media (max-width: 25rem) {
+  .coordinate-matrix-lab button {
+    width: 100%;
+  }
+}

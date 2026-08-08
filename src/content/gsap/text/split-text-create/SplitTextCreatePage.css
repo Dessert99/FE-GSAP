@@ -1,0 +1,26 @@
+.split-text-create-page {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 68rem;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+.split-text-create-page > header,
+.split-text-create-page > section {
+  display: grid;
+  gap: 0.75rem;
+}
+.split-text-create-page p,
+.split-text-create-page h2 {
+  margin: 0;
+  line-height: 1.65;
+}
+.split-text-create-page > section {
+  border-top: 1px solid #456;
+  padding-top: 1rem;
+}
+.split-text-create-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
