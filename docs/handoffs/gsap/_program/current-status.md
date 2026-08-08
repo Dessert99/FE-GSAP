@@ -7,6 +7,7 @@
 - 기록일: `2026-08-08` (Asia/Seoul)
 - 브랜치: `Dessert99/feat-gsap`
 - Core 구현 기준 커밋: `4e26141` (`utility-distribute`까지 완료)
+- 원격 반영: 이 세션은 push하지 않았다. 같은 workspace의 새 세션은 바로 이어갈 수 있지만, 다른 clone/worktree에서 시작하려면 먼저 이 브랜치를 원격에 반영한다.
 - Core 학습 페이지: **40/40 전달 완료**
 - Core canonical source: **159/159 소유 페이지 구현 완료**
 - Plugin 학습 페이지: **0/46**, canonical source **0/205**
@@ -14,7 +15,7 @@
 - Core 40개 모두 content 폴더·page handoff·lazy import·lesson 등록이 존재한다.
 - Core 40개 page handoff의 `releaseDecision`은 모두 `PASS`다.
 - 이 handoff 갱신 중 현재 HEAD에서 `npx tsc --noEmit`, `npm run build`(782 modules), `npm run build-storybook`(920 modules)을 다시 실행해 모두 exit 0을 확인했다.
-- 새 세션은 정적 숫자를 믿기 전에 `git status --short`, `git log -5 --oneline`, 아래 재현 스크립트를 다시 실행한다.
+- 새 세션은 정적 숫자를 믿기 전에 `git status -sb`, `git rev-list --left-right --count origin/main...HEAD`, `git log -5 --oneline`과 아래 재현 스크립트를 다시 실행한다.
 
 ## 완료와 미완료를 구분하는 법
 
@@ -161,14 +162,16 @@ root는 P01, P02, P03 순서로 하나씩 검수·통합·두 build·commit해�
 자동화 테스트 코드는 만들지 마.
 
 진행 중에는 60초 안으로 짧게 상태를 알려주고, 추측이나 미해결 BLOCK을 PASS로
-바꾸지 마. 먼저 current-status의 재현 명령과 git status를 실행한 결과부터
-보고한 뒤 작업을 시작해.
+바꾸지 마. 먼저 current-status의 재현 명령, branch ahead/behind와 git status를
+실행한 결과부터 보고한 뒤 작업을 시작해. 다른 clone에서 시작한다면 이 handoff
+commit이 원격에 존재하는지도 확인해.
 ```
 
 ## 상태 재현 명령
 
 ```bash
-git status --short
+git status -sb
+git rev-list --left-right --count origin/main...HEAD
 git log -5 --oneline
 rg -rl DEFERRED docs/handoffs/gsap/core | sort
 npx tsc --noEmit

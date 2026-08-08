@@ -6,6 +6,7 @@
 
 - 브랜치: `Dessert99/feat-gsap`
 - Core 구현 기준 커밋: `4e26141`
+- 원격 반영: 이 handoff 작성 세션은 push하지 않았다. 다른 clone에서 이어갈 때는 브랜치 원격 반영 여부를 먼저 확인한다.
 - Core visible learning pages: **40/40**
 - Core canonical technical sources: **159/159**
 - Plugin visible learning pages: **0/46**
@@ -151,7 +152,8 @@ source catalog의 `plugins-overview` 후보 identity보다 master inventory와 p
 새 세션은 최소한 다음을 확인한다.
 
 ```bash
-git status --short
+git status -sb
+git rev-list --left-right --count origin/main...HEAD
 git log -5 --oneline
 rg -rl DEFERRED docs/handoffs/gsap/core | sort
 npx tsc --noEmit
