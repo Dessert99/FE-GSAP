@@ -214,6 +214,10 @@ const DraggableLifecyclePage = lazy(() =>
   import('../content/gsap/ui/draggable-lifecycle/DraggableLifecyclePage').then(({ DraggableLifecyclePage }) => ({ default: DraggableLifecyclePage })),
 )
 
+const DraggableEventsPage = lazy(() =>
+  import('../content/gsap/ui/draggable-events/DraggableEventsPage').then(({ DraggableEventsPage }) => ({ default: DraggableEventsPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -267,6 +271,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'draggable-coordinates', title: 'Draggable 좌표 읽기', group: 'Draggable', Page: DraggableCoordinatesPage },
       { slug: 'draggable-bounds-axis', title: 'Draggable 범위와 축 제한', group: 'Draggable', Page: DraggableBoundsAxisPage },
       { slug: 'draggable-lifecycle', title: 'Draggable 생명주기', group: 'Draggable', Page: DraggableLifecyclePage },
+      { slug: 'draggable-events', title: 'Draggable gesture event', group: 'Draggable', Page: DraggableEventsPage },
     ],
   },
   {
