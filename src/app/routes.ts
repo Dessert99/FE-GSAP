@@ -146,6 +146,10 @@ const TimelineInspectionPage = lazy(() =>
   import('../content/gsap/fundamentals/timeline-inspection/TimelineInspectionPage').then(({ TimelineInspectionPage }) => ({ default: TimelineInspectionPage })),
 )
 
+const TimelineCleanupPage = lazy(() =>
+  import('../content/gsap/fundamentals/timeline-cleanup/TimelineCleanupPage').then(({ TimelineCleanupPage }) => ({ default: TimelineCleanupPage })),
+)
+
 const TimelineTimingMathPage = lazy(() =>
   import('../content/gsap/fundamentals/timeline-timing-math/TimelineTimingMathPage').then(({ TimelineTimingMathPage }) => ({ default: TimelineTimingMathPage })),
 )
@@ -198,6 +202,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'timeline-child-placement', title: 'Timeline child 배치', group: 'Timeline', Page: TimelineChildPlacementPage },
       { slug: 'timeline-labels', title: 'Timeline label 탐색', group: 'Timeline', Page: TimelineLabelsPage },
       { slug: 'timeline-inspection', title: 'Timeline child 조회', group: 'Timeline', Page: TimelineInspectionPage },
+      { slug: 'timeline-cleanup', title: 'Timeline 내용 정리', group: 'Timeline', Page: TimelineCleanupPage },
       { slug: 'timeline-timing-math', title: 'Timeline 시간 계산', group: 'Timeline', Page: TimelineTimingMathPage },
       { slug: 'timeline-repeats', title: 'Timeline 반복과 invalidate', group: 'Timeline', Page: TimelineRepeatsPage },
       { slug: 'gsap-utils', title: 'gsap.utils 계산 도구', group: '값 계산', Page: GsapUtilsPage },
