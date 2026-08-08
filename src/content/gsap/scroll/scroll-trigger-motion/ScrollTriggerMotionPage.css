@@ -1,0 +1,15 @@
+/** P42 page-local section rhythm을 유지한다. */
+.scroll-trigger-motion-page {
+  display: grid;
+  gap: 32px;
+}
+.scroll-trigger-motion-page > header,
+.scroll-trigger-motion-page > section {
+  display: grid;
+  gap: 12px;
+}
+.scroll-trigger-motion-page p,
+.scroll-trigger-motion-page h1,
+.scroll-trigger-motion-page h2 {
+  margin: 0;
+}
