@@ -1,0 +1,73 @@
+/** P26 signal readout의 type·단위·시간 경계를 catalog와 같은 ID로 보존한다. */
+export const observerSignalsProperties = [
+  {
+    id: 'OBSSIG-116',
+    name: 'deltaX',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: '마지막 callback 이후의 수평 pixel 변화',
+  },
+  {
+    id: 'OBSSIG-117',
+    name: 'deltaY',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: '마지막 callback 이후의 수직 pixel 변화',
+  },
+  {
+    id: 'OBSSIG-120',
+    name: 'event',
+    type: 'Event',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: '최근 watched input event',
+  },
+  {
+    id: 'OBSSIG-125',
+    name: 'startX',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: 'press-time viewport-left clientX',
+  },
+  {
+    id: 'OBSSIG-126',
+    name: 'startY',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: 'press-time viewport-top clientY',
+  },
+  {
+    id: 'OBSSIG-130',
+    name: 'Observer.isTouch',
+    type: 'Number',
+    defaultValue: 'static capability readout',
+    acceptedValues: '0 no touch, 1 touch-only, 2 touch plus other input',
+  },
+  {
+    id: 'OBSSIG-133',
+    name: 'velocityX',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: 'watched input의 수평 pixels per second',
+  },
+  {
+    id: 'OBSSIG-134',
+    name: 'velocityY',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: 'watched input의 수직 pixels per second',
+  },
+  {
+    id: 'OBSSIG-135',
+    name: 'x',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: 'current viewport-left clientX',
+  },
+  {
+    id: 'OBSSIG-136',
+    name: 'y',
+    type: 'Number',
+    defaultValue: '공식 페이지에 명시 없음',
+    acceptedValues: 'current viewport-top clientY',
+  },
+] as const

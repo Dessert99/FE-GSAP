@@ -290,6 +290,10 @@ const ObserverCreatePage = lazy(() =>
   import('../content/gsap/ui/observer-create/ObserverCreatePage').then(({ ObserverCreatePage }) => ({ default: ObserverCreatePage })),
 )
 
+const ObserverSignalsPage = lazy(() =>
+  import('../content/gsap/ui/observer-signals/ObserverSignalsPage').then(({ ObserverSignalsPage }) => ({ default: ObserverSignalsPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -362,6 +366,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'motion-path-coordinates', title: 'MotionPath 좌표 변환', group: 'SVG', Page: MotionPathCoordinatesPage },
       { slug: 'motion-path-measure', title: 'MotionPath 경로 측정', group: 'SVG', Page: MotionPathMeasurePage },
       { slug: 'observer-create', title: 'Observer 만들기와 찾기', group: 'Observer', Page: ObserverCreatePage },
+      { slug: 'observer-signals', title: 'Observer 입력 신호', group: 'Observer', Page: ObserverSignalsPage },
     ],
   },
   {
