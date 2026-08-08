@@ -1,0 +1,30 @@
+/** Draggable bounds·axis 페이지의 header, coverage, section과 reference 표 배치를 소유한다. */
+.draggable-bounds-axis-page__header { max-width: 850px; margin-bottom: 64px; }
+.draggable-bounds-axis-page__header > p:first-child { margin: 0 0 12px; color: var(--color-accent); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.draggable-bounds-axis-page__header h1 { max-width: 780px; margin: 0; font-size: clamp(44px, 8vw, 78px); line-height: 1; letter-spacing: -.06em; }
+.draggable-bounds-axis-page__header > p:nth-child(3) { max-width: 65ch; margin: 24px 0; color: var(--color-muted); font-size: 18px; line-height: 1.7; }
+.draggable-bounds-axis-page__header > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.draggable-bounds-axis-page__header > code { display: inline-block; margin-top: 18px; padding: 10px 12px; border: 1px solid var(--color-border); border-radius: 9px; color: var(--color-accent); overflow-wrap: anywhere; }
+.draggable-bounds-axis-coverage { display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 18px; margin-bottom: 86px; padding: 20px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+.draggable-bounds-axis-coverage > div { display: grid; align-content: start; gap: 3px; }
+.draggable-bounds-axis-coverage strong { color: var(--color-accent); font-size: 20px; }
+.draggable-bounds-axis-coverage span, .draggable-bounds-axis-coverage p, .draggable-bounds-axis-coverage small { color: var(--color-muted); font-size: 13px; }
+.draggable-bounds-axis-coverage p { margin: 0; line-height: 1.6; }
+.draggable-bounds-axis-coverage ol { display: grid; grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; }
+.draggable-bounds-axis-coverage a { display: block; padding: 10px; border-radius: 8px; text-decoration: none; }
+.draggable-bounds-axis-coverage a:hover { background: rgb(255 255 255 / 4%); }
+.draggable-bounds-axis-page__section { scroll-margin-top: 80px; }
+.draggable-bounds-axis-page__section + .draggable-bounds-axis-page__section { margin-top: 96px; }
+.draggable-bounds-axis-page__heading { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; margin-bottom: 24px; }
+.draggable-bounds-axis-page__heading > span { padding-top: 6px; color: var(--color-accent); font-size: 13px; }
+.draggable-bounds-axis-page__heading h2 { margin: 0; font-size: clamp(26px, 4vw, 36px); letter-spacing: -.045em; }
+.draggable-bounds-axis-page__heading p { max-width: 68ch; margin: 8px 0 0; color: var(--color-muted); line-height: 1.7; }
+.draggable-bounds-axis-page__prose, .draggable-bounds-axis-page__note { padding: 20px; border: 1px solid var(--color-border); border-radius: 14px; background: var(--color-surface); color: var(--color-muted); line-height: 1.72; }
+.draggable-bounds-axis-page__prose p:first-child { margin-top: 0; }
+.draggable-bounds-axis-page__prose p:last-child { margin-bottom: 0; }
+.draggable-bounds-axis-page__note { margin: 16px 0 0; }
+.draggable-bounds-axis-page__table-wrap { overflow-x: auto; border: 1px solid var(--color-border); border-radius: 12px; }
+.draggable-bounds-axis-page__table-wrap table { width: 100%; min-width: 600px; border-collapse: collapse; background: var(--color-surface); }
+.draggable-bounds-axis-page__table-wrap th, .draggable-bounds-axis-page__table-wrap td { padding: 14px; border-top: 1px solid var(--color-border); text-align: left; vertical-align: top; line-height: 1.6; }
+.draggable-bounds-axis-page__related { margin: 20px 0 0; color: var(--color-muted); line-height: 1.7; }
+@media (max-width: 680px) { .draggable-bounds-axis-coverage { grid-template-columns: 1fr 1fr; } .draggable-bounds-axis-coverage p { grid-column: 1 / -1; } .draggable-bounds-axis-coverage ol { grid-template-columns: 1fr; } }
