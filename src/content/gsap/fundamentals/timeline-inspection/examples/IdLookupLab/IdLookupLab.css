@@ -1,0 +1,154 @@
+/** getById 예제의 후보 버튼·중첩 트리·반환 강조를 소유한다. */
+.id-lookup-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.id-lookup-lab h3,
+.id-lookup-lab h4 {
+  margin: 0;
+}
+
+.id-lookup-lab__goal,
+.id-lookup-lab__status,
+.id-lookup-lab__finding p,
+.id-lookup-lab__panels p {
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+
+.id-lookup-lab__goal {
+  margin: 8px 0 20px;
+}
+
+.id-lookup-lab__buttons {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.id-lookup-lab__buttons button {
+  display: grid;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: rgb(255 255 255 / 3%);
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+
+.id-lookup-lab__buttons button[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: rgb(200 241 105 / 7%);
+}
+
+.id-lookup-lab__buttons span,
+.id-lookup-lab__status,
+.id-lookup-lab__source {
+  font-size: 13px;
+}
+
+.id-lookup-lab__buttons span,
+.id-lookup-lab__source {
+  color: var(--color-muted);
+}
+
+.id-lookup-lab__tree {
+  margin: 18px 0 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  list-style: none;
+}
+
+.id-lookup-lab__node {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 180px) minmax(0, 1fr) 64px;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.id-lookup-lab__node + .id-lookup-lab__node {
+  border-top: 1px solid var(--color-border);
+}
+
+.id-lookup-lab__node--depth1 {
+  padding-left: 36px;
+}
+
+.id-lookup-lab__node--found {
+  background: rgb(200 241 105 / 9%);
+  color: var(--color-text);
+}
+
+.id-lookup-lab__node strong {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.id-lookup-lab__code {
+  margin: 16px 0 0;
+  padding: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #0b0d12;
+  line-height: 1.7;
+}
+
+.id-lookup-lab__finding {
+  margin-top: 16px;
+  padding: 16px;
+  border-left: 3px solid #ffbd59;
+  background: rgb(255 189 89 / 7%);
+}
+
+.id-lookup-lab__finding p {
+  margin: 6px 0 0;
+}
+
+.id-lookup-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.id-lookup-lab__panels article {
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.id-lookup-lab__panels p {
+  margin: 6px 0 0;
+  font-size: 13px;
+}
+
+.id-lookup-lab__source {
+  margin: 14px 0 0;
+}
+
+@media (max-width: 720px) {
+  .id-lookup-lab__buttons,
+  .id-lookup-lab__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .id-lookup-lab__node {
+    grid-template-columns: 64px minmax(0, 1fr);
+  }
+
+  .id-lookup-lab__node span:nth-of-type(2) {
+    grid-column: 1 / -1;
+  }
+}
