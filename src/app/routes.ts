@@ -170,6 +170,10 @@ const GsapUtilsPage = lazy(() =>
   import('../content/gsap/fundamentals/gsap-utils/GsapUtilsPage').then(({ GsapUtilsPage }) => ({ default: GsapUtilsPage })),
 )
 
+const RangeInterpolationPage = lazy(() =>
+  import('../content/gsap/fundamentals/range-interpolation/RangeInterpolationPage').then(({ RangeInterpolationPage }) => ({ default: RangeInterpolationPage })),
+)
+
 const ModifiersSnapWrapPage = lazy(() =>
   import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
 )
@@ -216,6 +220,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'timeline-timing-math', title: 'Timeline 시간 계산', group: 'Timeline', Page: TimelineTimingMathPage },
       { slug: 'timeline-repeats', title: 'Timeline 반복과 invalidate', group: 'Timeline', Page: TimelineRepeatsPage },
       { slug: 'gsap-utils', title: 'gsap.utils 계산 도구', group: '값 계산', Page: GsapUtilsPage },
+      { slug: 'range-interpolation', title: '값 범위 변환과 보간', group: '값 계산', Page: RangeInterpolationPage },
       { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
     ],
   },

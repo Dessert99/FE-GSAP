@@ -1,0 +1,239 @@
+/** 실제 계산 lab의 controls·number line·색 성분·코드·관찰 패널 배치를 소유한다. */
+.range-lab {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.range-lab h3 {
+  margin: 0;
+  font-size: 21px;
+  letter-spacing: -0.03em;
+}
+
+.range-lab__goal,
+.range-lab__motion,
+.range-lab__source {
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.range-lab__goal {
+  max-width: 78ch;
+  margin: 8px 0 20px;
+}
+
+.range-lab__controls {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 10px 14px;
+  align-items: center;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+}
+
+.range-lab__controls > label,
+.range-lab__controls legend {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.range-lab__controls > output {
+  grid-column: 3;
+  grid-row: 1;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.range-lab__controls > input[type='range'] {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.range-lab__controls fieldset {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 8px;
+  margin: 6px 0 0;
+  padding: 13px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.range-lab__controls fieldset > label,
+.range-lab__mode-options label {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  color: var(--color-text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.range-lab__mode-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.range-lab__number-lines {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.range-lab__number-lines article {
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.range-lab__number-lines article > div:first-child {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.range-lab__number-lines strong {
+  font-size: 13px;
+}
+
+.range-lab__number-lines span {
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.range-lab__number-lines small {
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.range-lab__track {
+  position: relative;
+  height: 4px;
+  margin: 13px 0 9px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgb(255 107 107 / 75%), rgb(77 171 247 / 80%));
+}
+
+.range-lab__track i {
+  position: absolute;
+  top: 50%;
+  left: var(--range-position);
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--color-surface);
+  border-radius: 50%;
+  background: var(--color-accent);
+  transform: translate(-50%, -50%);
+}
+
+.range-lab__color-reading {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 13px;
+}
+
+.range-lab__swatch {
+  width: 72px;
+  aspect-ratio: 1;
+  border: 1px solid rgb(255 255 255 / 18%);
+  border-radius: 12px;
+}
+
+.range-lab__color-reading strong {
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.range-lab__color-reading p {
+  margin: 5px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.range-lab__code {
+  margin: 18px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.range-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.range-lab__panels article {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.range-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+}
+
+.range-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.range-lab__motion,
+.range-lab__source {
+  margin: 14px 0 0;
+  font-size: 12px;
+}
+
+.range-lab__source code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.range-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .range-lab__track i {
+    transition: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .range-lab {
+    padding: 18px;
+  }
+
+  .range-lab__mode-options,
+  .range-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}
