@@ -154,6 +154,10 @@ const TimelineRepeatsPage = lazy(() =>
   import('../content/gsap/fundamentals/timeline-repeats/TimelineRepeatsPage').then(({ TimelineRepeatsPage }) => ({ default: TimelineRepeatsPage })),
 )
 
+const GsapUtilsPage = lazy(() =>
+  import('../content/gsap/fundamentals/gsap-utils/GsapUtilsPage').then(({ GsapUtilsPage }) => ({ default: GsapUtilsPage })),
+)
+
 const ModifiersSnapWrapPage = lazy(() =>
   import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
 )
@@ -196,6 +200,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'timeline-inspection', title: 'Timeline child 조회', group: 'Timeline', Page: TimelineInspectionPage },
       { slug: 'timeline-timing-math', title: 'Timeline 시간 계산', group: 'Timeline', Page: TimelineTimingMathPage },
       { slug: 'timeline-repeats', title: 'Timeline 반복과 invalidate', group: 'Timeline', Page: TimelineRepeatsPage },
+      { slug: 'gsap-utils', title: 'gsap.utils 계산 도구', group: '값 계산', Page: GsapUtilsPage },
       { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
     ],
   },
