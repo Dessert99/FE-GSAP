@@ -1,0 +1,207 @@
+/** sequence card·실제 child ruler·코드 패널을 좁은 화면에서도 같은 순서로 읽게 한다. */
+.sequence-builder {
+  margin-top: 28px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.sequence-builder h3,
+.sequence-builder h4 {
+  margin-top: 0;
+}
+
+.sequence-builder__goal,
+.sequence-builder__panels p {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.sequence-builder__demo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.sequence-builder__card {
+  position: relative;
+  min-height: 150px;
+  padding: 26px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgb(116 219 152 / 12%), transparent), rgb(255 255 255 / 3%);
+}
+
+.sequence-builder__title {
+  margin: 0;
+  font-size: 26px;
+}
+
+.sequence-builder__bar {
+  height: 10px;
+  margin-top: 30px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 9%);
+}
+
+.sequence-builder__bar-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-accent);
+}
+
+.sequence-builder__badge {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  color: #08110c;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sequence-builder__controls {
+  display: grid;
+  gap: 8px;
+}
+
+.sequence-builder button {
+  padding: 10px 13px;
+  border: 1px solid var(--color-border);
+  border-radius: 9px;
+  background: rgb(255 255 255 / 4%);
+  color: var(--color-text);
+}
+
+.sequence-builder button:disabled {
+  opacity: .45;
+}
+
+.sequence-builder button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.sequence-builder__status {
+  margin: 16px 0 0;
+  color: var(--color-accent);
+}
+
+.sequence-builder__stages {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sequence-builder__stages li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  opacity: .5;
+}
+
+.sequence-builder__stages li[data-added='true'] {
+  border-color: var(--color-accent);
+  opacity: 1;
+}
+
+.sequence-builder__stages li > span {
+  grid-row: 1 / 3;
+  color: var(--color-accent);
+}
+
+.sequence-builder__stages small {
+  color: var(--color-muted);
+}
+
+.sequence-builder__ruler {
+  position: relative;
+  min-height: 76px;
+  margin-top: 16px;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #090c0f;
+}
+
+.sequence-builder__ruler > p {
+  margin: 16px 8px;
+  color: var(--color-muted);
+}
+
+.sequence-builder__block {
+  position: absolute;
+  top: 12px;
+  display: grid;
+  align-content: center;
+  height: 44px;
+  min-width: 4px;
+  padding: 6px;
+  overflow: hidden;
+  border: 1px solid rgb(116 219 152 / 50%);
+  border-radius: 8px;
+  background: rgb(116 219 152 / 18%);
+  white-space: nowrap;
+}
+
+.sequence-builder__block small {
+  color: var(--color-muted);
+  font-size: 10px;
+}
+
+.sequence-builder__code {
+  margin: 16px 0 0;
+  padding: 18px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  line-height: 1.7;
+}
+
+.sequence-builder__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.sequence-builder__panels article {
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.sequence-builder__source {
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .sequence-builder__demo,
+  .sequence-builder__stages,
+  .sequence-builder__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .sequence-builder__controls {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

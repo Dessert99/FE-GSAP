@@ -130,6 +130,10 @@ const TimelineCallbacksPausesPage = lazy(() =>
   import('../content/gsap/fundamentals/timeline-callbacks-pauses/TimelineCallbacksPausesPage').then(({ TimelineCallbacksPausesPage }) => ({ default: TimelineCallbacksPausesPage })),
 )
 
+const TimelineBasicsPage = lazy(() =>
+  import('../content/gsap/fundamentals/timeline-basics/TimelineBasicsPage').then(({ TimelineBasicsPage }) => ({ default: TimelineBasicsPage })),
+)
+
 const ModifiersSnapWrapPage = lazy(() =>
   import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
 )
@@ -166,6 +170,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'react-use-gsap', title: 'React 안에서 쓰기', group: '통합', Page: ReactUseGsapPage },
       { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
       { slug: 'timeline-callbacks-pauses', title: 'Timeline 함수와 멈춤 예약', group: 'Timeline', Page: TimelineCallbacksPausesPage },
+      { slug: 'timeline-basics', title: 'Timeline sequence 만들기', group: 'Timeline', Page: TimelineBasicsPage },
       { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
     ],
   },
