@@ -1,0 +1,9 @@
+.split-text-lifecycle-page {
+  display: grid;
+  gap: 2rem;
+}
+
+.split-text-lifecycle-page section {
+  display: grid;
+  gap: 1rem;
+}
