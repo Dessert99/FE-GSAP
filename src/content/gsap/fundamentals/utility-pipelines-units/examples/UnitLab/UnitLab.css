@@ -1,0 +1,33 @@
+/** unit lab의 세 경계값과 단위 controls 배치를 소유한다. */
+.unit-readings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 22px 0 0;
+}
+
+.unit-readings div {
+  min-width: 0;
+  padding: 17px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+
+.unit-readings dt {
+  color: var(--color-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.unit-readings dd {
+  margin: 8px 0 0;
+  color: var(--color-accent);
+  font-size: 20px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 680px) {
+  .unit-readings { grid-template-columns: 1fr; }
+}
