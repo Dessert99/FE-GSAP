@@ -1,0 +1,89 @@
+# ScrollTrigger responsive restoration handoff
+
+## 입력 계약
+
+```text
+objective
+  P45에서 responsive condition이 바뀔 때 legacy registration, owned condition cleanup, inline style snapshot, ScrollTrigger memory, browser history policy의 서로 다른 ownership을 host scroll 없이 학습한다.
+officialPage
+  title: ScrollTrigger.clearMatchMedia() / clearScrollMemory() / matchMedia() / saveStyles()
+  canonicalUrl: https://gsap.com/docs/v3/Plugins/ScrollTrigger/static.clearMatchMedia()/ ; https://gsap.com/docs/v3/Plugins/ScrollTrigger/static.clearScrollMemory()/ ; https://gsap.com/docs/v3/Plugins/ScrollTrigger/static.matchMedia()/ ; https://gsap.com/docs/v3/Plugins/ScrollTrigger/static.saveStyles()/
+  reviewedAt: 2026-08-09
+  category: Scroll
+  slug: scroll-trigger-responsive
+localPage
+  localPath: src/content/gsap/scroll/scroll-trigger-responsive/
+  route: /fundamentals/scroll-trigger-responsive
+moduleSelection
+  deprecated API boundary, condition/style snapshot simulator, static navigation timeline, ownership lifecycle
+sourceManifest
+  - id: STR-181 | officialItem: ScrollTrigger.clearMatchMedia(query?) is deprecated in favor of gsap.matchMedia() since 3.11.0; query is optional, no query clears all prior ScrollTrigger.matchMedia breakpoints, and it does not kill associated triggers or animations | sourceLocation: #181 rendered pass 1 lines 177-190 and pass 2 lines 177-190; official raw ScrollTrigger.js pass 1/2 lines 1457-1459; installed 3.15.0 source pass 1/2 lines 1457-1459; scroll-trigger.d.ts pass 1/2 lines 72-83 | sourceStatus: verified
+  - id: STR-182 | officialItem: ScrollTrigger.clearScrollMemory(scrollRestoration?) clears recorded ScrollTrigger positions so refresh will not restore them; auto/manual may explicitly set history.scrollRestoration and default is the value when ScrollTrigger loaded | sourceLocation: #182 rendered pass 1 lines 178-191 and pass 2 lines 178-191; official raw ScrollTrigger.js pass 1/2 lines 242-245 and 1498; installed 3.15.0 source pass 1/2 same; scroll-trigger.d.ts pass 1/2 lines 89-97 | sourceStatus: verified
+  - id: STR-192 | officialItem: ScrollTrigger.matchMedia(vars) is deprecated in favor of gsap.matchMedia() since 3.11.0; matching media callbacks set up triggers, all persists, and inactive-query associated triggers and animations revert and kill | sourceLocation: #192 rendered pass 1 lines 179-205 and pass 2 lines 179-205; official raw ScrollTrigger.js pass 1 lines 1362-1379 and pass 2 lines 1362-1379; installed 3.15.0 source pass 1/2 same; scroll-trigger.d.ts pass 1/2 lines 271-286 | sourceStatus: verified
+  - id: STR-199 | officialItem: ScrollTrigger.saveStyles(targets) records current inline CSS styles for internal revert after refresh or matchMedia change; targets accept selector text, element, or array | sourceLocation: #199 rendered pass 1 lines 178-199 and pass 2 lines 178-199; official raw ScrollTrigger.js pass 1 lines 1487-1495 and pass 2 lines 1487-1495; installed 3.15.0 source pass 1/2 same; scroll-trigger.d.ts pass 1/2 lines 408-416 | sourceStatus: verified
+sourceBlockers
+  none. Four rendered canonicals were opened and reopened; official raw source plus installed 3.15.0 source/types were compared twice. The source/runtime boundary is preserved: clearMatchMedia() only kills matching contexts in installed source, while rendered docs explicitly say it does not kill associated triggers/animations; this page retains the rendered guidance and does not invoke the legacy API.
+learnerFlow
+  1. Define a media condition as setup lifetime, not a CSS breakpoint alone.
+  2. Toggle a local large/small simulator and observe captured inline styles re-apply after condition cleanup.
+  3. Give reduced motion its own no-animation condition before responsive setup.
+  4. Follow the static navigation timeline and keep ScrollTrigger recorded memory separate from browser history restoration.
+coverageMap
+  - sourceItemId: STR-181 | localEvidence: ResponsiveRestorationLab watch points and ScrollTriggerResponsivePage deprecated ownership boundary | localStatus: covered
+  - sourceItemId: STR-182 | localEvidence: descriptor-derived static navigation timeline, code boundary, property table, and page navigation ownership paragraph | localStatus: covered
+  - sourceItemId: STR-192 | localEvidence: descriptor query, simulator lifecycle, code panel, property table, and deprecated/core boundary | localStatus: covered
+  - sourceItemId: STR-199 | localEvidence: local captured cssText simulator, preview labels, code panel, property table, and cleanup explanation | localStatus: covered
+relatedPages
+  P40 ScrollTrigger construction and core gsap.matchMedia() lessons are linked; P46 owns custom-scroller integration.
+```
+
+## 구현 계약
+
+```text
+exactFiles
+  create: ScrollTriggerResponsivePage TSX/CSS, meta/catalog/properties/descriptor, ResponsiveRestorationLab TSX/CSS/runtime, this handoff
+  modify: none
+exampleContracts
+  name: ResponsiveRestorationLab
+  goal: one descriptor supplies responsive query labels, local style snapshot simulator, no-animation reduced-motion condition, static navigation timeline, and code.
+  question: What must be reverted when a responsive condition or page navigation changes?
+  representation: labelled local panel, keyboard radio controls, lifecycle message, ordered static timeline, descriptor-derived code, and property table.
+  controls: large/small simulator radios plus replay; actual reduced-motion preference overrides selected condition.
+  runtimeSource: useResponsiveRestorationRuntime.ts captures only local panel inline cssText, applies a non-animated large style, uses a native media listener, and restores listener/style on condition change or unmount.
+  sourcePath: src/content/gsap/scroll/scroll-trigger-responsive/examples/ResponsiveRestorationLab/useResponsiveRestorationRuntime.ts
+  runtimeOwnership: local panel style and native listener only; no ScrollTrigger legacy registration, clearMatchMedia, clearScrollMemory, history.scrollRestoration, page scroll, tween, or trigger is invoked.
+  displayOwnership: descriptor supplies query strings, snapshot labels, navigation timeline, static code, and condition labels.
+  accessibility: radios use fieldset/legend; panel retains reading order; lifecycle is plain text rather than a continuous live region; no focus or scroll movement occurs.
+  motion: no animation is rendered; actual reduced-motion preference is an explicit condition that blocks the large setup style.
+nonGoals
+  host scroll-memory mutation, browser history policy mutation, global legacy matchMedia registration, actual ScrollTrigger creation, and animated breakpoint transitions.
+preserve
+  routes, program docs, shared UI, global CSS, packages, tests, full builds, and Git remain root-owned.
+```
+
+## 검증 계약
+
+```text
+verifiedPerspectives
+  Official Coverage: PASS — four canonical IDs have individual catalog, sourceManifest, and coverageMap rows.
+  Learning Transformation: PASS — global/legacy APIs become a local reversible snapshot and a navigation ownership timeline rather than a destructive demo.
+  Runtime/Display Sync: PASS (simulator) — one descriptor supplies query labels, snapshot labels, timeline, static code, and local condition state; runtime intentionally avoids global APIs.
+  Pedagogy: PASS — condition, cleanup, saved inline style, reduced motion, and navigation timing are separated in learner order.
+  Structure/Comment: PASS — page/example/runtime ownership is split and comments are scoped to new files.
+  Accessibility/Motion: PASS (static) — semantic radio group, no autonomous movement, and actual reduced-motion condition are present.
+  Build/Integration: PASS — root registered the route and completed full TypeScript/Vite/Storybook builds.
+findings
+  P45-OC-001 | PASS | exact four-row catalog/manifest/coverage audit | no canonical is grouped or omitted | none
+  P45-RDS-001 | PASS | descriptor and effective condition supply actual local snapshot/listener code before clearly labelled static global boundaries | no fake global runtime claim | none
+  P45-BOUNDARY-001 | PASS | local cssText/listener cleanup only | host scroll memory and history policy remain untouched | application owner chooses navigation timing
+  P45-SOURCE-001 | ADVISORY | rendered clearMatchMedia says it does not kill associated triggers/animations while installed source context-kills matching triggers | page records rendered/install boundary and does not execute legacy API | retain boundary
+  P45-INT-001 | PASS | route, prerequisite links, and full integration builds pass | page is registered in inventory order | none
+  P45-B01 | DEFERRED | keyboard radio/replay focus path | browser audit after route integration | root
+  P45-B02 | DEFERRED | actual reduced-motion condition switch | browser audit after route integration | root
+  P45-B03 | DEFERRED | 320/390 code/timeline layout | browser audit after route integration | root
+  P45-B04 | DEFERRED | simulator style/listener restoration through control changes | browser audit after route integration | root
+verificationEvidence
+  task-25-report.md records source comparisons, page-local TypeScript, exact four-row audit, scoped Prettier, assigned diff, and self-review.
+releaseDecision
+  PASS — source integration is complete; P45-B01..B04 remain in the approved final browser DEFERRED batch.
+```

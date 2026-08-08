@@ -1,0 +1,23 @@
+/** P45 header와 ownership section에만 적용하는 local page layout이다. */
+.scroll-trigger-responsive-page {
+  display: grid;
+  gap: 32px;
+}
+.scroll-trigger-responsive-page > header,
+.scroll-trigger-responsive-page > section {
+  display: grid;
+  gap: 12px;
+}
+.scroll-trigger-responsive-page h1,
+.scroll-trigger-responsive-page h2,
+.scroll-trigger-responsive-page p {
+  margin: 0;
+}
+.scroll-trigger-responsive-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.scroll-trigger-responsive-page__eyebrow {
+  color: var(--color-muted);
+}
