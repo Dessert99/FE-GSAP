@@ -242,6 +242,10 @@ const GsDevToolsPage = lazy(() =>
   import('../content/gsap/other/gsdevtools/GsDevToolsPage').then(({ GsDevToolsPage }) => ({ default: GsDevToolsPage })),
 )
 
+const InertiaPage = lazy(() =>
+  import('../content/gsap/ui/inertia/InertiaPage').then(({ InertiaPage }) => ({ default: InertiaPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -302,6 +306,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'flip-first-last', title: 'Flip First와 Last', group: 'Flip', Page: FlipFirstLastPage },
       { slug: 'flip-fit-absolute', title: 'Flip 맞춤과 절대 위치', group: 'Flip', Page: FlipFitAbsolutePage },
       { slug: 'gsdevtools', title: 'GSDevTools 시간 검사', group: 'Other Plugins', Page: GsDevToolsPage },
+      { slug: 'inertia', title: 'Inertia 관성 이동', group: 'Inertia', Page: InertiaPage },
     ],
   },
   {

@@ -1,0 +1,131 @@
+.inertia-puck-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #14131d;
+  color: #f7f5ff;
+  border-radius: 1rem;
+}
+.inertia-puck-lab__stage {
+  position: relative;
+  min-height: 5rem;
+  overflow: hidden;
+  border: 1px solid #635d85;
+  border-radius: 0.75rem;
+  background: #242132;
+}
+.inertia-puck-lab__line {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background: #a39dcc;
+}
+.inertia-puck-lab__line i {
+  position: absolute;
+  width: 2px;
+  height: 0.7rem;
+  top: -0.3rem;
+  background: #f7f5ff;
+}
+.inertia-puck-lab__puck {
+  position: absolute;
+  top: 1.4rem;
+  left: 1rem;
+  width: 3.5rem;
+  height: 2.2rem;
+  border: 0;
+  border-radius: 999px;
+  background: #bcf14a;
+  color: #152000;
+  font-weight: 800;
+}
+.inertia-puck-lab__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 0.65rem;
+}
+.inertia-puck-lab__controls label {
+  display: grid;
+  gap: 0.25rem;
+}
+.inertia-puck-lab button,
+.inertia-puck-lab select {
+  min-height: 2.5rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 0.45rem;
+}
+.inertia-puck-lab button {
+  border: 1px solid #bcf14a;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.inertia-puck-lab button:focus-visible,
+.inertia-puck-lab select:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+.inertia-puck-lab__notice {
+  min-height: 1.5rem;
+  margin: 0;
+  color: #d6d0ff;
+}
+.inertia-puck-lab dl {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+}
+.inertia-puck-lab dl div {
+  padding: 0.6rem;
+  background: #242132;
+  border-radius: 0.4rem;
+}
+.inertia-puck-lab dt {
+  font-size: 0.8rem;
+  color: #c9c4e8;
+}
+.inertia-puck-lab dd {
+  margin: 0.2rem 0 0;
+  font-weight: 700;
+}
+.inertia-puck-lab pre {
+  overflow: auto;
+  margin: 0;
+  padding: 1rem;
+  background: #09080e;
+  border-radius: 0.5rem;
+}
+.inertia-puck-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+.inertia-puck-lab__panels article {
+  padding: 0.75rem;
+  background: #242132;
+  border-radius: 0.5rem;
+}
+.inertia-puck-lab__panels h4,
+.inertia-puck-lab__panels p {
+  margin: 0;
+}
+.inertia-puck-lab table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.inertia-puck-lab th,
+.inertia-puck-lab td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #635d85;
+}
+@media (max-width: 40rem) {
+  .inertia-puck-lab dl,
+  .inertia-puck-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}
