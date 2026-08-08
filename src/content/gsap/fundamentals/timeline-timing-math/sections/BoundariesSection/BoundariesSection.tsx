@@ -1,0 +1,4 @@
+/** raw 시간 계산까지만 닫고 배치·label·재생 상세는 등록된 관련 페이지로 넘긴다. */
+import { toHref } from '../../../../../../app/routes'
+import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
+export function BoundariesSection(){return <section id="boundaries" className="tl-timing-page__section" aria-labelledby="boundaries-title"><SectionHeading number="08" id="boundaries" title="여기서 다루지 않는 것" description="이 페이지는 duration·position·배속의 숫자 관계만 소유한다. label과 child position, 재생 control은 다른 페이지로 넘긴다."/><ul className="tl-timing-page__list"><li><a href={toHref('/fundamentals/timeline-child-placement')}>Timeline child 배치</a> — parent 좌표와 smoothChildTiming</li><li><a href={toHref('/fundamentals/timeline-labels')}>Timeline label 탐색</a> — 숫자 위치에 이름 붙이기</li><li><a href={toHref('/fundamentals/timeline-basics')}>Timeline sequence 만들기</a> — children 구성 입문</li><li>미등록 Timeline playhead·repeat·inspection 페이지에는 링크하지 않는다.</li></ul></section>}

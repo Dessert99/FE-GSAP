@@ -1,0 +1,5 @@
+/** timeScale이 raw duration을 유지한 채 실제 부모 시간 폭과 중첩 속도를 바꾸는 계약을 설명한다. */
+import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
+export function TimeScaleSection(){return <section id="time-scale" className="tl-timing-page__section" aria-labelledby="time-scale-title"><SectionHeading number="06" id="time-scale" title="timeScale은 길이가 아니라 속도를 바꾼다" description="1은 정상, 0.5는 절반, 2는 두 배, -1은 정상 속도 역방향이다. raw getter가 아니라 부모가 보는 폭이 달라진다."/><pre className="tl-timing-page__code"><code>{`timeScale( value:Number ) : [Number | self]
+const current = timeline.timeScale()
+timeline.timeScale(0.5)`}</code></pre><div className="tl-timing-page__prose"><p>duration 2에 timeScale 0.5면 4초가 걸리고, 다시 0.5 부모 안에 중첩하면 전역에서는 8초입니다. timeScale 자체도 tween할 수 있습니다.</p></div><div className="tl-timing-page__note tl-timing-page__note--probe"><p>timeScale을 바꿔도 duration/totalDuration getter는 그대로고 endTime만 바뀝니다. child에 timeScale을 걸면 부모 duration이 줄어듭니다.</p></div><div className="tl-timing-page__warning"><p>paused Timeline은 <code>endTime()</code>에서 timeScale을 무시하고 1인 것처럼 계산했습니다. 공식이 말하지 않는 실행 예외입니다.</p></div></section>}

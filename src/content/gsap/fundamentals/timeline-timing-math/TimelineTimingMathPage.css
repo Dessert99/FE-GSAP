@@ -1,0 +1,403 @@
+/** Timeline 시간 계산 페이지의 배치와 규칙 표·경고 블록·실행 확인 블록의 표시 규칙을 소유한다. */
+.tl-timing-page__header {
+  max-width: 840px;
+  margin-bottom: 72px;
+}
+
+.tl-timing-page__eyebrow {
+  margin: 0 0 12px;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tl-timing-page__header h1 {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(34px, 5.4vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.tl-timing-page__summary {
+  max-width: 64ch;
+  margin: 24px 0 0;
+  color: var(--color-muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.tl-timing-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.tl-timing-page__path {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  border: 1px solid var(--color-border);
+  border-radius: 11px;
+  background: rgb(255 255 255 / 2%);
+  font-size: 13px;
+}
+
+.tl-timing-page__path span,
+.tl-timing-page__reviewed {
+  color: var(--color-muted);
+}
+
+.tl-timing-page__path code {
+  color: var(--color-accent);
+  overflow-wrap: anywhere;
+}
+
+.tl-timing-page__reviewed {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.tl-timing-coverage {
+  overflow: hidden;
+  margin-bottom: 92px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: var(--color-surface);
+}
+
+.tl-timing-coverage__summary {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--color-border);
+  background: rgb(200 241 105 / 5%);
+}
+
+.tl-timing-coverage__summary > div {
+  display: grid;
+  gap: 2px;
+}
+
+.tl-timing-coverage__summary strong {
+  color: var(--color-accent);
+  font-size: 19px;
+  font-variant-numeric: tabular-nums;
+}
+
+.tl-timing-coverage__summary span,
+.tl-timing-coverage__summary p,
+.tl-timing-coverage small {
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.tl-timing-coverage__summary p {
+  justify-self: end;
+  max-width: 52ch;
+  margin: 0;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.tl-timing-coverage ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+.tl-timing-coverage a {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+.tl-timing-coverage a:hover {
+  background: rgb(255 255 255 / 4%);
+}
+
+.tl-timing-coverage a > span {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+.tl-timing-coverage a div {
+  display: grid;
+  gap: 3px;
+}
+
+.tl-timing-page__section {
+  scroll-margin-top: 82px;
+}
+
+.tl-timing-page__section + .tl-timing-page__section {
+  margin-top: 100px;
+}
+
+.tl-timing-page__section-heading {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.tl-timing-page__section-heading > span {
+  padding-top: 6px;
+  color: var(--color-accent);
+  font-size: 13px;
+  letter-spacing: 0.1em;
+}
+
+.tl-timing-page__section-heading h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  letter-spacing: -0.045em;
+}
+
+.tl-timing-page__section-heading p {
+  max-width: 68ch;
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.tl-timing-page__split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.tl-timing-page__split > div,
+.tl-timing-page__prose {
+  min-width: 0;
+}
+
+.tl-timing-page__prose {
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.tl-timing-page__prose p,
+.tl-timing-page__subheading p {
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.72;
+}
+
+.tl-timing-page__prose p:first-child {
+  margin-top: 0;
+}
+
+.tl-timing-page__prose strong,
+.tl-timing-page__note strong,
+.tl-timing-page__warning strong {
+  color: var(--color-text);
+}
+
+.tl-timing-page__subheading {
+  margin-top: 48px;
+  margin-bottom: 18px;
+}
+
+.tl-timing-page__subheading h3 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.tl-timing-page__code-label {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.tl-timing-page__code-label code {
+  color: var(--color-accent);
+}
+
+.tl-timing-page__code {
+  margin: 12px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.75;
+  tab-size: 2;
+}
+
+.tl-timing-page__note,
+.tl-timing-page__warning {
+  margin: 18px 0 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.tl-timing-page__note h3,
+.tl-timing-page__warning h3 {
+  margin: 0 0 8px;
+  color: var(--color-text);
+  font-size: 16px;
+}
+
+.tl-timing-page__note p,
+.tl-timing-page__warning p {
+  margin: 0;
+}
+
+.tl-timing-page__note p + p,
+.tl-timing-page__warning p + p {
+  margin-top: 10px;
+}
+
+.tl-timing-page__note code,
+.tl-timing-page__warning code {
+  overflow-wrap: anywhere;
+}
+
+.tl-timing-page__warning {
+  border-color: rgb(255 191 120 / 34%);
+  background: rgb(255 191 120 / 7%);
+}
+
+/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+.tl-timing-page__note--probe {
+  border-style: dashed;
+}
+
+.tl-timing-page__provenance {
+  font-size: 13px;
+}
+
+.tl-timing-page__table-wrap {
+  margin-top: 18px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.tl-timing-page__rules-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tl-timing-page__rules-table caption {
+  padding: 16px 20px 0;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-align: left;
+}
+
+.tl-timing-page__rules-table th,
+.tl-timing-page__rules-table td {
+  padding: 14px 20px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.tl-timing-page__rules-table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tl-timing-page__rules-table tbody th {
+  color: var(--color-text);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tl-timing-page__rules-table tbody th code {
+  color: var(--color-accent);
+}
+
+.tl-timing-page__rules-table td {
+  color: var(--color-muted);
+}
+
+.tl-timing-page__rules-table td small {
+  display: block;
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.tl-timing-page__rules-table code {
+  overflow-wrap: anywhere;
+}
+
+/** Tween과 Timeline이 갈리는 행을 색이 아니라 왼쪽 굵은 선으로 표시해 흑백에서도 읽히게 한다 */
+.tl-timing-page__rules-table tbody tr.tl-timing-page__row--diverges th {
+  box-shadow: inset 3px 0 0 var(--color-accent);
+}
+
+.tl-timing-page__list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.tl-timing-page__list a {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.tl-fit-lab { margin-top: 22px; padding: 22px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-surface); }
+.tl-fit-lab h3, .tl-fit-lab p { margin-top: 0; }
+.tl-fit-lab__controls, .tl-fit-lab__grid, .tl-fit-lab__explain { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.tl-fit-lab__controls label { display: grid; gap: 6px; color: var(--color-muted); font-size: 12px; }
+.tl-fit-lab__controls select { min-height: 40px; border: 1px solid var(--color-border); border-radius: 8px; background: #090c0f; color: var(--color-text); }
+.tl-fit-lab__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 12px; }
+.tl-fit-lab__grid > div, .tl-fit-lab__explain article { padding: 11px; border: 1px solid var(--color-border); border-radius: 9px; }
+.tl-fit-lab__grid span, .tl-fit-lab__grid strong { display: block; }
+.tl-fit-lab__grid span, .tl-fit-lab__explain p { color: var(--color-muted); font-size: 11px; }
+.tl-fit-lab__explain h4, .tl-fit-lab__explain p { margin: 0; }
+.tl-fit-lab__explain p { margin-top: 5px; line-height: 1.6; }
+@media (max-width: 700px) { .tl-fit-lab__controls, .tl-fit-lab__grid, .tl-fit-lab__explain { grid-template-columns: 1fr; } }
+
+@media (max-width: 860px) {
+  .tl-timing-coverage__summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tl-timing-coverage__summary p {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .tl-timing-coverage ol,
+  .tl-timing-page__split {
+    grid-template-columns: 1fr;
+  }
+}
