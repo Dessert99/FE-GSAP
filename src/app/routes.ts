@@ -322,6 +322,10 @@ const SplitTextLifecyclePage = lazy(() =>
   import('../content/gsap/text/split-text-lifecycle/SplitTextLifecyclePage').then(({ SplitTextLifecyclePage }) => ({ default: SplitTextLifecyclePage })),
 )
 
+const TextPluginPage = lazy(() =>
+  import('../content/gsap/text/text-plugin/TextPluginPage').then(({ TextPluginPage }) => ({ default: TextPluginPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -402,6 +406,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'scramble-text', title: 'ScrambleText 글자 전환', group: 'Text', Page: ScrambleTextPage },
       { slug: 'split-text-create', title: 'SplitText 만들기', group: 'Text', Page: SplitTextCreatePage },
       { slug: 'split-text-lifecycle', title: 'SplitText 생명주기', group: 'Text', Page: SplitTextLifecyclePage },
+      { slug: 'text-plugin', title: 'TextPlugin 글자 교체', group: 'Text', Page: TextPluginPage },
     ],
   },
   {
