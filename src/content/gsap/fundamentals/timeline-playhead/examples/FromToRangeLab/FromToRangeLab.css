@@ -1,0 +1,2 @@
+/** from/to range의 생성 직후 위치와 현재 위치를 한 대상에서 비교한다. */
+.from-to-range-lab__card{display:grid;place-items:center;width:64px;height:46px;margin:5px;border-radius:10px;background:#f0abfc;color:#4a044e;font-size:12px;font-weight:800}.from-to-range-lab--reduced .from-to-range-lab__card{transform:none!important}

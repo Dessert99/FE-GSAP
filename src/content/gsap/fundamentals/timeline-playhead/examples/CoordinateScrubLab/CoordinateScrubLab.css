@@ -1,0 +1,2 @@
+/** direct 좌표 controls와 단일 target snapshot을 좁은 화면에서도 순서대로 읽게 배치한다. */
+.coordinate-scrub-lab__card{display:grid;place-items:center;width:64px;height:46px;margin:5px;border-radius:10px;background:var(--color-accent);color:#080a0c;font-size:12px;font-weight:800}.coordinate-scrub-lab--reduced .coordinate-scrub-lab__card{transform:none!important}

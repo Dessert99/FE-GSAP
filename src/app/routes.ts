@@ -154,6 +154,10 @@ const TimelinePlaybackControlsPage = lazy(() =>
   import('../content/gsap/fundamentals/timeline-playback-controls/TimelinePlaybackControlsPage').then(({ TimelinePlaybackControlsPage }) => ({ default: TimelinePlaybackControlsPage })),
 )
 
+const TimelinePlayheadPage = lazy(() =>
+  import('../content/gsap/fundamentals/timeline-playhead/TimelinePlayheadPage').then(({ TimelinePlayheadPage }) => ({ default: TimelinePlayheadPage })),
+)
+
 const TimelineTimingMathPage = lazy(() =>
   import('../content/gsap/fundamentals/timeline-timing-math/TimelineTimingMathPage').then(({ TimelineTimingMathPage }) => ({ default: TimelineTimingMathPage })),
 )
@@ -208,6 +212,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'timeline-inspection', title: 'Timeline child 조회', group: 'Timeline', Page: TimelineInspectionPage },
       { slug: 'timeline-cleanup', title: 'Timeline 내용 정리', group: 'Timeline', Page: TimelineCleanupPage },
       { slug: 'timeline-playback-controls', title: 'Timeline 재생 제어', group: 'Timeline', Page: TimelinePlaybackControlsPage },
+      { slug: 'timeline-playhead', title: 'Timeline playhead 이동', group: 'Timeline', Page: TimelinePlayheadPage },
       { slug: 'timeline-timing-math', title: 'Timeline 시간 계산', group: 'Timeline', Page: TimelineTimingMathPage },
       { slug: 'timeline-repeats', title: 'Timeline 반복과 invalidate', group: 'Timeline', Page: TimelineRepeatsPage },
       { slug: 'gsap-utils', title: 'gsap.utils 계산 도구', group: '값 계산', Page: GsapUtilsPage },

@@ -1,0 +1,2 @@
+/** label navigation의 한 대상과 부드러운 control Tween 변화를 표시한다. */
+.navigation-mode-lab__card{display:grid;place-items:center;width:64px;height:46px;margin:5px;border-radius:10px;background:#7dd3fc;color:#082f49;font-size:12px;font-weight:800}.navigation-mode-lab--reduced .navigation-mode-lab__card{transform:none!important}
