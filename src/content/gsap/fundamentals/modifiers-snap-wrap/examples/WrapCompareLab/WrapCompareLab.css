@@ -1,0 +1,173 @@
+/** wrap 비교 예제의 결과 표·컨트롤·코드 패널 배치를 소유한다. */
+.wrap-compare-lab {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+
+.wrap-compare-lab h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.wrap-compare-lab__goal {
+  margin: 8px 0 20px;
+  color: var(--color-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.wrap-compare-lab__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 18px;
+  align-items: start;
+}
+
+.wrap-compare-lab__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.wrap-compare-lab__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.wrap-compare-lab__table caption {
+  padding: 12px 16px;
+  color: var(--color-muted);
+  font-size: 12px;
+  text-align: left;
+}
+
+.wrap-compare-lab__table th,
+.wrap-compare-lab__table td {
+  padding: 10px 16px;
+  border-top: 1px solid var(--color-border);
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wrap-compare-lab__table thead th {
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wrap-compare-lab__table tbody th {
+  color: var(--color-accent);
+}
+
+.wrap-compare-lab__controls {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.wrap-compare-lab__controls legend {
+  padding: 0 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.wrap-compare-lab__controls > label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wrap-compare-lab__controls output {
+  color: var(--color-accent);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.wrap-compare-lab__controls input[type='range'] {
+  width: 100%;
+}
+
+.wrap-compare-lab__radio-group {
+  display: grid;
+  gap: 6px;
+}
+
+.wrap-compare-lab__radio-group p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wrap-compare-lab__radio-group label {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  color: var(--color-muted);
+  font-size: 13px;
+}
+
+.wrap-compare-lab__code {
+  margin: 16px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.wrap-compare-lab__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.wrap-compare-lab__panels article {
+  min-width: 0;
+  padding: 16px 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.wrap-compare-lab__panels h4 {
+  margin: 0 0 6px;
+  color: var(--color-accent);
+  font-size: 14px;
+}
+
+.wrap-compare-lab__panels p {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.wrap-compare-lab__source {
+  margin: 16px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.wrap-compare-lab :focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .wrap-compare-lab__body,
+  .wrap-compare-lab__panels {
+    grid-template-columns: 1fr;
+  }
+}

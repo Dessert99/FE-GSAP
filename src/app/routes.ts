@@ -126,6 +126,10 @@ const ReusableEffectsPage = lazy(() =>
   import('../content/gsap/fundamentals/reusable-effects/ReusableEffectsPage').then(({ ReusableEffectsPage }) => ({ default: ReusableEffectsPage })),
 )
 
+const ModifiersSnapWrapPage = lazy(() =>
+  import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -157,6 +161,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'responsive-motion', title: '조건별 animation', group: '엔진과 정리', Page: ResponsiveMotionPage },
       { slug: 'react-use-gsap', title: 'React 안에서 쓰기', group: '통합', Page: ReactUseGsapPage },
       { slug: 'reusable-effects', title: '재사용 가능한 effect', group: '트윈 구성', Page: ReusableEffectsPage },
+      { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
     ],
   },
   {
