@@ -306,6 +306,10 @@ const PhysicsMotionPage = lazy(() =>
   import('../content/gsap/other/physics-motion/PhysicsMotionPage').then(({ PhysicsMotionPage }) => ({ default: PhysicsMotionPage })),
 )
 
+const PixiPluginPage = lazy(() =>
+  import('../content/gsap/other/pixi-plugin/PixiPluginPage').then(({ PixiPluginPage }) => ({ default: PixiPluginPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -382,6 +386,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'observer-gesture-state', title: 'Observer 제스처 상태', group: 'Observer', Page: ObserverGestureStatePage },
       { slug: 'observer-lifecycle', title: 'Observer 생명주기', group: 'Observer', Page: ObserverLifecyclePage },
       { slug: 'physics-motion', title: 'Physics 물리 이동', group: 'Other Plugins', Page: PhysicsMotionPage },
+      { slug: 'pixi-plugin', title: 'PixiPlugin 통합 경계', group: 'Other Plugins', Page: PixiPluginPage },
     ],
   },
   {
