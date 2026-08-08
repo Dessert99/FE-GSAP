@@ -310,6 +310,10 @@ const PixiPluginPage = lazy(() =>
   import('../content/gsap/other/pixi-plugin/PixiPluginPage').then(({ PixiPluginPage }) => ({ default: PixiPluginPage })),
 )
 
+const ScrambleTextPage = lazy(() =>
+  import('../content/gsap/text/scramble-text/ScrambleTextPage').then(({ ScrambleTextPage }) => ({ default: ScrambleTextPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -387,6 +391,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'observer-lifecycle', title: 'Observer 생명주기', group: 'Observer', Page: ObserverLifecyclePage },
       { slug: 'physics-motion', title: 'Physics 물리 이동', group: 'Other Plugins', Page: PhysicsMotionPage },
       { slug: 'pixi-plugin', title: 'PixiPlugin 통합 경계', group: 'Other Plugins', Page: PixiPluginPage },
+      { slug: 'scramble-text', title: 'ScrambleText 글자 전환', group: 'Text', Page: ScrambleTextPage },
     ],
   },
   {

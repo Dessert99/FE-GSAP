@@ -1,0 +1,31 @@
+/** P31의 page-level learning rhythm과 prose spacing을 local scope에 둔다. */
+.scramble-text-page {
+  display: grid;
+  gap: 32px;
+}
+
+.scramble-text-page > header,
+.scramble-text-page > section {
+  display: grid;
+  gap: 12px;
+}
+
+.scramble-text-page h1,
+.scramble-text-page h2,
+.scramble-text-page p,
+.scramble-text-page pre {
+  margin: 0;
+}
+
+.scramble-text-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scramble-text-page pre {
+  padding: 14px;
+  overflow: auto;
+  border-radius: 10px;
+  background: #101820;
+}
