@@ -342,6 +342,10 @@ const ScrollSmootherControlPage = lazy(() =>
   import('../content/gsap/scroll/scroll-smoother-control/ScrollSmootherControlPage').then(({ ScrollSmootherControlPage }) => ({ default: ScrollSmootherControlPage })),
 )
 
+const ScrollToPage = lazy(() =>
+  import('../content/gsap/scroll/scroll-to/ScrollToPage').then(({ ScrollToPage }) => ({ default: ScrollToPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -427,6 +431,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'scroll-smoother-create', title: 'ScrollSmoother 구조와 생성', group: 'Scroll', Page: ScrollSmootherCreatePage },
       { slug: 'scroll-smoother-effects', title: 'ScrollSmoother 효과', group: 'Scroll', Page: ScrollSmootherEffectsPage },
       { slug: 'scroll-smoother-control', title: 'ScrollSmoother 제어', group: 'Scroll', Page: ScrollSmootherControlPage },
+      { slug: 'scroll-to', title: 'ScrollToPlugin 이동', group: 'Scroll', Page: ScrollToPage },
     ],
   },
   {

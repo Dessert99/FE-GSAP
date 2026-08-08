@@ -1,0 +1,17 @@
+/** P39 local scroll preview의 제한된 overflow 영역을 만든다. */
+.local-scroll-lab {
+  display: grid;
+  gap: 12px;
+}
+.local-scroll-lab__viewport {
+  height: 144px;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+}
+.local-scroll-lab__viewport p {
+  min-height: 92px;
+}
+.local-scroll-lab pre {
+  overflow-x: auto;
+}

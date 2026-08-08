@@ -1,0 +1,15 @@
+/** P39 header·section rhythm을 page-local로 유지한다. */
+.scroll-to-page {
+  display: grid;
+  gap: 32px;
+}
+.scroll-to-page > header,
+.scroll-to-page > section {
+  display: grid;
+  gap: 12px;
+}
+.scroll-to-page h1,
+.scroll-to-page h2,
+.scroll-to-page p {
+  margin: 0;
+}
