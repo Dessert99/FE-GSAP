@@ -222,6 +222,10 @@ const DraggableCollisionMomentumPage = lazy(() =>
   import('../content/gsap/ui/draggable-collision-momentum/DraggableCollisionMomentumPage').then(({ DraggableCollisionMomentumPage }) => ({ default: DraggableCollisionMomentumPage })),
 )
 
+const DrawSvgPage = lazy(() =>
+  import('../content/gsap/svg/draw-svg/DrawSvgPage').then(({ DrawSvgPage }) => ({ default: DrawSvgPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -277,6 +281,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'draggable-lifecycle', title: 'Draggable 생명주기', group: 'Draggable', Page: DraggableLifecyclePage },
       { slug: 'draggable-events', title: 'Draggable gesture event', group: 'Draggable', Page: DraggableEventsPage },
       { slug: 'draggable-collision-momentum', title: 'Draggable 충돌과 관성', group: 'Draggable', Page: DraggableCollisionMomentumPage },
+      { slug: 'draw-svg', title: 'DrawSVG stroke 그리기', group: 'SVG', Page: DrawSvgPage },
     ],
   },
   {
