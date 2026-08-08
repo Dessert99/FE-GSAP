@@ -1,0 +1,85 @@
+.velocity-tracker-lab {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #456;
+  border-radius: 0.75rem;
+}
+
+.velocity-tracker-lab p,
+.velocity-tracker-lab h3,
+.velocity-tracker-lab h4 {
+  margin: 0;
+}
+
+.velocity-tracker-lab__stage {
+  display: grid;
+  align-items: center;
+  min-height: 9rem;
+  overflow: hidden;
+  border: 1px dashed #789;
+}
+
+.velocity-tracker-lab__target {
+  width: max-content;
+  min-width: 8rem;
+  min-height: 3rem;
+  border-radius: 999px;
+  background: #245;
+  color: #fff;
+}
+
+.velocity-tracker-lab__controls,
+.velocity-tracker-lab fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.velocity-tracker-lab fieldset {
+  margin: 0;
+}
+
+.velocity-tracker-lab dl {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.velocity-tracker-lab dl div {
+  display: grid;
+  grid-template-columns: minmax(10rem, auto) 1fr;
+  gap: 0.5rem;
+}
+
+.velocity-tracker-lab dd {
+  margin: 0;
+}
+
+.velocity-tracker-lab pre {
+  margin: 0;
+  padding: 1rem;
+  overflow: auto;
+  background: #101820;
+}
+
+.velocity-tracker-lab__panels {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.velocity-tracker-lab__panels article {
+  display: grid;
+  gap: 0.4rem;
+}
+
+@media (max-width: 40rem) {
+  .velocity-tracker-lab__panels {
+    grid-template-columns: 1fr;
+  }
+
+  .velocity-tracker-lab dl div {
+    grid-template-columns: 1fr;
+  }
+}

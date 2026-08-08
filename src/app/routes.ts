@@ -250,6 +250,10 @@ const InertiaPage = lazy(() =>
   import('../content/gsap/ui/inertia/InertiaPage').then(({ InertiaPage }) => ({ default: InertiaPage })),
 )
 
+const VelocityTrackerLifecyclePage = lazy(() =>
+  import('../content/gsap/ui/velocity-tracker-lifecycle/VelocityTrackerLifecyclePage').then(({ VelocityTrackerLifecyclePage }) => ({ default: VelocityTrackerLifecyclePage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -312,6 +316,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'flip-batch-interrupt', title: 'Flip batch와 중단', group: 'Flip', Page: FlipBatchInterruptPage },
       { slug: 'gsdevtools', title: 'GSDevTools 시간 검사', group: 'Other Plugins', Page: GsDevToolsPage },
       { slug: 'inertia', title: 'Inertia 관성 이동', group: 'Inertia', Page: InertiaPage },
+      { slug: 'velocity-tracker-lifecycle', title: 'VelocityTracker 생명주기', group: 'Inertia', Page: VelocityTrackerLifecyclePage },
     ],
   },
   {
