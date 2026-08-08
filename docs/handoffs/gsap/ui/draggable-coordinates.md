@@ -99,3 +99,7 @@ P03에서 만든 Draggable instance를 읽는 다음 단계로, target·pointer�
 - Route registration and build: `PASS` — root registered `/fundamentals/draggable-coordinates`; `npx tsc --noEmit`, `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook`, `git diff --check` all exited 0. Vite transformed 846 modules and Storybook transformed 984 modules; both emitted `DraggableCoordinatesPage` JS/CSS chunks.
 - Browser checks: `DEFERRED` — translation drag, rotation drag, reset, cleanup/unmount.
 - Release: `PASS` — route/build integration blocker is cleared. The four approved browser checks remain `DEFERRED` for the final browser batch.
+
+## releaseDecision
+
+`PASS` — route/build integration blocker is cleared. The four approved browser checks remain `DEFERRED` for the final browser batch.
