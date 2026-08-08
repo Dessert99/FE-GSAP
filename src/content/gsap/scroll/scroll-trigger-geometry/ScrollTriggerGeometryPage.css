@@ -1,0 +1,20 @@
+/** P41 header and section rhythm을 page-local class로만 제공한다. */
+.scroll-trigger-geometry-page {
+  display: grid;
+  gap: 32px;
+}
+.scroll-trigger-geometry-page > header,
+.scroll-trigger-geometry-page > section {
+  display: grid;
+  gap: 12px;
+}
+.scroll-trigger-geometry-page h1,
+.scroll-trigger-geometry-page h2,
+.scroll-trigger-geometry-page p {
+  margin: 0;
+}
+.scroll-trigger-geometry-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
