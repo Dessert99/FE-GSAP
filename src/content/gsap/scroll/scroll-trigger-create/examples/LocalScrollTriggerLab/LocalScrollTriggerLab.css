@@ -1,0 +1,59 @@
+/** P40 local scroller, pin target, markers inspector를 example scope에만 배치한다. */
+.local-scroll-trigger-lab {
+  display: grid;
+  gap: 16px;
+}
+
+.local-scroll-trigger-lab__scroller {
+  block-size: 300px;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+.local-scroll-trigger-lab__spacer {
+  display: grid;
+  min-block-size: 260px;
+  place-items: center;
+  color: var(--color-muted);
+}
+
+.local-scroll-trigger-lab__trigger {
+  margin: 20px;
+  padding: 18px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-accent) 14%, transparent);
+}
+
+.local-scroll-trigger-lab__trigger p {
+  margin: 0 0 16px;
+}
+
+.local-scroll-trigger-lab__follower {
+  padding: 14px;
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  background: var(--color-background);
+}
+
+.local-scroll-trigger-lab__inspector {
+  overflow: auto;
+}
+
+.local-scroll-trigger-lab__inspector h4 {
+  margin: 0 0 8px;
+}
+
+.local-scroll-trigger-lab__inspector table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.local-scroll-trigger-lab__inspector th,
+.local-scroll-trigger-lab__inspector td {
+  padding: 7px;
+  border: 1px solid var(--color-border);
+  text-align: left;
+  white-space: nowrap;
+}

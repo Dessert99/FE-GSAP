@@ -1,0 +1,27 @@
+/** P40 header와 global ownership section에만 적용하는 local layout이다. */
+.scroll-trigger-create-page {
+  display: grid;
+  gap: 32px;
+}
+
+.scroll-trigger-create-page > header,
+.scroll-trigger-create-page > section {
+  display: grid;
+  gap: 12px;
+}
+
+.scroll-trigger-create-page h1,
+.scroll-trigger-create-page h2,
+.scroll-trigger-create-page p {
+  margin: 0;
+}
+
+.scroll-trigger-create-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scroll-trigger-create-page__eyebrow {
+  color: var(--color-muted);
+}
