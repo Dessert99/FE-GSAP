@@ -202,6 +202,10 @@ const DraggableCreatePage = lazy(() =>
   import('../content/gsap/ui/draggable-create/DraggableCreatePage').then(({ DraggableCreatePage }) => ({ default: DraggableCreatePage })),
 )
 
+const DraggableCoordinatesPage = lazy(() =>
+  import('../content/gsap/ui/draggable-coordinates/DraggableCoordinatesPage').then(({ DraggableCoordinatesPage }) => ({ default: DraggableCoordinatesPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -252,6 +256,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'plugins', title: 'Plugin 불러오기와 등록', group: 'Plugin 기초', Page: PluginsPage },
       { slug: 'css-rule-plugin', title: 'CSS rule 함께 움직이기', group: 'Plugin 기초', Page: CssRulePluginPage },
       { slug: 'draggable-create', title: 'Draggable instance 만들기', group: 'Draggable', Page: DraggableCreatePage },
+      { slug: 'draggable-coordinates', title: 'Draggable 좌표 읽기', group: 'Draggable', Page: DraggableCoordinatesPage },
     ],
   },
   {

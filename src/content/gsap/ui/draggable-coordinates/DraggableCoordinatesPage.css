@@ -1,0 +1,124 @@
+/** P04 문서와 lab의 page-local layout·contrast를 제공한다. */
+.draggable-coordinates-page {
+  display: grid;
+  gap: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 5rem;
+  color: var(--color-text-primary, #f2f5f7);
+}
+.draggable-coordinates-page__header {
+  display: grid;
+  gap: 0.75rem;
+}
+.draggable-coordinates-page__eyebrow,
+.draggable-coordinates-page__coverage p {
+  margin: 0;
+  color: var(--color-text-secondary, #aab7c2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.draggable-coordinates-page h1,
+.draggable-coordinates-page h2,
+.draggable-coordinates-page h3,
+.draggable-coordinates-page h4 {
+  margin: 0;
+}
+.draggable-coordinates-page__summary,
+.draggable-coordinates-page__path,
+.draggable-coordinates-page__reviewed,
+.draggable-coordinates-page__prose p {
+  margin: 0;
+  color: var(--color-text-secondary, #c4ced6);
+  line-height: 1.7;
+}
+.draggable-coordinates-page__official-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.draggable-coordinates-page__coverage {
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.8fr) 1.2fr;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, #18232b 72%, transparent);
+}
+.draggable-coordinates-page__coverage h2 {
+  margin: 0.3rem 0;
+  font-size: 2rem;
+}
+.draggable-coordinates-page__coverage span {
+  color: var(--color-text-secondary, #c4ced6);
+  font-size: 0.9rem;
+}
+.draggable-coordinates-page__coverage ol {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.draggable-coordinates-page__coverage li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.draggable-coordinates-page__coverage a {
+  color: inherit;
+  text-decoration-color: #7ad6ba;
+}
+.draggable-coordinates-page__section {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+}
+.draggable-coordinates-page__section-heading {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+.draggable-coordinates-page__section-heading > span {
+  display: grid;
+  place-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  background: #215a50;
+  color: #e7fff7;
+  font-weight: 700;
+}
+.draggable-coordinates-page__section-heading p {
+  margin: 0.4rem 0 0;
+  color: var(--color-text-secondary, #c4ced6);
+  line-height: 1.6;
+}
+.draggable-coordinates-page__prose {
+  display: grid;
+  gap: 0.75rem;
+}
+.draggable-coordinates-page__warning {
+  padding: 1rem;
+  border-left: 3px solid #d8aa59;
+  background: color-mix(in srgb, #60461a 25%, transparent);
+}
+.draggable-coordinates-page__warning p {
+  margin: 0.45rem 0 0;
+  line-height: 1.65;
+}
+.draggable-coordinates-page code,
+.draggable-coordinates-page pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+@media (max-width: 44rem) {
+  .draggable-coordinates-page__coverage {
+    grid-template-columns: 1fr;
+  }
+  .draggable-coordinates-page__coverage li {
+    display: grid;
+  }
+}
