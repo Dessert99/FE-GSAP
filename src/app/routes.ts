@@ -238,6 +238,10 @@ const FlipFitAbsolutePage = lazy(() =>
   import('../content/gsap/ui/flip-fit-absolute/FlipFitAbsolutePage').then(({ FlipFitAbsolutePage }) => ({ default: FlipFitAbsolutePage })),
 )
 
+const GsDevToolsPage = lazy(() =>
+  import('../content/gsap/other/gsdevtools/GsDevToolsPage').then(({ GsDevToolsPage }) => ({ default: GsDevToolsPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -297,6 +301,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'easel-plugin', title: 'EaselPlugin과 canvas', group: 'Other Plugins', Page: EaselPluginPage },
       { slug: 'flip-first-last', title: 'Flip First와 Last', group: 'Flip', Page: FlipFirstLastPage },
       { slug: 'flip-fit-absolute', title: 'Flip 맞춤과 절대 위치', group: 'Flip', Page: FlipFitAbsolutePage },
+      { slug: 'gsdevtools', title: 'GSDevTools 시간 검사', group: 'Other Plugins', Page: GsDevToolsPage },
     ],
   },
   {

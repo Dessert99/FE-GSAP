@@ -1,0 +1,41 @@
+/** inspector가 붙는 container와 labelled stage를 page-local로 표시한다. */
+.gsdevtools-lab {
+  display: grid;
+  gap: 14px;
+}
+
+.gsdevtools-lab__stage {
+  position: relative;
+  min-height: 130px;
+  overflow: hidden;
+  border: 1px dashed var(--color-accent);
+  border-radius: 14px;
+}
+
+.gsdevtools-lab__label {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.gsdevtools-lab__dot {
+  position: absolute;
+  top: 66px;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.gsdevtools-lab__tool-container {
+  position: relative;
+  min-height: 52px;
+}
+
+.gsdevtools-lab p {
+  margin: 0;
+  color: var(--color-muted);
+}
