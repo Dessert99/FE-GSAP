@@ -314,6 +314,10 @@ const ScrambleTextPage = lazy(() =>
   import('../content/gsap/text/scramble-text/ScrambleTextPage').then(({ ScrambleTextPage }) => ({ default: ScrambleTextPage })),
 )
 
+const SplitTextCreatePage = lazy(() =>
+  import('../content/gsap/text/split-text-create/SplitTextCreatePage').then(({ SplitTextCreatePage }) => ({ default: SplitTextCreatePage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -392,6 +396,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'physics-motion', title: 'Physics 물리 이동', group: 'Other Plugins', Page: PhysicsMotionPage },
       { slug: 'pixi-plugin', title: 'PixiPlugin 통합 경계', group: 'Other Plugins', Page: PixiPluginPage },
       { slug: 'scramble-text', title: 'ScrambleText 글자 전환', group: 'Text', Page: ScrambleTextPage },
+      { slug: 'split-text-create', title: 'SplitText 만들기', group: 'Text', Page: SplitTextCreatePage },
     ],
   },
   {
