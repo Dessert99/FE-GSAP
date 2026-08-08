@@ -302,6 +302,10 @@ const ObserverLifecyclePage = lazy(() =>
   import('../content/gsap/ui/observer-lifecycle/ObserverLifecyclePage').then(({ ObserverLifecyclePage }) => ({ default: ObserverLifecyclePage })),
 )
 
+const PhysicsMotionPage = lazy(() =>
+  import('../content/gsap/other/physics-motion/PhysicsMotionPage').then(({ PhysicsMotionPage }) => ({ default: PhysicsMotionPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -377,6 +381,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'observer-signals', title: 'Observer 입력 신호', group: 'Observer', Page: ObserverSignalsPage },
       { slug: 'observer-gesture-state', title: 'Observer 제스처 상태', group: 'Observer', Page: ObserverGestureStatePage },
       { slug: 'observer-lifecycle', title: 'Observer 생명주기', group: 'Observer', Page: ObserverLifecyclePage },
+      { slug: 'physics-motion', title: 'Physics 물리 이동', group: 'Other Plugins', Page: PhysicsMotionPage },
     ],
   },
   {

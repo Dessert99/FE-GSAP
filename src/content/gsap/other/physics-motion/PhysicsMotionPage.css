@@ -1,0 +1,30 @@
+.physics-motion-page {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 68rem;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+.physics-motion-page > header,
+.physics-motion-page > section {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.physics-motion-page p,
+.physics-motion-page h2 {
+  margin: 0;
+  line-height: 1.65;
+}
+
+.physics-motion-page > section {
+  border-top: 1px solid #456;
+  padding-top: 1rem;
+}
+
+.physics-motion-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
