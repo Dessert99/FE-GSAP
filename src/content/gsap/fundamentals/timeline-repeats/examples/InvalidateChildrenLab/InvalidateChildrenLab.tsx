@@ -1,0 +1,12 @@
+/** 부모 invalidate가 두 child function value를 모두 다시 읽는지 실행 기록으로 보여준다. */
+import { useInvalidateChildrenRuntime } from './useInvalidateChildrenRuntime'
+import './InvalidateChildrenLab.css'
+
+export function InvalidateChildrenLab() {
+  // runtime이 기록한 child 값·counter·timing snapshot을 화면에만 쓴다
+  const { scope, rows, status, run, reset, firstSelector, secondSelector } = useInvalidateChildrenRuntime()
+  // 실제 selector와 action 순서를 그대로 표시 코드로 직렬화한다
+  const code = `let counter = 0\nconst tl = gsap.timeline({ paused: true, delay: 0.25 })\ntl.to('${firstSelector}', { x: () => ++counter * 60 })\n  .to('${secondSelector}', { x: () => ++counter * 60 })\n\n// restart만 실행하고 자동 재생 없이 끝값을 읽습니다.\ntl.restart().pause()\ntl.progress(1, true)\n\n// 부모에서 children까지 다시 해석합니다.\ntl.invalidate()\ntl.restart().pause()\ntl.progress(1, true)`
+
+  return <section className="invalidate-children-lab" aria-labelledby="invalidate-children-lab-title"><h3 id="invalidate-children-lab-title">부모 한 번으로 child 둘의 function을 다시 읽기</h3><p className="invalidate-children-lab__goal">먼저 restart만 두 번 누른 뒤 invalidate 버튼을 누르세요. counter와 두 x 값이 언제 바뀌는지 기록 표로 확인합니다.</p><div className="invalidate-children-lab__body" ref={scope}><div className="invalidate-children-lab__stage"><div className="invalidate-children-lab__box invalidate-children-lab__box--a">A</div><div className="invalidate-children-lab__box invalidate-children-lab__box--b">B</div></div><div className="invalidate-children-lab__controls"><button type="button" onClick={() => run('restart')}>restart만</button><button type="button" onClick={() => run('invalidate')}>부모 invalidate 후 restart</button><button type="button" onClick={reset}>처음으로</button></div></div><p className="invalidate-children-lab__status" role="status">{status}</p><div className="invalidate-children-lab__table-wrap"><table><caption>실제 child function 호출과 timing getter</caption><thead><tr><th>회</th><th>action</th><th>counter</th><th>A x / B x</th><th>duration / start / delay</th></tr></thead><tbody>{rows.length === 0 ? <tr><td colSpan={5}>아직 실행 기록이 없습니다.</td></tr> : rows.map((row) => <tr key={row.index}><th>{row.index}</th><td>{row.action}</td><td>{row.counter}</td><td>{row.firstX} / {row.secondX}</td><td>{row.duration} / {row.startTime} / {row.delay}</td></tr>)}</tbody></table></div><pre className="invalidate-children-lab__code"><code>{code}</code></pre><p className="invalidate-children-lab__source">실행 코드 위치 · <code>examples/InvalidateChildrenLab/useInvalidateChildrenRuntime.ts</code></p></section>
+}

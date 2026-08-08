@@ -1,0 +1,6 @@
+/** 다섯 메서드의 signature·인자 기본값·getter/setter 반환 계약을 한 표로 비교한다. */
+import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
+
+export function CallFormsSection() {
+  return <section id="call-forms" className="tl-repeats-page__section" aria-labelledby="call-forms-title"><SectionHeading number="06" id="call-forms" title="다섯 메서드의 호출 형식" description="네 메서드는 getter/setter이고 invalidate만 인자 없이 self를 돌려주는 action이다."/><div className="tl-repeats-page__table-wrap"><table className="tl-repeats-page__table"><caption>Timeline repeat 메서드 공식 계약</caption><thead><tr><th>메서드</th><th>인자·기본값</th><th>반환</th></tr></thead><tbody><tr><th><code>repeat(value)</code></th><td>Number · 0</td><td>Number | self</td></tr><tr><th><code>repeatDelay(value)</code></th><td>Number · 0</td><td>Number | self</td></tr><tr><th><code>yoyo(value)</code></th><td>Boolean · false</td><td>Boolean | self</td></tr><tr><th><code>iteration(value)</code></th><td>Number · 기본값 미게시</td><td>Number | self</td></tr><tr><th><code>invalidate()</code></th><td>Parameters 절 없음</td><td>self</td></tr></tbody></table></div><p className="tl-repeats-page__boundary-note">Timeline 문서의 <code>repeatDelay</code> 기본값은 숫자 <code>0</code>입니다. Tween 문서의 잘못된 <code>NaN</code> 표기를 이 페이지로 옮기지 않습니다.</p></section>
+}
