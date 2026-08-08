@@ -226,6 +226,10 @@ const DrawSvgPage = lazy(() =>
   import('../content/gsap/svg/draw-svg/DrawSvgPage').then(({ DrawSvgPage }) => ({ default: DrawSvgPage })),
 )
 
+const EaselPluginPage = lazy(() =>
+  import('../content/gsap/other/easel-plugin/EaselPluginPage').then(({ EaselPluginPage }) => ({ default: EaselPluginPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -282,6 +286,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'draggable-events', title: 'Draggable gesture event', group: 'Draggable', Page: DraggableEventsPage },
       { slug: 'draggable-collision-momentum', title: 'Draggable 충돌과 관성', group: 'Draggable', Page: DraggableCollisionMomentumPage },
       { slug: 'draw-svg', title: 'DrawSVG stroke 그리기', group: 'SVG', Page: DrawSvgPage },
+      { slug: 'easel-plugin', title: 'EaselPlugin과 canvas', group: 'Other Plugins', Page: EaselPluginPage },
     ],
   },
   {
