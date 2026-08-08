@@ -1,0 +1,102 @@
+/** 등록 흐름의 세 단계와 한 문장 preview를 좁은 화면에서도 읽기 좋게 배치한다. */
+.registration-diagnostic {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-surface);
+}
+.registration-diagnostic h3,
+.registration-diagnostic h4 {
+  margin-top: 0;
+}
+.registration-diagnostic__goal,
+.registration-diagnostic__status,
+.registration-diagnostic__motion-note,
+.registration-diagnostic__source {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.registration-diagnostic__body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+.registration-diagnostic__steps,
+.registration-diagnostic__preview {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: rgb(255 255 255 / 2%);
+}
+.registration-diagnostic__steps p {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+.registration-diagnostic__steps p + p {
+  margin-top: 14px;
+}
+.registration-diagnostic__steps code {
+  overflow-wrap: anywhere;
+  color: var(--color-accent);
+}
+.registration-diagnostic__preview p {
+  margin-top: 0;
+  line-height: 1.7;
+}
+.registration-diagnostic__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.registration-diagnostic button {
+  padding: 9px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.registration-diagnostic button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.registration-diagnostic__status {
+  margin: 16px 0 0;
+}
+.registration-diagnostic__code {
+  margin: 18px 0 0;
+  padding: 16px;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #07090c;
+  color: #dbe5ee;
+  line-height: 1.7;
+}
+.registration-diagnostic__panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+.registration-diagnostic__panels article {
+  padding: 14px;
+  border-radius: 10px;
+  background: rgb(255 255 255 / 2%);
+}
+.registration-diagnostic__panels p {
+  margin-bottom: 0;
+  color: var(--color-muted);
+  line-height: 1.65;
+}
+@media (max-width: 640px) {
+  .registration-diagnostic__body,
+  .registration-diagnostic__panels {
+    grid-template-columns: 1fr;
+  }
+}

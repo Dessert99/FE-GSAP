@@ -190,6 +190,10 @@ const ModifiersSnapWrapPage = lazy(() =>
   import('../content/gsap/fundamentals/modifiers-snap-wrap/ModifiersSnapWrapPage').then(({ ModifiersSnapWrapPage }) => ({ default: ModifiersSnapWrapPage })),
 )
 
+const PluginsPage = lazy(() =>
+  import('../content/gsap/plugins/plugins/PluginsPage').then(({ PluginsPage }) => ({ default: PluginsPage })),
+)
+
 /** 앱에서 탐색 가능한 모든 학습 트랙과 레슨의 단일 등록부다. */
 export const tracks: TrackDefinition[] = [
   {
@@ -237,6 +241,7 @@ export const tracks: TrackDefinition[] = [
       { slug: 'utility-collections-random', title: '후보 배열과 무작위 선택', group: '값 계산', Page: UtilityCollectionsRandomPage },
       { slug: 'utility-distribute', title: '위치별 값 배분', group: '값 계산', Page: UtilityDistributePage },
       { slug: 'modifiers-snap-wrap', title: '값 가로채기·눈금·순환', group: '값 계산', Page: ModifiersSnapWrapPage },
+      { slug: 'plugins', title: 'Plugin 불러오기와 등록', group: 'Plugin 기초', Page: PluginsPage },
     ],
   },
   {
