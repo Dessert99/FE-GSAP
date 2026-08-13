@@ -140,7 +140,7 @@ export function AddParametersSection() {
           <strong>
             함수는 활성(매치) 상태가 될 때마다 호출된다. 사용자가 breakpoint를 넘나들며 여러 번 크기를 바꾸면 함수도 여러 번 호출된다
           </strong>
-          입니다. 그래서 handler 안에는 <strong>몇 번 실행돼도 같은 결과가 나오는 코드</strong>만 두어야 합니다.
+          입니다. 따라서 handler는 조건이 다시 맞을 때마다 setup 코드가 새로 실행된다는 전제로 작성해야 합니다.
         </p>
       </div>
 
@@ -152,21 +152,6 @@ export function AddParametersSection() {
       <pre className="responsive-page__code">
         <code>{desktopMobile}</code>
       </pre>
-
-      <div className="responsive-page__note responsive-page__note--probe">
-        <h3>공식 문서에 없는 것 둘 — 반환값과 첫 실행 시점</h3>
-        <p>
-          공식 페이지는 <code>add()</code>가 무엇을 돌려주는지, 그리고 <code>add()</code>를 부르는 그 순간 handler가 실행되는지를 적어
-          두지 않았습니다. 설치본에서 확인한 것은 두 가지입니다. <code>add()</code>는 <strong>MatchMedia 자신</strong>을 돌려주므로
-          이어서 <code>add()</code>를 붙일 수 있고, <strong>add()를 부르는 시점에 이미 조건이 맞으면 handler가 그 자리에서 한 번
-          실행됩니다.</strong>
-        </p>
-        <p className="responsive-page__provenance">
-          이 항목은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다. 반대로 말하면{' '}
-          <strong>add() 시점에 맞는 조건이 하나도 없으면 handler는 그때 실행되지 않습니다.</strong>
-        </p>
-      </div>
-
       <div className="responsive-page__warning">
         <h3>mobile 기기에서 조건이 안 맞는 것 같다면</h3>
         <p>

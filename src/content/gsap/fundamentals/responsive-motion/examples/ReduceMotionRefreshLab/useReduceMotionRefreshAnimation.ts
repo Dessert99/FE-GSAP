@@ -129,7 +129,7 @@ export function useReduceMotionRefreshAnimation() {
     setAppReduceMotion(next)
   }
 
-  // 지금 매치 중인 MatchMedia를 되돌리고 다시 실행시켜 새 앱 설정을 handler에 태운다
+  // 지금 매치 중인 MatchMedia를 되돌리고 다시 실행시켜 handler가 새 앱 설정을 읽게 한다
   function refresh() {
     gsap.matchMediaRefresh()
   }

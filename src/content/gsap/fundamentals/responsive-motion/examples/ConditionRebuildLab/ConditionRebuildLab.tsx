@@ -11,12 +11,14 @@ const conditionRows = [
 
 export function ConditionRebuildLab() {
   // runtime이 소유한 controls·descriptor·관찰값을 그대로 받아 화면에만 쓴다
-  const { scope, breakpoint, setBreakpoint, viewportWidth, observation, play } = useConditionRebuildAnimation()
+  const { scope, breakpoint, setBreakpoint, breakpointMax, viewportWidth, observation, play } = useConditionRebuildAnimation()
   const descriptor = observation.descriptor
 
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
   const code = descriptor
     ? `const mm = gsap.matchMedia(scope)
+// 재생 버튼이 같은 Tween을 제어하도록 현재 instance를 보관합니다.
+let tween
 
 mm.add(
   {
@@ -29,17 +31,21 @@ mm.add(
     // 지금 실행에서는 isWide=${descriptor.conditions.isWide}, isNarrow=${descriptor.conditions.isNarrow}, reduceMotion=${descriptor.conditions.reduceMotion}
 
     gsap.set('.${targetClassName}', { x: ${descriptor.x}, rotation: 0 })
-    gsap.to('.${targetClassName}', {
+    tween = gsap.to('.${targetClassName}', {
       rotation: ${descriptor.rotation},
       duration: ${descriptor.duration},
       paused: true,
     })
 
     return () => {
-      // 조건이 안 맞게 되면 GSAP이 먼저 위 두 줄을 되돌리고 이 함수를 부릅니다
+      // 이 실행이 정리될 때 GSAP 밖의 사용자 정리만 여기에 둡니다
     }
   },
-)`
+)
+
+function play() {
+  tween.restart()
+}`
     : '// MatchMedia가 아직 조건을 평가하지 않았습니다.'
 
   return (
@@ -113,7 +119,7 @@ mm.add(
             id="condition-rebuild-breakpoint"
             type="range"
             min={breakpointRange.min}
-            max={breakpointRange.max}
+            max={breakpointMax}
             step={breakpointRange.step}
             value={breakpoint}
             onChange={(event) => setBreakpoint(Number(event.target.value))}
@@ -125,7 +131,7 @@ mm.add(
         </fieldset>
       </div>
 
-      <p className="condition-rebuild-lab__status" role="status">
+      <p className="condition-rebuild-lab__status">
         breakpoint {breakpoint}px · 창 폭 {viewportWidth}px · handler {observation.runCount}회 실행
       </p>
 

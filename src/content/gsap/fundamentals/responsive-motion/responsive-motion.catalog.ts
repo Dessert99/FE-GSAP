@@ -5,8 +5,7 @@ export type SourceItem = {
   id: string
   officialItem: string
   source: 'match-media' | 'match-media-refresh'
-  /** 공식 문서에 게시된 주장인지, 설치본을 직접 실행·조회해 확인한 사실인지 구분한다. */
-  origin: 'official' | 'implementation'
+  origin: 'official'
   sectionId: string
 }
 
@@ -52,10 +51,4 @@ export const responsiveMotionSourceItems: SourceItem[] = [
 
   { id: 'MM-29', officialItem: '공식 페이지의 데모 셋(Demo using conditional syntax, simple demo, checkbox toggle)과 Examples는 CodePen 임베드라 본문에 코드가 없고, Examples는 CodePen Collection 링크만 제공한다.', source: 'match-media', origin: 'official', sectionId: 'boundaries' },
 
-  { id: 'MM-P1', officialItem: 'gsap.matchMedia()가 돌려주는 MatchMedia는 contexts 배열과 add()·revert(config?)·kill(revert?)를 가진다. 공식 페이지에는 MatchMedia의 멤버 목록이 없다.', source: 'match-media', origin: 'implementation', sectionId: 'auto-revert' },
-  { id: 'MM-P2', officialItem: 'mm.add()는 MatchMedia 자신을 돌려주므로 이어서 add()를 붙일 수 있다. 공식 페이지에는 add()의 반환값이 없다.', source: 'match-media', origin: 'implementation', sectionId: 'add-parameters' },
-  { id: 'MM-P3', officialItem: 'add()를 부르는 그 시점에 이미 조건이 맞으면 handler가 그 자리에서 한 번 실행된다. 공식 페이지에는 최초 실행 시점이 문장으로 적혀 있지 않다.', source: 'match-media', origin: 'implementation', sectionId: 'add-parameters' },
-  { id: 'MM-P4', officialItem: 'context.conditions 옆에 context.queries가 있어 조건 이름별 원본 query 문자열을 그대로 들고 있다. 공식 페이지에는 queries가 없다.', source: 'match-media', origin: 'implementation', sectionId: 'conditions-object' },
-  { id: 'MM-P5', officialItem: 'handler가 반환한 cleanup 함수는 조건이 안 맞게 될 때뿐 아니라 mm.revert()를 직접 부를 때도 실행되고, 그때 handler가 만든 tween의 값도 원래대로 돌아간다. 공식 페이지는 "더 이상 매치되지 않을 때"만 적어 두었다.', source: 'match-media', origin: 'implementation', sectionId: 'cleanup-order' },
-  { id: 'MMR-P1', officialItem: 'gsap.matchMediaRefresh()는 조건이 하나도 바뀌지 않아도 정리와 재실행을 일으키며 반환값은 undefined다. 공식 페이지에는 반환값이 없다.', source: 'match-media-refresh', origin: 'implementation', sectionId: 'reduced-motion-refresh' },
 ]
