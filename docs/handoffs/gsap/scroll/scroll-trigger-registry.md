@@ -151,3 +151,16 @@ releaseDecision: PASS
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- finding STR-A01 `BLOCK` → 수정: 세 local instance를 만든 직후 static `ScrollTrigger.refresh()`로 앱 전체 trigger를 재측정하던 호출을 제거했다. 각 instance는 생성 시 자체 측정된다.
+- finding STR-A02 `BLOCK` → 수정: 코드 패널을 plugin 등록·descriptor·DOM 조회·guarded killAll 재생성·정상 종료 instance cleanup이 포함된 독립 setup으로 교체했다.
+- finding STR-A03 `BLOCK` → 수정: 화면의 내부 coverage 수, 문서 경로, 단계 번호와 제작 용어를 제거했다.
+- Official Coverage: `PASS` — 7개 공식 항목을 2026-08-13 현재 문서와 다시 대조했다.
+- Runtime/Display Sync: `PASS` — 동일한 descriptor가 runtime 생성과 표시 코드의 id/start/end를 제공하며 exact-instance killAll guard와 종료 cleanup도 일치한다.
+- Build/Integration: `NOT VERIFIED` — 전역 build는 실행하지 않았다. TypeScript와 대상 범위 diff 검사는 exit 0이다.
+- Browser: `DEFERRED` — 사용자 승인 및 quality-gates에 따라 이번 감사에서 실조작하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 검증 대상이 아니다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점이 남아 있다.

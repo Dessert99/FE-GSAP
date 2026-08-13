@@ -1,4 +1,4 @@
-/** P44의 owned registry, navigator, guarded killAll 재생성을 소유한다. */
+/** 세 local trigger의 registry 조회와 안전한 killAll 재생성을 관리한다. */
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -30,7 +30,7 @@ export const registryDescriptor: ReadonlyArray<{
   { id: 'registry-gamma', label: 'Gamma', start: 'top 85%', end: 'bottom 15%' },
 ]
 
-// actual static and instance registry calls 전에 plugin을 GSAP core에 등록한다
+// static과 instance registry 호출 전에 plugin을 GSAP core에 등록한다
 gsap.registerPlugin(ScrollTrigger)
 
 /** local scroller 안에서만 세 trigger를 만들고 static registry를 snapshot으로 읽는다. */
@@ -68,6 +68,7 @@ export function useRegistryNavigatorRuntime() {
 
   // getAll, getById, next, previous, isScrolling, isTouch의 같은 시점 결과를 동결한다
   const readRegistry = (selectedId: RegistryId) => {
+    // 선택한 ID로 현재 registry instance를 한 번만 조회한다
     const selected = ScrollTrigger.getById(selectedId)
     setSnapshot({
       ids: ScrollTrigger.getAll().map((trigger) =>
@@ -84,8 +85,10 @@ export function useRegistryNavigatorRuntime() {
 
   // descriptor target가 모두 mount된 경우에만 standalone local instances를 만든다
   const createOwned = () => {
+    // 세 trigger가 공통으로 사용할 local scroller다
     const scroller = scrollerRef.current
     if (!scroller) return false
+    // 각 descriptor ID에 대응하는 mounted section을 같은 순서로 모은다
     const targets = registryDescriptor.map(
       (descriptor) => targetRefs.current[descriptor.id],
     )
@@ -99,19 +102,18 @@ export function useRegistryNavigatorRuntime() {
         end: descriptor.end,
       }),
     )
-    ScrollTrigger.refresh()
     return true
   }
 
   // mount 동안 owned local triggers만 만들고 unmount에서 그 instance만 kill한다
   useGSAP(
     () => {
-      // external registry와 섞이지 않는 local targets로 세 labelled trigger를 생성한다
+      // local targets로 세 labelled trigger를 생성한다
       if (!createOwned()) return undefined
       // initial selected lookup은 create 뒤 실제 registry에서 읽는다
       readRegistry('registry-alpha')
       setNotice(
-        '세 owned trigger를 만들었습니다. 목록 또는 이전·다음 순서를 읽어보세요.',
+        '세 trigger를 만들었습니다. 목록 또는 이전·다음 순서를 읽어보세요.',
       )
 
       // page dispose는 global killAll을 쓰지 않고 이 lab이 만든 instance만 정리한다
@@ -141,7 +143,7 @@ export function useRegistryNavigatorRuntime() {
       registered.some((trigger) => !owned.includes(trigger))
     ) {
       setNotice(
-        '외부 trigger가 있어 killAll을 실행하지 않았습니다. normal cleanup은 항상 owned-only입니다.',
+        '다른 trigger가 있어 killAll을 실행하지 않았습니다. unmount에서는 이 예제가 만든 instance만 정리합니다.',
       )
       return
     }
@@ -151,7 +153,7 @@ export function useRegistryNavigatorRuntime() {
     if (createOwned()) {
       readRegistry(snapshot.selectedId)
       setNotice(
-        'isolated registry에서 killAll() 뒤 세 owned trigger를 명시적으로 recreate했습니다.',
+        '이 페이지의 registry에서 killAll() 뒤 세 trigger를 다시 만들었습니다.',
       )
     }
   }
