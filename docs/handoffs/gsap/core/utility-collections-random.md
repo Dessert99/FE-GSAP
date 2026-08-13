@@ -213,3 +213,18 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- `SRC-UCR2` — **PASS**: random·shuffle·toArray 공식 페이지를 다시 조회했다.
+- `RDS-UCR2` — **PASS**: 각 lab의 runtime descriptor·snapshot·표시 코드를 정적으로 대조해 BLOCK이 없었다.
+- `PED-UCR2` — **ADDRESSED**: 첫 화면의 `coverage`·`기술 항목`·`실행 probe`를 배열 정규화·선택·섞기 순서와 직접 확인한 경계로 바꿨다.
+- `BROWSER-UCR2` — **DEFERRED**: 실제 control·키보드·반응형·motion 조작은 수행하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제됐다.
+- releaseDecision: `PASS with DEFERRED` — 정적 BLOCK은 없고 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`
