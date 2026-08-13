@@ -42,19 +42,18 @@ export function EndArraySection() {
       </div>
 
       <div className="non-css-page__warning">
-        <h3>길이가 다르면 짝이 있는 칸만 움직입니다</h3>
+        <h3>시작 배열이 더 길면 짝이 있는 칸만 움직입니다</h3>
         <p>
-          공식 문서의 문장입니다. <strong>두 배열의 길이가 다르면 양쪽 모두에 존재하는 index만 animate됩니다.</strong> 짝이 없는 칸은
-          계산에서 빠질 뿐, 사라지거나 0이 되지 않습니다.
+          공식 문서는 <strong>두 배열의 길이가 다르면 양쪽 모두에 존재하는 index만 animate된다</strong>고 설명합니다. 시작 배열이 더 긴
+          경우에는 목적지에 없는 칸이 계산에서 빠져 기존 값으로 남습니다. 반대 방향은 아래의 설치본 확인 결과처럼 다르게 동작합니다.
         </p>
       </div>
 
       <div className="non-css-page__note non-css-page__note--probe">
         <h3>공식 문서에 없는 동작 하나</h3>
         <p>
-          위 문장은 <strong>시작 배열이 더 길 때</strong>를 설명합니다. 반대로 <strong>목적지 배열이 더 길면</strong> 공식 문서가
-          말하지 않는 일이 벌어집니다. target 배열이 목적지 길이만큼 <strong>늘어나고</strong>, 새로 생긴 칸은 <code>0</code>에서부터
-          보간됩니다.
+          공식 문장은 길이 차이의 방향을 구분하지 않지만, <strong>목적지 배열이 더 긴 경우</strong> 설치된 GSAP 3.15.0의 결과는 그 설명과
+          달랐습니다. target 배열이 목적지 길이만큼 <strong>늘어나고</strong>, 새로 생긴 칸은 <code>0</code>에서부터 보간됩니다.
         </p>
         <p>
           예를 들어 <code>[10, 20]</code>을 <code>endArray: [0, 0, 99, 99]</code>로 보내면 progress 0.25에서 배열은{' '}
@@ -69,7 +68,7 @@ export function EndArraySection() {
       <NumericArrayLab />
 
       <p className="non-css-page__note">
-        예제의 <code>ease</code>와 <code>progress</code>는 이 페이지가 소유하지 않습니다. ease 곡선의 의미는{' '}
+        이 예제에서는 <code>ease</code>와 <code>progress</code>를 배열의 중간값을 관찰하는 데만 씁니다. ease 곡선의 의미는{' '}
         <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>가, <code>progress()</code>의 정확한 동작은{' '}
         <a href={toHref('/fundamentals/tween-playhead')}>Tween playhead 페이지</a>가 다룹니다.
       </p>

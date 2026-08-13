@@ -149,7 +149,7 @@ arr // [${rows.map((row) => row.current).join(', ')}]`
           <h4>실제로 언제 쓰나요?</h4>
           <p>
             좌표 배열, 색 채널 배열, 그래프 데이터처럼 <strong>숫자 여러 개가 한 묶음</strong>인 값을 한 번에 움직일 때 씁니다. canvas나
-            WebGL처럼 DOM이 아닌 곳에 그리는 경우, 배열을 보간해 두고 <code>onUpdate</code>에서 그리는 방식이 자주 쓰입니다.
+            WebGL처럼 DOM이 아닌 곳에 그리는 경우에는 배열을 보간하고 <code>onUpdate</code>에서 화면을 다시 그릴 수 있습니다.
           </p>
         </article>
       </div>

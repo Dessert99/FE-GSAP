@@ -71,14 +71,16 @@ export function useSvgAttributeAnimation() {
 
   useGSAP(
     () => {
-      // 관찰과 실행이 같은 element를 가리키도록 선택자를 한 번만 풀어 둔다
-      const circle = gsap.utils.toArray<SVGCircleElement>(descriptor.selector)[0]
+      // 관찰값을 읽을 element는 예제 범위 안에서 찾고 GSAP 호출에는 표시 코드와 같은 선택자를 쓴다
+      const circle = scope.current?.querySelector<SVGCircleElement>(descriptor.selector)
+      // 예제 DOM이 아직 준비되지 않았으면 Tween을 만들지 않는다
+      if (!circle) return
       // 이전 실행이 남긴 반지름을 지워 항상 같은 크기에서 출발시킨다
-      gsap.set(circle, { attr: descriptor.baselineAttr })
+      gsap.set(descriptor.selector, { attr: descriptor.baselineAttr })
       // CSS transform은 여기서 한 번만 걸고 이후 어떤 Tween도 건드리지 않는다 — 채널 비교의 고정 기준이다
-      gsap.set(circle, descriptor.fixedTransform)
+      gsap.set(descriptor.selector, descriptor.fixedTransform)
       // attr 안의 r만 움직이는 paused Tween — 실행 버튼이 이 Tween을 재생한다
-      const tween = gsap.to(circle, {
+      const tween = gsap.to(descriptor.selector, {
         attr: descriptor.targetAttr,
         duration: descriptor.effectiveDuration,
         ease: 'none',
@@ -113,6 +115,7 @@ export function useSvgAttributeAnimation() {
     // runtime 준비 전 click은 화면을 바꾸지 않는다
     if (!tween) return
 
+    // 같은 시작 반지름에서 다시 관찰할 수 있도록 준비한 Tween을 처음부터 재생한다
     tween.restart()
     setStatus(
       reducedMotion

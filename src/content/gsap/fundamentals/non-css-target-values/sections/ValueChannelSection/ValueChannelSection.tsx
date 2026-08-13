@@ -10,7 +10,7 @@ const channels = [
     target: 'DOM element',
     destination: 'vars 맨 바깥에 그대로',
     example: "gsap.to('.box', { x: 200, opacity: 0 })",
-    caution: '이 페이지가 소유하지 않습니다. CSS 값과 transform은 별도 페이지가 다룹니다.',
+    caution: 'CSS 값과 transform은 별도 페이지에서 설명합니다.',
     owner: null,
   },
   {
@@ -81,7 +81,7 @@ export function ValueChannelSection() {
               <tr key={channel.id}>
                 <th scope="row">
                   {channel.label}
-                  {channel.owner ? <small>{channel.owner} 문서</small> : <small>다른 페이지 소유</small>}
+                  {channel.owner ? <small>{channel.owner} 문서</small> : <small>비교용</small>}
                 </th>
                 <td>{channel.target}</td>
                 <td>
@@ -98,8 +98,8 @@ export function ValueChannelSection() {
       </div>
 
       <p className="non-css-page__note">
-        가운데 행과 아래 행이 이 페이지의 내용입니다. 맨 위 CSS 행은 <strong>비교용</strong>으로만 두었습니다. CSS 값과 transform이
-        실제로 어떻게 처리되는지는 <a href={toHref('/fundamentals/css-animation')}>CSS animation 페이지</a>가 전부 다룹니다.
+        가운데 행과 아래 행이 이 페이지의 내용입니다. 맨 위 CSS 행은 <strong>비교용</strong>입니다. CSS 값과 transform이 실제로
+        어떻게 처리되는지는 <a href={toHref('/fundamentals/css-animation')}>CSS animation 페이지</a>에서 확인할 수 있습니다.
       </p>
     </section>
   )

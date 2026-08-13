@@ -99,9 +99,8 @@ export function AttrSyntaxSection() {
       <div className="non-css-page__warning">
         <h3>단위를 바꾸려고 하면 안 됩니다</h3>
         <p>
-          CSS에서는 <code>width</code>를 <code>px</code>에서 <code>%</code>로 바꾸는 애니메이션이 됩니다. 하지만{' '}
-          <strong>attribute에서는 단위 변환이 없습니다.</strong> <code>50%</code>에서 시작했다면 <code>%</code> 단위 안에서만
-          움직입니다. 시작값과 목표값의 단위를 맞춰 두는 것이 안전합니다.
+          <strong>attribute Tween은 단위를 변환하지 않습니다.</strong> 공식 문서가 든 예처럼 <code>px</code>에서 <code>%</code>로
+          바꾸지 말고, 시작값과 목표값에 같은 단위를 사용하세요.
         </p>
       </div>
     </section>

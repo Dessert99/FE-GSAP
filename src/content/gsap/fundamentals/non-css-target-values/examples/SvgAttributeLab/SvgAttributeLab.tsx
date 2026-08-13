@@ -8,25 +8,39 @@ export function SvgAttributeLab() {
     useSvgAttributeAnimation()
 
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `// 1. 시작 반지름을 attr 채널로 되돌립니다.
+  const code = `const circle = containerRef.current.querySelector('${descriptor.selector}')
+
+// 1. 시작 반지름을 attr 채널로 되돌립니다.
 gsap.set('${descriptor.selector}', { attr: { r: ${descriptor.baselineAttr.r} } })
 
-// 2. CSS transform은 여기서 한 번만 겁니다. 이후 어떤 Tween도 건드리지 않습니다.
+// 2. CSS transform은 Tween을 준비할 때 고정하고 이후 Tween에서는 건드리지 않습니다.
 gsap.set('${descriptor.selector}', { x: ${descriptor.fixedTransform.x} })
 
-// 3. attr 안의 r만 움직입니다.
-gsap.to('${descriptor.selector}', {
+// 3. attr 안의 r만 움직이는 paused Tween을 준비합니다.
+const tween = gsap.to('${descriptor.selector}', {
   attr: { r: ${descriptor.targetAttr.r} },
   duration: ${descriptor.effectiveDuration},
   ease: 'none',
-})`
+  paused: true,
+  onUpdate() {
+    setObservation({
+      currentRadius: Number(circle.getAttribute('r')),
+      transformX: Number.parseFloat(String(gsap.getProperty(circle, 'x'))),
+    })
+  },
+})
+
+// 4. 실행 버튼을 누르면 준비한 Tween을 처음부터 재생합니다.
+function run() {
+  tween.restart()
+}`
 
   return (
     <section className="svg-attribute-lab" aria-labelledby="svg-attribute-lab-title">
       <h3 id="svg-attribute-lab-title">attribute만 움직이고 transform은 그대로 두기</h3>
       <p className="svg-attribute-lab__goal">
-        아래 원은 <code>r</code> attribute만 바뀝니다. 같은 원에 걸린 CSS transform <code>x</code>는 처음 한 번만 설정하고 건드리지
-        않습니다. 두 숫자가 어떻게 따로 노는지 확인해 보세요.
+        아래 원은 <code>r</code> attribute만 바뀝니다. 같은 원의 CSS transform <code>x</code>는 Tween을 준비할 때 고정하고 반지름
+        Tween에서는 건드리지 않습니다. 두 숫자를 함께 확인해 보세요.
       </p>
 
       <div className="svg-attribute-lab__body" ref={scope}>
@@ -145,8 +159,9 @@ gsap.to('${descriptor.selector}', {
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
-            SVG 도형의 실제 모양을 바꿔야 할 때 씁니다. 원의 반지름, 사각형의 폭, 선의 좌표처럼 <strong>CSS로는 건드릴 수 없는 값</strong>
-            들입니다. 반면 도형 전체를 옮기거나 회전시키는 것은 CSS transform이 더 가볍습니다. 둘을 같은 도형에 함께 쓰는 일이 흔합니다.
+            SVG 도형의 attribute 자체를 바꿔야 할 때 씁니다. 원의 <code>r</code>, 사각형의 <code>width</code>, 선의 좌표를{' '}
+            <code>attr</code> 안에 적으면 태그의 값이 바뀝니다. 도형 전체를 옮기거나 회전할 때는 예제의 <code>x</code>처럼 transform 값을
+            바깥에 적습니다.
           </p>
         </article>
       </div>

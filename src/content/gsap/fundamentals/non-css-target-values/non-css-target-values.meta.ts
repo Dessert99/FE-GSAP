@@ -5,7 +5,7 @@ export const nonCssTargetValuesMeta = {
   summary:
     'GSAP은 CSS property만 움직이는 게 아닙니다. element의 attribute도, 숫자 배열의 각 칸도 같은 Tween으로 보간합니다. 달라지는 건 값을 어디에 적느냐입니다.',
   sourcePath: 'src/content/gsap/fundamentals/non-css-target-values/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Attributes', href: 'https://gsap.com/docs/v3/GSAP/CorePlugins/Attributes' },
     { label: 'EndArray', href: 'https://gsap.com/docs/v3/GSAP/CorePlugins/EndArray' },
