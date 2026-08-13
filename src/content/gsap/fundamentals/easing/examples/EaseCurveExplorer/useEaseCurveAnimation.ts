@@ -13,6 +13,8 @@ export type EaseCurveDescriptor = { x: number; duration: number; easeExpression:
 
 // curve와 동등한 표를 그릴 때 사용하는 고정 progress 지점이다.
 const sampleProgresses = [0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1] as const
+// bounce·elastic의 굴곡도 놓치지 않도록 SVG에 사용할 progress를 더 촘촘히 나눈다.
+const graphProgresses = Array.from({ length: 65 }, (_, index) => index / 64)
 
 /** family와 variant를 실제 Tween과 표시 코드가 함께 쓰는 ease 문자열로 정규화한다. */
 function createEaseExpression(family: EaseFamily, variant: EaseVariant) {
@@ -41,6 +43,8 @@ export function useEaseCurveAnimation() {
   const easeFunction = gsap.parseEase(easeExpression)
   // curve를 색에 의존하지 않는 표와 SVG 양쪽에서 표시할 sample이다.
   const samples = sampleProgresses.map((sampleProgress) => ({ progress: sampleProgress, value: easeFunction(sampleProgress) }))
+  // SVG는 표보다 촘촘한 같은 ease 계산값으로 실제 굴곡을 가깝게 그린다.
+  const graphSamples = graphProgresses.map((sampleProgress) => ({ progress: sampleProgress, value: easeFunction(sampleProgress) }))
   // 현재 slider 위치에서 target에 적용되는 eased value다.
   const currentValue = easeFunction(progress)
 
@@ -67,6 +71,7 @@ export function useEaseCurveAnimation() {
     setProgress,
     descriptor,
     samples,
+    graphSamples,
     currentValue,
     replay: () => setRunKey((key) => key + 1),
   }

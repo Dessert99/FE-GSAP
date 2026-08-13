@@ -55,6 +55,7 @@
 
 .easing-page__path code {
   color: var(--color-accent);
+  overflow-wrap: anywhere;
 }
 
 .easing-page__reviewed {
@@ -120,13 +121,6 @@
 
 .easing-page__coverage strong {
   font-size: 14px;
-}
-
-.easing-page__coverage span {
-  color: var(--color-muted);
-  font-size: 11px;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
 }
 
 .easing-page__section {
@@ -251,6 +245,15 @@
   border: 1px solid var(--color-border);
   border-radius: 12px;
   background: rgb(255 255 255 / 2%);
+}
+
+.easing-page__boundary a {
+  color: var(--color-accent);
+}
+
+.easing-page__boundary a:focus-visible {
+  outline: 2px solid var(--color-accent-strong);
+  outline-offset: 3px;
 }
 
 @media (max-width: 720px) {

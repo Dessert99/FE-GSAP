@@ -1,4 +1,5 @@
-/** per-tween·global·Timeline default와 외부 ease package의 소유 경계를 정리한다. */
+/** per-tween·global·Timeline default와 Core 밖의 ease를 구분한다. */
+import { toHref } from '../../../../../../app/routes'
 import { externalEaseFamilies } from '../../easing.catalog'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 
@@ -11,7 +12,7 @@ const timeline = gsap.timeline({ defaults: { ease: 'sine.inOut' } })
 gsap.to('.box', { x: 160, ease: 'none' }) // 이 Tween만 override`}</code></pre>
       <p>GSAP의 기본 ease는 <code>power1.out</code>입니다. global default는 앞으로 만들어질 Tween에, Timeline default는 그 children에 적용되고 한 Tween의 명시적 ease가 다시 override합니다.</p>
       <ul className="easing-page__boundary-list">{externalEaseFamilies.map((ease) => <li key={ease}>{ease}</li>)}</ul>
-      <p className="easing-page__boundary">rough·slow·expoScale은 EasePack, Custom 계열은 별도 package입니다. 이 페이지는 loading이나 각 option을 설명하지 않고 전용 owner 페이지로 넘깁니다.</p>
+      <p className="easing-page__boundary">rough·slow·expoScale은 EasePack, Custom 계열은 별도 package입니다. 불러오고 등록하는 방법은 <a href={toHref('/fundamentals/installation')}>설치 페이지</a>에서, CustomBounce·CustomWiggle의 조절값은 <a href={toHref('/fundamentals/custom-bounce-wiggle')}>튕김과 흔들림</a>에서 이어서 확인하세요.</p>
     </section>
   )
 }
