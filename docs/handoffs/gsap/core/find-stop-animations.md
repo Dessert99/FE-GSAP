@@ -119,7 +119,7 @@ property catalog, ease visualizer, plugin, installation 모듈은 추가하지 �
 | sourceItemId | localEvidence | localStatus |
 | --- | --- | --- |
 | GID-01 | `LostReferenceSection.tsx` id 문단과 `idCall` 코드 블록 | covered |
-| GID-02 | `LostReferenceSection.tsx` "왜 변수 대신 이름표가 필요할까요?" note — 공식 문장 인용 | covered |
+| GID-02 | `LostReferenceSection.tsx` "왜 변수 대신 id가 필요할까요?" note — 공식 문장 인용 | covered |
 | GID-03 | `FindByIdSection.tsx` 반환값 표 두 행 | covered |
 | GID-04 | `FindByIdSection.tsx` `officialCall` 원문 코드 블록 | covered |
 | GID-05 | `FindByIdSection.tsx` GC 경고 블록 첫 문단 | covered |
@@ -221,11 +221,11 @@ src/app/routes.ts   (이 컨텍스트는 건드리지 않는다 — 저장소 �
 - controls: 처음부터 재생 · 일시정지 버튼(모션 허용 시), 재생 헤드 slider(모션 감소 시), 지금 조회하기 버튼
 - runtimeSource: `useTweenRegistryAnimation.ts`
 - sourcePath: `examples/TweenRegistryLab/useTweenRegistryAnimation.ts`
-- runtimeOwnership: hook이 selector, `tweenId`, 목표 x, duration, autoplay 여부를 담은 단일 descriptor와 paused Tween 하나를 소유한다. `getById` · `getTweensOf` · `isTweening`을 한 handler 안에서 순서대로 호출하고 결과를 `RegistryQuery`로 기록한다. scoped `useGSAP` 한 개, `revertOnUpdate: true`.
+- runtimeOwnership: hook이 selector, `tweenId`, 목표 x, duration, 재생 control 노출 여부를 담은 단일 descriptor와 paused Tween 하나를 소유한다. persistent Tween ref 없이 모든 control이 `getById`로 instance를 다시 찾고, 세 조회 API의 결과를 `RegistryQuery`로 기록한다. scoped `useGSAP` 한 개, `revertOnUpdate: true`.
 - displayOwnership: TSX가 descriptor와 마지막 조회 결과를 코드 문법으로만 직렬화하고 controls·관찰 패널·학습 문단을 그린다. 조회를 다시 실행하거나 결과를 추론하지 않는다.
 - coveredSourceItemIds: GID-01, GID-03, GTO-01, IST-01, IST-02, FS-P3
 - accessibility: native labeled 버튼과 slider, 조회 결과는 `dt`/`dd`와 `output aria-labelledby`, 상태는 `role="status"` 하나, 좁은 화면에서 단일 열
-- motion: `useReducedMotion()`이 `autoplay`를 끄고 자동 재생 대신 slider 조작으로 대체한다. 어떤 경우에도 페이지 진입 시 자동 재생하지 않는다.
+- motion: 페이지 진입 시 자동 재생하지 않는다. `useReducedMotion()`이 true면 재생·일시정지 버튼 대신 slider로만 재생 헤드를 옮긴다.
 
 #### `KillScopeLab`
 
@@ -317,3 +317,64 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+이 절은 위 구현 당시 판정보다 최신이며 현재 릴리스 판정은 이 절을 따른다. 공식 조회·중단 문서 여섯 페이지의 현재 HTML을 다시 대조하고, 로컬 GSAP 3.15.0에서 target/property kill, revert registry, 숫자 id를 재확인했다.
+
+### auditTarget
+
+- route: `/fundamentals/find-stop-animations`
+- localPath: `src/content/gsap/fundamentals/find-stop-animations/**`
+- comparedAt: `2026-08-13` (Asia/Seoul)
+- evidenceBoundary: 공식 웹 원문, 설치된 GSAP 3.15.0 probe, 대상 파일 정적 분석을 사용했다. 브라우저와 전역 build·Storybook은 이 재감사에서 실행하지 않았다.
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| FACT-FS-001 | BLOCK → ADDRESSED → PASS | meta와 `LostReferenceSection`은 반환값을 변수에 담지 않으면 코드에서 Tween을 조작할 방법이 사라지고 GSAP이 계속 기억한다고 일반화했다. 공식 문서는 완료 뒤 자동 release 경계를 설명하며 이 페이지 자체도 id/target 조회를 가르친다. | 페이지의 핵심 조회 API와 도입 설명이 모순된다. | 직접 instance method를 부를 변수만 없는 상태로 범위를 좁히고 완료 전 조회 경계를 공식 문서와 다시 대조했다. |
+| RDS-FS-001 | BLOCK → ADDRESSED → PASS (정적) | 세 hook의 `gsap.utils.toArray(selector)[0]`가 document 전체에서 target을 찾았고, 세 코드 패널은 정의하지 않은 `box`를 조회에 사용하면서 runtime과 달리 selector string을 `gsap.to()`에 넘겼다. | 여러 예제가 같은 class를 가질 때 잘못된 element를 조작할 수 있고 표시 코드는 실행되지 않는다. | 모두 `scope.current`로 selector를 제한하고 코드 패널의 `box` 선언과 실제 target을 정적으로 다시 대조했다. |
+| RDS-FS-002 | BLOCK → ADDRESSED → PASS (정적) | `TweenRegistryLab`은 “변수 없이 다시 찾기”를 목표로 하지만 runtime은 `tweenRef`로 재생·일시정지·seek를 수행했고 코드 패널은 이 제어와 `onUpdate`를 생략했다. | 학습 목표와 실제 runtime이 반대이며 runtime/display가 분리된다. | persistent Tween ref를 제거하고 모든 control과 코드 패널이 `getById()`를 쓰는지 다시 추적했다. |
+| RDS-FS-003 | BLOCK → ADDRESSED → PASS (정적) | Kill/Revert lab에서 중단 뒤 slider를 더 움직이면 실제 순서는 `progress(at stop) → kill/revert → progress(current)`지만 코드 패널은 `progress(current) → kill/revert`로 표시했다. | 핵심인 “중단 뒤 progress가 더 이상 값을 쓰지 않는다”는 실험을 반대 순서로 가르친다. | 중단 순간 progress를 기록하고 표시 코드가 중단 전후 호출 순서를 그대로 직렬화하는지 다시 확인했다. |
+| MOTION-FS-001 | BLOCK → ADDRESSED → PASS (정적) | Registry descriptor의 `autoplay`는 GSAP autoplay가 아니라 재생 버튼 노출 여부였고, 모션 감소 안내도 존재하지 않는 자동 재생을 끈다고 설명했다. reduced-motion 상태에서 “움직이는 도중 조회” 지시도 실행할 수 없었다. | motion 계약과 UI 설명이 실제 동작과 어긋난다. | `allowPlayback`과 slider 안내를 runtime·표시 문장·control에서 다시 대조했다. |
+| PED-FS-001 | BLOCK → ADDRESSED → PASS | 학습자 화면에 id “이름표”, 참조 “손잡이”, Tween을 손에 든다는 비유와 property 목록을 제거한다는 내부 구현 단정이 반복됐다. | 공식 API 계약보다 비유와 추정 구현이 앞선다. | id·변수 참조·조회 결과를 직접 설명하고 property kill 문장을 관찰 결과로 좁힌 뒤 본문을 다시 읽었다. |
+| PED-FS-002 | BLOCK → ADDRESSED → PASS | `PageCoverage`가 `source item`을 `기술 항목`으로 번역했지만 내부 coverage 단위와 개수를 계속 노출했다. | 조회·중단 API 학습 전에 콘텐츠 제작 구조를 해석하게 했다. | 내부 항목 개수를 제거하고 `공식 문서 학습 범위`, `설명 확인`, `공식 설명 확인`으로 교체한 뒤 학습자 표시 문자열을 재확인했다. |
+| TYPE-FS-001 | PASS | 최종 수정 후 `npx tsc --noEmit --pretty false`가 exit 0으로 완료됐고 `git diff --check`도 통과했다. GSAP 3.15.0 plain-object probe에서 partial kill 후 1개/`x=110`/`opacity=0.2`, revert 후 원래 값 30/조회 0개, 숫자 id exact-match를 재현했다. | TypeScript·정적 diff·비DOM runtime 검증 통과. | none |
+| BROWSER-FS-001 | NOT VERIFIED | 이번 재감사에서는 브라우저 control 조작, keyboard, 320/390px, reduced-motion 전환과 DOM CSSPlugin의 `x` 부분 kill을 실행하지 않았다. | 실제 DOM 값·inline style·반응형은 통합 검수 전 확정할 수 없다. | 메인 담당자가 세 lab의 모든 control, 특히 `global-prop`·`instance-prop`과 kill/revert inline style을 확인한다. |
+| BUILD-FS-001 | PASS | 메인 통합에서 2026-08-13 `npm run build`와 `npm run build-storybook`을 실행해 각각 exit 0을 확인했다. | 저장소 전체 TypeScript·Vite·Storybook 통합을 확인했다. | none |
+
+### 공식 재대조 URL
+
+- `https://gsap.com/docs/v3/GSAP/gsap.getById()/`
+- `https://gsap.com/docs/v3/GSAP/gsap.getTweensOf()/`
+- `https://gsap.com/docs/v3/GSAP/gsap.isTweening()/`
+- `https://gsap.com/docs/v3/GSAP/gsap.killTweensOf()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/kill()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/revert()/`
+
+### changesApplied
+
+- `FACT-FS-001`: meta와 `LostReferenceSection.tsx`
+- `RDS-FS-001`~`RDS-FS-003`: 세 lab의 runtime·serializer
+- `MOTION-FS-001`: `TweenRegistryLab` runtime·control·안내 문장
+- `PED-FS-001`: 관련 section과 세 lab 학습 문단
+- `PED-FS-002`: `PageCoverage.tsx`
+
+### verification
+
+- Fact Accuracy: 여섯 공식 문서와 설치본 probe 결과를 수정 문장과 다시 대조했다.
+- Runtime/Display Sync: 세 lab의 target scope, 조회 기반 control, 중단 전후 호출 순서를 정적으로 다시 추적했다.
+- Structure/Type: `npx tsc --noEmit --pretty false`와 대상 `git diff --check`가 exit 0이었다.
+- Browser matrix: NOT VERIFIED.
+- Vite build·Storybook build: PASS — 메인 통합에서 2026-08-13 각각 exit 0.
+
+### unresolved
+
+- BLOCK: none
+- ADVISORY: none
+- NOT VERIFIED: `BROWSER-FS-001`
+
+### overallDecision
+
+`NOT VERIFIED` — 공식 정확성, 학습 변환, runtime/display 정적 동기화, TypeScript와 비DOM runtime 검증의 BLOCK은 해결했고 통합 build·Storybook도 통과했지만 브라우저 관점은 확인되지 않았다.

@@ -21,11 +21,30 @@ function formatStopCall(mode: KillMode, property: string) {
 
 export function KillScopeLab() {
   // runtime이 소유한 descriptor·관찰값·조작 action을 그대로 받아 화면에만 쓴다
-  const { scope, descriptor, mode, setMode, progress, appliedMode, observation, status, seek, applyStop, reset } =
-    useKillScopeAnimation()
+  const {
+    scope,
+    descriptor,
+    mode,
+    setMode,
+    progress,
+    appliedMode,
+    appliedProgress,
+    observation,
+    status,
+    seek,
+    applyStop,
+    reset,
+  } = useKillScopeAnimation()
 
+  // 중단 전후 slider 이동을 실제 실행 순서대로 코드 패널에 표시한다
+  const progressBeforeStop = appliedProgress ?? descriptor.progress
+  // 중단 뒤 slider를 더 옮긴 경우에만 두 번째 progress 호출을 표시한다
+  const progressAfterStop = appliedMode && descriptor.progress !== appliedProgress ? `\ntween.progress(${descriptor.progress})` : ''
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `const tween = gsap.to('${descriptor.selector}', {
+  const code = `const box = gsap.utils.toArray('${descriptor.selector}', scope.current)[0]
+gsap.set(box, { x: 0, opacity: 1 })
+
+const tween = gsap.to(box, {
   x: ${descriptor.targetX},
   opacity: ${descriptor.targetOpacity},
   duration: ${descriptor.duration},
@@ -33,8 +52,8 @@ export function KillScopeLab() {
   paused: true,
 })
 
-tween.progress(${descriptor.progress})
-${appliedMode ? formatStopCall(appliedMode, descriptor.killedProperty) : `// 아직 중단하지 않았습니다 — 고른 범위: ${formatStopCall(mode, descriptor.killedProperty)}`}
+tween.progress(${progressBeforeStop})
+${appliedMode ? `${formatStopCall(appliedMode, descriptor.killedProperty)}${progressAfterStop}` : `// 아직 중단하지 않았습니다 — 고른 범위: ${formatStopCall(mode, descriptor.killedProperty)}`}
 
 gsap.getProperty(box, 'x')       // → ${observation.x}
 gsap.getProperty(box, 'opacity') // → ${observation.opacity}
@@ -138,8 +157,8 @@ gsap.getTweensOf(box).length     // → ${observation.remainingTweens}`
         <article>
           <h4>무엇이 달라졌나요?</h4>
           <p>
-            범위를 좁힌 두 가지(<code>x만</code>)로 멈추면 상자는 <strong>제자리에 선 채로 계속 흐려집니다.</strong> 범위를 좁히지 않으면
-            헤드를 아무리 옮겨도 상자는 꿈쩍하지 않습니다.
+            범위를 좁힌 두 가지(<code>x만</code>)로 멈춘 뒤 헤드를 더 옮기면 <code>x</code>는 유지되고 <code>opacity</code>만
+            바뀝니다. 범위를 좁히지 않으면 헤드를 더 옮겨도 두 값 모두 유지됩니다.
           </p>
         </article>
         <article>
@@ -153,8 +172,8 @@ gsap.getTweensOf(box).length     // → ${observation.remainingTweens}`
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
             공식 문서는 <code>propertiesList</code>의 기본값이 <code>"all"</code>이고, 이름을 콤마로 나열하면{' '}
-            <strong>그 property만 더 이상 animate하지 않는다</strong>고 밝힙니다. Tween은 property 목록을 들고 있고, kill은 그 목록에서
-            항목을 빼는 일입니다. 목록이 비면 Tween 자체가 사라집니다.
+            <strong>그 property만 더 이상 animate하지 않는다</strong>고 밝힙니다. 실행 결과에서도 <code>x</code>만 중단하면 Tween이
+            조회에 남아 <code>opacity</code>를 계속 갱신하고, 전체를 중단하면 조회 결과가 0개가 됩니다.
           </p>
         </article>
         <article>

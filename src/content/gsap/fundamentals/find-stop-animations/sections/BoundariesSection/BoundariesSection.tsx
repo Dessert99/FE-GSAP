@@ -1,4 +1,4 @@
-/** 여섯 공식 페이지가 게시하지 않은 범위와 다른 페이지가 소유한 개념을 명시해 추측을 막는다. */
+/** 여섯 공식 페이지가 게시하지 않은 범위와 다른 페이지에서 설명하는 개념을 명시해 추측을 막는다. */
 import { toHref } from '../../../../../../app/routes'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 
@@ -11,7 +11,7 @@ const unpublished = [
   'garbage collection이 정확히 몇 프레임 뒤에 일어나는지',
 ]
 
-// 이 페이지가 전제로만 쓰고 설명 소유권은 다른 페이지에 있는 개념들
+// 이 페이지가 전제로만 쓰고 자세한 설명은 다른 페이지에 있는 개념들
 const otherOwners = [
   { label: 'Tween을 만드는 방법과 vars 전체 명세 (id도 vars의 한 자리다)', href: '/fundamentals/gsap-to' },
   { label: 'progress() · pause() · restart() 같은 재생 헤드 조작', href: '/fundamentals/tween-playhead' },
@@ -43,7 +43,7 @@ export function BoundariesSection() {
 
         <div>
           <div className="find-stop-page__subheading">
-            <h3>다른 페이지가 소유한 개념</h3>
+            <h3>다른 페이지에서 설명하는 개념</h3>
             <p>이 페이지는 아래 내용을 전제로만 사용했습니다.</p>
           </div>
           <ul className="find-stop-page__list">
@@ -64,7 +64,7 @@ export function BoundariesSection() {
         </p>
         <p>
           React에서 <code>useGSAP()</code>가 컴포넌트 정리 시점에 자동으로 되돌려 주는 범위도 이 페이지의 여섯 문서에는 없습니다. 이
-          페이지의 예제들도 그 자동 정리를 쓰고 있지만, 설명 소유권은 React 통합 문서 쪽입니다.
+          페이지의 예제들도 그 자동 정리를 쓰고 있지만, 자세한 계약은 React 통합 문서에서 설명합니다.
         </p>
       </div>
     </section>

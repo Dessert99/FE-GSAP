@@ -4,27 +4,39 @@ import './TweenRegistryLab.css'
 
 export function TweenRegistryLab() {
   // runtime이 소유한 descriptor·조회 결과·조작 action을 그대로 받아 화면에만 쓴다
-  const { scope, descriptor, progress, query, status, reducedMotion, runQuery, play, pause, seek } =
+  const { scope, descriptor, progress, query, status, reducedMotion, runQuery, play, pause, seek, reset } =
     useTweenRegistryAnimation()
 
   // 실행에 쓰인 descriptor와 마지막 조회 결과를 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `// 변수에 담지 않고 id만 붙여 만듭니다.
-gsap.to('${descriptor.selector}', {
+  const code = `const box = gsap.utils.toArray('${descriptor.selector}', scope.current)[0]
+gsap.set(box, { x: 0 })
+
+// 반환값을 보관하지 않고 id만 붙여 만듭니다.
+gsap.to(box, {
   x: ${descriptor.targetX},
   duration: ${descriptor.duration},
   ease: 'none',
   id: '${descriptor.tweenId}',
   paused: true,
+  onUpdate() {
+    const tween = gsap.getById('${descriptor.tweenId}')
+    setProgress(Number(tween?.progress().toFixed(2) ?? 0))
+  },
 })
 
-// 나중에, 변수 없이 다시 찾습니다.
+// 재생·일시정지·slider도 id로 다시 찾은 Tween을 조작합니다.
+function play() { gsap.getById('${descriptor.tweenId}')?.restart() }
+function pause() { gsap.getById('${descriptor.tweenId}')?.pause() }
+function seek(value) { gsap.getById('${descriptor.tweenId}')?.progress(value) }
+
+// 조회 버튼은 세 질문을 같은 순간에 실행합니다.
 gsap.getById('${descriptor.tweenId}')  // → ${query ? query.byId : '아직 조회하지 않음'}
 gsap.getTweensOf(box).length         // → ${query ? query.tweensOfCount : '아직 조회하지 않음'}
 gsap.isTweening(box)                 // → ${query ? String(query.tweening) : '아직 조회하지 않음'}`
 
   return (
     <section className="tween-registry-lab" aria-labelledby="tween-registry-lab-title">
-      <h3 id="tween-registry-lab-title">변수 없이 Tween을 다시 잡아 보기</h3>
+      <h3 id="tween-registry-lab-title">변수 없이 Tween을 다시 조회하기</h3>
       <p className="tween-registry-lab__goal">
         아래 상자를 움직이는 Tween은 어떤 변수에도 담겨 있지 않습니다. <code>id</code> 하나와 상자 element만 가지고 세 가지 방법으로
         찾아보고, 각 방법이 서로 다른 답을 주는 순간을 확인하세요.
@@ -42,7 +54,7 @@ gsap.isTweening(box)                 // → ${query ? String(query.tweening) : '
         <fieldset className="tween-registry-lab__controls">
           <legend>조작</legend>
 
-          {descriptor.autoplay ? (
+          {descriptor.allowPlayback ? (
             <>
               <button type="button" onClick={play}>
                 처음부터 재생
@@ -70,12 +82,15 @@ gsap.isTweening(box)                 // → ${query ? String(query.tweening) : '
           <button type="button" onClick={runQuery}>
             지금 조회하기
           </button>
+          <button type="button" onClick={reset}>
+            Tween 새로 만들기
+          </button>
         </fieldset>
       </div>
 
       <p className="tween-registry-lab__status" role="status">
         {status}
-        {reducedMotion ? ' (모션 감소 설정이라 자동 재생 대신 슬라이더로 재생 헤드를 옮깁니다.)' : ''}
+        {reducedMotion ? ' (모션 감소 설정이라 재생 버튼 대신 슬라이더로 재생 헤드를 옮깁니다.)' : ''}
       </p>
 
       <dl className="tween-registry-lab__observation">
@@ -120,8 +135,17 @@ gsap.isTweening(box)                 // → ${query ? String(query.tweening) : '
         <article>
           <h4>무엇을 봐야 하나요?</h4>
           <p>
-            움직이는 <strong>도중에</strong> 한 번, <strong>일시정지한 뒤</strong> 한 번 조회해 보세요. <code>getById</code>와{' '}
-            <code>getTweensOf</code>는 두 번 다 찾아내지만 <code>isTweening</code>만 <strong>true → false</strong>로 바뀝니다.
+            {reducedMotion ? (
+              <>
+                슬라이더로 옮긴 Tween은 계속 paused 상태라 <code>getById</code>와 <code>getTweensOf</code>에는 잡히고{' '}
+                <code>isTweening</code>은 <code>false</code>입니다.
+              </>
+            ) : (
+              <>
+                움직이는 <strong>도중에</strong> 한 번, <strong>일시정지한 뒤</strong> 한 번 조회해 보세요. <code>getById</code>와{' '}
+                <code>getTweensOf</code>는 두 번 다 찾아내지만 <code>isTweening</code>만 <strong>true → false</strong>로 바뀝니다.
+              </>
+            )}
           </p>
         </article>
         <article>
