@@ -1,0 +1,4 @@
+interface:
+  display_name: "GSAP 학습 문서 검수"
+  short_description: "GSAP 학습 문서를 네 관점에서 검수하고 수정합니다"
+  default_prompt: "Use $auditing-gsap-learning-pages to audit and correct the current GSAP learning page."
