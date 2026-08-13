@@ -51,9 +51,7 @@ export function useLocalScrollRuntime() {
       setStatus('reduced motion · native local scroll로 즉시 도착했습니다.')
       return
     }
-    // plugin 등록은 이 example의 actual tween 전에 한 번 보장한다
-    gsap.registerPlugin(ScrollToPlugin)
-    // 전역 config의 기존 값을 첫 변경 전에 복사해 cleanup에서 복원한다
+    // 명시적인 plugin config 변경 전 현재 전역 값을 먼저 보존한다
     const globalConfig = gsap.config() as Record<string, unknown>
     configRef.current ??= {
       autoKill: globalConfig.autoKill,
@@ -61,6 +59,8 @@ export function useLocalScrollRuntime() {
       hadAutoKill: Object.hasOwn(globalConfig, 'autoKill'),
       hadAutoKillThreshold: Object.hasOwn(globalConfig, 'autoKillThreshold'),
     }
+    // actual tween 전에 plugin 등록을 명시적으로 보장한다
+    gsap.registerPlugin(ScrollToPlugin)
     // descriptor의 autoKill boundary를 현재 plugin config에 적용한다
     ScrollToPlugin.config({
       autoKill: scrollDescriptor.autoKill,

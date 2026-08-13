@@ -45,3 +45,17 @@
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: ScrollToPlugin과 `config()` 공식 문서를 다시 대조했다. window/element target, x/y·max·offset, per-tween autoKill/onAutoKill과 global autoKill을 확인했다. autoKillThreshold는 설치 source의 config 경계로 분리했다.
+- findings:
+  - STO-A01 `BLOCK → ADDRESSED` — 명시적인 `ScrollToPlugin.config()` 변경 전에 global config를 snapshot하도록 순서를 분명히 해 예제 진입 시점의 값을 복원하게 했다.
+  - STO-A02 `BLOCK → ADDRESSED` — autoKillThreshold까지 공식 config 계약인 것처럼 보이던 설명을 공식 autoKill과 설치 source 경계로 분리했다.
+  - STO-A03 `BLOCK → ADDRESSED` — 학습 화면의 sourcePath와 owner/lesson 제작 표현을 제거하고 표시 코드에 실제 plugin 등록을 추가했다.
+  - STO-A04 `PASS` — 하나의 descriptor가 local target의 max·offsetY·duration·autoKill을 구동하고, 표시 setup은 target guard·plugin 등록·tween과 global config cleanup을 runtime과 같은 순서로 보인다.
+  - STO-A05 `DEFERRED` — 실제 local tween·autoKill·config 복원, keyboard, reduced-motion, 좁은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - STO-A06 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.
