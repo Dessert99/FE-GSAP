@@ -9,7 +9,7 @@ const configProperties = [
     defaultValue: '120',
     allowed: '프레임 수',
     role: 'GSAP이 power-down해도 되는지 확인하는 frame 간격입니다. 기본값 120은 대략 2초에 한 번 확인한다는 뜻이며, 쓰지 않는 동안 시스템 자원과 모바일 배터리를 아끼기 위한 장치입니다.',
-    use: '항상 무언가 움직이는 화면에서 확인 빈도를 조절할 때',
+    use: 'ticker의 휴면 전환 비용을 측정하며 검사 간격을 조절할 때',
   },
   {
     name: 'force3D',
@@ -17,7 +17,7 @@ const configProperties = [
     defaultValue: '"auto"',
     allowed: '"auto" · true · false',
     role: 'GPU 가속을 위해 3D transform을 쓸지 정합니다. "auto"는 animation 동안 3D를 적용하고 끝나면 가능한 경우 2D로 되돌려 GPU 메모리를 아낍니다. true는 3D를 계속 유지하고, false는 이 동작을 끕니다.',
-    use: '많은 요소를 동시에 움직여 렌더링이 끊길 때',
+    use: '성능과 GPU 메모리를 측정하며 3D transform 유지 여부를 비교할 때',
   },
   {
     name: 'nullTargetWarn',

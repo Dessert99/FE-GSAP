@@ -12,7 +12,7 @@ tween.vars
 // 넘긴 값 + defaults에서 상속된 값이 함께 들어 있습니다.
 // { x, opacity, duration, overwrite, delay, ease }`
 
-// 공식 vars 문서가 나열하는 special property — 각 항목의 전체 명세는 gsap.to() owner가 소유한다
+// 공식 vars 문서가 나열하는 special property — 각 항목의 자세한 동작은 gsap.to()에서 이어서 다룬다
 const specialProperties = [
   'callbackScope', 'data', 'delay', 'duration', 'ease', 'easeReverse', 'id', 'immediateRender',
   'inherit', 'keyframes', 'lazy', 'onComplete', 'onCompleteParams', 'onRepeat', 'onRepeatParams',
@@ -37,8 +37,9 @@ export function VarsRecordSection() {
             <code>Tween.vars</code>는 <strong>생성할 때 넘긴 설정 객체</strong>입니다. 타입은 Object이고, 만들어진 뒤에도 읽을 수 있습니다.
           </p>
           <p>
-            <strong>읽기용입니다.</strong> 여기에 값을 새로 써서 이미 만들어진 Tween의 동작을 바꾸는 용도가 아닙니다. 디버깅할 때 "이
-            Tween이 어떤 설정으로 만들어졌지?"를 확인하는 데 씁니다.
+            <strong>현재 동작을 바꿀 때는 전용 메서드를 사용하세요.</strong> <code>tween.vars.duration</code>을 직접 바꿔도 이미 만들어진
+            Tween의 재생 시간은 자동으로 바뀌지 않습니다. 확인에는 <code>vars</code>를, 변경에는 <code>tween.duration(2)</code> 같은
+            메서드를 쓰면 의도가 분명합니다.
           </p>
           <p>
             읽어 보면 <strong>내가 넘기지 않은 key도 들어 있습니다.</strong> defaults에서 상속된 값이 같은 객체에 채워지기 때문입니다.

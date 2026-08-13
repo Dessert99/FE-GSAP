@@ -21,6 +21,7 @@ export function DefaultsInheritanceExample() {
     .map(([key, value]) => `  ${key}: ${typeof value === 'string' ? `'${value}'` : value},`)
     .join('\n')
 
+  // runtime과 같은 네 단계를 보여주되 descriptor의 값만 코드 문법으로 직렬화한다.
   const code = `// 1. 되돌릴 수 있도록 현재 defaults를 복사해 둡니다.
 const snapshot = { ...gsap.defaults() }
 
