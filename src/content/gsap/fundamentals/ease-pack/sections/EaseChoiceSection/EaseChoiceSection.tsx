@@ -7,7 +7,7 @@ const problems = [
   {
     id: 'scale',
     symptom: '크기를 키우는데, 등속 ease인데도 뒤로 갈수록 느려 보인다',
-    reason: '눈은 "몇 픽셀 커졌나"가 아니라 "몇 배 커졌나"로 느낀다',
+    reason: '같은 scale 증가량이어도 구간별 배율은 달라진다',
     ease: 'ExpoScaleEase',
     expression: "ease: 'expoScale(1, 2)'",
     owner: 'ExpoScaleEase 문서',
@@ -15,7 +15,7 @@ const problems = [
   {
     id: 'rough',
     symptom: '부드러우면 안 된다. 일부러 거칠게 떨거나 규칙적으로 왕복해야 한다',
-    reason: 'Core ease는 전부 매끄러운 곡선이라 덜컹거림을 만들 수 없다',
+    reason: '무작위 point나 고른 지그재그의 빈도·세기를 설정해야 한다',
     ease: 'RoughEase',
     expression: "ease: 'rough({strength: 3})'",
     owner: 'RoughEase 문서',
@@ -44,12 +44,12 @@ export function EaseChoiceSection() {
         <p>
           먼저 용어 하나만 짚겠습니다. <strong>ease</strong>는 "시간이 얼마나 흘렀는지"(progress 0→1)를 "값이 얼마나 갔는지"(0→1)로
           바꾸는 함수입니다. 같은 1초, 같은 거리라도 ease가 다르면 중간 값이 전부 달라집니다. ease의 기본 개념과 Core ease 목록은{' '}
-          <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>가 소유합니다.
+          <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>에서 먼저 확인할 수 있습니다.
         </p>
         <p>
           공식 RoughEase 문서는 <strong>"대부분의 easing 방정식은 시작값과 끝값 사이를 부드럽고 점진적으로 전환한다"</strong>고
-          적었습니다. Core의 <code>power</code>·<code>back</code>·<code>bounce</code>가 전부 그렇습니다. 그런데 그 "부드러움"이 답이
-          아닌 상황이 세 가지 있습니다.
+          적었습니다. RoughEase는 그와 달리 무작위 point나 고른 지그재그를 설정해 거친 효과를 만듭니다. ExpoScaleEase와 SlowMo는
+          각각 아래 표의 다른 문제를 해결합니다.
         </p>
       </div>
 
@@ -59,7 +59,7 @@ export function EaseChoiceSection() {
           <thead>
             <tr>
               <th scope="col">겪는 문제</th>
-              <th scope="col">Core ease로 안 되는 이유</th>
+              <th scope="col">별도 ease가 필요한 이유</th>
               <th scope="col">쓸 ease</th>
               <th scope="col">가장 짧은 형태</th>
             </tr>

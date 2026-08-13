@@ -1,11 +1,11 @@
 /** EasePack 세 ease 학습 페이지의 출처·섹션·coverage 기준을 한곳에서 관리한다. */
 export const easePackMeta = {
-  title: 'scale, roughness, slow middle 구간에는 어떤 특수 ease가 맞나요?',
+  title: '크기 보정·거친 움직임·느린 가운데 구간에는 어떤 ease가 맞나요?',
   category: 'GSAP · Easing · EasePack',
   summary:
-    'Core ease는 부드러운 전환을 만듭니다. 그런데 크기를 키울 때 속도가 이상해 보이거나, 일부러 거칠게 떨어야 하거나, 가운데를 등속으로 붙잡아 둬야 할 때가 있습니다. EasePack의 세 ease는 각각 그 셋 중 하나만 풉니다.',
+    '크기를 키울 때 속도가 달라 보이거나, 일부러 거친 움직임이 필요하거나, 가운데에 일정한 속도 구간을 두고 싶을 때가 있습니다. EasePack의 세 ease는 이 세 문제를 각각 해결합니다.',
   sourcePath: 'src/content/gsap/fundamentals/ease-pack/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'ExpoScaleEase', href: 'https://gsap.com/docs/v3/Eases/ExpoScaleEase' },
     { label: 'RoughEase', href: 'https://gsap.com/docs/v3/Eases/RoughEase' },

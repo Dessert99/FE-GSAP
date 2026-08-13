@@ -59,8 +59,8 @@ export const easePackSourceItems: SourceItem[] = [
   { id: 'SET-P2', officialItem: '등록하지 않은 채 ease: "rough"를 쓰면 경고 없이 기본 ease(power1.out)로 조용히 대체된다. 공식 문서에는 이 fallback이 없다.', source: 'rough-ease', origin: 'implementation', sectionId: 'easepack-setup' },
   { id: 'EXP-P1', officialItem: 'expoScale은 scale을 지수로 보간한다. expoScale(1, 2)의 정중앙 scale은 1.5가 아니라 √2 ≈ 1.414다. 공식 문서에는 계산식이 없다.', source: 'expo-scale-ease', origin: 'implementation', sectionId: 'expo-scale' },
   { id: 'EXP-P2', officialItem: '시작 scale과 끝 scale이 같으면 ease가 NaN을 돌려주고 target 값도 NaN이 된다. 공식 문서는 0만 금지한다.', source: 'expo-scale-ease', origin: 'implementation', sectionId: 'expo-scale' },
-  { id: 'RGH-P1', officialItem: 'ease 문자열은 해석할 때마다 새로 무작위 배치를 만든다. 같은 rough 문자열을 두 tween에 적어도 흔들림 모양이 서로 다르다(progress 0.3에서 0.2482와 0.4241). 같은 모양이 필요하면 만들어진 ease 함수를 재사용하거나 randomize: false를 쓴다. 공식 문서에는 이 동작이 없다.', source: 'rough-ease', origin: 'implementation', sectionId: 'rough-ease' },
+  { id: 'RGH-P1', officialItem: 'ease 문자열은 해석할 때마다 별도의 무작위 배치를 만든다. 같은 rough 문자열을 두 tween에 따로 적으면 흔들림 모양이 달라질 수 있다(progress 0.3에서 0.2482와 0.4241). 같은 모양이 필요하면 만들어진 ease 함수를 재사용하거나 randomize: false를 쓴다. 공식 문서에는 이 동작이 없다.', source: 'rough-ease', origin: 'implementation', sectionId: 'rough-ease' },
   { id: 'SLW-P1', officialItem: '공식 예제 주석과 달리 "slow"와 "slow(0.5, 0.8)"은 같은 곡선이 아니다. 기본값이 0.7·0.7이므로 progress 0.1에서 각각 0.375와 0.366이다.', source: 'slow-mo', origin: 'implementation', sectionId: 'slow-mo' },
   { id: 'SLW-P2', officialItem: 'linearRatio에 0을 넘기면 0이 무시되고 기본값 0.7이 쓰인다. 공식 문서는 0~1 범위만 말한다.', source: 'slow-mo', origin: 'implementation', sectionId: 'slow-mo' },
-  { id: 'SLW-P3', officialItem: 'yoyoMode true인 ease는 0에서 1로 올랐다가 다시 0으로 돌아오는 곡선이다. 그래서 같은 duration의 companion tween이 저절로 fade in·out 된다. 공식 문서는 곡선 모양을 적지 않았다.', source: 'slow-mo', origin: 'implementation', sectionId: 'slow-mo' },
+  { id: 'SLW-P3', officialItem: 'yoyoMode true인 ease는 0에서 1로 올랐다가 다시 0으로 돌아오는 곡선이다. 같은 duration의 companion tween에 쓰면 fade in·out 구간이 위치 tween의 양 끝 구간과 맞는다. 공식 문서는 곡선 모양을 적지 않았다.', source: 'slow-mo', origin: 'implementation', sectionId: 'slow-mo' },
 ]

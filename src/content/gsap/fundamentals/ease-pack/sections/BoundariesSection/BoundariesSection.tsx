@@ -1,4 +1,4 @@
-/** 이 페이지가 소유하지 않는 내용과 공식 페이지에 아예 없는 내용을 갈라 다음 학습으로 연결한다. */
+/** 다른 페이지에서 이어서 볼 내용과 공식 페이지에 없는 내용을 갈라 다음 학습으로 연결한다. */
 import { toHref } from '../../../../../../app/routes'
 import { OfficialDocsLink } from '../../../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
@@ -24,12 +24,12 @@ export function BoundariesSection() {
         number="06"
         id="boundaries"
         title="여기서 다루지 않는 것"
-        description="세 공식 페이지의 내용은 여기까지입니다. 나머지는 어느 페이지가 소유하는지, 공식 문서에 아예 없는 것은 무엇인지 갈라 둡니다."
+        description="세 공식 페이지의 내용은 여기까지입니다. 이어서 볼 페이지와 공식 문서에 명시되지 않은 내용을 구분합니다."
       />
 
       <div className="ease-pack-page__split">
         <div className="ease-pack-page__prose">
-          <h3>다른 페이지가 소유합니다</h3>
+          <h3>다른 페이지에서 이어서 볼 내용</h3>
           <ul className="ease-pack-page__list">
             <li>
               ease의 기본 개념, Core ease family, 문자열 해석과 이름 등록 — <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>

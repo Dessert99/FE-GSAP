@@ -53,12 +53,20 @@ const roughEase = gsap.parseEase(
   '${descriptor.easeExpression}'
 )
 
-// 위 그래프도 아래 이동도 이 함수 하나를 씁니다.
-gsap.to('${descriptor.selector}', {
+// 이전 실행이 남긴 위치를 지우고 같은 출발점으로 되돌립니다.
+gsap.set('${descriptor.selector}', { x: 0 })
+
+// 위 그래프도 아래 이동도 이 함수 하나를 씁니다. Tween은 실행 전까지 멈춰 둡니다.
+const tween = gsap.to('${descriptor.selector}', {
   x: ${descriptor.x},
   duration: ${descriptor.duration},
   ease: roughEase,
-})`
+  paused: true,
+})
+
+function run() {
+  tween.restart()
+}`
 
   return (
     <section className="roughness-lab" aria-labelledby="roughness-lab-title">
@@ -204,24 +212,24 @@ gsap.to('${descriptor.selector}', {
         <article>
           <h4>무엇이 달라졌나요?</h4>
           <p>
-            <code>points</code>를 올리면 곡선의 톱니가 촘촘해지고 <strong>방향이 바뀐 횟수</strong>가 그만큼 늘어납니다.{' '}
-            <code>strength</code>를 올리면 톱니의 키가 커지면서 <strong>값의 범위</strong>가 0~1 밖으로 넓어집니다.
+            <code>points</code>를 올리면 곡선을 구성하는 point가 많아져 변화가 더 자주 나타날 수 있습니다. <code>strength</code>를 올리면
+            point가 template에서 더 멀리 벗어날 수 있습니다. 실제 결과는 위의 방향 전환 횟수와 값 범위로 확인하세요.
           </p>
         </article>
         <article>
           <h4>무엇을 봐야 하나요?</h4>
           <p>
-            그래프의 가로 안내선 두 줄이 <code>0</code>과 <code>1</code>입니다. <code>clamp</code>를 켜면 곡선이 그 두 줄을 절대
-            넘지 않고, 끄면 위아래로 삐져나갑니다. <code>randomize</code>를 끄면 톱니가 무작위 대신 <strong>고른 지그재그</strong>가
-            됩니다.
+            그래프의 가로 안내선 두 줄이 <code>0</code>과 <code>1</code>입니다. <code>clamp</code>를 켜면 곡선이 그 범위를 넘지 않고,
+            끄면 설정과 무작위 배치에 따라 범위 밖으로 나갈 수 있습니다. <code>randomize</code>를 끄면 point가 무작위 대신{' '}
+            <strong>고른 지그재그</strong>로 배치됩니다.
           </p>
         </article>
         <article>
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
-            RoughEase는 곡선을 직접 그리는 게 아니라 <strong>template ease 위에 point를 흩뿌려</strong> 만듭니다.{' '}
-            <code>points</code>가 개수, <code>strength</code>가 벗어나는 거리, <code>taper</code>가 어느 쪽에서 벗어남을 줄일지,{' '}
-            <code>template</code>이 기준선입니다. <code>template</code>을 바꾸면 톱니는 그대로인데 전체 형태가 따라 움직입니다.
+            RoughEase는 <strong>template ease를 기준으로 point를 만들고 연결</strong>합니다. <code>points</code>가 개수,{' '}
+            <code>strength</code>가 벗어날 수 있는 거리, <code>taper</code>가 어느 쪽에서 거칠기를 줄일지, <code>template</code>이
+            기준선입니다. config가 바뀌면 현재 문자열을 다시 해석하므로 <code>randomize: true</code>에서는 무작위 배치도 새로 만들어집니다.
           </p>
         </article>
         <article>

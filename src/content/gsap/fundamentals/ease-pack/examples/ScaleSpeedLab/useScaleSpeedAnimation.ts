@@ -70,11 +70,13 @@ export function useScaleSpeedAnimation() {
 
   useGSAP(
     () => {
-      // 관찰과 실행이 같은 element를 가리키도록 선택자를 한 번만 풀어 둔다
-      const target = gsap.utils.toArray<HTMLElement>(descriptor.selector)[0]
+      // 관찰값을 읽을 element는 예제 범위 안에서 찾고 GSAP 호출에는 표시 코드와 같은 선택자를 쓴다
+      const target = scope.current?.querySelector<HTMLElement>(descriptor.selector)
+      // 예제 DOM이 아직 준비되지 않았으면 Tween을 만들지 않는다
+      if (!target) return
       // 시작 scale에서 끝 scale까지 가는 paused Tween — 실행 버튼이 이 Tween을 재생한다
       const tween = gsap.fromTo(
-        target,
+        descriptor.selector,
         { scale: descriptor.startScale },
         { scale: descriptor.endScale, duration: descriptor.duration, ease: descriptor.easeExpression, paused: true },
       )

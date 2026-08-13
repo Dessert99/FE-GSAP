@@ -73,8 +73,8 @@ export function RoughEaseSection() {
 
       <div className="ease-pack-page__prose">
         <p>
-          RoughEase는 곡선을 직접 그리지 않습니다. <strong>기준 곡선(template) 위에 point를 여러 개 흩뿌리고 그 점들을 이어</strong>{' '}
-          만듭니다. 여섯 개의 설정은 전부 "그 점들을 어떻게 흩뿌릴까"에 대한 답입니다.
+          RoughEase는 <strong>기준 곡선(template)을 따라 point를 만들고 각 point를 기준에서 벗어나게 한 뒤 연결</strong>합니다. 여섯 개의
+          설정은 point의 개수·배치·거리와 어느 구간에서 거칠기를 줄일지를 정합니다.
         </p>
         <p>
           설정은 <strong>ease 문자열 안에 객체 리터럴</strong>로 적습니다. 공식 예제를 보면 <code>template</code>과 <code>taper</code>{' '}
@@ -127,11 +127,11 @@ export function RoughEaseSection() {
       </div>
 
       <div className="ease-pack-page__note ease-pack-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용 · 같은 문자열이어도 흔들림은 매번 다르다</h3>
+        <h3>공식 문서에 없고 실행으로 확인한 내용 · 같은 문자열도 따로 해석하면 별도 배치가 된다</h3>
         <p>
           <code>randomize</code>의 기본값이 <code>true</code>이고, <strong>ease 문자열을 해석할 때마다 새로 무작위 배치가
-          만들어집니다.</strong> 그래서 두 tween에 똑같이 <code>ease: "rough({'{'}points:20{'}'})"</code>를 적어도{' '}
-          <strong>서로 다른 모양으로 흔들립니다.</strong> 같은 문자열이니 같은 결과일 거라고 기대하면 어긋납니다.
+          만들어집니다.</strong> 그래서 두 tween에 똑같이 <code>ease: "rough({'{'}points:20{'}'})"</code>를 따로 적으면{' '}
+          <strong>서로 다른 모양이 될 수 있습니다.</strong> 같은 배치를 보장하려면 문자열을 각각 해석하면 안 됩니다.
         </p>
         <p>
           여러 곳에서 <strong>똑같은 흔들림</strong>을 써야 한다면 방법은 두 가지입니다. 만들어진 ease 함수를 한 번만 얻어 변수에

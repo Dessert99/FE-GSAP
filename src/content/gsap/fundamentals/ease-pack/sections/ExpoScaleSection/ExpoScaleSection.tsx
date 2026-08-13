@@ -58,9 +58,9 @@ export function ExpoScaleSection() {
           보면 딱 중간입니다.
         </p>
         <p>
-          그런데 <strong>앞 절반</strong>에서 상자는 1배에서 1.5배가 됐으니 <strong>1.5배 커졌고</strong>, <strong>뒤 절반</strong>에서는
-          1.5배에서 2배가 됐으니 <strong>약 1.33배만</strong> 커졌습니다. 사람 눈은 "몇 픽셀 늘었나"가 아니라 "몇 배가 됐나"로 크기
-          변화를 느낍니다. 그래서 등속으로 키웠는데도 <strong>뒤로 갈수록 느려지는 것처럼 보입니다.</strong>
+          그런데 <strong>앞 절반</strong>의 상대 변화는 1배에서 1.5배, 즉 <strong>1.5배</strong>이고, <strong>뒤 절반</strong>은 1.5배에서
+          2배, 즉 <strong>약 1.33배</strong>입니다. 같은 <code>0.5</code>만큼 늘어도 구간별 배율은 다릅니다. 아래 예제는 이 구간별
+          배율을 linear ease와 ExpoScaleEase에서 직접 비교합니다.
         </p>
         <p>
           공식 문서는 이것을 <em>"object의 scale을 animate할 때 linear ease를 써도 속도가 변하는 것처럼 보이는 흥미로운 현상"</em>이라

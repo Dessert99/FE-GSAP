@@ -32,7 +32,7 @@ export function EasePackSetupSection() {
           </p>
           <p>
             공식 Quick Start가 보여 주는 등록 코드는 오른쪽 한 줄입니다. 설치와 <code>registerPlugin()</code>의 일반 규칙은{' '}
-            <a href={toHref('/fundamentals/installation')}>설치와 등록 페이지</a>가 소유합니다.
+            <a href={toHref('/fundamentals/installation')}>설치와 등록 페이지</a>에서 확인할 수 있습니다.
           </p>
         </div>
         <pre className="ease-pack-page__code">
@@ -67,7 +67,7 @@ export function EasePackSetupSection() {
           <code>51</code>로, 기본 ease를 쓴 tween과 정확히 같았습니다.
         </p>
         <p>
-          "흔들리게 만들었는데 그냥 부드럽게 움직인다"면 코드가 틀린 게 아니라 등록이 빠진 경우일 수 있습니다.
+          "흔들리게 만들었는데 그냥 부드럽게 움직인다"면 EasePack import와 등록부터 확인하세요.
         </p>
         <p className="ease-pack-page__provenance">
           이 항목도 공식 페이지에 없습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다.

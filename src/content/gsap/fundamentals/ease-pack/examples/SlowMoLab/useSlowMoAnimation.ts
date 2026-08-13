@@ -1,4 +1,4 @@
-/** SlowMo의 linearRatio·power가 가운데 구간을 어떻게 바꾸고 yoyoMode companion tween이 어떻게 저절로 맞물리는지 관찰하게 한다. */
+/** SlowMo의 linearRatio·power가 가운데 구간을 어떻게 바꾸고 yoyoMode companion tween이 어떻게 맞물리는지 관찰하게 한다. */
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ExpoScaleEase, RoughEase, SlowMo } from 'gsap/EasePack'
