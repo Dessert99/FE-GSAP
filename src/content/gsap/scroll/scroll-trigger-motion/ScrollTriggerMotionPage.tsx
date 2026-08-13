@@ -1,4 +1,4 @@
-/** P42의 exclusive motion lab과 trigger lifetime boundary를 조립한다. */
+/** ScrollTrigger motion mode 예제와 trigger lifetime 경계를 조립한다. */
 import { toHref } from '../../../../app/routes'
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { MotionModeLab } from './examples/MotionModeLab/MotionModeLab'
@@ -21,10 +21,6 @@ export function ScrollTriggerMotionPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>
-          <code>{scrollTriggerMotionMeta.sourcePath}</code> · 공식 대조일{' '}
-          {scrollTriggerMotionMeta.reviewedAt} · official coverage 4 / 4
-        </p>
       </header>
       <MotionModeLab />
       <section>
@@ -34,11 +30,11 @@ export function ScrollTriggerMotionPage() {
           snap function은 양수/음수 direction에 따라 다음 또는 이전 increment를
           고릅니다. 먼저{' '}
           <a href={toHref('/fundamentals/scroll-trigger-create')}>
-            P40 생성
+            ScrollTrigger 생성
           </a>
           과{' '}
           <a href={toHref('/fundamentals/scroll-trigger-geometry')}>
-            P41 geometry
+            ScrollTrigger geometry
           </a>
           에서 instance와 start/end 계산을 확인하세요.
         </p>

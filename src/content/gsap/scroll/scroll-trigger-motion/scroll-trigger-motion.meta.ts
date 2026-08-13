@@ -1,8 +1,8 @@
-/** P42의 네 ScrollTrigger motion canonical과 로컬 identity를 고정한다. */
+/** ScrollTrigger motion 학습 페이지의 경로와 공식 문서 링크를 정의한다. */
 export const scrollTriggerMotionMeta = {
   title: 'scroll-driven motion은 어느 한 방식만 고릅니다',
   category: 'GSAP · Scroll · ScrollTrigger',
-  reviewedAt: '2026-08-09',
+  reviewedAt: '2026-08-13',
   sourcePath: 'src/content/gsap/scroll/scroll-trigger-motion/',
   officialSources: [
     {

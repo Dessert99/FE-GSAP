@@ -8,16 +8,52 @@ export function MotionModeLab() {
   // scrub·batch·snap 중 actual runtime에 넘길 하나의 mode만 보존한다
   const [mode, setMode] = useState<MotionMode>('scrub')
   // runtime과 code가 공유할 scope, 결과, motion branch, descriptor를 받는다
-  const { scope, result, reducedMotion, descriptor } =
+  const { scope, scrollerRef, result, reducedMotion, descriptor } =
     useMotionModeRuntime(mode)
-  // reduced-motion branch도 actual reveal call을 그대로 직렬화한다
-  const code = reducedMotion
+  // reduced-motion branch와 선택 mode의 실제 호출만 setup 안에 넣는다
+  const modeCode = reducedMotion
     ? `gsap.set(items, { autoAlpha: 1, x: 0, y: 0 })`
     : mode === 'scrub'
-      ? `const trigger = gsap.to(item, { x: 48, scrollTrigger: { scrub: ${descriptor.scrub.scrub} } }).scrollTrigger\ntrigger.getTween(); trigger.getVelocity()`
+      ? `const trigger = gsap.to(items[0], { x: 48, scrollTrigger: { trigger: items[0], scroller, scrub: ${descriptor.scrub.scrub} } }).scrollTrigger
+trigger?.getTween(); trigger?.getVelocity()`
       : mode === 'batch'
-        ? `ScrollTrigger.batch(items, { interval: ${descriptor.batch.interval}, batchMax: ${descriptor.batch.batchMax} })`
-        : `const snap = ScrollTrigger.snapDirectional(${descriptor.snap.increment})\nScrollTrigger.create({ trigger: section, snap: { snapTo: (value, self) => snap(value, self.direction) } })`
+        ? `gsap.set(items, { autoAlpha: 0, y: 24 })
+batchTriggers = ScrollTrigger.batch(items, {
+  scroller,
+  interval: ${descriptor.batch.interval},
+  batchMax: ${descriptor.batch.batchMax},
+  onEnter: (enteredItems) => gsap.to(enteredItems, { autoAlpha: 1, y: 0 }),
+})`
+        : `const snap = ScrollTrigger.snapDirectional(${descriptor.snap.increment})
+ScrollTrigger.create({
+  trigger: items[0],
+  scroller,
+  snap: { snapTo: (value, self) => snap(value, self?.direction ?? 1) },
+})`
+  // plugin 등록부터 scoped selector와 Context cleanup까지 독립 실행 흐름으로 표시한다
+  const code = `import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const setup = () => {
+  const scroller = document.querySelector('.motion-mode-lab__items')
+  if (!scroller) throw new Error('motion scroller가 필요합니다.')
+  const items = gsap.utils.toArray('.motion-mode-lab__item', scroller)
+  if (!items.length) throw new Error('motion item이 필요합니다.')
+  let batchTriggers = []
+  const context = gsap.context(() => {
+    ${modeCode.replaceAll('\n', '\n    ')}
+  }, scroller)
+  return () => {
+    batchTriggers.forEach((trigger) => trigger.kill())
+    gsap.killTweensOf(items)
+    context.revert()
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
   return (
     <section
       ref={scope}
@@ -36,7 +72,12 @@ export function MotionModeLab() {
           <option value='snap'>snap</option>
         </select>
       </label>
-      <div className='motion-mode-lab__items'>
+      <div
+        ref={scrollerRef}
+        className='motion-mode-lab__items'
+        tabIndex={0}
+        aria-label='ScrollTrigger motion local scroller'
+      >
         {['one', 'two', 'three'].map((item) => (
           <p key={item} className='motion-mode-lab__item'>
             {item}

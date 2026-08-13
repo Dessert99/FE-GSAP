@@ -6,9 +6,12 @@
 .motion-mode-lab__items {
   display: grid;
   gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
 }
 .motion-mode-lab__item {
   margin: 0;
+  min-height: 120px;
   padding: 12px;
   border: 1px solid var(--color-border);
 }
