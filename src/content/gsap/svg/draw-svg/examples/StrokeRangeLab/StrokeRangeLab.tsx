@@ -17,8 +17,27 @@ export function StrokeRangeLab() {
     refreshMeasurement,
     reducedMotion,
   } = useStrokeRangeAnimation()
-  // plugin에 전달된 value만 문법으로 직렬화해 code panel을 만든다
-  const code = `gsap.to('#draw-svg-path', {\n  drawSVG: '${descriptor.value}',\n  duration: ${reducedMotion ? 0 : 0.7},\n})`
+  // runtime과 같은 target·measurement·tween cleanup을 실행 가능한 code panel로 만든다
+  const code = `const path = document.querySelector('#draw-svg-path')
+if (!path) throw new Error('DrawSVG path를 찾지 못했습니다.')
+gsap.registerPlugin(DrawSVGPlugin)
+const refreshMeasurement = () => {
+  const length = DrawSVGPlugin.getLength(path)
+  const position = DrawSVGPlugin.getPosition(path)
+  console.log({ length, position })
+}
+const tween = gsap.to(path, {
+  drawSVG: '${descriptor.value}',
+  duration: ${reducedMotion ? 0 : 0.7},
+  ease: 'power1.out',
+  overwrite: true,
+  onComplete: refreshMeasurement,
+})
+refreshMeasurement()
+
+function cleanup() {
+  tween.revert()
+}`
   // percentage ruler가 descriptor의 same start/end를 보여 준다
   const rulerStyle = {
     left: `${descriptor.start}%`,

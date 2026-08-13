@@ -1,29 +1,17 @@
-/** catalog의 실제 source 수를 meta 계약과 대조해 화면에 표시한다. */
-import { drawSvgSourceItems } from '../../draw-svg.catalog'
-import { drawSvgCoverage, drawSvgSections } from '../../draw-svg.meta'
+/** stroke 표시 범위와 측정을 익히는 다섯 학습 단계를 안내한다. */
+import { drawSvgSections } from '../../draw-svg.meta'
 
-/** source item과 installed/raw 차이를 분리한 coverage 요약을 표시한다. */
+/** dash 원리부터 렌더링 경계까지 학습 순서를 보여 준다. */
 export function PageCoverage() {
-  const official = drawSvgSourceItems.filter(
-    (item) => item.origin === 'official',
-  ).length
-  const implementation = drawSvgSourceItems.filter(
-    (item) => item.origin === 'implementation',
-  ).length
   return (
     <aside
       className="draw-svg-page__coverage"
       aria-labelledby="draw-svg-coverage-title"
     >
       <div>
-        <p>OFFICIAL COVERAGE</p>
-        <h2 id="draw-svg-coverage-title">
-          {official} / {drawSvgCoverage.officialSourceItems}
-        </h2>
-        <span>
-          {drawSvgCoverage.officialSources} canonicals · {implementation} /{' '}
-          {drawSvgCoverage.implementationItems} source/type checks
-        </span>
+        <p>학습 순서</p>
+        <h2 id="draw-svg-coverage-title">SVG stroke를 부분적으로 보이기</h2>
+        <span>값 문법, 길이·현재 위치, 렌더링 경계를 차례로 확인합니다.</span>
       </div>
       <ol>
         {drawSvgSections.map((section) => (
@@ -31,7 +19,6 @@ export function PageCoverage() {
             <a href={`#${section.id}`}>
               {section.number} · {section.title}
             </a>
-            <span>{section.sourceItems} items</span>
           </li>
         ))}
       </ol>
