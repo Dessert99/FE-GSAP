@@ -8,15 +8,28 @@ export function TimelineEventLab() {
     useTimelineEventAnimation()
 
   // 실제 위치와 pause 존재 상태를 코드 문법으로만 직렬화한다
-  const code = `const timeline = gsap.timeline({ paused: true })
+  const code = `import gsap from 'gsap'
+
+const target = { value: 0 }
+const events = []
+let promiseStatus = 'pending'
+const record = (label) => events.push({ label, time: timeline.time() })
+const setPromiseStatus = (status) => { promiseStatus = status }
+
+const timeline = gsap.timeline({ paused: true })
   .to(target, { value: 100, duration: ${descriptor.duration}, ease: 'none' })
-  .call(onChapter, ['call'], ${descriptor.callAt})
-  ${pauseEnabled ? `.addPause(${descriptor.pauseAt}, onPause)` : `// pause at ${descriptor.pauseAt} was removed`}
+  .call(() => record('call callback'), ['call'], ${descriptor.callAt})
+  ${pauseEnabled ? `.addPause(${descriptor.pauseAt}, () => record('pause callback'))` : `// ${descriptor.pauseAt}초 pause child를 제거한 상태`}
 
-timeline.eventCallback('onComplete', onComplete)
-timeline.then(onResolved)
+timeline.eventCallback('onComplete', () => record('onComplete'))
+timeline.then(() => setPromiseStatus('resolved'))
 
-timeline.removePause(${descriptor.pauseAt}) // → ${removeReturn}`
+${pauseEnabled ? '// pause child가 남아 있어 removePause()를 호출하지 않았습니다.' : `timeline.removePause(${descriptor.pauseAt}) // → ${removeReturn}`}
+
+function cleanup() {
+  timeline.kill()
+  events.length = 0
+}`
 
   return (
     <section className="timeline-event-lab" aria-labelledby="timeline-event-lab-title">

@@ -23,12 +23,25 @@ export function DelayedCallLab() {
   // 실제 호출에 params가 있을 때만 세 번째 인자를 표시해 runtime 분기와 같은 문법을 보여준다
   const paramsSyntax = descriptor.params ? `, [${descriptor.params.map((value) => `'${value}'`).join(', ')}]` : ''
   // descriptor와 마지막 취소 경로를 코드 문법으로만 포맷한다
-  const code = `const delayedCall = gsap.delayedCall(
+  const code = `import gsap from 'gsap'
+
+let status = 'waiting'
+let receivedParams = []
+function handleFire(...params) {
+  receivedParams = params
+  status = 'fired'
+}
+
+const delayedCall = gsap.delayedCall(
   ${descriptor.delay},
   handleFire${paramsSyntax},
 )
 
-${cancelRoute === 'killTweensOf' ? 'gsap.killTweensOf(handleFire)' : cancelRoute === 'kill' ? 'delayedCall.kill()' : '// 아직 취소하지 않았습니다.'}`
+${cancelRoute === 'killTweensOf' ? "gsap.killTweensOf(handleFire)\nstatus = 'cancelled'" : cancelRoute === 'kill' ? "delayedCall.kill()\nstatus = 'cancelled'" : '// 아직 취소하지 않았습니다.'}
+
+function cleanup() {
+  delayedCall.kill()
+}`
 
   return (
     <section className="delayed-call-lab" aria-labelledby="delayed-call-lab-title">
