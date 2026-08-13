@@ -4,7 +4,7 @@ export const tweenPlayheadMeta = {
   title: '초, progress, totalProgress, ratio는 어떻게 다른가요?',
   summary: '같은 playhead 순간을 current cycle·전체 반복·ease 적용값으로 나누어 읽고, 이동 method의 callback 경계를 확인합니다.',
   sourcePath: 'src/content/gsap/fundamentals/tween-playhead/',
-  reviewedAt: '2026-08-03',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: '공식 Tween.ratio 문서', href: 'https://gsap.com/docs/v3/GSAP/Tween/ratio/' },
     { label: '공식 progress() 문서', href: 'https://gsap.com/docs/v3/GSAP/Tween/progress%28%29/' },

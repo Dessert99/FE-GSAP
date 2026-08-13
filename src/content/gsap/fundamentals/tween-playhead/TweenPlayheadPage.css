@@ -13,7 +13,7 @@
 .tween-playhead-page__coverage h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
 .tween-playhead-page__coverage ul { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; }
 .tween-playhead-page__coverage li { display: grid; gap: .2rem; }
-.tween-playhead-page__coverage span { overflow-wrap: anywhere; color: var(--playhead-muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; line-height: 1.55; }
+.tween-playhead-page__coverage span { overflow-wrap: anywhere; color: var(--playhead-muted); font-size: .76rem; line-height: 1.55; }
 .tween-playhead-page__section { display: grid; gap: 1.5rem; scroll-margin-top: 2rem; }
 .tween-playhead-page__section-heading { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; align-items: start; }
 .tween-playhead-page__section-heading > p { margin: .25rem 0 0; color: var(--color-accent); font-weight: 800; }
@@ -26,6 +26,7 @@
 .tween-playhead-page__equation { padding: 1.2rem; overflow-x: auto; border-radius: 1rem; background: #111827; color: #e0e7ff; }
 .tween-playhead-page__table-wrap { overflow-x: auto; }
 .tween-playhead-page__table-wrap table { width: 100%; min-width: 42rem; border-collapse: collapse; }
+.tween-playhead-page__table-wrap caption { margin-bottom: .5rem; text-align: left; font-weight: 700; }
 .tween-playhead-page__table-wrap th, .tween-playhead-page__table-wrap td { padding: .8rem; border-bottom: 1px solid var(--playhead-line); text-align: left; }
 .tween-playhead-page__boundary-list { display: grid; gap: .8rem; margin: 0; padding-left: 1.25rem; line-height: 1.7; }
 .tween-playhead-page pre { max-width: 100%; padding: 1rem; overflow-x: auto; border-radius: 1rem; background: #111827; color: #e0e7ff; }
