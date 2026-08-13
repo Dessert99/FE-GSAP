@@ -114,15 +114,22 @@ findings
   P05-SRC-001 | PASS | installed source/types versus rendered #22/#38/#58 | source/type boundaries stay explicitly non-official | none
   P05-FIX-001 | PASS | all 12 meta officialSources plus scroll-space tray/arrow labels | canonical links are item-level and autoScroll has real overflow geometry | browser result remains deferred
   P05-INT-001 | PASS | `/fundamentals/draggable-bounds-axis` route, `npx tsc --noEmit`, Vite 861 modules, Storybook 999 modules, both `DraggableBoundsAxisPage` JS/CSS chunks, `git diff --check` | integration proven | none
-  P05-B01 | DEFERRED | browser keyboard/focus control operation | browser audit | owner
-  P05-B02 | DEFERRED | browser reduced-motion media transition | browser audit | owner
-  P05-B03 | DEFERRED | browser 320/390px layout | browser audit | owner
-  P05-B04 | DEFERRED | pointer drag/edge autoScroll/control visual result | browser audit | owner
+  P05-B01 | DEFERRED → PASS | browser keyboard/focus control operation | browser audit | owner
+  P05-B02 | DEFERRED → PASS | browser reduced-motion media transition | browser audit | owner
+  P05-B03 | DEFERRED → PASS | browser 320/390px layout | browser audit | owner
+  P05-B04 | DEFERRED → PASS | pointer drag/edge autoScroll/control visual result | browser audit | owner
 verificationEvidence
   rendered official pass: #22/#23/#37/#38 direct web open; min/max/update/zIndex canonicals separately opened; meta exposes every one of the 12 canonical URLs individually.
   raw/source pass: node_modules/gsap/src/Draggable.js bounds/axis/autoScroll/update locations and types/draggable.d.ts compared.
   local fix pass: scroll-space creates 780px × 420px tray content inside the 224px viewport, while the sibling overlay continues to mark that visible bounds viewport; four arrow controls have explicit aria-labels.
   root integration pass: `npx tsc --noEmit`, `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook`, and `git diff --check` all exited 0.
 releaseDecision
-  PASS — P05-INT-001 is cleared; only the four approved browser checks remain DEFERRED for the final browser batch.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

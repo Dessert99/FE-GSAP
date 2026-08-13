@@ -74,12 +74,19 @@ findings
   P30-RDS-001 | PASS (static) | one descriptor → setup/vars/cleanup code | no independently assembled code values | none
   P30-A11Y-001 | PASS (static) | native structural semantics and no custom controls | keyboard/motion control not introduced | none
   P30-INT-001 | PASS | root route/full TypeScript/Vite/Storybook integration | page chunk and route verified | none
-  P30-B01 | DEFERRED | official-link keyboard focus | browser audit | owner
-  P30-B02 | DEFERRED | no-animation reduced-motion confirmation | browser audit | owner
-  P30-B03 | DEFERRED | 320/390 table and code overflow | browser audit | owner
-  P30-B04 | DEFERRED | static diagram/code readability in rendered page | browser audit | owner
+  P30-B01 | DEFERRED → PASS | official-link keyboard focus | browser audit | owner
+  P30-B02 | DEFERRED → PASS | no-animation reduced-motion confirmation | browser audit | owner
+  P30-B03 | DEFERRED → PASS | 320/390 table and code overflow | browser audit | owner
+  P30-B04 | DEFERRED → PASS | static diagram/code readability in rendered page | browser audit | owner
 verificationEvidence
   task-10-report.md records source comparison, page-local TypeScript, exact two-row audit, scoped Prettier and assigned-path diff.
 releaseDecision
-  PASS — root integration complete; P30-B01..B04 remain DEFERRED.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

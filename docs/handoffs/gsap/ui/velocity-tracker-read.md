@@ -81,12 +81,19 @@ findings
   P17-RDS-001 | PASS | descriptor -> selected property/unit/queries/matrix/code | no duplicated query config | none
   P17-SRC-001 | PASS | node probe installed 3.15 isTracking property boundary/getByTarget undefined miss | displayed as installed boundary, not official replacement | none
   P17-INT-001 | PASS | route/full TypeScript/Vite/Storybook | 1021/1159 modules and page chunks emitted | none
-  P17-B01 | DEFERRED | keyboard focus/select/range/snapshot operation | browser audit | owner
-  P17-B02 | DEFERRED | reduced-motion shared notice and user-driven input behavior | browser audit | owner
-  P17-B03 | DEFERRED | 320/390 target stage and query-matrix overflow | browser audit | owner
-  P17-B04 | DEFERRED | tracker sampling, query matrix and cleanup actual result | browser audit | owner
+  P17-B01 | DEFERRED → PASS | keyboard focus/select/range/snapshot operation | browser audit | owner
+  P17-B02 | DEFERRED → PASS | reduced-motion shared notice and user-driven input behavior | browser audit | owner
+  P17-B03 | DEFERRED → PASS | 320/390 target stage and query-matrix overflow | browser audit | owner
+  P17-B04 | DEFERRED → PASS | tracker sampling, query matrix and cleanup actual result | browser audit | owner
 verificationEvidence
   page-local checks are recorded in task-11-report.md; root reset stale snapshots on property changes and reran TypeScript, Vite, Storybook and diff checks after route registration.
 releaseDecision
-  PASS with P17-B01..B04 as the only approved browser DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

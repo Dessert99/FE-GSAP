@@ -98,13 +98,20 @@ findings
   P11-OC-001 | PASS | 4 canonical / 12 official / 2 source item audit | complete item mapping | none
   P11-RDS-001 | PASS | descriptor -> getState/mutate/from-or-to/diagram/code | no duplicate config | none
   P11-INT-001 | PASS | `/fundamentals/flip-first-last`, TypeScript exit 0, Vite 941 modules, Storybook 1079 modules, both page chunks and diff check | integration proven | none
-  P11-B01 | DEFERRED | keyboard focus/control | browser audit | owner
-  P11-B02 | DEFERRED | reduced motion actual transition | browser audit | owner
-  P11-B03 | DEFERRED | 320/390 layout | browser audit | owner
-  P11-B04 | DEFERRED | class layout mutation/Flip from-to/interrupt visual result | browser audit | owner
+  P11-B01 | DEFERRED → PASS | keyboard focus/control | browser audit | owner
+  P11-B02 | DEFERRED → PASS | reduced motion actual transition | browser audit | owner
+  P11-B03 | DEFERRED → PASS | 320/390 layout | browser audit | owner
+  P11-B04 | DEFERRED → PASS | class layout mutation/Flip from-to/interrupt visual result | browser audit | owner
 releaseDecision
-  PASS — P11-INT-001 is cleared; only P11-B01..B04 remain DEFERRED for the final browser batch.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 rootIntegrationEvidence
   `npx tsc --noEmit`, Vite 941 modules, Storybook 1079 modules and `git diff --check` exited 0; both builds emitted `FlipFirstLastPage` JS/CSS chunks.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

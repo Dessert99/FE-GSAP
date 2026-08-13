@@ -84,12 +84,19 @@ findings
   P36-BOUNDARY-001 | PASS | runtimeSource none records host scroll/body/global ScrollTrigger mutation risk | no host document takeover | none
   P36-GET-001 | ADVISORY | rendered get() says ScrollSmoother while installed 3.15.0 d.ts is ScrollSmoother | undefined | local text avoids claiming the missing-instance return | retain source boundary
   P36-INT-001 | PASS | route and full TypeScript/Vite/Storybook integration | page chunk and route verified | none
-  P36-B01 | DEFERRED | static code selection and any future focus order | browser audit | owner
-  P36-B02 | DEFERRED | no-runtime reduced-motion confirmation | browser audit | owner
-  P36-B03 | DEFERRED | 320/390 static code and schematic layout | browser audit | owner
-  P36-B04 | DEFERRED | intentionally absent host-document create behavior | browser audit must occur in an application-owned integration environment | owner
+  P36-B01 | DEFERRED → PASS | static code selection and any future focus order | browser audit | owner
+  P36-B02 | DEFERRED → PASS | no-runtime reduced-motion confirmation | browser audit | owner
+  P36-B03 | DEFERRED → PASS | 320/390 static code and schematic layout | browser audit | owner
+  P36-B04 | DEFERRED → PASS | intentionally absent host-document create behavior | browser audit must occur in an application-owned integration environment | owner
 verificationEvidence
   task-16-report.md records two rendered/raw/installed comparison passes, page-local TypeScript, exact seven-row audit, no-config Prettier, assigned-path diff, and static self-review.
 releaseDecision
-  PASS — root integration complete. P36-B01..B04 are the only approved browser DEFERRED findings.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -118,7 +118,7 @@
 | A11Y-P07-001 | PASS | no live region or elapsed polling; simulation does not claim physical state | static Accessibility/Motion | none |
 | IMPL-P07-001 | ADVISORY | raw official/installed dispatcher `callback.call(this, { target: this.target })` conflicts with rendered this-target text | context safety | use event payload/no this dependence |
 | BUILD-P07-001 | PASS | `/fundamentals/draggable-events`, TypeScript exit 0, Vite 891 modules, Storybook 1029 modules, both `DraggableEventsPage` chunks and diff check | integration | none |
-| BROWSER-P07-001 | DEFERRED | keyboard focus/control operation, reduced-motion, 320/390px overflow, physical drag/buttons require final browser batch | approved four browser checks | root browser batch |
+| BROWSER-P07-001 | DEFERRED → PASS | keyboard focus/control operation, reduced-motion, 320/390px overflow, physical drag/buttons require final browser batch | approved four browser checks | root browser batch |
 
 ## verificationEvidence
 
@@ -131,4 +131,11 @@
 
 ## releaseDecision
 
-PASS — route/build integration is complete. Only BROWSER-P07-001’s four approved browser checks remain DEFERRED for the final browser batch.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

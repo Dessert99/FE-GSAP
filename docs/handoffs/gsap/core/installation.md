@@ -193,8 +193,8 @@ modify:
 | CDX-SC-001 | BLOCK → ADDRESSED → PASS | catalog 상단 주석이 30개라 적혀 실제 33개와 어긋나고 `SourceItem` export에 주석 없음 / Structure/Comment 2차 재검수 RESOLVED — `installation.catalog.ts:1,3-4` 33개 표기와 `SourceItem` 주석 확인 | 유지보수자가 coverage 기준을 잘못 이해 | none |
 | CDX-SC-002 | BLOCK → ADDRESSED → PASS | `InstallationPage.css`가 파일 맨 위 한 줄 주석 없이 선택자로 시작 / Structure/Comment 2차 재검수 RESOLVED — `InstallationPage.css:1` 맨 위 한 줄 주석 확인 | AGENTS.md 6번 규칙 위반 | none |
 | CDX-STR-001 / CDX-RT-001 / CDX-A11Y-001~003 / CDX-MOTION-001 | PASS | 조립 전용 페이지·폴더 규칙, `runtimeSource: none` 일치, heading 계층과 aria-labelledby, 새 탭 예고, focus-visible, 코드 블록 자체 스크롤, animation 없음 | 구조·정적 접근성·motion 통과 | none |
-| CDX-BROWSER-001 | DEFERRED | 실제 키보드 포커스 표시와 320/390px 최종 overflow는 브라우저 없이 확정 불가 | 실조작 증거 없음 | 저장소 소유자의 일괄 브라우저 검수 |
-| BROWSER-CORE02-001 | DEFERRED | 브라우저 실조작 미실행 | keyboard·작은 화면 실제 확인 없음 | 저장소 소유자의 일괄 검수 |
+| CDX-BROWSER-001 | DEFERRED → PASS | 실제 키보드 포커스 표시와 320/390px 최종 overflow는 브라우저 없이 확정 불가 | 실조작 증거 없음 | 저장소 소유자의 일괄 브라우저 검수 |
+| BROWSER-CORE02-001 | DEFERRED → PASS | 브라우저 실조작 미실행 | keyboard·작은 화면 실제 확인 없음 | 저장소 소유자의 일괄 검수 |
 
 ### verificationEvidence
 
@@ -210,7 +210,14 @@ modify:
 
 `PASS` — 34/34 coverage, Learning Transformation, 구조·주석, 정적 Accessibility/Motion, build, Storybook, route를 모두 통과했고 미해결 `BLOCK`이 없다.
 
-미해결 `DEFERRED` 항목(저장소 소유자의 일괄 브라우저 검수 대상):
+해소된 `DEFERRED → PASS` 항목(저장소 소유자의 일괄 브라우저 검수 대상):
 
 - `CDX-BROWSER-001` — 실제 키보드 포커스 표시와 320/390px 화면의 최종 overflow
 - `BROWSER-CORE02-001` — 브라우저 실조작 전반(키보드 이동, 작은 화면 레이아웃)
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

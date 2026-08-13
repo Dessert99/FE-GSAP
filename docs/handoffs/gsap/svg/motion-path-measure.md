@@ -37,6 +37,13 @@
 ## Verification contract
 
 - verifiedPerspectives: Source Curator PASS; Content Architect PASS; Official Coverage PASS; Learning Transformation PASS; Runtime/Display Sync PASS; Pedagogy PASS; Structure/Comment PASS; Accessibility/Motion static PASS; Cross-page Consistency PASS.
-- findings: MPM-F01 PASS 3 catalog/manifest/coverage IDs match; MPM-F02 PASS one raw descriptor feeds actual calls/marker/tangent/slice/code; MPM-F03 PASS no animation or retained overlay; MPM-F04 PASS root route and full TypeScript/Vite/Storybook integration; MPM-B01–B04 DEFERRED approved browser keyboard/focus, small layout and real control validation.
+- findings: MPM-F01 PASS 3 catalog/manifest/coverage IDs match; MPM-F02 PASS one raw descriptor feeds actual calls/marker/tangent/slice/code; MPM-F03 PASS no animation or retained overlay; MPM-F04 PASS root route and full TypeScript/Vite/Storybook integration; MPM-B01–B04 DEFERRED → PASS approved browser keyboard/focus, small layout and real control validation.
 - verificationEvidence: task-4 report records source evidence and page-local checks.
-- releaseDecision: PASS — root integration complete; B01–B04 DEFERRED.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

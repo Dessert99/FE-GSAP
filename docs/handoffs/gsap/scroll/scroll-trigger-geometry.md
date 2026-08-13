@@ -63,8 +63,15 @@
   - STG-F02 PASS — one descriptor provides actual create config, timeline label, getter-to-setter `scroll()` call, snapshot values, and code; snapshot is request/refresh sparse, not live.
   - STG-F03 PASS — owned listener, trigger, timeline, and pin work are killed/reverted on cleanup; reduced motion keeps measurements while animation/pin are disabled.
   - STG-I01 PASS — root route, full TypeScript, Vite, Storybook, and diff integration passed.
-  - STG-B01 DEFERRED — browser keyboard/local scroll/button operation.
-  - STG-B02 DEFERRED — browser reduced-motion pin-off outcome.
-  - STG-B03 DEFERRED — browser 320/390px table/code layout.
-  - STG-B04 DEFERRED — browser actual ruler geometry/pin cleanup result.
-- releaseDecision: PASS — root integration completed; STG-B01–B04 are approved browser DEFERRED checks.
+  - STG-B01 DEFERRED → PASS — browser keyboard/local scroll/button operation.
+  - STG-B02 DEFERRED → PASS — browser reduced-motion pin-off outcome.
+  - STG-B03 DEFERRED → PASS — browser 320/390px table/code layout.
+  - STG-B04 DEFERRED → PASS — browser actual ruler geometry/pin cleanup result.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

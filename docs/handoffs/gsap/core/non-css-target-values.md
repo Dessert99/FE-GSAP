@@ -200,7 +200,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | STRUCT-CORE07-002 | ADDRESSED | `SvgAttributeLab`의 `onUpdate`가 선언 전 `tween`을 참조했고, `NumericArrayLab`에 현재 선택지로는 도달할 수 없는 길이 절단 코드가 있었다. element를 먼저 풀어 두고 절단 코드를 제거해 해결했다. | 취약한 참조와 추측성 방어 코드 | none |
 | BUILD-CORE07-001 | PASS | `npm run build` exit 0, `npm run build-storybook` exit 0 (2026-08-04) | build/integration 통과 | none |
 | XPAGE-CORE07-001 | PASS | CSS·ease·progress·`gsap.to()`를 이 페이지가 소유하지 않고 각 owner 페이지로 연결했다. 채널 표의 CSS 행은 coverage를 받지 않는 비교용으로 표시했다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE07-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE07-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -210,4 +210,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CORE07-001 — 소유자 브라우저 일괄 검수 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

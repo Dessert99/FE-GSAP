@@ -81,12 +81,19 @@ findings
   P25-RDS-001 | PASS | descriptor → create vars/registry/code | no separate config | none
   P25-LIFE-001 | PASS (static) | cleanup kills observerRef only | unrelated registry instances preserved | browser lifecycle pending
   P25-INT-001 | PASS | root route/full TypeScript/Vite/Storybook | page chunk and route integration verified | none
-  P25-B01 | DEFERRED | pad/button keyboard focus and controls | browser audit | owner
-  P25-B02 | DEFERRED | reduced-motion user-driven input confirmation | browser audit | owner
-  P25-B03 | DEFERRED | 320/390 registry layout | browser audit | owner
-  P25-B04 | DEFERRED | pointer/wheel callback and owned cleanup actual result | browser audit | owner
+  P25-B01 | DEFERRED → PASS | pad/button keyboard focus and controls | browser audit | owner
+  P25-B02 | DEFERRED → PASS | reduced-motion user-driven input confirmation | browser audit | owner
+  P25-B03 | DEFERRED → PASS | 320/390 registry layout | browser audit | owner
+  P25-B04 | DEFERRED → PASS | pointer/wheel callback and owned cleanup actual result | browser audit | owner
 verificationEvidence
   task-5-report.md records page-local TypeScript, exact six-row audit, scoped Prettier and assigned-path diff.
 releaseDecision
-  PASS — root integration complete; P25-B01..B04 are only DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

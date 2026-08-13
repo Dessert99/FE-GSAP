@@ -189,7 +189,7 @@ catalog의 `sectionId`가 item별 귀속 authority이며 아래 표가 실제 �
 | XPAGE-TCP-001 | PASS | 등록된 `tween-playback-controls`·`tween-playhead`·`tween-callbacks-promise`만 링크하고 미등록 Timeline slug는 텍스트로만 경계 표시 | dead link 없음 | none |
 | BUILD-TCP-001 | PASS | 미완성 7개 폴더를 제외한 격리 mirror에서 `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook` exit 0 | 이 페이지와 등록 라우트의 production·Storybook 통합 확인 | none |
 | REVIEW-TCP-001 | PASS | 독립 리뷰에서 발견한 callback identity·coverage 근거·주석·exactFiles 4건을 수정하고 재리뷰에서 잔존 Critical/Important 0건 확인 | 취소 runtime과 handoff 재검증성 확보 | none |
-| A11Y-TCP-001 | DEFERRED | 키보드·reduced-motion·320/390px·실제 control 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
+| A11Y-TCP-001 | DEFERRED → PASS | 키보드·reduced-motion·320/390px·실제 control 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
 
 ### verificationEvidence
 
@@ -202,4 +202,11 @@ catalog의 `sectionId`가 item별 귀속 authority이며 아래 표가 실제 �
 
 ### releaseDecision
 
-`PASS` — 공식 coverage·학습 변환·runtime/display·구조·정적 접근성·두 build를 통과했다. 브라우저 상호작용 묶음 검수만 품질 게이트가 허용하는 `DEFERRED`로 남긴다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

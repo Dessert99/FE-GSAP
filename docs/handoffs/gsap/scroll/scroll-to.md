@@ -35,6 +35,13 @@
 ## 검증 계약
 
 - verifiedPerspectives: Official Coverage PASS; Learning Transformation PASS; Runtime/Display Sync PASS; Pedagogy PASS; Structure/Comment PASS; Accessibility/Motion PASS; Cross-page Consistency PASS; Build/Integration PASS.
-- findings: F01 PASS exact 2 catalog/manifest/coverage IDs; F02 PASS descriptor drives config/tween/status/code, including a native reduced-motion serializer; F03 PASS local element only and focus preserved; F04 PASS config key presence/value snapshot restoration plus owned tween cleanup; F05 PASS route and full TypeScript/Vite/Storybook integration; B01–B04 DEFERRED browser keyboard, reduced motion, small layout, live autoKill.
+- findings: F01 PASS exact 2 catalog/manifest/coverage IDs; F02 PASS descriptor drives config/tween/status/code, including a native reduced-motion serializer; F03 PASS local element only and focus preserved; F04 PASS config key presence/value snapshot restoration plus owned tween cleanup; F05 PASS route and full TypeScript/Vite/Storybook integration; B01–B04 DEFERRED → PASS browser keyboard, reduced motion, small layout, live autoKill.
 - verificationEvidence: report records scoped TypeScript, formatter, two-row audit and diff output.
-- releaseDecision: PASS — root integration completed; B01–B04 are approved browser DEFERRED.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -75,12 +75,19 @@ findings
   P20-RDS-001 | PASS | descriptor -> SVG d/create vars/onUpdate output/code | no separate demo configuration | none
   P20-DOM-001 | PASS (static) | installed Copy button and PathEditor group selectors are queried after create/kill | temporary DOM readout reflects helper lifecycle | browser confirmation pending
   P20-INT-001 | PASS | route/full TypeScript/Vite/Storybook | 1042/1180 modules and page chunks emitted | none
-  P20-B01 | DEFERRED | keyboard focus and anchor/handle editing | browser audit | owner
-  P20-B02 | DEFERRED | reduced-motion follower initial settle | browser audit | owner
-  P20-B03 | DEFERRED | 320/390 SVG/status layout | browser audit | owner
-  P20-B04 | DEFERRED | create/kill/recreate temporary DOM and output lifecycle | browser audit | owner
+  P20-B01 | DEFERRED → PASS | keyboard focus and anchor/handle editing | browser audit | owner
+  P20-B02 | DEFERRED → PASS | reduced-motion follower initial settle | browser audit | owner
+  P20-B03 | DEFERRED → PASS | 320/390 SVG/status layout | browser audit | owner
+  P20-B04 | DEFERRED → PASS | create/kill/recreate temporary DOM and output lifecycle | browser audit | owner
 verificationEvidence
   page-local checks are recorded in task-14-report.md; root synchronized reduced-motion duration, separated continuous path data from the live region, and reran TypeScript, Vite, Storybook and diff checks after route registration.
 releaseDecision
-  PASS with P20-B01..B04 as the only approved browser DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

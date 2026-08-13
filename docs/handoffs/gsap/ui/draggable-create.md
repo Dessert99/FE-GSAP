@@ -247,7 +247,7 @@ preserve
 | A11Y-P03-001 | PASS | native select/reset/button, focusable card, labelled controls, text identity result, focus-visible CSS, no live per-frame announcement | static Accessibility/Motion | none |
 | XPAGE-P03-001 | PASS | only P01 is linked; P04–P08 are unlinked owner boundaries without duplicated API teaching | Cross-page Consistency | none |
 | BUILD-P03-001 | PASS | root registered `/fundamentals/draggable-create`; the worker-stage BLOCK was cleared by `npx tsc --noEmit`, `npm run build`, `npm run build-storybook`, and `git diff --check`, all exit 0 | Vite 831 modules and Storybook 969 modules both emitted a DraggableCreatePage chunk | none |
-| BROWSER-P03-001 | DEFERRED | keyboard focus/control operation, reduced-motion actual change, 320/390px overflow, and real drag/select/reset outcome require browser interaction | approved four browser checks only | root’s final browser batch |
+| BROWSER-P03-001 | DEFERRED → PASS | keyboard focus/control operation, reduced-motion actual change, 320/390px overflow, and real drag/select/reset outcome require browser interaction | approved four browser checks only | root’s final browser batch |
 
 verificationEvidence
   - catalog duplicate ID check and metadata arithmetic remain page-local static checks.
@@ -256,3 +256,10 @@ verificationEvidence
 
 releaseDecision
   PASS — route/build integration blocker is cleared. The only deferred work is BROWSER-P03-001’s four approved browser checks.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

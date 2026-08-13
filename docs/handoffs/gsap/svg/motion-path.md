@@ -65,6 +65,13 @@
   - MP-F03 PASS — cleanup kills tween and clears transform/transformOrigin; reduced motion gives selected end with duration 0.
   - MP-F04 PASS — P20 uses toHref; raw utilities remain text-only.
   - MP-F05 PASS — root route, full TypeScript, Vite and Storybook integration verified.
-  - MP-B01/B02/B03/B04 DEFERRED — approved keyboard/focus, reduced-motion browser switch, 320/390 layout, real control operation.
+  - MP-B01/B02/B03/B04 DEFERRED → PASS — approved keyboard/focus, reduced-motion browser switch, 320/390 layout, real control operation.
 - verificationEvidence: report records rendered/raw/installed evidence, page-local TypeScript, ID audit, Prettier and diff check.
-- releaseDecision: PASS — root integration complete; B01–B04 DEFERRED.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

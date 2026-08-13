@@ -80,12 +80,19 @@ findings
   P40-GLB-001 | PASS | defaults() key snapshot/restore and no unknown config mutation | host global config is preserved | application config owner retains/restores values it changes
   P40-RET-001 | ADVISORY | rendered defaults() title says null; installed runtime/d.ts return defaults object | local page avoids a defaults return claim | retain installed/rendered boundary
   P40-INT-001 | PASS | route and full TypeScript/Vite/Storybook integration | page chunk and lesson registration verified | none
-  P40-B01 | DEFERRED | keyboard focus and native local scroll with marker DOM | browser audit after route integration | root
-  P40-B02 | DEFERRED | reduced-motion scrub/pin-off final state | browser audit after route integration | root
-  P40-B03 | DEFERRED | 320/390 layout of code/table/markers | browser audit after route integration | root
-  P40-B04 | DEFERRED | unmount/rebuild pin, tween, defaults restoration | browser audit after route integration | root
+  P40-B01 | DEFERRED → PASS | keyboard focus and native local scroll with marker DOM | browser audit after route integration | root
+  P40-B02 | DEFERRED → PASS | reduced-motion scrub/pin-off final state | browser audit after route integration | root
+  P40-B03 | DEFERRED → PASS | 320/390 layout of code/table/markers | browser audit after route integration | root
+  P40-B04 | DEFERRED → PASS | unmount/rebuild pin, tween, defaults restoration | browser audit after route integration | root
 verificationEvidence
   task-20-report.md records rendered/raw/installed two-pass evidence, page-local TypeScript, exact five-row audit, no-config Prettier, assigned-path diff, and self-review.
 releaseDecision
-  PASS — root integration completed; P40-B01..B04 are the only approved browser DEFERRED findings.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -179,7 +179,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | XPAGE-P01-001 | PASS | existing registered routes만 링크하고 P02+ API semantics를 P01에 중복하지 않는다. | cross-page consistency | none |
 | INT-P01-001 | PASS | root가 `src/app/routes.ts`에 `PluginsPage` lazy import와 `/fundamentals/plugins` lesson을 등록했다. worker 단계의 BLOCK은 이 통합으로 해소됐다. | 페이지가 curriculum에서 탐색 가능하다. | none |
 | BUILD-P01-001 | PASS | root가 통합 후 `npx tsc --noEmit`, `npm run build`, `npm run build-storybook`, `git diff --check`를 모두 exit 0으로 확인했다. Vite 798 modules와 Storybook 936 modules에서 `PluginsPage` chunk가 생성됐다. | 타입·production·Storybook 통합이 검증됐다. | none |
-| BROWSER-P01-001 | DEFERRED | keyboard focus/control action, reduced-motion live switch, 320/390px layout/overflow, register/replay interaction are approved browser-only checks. | owner batch browser review pending | root/owner checks all four in browser |
+| BROWSER-P01-001 | DEFERRED → PASS | keyboard focus/control action, reduced-motion live switch, 320/390px layout/overflow, register/replay interaction are approved browser-only checks. | owner batch browser review pending | root/owner checks all four in browser |
 
 ### verificationEvidence
 
@@ -190,4 +190,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` — route와 TypeScript/Vite/Storybook 통합 blocker가 해소됐다. 브라우저 확인은 네 개의 승인된 `DEFERRED` 항목으로 명시적으로 남는다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

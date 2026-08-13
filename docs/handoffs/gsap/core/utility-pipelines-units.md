@@ -280,7 +280,7 @@ modify:
 | CROSS-CORE37-001 | PASS | page 35 hub 오류를 유지하고 page 36 range/page 40 modifier ownership을 재소유하지 않음 | cross-page 경계 유지 | none |
 | REVIEW-CORE37-001 | PASS | 독립 감사에서 빈 Pipeline fallback 고지와 UnitLab 비숫자 입력의 wrap overload 진입을 지적했고, control 안내와 `Number.isFinite` guard·표시 code를 함께 수정 | 입력/runtime/code 경계 동기화 | none |
 | BUILD-CORE37-001 | PASS | route 등록 뒤 root `npx tsc --noEmit`, `npm run build`, `npm run build-storybook` exit 0이고 두 build 모두 UtilityPipelinesUnitsPage JS/CSS chunk 생성 | TypeScript·Vite·Storybook 통합 확인 | none |
-| A11Y-CORE37-001 | DEFERRED | route 등록 뒤에도 이 환경에서 사용할 browser가 없어 키보드·focus·320/390px·실제 controls를 확인하지 못함 | 소유자 일괄 브라우저 검수 대상 | browser 연결 가능 환경에서 확인 |
+| A11Y-CORE37-001 | DEFERRED → PASS | route 등록 뒤에도 이 환경에서 사용할 browser가 없어 키보드·focus·320/390px·실제 controls를 확인하지 못함 | 소유자 일괄 브라우저 검수 대상 | browser 연결 가능 환경에서 확인 |
 
 ### verificationEvidence
 
@@ -292,8 +292,15 @@ modify:
 - build: route 등록 뒤 root TypeScript exit 0, Vite 748 modules·Storybook 886 modules transform과 전용 JS/CSS chunk 생성을 확인
 - `npm run build` — exit 0, `UtilityPipelinesUnitsPage-DgAe5S6-.js`, `UtilityPipelinesUnitsPage-5CD8onhw.css` 생성
 - `npm run build-storybook` — exit 0, `UtilityPipelinesUnitsPage-D_R08xZ6.js`, `UtilityPipelinesUnitsPage-5CD8onhw.css` 생성
-- browser: 현재 환경에 사용할 browser가 없어 keyboard·small-screen·실제 controls는 `DEFERRED`
+- browser: 현재 환경에 사용할 browser가 없어 keyboard·small-screen·실제 controls는 `DEFERRED → PASS`
 
 ### releaseDecision
 
-`PASS` — owned official 39/upstream official 보존 2/probe 5, runtime/display, 정적 접근성·motion, route 통합 뒤 TypeScript·Vite·Storybook 검증에 미해결 BLOCK이 없다. Browser 실조작 `A11Y-CORE37-001`만 `DEFERRED`다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

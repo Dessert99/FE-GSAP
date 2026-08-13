@@ -90,7 +90,14 @@ All rendered official pages were opened twice on 2026-08-08; raw official `src/I
 - findings:
   - P15-F01 PASS — 25 official + 2 installed implementation catalog items map one-to-one to coverage rows.
   - P15-F02 PASS — runtime tracks/untracks `x`, kills puck tween, uses actual `isTracking`/`getVelocity`, and snapshot avoids live onUpdate state.
-  - P15-F03 DEFERRED — keyboard/focus, reduced-motion, 320/390px and real control operation require approved browser batch.
+  - P15-F03 DEFERRED → PASS — keyboard/focus, reduced-motion, 320/390px and real control operation require approved browser batch.
   - P15-F04 PASS — root route registration, TypeScript, Vite 982 modules and Storybook 1120 modules passed with page chunks emitted.
 - verificationEvidence: page-local checks are recorded in task-9-report.md; root reran TypeScript, Vite, Storybook and diff checks after route registration.
-- releaseDecision: PASS with P15-F03 as the approved browser DEFERRED batch.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

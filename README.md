@@ -21,19 +21,9 @@ GSAP 공식 문서를 **읽는 문서가 아니라 조작해보는 학습 페이
 
 ### 현재 공개된 레슨
 
-| 그룹 | 레슨 | 경로 |
-| --- | --- | --- |
-| 시작하기 | GSAP Core 지도 | `/fundamentals/gsap-core-map` |
-| 트윈 기초 | `gsap.to()` | `/fundamentals/gsap-to` |
-| 트윈 기초 | Tween 시작·끝 값 | `/fundamentals/tween-start-end-values` |
-| 값과 움직임 | CSS animation | `/fundamentals/css-animation` |
-| 값과 움직임 | Easing | `/fundamentals/easing` |
-| 트윈 제어 | Tween playhead | `/fundamentals/tween-playhead` |
-| 트윈 구성 | 재사용 가능한 effect | `/fundamentals/reusable-effects` |
+`/fundamentals`에는 **86개 학습 페이지**가 공개되어 있습니다. Core 40개 페이지가 canonical source 159개를, Plugin 46개 페이지가 canonical source 205개를 소유해 공식 기술 source **364/364개**를 모두 연결합니다.
 
-`custom-bounce-wiggle`은 섹션과 예제를 작업 중이며 아직 라우트에 등록되지 않았습니다.
-
-전체 로드맵은 [docs/handoffs/gsap/_program/master-page-inventory.md](docs/handoffs/gsap/_program/master-page-inventory.md)에 있습니다. 공식 core·plugin 문서 **364개 소스**를 **86개 학습 페이지**(core 40 + plugin 46)로 묶는 것이 목표입니다.
+페이지·공식 source·라우트의 전체 대응은 [master page inventory](docs/handoffs/gsap/_program/master-page-inventory.md), 최신 완료 상태와 검증 근거는 [current status](docs/handoffs/gsap/_program/current-status.md)에서 확인할 수 있습니다. `/patterns`와 `/showcases`는 아직 별도 레슨 없이 트랙 소개 화면만 제공합니다.
 
 ## 기술 스택
 
@@ -80,6 +70,8 @@ src/
 ## 검증 방식
 
 이 프로젝트는 **자동화 테스트 코드를 작성하지 않습니다.** 대신 TypeScript·Vite 빌드, Storybook 빌드, 그리고 브라우저에서 컨트롤과 애니메이션 동작을 직접 확인하는 방식으로 검증합니다. 자세한 기준은 [docs/workflows/quality-gates.md](docs/workflows/quality-gates.md)에 있습니다.
+
+2026-08-13 기준 86개 페이지 handoff는 모두 `releaseDecision: PASS`입니다. 기존 browser-only `DEFERRED`는 저장소 소유자의 완료 간주 승인으로 닫았으며, 실제 브라우저 실조작 증거가 별도로 생성된 것은 아닙니다.
 
 ## 배포
 

@@ -331,8 +331,8 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | BUILD-CTX-001 | PASS | 2026-08-05 `npx tsc --noEmit` → **exit 0, 출력 0줄**(저장소 전체 오류 0건, `gsap-context` 경로 오류 0건). 상대경로 import 전수 검사 스크립트로 24개 파일의 모든 `./` import가 실제 파일로 해석됨을 확인했다(MISSING 0건). `npm run build`·`npm run build-storybook`은 이 작업 범위에서 금지되어 실행하지 않았다. | build/integration 통과(이 페이지 범위) | 소유자가 전체 배치 완료 후 full build 1회 |
 | XPAGE-CTX-001 | PASS | `gsap-to` · `tween-playhead` · `tween-configuration`은 등록된 라우트라 `toHref()`로 링크했다. `react-use-gsap`은 `src/app/routes.ts`에 **아직 없어** 링크하면 `resolveRoute`가 첫 레슨으로 흡수하므로 링크 없이 문장으로만 경계를 밝혔다. Timeline · `matchMedia` · ScrollTrigger도 미구현이라 이름만 남겼다. 동시 작업 중인 `react-use-gsap/` 폴더는 읽기만 하고 수정하지 않았다. | Cross-page Consistency 통과 | 소유자가 `react-use-gsap` 등록 후 `BoundariesSection`의 `upcoming` 행을 `otherOwners`로 승격 |
 | LT-CTX-001 | PASS | 공식 목차(Quick Start / Scoping selector text / Adding to a Context / Cleanup function / Ignoring / Tips & Caveats)를 그대로 번역하지 않고 학습자 상황 순서로 재구성했다 — 문제 상황 → 모아서 되돌리기 → 범위 가두기 → 독립 utility → 나중에 생기는 것 → 되돌림의 수명 → 경계. Tips & Caveats 4개 항목은 한 덩어리로 옮기지 않고 각각 소유 섹션(01의 버전, 04의 `self`, 05의 permanence·Timeline 경계)으로 분산했다. | Learning Transformation 통과 | none |
-| A11Y-CTX-002 | DEFERRED | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환 동작, 320/390px 실제 레이아웃과 overflow, 네 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
-| A11Y-CTX-003 | DEFERRED | `ScopedSelectorLab`에서 scope 유무에 따라 카드별 이동 개수가 실제로 `3/0`과 `3/3`으로 갈리는지 — DOM이 필요해 Node probe로 확인할 수 없었다(`PROBE-CTX-009`). 화면에 표시되는 개수는 전부 DOM에서 **센** 관찰값이라 결과가 달라도 거짓을 표시하지는 않는다. | 소유자 일괄 브라우저 검수 대상 | 브라우저에서 두 radio 모드를 각각 실행해 확인 |
+| A11Y-CTX-002 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환 동작, 320/390px 실제 레이아웃과 overflow, 네 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CTX-003 | DEFERRED → PASS | `ScopedSelectorLab`에서 scope 유무에 따라 카드별 이동 개수가 실제로 `3/0`과 `3/3`으로 갈리는지 — DOM이 필요해 Node probe로 확인할 수 없었다(`PROBE-CTX-009`). 화면에 표시되는 개수는 전부 DOM에서 **센** 관찰값이라 결과가 달라도 거짓을 표시하지는 않는다. | 소유자 일괄 브라우저 검수 대상 | 브라우저에서 두 radio 모드를 각각 실행해 확인 |
 
 ### verificationEvidence
 
@@ -344,8 +344,15 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 2건: **A11Y-CTX-002**, **A11Y-CTX-003** — 둘 다 소유자 브라우저 일괄 검수 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 미해결 `BLOCK` 없음. 구현 중 발생한 `BLOCK` 3건(`PROBE-CTX-009`, `STRUCT-CTX-002`, `STRUCT-CTX-003`)은 모두 수정·재확인을 마쳐 `PASS`로 재판정했고 원래 상태를 위 표에 보존했다.
 
 라우팅 등록(`src/app/routes.ts`)은 이 컨텍스트의 작업 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 이 페이지는 앱에서 접근되지 않는다. 등록 시 `GsapContextPage`를 `fundamentals` 트랙에 `slug: 'gsap-context'`로 추가하면 된다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

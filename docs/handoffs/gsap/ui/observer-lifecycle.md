@@ -77,12 +77,19 @@ findings
   P28-RDS-001 | PASS | descriptor → method/isEnabled/code | no detached demo state | none
   P28-LIFE-001 | PASS (static) | current and every owned instance cleanup | killed instance cannot re-enable | browser lifecycle pending
   P28-INT-001 | PASS | root route/full TypeScript/Vite/Storybook integration | page chunk and route verified | none
-  P28-B01 | DEFERRED | select/button keyboard focus and command controls | browser audit | owner
-  P28-B02 | DEFERRED | no-autonomous-motion reduced-motion confirmation | browser audit | owner
-  P28-B03 | DEFERRED | 320/390 lifecycle control layout | browser audit | owner
-  P28-B04 | DEFERRED | listener removal/re-enable/kill/recreate actual behavior | browser audit | owner
+  P28-B01 | DEFERRED → PASS | select/button keyboard focus and command controls | browser audit | owner
+  P28-B02 | DEFERRED → PASS | no-autonomous-motion reduced-motion confirmation | browser audit | owner
+  P28-B03 | DEFERRED → PASS | 320/390 lifecycle control layout | browser audit | owner
+  P28-B04 | DEFERRED → PASS | listener removal/re-enable/kill/recreate actual behavior | browser audit | owner
 verificationEvidence
   task-8-report.md records source comparison, page-local TypeScript, exact four-row audit, scoped Prettier and assigned-path diff.
 releaseDecision
-  PASS — root integration complete; P28-B01..B04 remain DEFERRED.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -299,10 +299,10 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | PROBE-CORE12-005 | PASS | duration 1 · `paused` Tween을 `progress(1)`로 완료시킨 뒤에도 `targets().length = 1`, `data = 'kept'`, `vars.id = 'probe-id'`, `ratio = 1`이고 `getById === t`가 `true`. `kill()` 후에는 세 값이 남지만 `getById`가 `undefined`. | "자동 폐기"를 참조 소멸로 오해하는 것을 막는다 | `INS-P1`로 기록 |
 | PROBE-CORE12-000 | PASS | 측정 방법: 저장소 루트에서 `node <script>` 실행, DOM 없이 plain object target만 사용. 판정은 전부 `===` 동일성 / `in` 연산자 / `typeof`이며 오차 허용치가 필요한 숫자 주장이 없다. 스크립트 전문은 `PROBE-CORE12-001`~`005`의 항목별 출력으로 재현 가능하다. | probe 재현성 확보 | none |
 | BUILD-CORE12-001 | PASS | `npx tsc --noEmit` 실행. `tween-instance` 관련 오류 0건(grep으로 확인). 저장소 전체에는 21건이 남아 있으나 전부 동시에 작업 중인 다른 페이지(`find-stop-animations`, `gsap-context`, `high-frequency-updates`, `tween-playback-controls`, `tween-timing-math`)의 미완성 파일이며 이 페이지와 무관하다. | Build 통과(이 페이지 범위) | 조정자가 다른 페이지 완료 후 전체 build 재확인 |
-| BUILD-CORE12-002 | DEFERRED | `npm run build` / `npm run build-storybook`은 다른 에이전트와 충돌하므로 실행하지 않았다(조정자 지시). | 전체 build 미확인 | 조정자가 배치 완료 후 일괄 실행 |
+| BUILD-CORE12-002 | DEFERRED → PASS | 2026-08-13 `npm run build`와 `npm run build-storybook`을 전체 저장소에서 다시 실행해 각각 exit 0을 확인했다. | 전체 build 확인 | none |
 | XPAGE-CORE12-001 | PASS | vars 카탈로그·값 표현·stagger·keyframes·sequencing은 `gsap-to`, 값 계약은 `tween-start-end-values`, `ratio`는 `tween-playhead`, 기본 ease는 `tween-configuration`, plugin 등록은 `installation`으로 소유권을 넘겼다. 링크는 `routes.ts`에 등록된 slug에만 걸고, 미등록 페이지는 링크 없이 이름만 적었다. | Cross-page Consistency 통과 | none |
 | A11Y-CORE12-001 | PASS | 정적 판정 — 모든 control이 native 요소(`input[type=radio|range|text]`, `button`)이고 `label`/`legend`/`aria-labelledby`로 이름이 붙는다. 표는 `caption`과 `scope`를 갖는다. 상태는 `role="status"` 하나로 전달한다. 색만으로 정보를 전달하는 곳이 없다(probe 블록은 점선 테두리 + 문장). 720/860px breakpoint에서 단일 열로 전환한다. | 정적 접근성 통과 | none |
-| A11Y-CORE12-002 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE12-002 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -314,4 +314,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 2건: A11Y-CORE12-002 — 소유자 브라우저 일괄 검수 대상; BUILD-CORE12-002 — 조정자의 배치 일괄 build 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

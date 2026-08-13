@@ -294,7 +294,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | STRUCT-CORE13-001 | PASS | 페이지 TSX는 헤더와 섹션 조립만, 섹션은 학습 단위, 세 예제는 각자 hook을 소유한다. hook에 제목·설명·속성 표·학습 패널이 없고 TSX에 GSAP 생명주기가 없다. 한 파일에 React 컴포넌트는 하나뿐이다. 파일 21개가 목록과 일치하며, 스크립트로 모든 상대 import·CSS import 대상이 실재함을 확인했다(MISSING 0건). 모든 `className`이 CSS에 정의돼 있다(루트 `.playback-page`는 선례대로 규칙 없음). | Structure/Comment 통과 | none |
 | BUILD-CORE13-001 | PASS | `npx tsc --noEmit`에서 `tween-playback-controls` 경로 오류 **0건**(grep으로 확인). 저장소 전체에 남은 4건은 동시에 작업 중인 다른 페이지(`gsap-context`)의 미생성 섹션 import이며 이 페이지와 무관하다. | Build 통과 | `npm run build`/`build-storybook`은 지시에 따라 실행하지 않음 |
 | XPAGE-CORE13-001 | PASS | `timeScale`·`kill`·`time()`·`progress()`·`delay`·ease·콜백 발화 시점을 이 페이지가 소유하지 않고 각 owner로 링크했다. 내부 링크 5개(`easing`, `gsap-to`, `tween-callbacks-promise`, `tween-configuration`, `tween-playhead`)가 전부 `routes.ts`에 등록된 slug임을 스크립트로 확인했다. 미구현 Timeline 페이지는 링크 없이 문장으로만 경계를 남겼다. `SectionHeading`·`PageCoverage`·probe note 표기 규약은 `non-css-target-values`·`tween-callbacks-promise`와 동일하다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE13-003 | DEFERRED | 키보드 이동·포커스 표시·control 조작, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃과 overflow, 세 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE13-003 | DEFERRED → PASS | 키보드 이동·포커스 표시·control 조작, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃과 overflow, 세 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -318,6 +318,13 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CORE13-003 — 소유자 브라우저 일괄 검수 대상. `SRC-CORE13-004`는 `ADVISORY`로 release를 막지 않는다.)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 라우트 등록(`src/app/routes.ts`)은 이 작업의 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 페이지는 앱에서 접근되지 않는다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

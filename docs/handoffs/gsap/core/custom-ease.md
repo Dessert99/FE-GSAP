@@ -108,7 +108,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | PROBE-CE-005 | PASS | `getSVGData("power2")`가 문자열을 반환하고 `M0,100…`으로 시작해 기본 높이 100과 화면 좌표를 확인 | `CE-P6` 근거 | none |
 | OC-CE-001 | PASS | meta 섹션 합계 29 = catalog 공식 행 29, 중복 ID 0 | Official Coverage 통과 | none |
 | BUILD-CE-001 | PASS | `npm run build` exit 0, `npm run build-storybook` exit 0 (2026-08-04) | build/integration 통과 | none |
-| A11Y-CE-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CE-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -118,4 +118,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CE-001)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

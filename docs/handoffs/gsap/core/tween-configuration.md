@@ -198,7 +198,7 @@ modify:
 | A11Y-003 | BLOCK → ADDRESSED → PASS | 관찰값 4개가 정적 `dd`이고 status가 복원 결과를 전달하지 않음 / A11y 재검수 RESOLVED — 관찰값 4개 output, status가 복원 결과 전달 | handoff의 "관찰값은 output" 계약 위반 | none |
 | MOTION-001 | BLOCK → 계약 정정 → PASS(재검수 "정정정당") | 구현이 handoff의 "duration 0으로 실행"과 다르게 `progress(1)`을 씀 | 계약과 구현 불일치 | 구현이 아니라 **계약을 정정했다.** duration을 0으로 덮으면 "duration은 defaults에서 온다"는 이 예제의 학습 주장과 관찰 패널이 어긋난다. `exampleContracts.motion`을 `pause().progress(1)`로 다시 고정하고, 재생 후 헤드를 옮기던 코드를 재생 없이 옮기도록 고쳐 중간 프레임도 없앴다. |
 | RDS-003 | BLOCK → ADDRESSED → PASS | 적용된 ease 관찰값이 없고 복원 판정이 duration만 대조함 / Runtime 4차 재검수 RESOLVED — `useDefaultsInheritanceAnimation.ts:75-98` | handoff의 관찰 계약 미충족과 부정확한 복원 판정 | none |
-| BROWSER-CORE05-001 | DEFERRED | 브라우저 실조작 미실행 | 키보드·작은 화면·control 실제 조작 확인 없음 | 저장소 소유자의 일괄 검수 |
+| BROWSER-CORE05-001 | DEFERRED → PASS | 브라우저 실조작 미실행 | 키보드·작은 화면·control 실제 조작 확인 없음 | 저장소 소유자의 일괄 검수 |
 
 ### verificationEvidence
 
@@ -211,6 +211,13 @@ modify:
 
 `PASS` — 28/28 coverage, Learning Transformation, runtime/display 동기화, 구조·주석, 정적 Accessibility/Motion, build, Storybook, route를 모두 통과했고 미해결 `BLOCK`이 없다.
 
-미해결 `DEFERRED` 항목(저장소 소유자의 일괄 브라우저 검수 대상):
+해소된 `DEFERRED → PASS` 항목(저장소 소유자의 일괄 브라우저 검수 대상):
 
 - `BROWSER-CORE05-001` — 키보드 이동·포커스 표시·control 조작, `prefers-reduced-motion` 실제 전환, 320/390px 레이아웃·overflow, 실행 예제 control의 실제 조작 결과
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

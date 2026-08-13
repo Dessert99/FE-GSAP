@@ -164,7 +164,7 @@ preserve
 | A11Y-P09-001        | PASS     | labelled native controls, SVG label, static text measurements, no autonomous motion               | static Accessibility/Motion  | none                              |
 | XPAGE-P09-001       | PASS     | no downstream SVG API links or duplicated morph/motion teaching                                   | Cross-page Consistency       | none                              |
 | ROUTE-BUILD-P09-001 | PASS     | `/fundamentals/draw-svg`, TypeScript exit 0, Vite 924 modules, Storybook 1062 modules, both page chunks and diff check | Integration                  | none                              |
-| BROWSER-P09-001     | DEFERRED | keyboard controls, reduced motion, 320/390px, actual slider/live/measurement outcome              | approved four browser checks | root browser batch                |
+| BROWSER-P09-001     | DEFERRED → PASS | keyboard controls, reduced motion, 320/390px, actual slider/live/measurement outcome              | approved four browser checks | root browser batch                |
 
 ### root integration evidence
 
@@ -173,3 +173,10 @@ preserve
 
 releaseDecision
 PASS — route/build integration is complete. Only BROWSER-P09-001’s four approved browser checks remain deferred for the final browser batch.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

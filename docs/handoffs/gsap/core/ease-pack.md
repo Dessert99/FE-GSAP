@@ -123,7 +123,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | ASSET-EP-001 | ADDRESSED | `EasePackPage.tsx`가 `./EasePackPage.css`를 import하는데 파일이 없어 Vite 빌드가 깨질 상태였다. `NonCssTargetValuesPage.css`를 기준으로 생성하고 사용 클래스 전수 대조로 누락 0을 확인했다 | 빌드 실패 | none |
 | OC-EP-001 | PASS | meta 섹션 합계 37 = catalog 공식 행 37, 중복 ID 0 | Official Coverage 통과 | none |
 | BUILD-EP-001 | PASS | `npm run build` exit 0, `npm run build-storybook` exit 0 (2026-08-04) | build/integration 통과 | none |
-| A11Y-EP-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 세 lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-EP-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 세 lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -133,4 +133,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-EP-001)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

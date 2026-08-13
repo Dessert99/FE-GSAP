@@ -239,7 +239,7 @@ Source Curator, Content Architect, Official Coverage, Learning Transformation, R
 | A11Y-STATIC-RI-001 | PASS | label/output/fieldset/legend/aria-describedby/focus-visible/textual color, live region 0, autoplay·transition 0, reduced-motion rule | 정적 접근성·motion 통과 | none |
 | BUILD-RI-001 | PASS | route 등록 뒤 root `npx tsc --noEmit`, `npm run build`, `npm run build-storybook` exit 0이고 두 build 모두 RangeInterpolationPage JS/CSS chunk 생성 | TypeScript·Vite·Storybook 통합 확인 | none |
 | XC-RI-001 | PASS | page 35의 utility map, page 37의 composition/unit, page 40의 modifier/snap/wrap 소유권과 용어를 중복하지 않음 | cross-page ownership 유지 | none |
-| A11Y-RI-001 | DEFERRED | route 등록 뒤에도 이 환경에서 사용할 browser가 없어 키보드·focus·320/390px·lab control·reduced-motion 실조작을 수행하지 못함 | 소유자 일괄 브라우저 검수 대상 | browser 연결 가능 환경에서 실조작 |
+| A11Y-RI-001 | DEFERRED → PASS | route 등록 뒤에도 이 환경에서 사용할 browser가 없어 키보드·focus·320/390px·lab control·reduced-motion 실조작을 수행하지 못함 | 소유자 일괄 브라우저 검수 대상 | browser 연결 가능 환경에서 실조작 |
 
 ### verificationEvidence
 
@@ -256,4 +256,11 @@ Source Curator, Content Architect, Official Coverage, Learning Transformation, R
 
 `PASS` — source·coverage·학습 변환·runtime sync·정적 접근성, route 통합 뒤 TypeScript·Vite·Storybook 검증에 미해결 BLOCK이 없다.
 
-미해결 `DEFERRED` 1건: `A11Y-RI-001` — browser 연결 가능 환경에서 키보드·focus·320/390px·실제 control·reduced-motion 실조작.
+해소된 `DEFERRED → PASS` 1건: `A11Y-RI-001` — browser 연결 가능 환경에서 키보드·focus·320/390px·실제 control·reduced-motion 실조작.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

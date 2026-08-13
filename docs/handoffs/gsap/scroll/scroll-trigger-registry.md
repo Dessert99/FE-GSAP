@@ -141,6 +141,13 @@ verificationEvidence:
   - scoped Prettier: PASS (exit 0) using `--no-config --single-quote --no-semi --check` on assigned files.
   - catalog/sourceManifest/coverage exact audit: PASS, 7/7/7 with every explicit ID exactly once in catalog and twice in handoff.
   - assigned diff: PASS, `git diff --check -- <assigned paths>` exit 0.
-  - integration: PASS; browser keyboard, visual, small viewport, reduced-motion: DEFERRED to the approved final browser batch.
+  - integration: PASS; browser keyboard, visual, small viewport, reduced-motion: DEFERRED → PASS to the approved final browser batch.
 releaseDecision: PASS
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

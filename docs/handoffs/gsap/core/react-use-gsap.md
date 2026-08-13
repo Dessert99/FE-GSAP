@@ -116,7 +116,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | ASSET-RG-001 | ADDRESSED | `HookBasicsSection`이 쓰는 `react-gsap-page__token-list` 클래스가 CSS에 없었다. 사용 클래스 전수 대조로 발견해 추가했고 재대조에서 누락 0 | 스타일 누락 | none |
 | OC-RG-001 | PASS | meta 섹션 합계 19 = catalog 공식 행 19 = 분모 19, 중복 ID 0 | Official Coverage 통과 | none |
 | BUILD-RG-001 | PASS | `npx tsc --noEmit`에서 이 페이지 관련 오류 0 (동시 진행 중인 다른 페이지 오류는 별건) | 타입 통과 | 통합 시 전체 build 재확인 |
-| A11Y-RG-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab 실행 버튼 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-RG-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab 실행 버튼 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -127,4 +127,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-RG-001 / 통합 시점의 전체 `npm run build`와 Storybook build는 라우트 등록과 함께 수행)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

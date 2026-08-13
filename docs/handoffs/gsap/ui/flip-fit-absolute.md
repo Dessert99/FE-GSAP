@@ -126,10 +126,17 @@ preserve
 | A11Y-P12-001        | PASS     | native controls and DOM/focus order preserved                          | static Accessibility/Motion | none                    |
 | XPAGE-P12-001       | PASS     | registered P11 prerequisite link; P13 and later APIs remain text-only  | Cross-page Consistency      | none                    |
 | ROUTE-BUILD-P12-001 | PASS     | `/fundamentals/flip-fit-absolute`, TypeScript exit 0, Vite 956 modules, Storybook 1094 modules, both page chunks and diff check | Integration                 | none                    |
-| BROWSER-P12-001     | DEFERRED | keyboard, reduced motion, 320/390px, live fit/absolute/restore outcome | approved four only          | root batch              |
+| BROWSER-P12-001     | DEFERRED → PASS | keyboard, reduced motion, 320/390px, live fit/absolute/restore outcome | approved four only          | root batch              |
 
 releaseDecision
 PASS — route/build integration is complete; BROWSER-P12-001’s four approved checks remain deferred for the final browser batch.
 
 rootIntegrationEvidence
   `npx tsc --noEmit`, Vite 956 modules, Storybook 1094 modules and `git diff --check` exited 0; both builds emitted `FlipFitAbsolutePage` JS/CSS chunks.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

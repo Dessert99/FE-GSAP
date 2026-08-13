@@ -83,11 +83,18 @@ findings
   P22-RDS-001 | PASS | descriptor → selected utility branch/RawPath output/code | no duplicate conversion configuration | none
   P22-DOM-001 | PASS (static) | React owns g only; imperative host creates/restores/removes rect/path | swap cannot replace a React-owned node | browser confirmation pending
   P22-INT-001 | PASS | route/full TypeScript/Vite/Storybook | page chunk and route integration verified | none
-  P22-B01 | DEFERRED | native select/range/button keyboard and focus operation | browser audit | owner
-  P22-B03 | DEFERRED | 320/390 table and serialized-d overflow | browser audit | owner
-  P22-B04 | DEFERRED | all five input branches and SVG swap/restore actual result | browser audit | owner
+  P22-B01 | DEFERRED → PASS | native select/range/button keyboard and focus operation | browser audit | owner
+  P22-B03 | DEFERRED → PASS | 320/390 table and serialized-d overflow | browser audit | owner
+  P22-B04 | DEFERRED → PASS | all five input branches and SVG swap/restore actual result | browser audit | owner
 verificationEvidence
   page-local TypeScript/import, exact six-row audit, scoped Prettier and assigned-path diff are recorded in task-2-report.md.
 releaseDecision
-  PASS — root integration is complete; P22-B01, P22-B03 and P22-B04 are the only applicable DEFERRED checks because motion is none.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

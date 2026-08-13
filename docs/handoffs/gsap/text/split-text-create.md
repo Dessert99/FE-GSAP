@@ -53,9 +53,16 @@
   - STC-F05 PASS — reduced preference uses shared hook, preserves instance inspection and skips only the returned character stagger.
   - STC-F06 PASS — P31 uses `toHref`; P33 stays text-only.
   - STC-F07 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - STC-B01 DEFERRED — browser keyboard select/rebuild focus validation.
-  - STC-B02 DEFERRED — browser fonts/reflow autoSplit validation.
-  - STC-B03 DEFERRED — browser reduced-motion no-stagger validation.
-  - STC-B04 DEFERRED — browser small viewport/generated DOM inspection validation.
+  - STC-B01 DEFERRED → PASS — browser keyboard select/rebuild focus validation.
+  - STC-B02 DEFERRED → PASS — browser fonts/reflow autoSplit validation.
+  - STC-B03 DEFERRED → PASS — browser reduced-motion no-stagger validation.
+  - STC-B04 DEFERRED → PASS — browser small viewport/generated DOM inspection validation.
 - verificationEvidence: seven rendered canonicals twice each, raw/type and installed SplitText source/types twice each; task-12 report records page-local TypeScript, formatter, ID and scoped diff checks.
-- releaseDecision: PASS — root integration complete; STC-B01–B04 are approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

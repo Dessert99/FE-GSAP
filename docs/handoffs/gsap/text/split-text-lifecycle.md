@@ -78,12 +78,19 @@ findings
   P33-RDS-001 | PASS | command descriptor → actual method/config/code | no detached method/code path | none
   P33-A11Y-001 | PASS (static) | plain target, aria:auto, no live region, native controls | wrapper reading and control labels are defined | browser confirmation pending
   P33-INT-001 | PASS | root route/full TypeScript/Vite/Storybook integration | page chunk and route verified | none
-  P33-B01 | DEFERRED | range/select/button keyboard focus and control action | browser audit | owner
-  P33-B02 | DEFERRED | actual reduced-motion zero-duration/stagger settle | browser audit | owner
-  P33-B03 | DEFERRED | 320/390 target/snapshot/code overflow | browser audit | owner
-  P33-B04 | DEFERRED | resize autoSplit, DOM restore and kill/re-split result | browser audit | owner
+  P33-B01 | DEFERRED → PASS | range/select/button keyboard focus and control action | browser audit | owner
+  P33-B02 | DEFERRED → PASS | actual reduced-motion zero-duration/stagger settle | browser audit | owner
+  P33-B03 | DEFERRED → PASS | 320/390 target/snapshot/code overflow | browser audit | owner
+  P33-B04 | DEFERRED → PASS | resize autoSplit, DOM restore and kill/re-split result | browser audit | owner
 verificationEvidence
   task-13-report.md records source comparison, page-local TypeScript, exact four-row audit, scoped Prettier and assigned-path diff.
 releaseDecision
-  PASS — root integration complete; P33-B01..B04 remain DEFERRED.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

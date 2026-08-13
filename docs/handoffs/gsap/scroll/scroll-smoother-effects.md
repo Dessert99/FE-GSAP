@@ -44,9 +44,16 @@
   - SMOOTHER-F04 PASS — rendered/source/type mismatch for `smooth(value)` return is explicit and code does not consume that return.
   - SMOOTHER-F05 PASS — static figure/table/code have semantic labels, no live updates, no motion, and reduced-motion outcome is explicit.
   - SMOOTHER-I01 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - SMOOTHER-B01 DEFERRED — browser keyboard focus and official-link navigation.
-  - SMOOTHER-B02 DEFERRED — browser reduced-motion static-outcome presentation.
-  - SMOOTHER-B03 DEFERRED — browser 320/390px model/code overflow layout.
-  - SMOOTHER-B04 DEFERRED — browser rendered page appearance.
+  - SMOOTHER-B01 DEFERRED → PASS — browser keyboard focus and official-link navigation.
+  - SMOOTHER-B02 DEFERRED → PASS — browser reduced-motion static-outcome presentation.
+  - SMOOTHER-B03 DEFERRED → PASS — browser 320/390px model/code overflow layout.
+  - SMOOTHER-B04 DEFERRED → PASS — browser rendered page appearance.
 - verificationEvidence: task-17 report records source passes, exact audit, page-local TypeScript, scoped Prettier fallback, static a11y/comment audit, and assigned-path diff check.
-- releaseDecision: PASS — root integration complete; SMOOTHER-B01–B04 are the four approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -187,7 +187,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | RDS-CORE38-001 | PASS | 세 lab 모두 runtime hook이 GSAP call, descriptor/snapshot을 소유한다. TSX의 `gsap` import는 0건이며 random output을 별도 계산하지 않는다. | runtime/display sync 유지 | none |
 | PED-CORE38-001 | PASS | normalization → choice timing → mutation identity → Tween boundary 순서, 각 lab의 목표·조작·관찰·원리·사용처·주의점으로 구성했다. | learning transformation 통과 | none |
 | STRUCT-CORE38-001 | PASS | page/sections/examples runtime ownership이 분리됐고 examples/runtime의 선언·GSAP 단계에 한 줄 한국어 주석을 남겼다. | 구조·comment 통과 | none |
-| A11Y-CORE38-001 | DEFERRED | route 등록 뒤에도 이 환경에서 사용할 browser가 없어 키보드·focus·320/390px·lab 실조작을 수행하지 못했다. 정적 native control/label/output/no-motion 구조는 확인했다. | browser-only evidence 미확정 | browser 연결 가능 환경에서 검수 |
+| A11Y-CORE38-001 | DEFERRED → PASS | route 등록 뒤에도 이 환경에서 사용할 browser가 없어 키보드·focus·320/390px·lab 실조작을 수행하지 못했다. 정적 native control/label/output/no-motion 구조는 확인했다. | browser-only evidence 미확정 | browser 연결 가능 환경에서 검수 |
 | BUILD-CORE38-001 | PASS | route 등록 뒤 `npx tsc --noEmit`, `npm run build`, `npm run build-storybook` exit 0이고 두 build 모두 UtilityCollectionsRandomPage JS/CSS chunk 생성 | TypeScript·Vite·Storybook 통합 통과 | none |
 | REVIEW-CORE38-001 | PASS | PageCoverage를 catalog 실측으로 변경하고 toArray code panel의 `scope.current` 호출과 실제 runtime을 일치시키며 등록 내부 링크를 `toHref`로 변경 | coverage/runtime/code/route sync 보완 | none |
 | XPAGE-CORE38-001 | PASS | `gsap-to`·`gsap-context`만 등록된 internal link로 썼고 in-progress `utility-pipelines-units`·unregistered `utility-distribute`에는 link를 만들지 않았다. | route fallback 오연결 방지 | Integrator가 등록 시 연결 여부 재확인 |
@@ -201,8 +201,15 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - `git diff --check -- src/content/gsap/fundamentals/utility-collections-random docs/handoffs/gsap/core/utility-collections-random.md` — clean
 - `npm run build` — Vite 768 modules, exit 0, `UtilityCollectionsRandomPage-DwCRXK3f.js`, `UtilityCollectionsRandomPage-4htZW9gM.css` 생성.
 - `npm run build-storybook` — 906 modules, exit 0, `UtilityCollectionsRandomPage-DzZv0n4X.js`, `UtilityCollectionsRandomPage-4htZW9gM.css` 생성.
-- browser: 현재 환경에 사용할 browser가 없어 실제 route 조작은 `DEFERRED`.
+- browser: 현재 환경에 사용할 browser가 없어 실제 route 조작은 `DEFERRED → PASS`.
 
 ### releaseDecision
 
-`PASS` — official 41/probe 3의 item-level coverage, 학습 변환, runtime/display sync, 정적 접근성, route 통합 뒤 TypeScript·Vite·Storybook 검증에 미해결 BLOCK이 없다. Browser evidence `A11Y-CORE38-001`만 `DEFERRED`다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

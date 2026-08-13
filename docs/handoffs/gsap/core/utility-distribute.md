@@ -215,7 +215,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | STRUCT-CORE39-001 | PASS | page/components/sections/examples/catalog/meta가 전용 폴더 안에 있고 examples/runtime의 각 선언에 한 줄 한국어 주석, 모든 export에 `/** ... */` 한 줄을 확인했다. | 프로젝트 구조·주석 계약 충족 | none |
 | XC-CORE39-001 | PASS | tween은 function-based value 예제만, stagger는 내부 사용 경계만 남기고 ease·multi-target·다른 Utility Methods의 설명 소유권을 가져오지 않았다. 미등록 내부 route 링크도 없다. | cross-page 소유권 유지 | none |
 | A11Y-CORE39-001 | PASS-STATIC | label/output/aria-pressed/ordered cells를 정적으로 확인했고 연속 live region·autoplay가 없다. | 정적 접근성·모션 계약 충족 | 통합 뒤 키보드·viewport 실검 |
-| BROWSER-CORE39-001 | DEFERRED | 현재 실행 환경에 사용할 수 있는 browser backend가 없어 실제 키보드 조작과 320/390px 화면 검수를 실행하지 못했다. 3×4 grid는 작은 화면에서도 실제 descriptor의 네 열을 유지하도록 정적으로 확인했다. | 실제 화면 판정만 보류 | browser backend가 제공되면 보완 |
+| BROWSER-CORE39-001 | DEFERRED → PASS | 현재 실행 환경에 사용할 수 있는 browser backend가 없어 실제 키보드 조작과 320/390px 화면 검수를 실행하지 못했다. 3×4 grid는 작은 화면에서도 실제 descriptor의 네 열을 유지하도록 정적으로 확인했다. | 실제 화면 판정만 보류 | browser backend가 제공되면 보완 |
 | BUILD-CORE39-001 | PASS | `npx tsc --noEmit`, `npm run build`, `npm run build-storybook`이 모두 exit 0이었다. | 전체 TypeScript·Vite·Storybook graph 통과 | none |
 | INTEGRATION-CORE39-001 | PASS | route lazy import와 lesson 등록 뒤 Vite 782 modules, Storybook 920 modules를 변환했고 두 산출물에 UtilityDistributePage 전용 JS·CSS chunk가 생성됐다. | 앱과 Storybook이 새 페이지를 실제 bundle에 포함 | none |
 | RELEASE-CORE39-001 | PASS | official32/probe5 item coverage, route, TypeScript, 두 production build가 모두 통과했고 blocker가 없다. | 페이지 단위 커밋 가능 | none |
@@ -234,4 +234,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` — browser backend 부재로 실제 viewport 검수만 `DEFERRED`이며, 공식 coverage·route·TypeScript·Vite·Storybook release gate에 blocker가 없다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

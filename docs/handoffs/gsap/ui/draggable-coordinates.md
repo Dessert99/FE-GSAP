@@ -97,9 +97,16 @@ P03에서 만든 Draggable instance를 읽는 다음 단계로, target·pointer�
 
 - Static checks: PASS — catalog/meta/sourceManifest/coverageMap 14/14/14/14, duplicate/missing ID 0, relative import·comment·cleanup·P01/P03 link·P05–P08 text-only boundary 확인, `prettier --no-config --check` 및 scoped `git diff --check` 통과.
 - Route registration and build: `PASS` — root registered `/fundamentals/draggable-coordinates`; `npx tsc --noEmit`, `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook`, `git diff --check` all exited 0. Vite transformed 846 modules and Storybook transformed 984 modules; both emitted `DraggableCoordinatesPage` JS/CSS chunks.
-- Browser checks: `DEFERRED` — translation drag, rotation drag, reset, cleanup/unmount.
-- Release: `PASS` — route/build integration blocker is cleared. The four approved browser checks remain `DEFERRED` for the final browser batch.
+- Browser checks: `DEFERRED → PASS` — translation drag, rotation drag, reset, cleanup/unmount.
+- Release: `PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 ## releaseDecision
 
-`PASS` — route/build integration blocker is cleared. The four approved browser checks remain `DEFERRED` for the final browser batch.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

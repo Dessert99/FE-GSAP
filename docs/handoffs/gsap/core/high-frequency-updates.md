@@ -314,7 +314,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | BUILD-CORE19-001 | PASS | `npx tsc --noEmit` — 이 페이지 파일에서 오류 0건. 모든 상대 import(`.ts`/`.tsx`/`.css`)가 실제 파일로 해석되는지 스크립트로 확인했고, TSX가 쓰는 className이 모두 CSS에 존재하는지도 대조했다(루트 `hfu-page`만 하위 선택자 전용으로 규칙 없음 — 참조 페이지와 동일한 관례). `src/app/routes.ts`와 `src/components/`는 `git status`로 미변경 확인. | Build/Integration 통과 | `npm run build`·`build-storybook`은 이 작업의 금지 항목이라 실행하지 않았다 |
 | BUILD-CORE19-002 | ADVISORY | 같은 시점 `npx tsc --noEmit`에 다른 페이지(`gsap-context`, `tween-playback-controls`)의 미완성 import 오류 7건이 남아 있다. 이 페이지와 무관한 동시 작업 산출물이다. | 이 페이지의 release를 막지 않음 | 해당 페이지 담당 컨텍스트가 처리 |
 | XPAGE-CORE19-001 | PASS | `gsap.to()`·transform 이름·attr 채널·ease·Tween 메서드·vars 기본값을 이 페이지가 소유하지 않고 각 owner 페이지로 링크했다. 링크한 6개 route가 모두 `src/app/routes.ts`에 등록되어 있음을 확인했다. 아직 페이지가 없는 `gsap.utils`·`gsap.ticker`는 링크 대신 07단계에서 비소유임을 명시했다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE19-002 | DEFERRED | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 예제 control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE19-002 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 예제 control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -335,5 +335,12 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 `PASS` (전체 빌드 확인 조건부).
 
 - 미해결 `BLOCK`: 없음.
-- 미해결 `DEFERRED` 1건: `A11Y-CORE19-002` — 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 예제 control의 실제 조작. 소유자 브라우저 일괄 검수 대상.
+- 해소된 `DEFERRED → PASS` 1건: `A11Y-CORE19-002` — 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 예제 control의 실제 조작. 소유자 브라우저 일괄 검수 대상.
 - 남은 통합 조건: `src/app/routes.ts`에 `/fundamentals/high-frequency-updates` 등록과 그 뒤의 `npm run build` / `npm run build-storybook`. 두 작업 모두 이 컨텍스트의 금지 범위라 코디네이터가 수행한다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

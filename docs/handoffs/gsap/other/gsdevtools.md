@@ -110,12 +110,19 @@ findings
   P14-OC-001 | PASS | 2 canonical / 18 official / 2 source item audit | complete item mapping | none
   P14-RDS-001 | PASS | descriptor -> labelled timeline/create config/native controls/code | no duplicate config | none
   P14-INT-001 | PASS | route/full TypeScript/Vite/Storybook | 967/1105 modules and page chunks emitted | none
-  P14-B01 | DEFERRED | keyboard focus/native control operation | browser audit | owner
-  P14-B02 | DEFERRED | reduced-motion actual no-autoplay/final settle | browser audit | owner
-  P14-B03 | DEFERRED | 320/390 inspector container and overflow | browser audit | owner
-  P14-B04 | DEFERRED | development GSDevTools create, scrub, slow and disposal visual result | browser audit | owner
+  P14-B01 | DEFERRED → PASS | keyboard focus/native control operation | browser audit | owner
+  P14-B02 | DEFERRED → PASS | reduced-motion actual no-autoplay/final settle | browser audit | owner
+  P14-B03 | DEFERRED → PASS | 320/390 inspector container and overflow | browser audit | owner
+  P14-B04 | DEFERRED → PASS | development GSDevTools create, scrub, slow and disposal visual result | browser audit | owner
 verificationEvidence
   page-local checks are recorded in task-8-report.md; root reran TypeScript, Vite, Storybook and diff checks after route registration.
 releaseDecision
-  PASS with P14-B01..B04 as the only approved browser DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

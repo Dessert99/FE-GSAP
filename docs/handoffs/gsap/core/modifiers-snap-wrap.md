@@ -126,7 +126,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | STRUCT-MSW-001 | PASS | 순수 계산 예제라 `<ExampleName>.example.ts`를 쓰고 controls 상태만 얇은 hook이 들었다. `docs/project-structure.md`의 실행 source 선택 규칙에 부합 | 구조 통과 | none |
 | OC-MSW-001 | PASS | meta 섹션 합계 31 = catalog 공식 행 31 = 분모 31, 중복 ID 0, catalog가 근거 댄 source 5개 = 선언한 5개, 사용 CSS 클래스 누락 0 | Official Coverage 통과 | none |
 | BUILD-MSW-001 | PASS | `modifiers-snap-wrap`와 등록 라우트를 포함하고 다른 8개 미완성 폴더만 제외한 임시 검증 복제본에서 `npm run build` exit 0, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook` exit 0 (2026-08-08). 원본 전체 타입 검사는 미완성 폴더의 미생성 import 27건과 별도 타입 오류 1건 때문에 실패하며 이 페이지 경로 오류는 0건이다. | Build/Integration 통과 | 미완성 페이지를 완성할 때 원본 전체 타입 검사를 다시 실행 |
-| A11Y-MSW-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-MSW-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -137,4 +137,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-MSW-001 / `ADVISORY` 1건: SRC-MSW-002 — Modifiers 공식 데모 코드 미확보)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

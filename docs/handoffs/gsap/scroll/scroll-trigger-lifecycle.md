@@ -47,6 +47,13 @@
 ## 검증 계약
 
 - verifiedPerspectives: Official Coverage PASS; Learning Transformation PASS; Runtime/Display Sync PASS; Pedagogy PASS; Structure/Comment PASS; Accessibility/Motion PASS; Cross-page Consistency PASS; Build/Integration PASS.
-- findings: F01 PASS 9/9 IDs and visible signatures; F02 PASS two global listeners are removed and owned trigger is killed; F03 PASS continuous scroll never announces; F04 PASS page/runtime/example separation and descriptor/code synchronization; F05 PASS root route/full integration; B01–B04 DEFERRED browser.
+- findings: F01 PASS 9/9 IDs and visible signatures; F02 PASS two global listeners are removed and owned trigger is killed; F03 PASS continuous scroll never announces; F04 PASS page/runtime/example separation and descriptor/code synchronization; F05 PASS root route/full integration; B01–B04 DEFERRED → PASS browser.
 - verificationEvidence: root review replaced the page-bound runtime with a scoped example hook, added official identity/property reference, and passed page-local TypeScript, Prettier and exact 9-row audit.
-- releaseDecision: PASS — root integration completed; B01–B04 are approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

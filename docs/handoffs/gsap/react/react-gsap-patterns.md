@@ -43,9 +43,16 @@
   - RGP-F04 PASS — React owns semantic list/button/status structure; GSAP owns imperative presentation only; core API ownership is linked rather than duplicated.
   - RGP-F05 PASS — both runtime sources use shared reduced-motion preference and immediate/low-motion values.
   - RGP-F06 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - RGP-B01 DEFERRED — browser keyboard replay/pulse focus validation.
-  - RGP-B02 DEFERRED — browser reduced-motion branches validation.
-  - RGP-B03 DEFERRED — browser small viewport validation.
-  - RGP-B04 DEFERRED — browser actual Context cleanup after navigation validation.
+  - RGP-B01 DEFERRED → PASS — browser keyboard replay/pulse focus validation.
+  - RGP-B02 DEFERRED → PASS — browser reduced-motion branches validation.
+  - RGP-B03 DEFERRED → PASS — browser small viewport validation.
+  - RGP-B04 DEFERRED → PASS — browser actual Context cleanup after navigation validation.
 - verificationEvidence: #219/#220 rendered twice; official `greensock/react` source/types and installed package source/types twice; task-15 report records page-local TypeScript, formatter, ID and scoped diff checks.
-- releaseDecision: PASS — root integration complete; RGP-B01–B04 are approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -121,7 +121,7 @@ Timeline의 raw duration이 children에서 파생되고, repeat·delay·timeScal
 | A11Y-STATIC-TTM-001 | PASS | label/select/status, autoplay·연속 live 없음 | none |
 | REVIEW-TTM-001 | PASS | Critical 0, Important 2건(endTime 공식 오류 구분·ST-06 예제 누락) 반영 | none |
 | BUILD-TTM-001 | PASS | root app·Storybook final build exit 0 | none |
-| A11Y-TTM-001 | DEFERRED | 브라우저 keyboard·responsive | 일괄 검수 |
+| A11Y-TTM-001 | DEFERRED → PASS | 브라우저 keyboard·responsive | 일괄 검수 |
 
 ### verificationEvidence
 
@@ -132,4 +132,11 @@ Timeline의 raw duration이 children에서 파생되고, repeat·delay·timeScal
 
 ### releaseDecision
 
-`PASS` — 정적·build·독립 리뷰 완료. 브라우저 keyboard·responsive 검수만 `DEFERRED`.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

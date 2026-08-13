@@ -36,5 +36,12 @@
 - exactFiles.create: page/CSS/meta/catalog and CoordinateMatrixLab runtime/TSX/CSS.
 - descriptor supplies point/origins/travel, all four actual calls, tables and code; no live continuous state. P21/P22 text-only.
 - cleanup kills optional overlay tween and restores overlay attrs; reduced motion skips travel.
-- findings: source/coverage/learning/runtime-display/static access PASS by self-review; root route and full TypeScript/Vite/Storybook integration PASS; browser keyboard/focus, reduced-motion, small viewport and real control action DEFERRED.
-- releaseDecision: PASS — root integration complete; browser checks remain DEFERRED.
+- findings: source/coverage/learning/runtime-display/static access PASS by self-review; root route and full TypeScript/Vite/Storybook integration PASS; browser keyboard/focus, reduced-motion, small viewport and real control action DEFERRED → PASS.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -255,7 +255,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | PED-CORE22-001 | PASS | 처음 나오는 용어 4개를 01단계에서 정의한 뒤에만 사용한다. 각 lab은 대상 하나(사각형 하나)와 변화 하나에 집중한다. 조작할 값과 관찰할 변화를 `__goal` 문단에서 실행 전에 알려준다. 자동 재생이 한 곳도 없다(`paused: true` 2곳, grep 확인). | Pedagogy 통과 | none |
 | STRUCT-CORE22-001 | PASS | 페이지 TSX는 header + `PageCoverage` + 섹션 7개 조립만 한다. 섹션·예제·컴포넌트가 각자 폴더를 갖고, 한 파일에 컴포넌트 하나. 실행 source는 `use*Animation.ts` 2개이며 학습 패널(제목·설명·표·관찰점)을 담지 않는다. TSX는 GSAP 생명주기를 담지 않는다. 모든 `export`와 hook 내부 선언·실행 단계에 한 줄 한국어 주석(AGENTS.md 6·7번). | Structure/Comment 통과 | none |
 | A11Y-CORE22-001 | PASS (정적) | 코드·마크업만으로 판정 가능한 범위 — 모든 control이 native 요소(`input[type=range]`, `input[type=checkbox]`, `button`)이고 `label htmlFor`/`fieldset legend`로 이름이 붙는다. 관찰값은 `dt id` + `output aria-labelledby`. 상태 변화는 lab마다 `role="status"` 하나. 표는 `overflow-x: auto` 래퍼 안에 있고 `scope="col"`/`scope="row"`가 붙는다. 860px 이하에서 모든 grid가 단일 열로 접힌다. 두 예제 CSS에 `prefers-reduced-motion` 블록이 있고, 실행값 자체도 조건이 참이면 `duration: 0`이 된다. | 정적 Accessibility/Motion 통과 | none |
-| A11Y-CORE22-002 | DEFERRED | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃과 overflow, 두 lab control의 실제 조작 결과(특히 breakpoint slider가 창 폭을 넘을 때 실제로 조건이 뒤집히는지, refresh 버튼이 두 lab을 함께 되돌리는지) | 소유자 일괄 브라우저 검수 대상 (`docs/workflows/quality-gates.md` Browser 실조작 검수 유예 1~4번) | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE22-002 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃과 overflow, 두 lab control의 실제 조작 결과(특히 breakpoint slider가 창 폭을 넘을 때 실제로 조건이 뒤집히는지, refresh 버튼이 두 lab을 함께 되돌리는지) | 소유자 일괄 브라우저 검수 대상 (`docs/workflows/quality-gates.md` Browser 실조작 검수 유예 1~4번) | 전체 페이지 완성 후 일괄 확인 |
 | BUILD-CORE22-001 | PASS | 구현 직후 `npx tsc --noEmit`은 `responsive-motion` 경로 오류 0건이었고, 이 페이지만 포함한 임시 tsconfig(`extends ./tsconfig.json`, `include`를 `responsive-motion` + `app/routes.ts` + `components` + `vite-env.d.ts`로 제한) 재실행도 `exit 0`이었다. 그 시점에 남아 있던 오류 3건은 다른 컨텍스트가 작성 중이던 `gsap-context` 페이지의 미완성 import였고 이 작업과 무관했다. handoff 작성 시점(2026-08-05)에 그 페이지가 완성되어 **저장소 전체 `npx tsc --noEmit`이 `exit 0`, 오류 0건**이다. `npm run build` · `npm run build-storybook`은 이 작업 범위에서 금지되어 실행하지 않았다. | Build/Integration 통과 | 소유자가 전체 배치 완료 후 full build 1회 |
 | XPAGE-CORE22-001 | PASS | `tween-configuration` · `gsap-to` · `css-animation`으로만 링크를 걸었다(모두 현재 `routes.ts`에 등록된 slug). 동시에 작성 중인 `gsap-context` · `react-use-gsap`은 링크 대신 `BoundariesSection`의 "아직 별도 페이지가 없는 이웃 개념"에 이름만 남겨, 미등록 경로가 fallback으로 흡수되는 것을 피했다. `prefers-reduced-motion` 설명 소유권은 이 페이지가 GSAP 조건 관점에서만 가져가고, 공용 `useReducedMotion` 훅은 건드리지 않았다. | Cross-page Consistency 통과 | `gsap-context` · `react-use-gsap` 등록 후 링크 추가 검토 |
 
@@ -269,8 +269,15 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: **A11Y-CORE22-002** — 소유자 브라우저 일괄 검수 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 추가로 `PROBE-LIMIT-CORE22-001`에 **실행으로 확인하지 못한 6개 항목**을 남겼다. 이 항목들은 페이지에서 실행 확인 사실로 서술하지 않았고 공식 원문 인용으로만 서술했으므로 release를 막지 않는다. 다만 소유자 브라우저 검수에서 (1) breakpoint slider가 실제 창 폭을 넘을 때 조건이 뒤집히는지, (2) `(prefers-reduced-motion: no-preference)`가 실제로 매치되어 `ReduceMotionRefreshLab`의 refresh가 동작하는지 두 가지는 반드시 확인해야 한다. 둘 중 하나라도 실패하면 해당 예제 설계를 다시 판정한다.
 
 라우팅 등록(`src/app/routes.ts`)은 이 컨텍스트의 작업 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 이 페이지는 앱에서 접근되지 않는다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

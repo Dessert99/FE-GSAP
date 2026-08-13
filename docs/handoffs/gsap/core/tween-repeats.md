@@ -260,7 +260,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | STRUCT-CORE16-001 | PASS | 페이지 TSX는 조립만, 섹션은 학습 단위, 두 예제는 각자 hook을 소유한다. hook에 제목·설명·속성 표가 없고 TSX에 GSAP 생명주기가 없다. 파일 19개 전부 목록과 일치하며 import한 CSS 3개가 모두 존재한다. | Structure/Comment 통과 | none |
 | BUILD-CORE16-001 | PASS | `npx tsc --noEmit`에서 `tween-repeats` 경로 오류 0건(grep으로 확인). 저장소 전체 20건은 동시에 작업 중인 다른 페이지(`find-stop-animations`, `gsap-context`, `high-frequency-updates`, `tween-playback-controls`, `tween-timing-math`)의 것으로 이 페이지와 무관하다. | Build 통과 | `npm run build`/`build-storybook`은 지시에 따라 실행하지 않음 |
 | XPAGE-CORE16-001 | PASS | `repeatRefresh`·`progress()`·상대값 문법·ease를 이 페이지가 소유하지 않고 각 owner로 링크했다. 링크는 `routes.ts`에 등록된 경로만 사용했고 미구현 `timeline-repeats`는 문장으로만 경계를 남겼다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE16-003 | DEFERRED | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE16-003 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -282,6 +282,13 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CORE16-003 — 소유자 브라우저 일괄 검수 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 라우트 등록(`src/app/routes.ts`)은 이 작업의 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 페이지는 앱에서 접근되지 않는다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

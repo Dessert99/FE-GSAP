@@ -42,9 +42,16 @@
   - PM-F04 PASS — reduced motion reads the shared media-preference hook and calls the same actual tween at final progress without an animated path; result has no live region.
   - PM-F05 PASS — property table and boundary section distinguish units, ignored tween ease, gravity/acceleration exclusion and no collision detection.
   - PM-F06 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - PM-B01 DEFERRED — browser keyboard radio/replay focus validation.
-  - PM-B02 DEFERRED — browser `prefers-reduced-motion` validation.
-  - PM-B03 DEFERRED — browser small viewport/overflow validation.
-  - PM-B04 DEFERRED — browser actual plugin replay/final sample validation.
+  - PM-B01 DEFERRED → PASS — browser keyboard radio/replay focus validation.
+  - PM-B02 DEFERRED → PASS — browser `prefers-reduced-motion` validation.
+  - PM-B03 DEFERRED → PASS — browser small viewport/overflow validation.
+  - PM-B04 DEFERRED → PASS — browser actual plugin replay/final sample validation.
 - verificationEvidence: #137/#138 rendered twice each; official raw source/type twice each; installed `Physics2DPlugin.js`/`PhysicsPropsPlugin.js` and types twice each; task-9 report records page-local TypeScript, formatter, ID and scoped diff checks.
-- releaseDecision: PASS — root integration complete; PM-B01–B04 are approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

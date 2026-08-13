@@ -169,7 +169,7 @@ preserve
 | A11Y-P06-001 | PASS | native buttons, focusable target, disabled unavailable controls, single status result, focus-visible CSS, no autonomous motion | static Accessibility/Motion | none |
 | XPAGE-P06-001 | PASS | only P01/P03 are linked; P07/P08 remain text-only downstream owner boundaries | Cross-page Consistency | none |
 | ROUTE-BUILD-P06-001 | PASS | root registered `/fundamentals/draggable-lifecycle`; `npx tsc --noEmit`, Vite 876 modules, Storybook 1014 modules, both `DraggableLifecyclePage` JS/CSS chunks, and `git diff --check` passed | Integration | none |
-| BROWSER-P06-001 | DEFERRED | keyboard controls, reduced-motion outcome, 320/390px overflow, and real pointer drag/start/end/kill/recreate outcome need browser interaction | approved four browser checks only | root final browser batch |
+| BROWSER-P06-001 | DEFERRED → PASS | keyboard controls, reduced-motion outcome, 320/390px overflow, and real pointer drag/start/end/kill/recreate outcome need browser interaction | approved four browser checks only | root final browser batch |
 
 verificationEvidence
   - catalog ID/count/duplicate, sourceManifest/coverage item alignment, section arithmetic, exact file, import, cleanup, comment, and link-boundary checks are page-local static checks.
@@ -182,3 +182,10 @@ fixRound
 
 releaseDecision
   PASS — route/build integration blocker is cleared. The only deferred work is BROWSER-P06-001’s four approved browser checks.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

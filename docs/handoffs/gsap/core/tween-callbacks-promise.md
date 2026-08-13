@@ -112,7 +112,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | PROBE-CB-003 | PASS | handler 없이 `then()`을 부르면 Promise가 Tween 자신으로 resolve됨. 이미 완료된 Tween에 `then()`을 다시 부르면 즉시 resolve됨 | `TH-P1`·`TH-P2` 근거 | none |
 | OC-CB-002 | PASS | meta 섹션 합계 16 = catalog 공식 행 16, 중복 ID 0 | Official Coverage 통과 | none |
 | BUILD-CB-001 | PASS | `npm run build` exit 0, `npm run build-storybook` exit 0 (2026-08-04) | build/integration 통과 | none |
-| A11Y-CB-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab 버튼 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CB-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab 버튼 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 `TH-P2`의 "무한 반복·중도 kill된 Tween의 Promise는 resolve도 reject도 되지 않는다"는 부정 사실이라 유한 시간 실행으로 증명할 수 없다. 관측한 것은 정상 완료와 완료 후 재호출뿐이며, 나머지는 그 성질상 관측되지 않았다는 사실로만 적었다.
 
@@ -124,4 +124,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CB-001)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

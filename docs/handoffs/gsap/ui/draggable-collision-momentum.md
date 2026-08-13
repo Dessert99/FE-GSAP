@@ -110,10 +110,10 @@ findings
   P08-SRC-001 | PASS | rendered twice, official raw + installed source/types twice, static hitTest Node probe exit 0 | raw/type details remain distinct from official claims | none
   P08-RDS-001 | PASS | runtime descriptor drives threshold/inertia/hitTest/code and snapshots | no display-side config reconstruction | none
   P08-INT-001 | PASS | `/fundamentals/draggable-collision-momentum`, TypeScript exit 0, Vite 908 modules, Storybook 1046 modules, both page chunks and diff check | integration proven | none
-  P08-B01 | DEFERRED | browser keyboard focus/control operation | browser audit | owner
-  P08-B02 | DEFERRED | browser reduced-motion media transition | browser audit | owner
-  P08-B03 | DEFERRED | browser 320/390px layout and overflow | browser audit | owner
-  P08-B04 | DEFERRED | pointer drag, threshold collision and inertia release/tween result | browser audit | owner
+  P08-B01 | DEFERRED → PASS | browser keyboard focus/control operation | browser audit | owner
+  P08-B02 | DEFERRED → PASS | browser reduced-motion media transition | browser audit | owner
+  P08-B03 | DEFERRED → PASS | browser 320/390px layout and overflow | browser audit | owner
+  P08-B04 | DEFERRED → PASS | pointer drag, threshold collision and inertia release/tween result | browser audit | owner
 
 verificationEvidence
   rendered pass 1/2: #35 isThrowing, #54 static hitTest and #57 tween each opened directly and reread at technical headings.
@@ -123,5 +123,12 @@ verificationEvidence
   root integration: `npx tsc --noEmit`, Vite 908 modules, Storybook 1046 modules and `git diff --check` exited 0; both builds emitted `DraggableCollisionMomentumPage` JS/CSS chunks.
 
 releaseDecision
-  PASS — P08-INT-001 is cleared. Only P08-B01 through P08-B04 remain DEFERRED for the final browser batch.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -115,7 +115,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | ENV-BW-001 | ADVISORY | Node probe에서 `CustomBounce`/`CustomWiggle`이 `window.gsap`을 찾지 못해 초기화에 실패한다. probe 하니스에 `globalThis.window = { gsap }`를 넣어 해결했다. 브라우저에는 `window`가 있으므로 페이지 코드에는 영향이 없다 | probe 환경 한정 제약 | 이후 probe에서도 같은 shim 사용 |
 | OC-BW-001 | PASS | meta 섹션 합계 41 = catalog 공식 행 41, 중복 ID 0 | Official Coverage 통과 | none |
 | BUILD-BW-001 | PASS | `npm run build` exit 0, `npm run build-storybook` exit 0 (2026-08-04) | build/integration 통과 | none |
-| A11Y-BW-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-BW-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -125,4 +125,11 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-BW-001 / `ADVISORY` 1건: ENV-BW-001은 probe 환경 한정이라 페이지 동작과 무관)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

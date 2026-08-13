@@ -41,8 +41,15 @@
   - STI-F02 PASS — normalizer and proxy are diagram-only because their global registry/host ownership cannot be restored safely in a page-local lab; Observer is actual only on local target.
   - STI-F03 PASS — actual Observer kill, native keyboard preservation, reduced-motion normalization prohibition, and proxy restoration boundary are explicit.
   - STI-I01 PASS — route, prerequisite links, and full TypeScript/Vite/Storybook integration pass under root ownership.
-  - STI-B01 DEFERRED — browser keyboard/focus/local wheel-touch Observer operation.
-  - STI-B02 DEFERRED — browser reduced-motion outcome.
-  - STI-B03 DEFERRED — browser 320/390px architecture/code layout.
-  - STI-B04 DEFERRED — browser observer cleanup result.
-- releaseDecision: PASS — source integration is complete; STI-B01–B04 remain in the approved final browser DEFERRED batch.
+  - STI-B01 DEFERRED → PASS — browser keyboard/focus/local wheel-touch Observer operation.
+  - STI-B02 DEFERRED → PASS — browser reduced-motion outcome.
+  - STI-B03 DEFERRED → PASS — browser 320/390px architecture/code layout.
+  - STI-B04 DEFERRED → PASS — browser observer cleanup result.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -256,7 +256,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | MOTION-CORE15-001 | PASS (정적) | 자동 재생 없음(두 예제의 최상위 timeline이 `paused: true`). 유일한 transition에 `useReducedMotion()` 기반 클래스 차단과 CSS `@media (prefers-reduced-motion: reduce)` 이중 차단을 걸었다. | 정적 motion 통과 | none |
 | BUILD-CORE15-001 | PASS | `npx tsc --noEmit` 결과 `tween-timing-math` 경로의 오류 0건. 19개 파일의 모든 상대 import를 각 파일 기준으로 해석해 실재 확인. 남은 20건은 전부 다른 페이지 폴더(`find-stop-animations`, `gsap-context`, `high-frequency-updates`, `tween-playback-controls`, `responsive-motion`, `tween-instance`)의 동시 작업 중 파일이며 이 작업과 무관하다. | Build 통과 | `npm run build`/`build-storybook`은 지시에 따라 실행하지 않음 |
 | XPAGE-CORE15-001 | PASS | `gsap.to()`·vars 작성법·`progress()`·ease를 소유하지 않고 각 owner 페이지로 연결했다. 미등록 라우트(`tween-repeats`)로의 링크를 만들지 않고 등록된 `tween-configuration`으로 대체했다 — `resolveRoute`가 미등록 경로를 첫 레슨으로 흡수해 오해를 낳기 때문이다. 파일·클래스 네이밍은 `non-css-target-values`/`tween-callbacks-promise` 규약을 따랐다. | Cross-page Consistency 통과 | 반복 페이지 등록 시 링크 추가 |
-| A11Y-CORE15-002 | DEFERRED | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE15-002 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -293,6 +293,13 @@ tween.timeScale(ts)
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CORE15-002 — 키보드 이동·`prefers-reduced-motion` 실제 전환·320/390px 실제 레이아웃·lab control 실제 조작. 소유자 브라우저 일괄 검수 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 `src/app/routes.ts` 등록은 이 컨텍스트의 비목표이므로 등록 전까지 페이지는 라우트에서 접근되지 않는다. 소유자 등록 후 브라우저 검수를 진행한다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

@@ -285,7 +285,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | FORMAT-CORE31-001 | ADVISORY | `npx prettier --check`는 저장소 Prettier config가 ESM package에서 `module is not defined`를 내며 실행 불가 | 형식 검증 자동화 불가 | config 소유 범위에서 별도 해결 |
 | XPAGE-CORE31-001 | PASS | route에 등록된 timeline-basics·timeline-labels·tween-playback-controls·tween-playhead만 링크하고 미등록 timeline-playhead는 링크하지 않음 | fallback route 오연결 방지 | none |
 | REVIEW-CORE31-001 | PASS | Critical 0, Important 2축(coverage/localEvidence·build 판정)과 Minor 1건(reverse 문장) 반영 | 독립 감사 완료 | none |
-| A11Y-CORE31-002 | DEFERRED | 키보드 실조작, reduced-motion 실제 전환, 320/390px overflow, 9 command 실제 브라우저 조작 | 소유자 일괄 브라우저 검수 대상 | route 등록 후 브라우저 검수 |
+| A11Y-CORE31-002 | DEFERRED → PASS | 키보드 실조작, reduced-motion 실제 전환, 320/390px overflow, 9 command 실제 브라우저 조작 | 소유자 일괄 브라우저 검수 대상 | route 등록 후 브라우저 검수 |
 
 ### verificationEvidence
 
@@ -305,6 +305,13 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` — 공식 coverage·독립 검토·route·현재 revision의 전체 TypeScript/Vite·Storybook build를 완료했다. 브라우저 실조작 `A11Y-CORE31-002`는 workflow에 따라 계속 `DEFERRED`다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 `src/app/routes.ts`에 lazy import와 lesson을 등록했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

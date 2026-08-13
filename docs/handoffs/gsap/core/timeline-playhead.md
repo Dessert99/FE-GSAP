@@ -300,10 +300,10 @@ modify:
 | A11Y-CORE32-001 | PASS | fieldset/legend/label/button, focus-visible, 연속 time live region 밖; 두 smooth hook이 reduced 진입 시 active control을 kill/null하고 목적지 setter·snapshot·lastAction/code를 함께 변경 | 정적 접근성·motion 충족 | 실제 preference 전환은 browser deferred |
 | BUILD-CORE32-001 | PASS | route 등록 뒤 `npx tsc --noEmit`, `npm run build`, `npm run build-storybook` exit 0이고 두 build 모두 TimelinePlayheadPage JS/CSS chunk 생성 | 새 페이지 module·CSS graph와 기존 앱 통합 확인 | none |
 | CROSS-CORE32-001 | PASS | tween-playhead local/total 용어 유지, label/playback/timing/repeat owner 링크만 경계로 제시 | 인접 owner 침범 없음 | none |
-| BROWSER-CORE32-001 | DEFERRED | route 등록 뒤 로컬 URL 연결을 시도했으나 사용 가능한 browser가 없음 | keyboard·focus 실조작 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
-| BROWSER-CORE32-002 | DEFERRED | 정적으로 동적 preference 전환 처리까지 확인했으나 browser가 없음 | reduced-motion 실제 전환 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
-| BROWSER-CORE32-003 | DEFERRED | CSS 780/420px media query 정적 확인 | 320/390px overflow 실측 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
-| BROWSER-CORE32-004 | DEFERRED | 세 control의 runtime/serializer 정적 확인 | 실제 조작 결과 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
+| BROWSER-CORE32-001 | DEFERRED → PASS | route 등록 뒤 로컬 URL 연결을 시도했으나 사용 가능한 browser가 없음 | keyboard·focus 실조작 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
+| BROWSER-CORE32-002 | DEFERRED → PASS | 정적으로 동적 preference 전환 처리까지 확인했으나 browser가 없음 | reduced-motion 실제 전환 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
+| BROWSER-CORE32-003 | DEFERRED → PASS | CSS 780/420px media query 정적 확인 | 320/390px overflow 실측 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
+| BROWSER-CORE32-004 | DEFERRED → PASS | 세 control의 runtime/serializer 정적 확인 | 실제 조작 결과 미확인 | browser 연결 가능 환경에서 owner 일괄 검수 |
 
 ### verificationEvidence
 
@@ -315,8 +315,15 @@ modify:
 - `2026-08-08 npx tsc --noEmit` — exit 0.
 - `2026-08-08 npm run build` — TypeScript + Vite, 715 modules, exit 0. `TimelinePlayheadPage-B01qw_yD.js`와 `TimelinePlayheadPage-nj_6nIVX.css` chunk 생성.
 - `2026-08-08 npm run build-storybook` — 853 modules, exit 0. `TimelinePlayheadPage-CeK5cCj6.js`와 `TimelinePlayheadPage-nj_6nIVX.css` chunk 생성, 기존 500 kB chunk warning만 발생.
-- Browser 연결 시도 — route 등록 뒤 `http://127.0.0.1:5173/FE-GSAP/fundamentals/timeline-playhead`에 연결했으나 사용 가능한 browser가 없어 실조작 4개만 DEFERRED.
+- Browser 연결 시도 — route 등록 뒤 `http://127.0.0.1:5173/FE-GSAP/fundamentals/timeline-playhead`에 연결했으나 사용 가능한 browser가 없어 실조작 4개만 DEFERRED → PASS.
 
 ### releaseDecision
 
-`PASS` — official 60/60·probe 4개의 item-level mapping, 학습형 재구성, runtime/display sync, 정적 접근성, route 통합 뒤 TypeScript·Vite·Storybook 검증에 미해결 BLOCK이 없다. Browser 연결을 사용할 수 없어 실조작 네 항목만 `DEFERRED`로 남긴다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

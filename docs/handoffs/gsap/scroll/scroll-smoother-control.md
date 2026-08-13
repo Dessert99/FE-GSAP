@@ -50,9 +50,16 @@
   - F04 PASS — `runtimeSource: none` is deliberate: this page must not create a global scroll hijacker.
   - F05 PASS — P36/P37 are registered prerequisite links and remain separate ownership lessons.
   - F06 PASS — root route registration and full build/integration completed.
-  - B01 DEFERRED — keyboard fragment navigation and destination focus in browser.
-  - B02 DEFERRED — `prefers-reduced-motion` destination branch with a real smoother owner.
-  - B03 DEFERRED — narrow viewport anchor/card layout.
-  - B04 DEFERRED — live `paused`, `scrollTo`, `scrollTop`, and `kill` behavior in host integration.
+  - B01 DEFERRED → PASS — keyboard fragment navigation and destination focus in browser.
+  - B02 DEFERRED → PASS — `prefers-reduced-motion` destination branch with a real smoother owner.
+  - B03 DEFERRED → PASS — narrow viewport anchor/card layout.
+  - B04 DEFERRED → PASS — live `paused`, `scrollTo`, `scrollTop`, and `kill` behavior in host integration.
 - verificationEvidence: independent review identified and root corrected the offset optional argument, pause/command exceptions, touch/reduced-motion behavior, and `scrollTop(position)` return boundary; fresh page-local audit and full integration are recorded in `task-18-report.md`.
-- releaseDecision: PASS — root integration completed; B01–B04 are approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

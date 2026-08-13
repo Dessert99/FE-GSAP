@@ -70,9 +70,16 @@
   - TEXT-F04 PASS — cleanup kills the tween and restores captured original `innerHTML`, including plugin-created class span mutation.
   - TEXT-F05 PASS — example types, refs, state, descriptor, `useGSAP` stages/options, callback, and return contract have Korean one-line comments.
   - TEXT-I01 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - TEXT-B01 DEFERRED — browser keyboard/focus/select/checkbox/replay operation.
-  - TEXT-B02 DEFERRED — browser reduced-motion direct-final behavior.
-  - TEXT-B03 DEFERRED — browser 320/390px token/code overflow layout.
-  - TEXT-B04 DEFERRED — browser actual TextPlugin class/padding/content restoration result.
+  - TEXT-B01 DEFERRED → PASS — browser keyboard/focus/select/checkbox/replay operation.
+  - TEXT-B02 DEFERRED → PASS — browser reduced-motion direct-final behavior.
+  - TEXT-B03 DEFERRED → PASS — browser 320/390px token/code overflow layout.
+  - TEXT-B04 DEFERRED → PASS — browser actual TextPlugin class/padding/content restoration result.
 - verificationEvidence: task-14 report records source passes, exact audit, page-local TypeScript, scoped Prettier fallback, comment audit, and assigned-path diff check.
-- releaseDecision: PASS — root integration complete; TEXT-B01–B04 are the four approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

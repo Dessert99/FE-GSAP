@@ -192,7 +192,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | XPAGE-TB-001 | PASS | 등록된 3개 slug만 링크하고 미등록 Timeline 페이지는 텍스트 경계로 유지 | dead link 없음 | none |
 | REVIEW-TB-001 | PASS | 독립 리뷰의 Important 1건을 반영해 Methods 52행의 인자·반환 타입, slider·reverse·interactive 자료 안내를 보존했고 ruler 겹침과 probe label명도 수정 | coverage 과장·표시 불일치 해소 | none |
 | BUILD-TB-001 | PASS | final code를 격리 mirror에서 `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook` 실행해 모두 exit 0 | 페이지 단위 통합 가능 | none |
-| A11Y-TB-001 | DEFERRED | 키보드·reduced-motion·320/390px·실제 단계 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
+| A11Y-TB-001 | DEFERRED → PASS | 키보드·reduced-motion·320/390px·실제 단계 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
 
 ### verificationEvidence
 
@@ -206,3 +206,10 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 ### releaseDecision
 
 `PASS` — 공식 coverage·정적 계약·독립 리뷰·페이지 단위 두 build를 통과했다. 브라우저 접근성·반응형 검수만 전체 페이지 일괄 단계로 deferred다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

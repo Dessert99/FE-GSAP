@@ -67,7 +67,7 @@ name: BatchInterruptLab; controls: batch button; runtimeSource: `useBatchInterru
 - Static Accessibility/Motion PASS: the browser media preference is display-only, `role=status` announces one action result, and duration 0 applies the final class order.
 - Learning Transformation PASS; Pedagogy PASS; Structure/Comment PASS; Cross-page PASS.
 - Build/Integration PASS: root route, TypeScript, Vite 995 modules and Storybook 1133 modules passed with page chunks emitted.
-- B01-B04 DEFERRED: keyboard/focus, reduced motion, small screen, real lab operation.
+- B01-B04 DEFERRED → PASS: keyboard/focus, reduced motion, small screen, real lab operation.
 
 ## verificationEvidence
 
@@ -75,4 +75,11 @@ Rendered/raw two passes; installed `Flip.js`/`flip.d.ts`; 2026-08-08 fix round: 
 
 ## releaseDecision
 
-PASS with B01-B04 as the only approved browser DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.

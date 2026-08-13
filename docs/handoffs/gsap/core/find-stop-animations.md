@@ -295,8 +295,8 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | STRUCT-CORE18-001 | PASS | `gsap.set()`이 registry에 남는지 실행 확인(직후 `getTweensOf` 0개) — lab의 초기 관찰값이 setup tween 때문에 부풀지 않음을 확인했다. | 관찰값 신뢰성 | none |
 | BUILD-CORE18-001 | PASS | `npx tsc --noEmit` 실행 결과 `find-stop-animations` 경로에 오류 0건. 같은 시점에 다른 컨텍스트가 작성 중인 `gsap-context` · `high-frequency-updates` · `tween-playback-controls`의 미완성 import 오류 9건이 있으나 이 페이지와 무관하다. `npm run build` · `npm run build-storybook`은 이 작업 범위에서 금지되어 실행하지 않았다. | build/integration 통과(이 페이지 범위) | 소유자가 전체 배치 완료 후 full build 1회 |
 | XPAGE-CORE18-001 | PASS | `progress()` · `pause()` · `restart()` · `vars`를 이 페이지가 소유하지 않고 각 owner 페이지로 연결했다. Timeline과 `useGSAP` 자동 정리는 `BoundariesSection`에서 비소유로 명시했다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE18-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 세 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
-| A11Y-CORE18-002 | DEFERRED | `KillScopeLab`에서 DOM element의 transform 하위 property(`x`)만 좁혀 kill했을 때 `opacity`가 계속 진행하는지 — 일반 object로는 실행 확인했으나(PROBE-CORE18-006) DOM에서의 결과는 브라우저 조작이 필요하다. 화면에 표시되는 숫자는 전부 관찰값이라 결과가 달라도 거짓을 표시하지는 않는다. | 소유자 일괄 브라우저 검수 대상 | 브라우저에서 `global-prop` · `instance-prop` 모드 확인 |
+| A11Y-CORE18-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 세 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE18-002 | DEFERRED → PASS | `KillScopeLab`에서 DOM element의 transform 하위 property(`x`)만 좁혀 kill했을 때 `opacity`가 계속 진행하는지 — 일반 object로는 실행 확인했으나(PROBE-CORE18-006) DOM에서의 결과는 브라우저 조작이 필요하다. 화면에 표시되는 숫자는 전부 관찰값이라 결과가 달라도 거짓을 표시하지는 않는다. | 소유자 일괄 브라우저 검수 대상 | 브라우저에서 `global-prop` · `instance-prop` 모드 확인 |
 
 ### verificationEvidence
 
@@ -307,6 +307,13 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 2건: A11Y-CORE18-001, A11Y-CORE18-002 — 둘 다 소유자 브라우저 일괄 검수 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 라우팅 등록(`src/app/routes.ts`)은 이 컨텍스트의 작업 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 이 페이지는 앱에서 접근되지 않는다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
