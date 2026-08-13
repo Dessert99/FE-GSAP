@@ -4,7 +4,7 @@ export const utilityDistributeMeta = {
   category: 'GSAP · Utility Methods',
   summary: 'distribute()는 애니메이션이 아니라 index와 grid 거리를 숫자로 바꾸는 함수 제작기입니다. 한 줄 배열에서 규칙을 읽고, 같은 설정을 2차원 heatmap으로 펼쳐 봅니다.',
   sourcePath: 'src/content/gsap/fundamentals/utility-distribute/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'gsap.utils.distribute()', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods/distribute()' },
   ],
