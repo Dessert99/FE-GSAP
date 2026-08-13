@@ -1,4 +1,4 @@
-/** P35 header와 두 component-owned React pattern example을 조립한다. */
+/** React component scope와 contextSafe pattern 예제를 조립한다. */
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { ContextSafeEventLab } from './examples/ContextSafeEventLab/ContextSafeEventLab'
 import { ScopedListRevealLab } from './examples/ScopedListRevealLab/ScopedListRevealLab'
@@ -20,7 +20,6 @@ export function ReactGsapPatternsPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>2 official pattern resources covered</p>
       </header>
       <OrganizationSection />
       <ScopedListRevealLab />

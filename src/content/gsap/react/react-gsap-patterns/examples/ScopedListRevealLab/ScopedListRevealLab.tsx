@@ -12,26 +12,56 @@ export function ScopedListRevealLab() {
   // component-local runtime scope와 current motion config를 받는다.
   const { scope, reducedMotion, config, replay } =
     useScopedListRevealAnimation()
-  // runtime이 사용한 selector와 duration/stagger를 code로 직렬화한다.
-  const code = `const [runKey, setRunKey] = useState(0)\n\nuseGSAP(() => {\n  gsap.from('.${scopedListDescriptor.itemClassName}', {\n    y: ${reducedMotion ? 0 : 20},\n    autoAlpha: ${reducedMotion ? 1 : 0},\n    duration: ${config.duration},\n    stagger: ${config.stagger},\n  })\n}, { scope, dependencies: [config.duration, config.stagger, reducedMotion, runKey], revertOnUpdate: true })`
+  // runtime이 사용한 scope·motion config·selector를 단독으로 읽을 수 있게 직렬화한다.
+  const code = `import { useRef, useState } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { useReducedMotion } from '../../../../../../components/demo/InteractiveExample/useReducedMotion'
+
+export function ScopedListExample() {
+  const scope = useRef(null)
+  const reducedMotion = useReducedMotion()
+  const [runKey, setRunKey] = useState(0)
+  const config = { duration: ${config.duration}, stagger: ${config.stagger} }
+
+  useGSAP(() => {
+    gsap.from('.${scopedListDescriptor.itemClassName}', {
+      y: ${reducedMotion ? 0 : 20},
+      autoAlpha: ${reducedMotion ? 1 : 0},
+      duration: config.duration,
+      stagger: config.stagger,
+    })
+  }, { scope, dependencies: [config.duration, config.stagger, reducedMotion, runKey], revertOnUpdate: true })
+
+  return (
+    <div ref={scope}>
+      <button type="button" onClick={() => setRunKey((value) => value + 1)}>replay</button>
+      <ul>
+        {['alpha', 'beta', 'gamma'].map((item) => (
+          <li key={item} className="${scopedListDescriptor.itemClassName}">{item}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}`
 
   return (
     <section id="scoped-list-reveal-lab">
       <InteractiveExample
-        title="scoped list reveal"
-        description="list component가 own scope ref를 selector boundary로 전달합니다. 이 list의 item만 reveal되고 unmount/update에서는 Context가 cleanup합니다."
+        title="component 안의 list만 reveal"
+        description="list component가 scope ref를 selector 경계로 전달합니다. 이 list의 item만 reveal되고 unmount/update에서는 Context가 정리합니다."
         sourcePath="src/content/gsap/react/react-gsap-patterns/examples/ScopedListRevealLab/useScopedListRevealAnimation.ts"
         reducedMotion={reducedMotion}
         controls={
           <p>
-            replay는 이 component-owned list Context만 다시 만듭니다. sibling
-            selector나 global query를 추가하지 않습니다.
+            replay는 이 list의 Context만 다시 만듭니다. sibling selector나 global
+            query를 추가하지 않습니다.
           </p>
         }
         preview={
           <div ref={scope} className="scoped-list-reveal">
             <ul>
-              {['scope', 'stable deps', 'context cleanup'].map((item) => (
+              {['scope 경계', '고정된 의존성', 'Context cleanup'].map((item) => (
                 <li key={item} className={scopedListDescriptor.itemClassName}>
                   {item}
                 </li>

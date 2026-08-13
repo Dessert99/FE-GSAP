@@ -18,6 +18,6 @@ export const reactGsapPatternsProperties = [
     type: 'unknown[] / Boolean',
     defaultValue: '[] / false',
     acceptedValues:
-      'stable input만 dependencies에 두고 update cleanup 필요 때 true',
+      '렌더마다 바뀌지 않는 input만 dependencies에 두고 update cleanup이 필요할 때 true',
   },
 ]

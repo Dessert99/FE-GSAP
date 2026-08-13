@@ -56,3 +56,22 @@
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: GSAP의 React advanced/useful pattern 자료와 `gsap.context()`의 scope·late event 등록 설명을 다시 대조했다. component-local selector와 `contextSafe`가 늦게 만들어진 tween을 같은 Context에 기록하는 경계를 확인했다.
+- findings:
+  - RGP-A01 `BLOCK → ADDRESSED` — 두 표시 코드를 component 함수 안의 Hooks와 완전한 JSX로 구성해 scope·target ref, list selector, event handler가 실제 DOM에 연결되게 했다.
+  - RGP-A02 `BLOCK → ADDRESSED` — 학습 화면의 coverage 개수와 `own/component-owned/existing` 제작 표현을 실제 동작 문장으로 바꿨다.
+  - RGP-A03 `PASS` — list selector·duration·stagger와 late-event scale·duration·yoyo·repeat가 각각 runtime과 표시 코드에서 일치한다.
+  - RGP-A04 `DEFERRED` — 실제 scope 격리·navigation cleanup, keyboard controls, reduced-motion, 작은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - RGP-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.
+
+### 2026-08-13 최종 교차검토 수정
+
+- `RGP-RDS-20260813-02 | BLOCK → PASS` — 두 표시 component가 runtime의 공용 `useReducedMotion()` 대신 직접 `matchMedia`를 읽었고, ContextSafe 예제는 실제 count state와 status 출력을 생략했다. 두 snippet을 공용 hook 호출로 맞추고 ContextSafe에 `count`/`setCount`, callback 증가, `role="status"` 출력을 함께 반영했다.
+- 재검증: 두 component의 Hooks 위치·JSX ref·reduced-motion config·count/status 흐름을 정적 재독했고, `npx tsc --noEmit --pretty false`와 Batch C 범위 `git diff --check`는 exit 0이다.
+- Browser: `DEFERRED`, Storybook: `N/A`; overall/releaseDecision은 `NOT VERIFIED`를 유지한다.
