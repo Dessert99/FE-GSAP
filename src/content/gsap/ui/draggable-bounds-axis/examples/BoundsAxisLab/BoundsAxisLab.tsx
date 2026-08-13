@@ -7,11 +7,33 @@ export function BoundsAxisLab() {
   // Hook의 actual descriptor·instance snapshot·actions를 화면과 code panel에 그대로 연결한다.
   const { scope, trayRef, targetRef, lockAxis, setLockAxis, autoScroll, setAutoScroll, layoutInset, descriptor, snapshot, reducedMotion, moveBy, changeLayout, resync } = useBoundsAxisAnimation()
   // 실제 Draggable vars를 새 의미 없이 JS 문법으로만 직렬화한다.
-  const code = `Draggable.create(target, {
+  const code = `gsap.registerPlugin(Draggable)
+
+const target = document.querySelector('.bounds-axis-lab__target')
+const tray = document.querySelector('.bounds-axis-lab__tray')
+if (!(target instanceof HTMLElement) || !(tray instanceof HTMLElement)) {
+  throw new Error('bounds lab target을 찾지 못했습니다.')
+}
+
+const [instance] = Draggable.create(target, {
   type: '${descriptor.type}',
-  bounds: ${descriptor.boundsLabel},
+  bounds: tray,
   lockAxis: ${descriptor.lockAxis},
   autoScroll: ${descriptor.autoScroll},
-})`
+  inertia: ${descriptor.inertia},
+})
+
+function moveBy(x, y) {
+  gsap.set(target, { x: \`+=\${x}\`, y: \`+=\${y}\` })
+  instance.update(true)
+}
+
+function resync() {
+  instance.update(true)
+}
+
+function cleanup() {
+  instance.kill()
+}`
   return <div ref={scope}><InteractiveExample title="bounds tray와 axis lock inspector" description="하나의 target을 pointer로 끌거나 keyboard 버튼으로 움직인 뒤 legal min/max와 resync를 확인합니다." sourcePath="src/content/gsap/ui/draggable-bounds-axis/examples/BoundsAxisLab/useBoundsAxisAnimation.ts" reducedMotion={reducedMotion} controls={<div className="interactive-example__control-list"><label className="interactive-example__check"><input type="checkbox" checked={lockAxis} onChange={(event) => setLockAxis(event.target.checked)} />lockAxis 요청</label><label className="interactive-example__control"><span className="interactive-example__control-heading"><span>autoScroll</span></span><select value={autoScroll} onChange={(event) => setAutoScroll(Number(event.target.value))}><option value="0">0 · 기본값, 꺼짐</option><option value="1">1 · edge auto-scroll</option></select></label><button type="button" onClick={changeLayout}>외부 tray layout 바꾸기</button><button type="button" onClick={resync}>update(true)로 다시 재기</button><div className="bounds-axis-lab__keys"><button type="button" aria-label="왼쪽으로 24px 이동" onClick={() => moveBy(-24, 0)}>←</button><button type="button" aria-label="오른쪽으로 24px 이동" onClick={() => moveBy(24, 0)}>→</button><button type="button" aria-label="위로 24px 이동" onClick={() => moveBy(0, -24)}>↑</button><button type="button" aria-label="아래로 24px 이동" onClick={() => moveBy(0, 24)}>↓</button></div></div>} preview={<div className="bounds-axis-lab"><p>overlay는 <code>{descriptor.boundsLabel}</code>가 실제 Draggable <code>bounds</code>로 쓰는 보이는 tray viewport입니다.</p><div className="bounds-axis-lab__tray-shell"><div ref={trayRef} className="bounds-axis-lab__tray" style={{ padding: layoutInset }}><span className="bounds-axis-lab__scroll-space" aria-hidden="true" /><button ref={targetRef} type="button" className="bounds-axis-lab__target">drag target</button></div><span className="bounds-axis-lab__overlay" aria-hidden="true" /></div><dl><div><dt>minX / maxX</dt><dd>{snapshot.minX} / {snapshot.maxX}</dd></div><div><dt>minY / maxY</dt><dd>{snapshot.minY} / {snapshot.maxY}</dd></div><div><dt>lockedAxis</dt><dd>{snapshot.lockedAxis}</dd></div><div><dt>zIndex</dt><dd>{snapshot.zIndex}</dd></div></dl><p role="status">{snapshot.synced}</p></div>} code={code} propertyDetails={[{ name: 'bounds', type: 'Element | String | Object', defaultValue: '없음', acceptedValues: '이 lab: trayRef.current' }, { name: 'lockAxis', type: 'Boolean', defaultValue: '이 lab: true', acceptedValues: 'x,y initial direction lock' }, { name: 'autoScroll', type: 'Number', defaultValue: '0', acceptedValues: '0 또는 1; 실제 40px edge scrollable tray' }, { name: 'update(true)', type: 'instance method', defaultValue: '공식 페이지에 명시 없음', acceptedValues: 'external layout change 뒤 bounds 재계산' }]} changes={['bounds는 target과 tray viewport가 계산한 min/max legal range를 만듭니다.', 'lockAxis를 켜면 실제 pointer gesture의 초기 direction 뒤 막힌 축이 lockedAxis로 보입니다.', '외부 tray inset 변경은 update(true)를 누르기 전 snapshot과 새 geometry를 일부러 분리합니다.']} watchFor={['keyboard 버튼도 같은 target을 움직인 뒤 instance.update(true)를 호출해 min/max snapshot을 갱신하는지 봅니다.', 'autoScroll 1에서 실제 scrollable tray edge로 target을 끌면 scrollTop/scrollLeft가 변하는지 봅니다.', 'lockedAxis는 continuous live region이 아니라 gesture/control 뒤의 이산 snapshot으로만 읽습니다.']} explanation={<p><code>bounds</code>는 target의 목표 좌표가 아니라 허용되는 min/max 범위를 계산하는 입력입니다. <code>update(true)</code>는 외부 layout 때문에 그 계산이 낡았을 때 현재 target·container geometry를 다시 읽고 bounds를 적용합니다.</p>} onReplay={resync} replayLabel="현재 bounds 다시 재기" /></div>
 }

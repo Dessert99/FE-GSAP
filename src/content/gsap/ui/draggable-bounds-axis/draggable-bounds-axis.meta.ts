@@ -4,7 +4,7 @@ export const draggableBoundsAxisMeta = {
   category: 'GSAP · UI · Draggable',
   summary: 'Draggable의 bounds는 움직일 수 있는 값 범위를 계산합니다. min/max 값, axis lock, edge auto-scroll과 layout 변화 뒤 update()가 같은 공간 모델에서 어떤 역할을 맡는지 확인합니다.',
   sourcePath: 'src/content/gsap/ui/draggable-bounds-axis/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'applyBounds()', href: 'https://gsap.com/docs/v3/Plugins/Draggable/applyBounds()/' },
     { label: 'autoScroll', href: 'https://gsap.com/docs/v3/Plugins/Draggable/autoScroll/' },

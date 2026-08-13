@@ -133,3 +133,26 @@ PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- 공식 대조: `applyBounds()`, `autoScroll`, `lockAxis`, `lockedAxis`, min/max, `update()`, `zIndex` canonical을 현재 웹에서 다시 확인했다.
+- `WRITE-B05-01 | BLOCK → PASS` — 첫 화면의 canonical/item/source 분모와 본문의 P번호·소유권 표현을 학습 질문과 실제 관련 개념으로 교체했다.
+- `RDS-B05-01 | BLOCK → PASS` — runtime은 `inertia: false`를 실행하지만 코드 패널이 생략하던 값을 공용 descriptor에 넣어 Draggable vars와 표시 코드를 일치시켰다.
+- 정적 재검수: Official Coverage PASS, Learning Transformation PASS, Runtime/Display Sync PASS, Pedagogy PASS, Structure/Comment PASS, Accessibility/Motion PASS(static), Cross-page Consistency PASS.
+- Build/Integration: Batch B 종료 시 TypeScript와 범위 diff를 통합 검증한다. Storybook은 c309e13에서 삭제되어 `N/A`이며 실행·성공 근거로 사용하지 않는다.
+- Browser: `DEFERRED` — 키보드·focus, reduced-motion 실제 전환, 320/390px layout, pointer drag·autoScroll·control 결과는 실조작하지 않았다.
+- current releaseDecision: `PASS` — 미해결 BLOCK 없음. 위 browser 항목은 승인된 네 종류의 `DEFERRED`로 남는다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토
+
+- `RDS-B05-02 | BLOCK → PASS` — serializer의 미정의 `target`과 즉시 끝나는 생성 예시를 실제 target/tray query, null guard, plugin 등록, 보관한 Draggable instance, `moveBy()`·`resync()`와 별도 `cleanup()`으로 교체하고 runtime descriptor와 재대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 키보드·focus, reduced-motion, 320/390px, 실제 pointer drag·autoScroll·control 결과를 실조작하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.
