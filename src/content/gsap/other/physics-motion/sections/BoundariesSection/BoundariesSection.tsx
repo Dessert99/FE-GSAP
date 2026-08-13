@@ -18,7 +18,7 @@ export function BoundariesSection() {
           움직임을 결정합니다.
         </li>
         <li>
-          friction은 0–1의 편의 효과이고 추가 처리가 필요하며, 이 plugin들은
+          friction은 0–1의 편의 효과이고 계산 비용이 더 들며, 이 plugin들은
           collision detection을 제공하지 않습니다.
         </li>
         <li>
