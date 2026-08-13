@@ -21,10 +21,6 @@ export function TweenCallbacksPromisePage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <div className="callbacks-page__path">
-          <span>이 페이지의 코드 위치</span>
-          <code>{tweenCallbacksPromiseMeta.sourcePath}</code>
-        </div>
         <p className="callbacks-page__reviewed">공식 문서 대조일 · {tweenCallbacksPromiseMeta.reviewedAt}</p>
       </header>
 

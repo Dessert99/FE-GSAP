@@ -1,4 +1,4 @@
-/** 공식 두 문서에서 확인한 기술 item 15개를 로컬 섹션과 1:1로 묶어 coverage 근거로 남긴다. */
+/** 공식 두 문서에서 확인한 기술 item 17개를 로컬 섹션과 1:1로 묶어 coverage 근거로 남긴다. */
 
 /** 어떤 공식 문서의 어떤 주장이 어느 섹션에서 설명되는지를 한 행으로 고정한다. */
 export type SourceItem = {
@@ -15,6 +15,7 @@ export const tweenCallbacksPromiseSourceItems: SourceItem[] = [
   { id: 'EC-06', officialItem: 'eventCallback()은 onComplete·onUpdate·onStart·onReverseComplete·onInterrupt·onRepeat 같은 event callback과 거기에 넘길 parameter를 가져오거나 설정한다.', source: 'event-callback', origin: 'official', sectionId: 'after-creation' },
   { id: 'EC-07', officialItem: 'eventCallback() 설정은 생성자의 vars에 직접 적는 것과 기능적으로 동일하다. 공식 문서가 두 줄을 나란히 놓고 equivalent라고 밝힌다.', source: 'event-callback', origin: 'official', sectionId: 'after-creation' },
   { id: 'EC-08', officialItem: 'eventCallback()의 이점은 animation instance가 만들어진 뒤에도 콜백을 설정할 수 있고, 콜백 참조를 조회하거나 즉시 삭제할 수 있다는 것이다.', source: 'event-callback', origin: 'official', sectionId: 'after-creation' },
+  { id: 'EC-12', officialItem: 'eventCallback()으로 다루는 callback과 parameter 값은 vars 객체에도 들어가며, vars는 configuration data의 저장소 역할을 한다.', source: 'event-callback', origin: 'official', sectionId: 'after-creation' },
 
   { id: 'EC-01', officialItem: 'signature는 eventCallback( type:String, callback:Function, params:Array ) : [Function | self] 이다.', source: 'event-callback', origin: 'official', sectionId: 'event-callback-form' },
   { id: 'EC-05', officialItem: '첫 인자만 넘기면 현재 값을 돌려주는 getter이고, 두 번째 인자부터 넘기면 값을 설정하는 setter이며 chaining을 위해 instance 자신을 돌려준다.', source: 'event-callback', origin: 'official', sectionId: 'event-callback-form' },
@@ -34,5 +35,5 @@ export const tweenCallbacksPromiseSourceItems: SourceItem[] = [
 
   { id: 'EC-P1', officialItem: '설정되지 않은 type의 getter는 undefined를 돌려주고, vars에 적어 둔 콜백도 같은 getter로 읽힌다. null로 지운 뒤에도 undefined다. 공식 문서에는 getter의 반환 형태가 없다.', source: 'event-callback', origin: 'implementation', sectionId: 'event-callback-form' },
   { id: 'TH-P1', officialItem: 'handler 없이 then()을 부르면 Promise가 Tween 자신으로 resolve된다. await tween도 같은 방식으로 동작한다. 공식 문서에는 resolve 값이 없다.', source: 'then', origin: 'implementation', sectionId: 'then-promise' },
-  { id: 'TH-P2', officialItem: 'repeat: -1인 Tween과 완료 전에 kill()된 Tween의 Promise는 영원히 resolve되지 않고 reject도 되지 않는다. 이미 완료된 Tween에 then()을 다시 부르면 곧바로 resolve된다.', source: 'then', origin: 'implementation', sectionId: 'then-promise' },
+  { id: 'TH-P2', officialItem: '이미 완료된 Tween에 then()을 다시 호출해도 Tween 자신으로 resolve된다. 공식 문서에는 완료 후 재호출 동작이 없다.', source: 'then', origin: 'implementation', sectionId: 'then-promise' },
 ]

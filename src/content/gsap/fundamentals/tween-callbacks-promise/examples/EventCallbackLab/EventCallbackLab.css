@@ -130,13 +130,6 @@
   line-height: 1.7;
 }
 
-.event-callback-lab__source {
-  margin: 16px 0 0;
-  color: var(--color-muted);
-  font-size: 12px;
-  overflow-wrap: anywhere;
-}
-
 .event-callback-lab :focus-visible {
   outline: 2px solid var(--color-accent-strong);
   outline-offset: 3px;

@@ -4,18 +4,53 @@ import './EventCallbackLab.css'
 
 export function EventCallbackLab() {
   // runtime이 소유한 관찰값과 조작 action을 그대로 받아 화면에만 쓴다
-  const { scope, eventType, observation, status, apply, run } = useEventCallbackRuntime()
+  const { scope, eventType, observation, status, lastAction, apply, run } = useEventCallbackRuntime()
 
-  // 실행에 쓰인 event type과 현재 등록 상태를 코드 문법으로만 포맷한다
-  const code = `// 지금 등록된 콜백을 읽습니다 (인자 하나 = getter)
+  // runtime의 마지막 조작을 실제로 호출한 것과 같은 문법으로 직렬화한다
+  const actionCode = {
+    create: '// Tween을 만든 직후입니다.',
+    set: `tween.eventCallback('${eventType}', firstCallback)`,
+    replace: `tween.eventCallback('${eventType}', secondCallback)`,
+    clear: `tween.eventCallback('${eventType}', null)`,
+    run: 'tween.restart()',
+  }[lastAction]
+  // 재생 시점에 runtime에 남아 있던 콜백을 setup에도 같이 등록한다
+  const registeredCallbackCode = lastAction === 'run'
+    ? observation.registeredLabel === '첫 번째 함수'
+      ? `tween.eventCallback('${eventType}', firstCallback)\n`
+      : observation.registeredLabel === '두 번째 함수'
+        ? `tween.eventCallback('${eventType}', secondCallback)\n`
+        : '// 등록된 콜백이 없습니다.\n'
+    : ''
+  // runtime의 Tween·named callback setup과 마지막 호출을 독립적으로 실행할 수 있는 코드로 표시한다
+  const code = `let fireCount = 0
+let lastFired = '아직 없음'
+
+function recordFire(label) {
+  fireCount += 1
+  lastFired = label
+}
+
+function firstCallback() {
+  recordFire('첫 번째 함수')
+}
+
+function secondCallback() {
+  recordFire('두 번째 함수')
+}
+
+const tween = gsap.to(
+  { value: 0 },
+  { value: 1, duration: 0.4, paused: true }
+)
+
+${registeredCallbackCode}
+// 방금 실행한 호출
+${actionCode}
+
+// 현재 등록된 콜백을 읽습니다
 tween.eventCallback('${eventType}')
-// → ${observation.getterResult}
-
-// 콜백을 겁니다 (인자 둘 = setter, tween 자신을 돌려줍니다)
-tween.eventCallback('${eventType}', myFunction)
-
-// 콜백을 지웁니다
-tween.eventCallback('${eventType}', null)`
+// → ${observation.getterResult}`
 
   return (
     <section className="event-callback-lab" aria-labelledby="event-callback-lab-title">
@@ -29,27 +64,19 @@ tween.eventCallback('${eventType}', null)`
         <dl className="event-callback-lab__observation">
           <div>
             <dt id="ecl-getter">getter가 돌려준 값</dt>
-            <dd>
-              <output aria-labelledby="ecl-getter">{observation.getterResult}</output>
-            </dd>
+            <dd aria-labelledby="ecl-getter">{observation.getterResult}</dd>
           </div>
           <div>
             <dt id="ecl-registered">지금 걸려 있는 함수</dt>
-            <dd>
-              <output aria-labelledby="ecl-registered">{observation.registeredLabel}</output>
-            </dd>
+            <dd aria-labelledby="ecl-registered">{observation.registeredLabel}</dd>
           </div>
           <div>
             <dt id="ecl-count">콜백이 불린 횟수</dt>
-            <dd>
-              <output aria-labelledby="ecl-count">{observation.fireCount}회</output>
-            </dd>
+            <dd aria-labelledby="ecl-count">{observation.fireCount}회</dd>
           </div>
           <div>
             <dt id="ecl-last">마지막으로 불린 함수</dt>
-            <dd>
-              <output aria-labelledby="ecl-last">{observation.lastFired}</output>
-            </dd>
+            <dd aria-labelledby="ecl-last">{observation.lastFired}</dd>
           </div>
         </dl>
 
@@ -96,22 +123,18 @@ tween.eventCallback('${eventType}', null)`
         <article>
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
-            공식 문서가 밝힌 대로 <strong>event type 하나에 콜백은 하나</strong>입니다. GSAP은 목록이 아니라 자리 하나를 들고 있어서, 새
-            값을 넣으면 이전 값이 그 자리에서 밀려납니다.
+            공식 문서가 밝힌 대로 <strong>event type 하나에 콜백은 하나</strong>입니다. 같은 type에 새 콜백을 설정하면 이전 콜백을
+            덮어씁니다.
           </p>
         </article>
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
             재사용하는 animation 하나를 상황에 따라 다르게 끝맺을 때 씁니다. 모달을 닫는 animation은 같은데 닫힌 뒤 할 일이 화면마다
-            다르다면, Tween을 다시 만들지 않고 <code>onComplete</code>만 갈아 끼우면 됩니다.
+            다르다면, Tween을 다시 만들지 않고 <code>onComplete</code>만 바꿀 수 있습니다.
           </p>
         </article>
       </div>
-
-      <p className="event-callback-lab__source">
-        실행 코드 위치 · <code>examples/EventCallbackLab/useEventCallbackRuntime.ts</code>
-      </p>
     </section>
   )
 }

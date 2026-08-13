@@ -1,4 +1,4 @@
-/** then()이 완료를 Promise로 바꿔 주는 방식과, resolve되지 않는 경우의 경계를 설명한다. */
+/** then()이 Tween 완료 시점을 Promise로 다루는 방식을 설명한다. */
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 
 // 공식 문서에 실린 예제 원문
@@ -55,7 +55,7 @@ export function ThenPromiseSection() {
 
       <div className="callbacks-page__subheading">
         <h3>언제 이게 더 읽기 쉬운가</h3>
-        <p>animation을 순서대로 이어야 할 때 콜백은 오른쪽으로 계단처럼 깊어지지만 await는 위에서 아래로 읽힙니다.</p>
+        <p>animation을 순서대로 이어야 할 때 콜백은 중첩이 깊어지지만 await는 실행 순서를 위에서 아래로 적을 수 있습니다.</p>
       </div>
 
       <pre className="callbacks-page__code">
@@ -63,21 +63,18 @@ export function ThenPromiseSection() {
       </pre>
 
       <div className="callbacks-page__note callbacks-page__note--probe">
-        <h3>공식 문서에 없는 동작 셋</h3>
+        <h3>설치된 버전에서 확인한 반환값</h3>
         <p>
-          공식 문서는 <strong>언제</strong> resolve되는지는 밝히지만 <strong>무엇으로</strong> resolve되는지, 그리고 완료되지 않는
-          경우 어떻게 되는지는 적어 두지 않았습니다. 실행해 확인한 결과입니다.
+          공식 문서는 <strong>언제</strong> resolve되는지는 밝히지만 <strong>무엇으로</strong> resolve되는지는 적어 두지 않았습니다.
+          GSAP 3.15.0을 실행해 확인한 결과입니다.
         </p>
         <p>
-          첫째, handler 없이 <code>then()</code>만 부르면 Promise가 <strong>Tween 자신으로</strong> resolve됩니다.{' '}
-          <code>await tween</code>도 같습니다. 둘째, <strong>이미 완료된 Tween</strong>에 <code>then()</code>을 다시 부르면 곧바로
-          resolve됩니다. 셋째, <code>repeat: -1</code>로 무한 반복하는 Tween과 완료 전에 <code>kill()</code>된 Tween의 Promise는{' '}
-          <strong>영원히 resolve되지 않고 reject도 되지 않습니다.</strong>
+          handler 없이 <code>then()</code>만 부르면 Promise가 <strong>Tween 자신으로</strong> resolve됩니다. <code>await tween</code>도
+          Tween 자신을 돌려줍니다. 이미 완료된 Tween에 <code>then()</code>을 다시 호출해도 resolve됩니다.
         </p>
         <p className="callbacks-page__provenance">
-          이 세 항목은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다. 세 번째가 특히 위험합니다 —{' '}
-          <code>await</code>한 코드가 조용히 멈춘 채로 남습니다. 중간에 끊길 수 있는 animation을 <code>await</code>할 때는 타임아웃이나{' '}
-          <code>onInterrupt</code>를 함께 두는 편이 안전합니다.
+          이 반환값과 완료 후 재호출 동작은 공식 페이지의 명세가 아니라 현재 프로젝트에 설치된 버전의 실행 결과입니다. 일반적인 완료 대기에는
+          공식 문서가 보장하는 "animation이 완료될 때 resolve된다"는 규칙만 전제로 사용하세요.
         </p>
       </div>
     </section>
