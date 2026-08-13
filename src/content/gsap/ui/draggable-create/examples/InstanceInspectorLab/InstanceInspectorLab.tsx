@@ -21,14 +21,25 @@ export function InstanceInspectorLab() {
   // runtime이 만든 descriptor와 snapshot을 화면과 serializer가 그대로 소비한다
   const { scope, targetRef, type, setType, descriptor, snapshot, reset } = useInstanceInspectorAnimation()
   // 실제 create 입력만 문법으로 바꿔 code panel을 만든다
-  const code = `gsap.registerPlugin(Draggable)
+  const code = `import gsap from 'gsap'
+import { Draggable } from 'gsap/Draggable'
 
-const [draggable] = Draggable.create('#instance-card', {
+gsap.registerPlugin(Draggable)
+
+const target = document.querySelector('#instance-card')
+if (!target) throw new Error('drag target을 찾지 못했습니다.')
+
+const [draggable] = Draggable.create(target, {
   type: '${descriptor.type}',
   dragClickables: ${descriptor.dragClickables},
 })
 
-const sameInstance = Draggable.get('#instance-card') === draggable`
+const sameInstance = Draggable.get(target) === draggable
+
+function cleanup() {
+  draggable.kill()
+  gsap.set(target, { clearProps: 'transform,left,top' })
+}`
 
   return (
     <section className="instance-inspector-lab" aria-labelledby="instance-inspector-title">
@@ -58,7 +69,7 @@ const sameInstance = Draggable.get('#instance-card') === draggable`
       </dl>
       <pre className="instance-inspector-lab__code"><code>{code}</code></pre>
       <div className="instance-inspector-lab__panels"><article><h4>무엇이 달라졌나요?</h4><p>type을 바꾸면 이전 instance를 정리하고 같은 target에 새 instance를 만듭니다. inspector의 vars.type도 그 입력을 다시 읽습니다.</p></article><article><h4>무엇을 봐야 하나요?</h4><p>create()는 target 하나여도 배열을 반환합니다. get() identity가 “같은 instance”면 target 기반 lookup이 정확히 그 배열의 첫 instance를 찾은 것입니다.</p></article><article><h4>왜 이렇게 동작하나요?</h4><p>한 Draggable instance는 한 target만 책임집니다. selector나 array가 여러 target을 가리킬 수 있으므로 create()의 반환 모양은 항상 array입니다.</p></article><article><h4>실제로 언제 쓰나요?</h4><p>초기 설정을 만든 컴포넌트와 나중에 instance를 읽어야 하는 컴포넌트가 나뉠 때, 안정적인 target을 알고 있으면 get()으로 그 instance를 찾습니다.</p></article></div>
-      <div className="instance-inspector-lab__table-wrap"><table><caption>이 lab이 실제로 소유하는 surface</caption><thead><tr><th scope="col">이름</th><th scope="col">타입</th><th scope="col">기본값</th><th scope="col">이 페이지에서</th></tr></thead><tbody>{draggableCreateProperties.map((property) => <tr key={property.name}><th scope="row"><code>{property.name}</code></th><td>{property.type}</td><td>{property.defaultValue}</td><td>{property.use}</td></tr>)}</tbody></table></div>
+      <div className="instance-inspector-lab__table-wrap"><table><caption>만든 Draggable instance에서 바로 확인할 값</caption><thead><tr><th scope="col">이름</th><th scope="col">타입</th><th scope="col">기본값</th><th scope="col">이 페이지에서</th></tr></thead><tbody>{draggableCreateProperties.map((property) => <tr key={property.name}><th scope="row"><code>{property.name}</code></th><td>{property.type}</td><td>{property.defaultValue}</td><td>{property.use}</td></tr>)}</tbody></table></div>
       <p className="instance-inspector-lab__source">실행 코드 위치 · <code>examples/InstanceInspectorLab/useInstanceInspectorAnimation.ts</code></p>
     </section>
   )

@@ -9,8 +9,8 @@ export function PageCoverage() {
 
   return (
     <aside className="draggable-create-page__coverage" aria-labelledby="draggable-create-coverage-title">
-      <div><p>OFFICIAL COVERAGE</p><h2 id="draggable-create-coverage-title">{officialItemCount} / {draggableCreateCoverage.officialSourceItems}</h2><span>{draggableCreateCoverage.officialSources} canonicals · {implementationItemCount} / {draggableCreateCoverage.implementationItems} source/type checks</span></div>
-      <ol>{draggableCreateSections.map((section) => <li key={section.id}><a href={`#${section.id}`}>{section.number} · {section.title}</a><span>{section.sourceItems} items</span></li>)}</ol>
+      <div><p>DRAGGABLE 생성 순서</p><h2 id="draggable-create-coverage-title">핵심 동작 {officialItemCount}개</h2><span>공식 문서 {draggableCreateCoverage.officialSources}개 · 설치본에서 확인한 경계 {implementationItemCount}개</span></div>
+      <ol>{draggableCreateSections.map((section) => <li key={section.id}><a href={`#${section.id}`}>{section.number} · {section.title}</a><span>{section.sourceItems}개 핵심 동작</span></li>)}</ol>
     </aside>
   )
 }
