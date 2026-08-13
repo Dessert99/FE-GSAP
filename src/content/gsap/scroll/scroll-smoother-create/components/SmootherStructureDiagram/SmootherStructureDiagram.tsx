@@ -9,23 +9,32 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother'
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-// root owner가 ScrollTriggers보다 먼저 한 번만 생성합니다.
-const smoother = ScrollSmoother.create({
-  wrapper: '${scrollSmootherCreationDescriptor.wrapper}',
-  content: '${scrollSmootherCreationDescriptor.content}',
-  smooth: ${scrollSmootherCreationDescriptor.smooth},
-  effects: ${scrollSmootherCreationDescriptor.effects},
-})
+function setupScrollSmoother() {
+  // 앱 초기화 코드에서 ScrollTriggers보다 먼저 한 번만 생성합니다.
+  const smoother = ScrollSmoother.create({
+    wrapper: '${scrollSmootherCreationDescriptor.wrapper}',
+    content: '${scrollSmootherCreationDescriptor.content}',
+    smooth: ${scrollSmootherCreationDescriptor.smooth},
+    effects: ${scrollSmootherCreationDescriptor.effects},
+  })
 
-// 다른 module은 새 instance 대신 이미 생성된 singleton을 읽습니다.
-const sameSmoother = ScrollSmoother.get()
-const content = smoother.content()
-const wrapper = smoother.wrapper()
-const mainScrollTrigger = smoother.scrollTrigger
-const initialVars = smoother.vars
+  // 다른 module은 새 instance 대신 이미 생성된 singleton을 읽습니다.
+  const sameSmoother = ScrollSmoother.get()
+  const content = smoother.content()
+  const wrapper = smoother.wrapper()
+  const mainScrollTrigger = smoother.scrollTrigger
+  const initialVars = smoother.vars
+  console.log({ sameSmoother, content, wrapper, mainScrollTrigger, initialVars })
 
-// root owner가 만든 instance만 unmount 때 정리합니다.
-smoother.kill()`
+  return () => smoother.kill()
+}
+
+const cleanupSmoother = setupScrollSmoother()
+
+// 앱 종료 시 초기화 코드가 만든 singleton만 정리합니다.
+function teardownApp() {
+  cleanupSmoother()
+}`
 
 /** body scrollbar와 wrapper/content가 맡는 서로 다른 역할을 연결한다. */
 export function SmootherStructureDiagram() {
