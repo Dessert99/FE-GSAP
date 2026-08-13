@@ -32,23 +32,88 @@ export function SequencePlaybackLab() {
   // 실제 마지막 command descriptor만 코드 문법으로 포맷한다
   const lastCall = serializeCommand(lastCommand)
   // 실행 descriptor와 실제 getter snapshot을 한 코드 블록으로 직렬화한다
-  const code = `const tl = gsap.timeline({
-  paused: true,
-  defaults: { duration: ${descriptor.childDuration}, ease: 'none' },
-})
+  const code = `import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { useRef, useState } from 'react'
 
-tl.addLabel('${descriptor.labels.intro}', 0)
-  .to('${descriptor.selectors[0]}', { x: ${descriptor.distance} })
-  .addLabel('${descriptor.labels.middle}')
-  .to('${descriptor.selectors[1]}', { x: ${descriptor.distance} })
-  .addLabel('${descriptor.labels.finish}')
-  .to('${descriptor.selectors[2]}', { x: ${descriptor.distance} })
+function SequencePlaybackExample() {
+const scope = useRef(null)
+const timelineRef = useRef(null)
+const selectors = ['${descriptor.selectors[0]}', '${descriptor.selectors[1]}', '${descriptor.selectors[2]}']
+const [, setSnapshot] = useState({})
 
-${lastCall}
+function round(value) {
+  return Math.round(value * 100) / 100
+}
 
-tl.paused()   // ${snapshot.paused}
-tl.reversed() // ${snapshot.reversed}
-tl.isActive() // ${snapshot.active}`
+function getActiveChild(time, duration) {
+  if (time <= 0) return '대기'
+  if (time >= duration) return '완료'
+  if (time < ${descriptor.childDuration}) return 'A'
+  if (time < ${descriptor.childDuration * 2}) return 'B'
+  return 'C'
+}
+
+function report() {
+  const tl = timelineRef.current
+  if (!tl) return
+  const childX = selectors.map((selector) => {
+    const target = scope.current?.querySelector(selector)
+    return target ? Math.round(Number(gsap.getProperty(target, 'x'))) : 0
+  })
+  setSnapshot({
+    time: round(tl.time()),
+    progress: round(tl.progress()),
+    paused: tl.paused(),
+    reversed: tl.reversed(),
+    active: tl.isActive(),
+    activeChild: getActiveChild(tl.time(), tl.duration()),
+    childX,
+  })
+}
+
+useGSAP(() => {
+  const root = scope.current
+  const targets = root ? selectors.map((selector) => root.querySelector(selector)) : []
+  if (targets.length !== selectors.length || targets.some((target) => !target)) return
+  gsap.set(targets, { x: 0 })
+  const tl = gsap.timeline({
+    paused: true,
+    defaults: { duration: ${descriptor.childDuration}, ease: 'none' },
+    onUpdate: report,
+    onComplete: report,
+    onReverseComplete: report,
+  })
+
+  tl.addLabel('${descriptor.labels.intro}', 0)
+    .to(targets[0], { x: ${descriptor.distance} })
+    .addLabel('${descriptor.labels.middle}')
+    .to(targets[1], { x: ${descriptor.distance} })
+    .addLabel('${descriptor.labels.finish}')
+    .to(targets[2], { x: ${descriptor.distance} })
+  timelineRef.current = tl
+  report()
+  return () => {
+    tl.kill()
+    timelineRef.current = null
+  }
+}, { scope })
+
+function run() {
+  const tl = timelineRef.current
+  if (!tl) return
+  ${lastCall}
+  report()
+}
+
+return <div ref={scope}>
+  <span className="${descriptor.selectors[0].slice(1)}">A</span>
+  <span className="${descriptor.selectors[1].slice(1)}">B</span>
+  <span className="${descriptor.selectors[2].slice(1)}">C</span>
+  <button onClick={run}>명령 실행</button>
+</div>
+}
+// paused ${snapshot.paused} · reversed ${snapshot.reversed} · active ${snapshot.active}`
 
   return (
     <section className={`sequence-playback-lab${reducedMotion ? ' sequence-playback-lab--reduced' : ''}`} aria-labelledby="sequence-playback-lab-title">

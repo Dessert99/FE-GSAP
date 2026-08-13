@@ -5,7 +5,7 @@ export const timelinePlaybackControlsMeta = {
   summary:
     'Timeline의 playhead 하나를 멈추거나 뒤집으면 안에 놓인 children 전체가 같은 순서를 유지한 채 따라갑니다. 여덟 메서드를 상태·명령·관찰의 세 역할로 묶어 봅니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-playback-controls/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.isActive()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/isActive()' },
     { label: 'Timeline.pause()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/pause()' },

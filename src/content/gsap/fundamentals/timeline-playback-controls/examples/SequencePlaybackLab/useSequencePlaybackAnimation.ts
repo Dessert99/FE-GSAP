@@ -76,7 +76,11 @@ export function useSequencePlaybackAnimation() {
     if (!timeline) return
 
     // 세 child transform을 GSAP cache에서 직접 읽어 화면 수치와 실행을 맞춘다
-    const childX = descriptor.selectors.map((selector) => Math.round(Number(gsap.getProperty(selector, 'x')))) as [number, number, number]
+    const childX = descriptor.selectors.map((selector) => {
+      // 같은 class가 다른 페이지에 있어도 이 lab scope 안의 실제 target만 읽는다
+      const target = scope.current?.querySelector<HTMLElement>(selector)
+      return target ? Math.round(Number(gsap.getProperty(target, 'x'))) : 0
+    }) as [number, number, number]
     // 같은 프레임의 부모 getter와 child 값을 한 번에 교체한다
     setSnapshot({ time: round(timeline.time()), progress: round(timeline.progress()), paused: timeline.paused(), reversed: timeline.reversed(), active: timeline.isActive(), activeChild: getActiveChild(timeline.time(), timeline.duration()), childX })
   }
