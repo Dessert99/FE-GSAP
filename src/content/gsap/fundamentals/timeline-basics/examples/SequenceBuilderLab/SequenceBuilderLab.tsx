@@ -4,10 +4,11 @@ import './SequenceBuilderLab.css'
 
 // 한 creator descriptor를 실제 Timeline chaining 문법 한 줄로 직렬화한다
 function serializeCall(call: SequenceCall) {
-  if (call.method === 'from') return `.from(${call.targetSyntax}, { y: ${call.y}, autoAlpha: ${call.autoAlpha}, duration: ${call.duration} })`
-  if (call.method === 'to') return `.to(${call.targetSyntax}, { scaleX: ${call.scaleX}, duration: ${call.duration}, ease: '${call.ease}' })`
-  if (call.method === 'set') return `.set(${call.targetSyntax}, { autoAlpha: ${call.autoAlpha} })`
-  return `.fromTo(${call.targetSyntax}, { scale: ${call.fromScale} }, { scale: ${call.toScale}, duration: ${call.duration}, ease: '${call.ease}' })`
+  const target = call.target === 'title' ? 'titleRef.current' : call.target === 'bar' ? 'barRef.current' : 'badgeRef.current'
+  if (call.method === 'from') return `.from(${target}, { y: ${call.y}, autoAlpha: ${call.autoAlpha}, duration: ${call.duration} })`
+  if (call.method === 'to') return `.to(${target}, { scaleX: ${call.scaleX}, duration: ${call.duration}, ease: '${call.ease}' })`
+  if (call.method === 'set') return `.set(${target}, { autoAlpha: ${call.autoAlpha} })`
+  return `.fromTo(${target}, { scale: ${call.fromScale} }, { scale: ${call.toScale}, duration: ${call.duration}, ease: '${call.ease}' })`
 }
 
 export function SequenceBuilderLab() {
@@ -18,6 +19,60 @@ export function SequenceBuilderLab() {
   const codeLines = sequenceStages.slice(0, stageCount).flatMap((stage) => stage.calls.map(serializeCall))
   // 실제 child의 끝 중 가장 큰 값을 block 너비 계산의 분모로 쓴다
   const totalDuration = Math.max(0, ...blocks.map((block) => block.start + block.duration))
+  // 초기 상태·Timeline child·현재 재생 분기를 runtime 순서 그대로 직렬화한다
+  const code = `import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { useRef, useState } from 'react'
+
+function SequenceBuilderExample() {
+const scope = useRef(null)
+const titleRef = useRef(null)
+const barRef = useRef(null)
+const badgeRef = useRef(null)
+const timelineRef = useRef(null)
+const [, setStatus] = useState('')
+
+useGSAP(() => {
+  const title = titleRef.current
+  const bar = barRef.current
+  const badge = badgeRef.current
+  if (!title || !bar || !badge) return
+  gsap.set(title, { y: 0, autoAlpha: 1 })
+  gsap.set(bar, { scaleX: 0, transformOrigin: 'left center' })
+  gsap.set(badge, { autoAlpha: 0, scale: 1 })
+
+  const timeline = gsap.timeline({ paused: true })${codeLines.length > 0 ? `\n    ${codeLines.join('\n    ')}` : '\n  // 아직 child가 없습니다.'}
+
+  timeline.eventCallback('onComplete', () => setStatus('현재까지 추가한 sequence가 모두 끝났습니다.'))
+  timelineRef.current = timeline
+  return () => {
+    timeline.kill()
+    timelineRef.current = null
+  }
+}, { scope })
+
+function play() {
+  const timeline = timelineRef.current
+  if (!timeline) return
+  ${reducedMotion ? 'timeline.progress(1, true).pause()' : 'timeline.restart()'}
+}
+
+function reset() {
+  const timeline = timelineRef.current
+  if (!timeline || !titleRef.current || !barRef.current || !badgeRef.current) return
+  timeline.pause(0).clear()
+  gsap.set(titleRef.current, { y: 0, autoAlpha: 1 })
+  gsap.set(barRef.current, { scaleX: 0 })
+  gsap.set(badgeRef.current, { autoAlpha: 0, scale: 1 })
+}
+
+return <div ref={scope}>
+  <h2 ref={titleRef}>프로필 준비 중</h2>
+  <span ref={barRef} />
+  <span ref={badgeRef}>완료</span>
+  <button onClick={play}>재생</button><button onClick={reset}>초기화</button>
+</div>
+}`
 
   return (
     <section className="sequence-builder" aria-labelledby="sequence-builder-title">
@@ -68,7 +123,7 @@ export function SequenceBuilderLab() {
         ))}
       </div>
 
-      <pre className="sequence-builder__code"><code>{`const timeline = gsap.timeline({ paused: true })${codeLines.length > 0 ? `\n  ${codeLines.join('\n  ')}` : '\n// 아직 child가 없습니다.'}`}</code></pre>
+      <pre className="sequence-builder__code"><code>{code}</code></pre>
 
       <div className="sequence-builder__panels">
         <article><h4>무엇이 달라졌나요?</h4><p>child를 넣을 때마다 Timeline 길이와 block 수가 늘지만 조작 대상은 같은 Timeline 하나입니다.</p></article>
