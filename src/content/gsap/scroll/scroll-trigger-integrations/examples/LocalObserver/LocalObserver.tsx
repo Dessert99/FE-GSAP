@@ -1,9 +1,9 @@
-/** discriminated integration modes와 safely isolated Observer runtime을 one learning frame에 표시한다. */
+/** 세 integration 방식과 local Observer 실행 결과를 한 화면에 표시한다. */
 import { InteractiveExample } from '../../../../../../components/demo/InteractiveExample/InteractiveExample'
 import { useLocalObserverRuntime } from './useLocalObserverRuntime'
 import './LocalObserver.css'
 
-/** native-normalize·observer·proxy ownership을 architecture diagram으로 비교한다. */
+/** native normalization·observer·proxy의 역할과 실행 범위를 비교한다. */
 export function LocalObserver() {
   // local runtime이 소유한 target, discrete direction과 reset action을 받는다
   const { scope, targetRef, readout, resetReadout } = useLocalObserverRuntime()
@@ -11,18 +11,49 @@ export function LocalObserver() {
   const modes = [
     {
       kind: 'native-normalize',
-      execution: 'static only',
-      code: 'ScrollTrigger.normalizeScroll(true)\n// cleanup: ScrollTrigger.normalizeScroll(false)',
+      execution: '호출 형태만 표시',
+      code: "import gsap from 'gsap'\nimport { ScrollTrigger } from 'gsap/ScrollTrigger'\n\ngsap.registerPlugin(ScrollTrigger)\nScrollTrigger.normalizeScroll(true)\n// 페이지를 떠날 때 호출\nconst restoreNativeScroll = () => ScrollTrigger.normalizeScroll(false)",
     },
     {
       kind: 'observer',
-      execution: 'actual local target',
-      code: "const observer = ScrollTrigger.observe({ target, type: 'wheel,touch' })\n// cleanup: observer.kill()",
+      execution: 'local target에서 실행',
+      code: `import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+const target = document.querySelector('.local-observer-surface')
+if (!target) throw new Error('target이 필요합니다.')
+const reportDirection = (direction) => console.log(direction)
+
+const observer = ScrollTrigger.observe({
+  target,
+  type: 'wheel,touch',
+  preventDefault: false,
+  onUp: () => reportDirection('up'),
+  onDown: () => reportDirection('down'),
+})
+
+// component cleanup
+const cleanup = () => observer.kill()`,
     },
     {
       kind: 'proxy',
-      execution: 'static only',
-      code: "ScrollTrigger.scrollerProxy(scroller, {\n  scrollTop(value) { /* getter + setter */ },\n  getBoundingClientRect() { /* measurement */ },\n  pinType: 'transform',\n})",
+      execution: '호출 형태만 표시',
+      code: `import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
+const scroller = document.querySelector('.custom-scroller')
+if (!scroller) throw new Error('scroller가 필요합니다.')
+
+ScrollTrigger.scrollerProxy(scroller, {
+  scrollTop(value) {
+    if (arguments.length) scroller.scrollTop = value
+    return scroller.scrollTop
+  },
+  getBoundingClientRect: () => ({ top: 0, left: 0, width: innerWidth, height: innerHeight }),
+  pinType: 'transform',
+})`,
     },
   ] as const
   // actual runtime config와 same Observer branch를 code panel에 보여 준다
@@ -31,15 +62,15 @@ export function LocalObserver() {
   return (
     <section id='local-observer'>
       <InteractiveExample
-        title='integration architecture · only local Observer runs'
-        description='global native normalization과 proxy registry는 이 page에서 실행하지 않습니다. local surface의 wheel/touch direction만 actual Observer로 읽고 browser keyboard scroll은 그대로 둡니다.'
+        title='integration 비교 · local Observer만 실행'
+        description='native normalization과 proxy registry는 이 페이지에서 실행하지 않습니다. local surface의 wheel/touch direction만 Observer로 읽고 키보드 scroll은 그대로 둡니다.'
         sourcePath='src/content/gsap/scroll/scroll-trigger-integrations/examples/LocalObserver/useLocalObserverRuntime.ts'
-        controls='none — native keyboard scrolling remains browser-owned'
+        controls='별도 control 없음 — 키보드 scrolling은 browser 기본 동작을 유지합니다.'
         preview={
           <div ref={scope} className='local-observer'>
             <div
               className='local-observer__diagram'
-              aria-label='integration architecture'
+              aria-label='integration 방식 비교'
             >
               {modes.map((mode) => (
                 <article key={mode.kind}>
@@ -53,7 +84,7 @@ export function LocalObserver() {
             </div>
             <div
               ref={targetRef}
-              className='local-observer__surface'
+              className='local-observer-surface local-observer__surface'
               tabIndex={0}
             >
               <strong>local Observer target</strong>
@@ -62,8 +93,8 @@ export function LocalObserver() {
                 <output>{readout}</output>
               </p>
               <p>
-                Arrow/Page keys are not prevented; browser-native keyboard
-                scrolling is preserved.
+                Arrow/Page 키를 막지 않으므로 browser 기본 keyboard scrolling을
+                유지합니다.
               </p>
             </div>
           </div>
@@ -92,20 +123,20 @@ export function LocalObserver() {
           },
         ]}
         changes={[
-          'native-normalize는 page scroll owner를 JS thread로 옮기므로 static boundary만 설명합니다.',
-          'Observer mode는 local target에서 actual direction observer를 만들고 cleanup에서 kill합니다.',
+          'native-normalize는 page scroll 처리를 JS thread로 옮기므로 호출 형태만 설명합니다.',
+          'Observer mode는 local target에서 direction observer를 만들고 cleanup에서 kill합니다.',
           'proxy는 scroll getter/setter와 measurement/pin selection을 custom scroller integration에 위임합니다.',
         ]}
         watchFor={[
           'reduced motion에서는 normalization을 절대 force하지 않습니다.',
-          'proxy registry는 local scroll/listener restoration contract 없이 실행하지 않습니다.',
+          'proxy는 custom scroller의 getter/setter와 cleanup 방식을 정한 뒤 적용합니다.',
           'continuous delta/live progress를 announce하지 않습니다.',
         ]}
         explanation={
           <p>
-            세 mode는 interchangeability가 아닙니다. normalizeScroll은 browser
-            page scroll interception, observe는 input sensing, scrollerProxy는
-            ScrollTrigger의 scroll/measurement adapter입니다.
+            세 방식은 서로 바꿔 쓸 수 없습니다. normalizeScroll은 browser page
+            scroll을 JS thread에서 처리하고, observe는 input을 감지하며,
+            scrollerProxy는 ScrollTrigger에 scroll/measurement 방식을 제공합니다.
           </p>
         }
         onReplay={resetReadout}
