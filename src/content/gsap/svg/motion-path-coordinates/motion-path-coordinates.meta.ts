@@ -3,7 +3,7 @@ export const motionPathCoordinatesMeta = {
   title: '중첩 transform 사이에서 point를 어느 좌표로 읽을까요?',
   category: 'GSAP · SVG · MotionPathPlugin',
   sourcePath: 'src/content/gsap/svg/motion-path-coordinates/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'convertCoordinates()',

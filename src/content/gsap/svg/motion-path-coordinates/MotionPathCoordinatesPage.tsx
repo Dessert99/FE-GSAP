@@ -38,10 +38,10 @@ export function MotionPathCoordinatesPage() {
         <h2>03 · relative position</h2>
         <p>
           getRelativePosition은 from parent coordinate에서 x/y gap을 돌려줍니다.
-          먼저 <a href={toHref('/fundamentals/motion-path')}>P21 MotionPath</a>
+          먼저 <a href={toHref('/fundamentals/motion-path')}>MotionPath</a>
           와{' '}
           <a href={toHref('/fundamentals/motion-path-data')}>
-            P22 RawPath 변환
+            RawPath 변환
           </a>
           을 확인하면 좌표 utility의 입력 경계를 연결해서 볼 수 있습니다.
         </p>
