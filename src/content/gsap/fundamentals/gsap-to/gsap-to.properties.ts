@@ -40,8 +40,8 @@ export const specialPropertyGroups: SpecialPropertyGroup[] = [
         example: "gsap.to('.box', { x: 100, duration: 1 })", exampleAnchor: 'overview',
       },
       {
-        name: 'ease', type: '공식 gsap.to(): 문자열 | 정규화 함수', defaultValue: '공식 gsap.to(): power1.out', acceptedValues: '공식 gsap.to(): ease 이름 또는 0..1 진행률을 받아 0..1 진행률을 반환하는 함수',
-        description: '전체 시간 안에서 값이 변하는 속도 곡선을 정합니다. 사용자 함수는 정규화된 진행률 0..1을 받고 같은 범위의 진행률을 반환합니다.',
+        name: 'ease', type: '공식 gsap.to(): 문자열 | 정규화 함수', defaultValue: '공식 gsap.to(): power1.out', acceptedValues: '공식 gsap.to(): ease 이름 또는 0..1 진행률을 받아 변환된 변화 비율을 반환하는 함수',
+        description: '전체 시간 안에서 값이 변하는 속도 곡선을 정합니다. 사용자 함수의 입력은 0..1이고, back 같은 overshoot ease의 중간 출력은 이 범위를 벗어날 수 있습니다.',
         useCase: '카드가 부드럽게 멈추거나, 배지가 살짝 튕기는 등 인터랙션의 움직임 성격을 정할 때 사용합니다.',
         combination: '재생 방향이 바뀔 때 별도의 곡선이 필요하면 easeReverse를 함께 사용합니다.',
         example: "gsap.to('.box', { x: 100, ease: 'back.out(1.7)' })", exampleAnchor: 'overview',
@@ -126,7 +126,7 @@ export const specialPropertyGroups: SpecialPropertyGroup[] = [
         name: 'keyframes', type: '공식 gsap.to(): to-vars 배열', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): 연속해서 실행할 vars 배열',
         description: '하나의 대상이 지나갈 여러 중간 상태를 한 to() 호출에 순서대로 정의합니다. 이 특수 속성은 to() Tween에서 사용합니다.',
         useCase: '배지가 올라갔다 회전하며 제자리로 오는 것처럼 한 요소가 여러 자세를 차례로 거칠 때 사용합니다.',
-        combination: '각 단계의 delay로 간격과 음수 겹침을 만들 수 있습니다. 백분율·속성 기반 형식은 linked Keyframes 가이드의 별도 설명입니다.',
+        combination: '각 단계의 delay로 간격과 음수 겹침을 만들 수 있습니다. 백분율·속성 기반 형식은 공식 Keyframes 문서에서 자세히 다룹니다.',
         example: "gsap.to('.box', { keyframes: [{ x: 100 }, { y: 80 }] })", exampleAnchor: 'keyframes',
       },
     ],
@@ -139,7 +139,7 @@ export const specialPropertyGroups: SpecialPropertyGroup[] = [
         name: 'stagger', type: '공식 gsap.to(): number | 고급 설정 객체', defaultValue: '공식 페이지에 명시 없음', acceptedValues: '공식 gsap.to(): 시작 간격 숫자 또는 고급 stagger 객체',
         description: '여러 target의 시작 시각을 서로 다르게 배치합니다.',
         useCase: '목록, 카드, 글자가 한꺼번에 나타나지 않고 순서대로 진입하게 만들 때 사용합니다.',
-        combination: '숫자는 일정한 시작 간격을 만듭니다. each/from/grid/ease 세부 계약은 linked Staggers 가이드의 별도 설명입니다.',
+        combination: '숫자는 일정한 시작 간격을 만듭니다. each/from/grid/ease 세부 동작은 공식 Staggers 문서에서 자세히 다룹니다.',
         example: "gsap.to('.dot', { y: 40, stagger: { each: 0.1, from: 'center' } })", exampleAnchor: 'staggers',
       },
       {

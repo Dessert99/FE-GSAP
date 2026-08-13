@@ -25,6 +25,10 @@ function syncProgress(progressLabel) {
   meter.setAttribute('aria-label', progressLabel + ' 진행률')
 }
 
+function log(eventName) {
+  console.log(this.label + ' · ' + eventName)
+}
+
 tween = gsap.to('.box', {
   x: ${animationConfig.x}, duration: ${animationConfig.duration.toFixed(1)},
   repeat: ${animationConfig.repeat}, repeatDelay: ${animationConfig.repeatDelay.toFixed(2)}, yoyo: ${animationConfig.yoyo},

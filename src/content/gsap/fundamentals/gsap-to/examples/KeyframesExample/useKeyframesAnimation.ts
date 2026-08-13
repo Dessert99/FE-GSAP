@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import { useRef, useState } from 'react'
 import { useReducedMotion } from '../../../../../../components/demo/InteractiveExample/useReducedMotion'
 
-/** canonical vars 배열과 linked guide의 백분율 확장 중 표시할 형식이다. */
+/** 단계별 vars 배열과 전체 시간의 백분율 객체 중 표시할 형식이다. */
 type KeyframeMode = 'array' | 'percentage'
 /** 한 keyframe에서 바꿀 숫자형 속성 묶음이다. */
 type KeyframeVars = Record<string, number>
@@ -20,13 +20,13 @@ export function useKeyframesAnimation() {
   const scope = useRef<HTMLDivElement>(null)
   // 실행 선택자와 미리보기 className이 같은 target을 가리키게 한다.
   const targetClassName = 'keyframes-example__target'
-  // canonical 배열과 linked-guide 백분율 형식 중 실행할 구성을 선택한다.
+  // 단계별 vars 배열과 백분율 객체 중 실행할 구성을 선택한다.
   const [mode, setMode] = useState<KeyframeMode>('array')
   // 같은 keyframes도 처음부터 다시 실행할 수 있도록 재생 횟수를 센다.
   const [runKey, setRunKey] = useState(0)
   // 모션 감소 환경에서는 각 keyframe을 시간 없이 최종 상태까지 적용한다.
   const reducedMotion = useReducedMotion()
-  // canonical gsap.to()가 소개하는 to-style vars 배열을 실행 설정으로 만든다.
+  // 각 단계의 시간을 직접 적는 to-style vars 배열을 실행 설정으로 만든다.
   const arrayAnimationConfig: KeyframesAnimationConfig = {
     keyframes: [
       { x: 150, duration: reducedMotion ? 0 : 0.55 },
@@ -35,7 +35,7 @@ export function useKeyframesAnimation() {
     ],
     ease: 'none',
   }
-  // linked Keyframes guide의 백분율 형식을 별도 확장 설정으로 만든다.
+  // 전체 duration에서 각 상태의 위치를 정하는 백분율 객체를 실행 설정으로 만든다.
   const percentageAnimationConfig: KeyframesAnimationConfig = {
     keyframes: {
       '25%': { x: 90, y: -55 },
