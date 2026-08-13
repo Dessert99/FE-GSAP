@@ -5,7 +5,7 @@ export const gsapUtilsMeta = {
   summary:
     'GSAP은 "몇 초 동안 어디로 움직일지"를 정하는 도구지만, 그 값을 만들어 내는 계산은 animation이 아닙니다. 공식 문서는 그 계산을 gsap.utils라는 자리에 함수 17개로 모아 두었습니다. 이 페이지는 그 17개가 왜 따로 있고, 어디서 찾고, 어떻게 고르는지만 다룹니다.',
   sourcePath: 'src/content/gsap/fundamentals/gsap-utils/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'gsap.utils', href: 'https://gsap.com/docs/v3/GSAP/gsap.utils' },
     { label: 'Utility Methods', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods' },

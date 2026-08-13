@@ -10,23 +10,23 @@ const mappedSourceCount = new Set(gsapUtilsSourceItems.map((item) => item.source
 
 export function PageCoverage() {
   return (
-    <nav className="utils-coverage" aria-label="공식 source 대응 범위">
+    <nav className="utils-coverage" aria-label="GSAP utility 학습 순서">
       <div className="utils-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{gsapUtilsCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{gsapUtilsCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          gsap.utils 문서와 Utility Methods 문서의 기술 item {gsapUtilsCoverage.officialSourceItems}개를 "왜 따로 있고 어디서 찾나"를
-          따라가는 일곱 단계로 다시 묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로 표시합니다.
+          gsap.utils와 Utility Methods 문서의 핵심 동작 {gsapUtilsCoverage.officialSourceItems}개를 "왜 따로 있고 어디서 찾나"를
+          따라가는 일곱 단계로 묶었습니다. 문서에 없는 경계 동작 {probeItemCount}개는 직접 확인해 구분했습니다.
         </p>
       </div>
       <ol>
@@ -36,7 +36,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 공식 item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>
