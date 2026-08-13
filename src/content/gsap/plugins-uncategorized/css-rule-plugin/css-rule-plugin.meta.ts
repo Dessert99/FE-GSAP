@@ -5,7 +5,7 @@ export const cssRulePluginMeta = {
   summary:
     'CSSRulePlugin은 DOM 하나의 inline style 대신 stylesheet rule을 tween합니다. 같은 selector를 쓰는 모든 요소가 바뀌는 이유와, CSSOM 접근이 실패할 수 있는 경계를 함께 확인합니다.',
   sourcePath: 'src/content/gsap/plugins-uncategorized/css-rule-plugin/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'CSSRulePlugin', href: 'https://gsap.com/docs/v3/Plugins/CSSRulePlugin/' },
     { label: 'CSSRulePlugin.getRule()', href: 'https://gsap.com/docs/v3/Plugins/CSSRulePlugin/methods/static-getRule()/' },
