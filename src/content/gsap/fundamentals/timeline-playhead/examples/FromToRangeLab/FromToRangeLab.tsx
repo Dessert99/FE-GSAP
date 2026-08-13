@@ -15,17 +15,31 @@ export function FromToRangeLab() {
   // 마지막 실행의 실제 vars 형태를 의미 재조립 없이 문법 문자열로만 만든다
   const immediateVar = !lastAction || lastAction.immediateRenderMode === 'omitted' ? '' : `, { immediateRender: ${lastAction.immediateRenderMode} }`
   // 모션 감소 fallback까지 마지막 실제 실행 호출을 그대로 표시한다
-  const call = !lastAction ? '// 아직 range Tween을 만들지 않았습니다.' : lastAction.reducedMotion ? `tl.time(${lastAction.to.time}) // reduced-motion 대체` : `const control = tl.tweenFromTo('${lastAction.from.label}', '${lastAction.to.label}'${immediateVar})
+  const call = !lastAction ? '// 아직 range Tween을 만들지 않았습니다.' : lastAction.reducedMotion ? `tl.time(${lastAction.to.time}) // reduced-motion 대체` : `control = tl.tweenFromTo('${lastAction.from.label}', '${lastAction.to.label}'${immediateVar})
 control.eventCallback('onUpdate', reportCurrent)
 control.eventCallback('onComplete', reportCurrent)`
   // 실행 descriptor와 같은 label·duration을 코드에 직렬화한다
-  const code = `const tl = gsap.timeline({ paused: true, defaults: { duration: ${descriptor.duration}, ease: 'none' } })
-  .addLabel('intro', 0).to('.${targetClassName}', { x: ${descriptor.distance} })
-  .addLabel('focus').to('.${targetClassName}', { rotation: 120 })
-  .addLabel('outro').to('.${targetClassName}', { scale: 0.72 })
+  const code = `import gsap from 'gsap'
+
+const target = document.querySelector('.${targetClassName}')
+if (!target) throw new Error('range target을 찾지 못했습니다.')
+const tl = gsap.timeline({ paused: true, defaults: { duration: ${descriptor.duration}, ease: 'none' } })
+  .addLabel('intro', 0).to(target, { x: ${descriptor.distance} })
+  .addLabel('focus').to(target, { rotation: 120 })
+  .addLabel('outro').to(target, { scale: 0.72 })
   .addLabel('finish')
 
-${call}`
+let control = null
+function reportCurrent() {
+  console.log({ time: tl.time(), progress: tl.progress() })
+}
+
+${call}
+
+function cleanup() {
+  control?.kill()
+  tl.revert()
+}`
 
   return (
     <section className={`from-to-range-lab${reducedMotion ? ' from-to-range-lab--reduced' : ''}`} aria-labelledby="from-to-range-title">

@@ -327,3 +327,19 @@ modify:
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- `SRC-TPH2` — **PASS**: progress·time·totalProgress·totalTime·tweenFromTo·tweenTo 공식 페이지를 다시 조회했다.
+- `RDS-TPH2` — **PASS**: 세 lab의 descriptor·control Tween·표시 코드를 정적으로 대조해 BLOCK 없음.
+- `PED-TPH2` — **ADDRESSED**: 첫 화면의 `OFFICIAL COVERAGE`·`canonicals`·`probes`·`items`를 playhead 학습 순서와 핵심 동작 표현으로 바꿨다.
+- `BROWSER-TPH2` — **DEFERRED**: 실제 control·키보드·반응형·motion 조작은 수행하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제됐다.
+- releaseDecision: `PASS with DEFERRED` — 정적 BLOCK은 없고 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-TPH3` — **PASS**: NavigationMode·FromToRange 표시 코드에 target guard, report 함수, control Tween 보관과 Timeline teardown을 반영해 재검증했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`
