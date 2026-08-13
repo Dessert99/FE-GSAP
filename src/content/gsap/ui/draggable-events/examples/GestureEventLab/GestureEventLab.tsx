@@ -20,13 +20,24 @@ export function GestureEventLab() {
     simulate,
     checkClickDecision,
   } = useGestureEventRuntime()
-  // runtime descriptor 목록만 문법으로 직렬화해 등록 코드와 버튼 이름을 맞춘다
-  const code = gestureEventDescriptors
-    .map(
-      (descriptor) =>
-        `draggable.addEventListener('${descriptor.name}', onGesture)`,
-    )
-    .join('\n')
+  // runtime descriptor 목록을 같은 callback의 등록·해제에 쓰는 실행 가능한 코드로 직렬화한다
+  const eventNamesCode = gestureEventDescriptors
+    .map((descriptor) => `'${descriptor.name}'`)
+    .join(', ')
+  // 실제 target·listener identity·cleanup 경계를 하나의 코드 패널에 보인다
+  const code = `gsap.registerPlugin(Draggable)
+const target = document.querySelector('.gesture-event-lab__target')
+if (!target) throw new Error('gesture target을 찾지 못했습니다.')
+const eventNames = [${eventNamesCode}]
+const draggable = Draggable.create(target, { type: 'x,y', dragClickables: true })[0]
+const onGesture = (event) => console.log(event?.type, draggable.isPressed)
+eventNames.forEach((name) => draggable.addEventListener(name, onGesture))
+
+function cleanup() {
+  eventNames.forEach((name) => draggable.removeEventListener(name, onGesture))
+  draggable.kill()
+  gsap.set(target, { clearProps: 'transform' })
+}`
   return (
     <section
       className="gesture-event-lab"

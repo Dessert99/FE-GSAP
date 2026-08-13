@@ -34,8 +34,8 @@ export function ClickDragBoundarySection() {
           <a href={toHref('/fundamentals/draggable-coordinates')}>
             Draggable coordinates
           </a>
-          에서 먼저 확인합니다. bounds·axis(P05), lifecycle commands(P06),
-          collision·momentum(P08)은 이 페이지에서 text-only 경계로 둡니다.
+          에서 먼저 확인합니다. bounds·axis, lifecycle command,
+          collision·momentum은 각각의 후속 학습 페이지에서 다룹니다.
         </p>
       </div>
       <GestureEventLab />

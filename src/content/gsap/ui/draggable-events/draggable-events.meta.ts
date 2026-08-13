@@ -7,7 +7,7 @@ export const draggableEventsMeta = {
   summary:
     'listener가 받는 gesture event, press 상태, 그리고 최근 drag 뒤 click을 구분해 polling 없이 한 번의 결정으로 반응하는 법을 살펴봅니다.',
   sourcePath: 'src/content/gsap/ui/draggable-events/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'addEventListener()',
