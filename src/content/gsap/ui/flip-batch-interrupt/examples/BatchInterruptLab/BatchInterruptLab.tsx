@@ -12,17 +12,30 @@ export function BatchInterruptLab() {
   const { scope, reversed, status, reducedMotion, run } =
     useBatchInterruptAnimation()
   // runtime descriptor와 같은 id·phase·duration으로 코드 패널을 직렬화한다
-  const code = `const batch = Flip.batch('${batchActionDescriptor.id}')
+  const code = `const cardsEl = document.querySelector('.batch-interrupt-lab__cards')
+if (!cardsEl) throw new Error('Flip batch container를 찾지 못했습니다.')
+gsap.registerPlugin(Flip)
+const cards = cardsEl.querySelectorAll('.batch-interrupt-lab__card')
+const batch = Flip.batch('${batchActionDescriptor.id}')
 batch.add({
   getState: () => Flip.getState(cards),
-  setState: () => cardsEl.classList.toggle('batch-interrupt-lab__cards--reversed'),
+  setState: () => {
+    cardsEl.classList.toggle('batch-interrupt-lab__cards--reversed')
+    return Array.from(cardsEl.children)
+  },
   animate: (action) => Flip.from(action.state, {
     duration: ${reducedMotion ? 0 : batchActionDescriptor.duration},
   }),
 })
-const active = cards.some((card) => Flip.isFlipping(card))
+const active = Array.from(cards).some((card) => Flip.isFlipping(card))
 if (active) Flip.killFlipsOf(cards)
-batch.run()`
+batch.run()
+
+function cleanup() {
+  Flip.killFlipsOf(cards)
+  batch.kill()
+  cardsEl.classList.remove('batch-interrupt-lab__cards--reversed')
+}`
   return (
     <section className="batch-interrupt-lab">
       <h3>세 card의 새 order가 이전 Flip과 경쟁하지 않게 하기</h3>
