@@ -101,3 +101,27 @@ All rendered official pages were opened twice on 2026-08-08; raw official `src/I
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `INERTIA-OC-20260813` | PASS | 현재 공식 `InertiaPlugin`, `getVelocity()`, `isTracking()`, `track()`, `untrack()` 문서와 대조 | velocity·bounds·end·duration 및 tracking lifecycle 경계를 유지했다.
+- `INERTIA-FACT-20260813` | BLOCK → PASS | 임의의 `velocity / resistance * 120` 식을 “predicted notch”로 표시해 플러그인의 실제 도착 계산처럼 오해할 수 있었다 | 예측식을 제거하고 정상 모션은 완료 뒤 실제 x만 읽으며, reduced motion은 관성을 흉내 내지 않고 현재 위치의 가장 가까운 notch로 즉시 이동하게 했다.
+- `INERTIA-RDS-20260813` | BLOCK → PASS | 코드 패널이 정상 tween의 `onComplete` 관찰과 reduced-motion의 별도 `gsap.set()` 경로를 표시하지 않았다 | 두 runtime 분기를 각각 직렬화했다.
+- `INERTIA-WRITE-20260813` | BLOCK → PASS | 본문에 내부 페이지 번호가 노출됐다 | 후속 VelocityTracker 개념명으로 바꿨다.
+- `INERTIA-BROWSER-20260813` | DEFERRED | 키보드/포커스, reduced motion, 320/390px, 실제 추적·throw·snap 결과 | 이번 배치에서는 브라우저를 조작하지 않았다.
+- `INERTIA-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — 사실·runtime/display·문장 BLOCK을 해소했고 browser-only 4건은 DEFERRED다. 과거 빌드와 browser closure는 현재 근거가 아니다.
+
+### 2026-08-13 self cross-review
+
+- `INERTIA-RDS-20260813-02 | BLOCK → PASS` — 정상 분기의 `readSnapshot`과 두 분기의 `puck`이 표시 코드 안에서 정의되지 않았다. target query와 tracking setup, 실제 x completion read, tween kill/untrack cleanup을 포함한 뒤 재독해 PASS.
+- 통합 검증: `npx tsc --noEmit --pretty false` exit 0, Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

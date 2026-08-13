@@ -1,4 +1,4 @@
-/** 하나의 discriminated descriptor로 tracking·prediction·tween·snapshot을 동기화한다. */
+/** 하나의 descriptor로 tracking·inertia tween·완료 위치 snapshot을 동기화한다. */
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { InertiaPlugin } from 'gsap/InertiaPlugin'
@@ -23,18 +23,12 @@ export type InertiaDescriptor = NumericDescriptor | AutoDescriptor
 export type InertiaSnapshot = {
   tracked: boolean
   velocity: number
-  predictedEnd: number
+  nearestNotch: number
   position: number
   notice: string
 }
 
 gsap.registerPlugin(InertiaPlugin)
-
-/** number line의 가장 가까운 notch를 학습용 예상 readout에 쓴다. */
-const nearestEnd = (value: number, ends: number[]) =>
-  ends.reduce((closest, end) =>
-    Math.abs(end - value) < Math.abs(closest - value) ? end : closest,
-  )
 
 export function useInertiaPuckAnimation() {
   // GSAP selection과 unmount cleanup을 page-local puck 하나로 한정한다
@@ -51,11 +45,11 @@ export function useInertiaPuckAnimation() {
   const [snapshot, setSnapshot] = useState<InertiaSnapshot>({
     tracked: false,
     velocity: 0,
-    predictedEnd: 0,
+    nearestNotch: 0,
     position: 0,
     notice: 'track 준비 중',
   })
-  // descriptor는 tracking input, bounds, end, tween code와 snapshot prediction의 단일 source다
+  // descriptor는 tracking input, bounds, end와 tween code의 단일 source다
   const descriptor: InertiaDescriptor =
     mode === 'numeric'
       ? {
@@ -79,14 +73,6 @@ export function useInertiaPuckAnimation() {
   // current transform을 number로 읽어 direct GSAP mutation 후에도 snapshot을 사실대로 남긴다
   const readPosition = (puck: HTMLButtonElement) =>
     Number(gsap.getProperty(puck, 'x')) || 0
-  // raw velocity를 range에 제한하고 가장 가까운 notch로 학습용 predicted end를 만든다
-  const predictEnd = (position: number, velocity: number) => {
-    const natural = position + (velocity / descriptor.resistance) * 120
-    return nearestEnd(
-      Math.min(descriptor.max, Math.max(descriptor.min, natural)),
-      descriptor.end,
-    )
-  }
   // tracking 상태와 velocity를 실제 plugin static call로 가져와 sparse snapshot을 만든다
   const readSnapshot = (notice: string) => {
     const puck = puckRef.current
@@ -97,7 +83,7 @@ export function useInertiaPuckAnimation() {
     setSnapshot({
       tracked,
       velocity,
-      predictedEnd: predictEnd(position, velocity),
+      nearestNotch: gsap.utils.snap(descriptor.end, position),
       position,
       notice,
     })
@@ -122,14 +108,12 @@ export function useInertiaPuckAnimation() {
     const puck = puckRef.current
     if (!puck) return
     gsap.killTweensOf(puck)
-    const trackedVelocity = InertiaPlugin.getVelocity(puck, 'x')
-    const inputVelocity =
-      descriptor.velocity === 'auto' ? trackedVelocity : descriptor.velocity
-    const predictedEnd = predictEnd(readPosition(puck), inputVelocity)
     if (reducedMotion) {
-      gsap.set(puck, { x: predictedEnd })
+      // reduced motion에서는 관성 예측 대신 현재 위치에 가장 가까운 허용값을 고른다
+      const finalX = gsap.utils.snap(descriptor.end, readPosition(puck))
+      gsap.set(puck, { x: finalX })
       readSnapshot(
-        'reduced motion: tween 없이 predicted notch로 즉시 snap했습니다.',
+        'reduced motion: 관성 계산 없이 현재 위치에서 가장 가까운 notch로 이동했습니다.',
       )
       return
     }
@@ -149,8 +133,7 @@ export function useInertiaPuckAnimation() {
     })
     setSnapshot((previous) => ({
       ...previous,
-      predictedEnd,
-      notice: 'inertia tween 실행 중 — readout은 매 frame 갱신하지 않습니다.',
+      notice: 'inertia tween 실행 중 — 도착 위치는 완료 뒤에 읽습니다.',
     }))
   }
   useGSAP(
@@ -176,6 +159,7 @@ export function useInertiaPuckAnimation() {
     puckRef,
     descriptor,
     snapshot,
+    reducedMotion,
     setMode,
     sampleVelocity,
     throwPuck,

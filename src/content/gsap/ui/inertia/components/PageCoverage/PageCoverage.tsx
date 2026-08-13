@@ -1,27 +1,17 @@
-/** catalog item 수와 section mapping을 현재 페이지에서 보이게 한다. */
-import { inertiaSourceItems } from '../../inertia.catalog'
-import { inertiaCoverage, inertiaSections } from '../../inertia.meta'
+/** 속도 sampling부터 멈춤점 제한과 cleanup까지 학습 순서를 안내한다. */
+import { inertiaSections } from '../../inertia.meta'
 
 export function PageCoverage() {
-  const official = inertiaSourceItems.filter(
-    (item) => item.origin === 'official',
-  ).length
-  const implementation = inertiaSourceItems.filter(
-    (item) => item.origin === 'implementation',
-  ).length
   return (
     <aside className="inertia-page__coverage">
-      <strong>
-        {official} / {inertiaCoverage.officialSourceItems}
-      </strong>
-      <span>{implementation} implementation boundaries</span>
+      <strong>학습 순서</strong>
+      <span>속도를 읽고 bounds와 end로 최종 위치를 제한합니다.</span>
       <ol>
         {inertiaSections.map((section) => (
           <li key={section.id}>
             <a href={`#${section.id}`}>
               {section.number} · {section.title}
             </a>
-            <span>{section.sourceItems}</span>
           </li>
         ))}
       </ol>

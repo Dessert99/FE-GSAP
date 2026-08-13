@@ -10,9 +10,9 @@ export function DestinationPredictionSection() {
         question="빠른 sample은 대체로 더 오래, resistance는 더 짧게 멈추게 합니다."
       />
       <p>
-        lab의 predicted end는 학습용 예상값입니다. 실제 tween의 duration과
-        overshoot는 plugin이 ease, resistance, bounds를 함께 써서 결정하므로
-        snapshot은 onComplete에서만 다시 읽습니다.
+        실제 tween의 duration과 도착점은 plugin이 velocity, ease, resistance,
+        bounds와 end를 함께 써서 결정합니다. lab은 별도 예측식을 만들지 않고
+        onComplete에서 실제 x를 읽습니다.
       </p>
     </section>
   )

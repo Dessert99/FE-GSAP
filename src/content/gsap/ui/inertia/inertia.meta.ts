@@ -5,7 +5,7 @@ export const inertiaMeta = {
   summary:
     'InertiaPlugin은 현재 속도에서 자연스러운 감속을 계산하고, bounds와 end snap으로 멈춤점을 제한합니다.',
   sourcePath: 'src/content/gsap/ui/inertia/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'InertiaPlugin',
