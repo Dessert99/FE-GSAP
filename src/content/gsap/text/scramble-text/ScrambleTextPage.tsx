@@ -1,4 +1,4 @@
-/** P31의 setup, mental model, phrase lab, content boundary를 조립한다. */
+/** ScrambleText의 setup, 동작 원리, 예제와 content 경계를 조립한다. */
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { PhraseLab } from './examples/PhraseLab/PhraseLab'
 import { scrambleTextMeta } from './scramble-text.meta'
@@ -20,7 +20,6 @@ export function ScrambleTextPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>14 complete technical items covered</p>
       </header>
       <SetupSection />
       <MentalModelSection />

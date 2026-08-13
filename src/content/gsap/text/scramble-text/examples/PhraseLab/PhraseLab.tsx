@@ -33,29 +33,50 @@ export function PhraseLab() {
     },
   ]
   // runtime이 쓰는 descriptor fields만 current code panel 문법으로 직렬화한다
-  const code = reducedMotion
-    ? `target.textContent = '${descriptor.text}' // reduced motion: direct final`
-    : `gsap.to(target, {
-  duration: ${descriptor.duration},
-  scrambleText: {
-    text: '${descriptor.text}',
-    chars: '${descriptor.chars}',
-    speed: ${descriptor.speed},
-    delimiter: '${descriptor.delimiter}',
-    revealDelay: ${descriptor.revealDelay},
-    rightToLeft: ${descriptor.rightToLeft},
-    tweenLength: ${descriptor.tweenLength},
-    newClass: '${descriptor.newClass}',
-    oldClass: '${descriptor.oldClass}',
-  },
-})`
+  const code = `import { gsap } from 'gsap'
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin'
+
+gsap.registerPlugin(ScrambleTextPlugin)
+
+const setup = () => {
+  const target = document.querySelector('.phrase-lab__target')
+  if (!target) throw new Error('phrase target이 필요합니다.')
+  const originalHTML = target.innerHTML
+  ${
+    reducedMotion
+      ? `target.textContent = ${JSON.stringify(descriptor.text)}
+  const tween = null`
+      : `const tween = gsap.to(target, {
+    duration: ${descriptor.duration},
+    scrambleText: {
+      text: ${JSON.stringify(descriptor.text)},
+      chars: ${JSON.stringify(descriptor.chars)},
+      speed: ${descriptor.speed},
+      delimiter: ${JSON.stringify(descriptor.delimiter)},
+      revealDelay: ${descriptor.revealDelay},
+      rightToLeft: ${descriptor.rightToLeft},
+      tweenLength: ${descriptor.tweenLength},
+      newClass: ${JSON.stringify(descriptor.newClass)},
+      oldClass: ${JSON.stringify(descriptor.oldClass)},
+    },
+  })`
+  }
+
+  return () => {
+    tween?.kill()
+    target.innerHTML = originalHTML
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
 
   // descriptor-driven controls와 preview를 one InteractiveExample frame에 전달한다
   return (
     <section id="phrase-lab">
       <InteractiveExample
-        title="one phrase, one final meaning"
-        description="character set과 reveal direction을 고른 뒤 replay하세요. 움직이는 target은 숨기고 final phrase는 stable text로 따로 제공합니다."
+        title="한 문장의 중간 문자와 최종 의미"
+        description="character set과 reveal direction을 고른 뒤 replay하세요. 움직이는 target은 숨기고 최종 문장은 별도로 제공합니다."
         sourcePath="src/content/gsap/text/scramble-text/examples/PhraseLab/usePhraseAnimation.ts"
         reducedMotion={reducedMotion}
         controls={
@@ -120,15 +141,15 @@ export function PhraseLab() {
         ]}
         watchFor={[
           'static phase strip은 descriptor의 initial/intermediate/final contract를 보여 주며 live random string을 복제하지 않습니다.',
-          'animation target은 aria-hidden이고 Final phrase sibling이 stable accessible meaning을 제공합니다.',
+          'animation target은 aria-hidden이고 옆의 Final phrase가 보조기술에 고정된 최종 문장을 제공합니다.',
           'reduced motion에서는 ScrambleText tween 대신 final text를 바로 씁니다.',
         ]}
         explanation={
           <p>
-            ScrambleText는 target의 intermediate HTML을 replacement content로
+            ScrambleText는 target의 중간 HTML을 교체 가능한 content로
             다룹니다. 그래서 class option이 span을 만들 수 있는 target과,
-            사용자가 읽어야 할 final meaning을 별도 node로 나누면 noisy update를
-            announce하지 않으면서도 결과를 잃지 않습니다.
+            사용자가 읽어야 할 최종 문장을 별도 node로 나누면 무작위 문자를
+            반복해서 알리지 않으면서도 결과를 잃지 않습니다.
           </p>
         }
         onReplay={replay}
