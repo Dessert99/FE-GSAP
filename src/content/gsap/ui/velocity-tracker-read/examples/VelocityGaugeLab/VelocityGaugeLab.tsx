@@ -18,13 +18,29 @@ export function VelocityGaugeLab() {
     captureSnapshot,
   } = useVelocityGaugeRuntime()
   // runtime descriptor와 same call order를 code 문법으로만 표현한다.
-  const code = `const [tracker] = VelocityTracker.track(${descriptor.targetLabel}, '${descriptor.properties}', '${descriptor.type}')
-const found = VelocityTracker.getByTarget(${descriptor.targetLabel})
-const isTracked = VelocityTracker.isTracking(${descriptor.targetLabel}, '${descriptor.property}')
-const isPropertyTracked = found?.isTracking('${descriptor.property}')
-const velocity = found ? found.get('${descriptor.property}') : null
-const staticVelocity = found ? VelocityTracker.getVelocity(${descriptor.targetLabel}, '${descriptor.property}') : null
-VelocityTracker.untrack(${descriptor.targetLabel}, '${descriptor.properties}')`
+  const code = `gsap.registerPlugin(VelocityTracker)
+
+const ${descriptor.targetLabel} = { x: 0, rotation: 0 }
+const [tracker] = VelocityTracker.track(${descriptor.targetLabel}, '${descriptor.properties}', '${descriptor.type}')
+
+function setPropertyValue(value) {
+  ${descriptor.targetLabel}.${descriptor.property} = value
+}
+
+function captureSnapshot() {
+  const found = VelocityTracker.getByTarget(${descriptor.targetLabel}) ?? tracker
+  return {
+    found: Boolean(found),
+    staticTracked: VelocityTracker.isTracking(${descriptor.targetLabel}, '${descriptor.property}'),
+    instanceTracked: Boolean(found?.isTracking('${descriptor.property}')),
+    velocity: found ? found.get('${descriptor.property}') : null,
+    staticVelocity: found ? VelocityTracker.getVelocity(${descriptor.targetLabel}, '${descriptor.property}') : null,
+  }
+}
+
+function cleanup() {
+  VelocityTracker.untrack(${descriptor.targetLabel}, '${descriptor.properties}')
+}`
   const displayedVelocity = snapshot?.instanceVelocity ?? 'sample pending'
   return (
     <section id="velocity-gauge-lab">

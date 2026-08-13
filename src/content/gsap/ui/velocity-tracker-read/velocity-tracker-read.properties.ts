@@ -9,7 +9,7 @@ export const velocityTrackerReadProperties = [
   {
     name: 'VelocityTracker.getVelocity(target, property)',
     type: 'Number (installed type)',
-    defaultValue: '공식 P17 canonical 아님',
+    defaultValue: '기본값 없음',
     acceptedValues: 'tracked target/property convenience read',
   },
   {

@@ -4,13 +4,13 @@ import { toHref } from '../../../../../../app/routes'
 export function EstablishedTrackerSection() {
   return (
     <section id="established-tracker">
-      <p>01 · established tracker</p>
+      <p>01 · 준비된 tracker</p>
       <h2>읽기 전에 stable target을 tracking해야 합니다</h2>
       <p>
         velocity는 object 자체가 아니라{' '}
         <strong>그 object를 가리키는 tracker</strong>에서 나옵니다. 이 페이지는{' '}
         <a href={toHref('/fundamentals/velocity-tracker-lifecycle')}>
-          P16 VelocityTracker lifecycle
+          VelocityTracker lifecycle
         </a>
         의 <code>VelocityTracker.track(target, 'x,rotation')</code> setup이 이미
         끝났다고 가정합니다.
