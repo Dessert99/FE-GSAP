@@ -60,11 +60,14 @@ export function useLocalScrollTriggerRuntime() {
     () => {
       // 모든 required local node가 준비될 때만 explicit scroller create를 실행한다
       const scroller = scrollerRef.current
+      // start/end와 pin 위치를 계산할 trigger element다
       const trigger = triggerRef.current
+      // pin 안에서 x축으로 이동할 follower element다
       const follower = followerRef.current
       if (!scroller || !trigger || !follower) return undefined
       // defaults() runtime getter가 current object를 반환하므로 이 lab이 바꿀 key만 복사한다
       const defaultSnapshot = { ...ScrollTrigger.defaults({}) }
+      // cleanup에서 이 예제가 바꾼 toggleActions 값만 되돌린다
       const previousToggleActions = defaultSnapshot.toggleActions
       // 생략한 vars는 explicit vars가 덮기 전에 이 local lifetime의 creation default를 받는다
       ScrollTrigger.defaults({
@@ -111,6 +114,7 @@ export function useLocalScrollTriggerRuntime() {
 
   // user replay는 local layout 또는 scroll change 뒤 같은 instance에 remeasure를 요청한다
   function refreshSnapshot() {
+    // refresh 뒤 vars와 측정 좌표를 읽을 현재 instance다
     const instance = instanceRef.current
     if (!instance) return
     instance.refresh()
@@ -130,9 +134,9 @@ export function useLocalScrollTriggerRuntime() {
   }
 }
 
-/** descriptor-derived code가 explicit global config mutation을 피하는 이유를 제공한다. */
+/** 표시 코드가 global config mutation을 피하는 이유를 제공한다. */
 export function getConfigBoundary(
   descriptor: ScrollTriggerConstructionDescriptor,
 ) {
-  return `// config({ limitCallbacks: ${descriptor.config.limitCallbacks} })는 global이다.\n// config()에는 snapshot용 public getter가 없으므로 이 local lab은 값을 바꾸지 않는다.\n// application owner는 자신이 설정한 각 global config prior value를 보관하고 복원한다.`
+  return `// config({ limitCallbacks: ${descriptor.config.limitCallbacks} })는 global이다.\n// config()에는 현재 값을 읽는 public getter가 없어 이 예제는 값을 바꾸지 않는다.\n// 앱 초기화 코드가 설정한 global 값은 같은 위치에서 보관하고 복원한다.`
 }

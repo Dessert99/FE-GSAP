@@ -1,11 +1,11 @@
-/** P40의 source identity와 모든 canonical official link를 page header에 제공한다. */
+/** ScrollTrigger create 학습 페이지의 경로와 공식 문서 링크를 정의한다. */
 export const scrollTriggerCreateMeta = {
   title: 'ScrollTrigger는 scroll 전에 무엇을 측정하고 만들까?',
   category: 'GSAP · Scroll · ScrollTrigger',
   summary:
     '하나의 local scroller에서 create config, measured instance, markers와 vars를 같은 descriptor로 읽습니다.',
   sourcePath: 'src/content/gsap/scroll/scroll-trigger-create/',
-  reviewedAt: '2026-08-09',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'ScrollTrigger',
