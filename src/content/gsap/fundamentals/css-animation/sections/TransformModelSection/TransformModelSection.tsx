@@ -27,8 +27,8 @@ export function TransformModelSection() {
       </div>
       <div className="css-animation-page__example-stack"><TransformOrderExample /></div>
       <article className="css-animation-page__table-card">
-        <h3>공식 Quick reference · 20행</h3>
-        <p>전체 CSS property catalog가 아니라 공식 문서가 제공하는 transform shorthand와 공통 timing 대응만 그대로 보존합니다.</p>
+        <h3>자주 쓰는 값 대응표</h3>
+        <p>transform 단축 속성과 자주 쓰는 timing 옵션을 대응하는 CSS 개념과 나란히 비교합니다.</p>
         <div className="css-animation-page__table-wrap">
           <table>
             <thead><tr><th scope="col">GSAP vars</th><th scope="col">설명 또는 CSS 대응</th></tr></thead>

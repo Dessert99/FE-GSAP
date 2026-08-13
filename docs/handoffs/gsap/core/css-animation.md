@@ -10,7 +10,7 @@ CSSPlugin이 CSS 값과 transform을 읽고 쓰는 규칙을 이해해 올바른
 
 - title: `CSS`
 - canonicalUrl: `https://gsap.com/docs/v3/GSAP/CorePlugins/CSS/`
-- reviewedAt: `2026-08-03`
+- reviewedAt: `2026-08-13`
 - category: `Fundamentals`
 - slug: `css-animation`
 - sourcePageIds: primary `source:css`
@@ -94,11 +94,11 @@ CSSPlugin이 CSS 값과 transform을 읽고 쓰는 규칙을 이해해 올바른
 4. `#three-d`: perspective·force3D·cache
 5. `#origins`: transformOrigin·SVG origin·directional rotation
 6. `#lifecycle`: autoAlpha·variables·clearProps·autoRound
-7. `#coverage`: 52개 source item 확인
+7. 학습 목차: 여섯 질문 중 필요한 섹션으로 이동
 
 ### coverageMap
 
-`PageCoverage.tsx:13-33`이 아래 52개 item을 stable ID·요약·section anchor로 모두 렌더링한다.
+52개 공식 항목의 식별자와 로컬 근거는 `css-animation.reference.ts`와 아래 표에 보존한다. `PageCoverage.tsx`는 학습자에게 내부 검수 ID를 보이지 않고 여섯 학습 섹션으로 이동하는 목차만 렌더링한다.
 
 | sourceItemId | localEvidence | localStatus |
 | --- | --- | --- |
@@ -216,6 +216,12 @@ modify: 이 handoff evidence. `src/app/routes.ts`는 공유 파일 충돌 방지
 | A11Y-CORE06-001 | ADDRESSED | clearProps x를 shared descriptor에서 120→60으로 줄여 320px 범위 126..244 확보 | small-screen 정적 blocker 해소 | Browser 390px 실조작 필요 |
 | MOTION-CORE06-001 | ADDRESSED | 세 runtime이 마지막 replay key를 기억해 reduced-motion dependency 변경에는 baseline만 준비 | 설정 전환 자동재생 차단 | none |
 | IR-CORE06-FINAL | PASS | independent reviewer가 52/52, 20행 quick reference, learning/runtime/route/build와 comment·layout·motion 수정을 재검수 | 정적 release gate 통과 | Browser gate만 남음 |
+| AUD-CSS-001 | ADDRESSED | 세 code panel은 `.box`를 보였지만 실제 GSAP 호출은 각 page-owned class를 선택 | selector까지 실행·표시 불일치 | `targetClassName`으로 표시 selector 생성 |
+| AUD-CSS-002 | ADDRESSED | 학습 화면에 52개 internal ID·source item·coverage 분모와 `공식 문장 우선` 같은 검수 용어 노출 | 학습 흐름을 제작 workflow로 바꾸고 AI 요약처럼 읽힘 | 내부 근거는 reference·handoff에 보존하고 화면은 학습 목차·질문으로 교체 |
+| AUD-CSS-003 | PASS | `2026-08-13` CSSPlugin 공식 본문 42개 주장·10개 코드 예제·Quick reference 20행 재대조 | 현재 문서와 사실 일치 | none |
+| AUD-CSS-004 | PASS | 세 예제의 control→descriptor→GSAP call→serializer를 모든 mode에서 정적 추적 | selector 수정 후 method·target·vars·duration·ease 일치 | Browser 실조작 별도 필요 |
+| AUD-CSS-005 | NOT VERIFIED | 현재 검수에서 브라우저 실조작을 수행하지 않음 | 재생·mode 전환·computed style·focus·responsive 동작 미확인 | 메인 통합 브라우저 검증 |
+| AUD-CSS-006 | PASS | 2026-08-13 메인 통합 `npm run build`·`npm run build-storybook` 모두 exit 0 | 현재 수정본의 전역 통합 확인 | none |
 
 ### verificationEvidence
 
@@ -227,8 +233,13 @@ modify: 이 handoff evidence. `src/app/routes.ts`는 공유 파일 충돌 방지
 - independent review — coverage/learning/runtime/route/build PASS; comment와 320px clearProps overflow 수정 후 재검수 PASS
 - local HTTP — 최종 Vite server에서 `/fundamentals/css-animation` `200` 응답 확인
 - cross-page review — 세 runtime의 replay-key guard 추가 후 reduced-motion 변경 no-autoplay 재검수 PASS
-- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
+- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않아 `2026-08-13` 현재 검수의 근거로는 재사용하지 않음.
+- `2026-08-13` 공식 문서 재대조 → 42개 기술 주장·10개 예제·Quick reference 20행 유지, 사실 오류 없음
+- `2026-08-13` 예제 정적 matrix → 3개 예제의 모든 mode에서 method·selector·vars·duration·ease 일치
+- `2026-08-13 npx tsc --noEmit` → exit 0
+- `2026-08-13 git diff --check -- src/content/gsap/fundamentals/css-animation docs/handoffs/gsap/core/css-animation.md` → exit 0
+- `2026-08-13` 메인 통합 → `npm run build` exit 0, `npm run build-storybook` exit 0; Browser는 `NOT VERIFIED`
 
 ### releaseDecision
 
-`PASS` — 구현·52/52 coverage·route·build·독립 정적 review를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.
+`NOT VERIFIED` — `2026-08-13` 공식 재대조·학습 문장·세 예제 정적 동기화와 메인 통합 build·Storybook은 PASS이고 남은 BLOCK은 없다. Browser 실조작은 `NOT VERIFIED`다.

@@ -4,7 +4,7 @@ import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 export function PluginBoundarySection() {
   return (
     <section id="plugin-boundary" className="css-animation-page__section" aria-labelledby="plugin-boundary-title">
-      <SectionHeading number="01" id="plugin-boundary" title="CSSPlugin의 경계부터 잡기" description="CSSPlugin은 DOM element의 CSS 값을 읽고 쓰는 Core 내장 변환기입니다. property 이름을 외우기 전에 무엇이 CSS 값이고 무엇이 다른 도구의 책임인지 나눕니다." />
+      <SectionHeading number="01" id="plugin-boundary" title="CSSPlugin의 경계부터 잡기" description="CSSPlugin은 DOM 요소의 CSS 값을 읽고 쓰도록 GSAP Core에 포함된 플러그인입니다. property 이름을 외우기 전에 CSSPlugin이 다루는 값과 다른 플러그인이 필요한 값을 구분합니다." />
       <div className="css-animation-page__grid">
         <article className="css-animation-page__card">
           <h3>등록 없이 vars에 바로 쓰기</h3>
@@ -24,8 +24,8 @@ export function PluginBoundarySection() {
           <p><code>position:'absolute'</code>나 <code>borderStyle:'solid'</code>은 Tween 시작에 바로 적용합니다. 단, <code>display:'none'</code>은 대상이 움직이는 동안 사라지지 않도록 끝에 적용합니다.</p>
         </article>
         <article className="css-animation-page__card">
-          <h3>CSSPlugin 밖으로 넘길 때</h3>
-          <p>복잡한 layout 전환은 FLIP, numeric DOM attribute는 AttrPlugin, text 교체는 TextPlugin이 맡습니다. 일반 object의 방향 회전도 별도 DirectionalRotationPlugin 경계입니다.</p>
+          <h3>다른 기능이 필요한 경우</h3>
+          <p>복잡한 layout 전환은 Flip, 숫자형 DOM attribute는 AttrPlugin, text 교체는 TextPlugin이 맡습니다. 일반 객체의 방향 회전에는 DirectionalRotationPlugin을 사용합니다.</p>
         </article>
       </div>
       <div className="css-animation-page__links" aria-label="관련 공식 문서">

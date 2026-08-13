@@ -4,7 +4,7 @@ import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 export function OriginsSection() {
   return (
     <section id="origins" className="css-animation-page__section" aria-labelledby="origins-title">
-      <SectionHeading number="05" id="origins" title="회전축과 방향을 명시하기" description="같은 rotation도 어느 좌표를 중심으로 어느 방향으로 가는지에 따라 경로가 달라집니다. HTML local 좌표와 SVG canvas 좌표를 구분합니다." />
+      <SectionHeading number="05" id="origins" title="회전축과 방향을 명시하기" description="같은 rotation도 어느 좌표를 중심으로 어느 방향으로 가는지에 따라 경로가 달라집니다. HTML 요소 내부 좌표와 SVG 캔버스 좌표를 구분합니다." />
       <div className="css-animation-page__origin-grid">
         <article className="css-animation-page__card">
           <h3>transformOrigin</h3>
@@ -13,12 +13,12 @@ export function OriginsSection() {
         </article>
         <article className="css-animation-page__card">
           <h3>SVG origin 두 방식</h3>
-          <p><code>transformOrigin</code>은 element local 좌표, <code>svgOrigin:'250 100'</code>은 SVG canvas의 global 좌표입니다. 둘은 동시에 쓸 수 없고 svgOrigin은 percent를 받지 않습니다.</p>
-          <p>GSAP은 SVG origin을 browser마다 일관화하지만 SVG 3D transform은 공식 지원 범위가 아닙니다.</p>
+          <p><code>transformOrigin</code>은 요소 내부 좌표, <code>svgOrigin:'250 100'</code>은 SVG 캔버스 전체 좌표입니다. 둘은 동시에 쓸 수 없고 svgOrigin은 percent를 받지 않습니다.</p>
+          <p>GSAP은 SVG origin을 브라우저마다 일관되게 다루지만 SVG 3D transform은 공식 지원 범위가 아닙니다.</p>
         </article>
         <article className="css-animation-page__card">
           <h3>smoothOrigin</h3>
-          <p>SVG origin을 바꿀 때 element가 튀지 않도록 offset을 기록·적용합니다. per-Tween의 <code>true/false</code> 또는 <code>CSSPlugin.defaultSmoothOrigin</code>으로 조절할 수 있습니다.</p>
+          <p>SVG origin을 바꿀 때 요소가 튀지 않도록 보정값을 기록·적용합니다. 트윈별 <code>true/false</code> 또는 <code>CSSPlugin.defaultSmoothOrigin</code>으로 조절할 수 있습니다.</p>
         </article>
         <article className="css-animation-page__card">
           <h3>directional rotation</h3>

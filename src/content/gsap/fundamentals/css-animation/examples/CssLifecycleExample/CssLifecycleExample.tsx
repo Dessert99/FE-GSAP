@@ -26,19 +26,19 @@ export function CssLifecycleExample() {
   // 실제 method·vars·완료 style 결과를 hook에서 함께 받는다.
   const runtime = useCssLifecycleAnimation()
   // code panel은 실행 method와 config를 의미 변경 없이 직렬화한다.
-  const code = `gsap.${runtime.descriptor.method}('.box', {\n${serializeVars(runtime.animationConfig)}\n})`
+  const code = `gsap.${runtime.descriptor.method}('.${runtime.targetClassName}', {\n${serializeVars(runtime.animationConfig)}\n})`
 
   return (
     <div ref={runtime.scope}>
       <InteractiveExample
         title="보이지 않는 상태와 inline style은 언제 정리될까요?"
-        description="autoAlpha는 opacity와 visibility의 완료 상태를, clearProps는 Tween이 남긴 inline transform과 색을 stylesheet에 돌려주는 시점을 보여줍니다."
+        description="autoAlpha는 opacity와 visibility의 완료 상태를, clearProps는 트윈이 남긴 inline transform과 색을 제거하는 시점을 보여줍니다."
         sourcePath="src/content/gsap/fundamentals/css-animation/examples/CssLifecycleExample/useCssLifecycleAnimation.ts"
         reducedMotion={runtime.reducedMotion}
         controls={(
           <div className="interactive-example__control-list">
             <label className="interactive-example__control">
-              <span className="interactive-example__control-heading"><span>lifecycle</span></span>
+              <span className="interactive-example__control-heading"><span>정리 방식</span></span>
               <select value={runtime.mode} onChange={(event) => runtime.setMode(event.target.value as CssLifecycleMode)}>
                 {(Object.keys(modeLabels) as CssLifecycleMode[]).map((mode) => <option key={mode} value={mode}>{modeLabels[mode]}</option>)}
               </select>

@@ -13,7 +13,7 @@ export function VisibilityCleanupSection() {
           <p>처음부터 <code>visibility:hidden; opacity:1</code>인 대상도 fade-in을 위해 opacity 0 시작으로 취급합니다.</p>
         </article>
         <article className="css-animation-page__card">
-          <h3>clearProps로 stylesheet에 반환</h3>
+          <h3>clearProps로 inline style 제거</h3>
           <p>완료 시 comma-separated property, <code>'all'</code>, 또는 <code>true</code>로 inline style을 제거합니다. transform alias는 하나의 transform으로 합쳐지므로 일부만 지정해도 전체 transform이 제거됩니다.</p>
         </article>
         <article className="css-animation-page__card">
@@ -26,7 +26,7 @@ export function VisibilityCleanupSection() {
         </article>
       </div>
       <div className="css-animation-page__example-stack"><CssLifecycleExample /></div>
-      <div className="css-animation-page__note css-animation-page__note--warning"><strong>공식 문장 우선</strong> autoAlpha가 0이 아닐 때의 visibility는 <code>visible</code> 고정이 아니라 <code>inherit</code>입니다. 그래야 숨겨진 parent 아래 child가 뜻밖에 나타나지 않습니다.</div>
+      <div className="css-animation-page__note css-animation-page__note--warning"><strong>왜 visible이 아닌가요?</strong> autoAlpha가 0이 아닐 때 visibility는 <code>inherit</code>입니다. 그래야 숨겨진 부모 요소 아래의 자식 요소가 뜻밖에 나타나지 않습니다.</div>
     </section>
   )
 }
