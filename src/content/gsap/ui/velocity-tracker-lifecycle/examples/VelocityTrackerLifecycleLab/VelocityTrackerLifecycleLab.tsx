@@ -9,18 +9,33 @@ export function VelocityTrackerLifecycleLab() {
     targetRef,
     descriptor,
     snapshot,
+    lastActionCode,
     reducedMotion,
     nudge,
     toggleProperty,
     trackSet,
     untrackAll,
   } = useVelocityTrackerLifecycleRuntime()
-  // code panel은 descriptor list와 현재 membership action을 문법으로만 직렬화한다
-  const code = `const [tracker] = VelocityTracker.track(target, '${descriptor.propertyList}', '${descriptor.typeList}')
-const current = VelocityTracker.getByTarget(target)
-const trackingX = VelocityTracker.isTracking(target, 'x')
-${snapshot.membership.x ? "current.remove('x')" : "current.add('x', 'num')"}
-VelocityTracker.untrack(target)`
+  // mount setup과 같은 track 호출은 최근 action에서 중복 표시하지 않는다
+  const initialTrackCode = `VelocityTracker.track(target, '${descriptor.propertyList}', '${descriptor.typeList}')`
+  // setup 이후 실제로 실행한 최근 action만 같은 문맥 뒤에 이어 붙인다
+  const recentActionCode =
+    lastActionCode === initialTrackCode ? '' : `\n${lastActionCode}`
+  // stable target setup과 최근 action, whole-target cleanup을 같은 실행 문맥으로 표시한다
+  const code = `const target = document.querySelector('.velocity-tracker-lab__target')
+if (!target) throw new Error('velocity target을 찾지 못했습니다.')
+gsap.registerPlugin(InertiaPlugin)
+VelocityTracker.register(gsap)
+const [tracker] = VelocityTracker.track(target, '${descriptor.propertyList}', '${descriptor.typeList}')
+
+// setup 이후 최근 control이 실행한 호출
+${recentActionCode}
+
+function cleanup() {
+  tracker.remove('x')
+  tracker.remove('rotation')
+  VelocityTracker.untrack(target)
+}`
   return (
     <section
       className="velocity-tracker-lab"

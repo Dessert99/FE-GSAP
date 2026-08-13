@@ -64,3 +64,26 @@ All five rendered official canonicals were opened twice on 2026-08-08. Official 
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `VTL-OC-20260813` | PASS | 현재 공식 `VelocityTracker`, `addProp()`, `removeProp()`, `track()`, `untrack()` 문서와 설치 소스의 `add/remove` API를 대조 | 렌더 문서와 실제 설치 API의 이름·반환 차이를 계속 명시한다.
+- `VTL-RDS-20260813` | BLOCK → PASS | 코드 패널이 rotation 조작 뒤에도 x membership에서 추론한 호출을 표시하고 nudge·track·untrack의 실제 최근 동작을 반영하지 못했다 | runtime 각 action에서 실행한 property·type·값으로 `lastActionCode`를 함께 갱신한다.
+- `VTL-WRITE-20260813` | BLOCK → PASS | learner-facing `ownership`과 내부 P15 번호를 사용했다 | “tracker 생성”과 개념명 링크로 바꿨다.
+- `VTL-BROWSER-20260813` | DEFERRED | 키보드/포커스, reduced motion, 320/390px, membership 조작 결과 | 이번 배치에서는 브라우저를 조작하지 않았다.
+- `VTL-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — runtime/display 및 문장 BLOCK을 해소했고 browser-only 4건은 DEFERRED다. 과거 빌드와 browser closure는 현재 근거가 아니다.
+
+### 2026-08-13 self cross-review
+
+- `VTL-RDS-20260813-02 | BLOCK → PASS` — 최근 action 한 줄만 표시해 `target`·`tracker`가 정의되지 않았다. 실제 target query, tracker setup, 최근 action, property remove와 whole-target cleanup을 한 실행 문맥으로 묶은 뒤 재독해 PASS.
+- 통합 검증: `npx tsc --noEmit --pretty false` exit 0, Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.
