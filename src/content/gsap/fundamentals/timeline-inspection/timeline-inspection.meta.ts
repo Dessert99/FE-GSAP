@@ -5,7 +5,7 @@ export const timelineInspectionMeta = {
   summary:
     'Timeline 안에 Timeline을 넣으면 animation은 나무 모양이 됩니다. 그 나무에서 원하는 가지 하나를 다시 꺼내는 방법은 세 가지입니다 — 조건으로 훑거나(getChildren), 이름표로 집거나(getById), 움직이는 대상에서 거꾸로 되짚거나(getTweensOf).',
   sourcePath: 'src/content/gsap/fundamentals/timeline-inspection/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.data', href: 'https://gsap.com/docs/v3/GSAP/Timeline/data' },
     { label: 'Timeline.getChildren()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/getChildren()' },

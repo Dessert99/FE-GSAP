@@ -10,22 +10,22 @@ const mappedSourceCount = new Set(timelineInspectionSourceItems.map((item) => it
 
 export function PageCoverage() {
   return (
-    <nav className="inspect-coverage" aria-label="공식 source 대응 범위">
+    <nav className="inspect-coverage" aria-label="Timeline 구조 조회 학습 순서">
       <div className="inspect-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{timelineInspectionCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{timelineInspectionCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          조회 메서드 세 개와 속성 두 개, 공식 문서 다섯 곳의 기술 item {timelineInspectionCoverage.officialSourceItems}개를 "지형 파악 →
+          조회 메서드 세 개와 속성 두 개, 공식 문서 다섯 곳의 핵심 동작 {timelineInspectionCoverage.officialSourceItems}개를 "구조 파악 →
           세 가지 조회 → 노드에 남는 부가 정보"라는 흐름의 일곱 단계로 다시 묶었습니다. 여기에 공식 문서에 없거나 공식 설명과 달라서 직접
           실행해 확인한 항목 {probeItemCount}개를 따로 표시합니다.
         </p>
@@ -37,7 +37,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

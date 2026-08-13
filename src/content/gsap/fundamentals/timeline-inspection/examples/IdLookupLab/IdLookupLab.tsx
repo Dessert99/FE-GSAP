@@ -10,9 +10,28 @@ export function IdLookupLab() {
   // 반환 instance를 평탄화 목록의 같은 행으로 강조한다
   const foundNode = result?.foundIndex == null ? null : nodes[result.foundIndex]
   // 화면의 호출 문장은 실제 handler가 받은 candidate literal에서 만든다
-  const code = selected
+  const lookupCall = selected
     ? `const found = master.getById(${selected.literal})\n// → ${foundNode ? `${foundNode.kind} id: ${String(foundNode.id)}` : 'undefined'}`
     : '// 위 id 버튼을 누르면 실제 getById 호출과 반환값이 여기에 표시됩니다.'
+  // 조회 문장만 바뀌어도 독립 실행에 필요한 master tree와 cleanup은 항상 함께 표시한다
+  const code = `import gsap from 'gsap'
+
+const targets = {
+  headline: { x: 0 }, badge: { x: 0 }, panel: { y: 0 }, icon: { y: 0 },
+}
+const master = gsap.timeline({ paused: true })
+const group = gsap.timeline({ id: '${nestedTimelineId}' })
+master.to(targets.headline, { x: 120, id: '${duplicatedId}' })
+master.to(targets.badge, { x: 120, id: 7 })
+group.to(targets.panel, { y: 40, id: '${duplicatedId}' })
+group.to(targets.icon, { y: 40, id: 'inner' })
+master.add(group)
+
+${lookupCall}
+
+function cleanup() {
+  master.kill()
+}`
 
   return (
     <section className="id-lookup-lab" aria-labelledby="id-lookup-lab-title" ref={scope}>
