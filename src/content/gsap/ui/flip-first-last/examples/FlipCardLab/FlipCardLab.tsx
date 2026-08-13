@@ -9,10 +9,46 @@ export function FlipCardLab() {
   const { scope, cardRef, stageRef, mode, setMode, location, descriptor, reducedMotion, runFlip } =
     useFlipCardAnimation()
   // runtime descriptor의 actual from/to sequence를 code 문법으로만 표현한다.
-  const code =
+  const code = `gsap.registerPlugin(Flip)
+
+const stage = document.querySelector('.flip-card-lab__stage')
+const card = document.querySelector('.flip-card-lab__card')
+if (!(stage instanceof HTMLElement) || !(card instanceof HTMLElement)) {
+  throw new Error('FLIP card를 찾지 못했습니다.')
+}
+
+let timeline = null
+let location = stage.classList.contains('flip-card-lab__stage--right') ? 'right' : 'left'
+
+function applyLayout(next) {
+  stage.classList.toggle('flip-card-lab__stage--left', next === 'left')
+  stage.classList.toggle('flip-card-lab__stage--right', next === 'right')
+  location = next
+}
+
+function runFlip() {
+  timeline?.kill()
+  Flip.killFlipsOf(card)
+  const current = location
+  const destination = current === 'left' ? 'right' : 'left'
+  ${
     descriptor.mode === 'from'
-      ? `const state = Flip.getState(card, { props: '${descriptor.props}' })\nmoveCardToNextLane()\nFlip.from(state, { duration: ${descriptor.duration}, ease: '${descriptor.ease}' })`
-      : `moveCardToNextLane()\nconst destinationState = Flip.getState(card, { props: '${descriptor.props}' })\nrestoreCurrentLane()\nFlip.to(destinationState, { duration: ${descriptor.duration}, ease: '${descriptor.ease}' })\ncommitNextLane()`
+      ? `const state = Flip.getState(card, { props: '${descriptor.props}' })
+  applyLayout(destination)
+  timeline = Flip.from(state, { duration: ${descriptor.duration}, ease: '${descriptor.ease}' })`
+      : `applyLayout(destination)
+  const destinationState = Flip.getState(card, { props: '${descriptor.props}' })
+  applyLayout(current)
+  timeline = Flip.to(destinationState, { duration: ${descriptor.duration}, ease: '${descriptor.ease}' })
+  applyLayout(destination)`
+  }
+}
+
+function cleanup() {
+  timeline?.kill()
+  Flip.killFlipsOf(card)
+  applyLayout('left')
+}`
   return (
     <div ref={scope}>
       <InteractiveExample

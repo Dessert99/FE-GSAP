@@ -115,3 +115,27 @@ rootIntegrationEvidence
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `FLIPFL-OC-20260813` | PASS | 현재 공식 `Flip`, `getState()`, `from()`, `to()` 문서와 대조 | First/Last 캡처 순서, 반환 Timeline, `absolute`·`nested`·`simple` 경계를 유지했다.
+- `FLIPFL-RDS-20260813` | PASS | `useFlipCardAnimation.ts`와 `FlipCardLab.tsx` 정적 대조 | mode descriptor의 props·duration·ease와 `Flip.from()`/`Flip.to()` 실행 순서가 코드 패널과 일치한다.
+- `FLIPFL-WRITE-20260813` | PASS | 학습 흐름과 문장 재검수 | 구현 용어가 필요한 DOM 소유권·레이아웃 변경 경계에만 쓰였고 별도 BLOCK은 없었다.
+- `FLIPFL-BROWSER-20260813` | DEFERRED | 키보드 포커스, reduced motion, 320/390px 레이아웃, from/to 전환 결과 | 이번 배치는 실제 브라우저를 조작하지 않았으므로 이전 문서상 종료를 현재 관찰 증거로 재사용하지 않는다.
+- `FLIPFL-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 현재 품질 게이트가 아니며 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — 정적 감사에서 BLOCK은 없고, 허용된 browser-only 검증 4건은 DEFERRED다. 이전 `browserReviewClosure`와 빌드 기록은 당시 이력이며 현재 판정 근거가 아니다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토
+
+- `FLIPFL-RDS-20260813-02 | BLOCK → PASS` — serializer에 실제 stage/card query와 null guard, Flip 등록, Timeline 보관, from/to별 layout mutation 순서와 별도 cleanup을 포함하고 runtime과 재대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 키보드·focus, reduced-motion, 320/390px, 실제 from/to 전환을 실조작하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.
