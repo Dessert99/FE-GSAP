@@ -28,11 +28,10 @@ export function CleanupFallbackSection() {
         </p>
       </div>
       <p className="draggable-collision-momentum-page__related">
-        <a href="/fundamentals/draggable-create">P03 instance 생성</a>,{' '}
-        <a href="/fundamentals/draggable-coordinates">P04 좌표 timing</a>,{' '}
-        <a href="/fundamentals/draggable-bounds-axis">P05 bounds</a>를 선행으로 링크합니다.
-        lifecycle·gesture event API와 Inertia의 velocity 설정은 이 페이지에서 text-only 경계로
-        남깁니다.
+        먼저 <a href="/fundamentals/draggable-create">instance 생성</a>,{' '}
+        <a href="/fundamentals/draggable-coordinates">좌표 timing</a>,{' '}
+        <a href="/fundamentals/draggable-bounds-axis">bounds</a>를 확인하세요.
+        lifecycle·gesture event API와 Inertia velocity 설정은 각각의 후속 학습 페이지에서 다룹니다.
       </p>
     </section>
   )

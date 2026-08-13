@@ -27,13 +27,52 @@ export function CollisionMomentumLab() {
   // Draggable vars와 static hitTest call이 같은 descriptor value를 표시한다.
   const code = `gsap.registerPlugin(Draggable, InertiaPlugin)
 
-const draggable = Draggable.create(puck, {
-  type: '${descriptor.type}',
-  bounds: ${descriptor.boundsLabel},
-  inertia: ${descriptor.inertia},
-})[0]
+const puck = document.querySelector('.collision-momentum-lab__puck')
+const stage = document.querySelector('.collision-momentum-lab__stage')
+const dropZone = document.querySelector('.collision-momentum-lab__drop-zone')
+if (!(puck instanceof HTMLElement) || !(stage instanceof HTMLElement) || !(dropZone instanceof HTMLElement)) {
+  throw new Error('collision lab element를 찾지 못했습니다.')
+}
 
-const overlaps = Draggable.hitTest(puck, dropZone, ${thresholdCode})`
+let throwTween = null
+gsap.set(puck, { x: 0, y: 0 })
+
+function readCollision() {
+  return Draggable.hitTest(puck, dropZone, ${thresholdCode})
+}
+
+const [draggable] = Draggable.create(puck, {
+  type: '${descriptor.type}',
+  bounds: stage,
+  inertia: ${descriptor.inertia},
+  onDrag() {
+    const overlaps = readCollision()
+  },
+  onDragEnd() {
+    throwTween = this.tween ?? null
+    const throwing = this.isThrowing
+  },
+  onThrowComplete() {
+    throwTween = this.tween ?? null
+    const throwing = this.isThrowing
+  },
+})
+
+function recheck() {
+  return readCollision()
+}
+
+function reset() {
+  throwTween?.kill()
+  throwTween = null
+  gsap.set(puck, { x: 0, y: 0 })
+  draggable.update(true)
+}
+
+function cleanup() {
+  throwTween?.kill()
+  draggable.kill()
+}`
 
   return (
     <div ref={scope}>

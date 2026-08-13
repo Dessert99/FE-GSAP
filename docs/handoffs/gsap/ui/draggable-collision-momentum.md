@@ -132,3 +132,26 @@ PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- 공식 대조: `Draggable.hitTest()`, `isThrowing`, `tween` canonical을 현재 웹에서 다시 확인했다.
+- `WRITE-B08-01 | BLOCK → PASS` — 첫 화면의 canonical/item/probe 수치와 본문의 P번호·소유권 표현을 실제 질문과 공식/설치본 경계 설명으로 교체했다.
+- `RDS-B08-01 | BLOCK → PASS` — 코드 패널이 baseline과 release/throw 관찰 callback을 생략해 실제 snapshot 경로를 설명하지 못하던 문제를 수정했다.
+- `FACT-B08-01 | ADVISORY` — threshold의 strict 경계 비교는 공식 문서에 없으므로 설치된 3.15.0 관찰로만 표시했다.
+- Storybook: c309e13에서 삭제되어 `N/A`.
+- Browser: `DEFERRED` — keyboard/focus, reduced-motion, 320/390px, 실제 drag·hitTest·throw Tween 결과를 실조작하지 않았다.
+- current releaseDecision: `PASS` — 미해결 BLOCK 없음. Browser 항목은 승인된 `DEFERRED`다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토
+
+- `RDS-B08-02 | BLOCK → PASS` — serializer에 puck/stage/drop zone query와 null guard, plugin 등록, throw Tween·Draggable 보관, collision 재검사·reset과 별도 cleanup을 포함하고 runtime callback 의미와 재대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 키보드·focus, reduced-motion, 320/390px, 실제 drag·hitTest·throw 결과를 실조작하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.
