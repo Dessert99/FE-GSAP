@@ -6,7 +6,6 @@ import { useRef, useState } from 'react'
 
 /** DOM conversion의 입력 종류와 swap 정책을 표시 코드까지 공유한다. */
 export type GeometryDescriptor = {
-  sourceTag: 'rect'
   swap: boolean
 }
 /** 세 utility의 실제 반환값과 사용자 동작 결과만 보관한다. */
@@ -30,7 +29,6 @@ export function useGeometryConverter() {
   const currentRef = useRef<SVGElement | null>(null)
   // descriptor는 DOM input과 raw/string/code 표시에 같이 쓰는 기준값이다
   const descriptor: GeometryDescriptor = {
-    sourceTag: 'rect',
     swap: true,
   }
   // snapshot은 utility call이 실제 반환한 DOM/raw/string values만 표시한다

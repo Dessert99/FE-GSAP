@@ -3,7 +3,7 @@ export const morphSvgPathDataMeta = {
   title: 'SVG shape를 path data와 RawPath로 어떻게 왕복할까요?',
   category: 'GSAP · SVG · MorphSVGPlugin',
   sourcePath: 'src/content/gsap/svg/morph-svg-path-data/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'convertToPath()',
