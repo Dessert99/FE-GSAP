@@ -19,7 +19,7 @@ React 통합 전체 계약은 다루지 않는다. `react-use-gsap` 페이지가
 - canonicalUrl:
   - `https://gsap.com/docs/v3/GSAP/gsap.context()`
   - `https://gsap.com/docs/v3/GSAP/UtilityMethods/selector()`
-- reviewedAt: `2026-08-04`
+- reviewedAt: `2026-08-13`
 - category: `GSAP > Context & Utils`
 - slug: `gsap-context`
 - sourcePageIds: primary `source:gsap-context`; related `source:utils-selector`
@@ -80,7 +80,7 @@ React 통합 전체 계약은 다루지 않는다. `react-use-gsap` 페이지가
 
 ### sourceBlockers
 
-`none`. 33개 기술 item 전부 2026-08-04에 두 공식 페이지 원문으로 직접 확인했다.
+`none`. 33개 기술 item 전부 2026-08-13에 두 공식 페이지의 현재 원문으로 다시 확인했다.
 
 다음은 두 공식 페이지가 **게시하지 않은** 내용이므로 주장하지 않는다. 필요해지면 `blocked-source` item을 추가하고 release를 `BLOCK`한다.
 
@@ -149,7 +149,7 @@ catalog의 각 행이 `sectionId`로 소유 섹션을 지목한다. 아래는 �
 | CTX-17 | `RevertLifetimeSection.tsx` `.add()`에서도 cleanup을 돌려줄 수 있다는 문단 | covered |
 | CTX-18 | `RevertLifetimeSection.tsx` "revert() 이후" 표 2행(담고 있던 애니메이션 / Context 자신) | covered |
 | CTX-19 | `RevertLifetimeSection.tsx` "제어 도구가 아니다" 경고 블록 | covered |
-| CTX-20 | `BoundariesSection.tsx` `upcoming` 표 `useGSAP()` 행 | covered |
+| CTX-20 | `BoundariesSection.tsx` `otherOwners` 목록의 `useGSAP()` 링크 | covered |
 | CTX-P1, CTX-P2 | `CollectAndRevertSection.tsx` probe 블록 + `ContextRevertLab` 기록 수·isReverted 관찰값 | covered (probe) |
 | SEL-P1 | `SelectorUtilitySection.tsx` probe 블록 (DOM 필요) | covered (probe) |
 | CTX-P3 | `AddAndIgnoreSection.tsx` 첫 probe 블록 + `ContextAddLab` `named`·`immediate` 경로 | covered (probe) |
@@ -161,10 +161,10 @@ catalog의 각 행이 `sectionId`로 소유 섹션을 지목한다. 아래는 �
 - `gsap-to` — Tween 생성과 `target`·`vars` 전체 계약을 소유한다. 이 페이지는 전제로만 쓴다.
 - `tween-playhead` — 재생·정지·seek을 소유한다.
 - `tween-configuration` — 설정의 출처와 적용 범위를 소유한다.
-- `react-use-gsap` (**미등록**) — `useGSAP()`의 scope · dependencies · `revertOnUpdate` · `contextSafe` 계약 전체를 소유한다. 공식 `gsap.context()` 페이지가 이 훅으로 안내하므로 이 페이지는 **경계만 밝히고 링크하지 않는다**(`src/app/routes.ts`에 아직 없어 링크가 첫 레슨으로 흡수되기 때문. 등록 후 `BoundariesSection`의 `upcoming` 행을 `otherOwners`로 옮기면 된다).
-- `responsive-motion` (미구현) — `gsap.matchMedia()`의 조건별 정리를 소유한다. 이름만 언급했다.
-- Timeline 학습 페이지(미구현) — 공식이 "제어는 Timeline이 할 일"이라고 못 박은 영역. 경계만 밝혔다.
-- ScrollTrigger 학습 페이지(미구현) — Context가 함께 기록하는 대상이라 이름만 나온다.
+- `react-use-gsap` — `useGSAP()`의 scope · dependencies · `revertOnUpdate` · `contextSafe` 계약 전체를 설명한다.
+- `responsive-motion` — `gsap.matchMedia()`의 조건별 정리를 설명한다.
+- `timeline-basics` — 공식이 "제어는 Timeline이 할 일"이라고 선을 그은 Timeline의 기본 구성을 설명한다.
+- `scroll-trigger-create` — Context가 함께 기록하는 ScrollTrigger의 생성 계약을 설명한다.
 
 ## 구현 계약
 
@@ -205,7 +205,7 @@ docs/handoffs/gsap/core/gsap-context.md
 modify:
 
 ```text
-src/app/routes.ts   (이 컨텍스트는 건드리지 않는다 — 저장소 소유자가 등록한다)
+src/app/routes.ts   (이미 등록되어 있으며 이 컨텍스트에서는 건드리지 않는다)
 ```
 
 ### exampleContracts
@@ -314,7 +314,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | PROBE-CTX-002 | PASS | **측정 방법**: 같은 환경에서 `gsap.context(() => { gsap.to(o,{v:1,duration:1}); gsap.timeline().to(o,{v:2,duration:1}); })` 실행. `ctx.data.length === 3`, `data.map(d=>d.constructor.name)` → `Tween,Timeline,Tween`(Timeline의 자식 Tween이 함께 기록됨). `ctx.getTweens()`는 길이 2의 Array로 Tween만 골라 돌려줬다. | `CTX-P2` 근거 — 기록 수가 만든 개수보다 커 보일 수 있다는 경고 | 예제는 Timeline을 쓰지 않아 기록 수가 직관적으로 유지됨 |
 | PROBE-CTX-003 | PASS | **측정 방법·재현 조건**: 대상은 DOM이 아닌 일반 객체 `{ v: 0 }`, tween은 `{ v: 100, duration: 1, ease: 'none' }`(ease를 `none`으로 고정해야 중간값이 재현 가능하다 — 기본 `power1.out`에서는 `progress(0.5)`가 75였다). 같은 조건의 Context 3개를 만들어 각각 `progress(1)` 뒤 `revert()` / `kill()` / `kill(true)` 실행. 결과: 값 `0` / `100` / `0`, `isReverted` `true` / `false` / `true`, cleanup 호출 `1` / `0` / `1`회, `data.length`는 셋 다 `0`. | `CTX-P4` · `CTX-P5` 근거 — 이 페이지의 핵심 주장 | 실행 확인 사실임을 페이지와 lab 표 caption에 명시 |
 | PROBE-CTX-004 | PASS | **측정 방법**: Context 함수가 cleanup을 return하고 `ctx.add(() => { return () => {...} })`도 하나 더 등록한 상태에서 `revert()` 1회 호출 → 두 cleanup이 모두 불림(카운터 `0 → 11`, 각각 `+1`·`+10`). 이어서 `revert()`를 한 번 더 호출해도 카운터는 `11`로 그대로였다. | `CTX-P5`의 "두 번째 revert에서 다시 불리지 않는다" 근거 | none |
-| PROBE-CTX-005 | PASS | **측정 방법**: `gsap.context((self) => { self.add('onClick', fn) })` 직후 `ctx.data.length === 0`이고 `typeof ctx.onClick === 'function'` — 즉 등록만 되고 실행되지 않았다. `ctx.onClick()` 뒤 `1`, 이어 `ctx.add(fn)` 뒤 `2`(즉시 실행됨, 플래그로 확인). 두 호출의 반환값은 모두 `undefined`. 설치본 `gsap-core.d.ts:61`은 `add(methodName, func, scope?): Function`으로 선언하지만 실제 실행값은 `undefined`였다. | `CTX-P3` 근거 — 타입 선언과 실행값의 불일치를 페이지에 함께 적었다 | none |
+| PROBE-CTX-005 | PASS | **측정 방법**: `gsap.context((self) => { returned = self.add('onClick', fn) })` 직후 `ctx.data.length === 0`, `typeof ctx.onClick === 'function'`, `returned === ctx.onClick` — 이름을 준 형태는 등록만 하고 같은 wrapper 함수를 돌려줬다. `ctx.onClick()` 뒤 기록 수 `1`, 이어 반환값 없는 `ctx.add(fn)` 뒤 `2`였으며 즉시 호출 형태의 결과는 `undefined`였다. 설치본 타입의 named overload `Function`과 generic immediate overload `ReturnType<T>`에도 일치한다. | `CTX-P3` 근거 | none |
 | PROBE-CTX-006 | PASS | **측정 방법**: 위와 같은 Context에서 함수 실행이 끝난 뒤 밖에서 `ctx.ignore(() => { gsap.to(...) })` 호출 → `ctx.data.length`가 `2`에서 늘지 않았다. 공식 예제는 함수 **안에서** `self.ignore()`를 부르는 형태만 보여준다. | `CTX-P6` 근거 — `ContextAddLab`의 `ignored` 경로 설계 근거 | none |
 | PROBE-CTX-007 | PASS | **측정 방법**: 공식 Tips의 재사용 주장을 실행으로 대조. `revert()` 뒤 `isReverted === true` · `data.length === 0`인 상태에서 `ctx.add(() => gsap.to(...))`를 호출하니 `isReverted`가 `false`로 되돌아가고 `data.length === 1`이 됐으며, 2차 `revert()`가 그 새 tween의 값을 되돌렸다. | `CTX-18`(공식 주장)의 실행 대조 — 새 item 아님 | none |
 | PROBE-CTX-008 | PASS | **측정 방법**: `document`가 없는 Node에서 `gsap.context(() => {}, '.my-scope')`를 try/catch로 호출 → `TypeError: Cannot read properties of undefined (reading 'querySelectorAll')`. 같은 환경에서 `typeof document === 'undefined'`, `gsap.context(()=>{}).selector === undefined`(scope 미지정 시). | `SEL-P1` 근거 | none |
@@ -329,7 +329,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | A11Y-CTX-001 | PASS (정적) | 코드·마크업만으로 판정 가능한 부분 — 모든 control이 native `button`/`input[type=radio]`이고 `label`·`legend`로 이름이 붙는다. 관찰값은 `dt`/`dd` + `output aria-labelledby`, 상태는 lab마다 `role="status"` 하나. 표의 현재 선택 행은 색만이 아니라 `aria-current`와 왼쪽 표시선으로도 구분된다. probe 블록도 색이 아닌 dashed 테두리 + 문장으로 구분한다. 860px 이하 단일 열 규칙이 네 lab과 페이지 CSS에 모두 있고, 표·코드는 `overflow-x: auto` 컨테이너 안에 있다. | 정적 판정은 유예 대상이 아님 | none |
 | MOTION-CTX-001 | PASS (정적) | 네 lab 모두 **자동 재생이 없다**(진입 시 애니메이션이 시작되지 않고 버튼을 눌러야 실행된다). 네 hook 전부 `useReducedMotion()`을 소비해 `duration`을 0으로 낮추고, 각 TSX가 모션 감소 상태를 상태 문구로도 알린다. 모션 감소 시에도 시작값↔끝값 비교라는 학습 목표가 그대로 성립한다. | 정적 판정은 유예 대상이 아님 | none |
 | BUILD-CTX-001 | PASS | 2026-08-05 `npx tsc --noEmit` → **exit 0, 출력 0줄**(저장소 전체 오류 0건, `gsap-context` 경로 오류 0건). 상대경로 import 전수 검사 스크립트로 24개 파일의 모든 `./` import가 실제 파일로 해석됨을 확인했다(MISSING 0건). `npm run build`·`npm run build-storybook`은 이 작업 범위에서 금지되어 실행하지 않았다. | build/integration 통과(이 페이지 범위) | 소유자가 전체 배치 완료 후 full build 1회 |
-| XPAGE-CTX-001 | PASS | `gsap-to` · `tween-playhead` · `tween-configuration`은 등록된 라우트라 `toHref()`로 링크했다. `react-use-gsap`은 `src/app/routes.ts`에 **아직 없어** 링크하면 `resolveRoute`가 첫 레슨으로 흡수하므로 링크 없이 문장으로만 경계를 밝혔다. Timeline · `matchMedia` · ScrollTrigger도 미구현이라 이름만 남겼다. 동시 작업 중인 `react-use-gsap/` 폴더는 읽기만 하고 수정하지 않았다. | Cross-page Consistency 통과 | 소유자가 `react-use-gsap` 등록 후 `BoundariesSection`의 `upcoming` 행을 `otherOwners`로 승격 |
+| XPAGE-CTX-001 | PASS | `gsap-to` · `tween-playhead` · `tween-configuration` · `react-use-gsap` · `responsive-motion` · `timeline-basics` · `scroll-trigger-create`가 모두 현재 `src/app/routes.ts`에 등록된 것을 확인하고 `toHref()` 링크로 연결했다. | Cross-page Consistency 통과 | none |
 | LT-CTX-001 | PASS | 공식 목차(Quick Start / Scoping selector text / Adding to a Context / Cleanup function / Ignoring / Tips & Caveats)를 그대로 번역하지 않고 학습자 상황 순서로 재구성했다 — 문제 상황 → 모아서 되돌리기 → 범위 가두기 → 독립 utility → 나중에 생기는 것 → 되돌림의 수명 → 경계. Tips & Caveats 4개 항목은 한 덩어리로 옮기지 않고 각각 소유 섹션(01의 버전, 04의 `self`, 05의 permanence·Timeline 경계)으로 분산했다. | Learning Transformation 통과 | none |
 | A11Y-CTX-002 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환 동작, 320/390px 실제 레이아웃과 overflow, 네 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 | A11Y-CTX-003 | DEFERRED → PASS | `ScopedSelectorLab`에서 scope 유무에 따라 카드별 이동 개수가 실제로 `3/0`과 `3/3`으로 갈리는지 — DOM이 필요해 Node probe로 확인할 수 없었다(`PROBE-CTX-009`). 화면에 표시되는 개수는 전부 DOM에서 **센** 관찰값이라 결과가 달라도 거짓을 표시하지는 않는다. | 소유자 일괄 브라우저 검수 대상 | 브라우저에서 두 radio 모드를 각각 실행해 확인 |
@@ -348,7 +348,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 미해결 `BLOCK` 없음. 구현 중 발생한 `BLOCK` 3건(`PROBE-CTX-009`, `STRUCT-CTX-002`, `STRUCT-CTX-003`)은 모두 수정·재확인을 마쳐 `PASS`로 재판정했고 원래 상태를 위 표에 보존했다.
 
-라우팅 등록(`src/app/routes.ts`)은 이 컨텍스트의 작업 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 이 페이지는 앱에서 접근되지 않는다. 등록 시 `GsapContextPage`를 `fundamentals` 트랙에 `slug: 'gsap-context'`로 추가하면 된다.
+라우팅은 이미 `src/app/routes.ts`의 `fundamentals` 트랙에 `slug: 'gsap-context'`로 등록되어 있다. 이번 재감사에서는 범위 밖인 route 파일을 수정하지 않았다.
 
 ### browserReviewClosure
 
@@ -356,3 +356,72 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+이 절은 위 구현 당시 판정과 `browserReviewClosure`보다 최신이며 현재 overall/release 판정은 이 절을 따른다. 공식 문서 두 페이지의 현재 HTML을 다시 대조하고 설치된 GSAP 3.15.0의 Context 수명과 `add()` 반환값을 다시 실행했다.
+
+### auditTarget
+
+- route: `/fundamentals/gsap-context`
+- localPath: `src/content/gsap/fundamentals/gsap-context/`
+- officialReviewedAt: `2026-08-13` (Asia/Seoul)
+- browserBoundary: 이번 재감사에서는 실제 브라우저를 조작하지 않았다.
+- buildBoundary: 메인 담당자가 통합 실행하므로 `npm run build`와 `npm run build-storybook`을 실행하지 않았다.
+
+### findings
+
+| ID | perspective | status | evidence | impact | action |
+| --- | --- | --- | --- | --- | --- |
+| SRC-CTX-010 | Official Coverage | PASS | 현재 `gsap.context()` article의 Quick Start, 두 이점, scope/Vue note, add, cleanup, ignore, Tips & Caveats와 `selector()`의 Returns·본문·Parameters를 재대조했다. catalog 공식 33행과 새로운 기술 항목 차이가 없다. | 공식 coverage 유지 | meta 대조일과 URL을 현재 값으로 갱신했다. |
+| FACT-CTX-010 | 사실 정확성 | BLOCK → ADDRESSED → PASS | 본문과 `CTX-P3`는 named `add()`와 immediate `add()`가 모두 `undefined`를 돌려주고 타입과 runtime이 불일치한다고 설명했다. GSAP 3.15.0 재실행 결과 `self.add('later', fn)`은 `ctx.later`와 동일한 wrapper 함수를 반환했고, `ctx.add(fn)`은 `fn`의 반환값을 돌려줬다. 설치 타입의 두 overload와도 일치한다. | 잘못된 반환 계약과 존재하지 않는 타입 불일치를 가르친다. | catalog·`AddAndIgnoreSection`의 설명과 측정 근거를 현재 runtime·타입에 맞게 교정했다. |
+| RDS-CTX-010 | Runtime/Display Sync | BLOCK → ADDRESSED → PASS (정적) | `ContextAddLab`은 nonzero duration Tween을 만든 직후만 값을 읽어 완료 뒤 x 표시가 갱신되지 않았다. outside·ignored Tween을 Context가 정리하지 않는데 별도 참조도 없어 모드 변경·unmount 뒤 남을 수 있었다. | 관찰 패널이 실제 최종값과 다르고 빠른 재설정 뒤 이전 Tween이 다시 값을 쓸 수 있다. | 같은 scoped element를 네 경로가 공유하고 `onComplete: read`로 최종값을 읽게 했다. Context 밖 Tween은 별도 배열에 기록해 재설정·unmount에서 kill하며 실험 중 `revert()`에서는 그대로 남긴다. 단계 버튼도 `ready → made` 순서에서만 활성화했다. |
+| RDS-CTX-011 | Runtime/Display Sync | BLOCK → ADDRESSED → PASS (정적) | 네 hook은 dependency 변경 때 Context ref를 정리했지만 stage·관찰값·버튼 상태를 그대로 두었다. | 모드나 reduced-motion 변경 뒤 활성 버튼이 빈 ref를 조작하고 이전 결과를 새 설정의 결과처럼 보여준다. | 각 `useGSAP` 재실행에서 stage, 관찰값, 상태 문구와 종료 버튼을 baseline과 함께 초기화했다. `ScopedSelectorLab`에는 실제 Context가 있을 때만 revert가 활성화되는 상태를 추가했다. |
+| RDS-CTX-012 | Runtime/Display Sync | BLOCK → ADDRESSED → PASS (정적) | `RevertKillLab`에서 `kill()` 뒤 다시 만들면 x=180이 다음 Context의 시작값이 되어 `revert()`도 180으로 돌아갔다. 종료 버튼은 이동 완료 전에도 활성화되어 x=180이라는 설명과 실제 중간값이 갈릴 수 있었다. | 세 종료 방법을 같은 시작점에서 비교할 수 없다. | 매 생성 전 scoped box를 x=0으로 설정하고, nonzero duration에서는 `onComplete` 뒤에만 종료 버튼을 활성화한다. 종료 뒤 버튼을 다시 비활성화했다. |
+| RDS-CTX-013 | Runtime/Display Sync | BLOCK → ADDRESSED → PASS (정적) | 네 code panel이 runtime의 scoped target 해석, replay baseline, `ease`, 관찰 callback을 일부 생략했고 `ContextAddLab`은 runtime과 달리 document-global selector string을 표시했다. | 표시 코드를 실행하면 runtime과 다른 대상·관찰 시점이 된다. | 네 panel에 실제 scoped target, baseline `gsap.set`, `ease`, `onComplete`를 반영하고 ContextAdd의 네 분기를 동일한 `box`에서 직렬화했다. |
+| RDS-CTX-014 | Runtime/Display Sync | BLOCK → ADDRESSED → PASS (정적) | `ContextAddLab` runtime은 outside·ignored Tween을 별도 ref에 보관해 dependency 변경과 unmount에서 kill하지만 표시 코드는 추적과 cleanup을 생략했다. | 표시 코드와 runtime의 Context 밖 Tween 수명이 달라지고 직접 정리해야 한다는 학습 경계가 코드에 나타나지 않았다. | 두 분기에서 loose Tween을 ref에 보관하고, cleanup에서 loose Tween kill·배열 비우기·Context revert를 실행하는 계약을 표시했다. |
+| PED-CTX-010 | Pedagogy/Prose | BLOCK → ADDRESSED → PASS | 학습자 화면에 Context “기록원”, “옆에서 적는다”, “아무도 보고 있지 않다”는 의인화와 `source/item/소유` 제작 용어가 반복됐다. | 기록 시점과 객체 역할보다 비유·제작 과정이 앞선다. | Context 객체가 함수 실행 중 생긴 작업을 기록한다는 직접 설명으로 바꾸고, 공식 문서·확인한 설명·다른 페이지에서 설명한다는 표현으로 교정했다. |
+| PED-CTX-011 | Pedagogy/Prose | BLOCK → ADDRESSED → PASS | `PageCoverage`가 `source item`을 `기술 항목`으로 번역했지만 내부 coverage 단위와 개수를 계속 학습자에게 노출했다. | Context 학습 전에 콘텐츠 제작 구조를 해석하게 했다. | 내부 항목 개수를 제거하고 `공식 문서 학습 범위`, `설명 확인`, `공식 설명 확인`으로 바꿔 학습자 행동 중심 문구만 남겼다. |
+| XPAGE-CTX-010 | Cross-page Consistency | BLOCK → ADDRESSED → PASS | `BoundariesSection`과 handoff가 `react-use-gsap`, `responsive-motion`, Timeline, ScrollTrigger를 미등록·미구현으로 설명했지만 현재 routes에는 모두 등록되어 있다. | 실제로 열린 다음 학습 경로를 감추고 현재 저장소 상태를 거짓으로 설명한다. | 현재 route를 확인해 `react-use-gsap`, `responsive-motion`, `timeline-basics`, `scroll-trigger-create`를 링크하고 stale upcoming 표를 제거했다. |
+| TYPE-CTX-010 | Structure/Type | PASS | 수정 후 `npx tsc --noEmit --pretty false`와 scoped `git diff --check`가 exit 0이었다. 공식/구현 item 집계는 33/7, 총 40, 중복 ID 0으로 유지됐다. | 정적 구조와 타입 확인 | none |
+| PROBE-CTX-010 | Runtime Probe | PASS | GSAP 3.15.0 plain-object probe에서 `revert()`/`kill()`/`kill(true)` 결과가 값 0/100/0, `isReverted` true/false/true, cleanup 1/0/1, data 0/0/0이었다. named add는 동일 wrapper 함수를 반환했고 호출 뒤 기록 1, immediate add 뒤 2, ignore 뒤에도 2였다. | 공식 문서 밖 구현 설명 재확인 | DOM/CSS 결과의 근거로 사용하지 않는다. |
+| BROWSER-CTX-010 | Browser/A11y/Motion | NOT VERIFIED | 네 lab의 실제 control 조작, 빠른 반복, route 이탈·복귀, keyboard/focus, reduced-motion 전환, 320/390px와 selector scope 결과를 이번 재감사에서 실행하지 않았다. 과거 승인만으로 현재 코드의 브라우저 근거를 대신하지 않는다. | 실제 DOM animation·cleanup·반응형은 확정할 수 없다. | 메인 담당자가 네 lab browser matrix를 실행한다. |
+| BUILD-CTX-010 | Build/Integration | PASS | 메인 통합에서 2026-08-13 `npm run build`와 `npm run build-storybook`을 실행해 각각 exit 0을 확인했다. | 저장소 전체 TypeScript·Vite·Storybook 통합을 확인했다. | none |
+
+### changesApplied
+
+- `FACT-CTX-010`: `gsap-context.catalog.ts`, `AddAndIgnoreSection.tsx`
+- `RDS-CTX-010`: `ContextAddLab.tsx`, `useContextAddAnimation.ts`
+- `RDS-CTX-011`: 네 lab의 hook과 `ScopedSelectorLab.tsx`
+- `RDS-CTX-012`: `RevertKillLab.tsx`, `useRevertKillAnimation.ts`
+- `RDS-CTX-013`: 네 lab의 TSX와 관련 hook
+- `RDS-CTX-014`: `ContextAddLab.tsx`
+- `PED-CTX-010`: meta, PageCoverage, Collect/Add/SelectorUtility/Boundaries 섹션, 예제 학습 패널
+- `PED-CTX-011`: `PageCoverage.tsx`
+- `XPAGE-CTX-010`: `BoundariesSection.tsx`, 이 handoff
+
+### verification
+
+- Official Coverage: 공식 33개 = catalog official 33개 = meta 분모 33개, implementation 7개, 총 40개, 중복 ID 0개.
+- TypeScript: `npx tsc --noEmit --pretty false` exit 0.
+- Diff: 허용 범위 `git diff --check` exit 0.
+- Runtime probe: GSAP 3.15.0 Context 종료 세 방식과 add/ignore 반환·기록 결과 PASS.
+- Runtime/Display Sync: `ContextAddLab`의 outside·ignored 분기와 표시 코드가 loose Tween 보관 및 dependency/unmount cleanup 계약을 함께 포함하는지 정적으로 대조했다.
+- Browser matrix: NOT VERIFIED.
+- Vite build: PASS — 메인 통합에서 2026-08-13 exit 0.
+- Storybook build: PASS — 메인 통합에서 2026-08-13 exit 0.
+
+### 공식 재대조 URL
+
+- `https://gsap.com/docs/v3/GSAP/gsap.context()/`
+- `https://gsap.com/docs/v3/GSAP/UtilityMethods/selector()/`
+
+### unresolved
+
+- BLOCK: none
+- ADVISORY: none
+- NOT VERIFIED: `BROWSER-CTX-010`
+
+### overallDecision
+
+`NOT VERIFIED` — 공식 정확성, 학습 변환, runtime/display 정적 동기화와 TypeScript·비DOM probe의 BLOCK은 해결했고 통합 build·Storybook도 통과했지만 브라우저 관점은 확인되지 않았다.

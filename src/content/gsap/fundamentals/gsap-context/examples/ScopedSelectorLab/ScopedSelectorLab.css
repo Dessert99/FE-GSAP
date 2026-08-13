@@ -66,9 +66,15 @@
   cursor: pointer;
 }
 
-.scoped-selector-lab__buttons button:hover {
+.scoped-selector-lab__buttons button:hover:not(:disabled) {
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+.scoped-selector-lab__buttons button:disabled {
+  color: var(--color-muted);
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .scoped-selector-lab__stage {

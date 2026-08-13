@@ -7,16 +7,31 @@ export function ContextRevertLab() {
   const { scope, descriptor, stage, boxes, contextObservation, status, reducedMotion, create, revert } =
     useContextRevertAnimation()
 
+  // 실제로 되돌린 뒤에만 실행된 revert 호출을 코드 패널에 표시한다
+  const revertCall = stage === 'reverted' ? 'ctx.revert()' : '// 아직 revert()를 부르지 않았습니다'
+
   // 실행에 쓰인 descriptor를 코드 문법으로만 포맷한다 — 값을 다시 조립하지 않는다
-  const code = `// 이 함수 안에서 만든 GSAP 작업을 Context가 전부 기록합니다
+  const code = `${descriptor.steps
+    .map(
+      (step) =>
+        `gsap.set(gsap.utils.toArray('${step.selector}', containerRef.current)[0], { ${step.property}: ${step.from} })`,
+    )
+    .join('\n')}
+
+// 이 함수 안에서 만든 GSAP 작업을 Context가 전부 기록합니다
 const ctx = gsap.context(() => {
 ${descriptor.steps
-  .map((step) => `  gsap.to('${step.selector}', { ${step.property}: ${step.to}, duration: ${descriptor.duration} })`)
+  .map(
+    (step, index) =>
+      `  gsap.to('${step.selector}', { ${step.property}: ${step.to}, duration: ${descriptor.duration}, ease: 'power2.out'${
+        index === descriptor.steps.length - 1 ? ', onComplete: readBoxes' : ''
+      } })`,
+  )
   .join('\n')}
 }, containerRef)
 
 // 기록된 ${contextObservation.recorded}개를 한 번에 되돌립니다
-ctx.revert()`
+${revertCall}`
 
   return (
     <section className="context-revert-lab" aria-labelledby="context-revert-lab-title">
@@ -118,8 +133,8 @@ ctx.revert()`
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
             공식 문서의 표현으로 Context는 그 함수 안에서 만들어진 모든 GSAP animation과 ScrollTrigger를{' '}
-            <strong>collect</strong>합니다. 애니메이션이 만들어지는 순간 Context가 옆에서 목록에 적어 두기 때문에, 나중에{' '}
-            <code>revert()</code>는 그 목록을 훑기만 하면 됩니다. 내가 변수를 들고 있을 필요가 없는 이유입니다.
+            <strong>기록</strong>합니다. 그래서 나중에 <code>revert()</code>는 Context에 기록된 작업을 모두 되돌릴 수 있고, 각
+            Tween의 변수를 따로 보관할 필요가 없습니다.
           </p>
         </article>
         <article>

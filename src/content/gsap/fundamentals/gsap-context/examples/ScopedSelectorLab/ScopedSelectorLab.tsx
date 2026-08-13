@@ -7,18 +7,36 @@ const boxIndexes = Array.from({ length: boxesPerCard }, (_, index) => index + 1)
 
 export function ScopedSelectorLab() {
   // runtime이 소유한 실행 descriptor와 관찰값을 그대로 받아 화면에만 쓴다
-  const { scope, cardOneRef, cardTwoRef, mode, setMode, descriptor, cards, status, reducedMotion, run, revert } =
-    useScopedSelectorAnimation()
+  const {
+    scope,
+    cardOneRef,
+    cardTwoRef,
+    mode,
+    setMode,
+    descriptor,
+    cards,
+    hasContext,
+    didRevert,
+    status,
+    reducedMotion,
+    run,
+    revert,
+  } = useScopedSelectorAnimation()
 
   // 실행에 쓰인 descriptor를 코드 문법으로만 포맷한다 — 두 번째 인자 유무가 실행과 같은 값에서 나온다
-  const code = `const ctx = gsap.context(() => {
-  gsap.to('${descriptor.selector}', { y: ${descriptor.y}, duration: ${descriptor.duration} })
+  const code = `const boxes = gsap.utils.toArray('${descriptor.selector}', labRef.current)
+gsap.set(boxes, { y: 0 })
+
+const ctx = gsap.context(() => {
+  gsap.to('${descriptor.selector}', { y: ${descriptor.y}, duration: ${descriptor.duration}, ease: 'power2.out', onComplete: readCards })
 }${descriptor.scopeExpression ? `, ${descriptor.scopeExpression}` : ''})
 ${
   descriptor.scopeExpression
     ? '// scope가 있으니 cardOneRef의 자손 중에서만 찾습니다'
     : '// scope가 없으니 문서 전체에서 이 class를 찾습니다'
-}`
+}
+
+${didRevert ? 'ctx.revert()' : '// 아직 revert()를 부르지 않았습니다'}`
 
   return (
     <section className="scoped-selector-lab" aria-labelledby="scoped-selector-lab-title">
@@ -55,7 +73,7 @@ ${
             <button type="button" onClick={run}>
               같은 선택자로 실행
             </button>
-            <button type="button" onClick={revert}>
+            <button type="button" onClick={revert} disabled={!hasContext}>
               revert()
             </button>
           </div>

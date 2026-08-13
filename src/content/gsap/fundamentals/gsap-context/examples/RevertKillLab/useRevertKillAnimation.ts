@@ -92,10 +92,22 @@ export function useRevertKillAnimation() {
     })
   }
 
+  // 이동이 끝난 시점의 값을 읽고 나서만 종료 방법을 고를 수 있게 한다
+  function finishCreation() {
+    read(null)
+    setHasContext(true)
+    setStatus('박스 이동이 끝났습니다. 이제 끝내는 방법을 골라 보세요.')
+  }
+
   useGSAP(
     () => {
       // 이전 실행이 남긴 위치를 지워 항상 같은 지점에서 출발시킨다
       gsap.set(targetSelector, { x: descriptor.from })
+      // 모션 설정이 바뀌면 종료 버튼과 관찰값도 새 실험의 시작 상태로 맞춘다
+      cleanupCallsRef.current = 0
+      setHasContext(false)
+      setObservation({ boxX: descriptor.from, isReverted: false, recorded: 0, cleanupCalls: 0, endedBy: null })
+      setStatus('먼저 Context를 만들어 박스를 옮기고, 그다음 끝내는 방법을 골라 보세요.')
       // 이 컴포넌트가 사라질 때 손으로 만든 Context도 함께 되돌린다
       return () => {
         contextRef.current?.revert()
@@ -110,15 +122,21 @@ export function useRevertKillAnimation() {
   function create() {
     contextRef.current?.revert()
     cleanupCallsRef.current = 0
+    // 세 종료 방법이 공유할 이 예제 안의 박스 하나다
+    const box = scope.current?.querySelector<HTMLElement>(descriptor.selector)
+    if (!box) return
+
+    // 이전 kill()이 남긴 값을 지워 세 종료 방법을 언제나 같은 시작점에서 비교한다
+    gsap.set(box, { x: descriptor.from })
 
     contextRef.current = gsap.context(() => {
       // 되돌렸는지 그 자리에 두었는지를 x 값 하나로 판단할 수 있게 한 대상만 움직인다
-      gsap.to(descriptor.selector, {
+      gsap.to(box, {
         x: descriptor.to,
         duration: descriptor.duration,
         ease: 'power2.out',
         // 다 옮긴 뒤의 값을 읽어 두어야 끝내기 전후를 비교할 수 있다
-        onComplete: () => read(null),
+        onComplete: finishCreation,
       })
       // 함수가 돌려주는 이 cleanup function이 언제 불리는지가 이 예제의 두 번째 관찰점이다
       return () => {
@@ -126,8 +144,12 @@ export function useRevertKillAnimation() {
       }
     }, scope)
 
-    setHasContext(true)
-    setStatus('Context를 만들고 박스를 옮겼습니다. 이제 끝내는 방법을 골라 보세요.')
+    setHasContext(reducedMotion)
+    setStatus(
+      reducedMotion
+        ? '모션 감소 설정이라 박스를 최종 위치에 두었습니다. 이제 끝내는 방법을 골라 보세요.'
+        : 'Context를 만들고 박스를 옮기는 중입니다. 이동이 끝나면 종료 버튼이 활성화됩니다.',
+    )
     read(null)
   }
 
@@ -152,6 +174,7 @@ export function useRevertKillAnimation() {
         ? 'kill()로 끝냈습니다. 애니메이션은 사라졌지만 박스는 옮겨진 자리에 남아 있습니다.'
         : '되돌리면서 끝냈습니다. 박스가 시작 위치로 돌아갔습니다.',
     )
+    setHasContext(false)
     read(method)
   }
 

@@ -243,11 +243,11 @@ export function SelectorUtilitySection() {
       </div>
 
       <div className="context-page__note">
-        <h3>이 페이지가 소유하는 범위</h3>
+        <h3>이 페이지에서 다루는 범위</h3>
         <p>
           <code>gsap.utils.selector()</code>는 Context와 독립된 utility이고, GSAP에는 이 밖에도 여러 utility method가 있습니다.
           이 페이지는 그중 <strong>범위 지정</strong>이라는 한 가지 역할만, 그것도 Context의 scope와 이어지는 지점에서만
-          설명합니다. 나머지 utility method들은 각자의 학습 페이지가 소유합니다.
+          설명합니다. 나머지 utility method는 별도 학습 페이지에서 설명합니다.
         </p>
       </div>
     </section>

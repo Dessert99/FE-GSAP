@@ -68,6 +68,10 @@ export function useScopedSelectorAnimation() {
     { key: 'one', label: '카드 1 (scope로 넘긴 영역)', total: boxesPerCard, moved: 0 },
     { key: 'two', label: '카드 2 (scope 밖)', total: boxesPerCard, moved: 0 },
   ])
+  // 실행 전에는 revert 버튼을 막고 모드 변경 뒤 남은 Context를 조작하지 않게 한다
+  const [hasContext, setHasContext] = useState(false)
+  // 코드 패널이 실제 revert 호출 여부를 구분하도록 마지막 정리 동작을 기록한다
+  const [didRevert, setDidRevert] = useState(false)
   // 방금 어떤 조작을 했는지 screen reader에도 전달한다
   const [status, setStatus] = useState('아직 실행하지 않았습니다. scope 여부를 고르고 실행을 눌러 보세요.')
   // 운영체제 모션 감소 설정에서는 이동 없이 최종 상태만 보여준다
@@ -94,7 +98,16 @@ export function useScopedSelectorAnimation() {
   useGSAP(
     () => {
       // 이전 실행이 남긴 위치를 지워 두 카드가 항상 같은 지점에서 출발하게 한다
-      gsap.set(targetSelector, { y: 0 })
+      const boxes = gsap.utils.toArray<HTMLElement>(targetSelector, scope.current)
+      gsap.set(boxes, { y: 0 })
+      // scope 선택이나 모션 설정이 바뀌면 관찰값과 버튼 단계도 시작 상태로 맞춘다
+      setCards([
+        { key: 'one', label: '카드 1 (scope로 넘긴 영역)', total: boxesPerCard, moved: 0 },
+        { key: 'two', label: '카드 2 (scope 밖)', total: boxesPerCard, moved: 0 },
+      ])
+      setHasContext(false)
+      setDidRevert(false)
+      setStatus('아직 실행하지 않았습니다. scope 여부를 고르고 실행을 눌러 보세요.')
       // 이 컴포넌트가 사라질 때 손으로 만든 Context도 함께 되돌린다
       return () => {
         contextRef.current?.revert()
@@ -124,6 +137,8 @@ export function useScopedSelectorAnimation() {
     contextRef.current =
       descriptor.mode === 'scoped' ? gsap.context(animate, cardOneRef) : gsap.context(animate)
 
+    setHasContext(true)
+    setDidRevert(false)
     setStatus(
       descriptor.mode === 'scoped'
         ? '카드 1을 scope로 넘겼습니다. 같은 선택자인데도 카드 1 안에서만 찾습니다.'
@@ -139,10 +154,26 @@ export function useScopedSelectorAnimation() {
     if (!context) return
 
     context.revert()
+    setHasContext(false)
+    setDidRevert(true)
     setStatus('revert()로 이번 실행이 건드린 박스를 모두 처음 자리로 되돌렸습니다.')
     readCards()
   }
 
   // TSX가 controls·카드 무대·코드 패널을 같은 descriptor에서 그리도록 필요한 값만 전달한다
-  return { scope, cardOneRef, cardTwoRef, mode, setMode, descriptor, cards, status, reducedMotion, run, revert }
+  return {
+    scope,
+    cardOneRef,
+    cardTwoRef,
+    mode,
+    setMode,
+    descriptor,
+    cards,
+    hasContext,
+    didRevert,
+    status,
+    reducedMotion,
+    run,
+    revert,
+  }
 }
