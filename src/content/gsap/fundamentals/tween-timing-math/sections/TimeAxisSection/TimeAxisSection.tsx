@@ -117,7 +117,7 @@ export function TimeAxisSection() {
       </div>
 
       <p className="timing-page__note">
-        Tween을 처음 만드는 방법과 <code>vars</code>에 무엇을 적을 수 있는지는 이 페이지가 소유하지 않습니다.{' '}
+        Tween을 처음 만드는 방법과 <code>vars</code>에 무엇을 적을 수 있는지는 다른 페이지에서 설명합니다.{' '}
         <a href={toHref('/fundamentals/gsap-to')}>gsap.to() 페이지</a>와{' '}
         <a href={toHref('/fundamentals/tween-configuration')}>설정은 어디서 오나 페이지</a>가 다룹니다.
       </p>

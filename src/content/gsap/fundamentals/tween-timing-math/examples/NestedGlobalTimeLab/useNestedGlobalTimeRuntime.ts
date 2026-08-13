@@ -1,4 +1,4 @@
-/** timeline 안의 timeline 안에 tween을 넣고 globalTime()이 중첩을 어떻게 하나의 전역 시각으로 접는지 읽는다. */
+/** timeline 안의 timeline 안에 tween을 넣고 globalTime()이 중첩을 반영한 전역 시각을 어떻게 반환하는지 읽는다. */
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useMemo, useRef, useState } from 'react'
@@ -65,7 +65,7 @@ export function useNestedGlobalTimeRuntime() {
   const [innerPosition, setInnerPosition] = useState(3)
   // 안쪽 timeline 위에서 tween이 시작하는 지점이다
   const [tweenPosition, setTweenPosition] = useState(1)
-  // 안쪽 timeline의 배속 — 이 한 층만 바꿔도 전역 시각이 어떻게 접히는지 본다
+  // 안쪽 timeline의 배속 — 이 한 층만 바꿔 전역 시각에 배율이 어떻게 반영되는지 본다
   const [innerTimeScale, setInnerTimeScale] = useState<number>(1)
   // globalTime()에 넣을 tween 자기 기준 시각 — 이 예제가 조작하는 입력값이다
   const [localTime, setLocalTime] = useState(0)
@@ -83,7 +83,7 @@ export function useNestedGlobalTimeRuntime() {
     () => {
       // 바깥 timeline은 멈춰 둔다 — 아무것도 재생되지 않아야 좌표만 관찰할 수 있다
       const outer = gsap.timeline({ paused: true })
-      // 전역 시각의 기준점을 0으로 못 박는다. 이렇게 하지 않으면 페이지를 연 시각만큼 숫자가 밀린다
+      // 전역 시각의 기준점을 0으로 고정해 controls의 영향만 결과에 남긴다
       outer.startTime(0)
       // 바깥과 tween 사이에 한 층을 더 두어야 "중첩을 푼다"는 말이 실제로 두 번 일어난다
       const inner = gsap.timeline()

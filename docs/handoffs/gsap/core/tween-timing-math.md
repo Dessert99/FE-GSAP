@@ -303,3 +303,65 @@ tween.timeScale(ts)
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+이 절은 위 구현 당시 판정보다 최신이며 현재 릴리스 판정은 이 절을 따른다. 공식 Tween method 문서 일곱 페이지를 현재 HTML로 다시 대조하고, 로컬 설치본 GSAP 3.15.0으로 getter와 중첩 시간 좌표를 재확인했다.
+
+### auditTarget
+
+- route: `/fundamentals/tween-timing-math`
+- localPath: `src/content/gsap/fundamentals/tween-timing-math/**`
+- comparedAt: `2026-08-13` (Asia/Seoul)
+- evidenceBoundary: 공식 웹 원문, 설치된 GSAP 3.15.0 probe, 대상 파일 정적 분석을 사용했다. 브라우저와 전역 build·Storybook은 이 재감사에서 실행하지 않았다.
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| FACT-TM-001 | BLOCK → ADDRESSED → PASS | `GetterSetterSection`은 Parameters 표의 `default = NaN`을 GSAP이 getter 호출을 판별하는 신호라고 단정했다. 공식 계약은 인자 생략이 getter라는 것까지만 설명한다. | 문서 표기를 내부 판별 방식으로 오해하게 한다. | Tween 값의 기본값과 인자 표기를 분리하고 getter는 인자를 생략한다고만 설명한 뒤 공식 문서와 재대조했다. |
+| FACT-TM-002 | BLOCK → ADDRESSED → PASS | `totalDuration`, `startTime`, `endTime`, `globalTime` probe 식이 무한 repeat·후속 timing 변경·paused/zero scale까지 포함하는 일반식처럼 제시됐다. 실제 probe 범위는 유한 repeat, 최초 배치, 재생 가능한 nonzero scale이었다. | 지원하지 않는 입력에서 식이 성립하지 않는다. | 각 식과 catalog 주장에 측정 범위를 명시하고 pause·무한 repeat 경계를 다시 대조했다. |
+| FACT-TM-003 | BLOCK → ADDRESSED → PASS | `TimingMathLab`은 timeScale 2에서 `endTime()`이 절반이 된다고 했지만 기본 예제는 startTime 1이 유지되어 8→4.5가 된다. 또한 `endTime(false)`를 한 회차 길이를 재는 메서드처럼 안내했다. | 좌표와 길이를 혼동한다. | 재생 구간과 종료 좌표, 첫 회차 종료 좌표와 `duration()` 길이를 구분한 뒤 getter 결과와 재대조했다. |
+| FACT-TM-004 | BLOCK → ADDRESSED → PASS | 현재 공식 `globalTime()` 문서는 인자 생략 시 `totalTime()`을 쓴다고 하지만 GSAP 3.15.0 구현과 probe는 부모 playhead에서 환산한 `rawTime()`을 사용했다. 기존 문구는 두 값이 같은 조건을 과도하게 일반화했다. | 공식 설명과 설치본 차이의 적용 조건이 부정확하다. | 설치본과 공식 설명의 불일치를 명시하고 두 local time이 같은 조건을 probe와 재대조했다. |
+| RDS-TM-001 | BLOCK → ADDRESSED → PASS (정적) | `TimingMathLab`은 축의 회차·대기 구간을 `repeat()`·`repeatDelay()` 결과로 만들면서 코드 패널에는 두 호출을 표시하지 않았고, 모든 화면 숫자를 직접 getter로 읽었다고 설명했다. | runtime/display와 관찰값/파생값 경계가 어긋난다. | 두 getter 호출을 코드 패널에 추가하고 표와 축의 근거를 정적으로 다시 추적했다. |
+| RDS-TM-002 | BLOCK → ADDRESSED → PASS (정적) | `NestedGlobalTimeLab` 축 상한이 10초였지만 control 최대 조합은 `4 + (3 + 2) / 0.5 = 14`초였다. 축 구간에 쓰는 `globalTime(0)`과 `globalTime(duration)`도 코드 패널에서 빠졌다. | 최대 조합에서 막대와 marker가 축 밖으로 넘고 표시 코드가 관찰 호출을 누락한다. | 축 상한과 세 `globalTime()` 호출을 수정하고 control 최대 조합 및 serializer를 재확인했다. |
+| PED-TM-001 | BLOCK → ADDRESSED → PASS | 학습자 화면에 `source item`, `소유`, `꿈쩍`, 시간을 소비하거나 숫자를 접는다는 제작 용어·과장 비유가 남아 있었다. | 시간 좌표와 길이의 직접 설명을 방해한다. | 공식 문서·확인한 설명·재생 배율·좌표 변환 중심의 직접 문장으로 교체하고 학습자 본문을 다시 읽었다. |
+| PED-TM-002 | BLOCK → ADDRESSED → PASS | `PageCoverage`가 `source item`을 `기술 항목`으로 번역했지만 내부 coverage 단위와 개수를 계속 노출했다. | 시간 메서드 학습 전에 콘텐츠 제작 구조를 해석하게 했다. | 내부 항목 개수를 제거하고 `공식 문서 학습 범위`, `설명 확인`, `공식 설명 확인`으로 교체한 뒤 학습자 표시 문자열을 재확인했다. |
+| TYPE-TM-001 | PASS | 최종 수정 후 `npx tsc --noEmit --pretty false`가 exit 0으로 완료됐다. `git diff --check`도 통과했다. | TypeScript와 diff 정적 검증 통과. | none |
+| BROWSER-TM-001 | NOT VERIFIED | 이번 재감사에서는 브라우저 control 조작, keyboard, 320/390px, reduced-motion 전환을 실행하지 않았다. | 실제 화면 동작은 통합 검수 전 확정할 수 없다. | 메인 담당자가 두 lab의 모든 control과 접근성·반응형·motion을 확인한다. |
+| BUILD-TM-001 | PASS | 메인 통합에서 2026-08-13 `npm run build`와 `npm run build-storybook`을 실행해 각각 exit 0을 확인했다. | 저장소 전체 TypeScript·Vite·Storybook 통합을 확인했다. | none |
+
+### 공식 재대조 URL
+
+- `https://gsap.com/docs/v3/GSAP/Tween/delay()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/duration()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/totalDuration()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/startTime()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/endTime()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/timeScale()/`
+- `https://gsap.com/docs/v3/GSAP/Tween/globalTime()/`
+
+### changesApplied
+
+- `FACT-TM-001`~`FACT-TM-004`: getter·시간식·endTime·globalTime 설명
+- `RDS-TM-001`~`RDS-TM-002`: 두 lab의 관찰값·축·serializer
+- `PED-TM-001`: 관련 section과 두 lab 학습 문단
+- `PED-TM-002`: `PageCoverage.tsx`
+
+### verification
+
+- Fact Accuracy: 일곱 공식 문서와 설치본 probe 결과를 수정 문장과 다시 대조했다.
+- Runtime/Display Sync: 두 lab의 descriptor → getter 관찰 → 파생 축 → 표시 코드 흐름을 정적으로 다시 추적했다.
+- Structure/Type: `npx tsc --noEmit --pretty false`와 대상 `git diff --check`가 exit 0이었다.
+- Browser matrix: NOT VERIFIED.
+- Vite build·Storybook build: PASS — 메인 통합에서 2026-08-13 각각 exit 0.
+
+### unresolved
+
+- BLOCK: none
+- ADVISORY: none
+- NOT VERIFIED: `BROWSER-TM-001`
+
+### overallDecision
+
+`NOT VERIFIED` — 공식 정확성, 학습 변환, runtime/display 정적 동기화의 BLOCK은 재검증해 해소했고 통합 build·Storybook도 통과했지만 브라우저 관점은 확인되지 않았다.

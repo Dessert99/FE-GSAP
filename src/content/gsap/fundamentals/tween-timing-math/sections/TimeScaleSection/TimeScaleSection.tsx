@@ -24,7 +24,7 @@ export function TimeScaleSection() {
         number="05"
         id="time-scale"
         title="timeScale은 길이가 아니라 속도를 바꾼다"
-        description="배속을 올리면 애니메이션이 짧아진다고 생각하기 쉽습니다. 그런데 GSAP이 돌려주는 duration은 꿈쩍도 하지 않습니다. 무엇이 바뀌고 무엇이 안 바뀌는지가 이 섹션의 질문입니다."
+        description="배속을 올려도 GSAP이 돌려주는 duration은 바뀌지 않습니다. 어떤 반환값이 바뀌고 어떤 값이 유지되는지가 이 섹션의 질문입니다."
       />
 
       <div className="timing-page__prose">
@@ -59,7 +59,7 @@ export function TimeScaleSection() {
       <div className="timing-page__split">
         <div className="timing-page__prose">
           <p>
-            공식 문서의 예시가 <code>timeScale</code>이 쌓인다는 것까지 보여 줍니다. <strong>duration이 2인데 timeScale이 0.5면
+            공식 문서의 예시는 중첩된 <code>timeScale</code>이 함께 반영된다는 점까지 보여 줍니다. <strong>duration이 2인데 timeScale이 0.5면
             끝나는 데 4초가 걸립니다.</strong> 그리고{' '}
             <strong>그 애니메이션을 timeScale이 0.5인 timeline 안에 중첩하면 8초가 걸립니다.</strong>
           </p>
@@ -84,9 +84,8 @@ export function TimeScaleSection() {
           <strong>전혀 변하지 않습니다.</strong> 바뀌는 것은 <code>endTime()</code>뿐입니다.
         </p>
         <p>
-          말이 되는 결과입니다. <code>duration</code>은 <strong>설계된 길이</strong>이고 <code>timeScale</code>은{' '}
-          <strong>그 길이를 소비하는 속도</strong>이기 때문에, 둘은 서로를 덮어쓰지 않습니다. 실제로 걸리는 시간은 두 값을 나누어 얻는
-          제3의 값입니다.
+          <code>duration</code>은 <strong>설정된 한 회차의 길이</strong>이고 <code>timeScale</code>은 재생 배율이므로 둘은 서로를
+          덮어쓰지 않습니다. 부모 시간축에서 실제로 차지하는 시간은 길이를 배율로 나누어 구합니다.
         </p>
         <p className="timing-page__provenance">
           공식 페이지에 없는 내용입니다. GSAP 3.15.0에서 <code>parent = gsap.timeline(&#123;paused:true&#125;)</code>에{' '}
@@ -116,7 +115,7 @@ export function TimeScaleSection() {
       <TimingMathLab />
 
       <p className="timing-page__note">
-        예제에 나오는 <code>repeat</code>과 <code>repeatDelay</code>는 이 페이지가 소유하지 않습니다. 값을 어디에 적는지는{' '}
+        예제에 나오는 <code>repeat</code>과 <code>repeatDelay</code>의 전체 계약은 다른 페이지에서 설명합니다. 값을 어디에 적는지는{' '}
         <a href={toHref('/fundamentals/tween-configuration')}>설정은 어디서 오나 페이지</a>가, 재생 헤드를 직접 옮기는 방법은{' '}
         <a href={toHref('/fundamentals/tween-playhead')}>Tween playhead 페이지</a>가 다룹니다.
       </p>

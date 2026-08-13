@@ -115,7 +115,8 @@ export function StartEndSection() {
       <div className="timing-page__note timing-page__note--probe">
         <h3>배치 위치와 delay는 더해집니다</h3>
         <p>
-          공식은 "delay가 반영된 뒤"라고만 하고 <strong>산수는 적지 않습니다.</strong> 실행해 보면 단순한 덧셈입니다 —{' '}
+          공식은 "delay가 반영된 뒤"라고만 하고 <strong>산수는 적지 않습니다.</strong> 자식을 처음 배치하고 이후 timing 변경을 하지 않은
+          아래 probe에서는 단순한 덧셈입니다 —{' '}
           <code>startTime = 배치 위치 + delay</code>.
         </p>
         <p className="timing-page__provenance">
@@ -164,7 +165,8 @@ export function StartEndSection() {
       <div className="timing-page__note timing-page__note--probe">
         <h3>공식이 적지 않은 식 하나 더</h3>
         <p>
-          공식은 timeScale이 반영된다고만 하고 식을 적지 않습니다. 실행으로 확인한 식은 이것입니다.
+          공식은 timeScale이 반영된다고만 하고 식을 적지 않습니다. 재생 가능한 상태이고 <code>timeScale</code>이 0이 아닌 아래
+          probe에서 확인한 식은 이것입니다.
         </p>
         <p>
           <code>endTime(true) = startTime + totalDuration ÷ |timeScale|</code>

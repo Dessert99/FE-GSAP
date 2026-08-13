@@ -1,4 +1,4 @@
-/** 일곱 공식 페이지가 게시하지 않은 범위와 다른 페이지가 소유한 개념을 명시해 추측을 막는다. */
+/** 일곱 공식 페이지가 게시하지 않은 범위와 다른 페이지에서 설명하는 개념을 명시해 추측을 막는다. */
 import { toHref } from '../../../../../../app/routes'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 
@@ -12,7 +12,7 @@ const unpublished = [
   '브라우저·버전 지원 표. 일곱 페이지 모두 없습니다.',
 ]
 
-// 이 페이지가 전제로만 쓰고 설명 소유권은 다른 페이지에 있는 개념들
+// 이 페이지가 전제로만 쓰고 자세한 설명은 다른 페이지에 있는 개념들
 const otherOwners = [
   { label: 'gsap.to()의 target과 vars 전체', href: '/fundamentals/gsap-to' },
   { label: 'duration·delay·repeat을 vars에 적는 방법', href: '/fundamentals/tween-configuration' },
@@ -48,7 +48,7 @@ export function BoundariesSection() {
 
         <div>
           <div className="timing-page__subheading">
-            <h3>다른 페이지가 소유한 개념</h3>
+            <h3>다른 페이지에서 설명하는 개념</h3>
             <p>이 페이지는 아래 내용을 전제로만 사용했습니다.</p>
           </div>
           <ul className="timing-page__list">

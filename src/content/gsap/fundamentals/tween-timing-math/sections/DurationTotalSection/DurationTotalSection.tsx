@@ -84,7 +84,8 @@ export function DurationTotalSection() {
       <div className="timing-page__note timing-page__note--probe">
         <h3>공식이 적지 않은 식 하나</h3>
         <p>
-          공식 문서는 위의 두 숫자 예시만 보여 주고 <strong>식은 적어 두지 않았습니다.</strong> 두 예시를 모두 만족하는 식은 이것입니다.
+          공식 문서는 위의 두 숫자 예시만 보여 주고 <strong>식은 적어 두지 않았습니다.</strong> <code>repeat</code>이 0 이상의 유한한
+          값일 때 실행으로 확인한 식은 이것입니다.
         </p>
         <p>
           <code>totalDuration = duration × (repeat + 1) + repeatDelay × repeat</code>
@@ -163,7 +164,7 @@ export function DurationTotalSection() {
 
       <p className="timing-page__note">
         <code>repeat</code>, <code>repeatDelay</code>, <code>yoyo</code>가 회차를 어떻게 세고 값을 언제 다시 계산하는지는 이 페이지가
-        소유하지 않습니다. 그 설정들을 <code>vars</code>에 적는 방법은{' '}
+        자세히 설명하지 않습니다. 그 설정들을 <code>vars</code>에 적는 방법은{' '}
         <a href={toHref('/fundamentals/tween-configuration')}>설정은 어디서 오나 페이지</a>가 다룹니다. 여기서는 그 설정이{' '}
         <strong>totalDuration이라는 숫자에 어떻게 반영되는지</strong>만 봅니다.
       </p>
