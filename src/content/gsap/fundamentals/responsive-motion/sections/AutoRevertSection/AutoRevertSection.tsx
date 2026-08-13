@@ -13,7 +13,7 @@ const glossary = [
   },
   {
     term: 'revert',
-    body: 'GSAP이 값을 건드리기 전 상태로 되돌리는 것입니다. 재생을 멈추는 것이 아니라, 붙여 둔 transform과 style을 떼어 내는 것입니다.',
+    body: 'GSAP이 값을 건드리기 전 상태로 되돌리는 것입니다. 단순히 재생을 멈추는 것과는 다릅니다.',
   },
   {
     term: 'MatchMedia',
@@ -132,18 +132,6 @@ export function AutoRevertSection() {
             </tr>
           </tbody>
         </table>
-      </div>
-
-      <div className="responsive-page__note responsive-page__note--probe">
-        <h3>공식 문서에 없는 것 하나 — MatchMedia가 가진 것</h3>
-        <p>
-          공식 페이지는 <code>revert()</code>와 <code>add()</code>를 문장 안에서 쓰기만 하고, MatchMedia가 가진 멤버 목록을 따로 적어
-          두지 않았습니다. 설치본에서 확인한 것은 <code>contexts</code> 배열과 <code>add()</code>, <code>revert(config?)</code>,{' '}
-          <code>kill(revert?)</code>입니다.
-        </p>
-        <p className="responsive-page__provenance">
-          이 항목은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0의 설치본 타입 정의와 실행으로 확인한 내용입니다.
-        </p>
       </div>
     </section>
   )

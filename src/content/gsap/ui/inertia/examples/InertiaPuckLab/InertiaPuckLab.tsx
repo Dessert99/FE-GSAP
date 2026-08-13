@@ -11,6 +11,7 @@ export function InertiaPuckLab() {
     puckRef,
     descriptor,
     snapshot,
+    reducedMotion,
     setMode,
     sampleVelocity,
     throwPuck,
@@ -21,8 +22,26 @@ export function InertiaPuckLab() {
     event.preventDefault()
     sampleVelocity(event.key === 'ArrowRight' ? 28 : -28)
   }
-  // 표시 코드는 runtime descriptor를 문법으로만 직렬화한다
-  const code = `gsap.to(puck, {\n  inertia: {\n    x: { velocity: ${typeof descriptor.velocity === 'string' ? `'${descriptor.velocity}'` : descriptor.velocity}, min: ${descriptor.min}, max: ${descriptor.max}, end: [${descriptor.end.join(', ')}] },\n    resistance: ${descriptor.resistance},\n    duration: { min: ${descriptor.duration.min}, max: ${descriptor.duration.max} },\n  },\n})`
+  // 표시 코드는 runtime과 같은 target·tracking·cleanup 경계 안에서 descriptor를 직렬화한다
+  const actionCode = reducedMotion
+    ? `gsap.killTweensOf(puck)
+const position = Number(gsap.getProperty(puck, 'x')) || 0
+const finalX = gsap.utils.snap([${descriptor.end.join(', ')}], position)
+gsap.set(puck, { x: finalX })`
+    : `gsap.killTweensOf(puck)
+gsap.to(puck, {\n  inertia: {\n    x: { velocity: ${typeof descriptor.velocity === 'string' ? `'${descriptor.velocity}'` : descriptor.velocity}, min: ${descriptor.min}, max: ${descriptor.max}, end: [${descriptor.end.join(', ')}] },\n    resistance: ${descriptor.resistance},\n    duration: { min: ${descriptor.duration.min}, max: ${descriptor.duration.max} },\n  },\n  onComplete: () => console.log(Number(gsap.getProperty(puck, 'x')) || 0),\n})`
+  // plugin setup과 action, whole-target teardown을 하나의 복사 가능한 snippet으로 묶는다
+  const code = `const puck = document.querySelector('.inertia-puck-lab__puck')
+if (!puck) throw new Error('inertia puck을 찾지 못했습니다.')
+gsap.registerPlugin(InertiaPlugin)
+InertiaPlugin.track(puck, 'x')
+
+${actionCode}
+
+function cleanup() {
+  gsap.killTweensOf(puck)
+  InertiaPlugin.untrack(puck, 'x')
+}`
   return (
     <section
       className="inertia-puck-lab"
@@ -91,8 +110,8 @@ export function InertiaPuckLab() {
           <dd>{Math.round(snapshot.velocity)} px/s</dd>
         </div>
         <div>
-          <dt>predicted notch</dt>
-          <dd>{Math.round(snapshot.predictedEnd)}</dd>
+          <dt>last position의 nearest notch</dt>
+          <dd>{Math.round(snapshot.nearestNotch)}</dd>
         </div>
         <div>
           <dt>last position</dt>

@@ -81,7 +81,7 @@
 
 .core-map-coverage__summary {
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 24px;
   padding: 20px 22px;
@@ -101,8 +101,7 @@
 }
 
 .core-map-coverage__summary span,
-.core-map-coverage__summary p,
-.core-map-coverage small {
+.core-map-coverage__summary p {
   color: var(--color-muted);
   font-size: 13px;
 }

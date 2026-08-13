@@ -2,7 +2,7 @@
 export const motionPathMeasureMeta = {
   title: '경로의 길이와 한 지점을 어떻게 재나요?',
   category: 'GSAP · SVG · MotionPathPlugin',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   sourcePath: 'src/content/gsap/svg/motion-path-measure/',
   officialSources: [
     {

@@ -5,7 +5,7 @@ export const tweenInstanceMeta = {
   summary:
     'gsap.to()를 부르면 화면만 움직이는 게 아니라 객체 하나가 돌아옵니다. 그 객체는 무엇을 기억하고, 무엇을 물어보면 답해 주며, 언제까지 살아 있을까요?',
   sourcePath: 'src/content/gsap/fundamentals/tween-instance/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Tween', href: 'https://gsap.com/docs/v3/GSAP/Tween' },
     { label: 'Tween.data', href: 'https://gsap.com/docs/v3/GSAP/Tween/data' },

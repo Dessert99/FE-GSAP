@@ -11,14 +11,32 @@ const modeOptions: { value: StopMode; label: string; hint: string }[] = [
 
 export function RevertVsKillLab() {
   // runtime이 소유한 descriptor·관찰값·조작 action을 그대로 받아 화면에만 쓴다
-  const { scope, descriptor, mode, setMode, progress, appliedMode, observation, status, seek, applyStop, reset } =
-    useRevertVsKillAnimation()
+  const {
+    scope,
+    descriptor,
+    mode,
+    setMode,
+    progress,
+    appliedMode,
+    appliedProgress,
+    observation,
+    status,
+    seek,
+    applyStop,
+    reset,
+  } = useRevertVsKillAnimation()
 
+  // 중단 전후 slider 이동을 실제 실행 순서대로 코드 패널에 표시한다
+  const progressBeforeStop = appliedProgress ?? descriptor.progress
+  // 중단 뒤 slider를 더 옮긴 경우에만 두 번째 progress 호출을 표시한다
+  const progressAfterStop = appliedMode && descriptor.progress !== appliedProgress ? `\ntween.progress(${descriptor.progress})` : ''
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `// 시작 투명도는 stylesheet가 정합니다. vars에 시작값을 적지 않습니다.
-gsap.set('${descriptor.selector}', { clearProps: 'opacity' })
+  const code = `const box = gsap.utils.toArray('${descriptor.selector}', scope.current)[0]
 
-const tween = gsap.to('${descriptor.selector}', {
+// 시작 투명도는 stylesheet가 정합니다. vars에 시작값을 적지 않습니다.
+gsap.set(box, { clearProps: 'opacity' })
+
+const tween = gsap.to(box, {
   opacity: ${descriptor.targetOpacity},
   duration: ${descriptor.duration},
   ease: 'none',
@@ -26,8 +44,8 @@ const tween = gsap.to('${descriptor.selector}', {
   paused: true,
 })
 
-tween.progress(${descriptor.progress})
-${appliedMode ? `tween.${appliedMode}()` : `// 아직 중단하지 않았습니다 — 고른 방식: tween.${mode}()`}
+tween.progress(${progressBeforeStop})
+${appliedMode ? `tween.${appliedMode}()${progressAfterStop}` : `// 아직 중단하지 않았습니다 — 고른 방식: tween.${mode}()`}
 
 gsap.getProperty(box, 'opacity') // → ${observation.opacity}
 box.getAttribute('style')        // → ${observation.inlineStyle === '(없음)' ? 'null' : `"${observation.inlineStyle}"`}
@@ -156,8 +174,8 @@ gsap.getTweensOf(box).length     // → ${observation.remainingTweens}`
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
-            드래그를 놓은 지점에 그대로 두고 싶으면 <code>kill()</code>, 화면을 떠나거나 레이아웃을 다시 계산하기 전에 CSS가 다시 주도권을
-            갖게 하려면 <code>revert()</code>입니다. 반응형에서 media query가 정한 값이 inline style에 가려지는 사고를 막아 줍니다.
+            드래그를 놓은 지점의 값을 유지하려면 <code>kill()</code>, 화면을 떠나거나 레이아웃을 다시 계산하기 전에 animation이 추가한
+            inline style을 제거하려면 <code>revert()</code>를 씁니다. 그러면 media query의 class rule이 다시 적용될 수 있습니다.
           </p>
         </article>
       </div>

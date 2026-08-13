@@ -1,4 +1,4 @@
-/** 공식 두 문서에서 확인한 기술 item 33개와 실행으로만 확인한 6개를 로컬 섹션과 1:1로 묶어 coverage 근거로 남긴다. */
+/** 공식 두 문서에서 확인한 기술 항목 33개와 실행으로만 확인한 7개를 로컬 섹션과 1:1로 묶어 대조 근거로 남긴다. */
 
 /** 어떤 공식 문서의 어떤 주장이 어느 섹션에서 설명되는지를 한 행으로 고정한다. */
 export type SourceItem = {
@@ -54,7 +54,7 @@ export const gsapContextSourceItems: SourceItem[] = [
   { id: 'CTX-P1', officialItem: 'gsap.context()가 돌려주는 것은 생성자 이름이 Context인 instance이고 prototype에 add·ignore·getTweens·clear·kill·revert가, 자신에 selector·data·isReverted·id·last가 있다. 넘긴 함수는 gsap.context() 호출 시점에 즉시 실행되어 그 안의 animation이 곧바로 data에 쌓인다. 공식 페이지에는 signature·Parameters·Returns 절 자체가 없다.', source: 'context', origin: 'implementation', sectionId: 'collect-and-revert' },
   { id: 'CTX-P2', officialItem: 'getTweens()는 data에 기록된 것 중 Tween만 골라 Array로 돌려준다. Timeline을 만들면 data에는 Timeline과 그 자식 Tween이 함께 들어가서 data.length가 만든 animation 수보다 커질 수 있다. 공식 페이지에 getTweens()는 등장하지 않는다.', source: 'context', origin: 'implementation', sectionId: 'collect-and-revert' },
   { id: 'SEL-P1', officialItem: 'scope 문자열은 document가 있어야 해석된다. document가 없는 Node에서 gsap.context(fn, ".my-scope")를 부르면 querySelectorAll을 읽지 못해 TypeError가 난다. 공식 페이지는 DOM 필요 여부를 적어 두지 않았다.', source: 'selector', origin: 'implementation', sectionId: 'selector-utility' },
-  { id: 'CTX-P3', officialItem: 'add(name, fn)은 fn을 즉시 실행하지 않고 Context에 name 메서드만 만든다. 그 메서드를 부를 때 비로소 animation이 data에 들어간다. 반면 add(fn)은 fn을 그 자리에서 실행한다. 두 형태 모두 실행 결과로 undefined를 돌려주므로 chaining 대상이 아니다. 패키지에 함께 들어 있는 타입 선언은 반환 타입을 Function으로 적어 두었지만 실제 실행값은 undefined다.', source: 'context', origin: 'implementation', sectionId: 'add-and-ignore' },
+  { id: 'CTX-P3', officialItem: 'add(name, fn)은 fn을 즉시 실행하지 않고 Context에 name 메서드를 만들며 그 wrapper 함수를 반환한다. 반환 함수는 Context에 추가된 name 메서드와 같다. 그 메서드를 부를 때 비로소 animation이 data에 들어간다. 반면 add(fn)은 fn을 그 자리에서 실행하고 그 함수의 반환값을 돌려준다. void 함수라면 실행값은 undefined다.', source: 'context', origin: 'implementation', sectionId: 'add-and-ignore' },
   { id: 'CTX-P6', officialItem: 'ignore()는 Context 함수가 이미 끝난 뒤 ctx.ignore(fn)으로 불러도 그 안에서 만든 animation을 data에 넣지 않는다. 공식 예제는 함수 안에서 self.ignore()를 부르는 형태만 보여 준다.', source: 'context', origin: 'implementation', sectionId: 'add-and-ignore' },
   { id: 'CTX-P4', officialItem: 'revert()는 대상 값을 애니메이션 시작 전 상태로 되돌리고 isReverted를 true로 만들며 data를 비운다. kill()은 값을 현재 자리에 그대로 둔 채 animation만 없애고 isReverted는 false로 남는다. kill(true)는 revert()처럼 값까지 되돌린다. 공식 페이지는 두 메서드를 함께 언급할 뿐 차이를 적어 두지 않았다.', source: 'context', origin: 'implementation', sectionId: 'revert-lifetime' },
   { id: 'CTX-P5', officialItem: '함수가 return한 cleanup function과 각 add()가 return한 cleanup function은 revert() 한 번에 모두 불리고, 같은 cleanup function이 두 번째 revert()에서 다시 불리지는 않는다. kill()은 cleanup function을 부르지 않고 kill(true)는 부른다. 공식 페이지는 호출 여부만 밝히고 횟수나 kill()과의 관계는 적어 두지 않았다.', source: 'context', origin: 'implementation', sectionId: 'revert-lifetime' },

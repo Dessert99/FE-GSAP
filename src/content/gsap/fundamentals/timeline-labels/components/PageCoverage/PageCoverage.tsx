@@ -10,22 +10,22 @@ const mappedSourceCount = new Set(timelineLabelsSourceItems.map((item) => item.s
 
 export function PageCoverage() {
   return (
-    <nav className="labels-coverage" aria-label="공식 source 대응 범위">
+    <nav className="labels-coverage" aria-label="Timeline label 학습 순서">
       <div className="labels-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{timelineLabelsCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{timelineLabelsCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          Timeline label 문서 7개의 기술 item {timelineLabelsCoverage.officialSourceItems}개를 "이름을 만들고, 묻고, 그 이름으로
+          Timeline label 문서 7개에서 확인한 핵심 동작 {timelineLabelsCoverage.officialSourceItems}개를 "이름을 만들고, 묻고, 그 이름으로
           이동하고, 지운다"는 흐름의 일곱 단계로 다시 묶었습니다. 여기에 공식 문서가 침묵하거나 실행과 어긋나 직접 확인한 항목{' '}
           {probeItemCount}개를 따로 표시합니다.
         </p>
@@ -37,7 +37,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

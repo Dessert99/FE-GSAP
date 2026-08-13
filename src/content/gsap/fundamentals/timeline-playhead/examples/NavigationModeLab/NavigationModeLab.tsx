@@ -13,17 +13,31 @@ export function NavigationModeLab() {
   // 실행 runtime의 descriptor와 관찰 상태를 그대로 화면에 사용한다
   const { scope, targetClassName, descriptor, method, setMethod, destination, setDestination, lastAction, snapshot, reducedMotion, navigate } = useNavigationModeAnimation()
   // 실제로 실행된 action만 코드 문법으로 포맷한다
-  const lastCall = !lastAction ? '// 아직 이동하지 않았습니다.' : lastAction.effectiveMethod === 'time' ? `tl.time(${lastAction.destination.time})` : lastAction.effectiveMethod === 'progress' ? `tl.progress(${lastAction.destination.progress.toFixed(3)})` : `const control = tl.tweenTo('${lastAction.destination.label}')
+  const lastCall = !lastAction ? '// 아직 이동하지 않았습니다.' : lastAction.effectiveMethod === 'time' ? `tl.time(${lastAction.destination.time})` : lastAction.effectiveMethod === 'progress' ? `tl.progress(${lastAction.destination.progress.toFixed(3)})` : `control = tl.tweenTo('${lastAction.destination.label}')
 control.eventCallback('onUpdate', report)
 control.eventCallback('onComplete', report)`
   // Timeline 구성과 마지막 실제 호출을 같은 descriptor에서 직렬화한다
-  const code = `const tl = gsap.timeline({ paused: true, defaults: { duration: ${descriptor.duration}, ease: 'none' } })
-  .addLabel('intro', 0).to('.${targetClassName}', { x: ${descriptor.distance} })
-  .addLabel('focus').to('.${targetClassName}', { rotation: ${descriptor.rotation} })
-  .addLabel('outro').to('.${targetClassName}', { scale: ${descriptor.scale} })
+  const code = `import gsap from 'gsap'
+
+const target = document.querySelector('.${targetClassName}')
+if (!target) throw new Error('playhead target을 찾지 못했습니다.')
+const tl = gsap.timeline({ paused: true, defaults: { duration: ${descriptor.duration}, ease: 'none' } })
+  .addLabel('intro', 0).to(target, { x: ${descriptor.distance} })
+  .addLabel('focus').to(target, { rotation: ${descriptor.rotation} })
+  .addLabel('outro').to(target, { scale: ${descriptor.scale} })
   .addLabel('finish')
 
-${lastCall}`
+let control = null
+function report() {
+  console.log({ time: tl.time(), progress: tl.progress() })
+}
+
+${lastCall}
+
+function cleanup() {
+  control?.kill()
+  tl.revert()
+}`
 
   return (
     <section className={`navigation-mode-lab${reducedMotion ? ' navigation-mode-lab--reduced' : ''}`} aria-labelledby="navigation-mode-title">

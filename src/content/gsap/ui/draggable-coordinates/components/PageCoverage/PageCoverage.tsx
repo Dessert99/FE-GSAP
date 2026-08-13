@@ -16,14 +16,12 @@ export function PageCoverage() {
       aria-labelledby="draggable-coordinates-coverage-title"
     >
       <div>
-        <p>OFFICIAL COVERAGE</p>
+        <p>DRAG 좌표 읽기 순서</p>
         <h2 id="draggable-coordinates-coverage-title">
-          {officialItemCount} /{' '}
-          {draggableCoordinatesCoverage.officialSourceItems}
+          핵심 동작 {officialItemCount}개
         </h2>
         <span>
-          {draggableCoordinatesCoverage.officialSources} canonicals ·
-          source/type 대조는 handoff에 별도 기록
+          공식 문서 {draggableCoordinatesCoverage.officialSources}개 · target과 pointer 값을 단계별로 비교
         </span>
       </div>
       <ol>
@@ -32,7 +30,7 @@ export function PageCoverage() {
             <a href={`#${section.id}`}>
               {section.number} · {section.title}
             </a>
-            <span>{section.sourceItems} items</span>
+            <span>{section.sourceItems}개 핵심 동작</span>
           </li>
         ))}
       </ol>

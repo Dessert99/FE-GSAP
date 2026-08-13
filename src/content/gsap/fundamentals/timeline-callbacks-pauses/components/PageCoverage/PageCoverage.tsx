@@ -10,22 +10,22 @@ const mappedSourceCount = new Set(timelineCallbacksPausesSourceItems.map((item) 
 
 export function PageCoverage() {
   return (
-    <nav className="schedule-coverage" aria-label="공식 source 대응 범위">
+    <nav className="schedule-coverage" aria-label="Timeline callback과 pause 학습 순서">
       <div className="schedule-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{timelineCallbacksPausesCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{timelineCallbacksPausesCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          여섯 공식 문서의 기술 item {timelineCallbacksPausesCoverage.officialSourceItems}개를 "예약한다 → 어디에 놓나 → 멈춘다 →
+          여섯 공식 문서의 핵심 동작 {timelineCallbacksPausesCoverage.officialSourceItems}개를 "예약한다 → 어디에 놓나 → 멈춘다 →
           끝을 안다"라는 여덟 단계로 다시 묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로
           표시합니다.
         </p>
@@ -37,7 +37,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

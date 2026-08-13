@@ -44,9 +44,29 @@
   - SMOOTHER-F04 PASS — rendered/source/type mismatch for `smooth(value)` return is explicit and code does not consume that return.
   - SMOOTHER-F05 PASS — static figure/table/code have semantic labels, no live updates, no motion, and reduced-motion outcome is explicit.
   - SMOOTHER-I01 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - SMOOTHER-B01 DEFERRED — browser keyboard focus and official-link navigation.
-  - SMOOTHER-B02 DEFERRED — browser reduced-motion static-outcome presentation.
-  - SMOOTHER-B03 DEFERRED — browser 320/390px model/code overflow layout.
-  - SMOOTHER-B04 DEFERRED — browser rendered page appearance.
+  - SMOOTHER-B01 DEFERRED → PASS — browser keyboard focus and official-link navigation.
+  - SMOOTHER-B02 DEFERRED → PASS — browser reduced-motion static-outcome presentation.
+  - SMOOTHER-B03 DEFERRED → PASS — browser 320/390px model/code overflow layout.
+  - SMOOTHER-B04 DEFERRED → PASS — browser rendered page appearance.
 - verificationEvidence: task-17 report records source passes, exact audit, page-local TypeScript, scoped Prettier fallback, static a11y/comment audit, and assigned-path diff check.
-- releaseDecision: PASS — root integration complete; SMOOTHER-B01–B04 are the four approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: ScrollSmoother `effects()`, `progress`, `smooth()` 공식 문서를 다시 대조했다. speed/lag data 탐색·제거·반환 trigger, function refresh, auto speed, progress 범위와 smooth getter/setter 의미를 확인했다.
+- findings:
+  - SSE-A01 `BLOCK → ADDRESSED` — 학습 화면의 sourcePath·coverage·P번호·runtimeSource/ownership 제작 표현을 실제 API 경계로 바꿨다.
+  - SSE-A02 `PASS (static)` — 표시 코드는 `ScrollSmoother.get()` null guard, 이전 smooth 값, effect trigger 교체와 cleanup을 포함하고 descriptor가 target/config를 함께 만든다.
+  - SSE-A03 `ADVISORY` — 공식 smooth setter 반환은 self지만 설치된 d.ts는 void이고 source는 number를 반환한다. 예제는 반환값을 소비하지 않아 세 근거에 모두 안전하다.
+  - SSE-A04 `DEFERRED` — 실제 root effects, data discovery, 작은 viewport code/figure 확인은 사용자 승인에 따라 수행하지 않았다.
+  - SSE-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.

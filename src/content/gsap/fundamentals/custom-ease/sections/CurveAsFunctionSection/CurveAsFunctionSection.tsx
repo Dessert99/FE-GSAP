@@ -20,20 +20,18 @@ export function CurveAsFunctionSection() {
         </p>
         <p>
           ease가 무엇이고 <code>power2.out</code> 같은 이름이 어떻게 해석되는지는{' '}
-          <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>가 소유합니다. 이 페이지는 그 다음 질문 하나만 다룹니다.{' '}
+          <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>에서 먼저 확인할 수 있습니다. 여기서는 그 다음 질문 하나만 다룹니다.{' '}
           <strong>준비된 이름 중에 원하는 모양이 없으면 어떻게 하나요?</strong>
         </p>
         <p>
-          공식 문서의 답은 분명합니다. CustomEase는 <strong>"준비된 easing 선택지의 한계에서 벗어나게 해 준다"</strong>고 적혀 있습니다.
-          Ease Visualizer에서 곡선을 직접 그리거나 SVG path를 복사해 붙여 넣는 것만으로, 상상할 수 있는 어떤 easing 곡선이든 만들 수
-          있다는 뜻입니다.
+          CustomEase를 쓰면 Ease Visualizer에서 곡선을 직접 그리거나 SVG path를 복사해 붙여 넣어 준비된 ease에 없는
+          곡선을 만들 수 있습니다.
         </p>
       </div>
 
       <div className="custom-ease-page__note">
         <h3>제어점 개수에 제한이 없습니다</h3>
         <p>
-          공식 문서는 이 문단을 <strong>"Zero limitations. Use as many control points as you want."</strong>라는 두 문장으로 끝냅니다.{' '}
           <strong>제어점(control point)</strong>은 곡선의 모양을 잡아 주는 점입니다. CSS의 <code>cubic-bezier()</code>가 제어점 두 개만
           허용하는 것과 달리, CustomEase는 점을 원하는 만큼 찍어 여러 번 꺾이고 되돌아오는 곡선까지 만들 수 있습니다.
         </p>

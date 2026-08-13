@@ -95,19 +95,6 @@ export function ConditionsObjectSection() {
           거짓인 동안 handler는 아예 실행되지 않습니다. 서로 반대인 조건을 쌍으로 두는 습관이 여기서 나옵니다.
         </p>
       </div>
-
-      <div className="responsive-page__note responsive-page__note--probe">
-        <h3>공식 문서에 없는 것 하나 — context.queries</h3>
-        <p>
-          공식 페이지는 <code>context.conditions</code>만 설명합니다. 설치본에서 확인하면 그 옆에 <code>context.queries</code>가 있고,
-          조건 이름별 <strong>원본 query 문자열</strong>을 그대로 들고 있습니다. 아래 예제의 표가 query 문자열을 보여줄 수 있는 이유도
-          같은 값을 실행 시점에 만들어 두기 때문입니다.
-        </p>
-        <p className="responsive-page__provenance">
-          이 항목은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다.
-        </p>
-      </div>
-
       <ConditionRebuildLab />
     </section>
   )

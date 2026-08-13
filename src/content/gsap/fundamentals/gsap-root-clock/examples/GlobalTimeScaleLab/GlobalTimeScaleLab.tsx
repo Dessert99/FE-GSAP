@@ -17,19 +17,89 @@ export function GlobalTimeScaleLab() {
     useGlobalTimeScaleAnimation()
 
   // 실제 실행에 쓰인 배속·거리·시간을 코드 문법으로만 포맷한다
-  const code = `// 이 한 줄이 앱 안의 모든 animation 속도를 바꿉니다
-gsap.globalTimeline.timeScale(${descriptor.appliedTimeScale})
+  const code = `import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { useRef, useState } from 'react'
+import { useReducedMotion } from '../../../../../../components/demo/InteractiveExample/useReducedMotion'
 
-// tween 자신의 설정은 아무것도 바뀌지 않습니다
-gsap.to('${descriptor.selector}', {
-  x: ${descriptor.travelX},
-  duration: ${descriptor.effectiveDuration},
-  ease: 'none',
+function GlobalTimeScaleExample() {
+const scope = useRef(null)
+const tweenRef = useRef(null)
+const startedAtRef = useRef(0)
+const [, setObservation] = useState({})
+const requestedTimeScale = ${descriptor.requestedTimeScale}
+const timeScale = ${descriptor.appliedTimeScale}
+const duration = ${descriptor.effectiveDuration}
+
+function round(value) {
+  return Math.round(value * 100) / 100
+}
+
+function report() {
+  const tween = tweenRef.current
+  if (!tween) return
+  const globalTimeScale = gsap.globalTimeline.timeScale()
+  setObservation({
+    globalTimeScale,
+    tweenOwnTimeScale: tween.timeScale(),
+    tweenSeconds: round(tween.time()),
+    wallSeconds: round((performance.now() - startedAtRef.current) / 1000),
+    restored: globalTimeScale === 1,
+  })
+}
+
+useGSAP(() => {
+  const target = scope.current?.querySelector('${descriptor.selector}')
+  if (!target) return
+  gsap.set(target, { x: 0 })
+
+  // Tween은 버튼을 누를 때 재생하도록 미리 준비합니다
+  const tween = gsap.to(target, {
+    x: ${descriptor.travelX},
+    duration,
+    ease: 'none',
+    paused: true,
+    onUpdate: report,
+    onComplete() {
+      gsap.globalTimeline.timeScale(1)
+      report()
+    },
+  })
+  tweenRef.current = tween
+  startedAtRef.current = performance.now()
+  report()
+
+  return () => {
+    tween.kill()
+    gsap.globalTimeline.timeScale(1)
+    tweenRef.current = null
+  }
+}, {
+  scope,
+  dependencies: [requestedTimeScale, timeScale, duration],
+  revertOnUpdate: true,
 })
 
-// 전역 상태이므로 끝나면 반드시 되돌립니다
-gsap.globalTimeline.timeScale(1)
-// → 지금 읽은 값: ${observation.globalTimeScale}`
+function run() {
+  const tween = tweenRef.current
+  if (!tween) return
+  gsap.globalTimeline.timeScale(timeScale)
+  startedAtRef.current = performance.now()
+  tween.restart()
+}
+
+function restore() {
+  gsap.globalTimeline.timeScale(1)
+  report()
+}
+
+return <div ref={scope}>
+  <div className="${descriptor.selector.slice(1)}" />
+  <button onClick={run}>실행</button>
+  <button onClick={restore}>1로 복원</button>
+</div>
+}
+// 지금 읽은 전역 값: ${observation.globalTimeScale}`
 
   return (
     <section className="global-timescale-lab" aria-labelledby="global-timescale-lab-title">

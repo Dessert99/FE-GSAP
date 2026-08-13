@@ -22,8 +22,8 @@ export function ThrowStateSection() {
           callback에서 instance field를 읽습니다.
         </p>
         <p>
-          InertiaPlugin은 이 throw branch의 dependency입니다. P08은 velocity·resistance·landing
-          rule을 가르치지 않으며, 그 상세 모델은 Inertia lesson의 소유입니다. 모션 감소 설정에서는
+          InertiaPlugin은 이 throw branch의 dependency입니다. velocity·resistance·landing
+          규칙은 Inertia 학습 페이지에서 이어서 다룹니다. 모션 감소 설정에서는
           lab이 <code>inertia: false</code>로 runtime을 만들어 현재 위치에 즉시 정착시킵니다.
         </p>
       </div>

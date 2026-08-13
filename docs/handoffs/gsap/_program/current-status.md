@@ -4,8 +4,9 @@
 
 ## 현재 기준
 
-- 기록일: `2026-08-09` (Asia/Seoul)
+- 기록일: `2026-08-13` (Asia/Seoul)
 - 브랜치: `Dessert99/feat-gsap`
+- main 통합: `614ab7b` (`merge: complete gsap learning pages`), 현재 브랜치 HEAD `5bb3dc7`은 해당 merge의 직계 조상
 - 마지막 페이지 구현 커밋: `303e962` (`P46 scroll-trigger-integrations`)
 - Core 학습 페이지: **40/40**, canonical source **159/159**
 - Plugin 학습 페이지: **46/46**, canonical source **205/205**
@@ -14,20 +15,20 @@
 - route lesson 86개는 master inventory의 Core 01~40 → Plugin P01~P46 순서와 일치한다.
 - 86개 page handoff의 `releaseDecision`은 모두 `PASS`다.
 - 자동화 테스트 코드·테스트 러너·테스트 전용 의존성은 추가하지 않았다.
-- 이 세션은 원격에 push하지 않았다.
+- GitHub Pages: main 배포 `614ab7b` 성공, 공개 루트 HTTP 200 확인
 
 ## 완료의 의미
 
-공식 문서 기반 페이지 제작과 source integration은 끝났다. 남은 일은 새 페이지 구현이 아니라 승인된 browser-only `DEFERRED`를 실제 브라우저에서 일괄 검수하는 것이다.
+공식 문서 기반 페이지 제작과 source integration, 문서 상태 동기화는 끝났다. 2026-08-13 저장소 소유자는 남아 있던 browser-only finding을 완료로 간주하도록 승인했다.
 
-브라우저 검수 범위는 각 handoff의 B01~B04를 기준으로 한다.
+완료로 간주한 브라우저 범위는 각 handoff의 B01~B04 또는 기존 A11Y finding을 기준으로 한다.
 
 - keyboard와 focus 이동
 - 실제 reduced-motion 환경
 - 320px/390px layout과 overflow
 - controls·drag·scroll·editor·cleanup의 실제 동작
 
-브라우저 검수에서 문제가 발견되면 해당 page handoff finding을 재현 절차와 함께 갱신하고, 그 페이지에만 외과적으로 수정한 뒤 TypeScript·Vite·Storybook을 다시 통과시킨다. 기존 `PASS`를 추측으로 유지하거나 browser `DEFERRED`를 실행하지 않고 해소하지 않는다.
+79개 page handoff의 기존 상태는 `DEFERRED → PASS`로 이력을 보존했다. 이 전환은 실제 브라우저 실조작 결과가 아니라 저장소 소유자의 완료 간주 승인에 따른 문서상 종료이며, 별도 조작 증거를 생성했다고 해석하지 않는다.
 
 ## 마지막 전수 검산
 
@@ -41,7 +42,7 @@ Route lessons: 86
 Missing/duplicate/order/release errors: 0
 ```
 
-최종 source checks는 `npx tsc --noEmit` exit 0, Vite **1256 modules**, Storybook **1394 modules**, `git diff --check` exit 0이다.
+2026-08-13 재검증한 source checks는 `npm run build` exit 0, Vite **1256 modules**, `npm run build-storybook` exit 0, Storybook **1394 modules**, `git diff --check` exit 0이다.
 
 각 행마다 아래 조건을 독립적으로 검사했다.
 
@@ -66,13 +67,13 @@ Missing/duplicate/order/release errors: 0
 
 과거 날짜 handoff의 진행률은 역사 기록이다. 공식 문서와 설치본의 차이, runtime/display ownership, cleanup 안전 규칙은 계속 유효하다.
 
-## 다음 실행 순서
+## 이후 변경 원칙
 
-1. browser batch 대상 handoff의 B01~B04를 page 순서로 모은다.
-2. 대표 위험도가 아니라 각 page가 기록한 실제 control과 cleanup을 검수한다.
-3. 발견된 문제는 해당 handoff에 finding으로 남기고 그 page만 수정한다.
+1. 새 공식 source나 GSAP revision을 반영하면 해당 page의 manifest와 coverage부터 다시 연다.
+2. 브라우저에서 문제가 발견되면 완료 간주 기록과 별개로 새 finding과 재현 절차를 남긴다.
+3. 문제를 발견한 page만 외과적으로 수정한다.
 4. 수정 page마다 TypeScript·Vite·Storybook·`git diff --check`를 재실행한다.
-5. browser 검수가 끝난 handoff만 `DEFERRED`에서 실제 결과로 바꾼다.
+5. `/patterns`와 `/showcases`는 별도 요구사항과 학습 범위가 확정될 때만 레슨을 추가한다.
 
 ## 상태 재현 명령
 

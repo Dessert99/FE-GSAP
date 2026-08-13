@@ -5,15 +5,17 @@ gsap.registerPlugin(EaselPlugin)
 const renderStage = () => stage.update()
 gsap.ticker.add(renderStage)
 
-gsap.to(circle, {
+const tween = gsap.to(circle, {
   duration: 2,
   scaleX: 0.5,
   scaleY: 0.5,
   easel: { tint: 0x00ff00 },
 })
 
-// cleanup
-gsap.ticker.remove(renderStage)`
+function cleanup() {
+  tween.kill()
+  gsap.ticker.remove(renderStage)
+}`
 /** DOM/CSS와 canvas display object의 update/draw 책임을 한 diagram에 배치한다. */
 export function BoundaryDiagram() {
   return (
@@ -48,8 +50,8 @@ export function BoundaryDiagram() {
       </pre>
       <p>
         이 저장소에는 CreateJS가 없으므로 이 diagram과 code는 실행 결과가 아닌
-        필요한 실행 경계를 설명합니다. 실제 canvas의 의미는 Stage draw 뒤에
-        화면에 나타나며, 여기서는 textual state로 대체합니다.
+        필요한 실행 순서를 설명합니다. 실제 canvas 결과는 Stage draw 뒤에
+        나타나며, 여기서는 정적 설명으로 대신합니다.
       </p>
     </figure>
   )

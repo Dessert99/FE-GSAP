@@ -14,21 +14,13 @@ export type OfficialCoverageItem = {
 /** gsap.to() 페이지의 공식 출처와 로컬 위치를 한곳에서 관리한다. */
 export const gsapToPageMeta = {
   sourcePageId: 'source:gsap-to',
-  sourceRevision: 1,
+  sourceRevision: 2,
   title: 'gsap.to()',
   category: 'GSAP · Methods',
   officialUrl: 'https://gsap.com/docs/v3/GSAP/gsap.to%28%29/',
   sourcePath: 'src/content/gsap/fundamentals/gsap-to/',
   summary: '대상이 지금 있는 모습에서 내가 정한 위치나 모습까지 자연스럽게 바뀌게 합니다.',
-  reviewedAt: '2026-08-02',
-} as const
-
-/** 구현 근거 연결과 검증·릴리스 판정을 섞지 않도록 현재 게이트를 따로 공개한다. */
-export const gsapToReviewStatus = {
-  selfVerification: 'PASS · coverage/runtime/learning/structure',
-  browserVerification: 'DEFERRED · 소유자 일괄 브라우저 검수 대상',
-  releaseDecision: 'PASS',
-  releaseReason: '키보드·reduced-motion·작은 화면·control 실조작은 소유자 일괄 검수로 유예된 상태입니다.',
+  reviewedAt: '2026-08-13',
 } as const
 
 /** 공식 목차와 로컬 학습 섹션의 이동 경로를 대응시킨다. */
@@ -60,7 +52,7 @@ export const officialCoverageItems: OfficialCoverageItem[] = [
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#data', officialItem: 'data', sourceLocation: 'L204-206 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-data', 'TweenControlsExample · tween.data'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#delay', officialItem: 'delay', sourceLocation: 'L208-210 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-delay', 'PlaybackOptionsExample · delay'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#duration', officialItem: 'duration', sourceLocation: 'L212-214 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-duration', 'DestinationValuesExample · duration'], localStatus: 'covered' },
-  { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#ease', officialItem: 'ease', sourceLocation: 'L216-217 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-ease · 0..1 함수 계약', 'DestinationValuesExample · ease'], localStatus: 'covered' },
+  { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#ease', officialItem: 'ease', sourceLocation: 'L216-217 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-ease · 입력 진행률과 overshoot 출력 경계', 'DestinationValuesExample · ease'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#ease-reverse', officialItem: 'easeReverse', sourceLocation: 'L219-221 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-easeReverse', 'PlaybackOptionsExample · easeReverse'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#id', officialItem: 'id', sourceLocation: 'L222-224 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-id', 'TweenControlsExample · id'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#immediate-render', officialItem: 'immediateRender', sourceLocation: 'L226-227 · Special Properties', sourceStatus: 'verified', localEvidence: ['property-immediateRender'], localStatus: 'covered' },
@@ -100,7 +92,7 @@ export const officialCoverageItems: OfficialCoverageItem[] = [
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#stagger-guide', officialItem: 'Staggers', sourceLocation: 'L357-359 · Staggers', sourceStatus: 'verified', localEvidence: ['StaggersSection', 'MultipleTargetsExample · 숫자/객체 stagger'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#sequencing-delay-timeline-selection', officialItem: 'delay와 Timeline 선택', sourceLocation: 'L360-361 · Sequencing', sourceStatus: 'verified', localEvidence: ['SequencingSection · 선택 기준'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#timeline-overlap-nesting-chaining', officialItem: 'Timeline 겹침·중첩·체이닝', sourceLocation: 'L362-369 · Sequencing', sourceStatus: 'verified', localEvidence: ['SequencingSection · to/from/fromTo 체이닝과 Tween 겹침/Timeline 중첩 경계'], localStatus: 'covered' },
-  { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#keyframes-guide-purpose', officialItem: 'Keyframes 사용 목적', sourceLocation: 'L370-374 · Keyframes', sourceStatus: 'verified', localEvidence: ['KeyframesSection · 반복 호출 축약과 CSS animation 이식', 'KeyframesExample · canonical 배열과 linked-guide 형식 분리'], localStatus: 'covered' },
+  { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#keyframes-guide-purpose', officialItem: 'Keyframes 사용 목적', sourceLocation: 'L370-374 · Keyframes', sourceStatus: 'verified', localEvidence: ['KeyframesSection · 반복 호출 축약과 CSS animation 이식', 'KeyframesExample · vars 배열과 백분율 객체 형식 분리'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#callback-events', officialItem: '콜백 이벤트', sourceLocation: 'L375-379 · Callbacks', sourceStatus: 'verified', localEvidence: ['CallbacksSection', 'CallbacksExample · 생명주기 이벤트'], localStatus: 'covered' },
   { sourcePageId: 'source:gsap-to', sourceItemId: 'source:gsap-to#callback-use-cases', officialItem: '콜백 사용처', sourceLocation: 'L377-382 · Callbacks', sourceStatus: 'verified', localEvidence: ['CallbacksExample · 디버깅과 동기화'], localStatus: 'covered' },
 ]

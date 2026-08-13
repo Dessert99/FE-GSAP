@@ -93,6 +93,7 @@ export function useWiggleShapeAnimation() {
 
       // 5. Tween이 완성된 뒤에 콜백을 붙여, GSAP이 계산한 위치를 매 프레임 그대로 읽어 온다
       tween.eventCallback('onUpdate', () => {
+        // 곡선의 출력값과 progress 표시가 같은 재생 위치를 가리키게 한다
         const current = tween.progress()
         setProgress(current)
         setObservation((previous) => ({ ...previous, ratio: wiggleEase(current) }))
@@ -115,6 +116,7 @@ export function useWiggleShapeAnimation() {
 
   // 모션 감소 설정에서는 움직임 없이 끝 상태만 보여주고, 아니면 처음부터 재생한다
   function run() {
+    // 설정 변경 뒤 가장 최근에 만든 Tween만 제어한다
     const tween = tweenRef.current
     if (!tween) return
 
@@ -130,6 +132,7 @@ export function useWiggleShapeAnimation() {
 
   // 사용자가 직접 끄는 값이므로 재생을 멈추고 그 위치의 화면 상태로 곧바로 이동시킨다
   function seek(value: number) {
+    // slider와 재생 버튼이 같은 Tween을 제어하게 참조를 다시 읽는다
     const tween = tweenRef.current
     if (!tween) return
 

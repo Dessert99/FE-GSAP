@@ -1,8 +1,8 @@
-/** P27 official identity와 source link를 표시한다. */
+/** Observer gesture 상태 학습 페이지의 경로와 공식 문서 링크를 정의한다. */
 export const observerGestureStateMeta = {
   title: 'pressed는 언제 dragging이 되나요?',
   category: 'GSAP · UI · Observer',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   sourcePath: 'src/content/gsap/ui/observer-gesture-state/',
   officialSources: [
     {

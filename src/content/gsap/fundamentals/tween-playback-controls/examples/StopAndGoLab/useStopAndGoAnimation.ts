@@ -7,6 +7,11 @@ import { useReducedMotion } from '../../../../../../components/demo/InteractiveE
 /** 버튼 하나하나가 실제로 부르는 Tween 호출을 구분한다. */
 export type StopAndGoCommand = 'pause' | 'pauseAt' | 'play' | 'playFrom' | 'resume' | 'turnBackward'
 
+/** 실제로 실행한 메서드와 그 순간 사용한 인자를 함께 보관한다. */
+export type StopAndGoAction =
+  | { command: Exclude<StopAndGoCommand, 'pauseAt' | 'playFrom'> }
+  | { command: 'pauseAt' | 'playFrom'; time: number }
+
 /** 명령 직후와 매 프레임마다 Tween에서 그대로 읽어 오는 재생 상태다. */
 export type PlaybackObservation = {
   paused: boolean
@@ -64,8 +69,8 @@ export function useStopAndGoAnimation() {
     time: 0,
     progress: 0,
   })
-  // 마지막으로 누른 버튼이 부른 호출 — TSX가 이것으로 코드와 안내 문장을 만든다
-  const [lastCommand, setLastCommand] = useState<StopAndGoCommand | null>(null)
+  // 마지막 실행 시점의 명령과 인자 — slider를 나중에 바꿔도 표시 코드가 달라지지 않는다
+  const [lastAction, setLastAction] = useState<StopAndGoAction | null>(null)
   // 운영체제 모션 감소 설정에서는 움직이는 표시자 대신 숫자만 보여준다
   const reducedMotion = useReducedMotion()
   // controls·GSAP 호출·serializer가 공유할 단일 descriptor다
@@ -113,19 +118,23 @@ export function useStopAndGoAnimation() {
     const tween = tweenRef.current
     if (!tween) return
 
-    // 인자를 준 호출과 안 준 호출을 나란히 두어 atTime·from의 역할이 드러나게 한다
-    if (command === 'pause') tween.pause()
-    if (command === 'pauseAt') tween.pause(descriptor.jumpTo)
-    if (command === 'play') tween.play()
-    if (command === 'playFrom') tween.play(descriptor.jumpTo)
-    if (command === 'resume') tween.resume()
-    // 방향 스위치를 직접 뒤로 돌려 둔다 — play()와 resume()의 차이를 만들 준비다
-    if (command === 'turnBackward') tween.reversed(true)
+    // 인자를 쓰는 명령은 버튼을 누른 순간의 slider 값을 실행 기록에 고정한다
+    const action: StopAndGoAction =
+      command === 'pauseAt' || command === 'playFrom' ? { command, time: descriptor.jumpTo } : { command }
 
-    setLastCommand(command)
+    // 인자를 준 호출과 안 준 호출을 나란히 두어 atTime·from의 역할이 드러나게 한다
+    if (action.command === 'pause') tween.pause()
+    if (action.command === 'pauseAt') tween.pause(action.time)
+    if (action.command === 'play') tween.play()
+    if (action.command === 'playFrom') tween.play(action.time)
+    if (action.command === 'resume') tween.resume()
+    // 방향 스위치를 직접 뒤로 돌려 둔다 — play()와 resume()의 차이를 만들 준비다
+    if (action.command === 'turnBackward') tween.reversed(true)
+
+    setLastAction(action)
     report()
   }
 
   // TSX가 controls·관찰 패널·코드 패널을 같은 runtime 값에서 그리도록 필요한 값만 전달한다
-  return { scope, jumpTo, setJumpTo, position, observation, lastCommand, descriptor, reducedMotion, run }
+  return { scope, jumpTo, setJumpTo, position, observation, lastAction, descriptor, reducedMotion, run }
 }

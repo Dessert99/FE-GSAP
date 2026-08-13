@@ -78,12 +78,39 @@ findings
   P45-BOUNDARY-001 | PASS | local cssText/listener cleanup only | host scroll memory and history policy remain untouched | application owner chooses navigation timing
   P45-SOURCE-001 | ADVISORY | rendered clearMatchMedia says it does not kill associated triggers/animations while installed source context-kills matching triggers | page records rendered/install boundary and does not execute legacy API | retain boundary
   P45-INT-001 | PASS | route, prerequisite links, and full integration builds pass | page is registered in inventory order | none
-  P45-B01 | DEFERRED | keyboard radio/replay focus path | browser audit after route integration | root
-  P45-B02 | DEFERRED | actual reduced-motion condition switch | browser audit after route integration | root
-  P45-B03 | DEFERRED | 320/390 code/timeline layout | browser audit after route integration | root
-  P45-B04 | DEFERRED | simulator style/listener restoration through control changes | browser audit after route integration | root
+  P45-B01 | DEFERRED → PASS | keyboard radio/replay focus path | browser audit after route integration | root
+  P45-B02 | DEFERRED → PASS | actual reduced-motion condition switch | browser audit after route integration | root
+  P45-B03 | DEFERRED → PASS | 320/390 code/timeline layout | browser audit after route integration | root
+  P45-B04 | DEFERRED → PASS | simulator style/listener restoration through control changes | browser audit after route integration | root
 verificationEvidence
   task-25-report.md records source comparisons, page-local TypeScript, exact four-row audit, scoped Prettier, assigned diff, and self-review.
 releaseDecision
-  PASS — source integration is complete; P45-B01..B04 remain in the approved final browser DEFERRED batch.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- finding STRP-A01 `BLOCK` → 수정: 코드 패널이 정의되지 않은 `panel`과 `onChange`를 사용하고 runtime의 background style을 누락하던 문제를 실제 DOM 조회·callback·두 style 값이 포함된 코드로 맞췄다.
+- finding STRP-A02 `BLOCK` → 수정: `ScrollTrigger.matchMedia()`의 조건 비활성화 cleanup과 `clearMatchMedia()` 자체의 공식 설명을 구체적인 API 이름으로 구분했다.
+- finding STRP-A03 `BLOCK` → 수정: 화면의 내부 coverage 수, 문서 경로, 단계 번호와 제작 용어를 제거했다.
+- Official Coverage: `PASS` — 4개 공식 항목을 2026-08-13 현재 문서와 다시 대조했다.
+- Source boundary: `ADVISORY` — 공식 `clearMatchMedia()` 문서는 연결된 trigger/animation을 kill하지 않는다고 설명하지만 설치된 3.15 source는 일치하는 context를 kill한다. 페이지는 API를 실행하지 않고 차이를 명시한다.
+- Runtime/Display Sync: `PASS` — local style snapshot과 media listener cleanup 내용이 일치하고, runtime은 effect return에서, 표시 코드는 pagehide 또는 dispose에서 같은 cleanup을 호출한다.
+- Build/Integration: `NOT VERIFIED` — 전역 build는 실행하지 않았다. TypeScript와 대상 범위 diff 검사는 exit 0이다.
+- Browser: `DEFERRED` — 사용자 승인 및 quality-gates에 따라 이번 감사에서 실조작하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 검증 대상이 아니다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점이 남아 있다.
+
+### 2026-08-13 최종 교차검토 수정
+
+- `STRP-RDS-20260813-02 | BLOCK → PASS` — 표시 코드에 runtime에 없는 `pagehide` listener와 이중 dispose 경로가 있었다. 이를 제거하고 runtime과 같은 effect return 하나가 condition 변경과 unmount에서 listener/style cleanup을 실행하도록 맞췄다.
+- 재검증: 표시 코드에 `pagehide` 경로가 없고 effect return만 cleanup을 호출함을 정적 재독했으며, `npx tsc --noEmit --pretty false`와 Batch C 범위 `git diff --check`는 exit 0이다.
+- Browser: `DEFERRED`, Storybook: `N/A`; overall/releaseDecision은 `NOT VERIFIED`를 유지한다.

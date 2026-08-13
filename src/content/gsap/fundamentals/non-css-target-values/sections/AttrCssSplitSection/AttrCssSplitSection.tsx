@@ -82,8 +82,8 @@ export function AttrCssSplitSection() {
         <h3>CSS property를 attr 안에 넣지 마세요</h3>
         <p>
           공식 문서의 문장입니다. <strong>CSS 관련 property를 attr 객체 안에서 animate하려 하면 안 됩니다.</strong> GSAP이 CSS를
-          내부적으로 다르게 처리하기 때문입니다. 반대 방향도 마찬가지입니다. SVG의 <code>r</code>이나 <code>width</code> 같은 attribute를{' '}
-          <code>attr</code> 밖에 적으면 GSAP은 그걸 CSS로 해석합니다.
+          내부적으로 다르게 처리하기 때문입니다. attribute 값을 바꾸려면 <code>attr</code> 안에 적고, CSS 값은 바깥에 적어 두 자리를
+          구분하세요.
         </p>
         <p>
           CSS 값과 transform이 실제로 어떻게 처리되는지는{' '}

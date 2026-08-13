@@ -27,10 +27,10 @@ export function ThresholdFormsSection() {
         </p>
       </div>
       <aside className="draggable-collision-momentum-page__note">
-        <strong>source/probe 경계:</strong> 공식 문서는 “minimum pixels”와 “percentage”를
-        설명합니다. 설치 source와 Node probe에서는 numeric 10px overlap이 threshold <code>10</code>
-        에 false, <code>9</code>에 true였고 percentage 10%는 true였습니다. 이 strict comparison은
-        공식 문구가 아니라 source/probe observation입니다.
+        <strong>공식 설명의 경계:</strong> 공식 문서는 “minimum pixels”와 “percentage”를
+        설명하지만 경계값의 비교 연산자는 명시하지 않습니다. 설치된 GSAP 3.15.0에서는 10px
+        overlap에 threshold <code>10</code>은 false, <code>9</code>는 true였습니다. 이 결과를 다른
+        버전의 공식 계약으로 일반화하지 않습니다.
       </aside>
     </section>
   )

@@ -17,15 +17,15 @@ const lifecycles = [
     label: '변수에 담지 않음',
     code: 'gsap.to(".box", { x: 100 })',
     steps: ['만들어진다', '기본적으로 즉시 재생된다', '끝난다', '스스로 폐기한다'],
-    cleanup: '따로 치울 것이 없습니다.',
-    control: '만든 뒤에는 손댈 방법이 없습니다.',
+    cleanup: '완료되면 GSAP이 자동으로 폐기합니다.',
+    control: '반환값으로 직접 제어할 변수는 없습니다.',
   },
   {
     id: 'kept',
     label: '변수에 담음',
     code: 'let tween = gsap.to(".box", { x: 100 })',
-    steps: ['만들어진다', '기본적으로 즉시 재생된다', '끝난다', '변수가 살아 있는 동안 남는다'],
-    cleanup: '변수를 놓아 주면 정리됩니다.',
+    steps: ['만들어진다', '기본적으로 즉시 재생된다', '끝난 뒤에도 변수로 접근할 수 있다'],
+    cleanup: '애플리케이션이 변수 참조를 관리합니다.',
     control: '멈추고, 되감고, 다시 재생할 수 있습니다.',
   },
 ]
@@ -43,11 +43,8 @@ export function InstanceLifecycleSection() {
       <div className="instance-page__note">
         <h3>그냥 불러도 됩니다</h3>
         <p>
-          공식 Quick Start의 안내 상자는 이렇게 말합니다.{' '}
-          <strong>
-            "그냥 애니메이션을 쏘고 흘려보내려면 변수를 쓸 필요가 없다. Tween은 기본적으로 즉시 재생되고(다만 delay나 paused 값을 줄 수
-            있다) 끝나면 스스로 폐기한다. cleanup을 걱정하지 말고 gsap.to()를 원하는 만큼 불러라."
-          </strong>
+          공식 Quick Start는 나중에 직접 제어하지 않을 Tween은 변수에 담을 필요가 없다고 안내합니다. Tween은 기본적으로 즉시
+          재생되며(<code>delay</code>나 <code>paused</code>로 바꿀 수 있음), 완료되면 자동으로 폐기됩니다.
         </p>
         <p>
           여기서 중요한 단어가 둘 있습니다. <strong>즉시 재생</strong> — 만드는 것 자체가 시작 신호입니다. 그리고{' '}
@@ -86,13 +83,11 @@ export function InstanceLifecycleSection() {
       <div className="instance-page__split">
         <div className="instance-page__prose">
           <p>
-            나중에 손대야 한다면 방법은 하나입니다. 공식 문서의 표현대로{' '}
-            <strong>"Tween instance를 나중에 제어하려면 변수에 할당한다"</strong>입니다. 괄호 안에 붙인 설명도 그대로 옮기면{' '}
-            <strong>"GSAP은 편리하게도 객체지향적이다"</strong>입니다.
+            나중에 반환된 Tween을 직접 제어하려면 공식 문서의 예제처럼 <strong>Tween instance를 변수에 할당</strong>합니다.
           </p>
           <p>
             오른쪽이 공식 예제입니다. 한 번 담아 둔 <code>tween</code> 변수에 대고 멈추고, 2초 지점으로 건너뛰고, 절반 지점으로 옮기고,
-            다시 재생합니다. <strong>같은 instance에게 계속 말을 거는 것</strong>이 이 페이지 이후 모든 레슨의 기본 자세입니다.
+            다시 재생합니다. 같은 instance의 메서드를 이어서 호출하는 방식입니다.
           </p>
         </div>
         <pre className="instance-page__code">
@@ -106,9 +101,9 @@ export function InstanceLifecycleSection() {
           아래는 공식 문서에 적혀 있지 않습니다. GSAP 3.15.0을 Node에서 직접 실행해 확인한 결과입니다.
         </p>
         <p>
-          <strong>"스스로 폐기한다"는 말은 우리가 쥔 변수를 비운다는 뜻이 아닙니다.</strong> 완료된 Tween에게{' '}
-          <code>targets()</code>, <code>data</code>, <code>vars</code>를 물어보면 전부 그대로 답하고, <code>gsap.getById()</code>로도
-          계속 찾힙니다. GSAP이 정리하는 것은 자신이 매 프레임 돌리던 목록이지 우리 변수가 아닙니다.
+          <strong>"스스로 폐기한다"는 말이 애플리케이션의 변수까지 비운다는 뜻은 아닙니다.</strong> 이 probe에서는 완료 지점으로 옮긴
+          Tween의 <code>targets()</code>, <code>data</code>, <code>vars</code>를 변수로 계속 읽을 수 있었고, <code>gsap.getById()</code>도
+          같은 Tween을 돌려줬습니다. 변수 참조의 수명은 애플리케이션이 관리합니다.
         </p>
         <p>
           다만 <code>kill()</code>을 직접 부르면 달라집니다. 그때도 <code>targets()</code>·<code>data</code>·<code>vars</code>는 남지만{' '}

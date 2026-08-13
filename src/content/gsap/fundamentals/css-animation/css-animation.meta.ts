@@ -5,7 +5,7 @@ export const cssAnimationMeta = {
   summary: 'CSSPlugin이 이름·단위·복합값·transform을 해석하는 규칙을 알면 브라우저가 읽을 수 있는 중간값과 정리 시점을 의도대로 만들 수 있습니다.',
   officialUrl: 'https://gsap.com/docs/v3/GSAP/CorePlugins/CSS/',
   sourcePath: 'src/content/gsap/fundamentals/css-animation/',
-  reviewedAt: '2026-08-03',
+  reviewedAt: '2026-08-13',
 } as const
 
 /** 52개 source item을 로컬 학습 질문과 같은 anchor로 연결한다. */

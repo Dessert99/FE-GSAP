@@ -103,8 +103,8 @@ export function StopAndGoSection() {
             <tr>
               <th scope="col">명령</th>
               <th scope="col">이럴 때 쓴다</th>
-              <th scope="col">paused 스위치</th>
-              <th scope="col">reversed 스위치</th>
+              <th scope="col">paused 상태</th>
+              <th scope="col">reversed 상태</th>
               <th scope="col">어디서부터</th>
             </tr>
           </thead>
@@ -193,42 +193,15 @@ export function StopAndGoSection() {
       </pre>
 
       <div className="playback-page__note playback-page__note--probe">
-        <h3>resume()과 paused(false)는 결과가 같았습니다</h3>
-        <p>
-          <code>resume()</code>은 방향을 건드리지 않는다고만 적혀 있을 뿐, 05단계에서 볼 <code>paused(false)</code>와 무엇이 다른지는
-          공식 페이지에 없습니다. GSAP 3.15.0을 실행해 확인했습니다.
-        </p>
-        <p>
-          <strong>측정 방법</strong> — <code>duration 1</code>인 Tween을 절반 지점에 두고 거꾸로 향하게 한 뒤 멈춘 상태(
-          <code>paused=true, reversed=true, timeScale=-1</code>)에서 세 명령을 각각 한 번씩 불러 직후 값을 읽었습니다.{' '}
-          <code>resume()</code>과 <code>paused(false)</code>는 둘 다 <code>reversed=true, timeScale=-1</code>을 유지했고,{' '}
-          <code>play()</code>만 <code>reversed=false, timeScale=1</code>로 되돌렸습니다. 즉 관측 범위에서 앞의 둘은 구분되지 않고,{' '}
-          <code>play()</code>만 방향을 바꿉니다.
-        </p>
-        <p className="playback-page__provenance">
-          이 비교는 공식 페이지에 게시돼 있지 않습니다. 문서에 적힌 사실만 믿어야 하는 코드라면 방향을 유지하려는 의도를{' '}
-          <code>resume()</code>으로 쓰는 편이 안전합니다. 그 의도가 공식 문장으로 보장된 쪽입니다.
-        </p>
-      </div>
-
-      <div className="playback-page__note playback-page__note--probe">
-        <h3>timeScale이 0일 때의 공식 tip은 재현되지 않았습니다</h3>
+        <h3>timeScale이 0이면 명시적으로 값을 바꾸세요</h3>
         <p>
           <code>play()</code>와 <code>resume()</code> 두 페이지 모두 같은 안내를 답니다. <strong>timeScale이 정확히 0일 때 이 메서드를
           부르면 1로 바뀐다</strong>(그러지 않으면 재생되지 않으므로)는 것입니다. 그래서 0에서부터 서서히 올리고 싶다면 미리{' '}
           <code>myAnimation.timeScale(myAnimation.timeScale() || 0.001)</code>처럼 아주 작은 값을 주라고 권합니다.
         </p>
         <p>
-          <strong>측정 방법</strong> — 설치본 GSAP 3.15.0에서 여섯 경로를 각각 시도하고 호출 직후 <code>timeScale()</code>을
-          읽었습니다. <code>timeScale(0)</code> 뒤 <code>pause()</code>를 거쳐 <code>play()</code>/<code>resume()</code>/
-          <code>paused(false)</code>를 부른 세 경우, <code>pause()</code> 없이 <code>play()</code>를 부른 경우,{' '}
-          <code>reverse()</code>를 부른 경우까지 <strong>모두 0이 유지</strong>됐고 ticker를 300ms 돌려도 <code>progress</code>가
-          0이었습니다. <strong>예외가 하나</strong> 있었습니다. <code>timeScale(0)</code> 뒤 방향을 뒤로 바꿨다가{' '}
-          <code>play()</code>를 부르면 <code>timeScale</code>이 1이 아니라 <code>1e-8</code>이 됐습니다.
-        </p>
-        <p className="playback-page__provenance">
-          공식 tip은 위에 그대로 옮겨 두었고, 재현 결과가 다르다는 사실을 함께 남깁니다. <code>timeScale</code> 자체의 계약은 이
-          페이지가 소유하지 않으므로, 0에서 출발해야 한다면 문서의 권고대로 아주 작은 값을 먼저 주는 쪽이 두 경우 모두에서 안전합니다.
+          하지만 GSAP 3.15.0에서는 두 메서드를 불러도 <code>timeScale()</code>이 0으로 남았습니다. 자동 변경에 기대지 말고 재생 전에{' '}
+          <code>timeScale(1)</code> 또는 필요한 작은 값을 직접 지정하세요.
         </p>
       </div>
 

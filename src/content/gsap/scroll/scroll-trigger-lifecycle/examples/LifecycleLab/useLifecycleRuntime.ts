@@ -1,4 +1,4 @@
-/** P43의 owned trigger, global refresh listeners, command log cleanup을 소유한다. */
+/** 한 trigger의 수명 주기 명령과 앱 전체 명령의 안전 경계를 관리한다. */
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -19,11 +19,13 @@ export const lifecycleCommandDescriptor: ReadonlyArray<{
   id: LifecycleCommandId
   label: string
   code: string
+  globalReference?: boolean
 }> = [
   {
     id: 'update',
-    label: 'scroll state update',
+    label: '전체 update 호출 형태',
     code: 'ScrollTrigger.update()',
+    globalReference: true,
   },
   {
     id: 'instanceRefresh',
@@ -32,8 +34,9 @@ export const lifecycleCommandDescriptor: ReadonlyArray<{
   },
   {
     id: 'globalRefresh',
-    label: '모든 trigger refresh',
+    label: '전체 refresh 호출 형태',
     code: 'ScrollTrigger.refresh()',
+    globalReference: true,
   },
   {
     id: 'disable',
@@ -45,10 +48,15 @@ export const lifecycleCommandDescriptor: ReadonlyArray<{
     label: 'instance enable',
     code: 'trigger.enable(true, true)',
   },
-  { id: 'sort', label: 'registry sort', code: 'ScrollTrigger.sort()' },
+  {
+    id: 'sort',
+    label: '전체 sort 호출 형태',
+    code: 'ScrollTrigger.sort()',
+    globalReference: true,
+  },
   {
     id: 'kill',
-    label: 'owned instance kill',
+    label: 'instance kill',
     code: 'trigger.kill(true, false)',
   },
 ]
@@ -62,7 +70,7 @@ export function useLifecycleRuntime() {
   const scope = useRef<HTMLDivElement>(null)
   // geometry를 측정할 local target element를 standalone instance에 전달한다
   const targetRef = useRef<HTMLDivElement>(null)
-  // command가 page-wide registry 대신 owned instance만 다루게 보관한다
+  // 명령이 현재 예제의 instance를 찾도록 보관한다
   const triggerRef = useRef<ScrollTrigger | null>(null)
   // layout change를 refresh 전후 비교할 두 높이로 제한한다
   const [tall, setTall] = useState(false)
@@ -86,7 +94,7 @@ export function useLifecycleRuntime() {
       // 두 listener는 cleanup에서 같은 callback identity로 제거한다
       ScrollTrigger.addEventListener('refreshInit', onRefreshInit)
       ScrollTrigger.addEventListener('refresh', onRefresh)
-      // 한 local target의 start/end를 측정하는 standalone instance만 만든다
+      // 한 target의 start/end를 측정하는 standalone instance만 만든다
       const trigger = ScrollTrigger.create({
         trigger: target,
         start: 'top 80%',
@@ -94,7 +102,7 @@ export function useLifecycleRuntime() {
       })
       triggerRef.current = trigger
 
-      // listener를 먼저 제거한 뒤 아직 살아 있는 owned instance만 폐기한다
+      // listener를 먼저 제거한 뒤 아직 살아 있는 instance만 폐기한다
       return () => {
         ScrollTrigger.removeEventListener('refreshInit', onRefreshInit)
         ScrollTrigger.removeEventListener('refresh', onRefresh)
@@ -108,30 +116,16 @@ export function useLifecycleRuntime() {
     { scope },
   )
 
-  // descriptor ID를 exact public lifecycle call 하나로 실행한다
+  // 페이지 밖 trigger에 영향을 주는 명령은 호출 형태만 안내하고 실행하지 않는다
   const runCommand = (id: LifecycleCommandId) => {
-    // update는 start/end를 다시 측정하지 않고 registry state만 갱신한다
-    if (id === 'update') {
-      ScrollTrigger.update()
-      appendLog('command · update, geometry 유지')
-      return
-    }
-    // global refresh는 refreshInit → refresh event ordering까지 관찰하게 한다
-    if (id === 'globalRefresh') {
-      ScrollTrigger.refresh()
-      appendLog('command · global refresh')
-      return
-    }
-    // sort는 global registry 순서를 정렬하고 반환된 instance 수만 기록한다
-    if (id === 'sort') {
-      const sorted = ScrollTrigger.sort()
-      appendLog(`command · sorted ${sorted.length} triggers`)
+    if (id === 'update' || id === 'globalRefresh' || id === 'sort') {
+      appendLog(`reference · ${id}는 앱 전체에 적용되어 실행하지 않습니다.`)
       return
     }
     // 나머지 instance command는 kill 뒤에는 실행하지 않는다
     const trigger = triggerRef.current
     if (!trigger) {
-      appendLog('owned trigger가 이미 kill되었습니다.')
+      appendLog('trigger가 이미 kill되었습니다.')
       return
     }
     // 한 instance만 current layout에서 다시 측정한다
@@ -140,7 +134,7 @@ export function useLifecycleRuntime() {
     if (id === 'disable') trigger.disable(true, false)
     // reset/refresh를 요청해 같은 instance를 다시 활성화한다
     if (id === 'enable') trigger.enable(true, true)
-    // owner disposal은 pin/style을 되돌리고 animation은 별도 owner에 남긴다
+    // 더는 쓰지 않는 instance는 pin/style을 되돌리고 animation은 남긴다
     if (id === 'kill') {
       trigger.kill(true, false)
       triggerRef.current = null
@@ -154,7 +148,7 @@ export function useLifecycleRuntime() {
     appendLog('layout changed · refresh를 선택하세요.')
   }
 
-  // display는 actual refs, descriptor, layout, log와 command action만 받는다
+  // 화면은 refs, descriptor, layout, log와 command action만 받는다
   return {
     scope,
     targetRef,

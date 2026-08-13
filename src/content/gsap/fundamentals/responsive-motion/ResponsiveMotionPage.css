@@ -73,17 +73,12 @@
 
 .responsive-coverage__summary {
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 24px;
   padding: 20px 22px;
   border-bottom: 1px solid var(--color-border);
   background: rgb(200 241 105 / 5%);
-}
-
-.responsive-coverage__summary > div {
-  display: grid;
-  gap: 2px;
 }
 
 .responsive-coverage__summary strong {
@@ -92,14 +87,9 @@
   font-variant-numeric: tabular-nums;
 }
 
-.responsive-coverage__summary span,
-.responsive-coverage__summary p,
-.responsive-coverage small {
+.responsive-coverage__summary p {
   color: var(--color-muted);
   font-size: 13px;
-}
-
-.responsive-coverage__summary p {
   justify-self: end;
   max-width: 52ch;
   margin: 0;
@@ -327,15 +317,6 @@
   background: rgb(255 191 120 / 7%);
 }
 
-/** 공식 문서에 없고 설치본으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
-.responsive-page__note--probe {
-  border-style: dashed;
-}
-
-.responsive-page__provenance {
-  font-size: 13px;
-}
-
 .responsive-page__table-wrap {
   margin-top: 18px;
   overflow-x: auto;
@@ -406,12 +387,7 @@
 }
 
 @media (max-width: 860px) {
-  .responsive-coverage__summary {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .responsive-coverage__summary p {
-    grid-column: 1 / -1;
     justify-self: start;
     text-align: left;
   }

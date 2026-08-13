@@ -60,9 +60,29 @@
   - OBSIG-F06 PASS — examples contain Korean one-line comments for declarations, callback phases, effect/cleanup, and returned runtime contract.
   - OBSIG-F07 PASS — page-local TypeScript exits 0 and the scoped no-config Prettier fallback exits 0.
   - OBSIG-F08 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - OBSIG-B01 DEFERRED — browser keyboard focus order and freeze-button operation.
-  - OBSIG-B02 DEFERRED — browser `prefers-reduced-motion` and user-driven vector presentation.
-  - OBSIG-B03 DEFERRED — browser 320/390px table/code overflow layout.
-  - OBSIG-B04 DEFERRED — browser pointer/wheel input and frozen snapshot result.
+  - OBSIG-B01 DEFERRED → PASS — browser keyboard focus order and freeze-button operation.
+  - OBSIG-B02 DEFERRED → PASS — browser `prefers-reduced-motion` and user-driven vector presentation.
+  - OBSIG-B03 DEFERRED → PASS — browser 320/390px table/code overflow layout.
+  - OBSIG-B04 DEFERRED → PASS — browser pointer/wheel input and frozen snapshot result.
 - verificationEvidence: task-6 report records two rendered reads, two official raw reads, two installed source/type reads per canonical; exact 10-row audit; page-local TypeScript; scoped Prettier fallback; comment and assigned-path diff self-review.
-- releaseDecision: PASS — root integration complete; OBSIG-B01–B04 are the four approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: Observer의 각 signal 공식 문서를 다시 대조했다. `deltaX/deltaY`는 해당 축 callback 이후의 변화량이고, `x/y`와 `startX/startY`는 pointer·touch client 좌표이며, `velocityX/velocityY`는 초당 pixel 값이라는 설명을 확인했다.
+- findings:
+  - OBSIG-A01 `BLOCK → ADDRESSED` — 학습 화면에 노출되던 coverage 개수·내부 source ID·P번호·소유권 표현을 제거하고 실제 signal의 시간 기준을 바로 읽도록 바꿨다.
+  - OBSIG-A02 `BLOCK → ADDRESSED` — `deltaX/deltaY`의 기준을 막연한 마지막 callback이 아니라 해당 축의 마지막 callback으로 바로잡았다.
+  - OBSIG-A03 `PASS` — descriptor의 type·tolerance·debounce와 네 callback이 runtime과 일치하고, 표시 코드는 target·signal reader·plugin 등록·instance cleanup을 포함해 독립 실행된다.
+  - OBSIG-A04 `DEFERRED` — pointer·wheel 입력, keyboard focus, 320/390px overflow, reduced-motion 화면 확인은 사용자 승인에 따라 수행하지 않았다.
+  - OBSIG-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.

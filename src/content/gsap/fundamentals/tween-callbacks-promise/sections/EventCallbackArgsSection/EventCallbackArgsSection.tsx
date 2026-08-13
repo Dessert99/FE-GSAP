@@ -97,7 +97,7 @@ export function EventCallbackArgsSection() {
       <div className="callbacks-page__note">
         <p>
           <code>params</code>로 넘긴 값이 콜백에서 어떻게 받아지는지, 그리고 <code>onCompleteParams</code>처럼{' '}
-          <code>vars</code>에 적는 형태의 전체 명세는 <a href={toHref('/fundamentals/gsap-to')}>gsap.to() 페이지</a>가 소유합니다.
+          <code>vars</code>에 적는 형태의 전체 명세는 <a href={toHref('/fundamentals/gsap-to')}>gsap.to() 페이지</a>에서 다룹니다.
         </p>
       </div>
     </section>

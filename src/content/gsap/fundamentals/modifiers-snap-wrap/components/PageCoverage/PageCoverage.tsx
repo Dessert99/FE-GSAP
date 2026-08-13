@@ -10,22 +10,22 @@ const mappedSourceCount = new Set(modifiersSnapWrapSourceItems.map((item) => ite
 
 export function PageCoverage() {
   return (
-    <nav className="msw-coverage" aria-label="공식 source 대응 범위">
+    <nav className="msw-coverage" aria-label="값 보정과 순환 학습 순서">
       <div className="msw-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{modifiersSnapWrapCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{modifiersSnapWrapCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          공식 다섯 문서의 기술 item {modifiersSnapWrapCoverage.officialSourceItems}개를 "가로채기 → 눈금 → 순환"의 여섯 단계로 다시 묶었습니다. 여기에 공식에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로 표시합니다.</p>
+          공식 다섯 문서의 핵심 동작 {modifiersSnapWrapCoverage.officialSourceItems}개를 "가로채기 → 눈금 → 순환"의 여섯 단계로 묶었습니다. 문서에 없는 경계 동작 {probeItemCount}개는 직접 확인해 구분했습니다.</p>
       </div>
       <ol>
         {modifiersSnapWrapSections.map((section) => (
@@ -34,7 +34,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

@@ -5,7 +5,7 @@ export const velocityTrackerReadMeta = {
   summary:
     'VelocityTracker는 stable target에서 tracker를 찾고, property membership을 확인한 뒤 현재 velocity를 읽습니다. 값은 sample 사이의 변화와 시간에 따라 달라집니다.',
   sourcePath: 'src/content/gsap/ui/velocity-tracker-read/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'VelocityTracker.get()',

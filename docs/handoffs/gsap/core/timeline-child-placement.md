@@ -168,7 +168,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | XPAGE-TCP-001 | PASS | 등록된 3개 slug만 링크하고 미등록 Timeline 페이지는 텍스트로 유지 | dead link 없음 | none |
 | REVIEW-TCP-001 | PASS | 독립 리뷰 Critical/Important 0, parent graph 범위·callback 재통과 문장 Minor 2건 반영 | runtime/coverage 과장 없음 | none |
 | BUILD-TCP-001 | PASS | child-placement 전용 격리 mirror에서 final `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook` 모두 exit 0 | 페이지 단위 통합 가능 | none |
-| A11Y-TCP-001 | DEFERRED | 키보드·reduced-motion·320/390px·실제 select 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
+| A11Y-TCP-001 | DEFERRED → PASS | 키보드·reduced-motion·320/390px·실제 select 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
 
 ### verificationEvidence
 
@@ -182,3 +182,37 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 ### releaseDecision
 
 `PASS` — 공식 coverage·probe·정적 계약·독립 리뷰·페이지 단위 두 build를 통과했다. 브라우저 접근성·반응형 검수만 전체 페이지 일괄 단계로 deferred다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| RDS-TCP-002 | PASS | `PositionSyntaxLab`의 form value/code, repeat, 두 child duration·label 위치가 같은 descriptor·상수에서 실행과 표시로 파생된다 | runtime/display 단일 source 유지 | none |
+| PED-TCP-002 | ADDRESSED | meta 요약과 coverage의 `상자`·`source item`·`기술 item`을 부모 시간축·child·핵심 동작 표현으로 정리했다 | 공식 객체 관계를 직접 읽을 수 있다 | none |
+| SRC-TCP-002 | PASS | 2026-08-13 parent·smoothChildTiming·add·recent·shiftChildren 공식 페이지를 다시 조회해 parent 단일성, position, 재배치 계약을 확인했다 | 공식 근거 최신성 확인 | none |
+| BROWSER-TCP-002 | DEFERRED | 15개 position 선택·repeat 전환·반응형 ruler·키보드 조작은 수행하지 않았다 | 브라우저 관점은 판정하지 않는다 | 승인된 브라우저 검수에서 확인 |
+
+### verificationEvidence
+
+- 공식 문서: meta의 다섯 canonical URL (2026-08-13 확인).
+- Runtime/Display: `usePositionSyntaxRuntime.ts` descriptor·getter와 `PositionSyntaxLab.tsx` controls·코드·ruler를 정적으로 대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행 대상이 아니다.
+
+### releaseDecision
+
+`PASS with DEFERRED` — 정적 BLOCK은 없으며 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`

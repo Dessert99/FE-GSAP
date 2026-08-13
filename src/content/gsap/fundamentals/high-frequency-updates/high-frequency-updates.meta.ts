@@ -5,7 +5,7 @@ export const highFrequencyUpdatesMeta = {
   summary:
     '마우스가 한 번 지나갈 때 pointermove는 수십 번 발생합니다. 그때마다 gsap.to()를 부르면 Tween이 그 수만큼 쌓입니다. GSAP은 함수를 미리 한 번 만들어 두고 숫자만 흘려보내는 길을 따로 열어 둡니다.',
   sourcePath: 'src/content/gsap/fundamentals/high-frequency-updates/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'gsap.getProperty()', href: 'https://gsap.com/docs/v3/GSAP/gsap.getProperty()' },
     { label: 'gsap.quickSetter()', href: 'https://gsap.com/docs/v3/GSAP/gsap.quickSetter()' },
@@ -21,7 +21,7 @@ export const highFrequencyUpdatesSections = [
   { number: '04', id: 'skipped-conveniences', title: '빨라지는 대신 포기하는 것', sourceItems: 12 },
   { number: '05', id: 'follow-the-input', title: 'Tween 하나로 방향만 계속 바꾼다', sourceItems: 9 },
   { number: '06', id: 'pipe-and-multi-value', title: '값을 다듬어 넣고 여러 property를 한 번에', sourceItems: 5 },
-  { number: '07', id: 'boundaries', title: '여기서 다루지 않는 것', sourceItems: 0 },
+  { number: '07', id: 'boundaries', title: '공식 문서가 밝히지 않은 경계', sourceItems: 0 },
 ] as const
 
 /** source 대조와 local mapping의 분모를 페이지에서 명시적으로 드러낸다. */

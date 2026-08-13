@@ -52,9 +52,11 @@ function createDescriptor(repeat: number, repeatDelay: number, yoyo: boolean, to
 
 /** 실제 Tween이 보고한 전체 길이를 분모로 삼아 회차 칸과 틈 칸의 폭을 비율로 만든다. */
 function createBlocks(descriptor: RepeatCycleDescriptor, totalDuration: number): CycleBlock[] {
+  // 회차와 틈을 실제 시간 순서대로 담아 시간표를 그린다
   const blocks: CycleBlock[] = []
   // 회차 수는 repeat가 아니라 repeat + 1이다 — 이 예제가 가장 먼저 보여주려는 계산이다
   const iterationCount = descriptor.repeat + 1
+  // 다음 칸의 시작 지점을 누적해 전체 길이에 대한 비율을 구한다
   let elapsed = 0
 
   for (let index = 0; index < iterationCount; index += 1) {

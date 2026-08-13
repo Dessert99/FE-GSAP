@@ -22,7 +22,7 @@ export function GetterSetterSection() {
       <SectionHeading
         number="02"
         id="getter-setter"
-        title="일곱 개가 전부 같은 모양이다"
+        title="다섯 getter/setter의 공통 규칙"
         description="메서드를 하나씩 외울 필요가 없습니다. 다섯 개는 인자·반환 규칙이 글자 그대로 같고, 나머지 둘만 다릅니다. 이 규칙을 여기서 한 번 익히면 나머지 섹션은 의미만 읽으면 됩니다."
       />
 
@@ -76,9 +76,9 @@ export function GetterSetterSection() {
       <div className="timing-page__note">
         <h3>기본값 NaN이 뜻하는 것</h3>
         <p>
-          공식 문서는 다섯 페이지 모두 인자의 기본값을 <code>NaN</code>으로 적어 두었습니다. 이것은{' '}
-          <strong>"delay의 기본값이 NaN"이라는 뜻이 아닙니다.</strong> 인자를 생략했다는 것을 GSAP이 알아채기 위한 표시일 뿐입니다. 즉
-          기본값 <code>NaN</code>은 <strong>"지금 이 호출은 getter다"</strong>라는 신호입니다.
+          공식 문서는 다섯 페이지 모두 인자의 기본값을 <code>NaN</code>으로 표시하지만, 바로 다음 문장에서{' '}
+          <strong>인자를 생략하면 getter가 된다</strong>고 계약을 설명합니다. 따라서 이 표기는 Tween의 <code>delay</code>나{' '}
+          <code>duration</code> 자체가 <code>NaN</code>이라는 뜻이 아닙니다. getter로 읽을 때는 숫자를 전달하지 않고 괄호를 비웁니다.
         </p>
       </div>
 

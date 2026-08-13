@@ -29,7 +29,7 @@ export function ReducedMotionRefreshSection() {
         number="06"
         id="reduced-motion-refresh"
         title="모션을 줄여 달라는 요청에 답한다"
-        description="화면 폭은 취향의 문제지만 모션 설정은 그렇지 않습니다. 운영체제의 요청과 앱 안의 토글, 두 경로를 어떻게 한 handler에서 다룰지가 이 단계의 주제입니다."
+        description="화면 폭과 달리 모션 설정은 사용자 접근성 선호를 나타냅니다. 운영체제의 요청과 앱 안의 토글, 두 경로를 어떻게 한 handler에서 다룰지가 이 단계의 주제입니다."
       />
 
       <div className="responsive-page__prose">
@@ -87,20 +87,6 @@ export function ReducedMotionRefreshSection() {
           </tbody>
         </table>
       </div>
-
-      <div className="responsive-page__note responsive-page__note--probe">
-        <h3>공식 문서에 없는 것 하나 — 반환값과 "조건이 안 바뀌어도"</h3>
-        <p>
-          설치본에서 확인하면 <code>gsap.matchMediaRefresh()</code>는 <strong>조건이 하나도 바뀌지 않아도</strong> 정리와 재실행을
-          일으키고, 반환값은 <code>undefined</code>입니다. 공식 문장 "매치 중인 것을 revert하고 매치되는 것을 실행한다"를 실행으로
-          확인한 결과입니다.
-        </p>
-        <p className="responsive-page__provenance">
-          이 항목은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다. 같은 실행에서{' '}
-          <strong>매치되는 조건이 하나도 없는 MatchMedia는 refresh해도 handler가 실행되지 않는다</strong>는 것도 함께 확인했습니다.
-        </p>
-      </div>
-
       <ReduceMotionRefreshLab />
     </section>
   )

@@ -29,7 +29,7 @@ const twoFaces = [
     id: 'read-only',
     call: 'tween.isActive()',
     role: '읽기 전용',
-    does: '두 스위치와 playhead로 계산한 결과를 물어본다',
+    does: '실제로 재생 중인지 물어본다',
     returns: 'Boolean',
     chain: '쓰기 얼굴이 없다',
   },
@@ -165,24 +165,6 @@ export function StateGetterSection() {
           <code>tween.paused().delay(2)</code>는 동작하지 않습니다. 앞의 <code>paused()</code>가 돌려준 것은 Tween이 아니라{' '}
           <code>true</code>나 <code>false</code>이고, Boolean에는 <code>delay()</code>가 없기 때문입니다. 점을 찍어 이어 쓸 수 있는 것은{' '}
           <strong>괄호에 값을 넣은 쪽</strong>뿐입니다.
-        </p>
-      </div>
-
-      <div className="playback-page__note playback-page__note--probe">
-        <h3>isActive()에는 쓰기 얼굴이 없습니다</h3>
-        <p>
-          <code>isActive()</code>의 공식 signature에는 Parameters 절 자체가 없습니다. 그런데 <strong>값을 넣으면 어떻게 되는지</strong>
-          는 적혀 있지 않습니다. 실수로 넣었을 때 조용히 상태가 바뀌면 곤란하므로 직접 확인했습니다.
-        </p>
-        <p>
-          <strong>측정 방법</strong> — GSAP 3.15.0에서 <code>isActive(true)</code>를 부르고 반환값과 이후 상태를 읽었습니다. 인자는{' '}
-          <strong>무시되고</strong> 그 시점의 Boolean이 그대로 돌아왔습니다. 상태는 바뀌지 않았습니다. 같은 확인에서{' '}
-          <code>paused(true)</code>와 <code>reversed(true)</code>, 그리고 명령 메서드 다섯 개(<code>pause</code>, <code>play</code>,{' '}
-          <code>resume</code>, <code>restart</code>, <code>reverse</code>)는 <strong>모두 Tween 자신과 같은 객체</strong>를 돌려주는
-          것을 확인했습니다.
-        </p>
-        <p className="playback-page__provenance">
-          이 항목은 공식 페이지에 게시돼 있지 않습니다. <code>isActive()</code>는 언제나 물어보기만 하는 메서드라고 기억하면 됩니다.
         </p>
       </div>
 

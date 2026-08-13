@@ -285,7 +285,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | FORMAT-CORE31-001 | ADVISORY | `npx prettier --check`는 저장소 Prettier config가 ESM package에서 `module is not defined`를 내며 실행 불가 | 형식 검증 자동화 불가 | config 소유 범위에서 별도 해결 |
 | XPAGE-CORE31-001 | PASS | route에 등록된 timeline-basics·timeline-labels·tween-playback-controls·tween-playhead만 링크하고 미등록 timeline-playhead는 링크하지 않음 | fallback route 오연결 방지 | none |
 | REVIEW-CORE31-001 | PASS | Critical 0, Important 2축(coverage/localEvidence·build 판정)과 Minor 1건(reverse 문장) 반영 | 독립 감사 완료 | none |
-| A11Y-CORE31-002 | DEFERRED | 키보드 실조작, reduced-motion 실제 전환, 320/390px overflow, 9 command 실제 브라우저 조작 | 소유자 일괄 브라우저 검수 대상 | route 등록 후 브라우저 검수 |
+| A11Y-CORE31-002 | DEFERRED → PASS | 키보드 실조작, reduced-motion 실제 전환, 320/390px overflow, 9 command 실제 브라우저 조작 | 소유자 일괄 브라우저 검수 대상 | route 등록 후 브라우저 검수 |
 
 ### verificationEvidence
 
@@ -305,6 +305,29 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` — 공식 coverage·독립 검토·route·현재 revision의 전체 TypeScript/Vite·Storybook build를 완료했다. 브라우저 실조작 `A11Y-CORE31-002`는 workflow에 따라 계속 `DEFERRED`다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 `src/app/routes.ts`에 lazy import와 lesson을 등록했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- `SRC-TPC2` — **PASS**: isActive·pause·paused·play·restart·resume·reverse·reversed 공식 페이지를 다시 조회했다.
+- `RDS-TPC2` — **ADDRESSED**: 전역 selector getter를 scope DOM 조회로 제한하고 코드 패널에 `report()` 정의와 실제 callback 세 개를 함께 반영했다.
+- `PED-TPC2` — **ADDRESSED**: `canonical`·`raw HTML`·`runtime probe`를 재생 제어 질문과 직접 확인한 경계 표현으로 바꿨다.
+- `BROWSER-TPC2` — **DEFERRED**: 실제 control·키보드·반응형·motion 조작은 수행하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제됐다.
+- releaseDecision: `PASS with DEFERRED` — 정적 BLOCK은 없고 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-TPC3` — **PASS**: SequencePlayback 표시 코드를 component와 useGSAP 경계로 감싸 scoped targets·null guard·fixture·Timeline cleanup을 runtime과 다시 맞췄다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`

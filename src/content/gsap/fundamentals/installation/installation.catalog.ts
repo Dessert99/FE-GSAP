@@ -28,7 +28,7 @@ export const installationSourceItems: SourceItem[] = [
   { id: 'INST-10', officialItem: 'core와 plugin을 한 파일에서 다시 export해 한 곳에서 가져오게 만들 수 있다.', source: 'Installation', sectionId: 'import-forms' },
   { id: 'INST-11', officialItem: '재export 파일을 만들면 `import { gsap, DrawSVGPlugin } from "../gsap.js"`처럼 함께 가져온다.', source: 'Installation', sectionId: 'import-forms' },
   { id: 'INST-12', officialItem: 'UMD 파일은 `import { gsap } from "gsap/dist/gsap"`으로 가져온다.', source: 'Installation', sectionId: 'import-forms' },
-  { id: 'INST-13', officialItem: 'TypeScript는 tsconfig files에 `node_modules/gsap/types/index.d.ts`를 넣어 타입을 인식한다.', source: 'Installation', sectionId: 'import-forms' },
+  { id: 'INST-13', officialItem: 'TypeScript compiler에 타입 선언 위치를 알려줘야 한다면 tsconfig files에 `node_modules/gsap/types/index.d.ts`를 넣을 수 있다.', source: 'Installation', sectionId: 'import-forms' },
   { id: 'INST-22', officialItem: 'TypeScript 오류가 나면 공식 GitHub 저장소의 공식 타입 정의를 쓰고 있는지 먼저 확인한다.', source: 'Installation', sectionId: 'import-forms' },
 
   { id: 'INST-09', officialItem: '등록은 `gsap.registerPlugin(MotionPathPlugin, ScrollToPlugin, TextPlugin)` 형태로 호출한다.', source: 'Installation', sectionId: 'register-plugin' },
@@ -46,7 +46,7 @@ export const installationSourceItems: SourceItem[] = [
   { id: 'REG-07', officialItem: 'tree shaking 문제는 브라우저가 아닌 build 환경에서 발생한다.', source: 'registerPlugin', sectionId: 'tree-shaking' },
 
   { id: 'INST-18', officialItem: 'script tag로 넣으면 대개 자동 등록되지만 build tool에서는 명시적 등록을 권한다.', source: 'Installation', sectionId: 'troubleshooting' },
-  { id: 'INST-21', officialItem: '비공개 npm 저장소는 더 이상 유지되지 않으며 모든 plugin이 npm에 공개됐다. `.npmrc`를 정리하고 3.13 이상을 쓴다.', source: 'Installation', sectionId: 'troubleshooting' },
+  { id: 'INST-21', officialItem: '비공개 npm 저장소는 더 이상 유지되지 않으며 모든 plugin이 npm에 공개됐다. `.npmrc`를 정리하고 3.13 이상을 쓰며, 상세 이전 절차는 migration guide를 따른다.', source: 'Installation', sectionId: 'troubleshooting' },
   { id: 'REG-08', officialItem: 'React 사용자는 useGSAP hook을 등록해 버전 충돌을 피한다.', source: 'registerPlugin', sectionId: 'troubleshooting' },
   { id: 'INST-24', officialItem: '이전 버전은 GitHub releases 페이지에서 확인·다운로드할 수 있으나 최신 버전 사용을 권장한다.', source: 'Installation', sectionId: 'troubleshooting' },
 ]

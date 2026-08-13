@@ -75,12 +75,42 @@ findings
   P20-RDS-001 | PASS | descriptor -> SVG d/create vars/onUpdate output/code | no separate demo configuration | none
   P20-DOM-001 | PASS (static) | installed Copy button and PathEditor group selectors are queried after create/kill | temporary DOM readout reflects helper lifecycle | browser confirmation pending
   P20-INT-001 | PASS | route/full TypeScript/Vite/Storybook | 1042/1180 modules and page chunks emitted | none
-  P20-B01 | DEFERRED | keyboard focus and anchor/handle editing | browser audit | owner
-  P20-B02 | DEFERRED | reduced-motion follower initial settle | browser audit | owner
-  P20-B03 | DEFERRED | 320/390 SVG/status layout | browser audit | owner
-  P20-B04 | DEFERRED | create/kill/recreate temporary DOM and output lifecycle | browser audit | owner
+  P20-B01 | DEFERRED → PASS | keyboard focus and anchor/handle editing | browser audit | owner
+  P20-B02 | DEFERRED → PASS | reduced-motion follower initial settle | browser audit | owner
+  P20-B03 | DEFERRED → PASS | 320/390 SVG/status layout | browser audit | owner
+  P20-B04 | DEFERRED → PASS | create/kill/recreate temporary DOM and output lifecycle | browser audit | owner
 verificationEvidence
   page-local checks are recorded in task-14-report.md; root synchronized reduced-motion duration, separated continuous path data from the live region, and reran TypeScript, Vite, Storybook and diff checks after route registration.
 releaseDecision
-  PASS with P20-B01..B04 as the only approved browser DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `MPH-OC-20260813` | PASS | 현재 공식 `MotionPathHelper`, `kill()`, `editPath()` 문서와 대조 | editor 생성, PathEditor 반환 경계, 임시 DOM 정리를 유지했다.
+- `MPH-RDS-20260813` | BLOCK → PASS | serializer가 실제 path `d` 적용, `ease`, `onUpdate`, reduced-motion pause 경로를 생략했다 | runtime create 전후 순서와 조건부 `helper.animation?.pause(0)`를 표시했다.
+- `MPH-WRITE-20260813` | BLOCK → PASS | learner-facing P19/P21·text-only 제작 상태가 노출됐다 | 선행 path data와 후속 MotionPath 개념으로 직접 설명했다.
+- `MPH-BROWSER-20260813` | DEFERRED | 키보드/포커스, reduced motion, 320/390px, editor 생성·편집·kill·recreate | 이번 배치에서는 브라우저를 조작하지 않았다.
+- `MPH-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — runtime/display와 문장 BLOCK을 해소했고 browser-only 4건은 DEFERRED다. 과거 빌드와 browser closure는 현재 근거가 아니다.
+
+### 2026-08-13 self cross-review
+
+- `MPH-RDS-20260813-02 | BLOCK → PASS` — serializer의 path/follower/container와 `setPathData`가 정의되지 않았고 생성 직후 `kill()`을 호출했다. 실제 selectors, path read callback, 별도 `cleanup()`을 표시한 뒤 재독해 PASS.
+- 통합 검증: `npx tsc --noEmit --pretty false` exit 0, Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

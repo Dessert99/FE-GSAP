@@ -31,7 +31,7 @@ gsap.to('.box', {
         <p>
           <strong>왜 플러그인으로 나눌까요?</strong> GSAP Core는 작게 유지하고, 렌더링 라이브러리 연결·도형
           변형·드래그처럼 필요한 기능만 추가하기 위해서입니다. 이 페이지는 플러그인이 vars를 확장한다는 원리까지만
-          설명하며, 각 플러그인의 등록·옵션·정리 방법은 그 source를 소유한 학습 페이지에서 다룹니다.
+          설명하며, 각 플러그인의 등록·옵션·정리 방법은 해당 플러그인 학습 페이지에서 다룹니다.
         </p>
         <OfficialDocsLink label="공식 Plugins 문서" href={officialLinks.plugins} />
       </div>

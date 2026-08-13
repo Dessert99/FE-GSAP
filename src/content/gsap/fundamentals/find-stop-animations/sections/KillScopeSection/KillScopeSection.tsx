@@ -51,7 +51,7 @@ const scopeRows = [
   },
   {
     call: 'tween.kill(target, propertiesList)',
-    handle: '이미 손에 든 Tween instance 하나',
+    handle: '이미 참조하고 있는 Tween instance 하나',
     reach: '그 Tween 안에서 고른 target과 property만',
     note: '반환값은 self라서 이어서 다른 메서드를 부를 수 있습니다.',
   },
@@ -64,7 +64,7 @@ export function KillScopeSection() {
         number="04"
         id="kill-scope"
         title="어디까지 멈출지 범위를 고른다"
-        description="멈추는 방법은 하나가 아닙니다. 손에 든 것이 target인지 Tween instance인지, 그리고 전부 멈출지 property 하나만 멈출지에 따라 호출이 달라집니다."
+        description="멈추는 방법은 하나가 아닙니다. target으로 조회할지 Tween instance를 직접 참조할지, 그리고 전부 멈출지 property 하나만 멈출지에 따라 호출이 달라집니다."
       />
 
       <div className="find-stop-page__split">
@@ -106,7 +106,7 @@ export function KillScopeSection() {
       </div>
 
       <div className="find-stop-page__subheading">
-        <h3>이미 Tween을 손에 들고 있다면</h3>
+        <h3>이미 Tween instance를 참조하고 있다면</h3>
         <p>
           공식 <code>Tween.kill()</code> 페이지는 이 페이지가 담당하는 여섯 문서 중 <strong>유일하게 signature와 Parameters 절을
           게시</strong>합니다. 아래는 그 원문입니다.
@@ -161,7 +161,7 @@ export function KillScopeSection() {
 
       <div className="find-stop-page__table-wrap">
         <table className="find-stop-page__scope-table">
-          <caption>같은 &quot;멈춤&quot;인데 손에 든 것이 다릅니다</caption>
+          <caption>같은 &quot;멈춤&quot;인데 조회 기준이 다릅니다</caption>
           <thead>
             <tr>
               <th scope="col">호출</th>

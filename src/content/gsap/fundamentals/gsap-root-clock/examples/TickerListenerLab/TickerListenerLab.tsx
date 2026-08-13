@@ -8,17 +8,42 @@ export function TickerListenerLab() {
     useTickerListenerRuntime()
 
   // 실제 실행에 쓰인 once 인자와 방금 받은 값을 코드 문법으로만 포맷한다
-  const code = `// 매 tick 실행할 함수를 ticker에 등록합니다 (두 번째 인자가 once)
-gsap.ticker.add(readTick, ${mode === 'once'})
+  const code = `import gsap from 'gsap'
+import { useEffect, useRef } from 'react'
 
+function TickerListener() {
+  const listenerRef = useRef(null)
+
+  // 매 tick 실행할 함수를 ticker에 등록합니다 (두 번째 인자가 once)
 function readTick(time, deltaTime, frame) {
   // time      → ${observation.time}
   // deltaTime → ${observation.deltaTime}
   // frame     → ${observation.frame}
+  // 60fps 비율 → ${observation.deltaRatio60}
+  if (${mode === 'once'}) listenerRef.current = null
 }
 
-// 다 봤으면 반드시 뗍니다
-gsap.ticker.remove(readTick)`
+  function start() {
+    if (listenerRef.current) return
+    listenerRef.current = gsap.ticker.add(readTick, ${mode === 'once'})
+  }
+
+  function stop() {
+    const listener = listenerRef.current
+    if (!listener) return
+    // once일 때 반환되는 wrapper까지 정확히 제거합니다
+    gsap.ticker.remove(listener)
+    listenerRef.current = null
+  }
+
+  useEffect(() => () => {
+    const listener = listenerRef.current
+    if (listener) gsap.ticker.remove(listener)
+    listenerRef.current = null
+  }, [])
+
+  return <><button onClick={start}>listener 붙이기</button><button onClick={stop}>listener 떼기</button></>
+}`
 
   return (
     <section className="ticker-listener-lab" aria-labelledby="ticker-listener-lab-title">

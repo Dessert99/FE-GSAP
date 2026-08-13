@@ -5,7 +5,7 @@ export const draggableCollisionMomentumMeta = {
   summary:
     'hitTest()는 두 사각형의 겹침을 Boolean으로 바꾸고, inertia release가 만든 tween은 isThrowing과 tween으로 읽습니다. 충돌 판정과 momentum 관찰은 서로 다른 순간의 질문입니다.',
   sourcePath: 'src/content/gsap/ui/draggable-collision-momentum/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'isThrowing', href: 'https://gsap.com/docs/v3/Plugins/Draggable/isThrowing/' },
     {

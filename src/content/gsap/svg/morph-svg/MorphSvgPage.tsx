@@ -39,7 +39,7 @@ export function MorphSvgPage() {
         <p>
           MorphSVG는 target에 original data를 저장할 수 있지만 lab은 mount d를
           직접 snapshot하여 restore합니다. conversion utility와 raw path
-          utility는 P19에서 다룹니다.
+          utility는 이어지는 path data 페이지에서 다룹니다.
         </p>
       </section>
     </article>

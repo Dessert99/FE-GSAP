@@ -1,8 +1,7 @@
-/** P26의 official signal inventory와 실제 signal lab을 조립한다. */
+/** Observer의 좌표·변화량·속도 신호를 실제 입력 예제와 함께 설명한다. */
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { toHref } from '../../../../app/routes'
 import { ObserverSignalLab } from './examples/ObserverSignalLab/ObserverSignalLab'
-import { observerSignalsCatalog } from './observer-signals.catalog'
 import { observerSignalsMeta } from './observer-signals.meta'
 import './ObserverSignalsPage.css'
 
@@ -19,7 +18,6 @@ export function ObserverSignalsPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>{observerSignalsCatalog.length} official signal items covered</p>
       </header>
 
       <section aria-labelledby="observer-signal-prerequisite">
@@ -30,9 +28,9 @@ export function ObserverSignalsPage() {
           signal은 새 plugin이 아니라 이미 만들어진 Observer instance에서 읽는
           값입니다. 먼저{' '}
           <a href={toHref('/fundamentals/observer-create')}>
-            P25 Observer 만들기와 찾기
+            Observer 만들기와 찾기
           </a>
-          에서 target과 watched input을 정한 뒤 이 페이지에서 same instance의
+          에서 target과 감지할 입력을 정한 뒤 이 페이지에서 같은 instance의
           값을 비교하세요.
         </p>
       </section>
@@ -59,8 +57,8 @@ export function ObserverSignalsPage() {
           <div>
             <h3>callback delta</h3>
             <p>
-              <code>deltaX/deltaY</code>는 마지막 callback 이후의 pixel
-              변화입니다. 시작 좌표가 아닙니다.
+              <code>deltaX/deltaY</code>는 해당 축의 마지막 callback 이후
+              pixel 변화입니다. 시작 좌표가 아닙니다.
             </p>
           </div>
           <div>
@@ -84,24 +82,16 @@ export function ObserverSignalsPage() {
           velocity를 만들 수 있지만, <code>x/y</code>의 touch·pointer client
           coordinate를 대신하지 않습니다.
         </p>
-        <ul>
-          {observerSignalsCatalog.map((item) => (
-            <li key={item.id}>
-              <code>{item.id}</code> — {item.officialItem}
-            </li>
-          ))}
-        </ul>
       </section>
 
       <ObserverSignalLab />
 
       <section aria-labelledby="observer-signal-boundary">
-        <h2 id="observer-signal-boundary">이 페이지가 소유하지 않는 경계</h2>
+        <h2 id="observer-signal-boundary">다음에 구분해서 배울 내용</h2>
         <p>
-          press가 dragging으로 전환되는 state는 P27, enable·disable·kill
-          lifecycle은 P28이 소유합니다. 이 페이지에서는 한 owned Observer의
-          signal을 읽고 unmount에서 그 instance를 kill하는 cleanup 전제만
-          사용합니다.
+          press가 dragging으로 바뀌는 상태와 enable·disable·kill 생명주기는
+          다음 학습 페이지에서 다룹니다. 여기서는 하나의 Observer에서 signal을
+          읽고, 화면이 사라질 때 그 instance를 정리하는 흐름에 집중합니다.
         </p>
       </section>
     </article>

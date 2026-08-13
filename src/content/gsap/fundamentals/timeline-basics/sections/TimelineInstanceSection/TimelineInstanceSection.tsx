@@ -4,7 +4,7 @@ import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 export function TimelineInstanceSection() {
   return (
     <section id="timeline-instance" className="timeline-page__section" aria-labelledby="timeline-instance-title">
-      <SectionHeading number="02" id="timeline-instance" title="gsap.timeline()이 돌려주는 그릇" description="반환된 Timeline에는 children뿐 아니라 생성 설정·부모·label·연결 객체를 읽는 property가 함께 있습니다." />
+      <SectionHeading number="02" id="timeline-instance" title="gsap.timeline()이 돌려주는 Timeline" description="반환된 Timeline에는 children뿐 아니라 생성 설정·부모·label·연결 객체를 읽는 property가 함께 있습니다." />
 
       <pre className="timeline-page__signature"><code>gsap.timeline(vars?: Object) → Timeline</code></pre>
       <div className="timeline-page__table-wrap">

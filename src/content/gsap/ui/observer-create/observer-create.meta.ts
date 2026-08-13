@@ -3,9 +3,9 @@ export const observerCreateMeta = {
   title: '여러 입력을 하나의 Observer로 만들고 찾으려면?',
   category: 'GSAP · UI · Observer',
   summary:
-    'Observer는 wheel·touch·pointer·scroll 입력을 one configuration과 callback instance로 모으고 id registry에서 찾습니다.',
+    'Observer는 wheel·touch·pointer·scroll 입력을 하나의 configuration과 callback instance로 모으고 id registry에서 찾습니다.',
   sourcePath: 'src/content/gsap/ui/observer-create/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Observer', href: 'https://gsap.com/docs/v3/Plugins/Observer/' },
     {

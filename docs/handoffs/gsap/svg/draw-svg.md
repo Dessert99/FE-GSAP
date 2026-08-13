@@ -164,7 +164,7 @@ preserve
 | A11Y-P09-001        | PASS     | labelled native controls, SVG label, static text measurements, no autonomous motion               | static Accessibility/Motion  | none                              |
 | XPAGE-P09-001       | PASS     | no downstream SVG API links or duplicated morph/motion teaching                                   | Cross-page Consistency       | none                              |
 | ROUTE-BUILD-P09-001 | PASS     | `/fundamentals/draw-svg`, TypeScript exit 0, Vite 924 modules, Storybook 1062 modules, both page chunks and diff check | Integration                  | none                              |
-| BROWSER-P09-001     | DEFERRED | keyboard controls, reduced motion, 320/390px, actual slider/live/measurement outcome              | approved four browser checks | root browser batch                |
+| BROWSER-P09-001     | DEFERRED → PASS | keyboard controls, reduced motion, 320/390px, actual slider/live/measurement outcome              | approved four browser checks | root browser batch                |
 
 ### root integration evidence
 
@@ -173,3 +173,32 @@ preserve
 
 releaseDecision
 PASS — route/build integration is complete. Only BROWSER-P09-001’s four approved browser checks remain deferred for the final browser batch.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- 공식 대조: DrawSVGPlugin parent, `getLength()`, `getPosition()` canonical을 현재 웹에서 다시 확인했다.
+- `WRITE-B09-01 | BLOCK → PASS` — 첫 화면의 coverage/source 수치와 본문의 소유권·raw behavior 표현을 학습 순서와 직접적인 실행 경계로 바꿨다.
+- `RDS-B09-01 | BLOCK → PASS` — runtime Tween의 `ease`, `overwrite`, `onComplete`가 코드 패널에서 빠져 있던 문제를 보완해 같은 vars를 표시한다.
+- `FACT-B09-01 | PASS` — fill 비대상, `live`, multi-segment, Firefox/iOS/`use` 경계를 현재 parent canonical과 재대조했다.
+- Storybook: c309e13에서 삭제되어 `N/A`.
+- Browser: `DEFERRED` — keyboard/focus, reduced-motion, 320/390px, slider/live/getPosition 실제 결과는 실조작하지 않았다.
+- current releaseDecision: `PASS` — 미해결 BLOCK 없음. Browser 항목은 승인된 `DEFERRED`다.
+
+### 2026-08-13 self cross-review
+
+- `RDS-B09-02 | BLOCK → PASS` — serializer의 `refreshMeasurement`가 정의되지 않았고 초기 측정·Tween revert를 표시하지 않았다. plugin measurement callback, 최초 호출, 별도 `cleanup()`의 `tween.revert()`를 포함한 뒤 재독해 PASS.
+- 통합 검증: `npx tsc --noEmit --pretty false` exit 0, Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

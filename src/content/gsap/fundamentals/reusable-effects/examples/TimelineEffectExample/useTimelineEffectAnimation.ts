@@ -11,7 +11,7 @@ export type TimelineEffectPosition = 0 | '+=0.25'
 type TimelineEffectConfig = { duration: number; ease: string }
 
 /** child Tween에서 callback의 세 입력과 parent context를 관찰한다. */
-type TimelineEffectData = { kind: 'effect'; targetCount: number; effectiveDuration: number; receivedTimeline: boolean; parentId: string }
+type TimelineEffectData = { kind: 'effect'; targetCount: number; effectiveDuration: number; timeline?: gsap.core.Timeline }
 
 /** GSAP이 동적으로 추가한 page-prefixed Timeline method의 호출 타입이다. */
 type TimelineWithReusableEffect = gsap.core.Timeline & { reusableEffectsReveal: (targets: gsap.TweenTarget, vars?: Partial<TimelineEffectConfig>, position?: TimelineEffectPosition) => gsap.core.Timeline }
@@ -23,10 +23,9 @@ export type TimelineEffectDescriptor = {
   followUp: { scale: number; duration: number; repeat: number; yoyo: boolean }
 }
 
-/** Timeline prototype과 충돌하지 않을 name과 기본 recipe 값을 고정한다. */
+/** Timeline prototype과 충돌하지 않을 name과 effect 기본값을 고정한다. */
 export const timelineEffectRegistration = {
   name: 'reusableEffectsReveal',
-  plugins: '',
   defaults: { duration: 0.8, ease: 'power2.out' },
   extendTimeline: true,
 } as const
@@ -34,12 +33,12 @@ export const timelineEffectRegistration = {
 /** 정규화 targets와 parent Timeline context를 반환 Tween의 data에 남긴다. */
 function createRevealEffect(targets: object[], config: TimelineEffectConfig, timeline?: gsap.core.Timeline) {
   // callback의 세 번째 인자가 실제 parent인지 코드 밖에서도 확인할 관찰값이다.
-  const data: TimelineEffectData = { kind: 'effect', targetCount: targets.length, effectiveDuration: config.duration, receivedTimeline: Boolean(timeline), parentId: String(timeline?.vars.id ?? 'none') }
+  const data: TimelineEffectData = { kind: 'effect', targetCount: targets.length, effectiveDuration: config.duration, timeline }
   // parent가 position에 삽입할 수 있는 실제 Tween을 반환한다.
   return gsap.fromTo(targets, { autoAlpha: 0, x: -48 }, { autoAlpha: 1, x: 0, duration: config.duration, ease: config.ease, immediateRender: false, data })
 }
 
-// extendTimeline을 켠 page-prefixed recipe를 한 번 등록해 모든 Timeline에 동명 method를 추가한다.
+// extendTimeline을 켠 page-prefixed effect를 한 번 등록해 모든 Timeline에 동명 method를 추가한다.
 gsap.registerEffect({ ...timelineEffectRegistration, effect: createRevealEffect })
 
 /** position과 모션 설정을 effect·후속 Tween이 공유할 sequence descriptor로 만든다. */
@@ -76,7 +75,7 @@ export function useTimelineEffectAnimation() {
       // position을 바꿀 때 target을 최종 표시 상태로 되돌려 autoplay 없이 준비한다.
       gsap.set(`.${targetClassName}`, { autoAlpha: 1, x: 0, scale: 1 })
       // effect와 후속 Tween을 담되 자동 재생하지 않는 parent Timeline을 만든다.
-      const parent = gsap.timeline({ paused: true, id: 'reusable-effects-parent' })
+      const parent = gsap.timeline({ paused: true })
       // parent 실행 시작점에서 target을 reveal 전 상태로 즉시 배치한다.
       parent.set(`.${targetClassName}`, { autoAlpha: 0, x: -48, scale: 1 }, 0)
       // 동적으로 확장된 method signature를 runtime에서 명시적으로 사용한다.
@@ -92,7 +91,7 @@ export function useTimelineEffectAnimation() {
       // child data는 callback의 target array와 third Timeline 입력을 그대로 나타낸다.
       const data = effectTween?.data as TimelineEffectData | undefined
       // method 반환과 callback context를 숫자·boolean으로 표시한다.
-      setObservation({ receivedTimeline: data?.receivedTimeline ?? false, returnedParent: returnedTimeline === parent, parentDuration: parent.duration(), targetCount: data?.targetCount ?? 0 })
+      setObservation({ receivedTimeline: data?.timeline === parent, returnedParent: returnedTimeline === parent, parentDuration: parent.duration(), targetCount: data?.targetCount ?? 0 })
       // 새 position으로 sequence가 준비됐지만 아직 움직이지 않았음을 알린다.
       setStatus('현재 position으로 paused parent Timeline을 준비했습니다. 실행 버튼을 눌러 확인하세요.')
       // context 정리 뒤 handler가 이전 Timeline을 다시 실행하지 않게 참조를 비운다.

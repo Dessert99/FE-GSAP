@@ -8,22 +8,34 @@ export function SlowMoLab() {
     useSlowMoAnimation()
 
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `gsap.to('${descriptor.selector}', {
+  const code = `// 1. 이전 실행의 위치와 투명도를 시작 상태로 되돌립니다.
+gsap.set('${descriptor.selector}', { x: 0, opacity: 1 })
+
+// 2. 가운데에 선형 구간이 있는 paused 위치 Tween을 준비합니다.
+const positionTween = gsap.to('${descriptor.selector}', {
   x: ${descriptor.x},
   duration: ${descriptor.duration},
   ease: '${descriptor.easeExpression}',
+  paused: true,
 })${
     descriptor.companionEnabled
       ? `
 
-gsap.from('${descriptor.selector}', {
+// 3. 같은 duration에 yoyoMode를 켠 paused opacity Tween을 준비합니다.
+const companionTween = gsap.from('${descriptor.selector}', {
   opacity: 0,
   duration: ${descriptor.duration},
   ease: '${descriptor.companionEaseExpression}',
   immediateRender: false,
+  paused: true,
 })`
       : ''
-  }`
+  }
+
+// 4. 실행 버튼을 누르면 준비한 Tween을 같은 시점에 재생합니다.
+function run() {
+  positionTween.restart()${descriptor.companionEnabled ? '\n  companionTween.restart()' : ''}
+}`
 
   return (
     <section className="slow-mo-lab" aria-labelledby="slow-mo-lab-title">
@@ -151,7 +163,7 @@ gsap.from('${descriptor.selector}', {
           <p>
             SlowMo는 감속 → 등속 → 가속을 <strong>하나의 곡선</strong>으로 이어 붙인 ease입니다. tween 3개를 붙이면 이음매에서 속도가
             튀지만, 하나의 곡선이면 그 이음매가 없습니다. <code>yoyoMode: true</code>는 같은 비율을 쓰되 값이 0에서 1로 갔다가 다시
-            0으로 돌아오는 곡선이라, <strong>duration만 같게 맞추면</strong> fade in·out 타이밍이 저절로 맞습니다.
+            0으로 돌아오는 곡선이라, <strong>duration을 같게 두면</strong> fade in·out 구간이 위치 Tween의 양 끝 구간과 맞습니다.
           </p>
         </article>
         <article>

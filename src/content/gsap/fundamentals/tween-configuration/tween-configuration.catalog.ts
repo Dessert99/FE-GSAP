@@ -41,7 +41,7 @@ export const tweenConfigurationSourceItems: SourceItem[] = [
   { id: 'DEF-10', officialItem: 'inherit: false는 built-in duration 기본값까지 끊어 duration이 0이 된다.', source: 'defaults', origin: 'implementation', sectionId: 'precedence' },
 
   { id: 'VARS-01', officialItem: 'Tween.vars는 생성자에 넘긴 configuration 객체이고 타입은 Object다.', source: 'vars', origin: 'official', sectionId: 'vars-record' },
-  { id: 'VARS-02', officialItem: '읽을 수 있는 property이며 생성 이후 설정 수단으로 쓰지 않는다.', source: 'vars', origin: 'official', sectionId: 'vars-record' },
+  { id: 'VARS-02', officialItem: 'vars의 duration을 직접 바꿔도 tween의 재생 시간은 자동으로 갱신되지 않는다.', source: 'vars', origin: 'implementation', sectionId: 'vars-record' },
   { id: 'VARS-03', officialItem: 'animate할 property와 special property를 함께 담는다.', source: 'vars', origin: 'official', sectionId: 'vars-record' },
   { id: 'VARS-04', officialItem: 'vars 문서는 special property 목록을 나열하며 각 상세는 gsap.to() owner가 소유한다.', source: 'vars', origin: 'official', sectionId: 'vars-record' },
 ]

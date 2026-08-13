@@ -20,22 +20,60 @@ export function PhysicsMotionLab() {
   // current discriminator가 실행한 plugin key만 code panel에 남긴다.
   const code =
     descriptor.mode === 'launch'
-      ? `gsap.registerPlugin(Physics2DPlugin)
-gsap.to(target, {
-  duration: ${descriptor.duration},
-  physics2D: ${JSON.stringify(descriptor.config, null, 2)},
-})`
-      : `gsap.registerPlugin(PhysicsPropsPlugin)
-gsap.to(target, {
-  duration: ${descriptor.duration},
-  physicsProps: ${JSON.stringify(descriptor.config, null, 2)},
-})`
+      ? `import { gsap } from 'gsap'
+import { Physics2DPlugin } from 'gsap/Physics2DPlugin'
+
+gsap.registerPlugin(Physics2DPlugin)
+
+const setup = () => {
+  const target = document.querySelector('.physics-motion-lab__target')
+  if (!target) throw new Error('physics target이 필요합니다.')
+  let tween
+  const context = gsap.context(() => {
+    gsap.set(target, { x: 0, y: 0 })
+    const onUpdate = () => console.log({ x: gsap.getProperty(target, 'x'), y: gsap.getProperty(target, 'y') })
+    tween = gsap.to(target, {
+      duration: ${descriptor.duration},
+      physics2D: ${JSON.stringify(descriptor.config, null, 2)},
+      onUpdate,
+    })
+  })
+  ${reducedMotion ? 'tween?.progress(1).pause()' : ''}
+  return () => context.revert()
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
+      : `import { gsap } from 'gsap'
+import { PhysicsPropsPlugin } from 'gsap/PhysicsPropsPlugin'
+
+gsap.registerPlugin(PhysicsPropsPlugin)
+
+const setup = () => {
+  const target = document.querySelector('.physics-motion-lab__target')
+  if (!target) throw new Error('physics target이 필요합니다.')
+  let tween
+  const context = gsap.context(() => {
+    gsap.set(target, { x: 0, y: 0 })
+    const onUpdate = () => console.log({ x: gsap.getProperty(target, 'x'), y: gsap.getProperty(target, 'y') })
+    tween = gsap.to(target, {
+      duration: ${descriptor.duration},
+      physicsProps: ${JSON.stringify(descriptor.config, null, 2)},
+      onUpdate,
+    })
+  })
+  ${reducedMotion ? 'tween?.progress(1).pause()' : ''}
+  return () => context.revert()
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
 
   return (
     <section id="physics-motion-lab">
       <InteractiveExample
-        title="one target, two exclusive physics inputs"
-        description="mode를 고른 뒤 replay하면 하나의 React-owned target에 선택한 physics plugin tween만 실행됩니다."
+        title="한 target에서 두 physics 입력 비교"
+        description="mode를 고른 뒤 replay하면 같은 target에 선택한 physics plugin tween만 실행됩니다."
         sourcePath="src/content/gsap/other/physics-motion/examples/PhysicsMotionLab/usePhysicsMotionAnimation.ts"
         controls={
           <fieldset className="physics-motion-lab__mode">

@@ -8,8 +8,8 @@ export function PageCoverage() {
 
   return (
     <aside className="timeline-playhead-page__coverage" aria-labelledby="timeline-playhead-coverage-title">
-      <div><p>OFFICIAL COVERAGE</p><h2 id="timeline-playhead-coverage-title">{officialItemCount} / {timelinePlayheadCoverage.officialSourceItems}</h2><span>{timelinePlayheadCoverage.officialSources} canonicals · {probeItemCount} / {timelinePlayheadCoverage.probeItems} probes</span></div>
-      <ol>{timelinePlayheadSections.map((section) => <li key={section.id}><a href={`#${section.id}`}>{section.number} · {section.title}</a><span>{section.sourceItems} items</span></li>)}</ol>
+      <div><p>PLAYHEAD 학습 순서</p><h2 id="timeline-playhead-coverage-title">핵심 동작 {officialItemCount}개</h2><span>공식 문서 {timelinePlayheadCoverage.officialSources}개 · 직접 확인한 경계 {probeItemCount}개</span></div>
+      <ol>{timelinePlayheadSections.map((section) => <li key={section.id}><a href={`#${section.id}`}>{section.number} · {section.title}</a><span>{section.sourceItems}개 핵심 동작</span></li>)}</ol>
     </aside>
   )
 }

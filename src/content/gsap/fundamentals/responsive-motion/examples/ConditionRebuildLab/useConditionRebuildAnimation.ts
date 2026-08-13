@@ -78,6 +78,12 @@ export function useConditionRebuildAnimation() {
   const [breakpoint, setBreakpoint] = useState(800)
   // 조건 boolean이 왜 그렇게 나왔는지 설명하려면 지금 창 폭이 함께 보여야 한다
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth)
+  // 넓은 창에서도 slider가 현재 폭을 넘어 조건을 뒤집을 수 있도록 최댓값을 넓힌다
+  const breakpointMax = Math.max(
+    breakpointRange.max,
+    breakpoint,
+    Math.ceil(viewportWidth / breakpointRange.step) * breakpointRange.step + breakpointRange.step,
+  )
   // handler가 실제로 쓴 descriptor와 실행·정리 횟수를 한 번에 보여주는 관찰값이다
   const [observation, setObservation] = useState<RebuildObservation>({
     descriptor: null,
@@ -139,5 +145,5 @@ export function useConditionRebuildAnimation() {
   }
 
   // TSX가 controls·조건 표·코드 패널을 같은 descriptor에서 그리도록 필요한 값만 전달한다
-  return { scope, breakpoint, setBreakpoint, viewportWidth, observation, play }
+  return { scope, breakpoint, setBreakpoint, breakpointMax, viewportWidth, observation, play }
 }

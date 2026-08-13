@@ -43,7 +43,7 @@ export function BoundariesSection() {
 
         <div>
           <div className="non-css-page__subheading">
-            <h3>다른 페이지가 소유한 개념</h3>
+            <h3>다른 페이지에서 이어서 볼 개념</h3>
             <p>이 페이지는 아래 내용을 전제로만 사용했습니다.</p>
           </div>
           <ul className="non-css-page__list">

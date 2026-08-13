@@ -5,11 +5,11 @@ export const tweenConfigurationMeta = {
   summary:
     'GSAP의 설정은 엔진 자체를 바꾸는 곳과 Tween이 물려받을 값을 정하는 곳으로 나뉩니다. 어디에 적었느냐가 무엇을 이길지와 어디까지 영향을 줄지를 정합니다.',
   sourcePath: 'src/content/gsap/fundamentals/tween-configuration/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
-    { label: 'gsap.config()', href: 'https://gsap.com/docs/v3/GSAP/gsap.config()' },
-    { label: 'gsap.defaults()', href: 'https://gsap.com/docs/v3/GSAP/gsap.defaults()' },
-    { label: 'Tween.vars', href: 'https://gsap.com/docs/v3/GSAP/Tween/vars' },
+    { label: 'gsap.config()', href: 'https://gsap.com/docs/v3/GSAP/gsap.config()/' },
+    { label: 'gsap.defaults()', href: 'https://gsap.com/docs/v3/GSAP/gsap.defaults()/' },
+    { label: 'Tween.vars', href: 'https://gsap.com/docs/v3/GSAP/Tween/vars/' },
   ],
 } as const
 

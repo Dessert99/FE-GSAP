@@ -12,8 +12,8 @@ export function KeyframesSection() {
       <div className="gsap-method-page__note">
         <p>
           <strong>언제 쓰나요?</strong> 같은 target에 <code>gsap.to()</code>를 반복해서 쓰는 코드를 한 Tween으로 줄이거나,
-          CSS animation의 여러 단계를 GSAP으로 옮길 때 유용합니다. 이 페이지의 소유 source는 배열형 to-vars를 설명하며,
-          백분율·속성 기반 형식은 아래 연결 문서가 제공하는 확장 내용입니다.
+          CSS animation의 여러 단계를 GSAP으로 옮길 때 유용합니다. <code>gsap.to()</code> 문서는 배열형 vars를 소개하고,
+          백분율·속성 기반 형식은 아래 공식 Keyframes 문서에서 자세히 설명합니다.
         </p>
         <OfficialDocsLink label="공식 Keyframes 문서" href={officialLinks.keyframes} />
       </div>

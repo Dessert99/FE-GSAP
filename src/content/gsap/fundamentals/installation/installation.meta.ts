@@ -5,7 +5,7 @@ export const installationMeta = {
   summary:
     'GSAP은 framework를 가리지 않는 JavaScript 파일입니다. 파일을 가져오는 방법을 먼저 고르고, 그다음 필요한 plugin(core에 특수 기능을 더하는 별도 파일)을 core에 등록합니다.',
   sourcePath: 'src/content/gsap/fundamentals/installation/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Installation', href: 'https://gsap.com/docs/v3/Installation' },
     { label: 'gsap.registerPlugin()', href: 'https://gsap.com/docs/v3/GSAP/gsap.registerPlugin()' },

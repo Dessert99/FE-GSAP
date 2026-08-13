@@ -10,7 +10,7 @@ export const scrollTriggerLifecycleProperties = [
     'void',
     'disabled instance를 다시 활성화하고 필요하면 측정',
   ],
-  ['kill(revert?, allowAnimation?)', 'void', 'owner가 instance를 영구 폐기'],
+  ['kill(revert?, allowAnimation?)', 'void', 'instance를 만든 코드가 영구 폐기'],
   ['instance.refresh()', 'void', '한 instance의 start/end를 다시 측정'],
   [
     'addEventListener(type, callback)',

@@ -1,4 +1,4 @@
-/** startTime이 부모 하나만 안다는 한계에서 출발해 globalTime이 중첩 전체를 접는 방식을 마지막에 다룬다. */
+/** startTime이 부모 하나만 안다는 한계에서 출발해 globalTime이 중첩을 반영하는 방식을 마지막에 다룬다. */
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 import { NestedGlobalTimeLab } from '../../examples/NestedGlobalTimeLab/NestedGlobalTimeLab'
 
@@ -8,7 +8,7 @@ export function GlobalTimeSection() {
       <SectionHeading
         number="06"
         id="global-time"
-        title="중첩을 다 풀어 전역 시계로"
+        title="중첩을 반영한 전역 시각"
         description="여기까지의 모든 숫자는 부모 하나를 기준으로 잰 값이었습니다. 부모의 부모가 또 있으면 그 숫자만으로는 실제 시각을 알 수 없습니다. 마지막 메서드가 그 문제를 풉니다."
       />
 
@@ -97,10 +97,11 @@ export function GlobalTimeSection() {
       </div>
 
       <div className="timing-page__note timing-page__note--probe">
-        <h3>인자를 생략한 호출은 조건이 붙습니다</h3>
+        <h3>인자를 생략한 호출은 설치본과 공식 설명이 다릅니다</h3>
         <p>
-          위의 공식 문장은 <strong>재생 헤드가 실제로 그 tween 위에 있을 때만</strong> 성립합니다. 실행해 보면 인자 없는{' '}
-          <code>globalTime()</code>은 <code>totalTime()</code>이 아니라 <strong>재생 헤드 기준의 현재 시각</strong>을 씁니다.
+          GSAP 3.15.0의 실행 결과는 위 공식 문장과 항상 일치하지 않습니다. 인자 없는 <code>globalTime()</code>은 이 버전에서{' '}
+          <code>totalTime()</code> 대신 <strong>부모 재생 헤드로부터 환산한 현재 local time</strong>을 사용합니다. 두 local time이 같은
+          순간에는 결과도 같지만 일반적으로 등식이 보장되지는 않습니다.
         </p>
         <p className="timing-page__provenance">
           공식 페이지에 없는 내용입니다. GSAP 3.15.0에서 아래 예제와 같은 삼중 구조(outer를 <code>startTime(0)</code>으로 고정, inner를
@@ -117,17 +118,18 @@ export function GlobalTimeSection() {
       <div className="timing-page__note timing-page__note--probe">
         <h3>변환은 위로 한 층씩 올라가며 일어납니다</h3>
         <p>
-          공식 문서는 "모든 중첩과 timeScale을 반영한다"고만 하고 방식은 적지 않습니다. 실행으로 확인한 규칙은 반복되는 한 줄입니다.
-          자기 자신부터 시작해 부모가 없을 때까지 아래를 되풀이합니다.
+          공식 문서는 "모든 중첩과 timeScale을 반영한다"고만 하고 방식은 적지 않습니다. 아래처럼 양수이면서 0이 아닌{' '}
+          <code>timeScale</code>로 실행한 결과에서 확인한 규칙은 반복되는 한 줄입니다. 자기 자신부터 시작해 부모가 없을 때까지 아래를
+          되풀이합니다.
         </p>
         <p>
           <code>시각 = 그 층의 startTime + 시각 ÷ |그 층의 timeScale|</code>
         </p>
         <p>
-          <a href="#time-scale">05 섹션</a>에서 본 "층마다 배속이 쌓인다"는 성질이 여기서 나눗셈의 연쇄로 나타납니다. 위치는 더하기로,
-          배속은 나누기로 들어옵니다.
+          <a href="#time-scale">05 섹션</a>에서 본 중첩 배속이 여기서 나눗셈의 연쇄로 나타납니다. 위치는 더하고 배속은 나눕니다.
         </p>
         <p className="timing-page__provenance">
+          이 식은 자식 animation이 재생 가능한 상태이고 <code>timeScale</code>이 양수이면서 0이 아닌 이 예제 범위에만 적용했습니다.
           공식 페이지에 없는 내용입니다. GSAP 3.15.0에서 위 삼중 구조의 7가지 설정에 대해 <code>tween.globalTime(local)</code>의
           반환값과 이 식을 손으로 적용한 값이 모두 일치했습니다. 예: <code>inner 3초·tween 1초·배속 1·local 0</code> →{' '}
           <code>4</code>, <code>local 2</code> → <code>6</code>, 같은 배치에서 <code>배속 2·local 0</code> → <code>3.5</code>,{' '}
@@ -136,15 +138,14 @@ export function GlobalTimeSection() {
       </div>
 
       <div className="timing-page__warning">
-        <h3>실제 앱의 숫자는 이렇게 깔끔하지 않습니다</h3>
+        <h3>실제 앱에서는 전역 기준점도 확인합니다</h3>
         <p>
-          위 예제는 맨 바깥 timeline을 <code>outer.startTime(0)</code>으로 <strong>0초에 못 박아</strong> 두었습니다. 그래서 결과가
+          위 예제는 맨 바깥 timeline의 시작점을 <code>outer.startTime(0)</code>으로 고정했습니다. 그래서 결과가
           <code>4</code>나 <code>5.5</code>처럼 읽기 좋은 숫자로 나옵니다.
         </p>
         <p>
-          실제 앱에서는 그렇지 않습니다. 전역 시계는 페이지가 열린 뒤 계속 흐르고 있어서, 나중에 만든 timeline은{' '}
-          <strong>만들어진 그 시각</strong>에 놓입니다. 그래서 <code>globalTime()</code>의 절댓값 자체보다{' '}
-          <strong>두 애니메이션의 globalTime을 서로 비교하는 용도</strong>가 실제로는 더 유용합니다.
+          전역 timeline은 계속 진행되므로 나중에 만든 animation의 시작점은 0이 아닐 수 있습니다. 전역 기준의 절대 좌표가 필요한지,
+          두 animation의 전후 관계만 비교할 것인지에 맞춰 반환값을 해석해야 합니다.
         </p>
       </div>
     </section>

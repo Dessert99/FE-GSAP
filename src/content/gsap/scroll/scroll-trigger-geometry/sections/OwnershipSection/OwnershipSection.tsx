@@ -3,13 +3,13 @@ export function OwnershipSection() {
   return (
     <section id='ownership' aria-labelledby='ownership-title'>
       <h2 id='ownership-title'>
-        02 · trigger, pin, scroller는 owner element이고 viewport utility는 별도
+        02 · trigger, pin, scroller는 element를 기준으로 하고 viewport utility는 별도
         좌표계입니다
       </h2>
       <p>
         <code>trigger</code>는 start/end를 계산할 element이고, <code>pin</code>
         은 pin을 요청했을 때의 pinned element입니다. <code>scroller</code>는
-        Element 또는 window이며 <code>scroll()</code>은 그 owner의 scroll
+        Element 또는 window이며 <code>scroll()</code>은 그 element의 scroll
         position을 읽거나 설정합니다.
       </p>
       <p>

@@ -1,4 +1,4 @@
-/** seek의 callback suppression과 paused·reversed 상태 보존을 관찰한다. */
+/** seek의 callback suppression과 paused 상태 보존을 관찰한다. */
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRef, useState } from 'react'
@@ -18,7 +18,7 @@ export function useSeekEventsAnimation() {
   const [suppressEvents, setSuppressEvents] = useState(true)
   // onComplete가 실제로 호출된 횟수를 사용자 action 단위로 기록한다.
   const [callbackCount, setCallbackCount] = useState(0)
-  // seek 뒤 paused·reversed 상태와 위치를 text로 전달한다.
+  // seek 뒤 paused 상태와 위치를 text로 전달한다.
   const [status, setStatus] = useState('0초에서 정지 중')
   useGSAP(
     () => {
@@ -45,8 +45,8 @@ export function useSeekEventsAnimation() {
     setCallbackCount(0)
     // seek는 위치만 바꾸고 선택값에 따라 이동 구간 callback을 억제한다.
     tween.seek(seekDescriptor.duration, suppressEvents)
-    // seek 뒤에도 paused·reversed가 보존됐는지 숫자와 함께 전달한다.
-    setStatus(`${tween.time().toFixed(1)}초 · paused ${tween.paused()} · reversed ${tween.reversed()}`)
+    // seek 뒤에도 paused 상태가 보존됐는지 현재 초와 함께 전달한다.
+    setStatus(`${tween.time().toFixed(1)}초 · paused ${tween.paused()}`)
   }
 
   // callback을 발생시키지 않고 처음 위치와 관찰 상태를 되돌린다.

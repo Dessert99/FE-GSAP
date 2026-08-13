@@ -109,8 +109,23 @@ export function useContextRevertAnimation() {
     () => {
       // 이전 실행이 남긴 transform을 지워 항상 같은 지점에서 출발시킨다
       descriptor.steps.forEach((step) => {
-        gsap.set(step.selector, { [step.property]: step.from })
+        // 각 baseline도 이 예제 scope 안의 박스 하나에만 적용한다
+        const box = gsap.utils.toArray<HTMLElement>(step.selector, scope.current)[0]
+        gsap.set(box, { [step.property]: step.from })
       })
+      // 모션 설정이 바뀌면 이전 Context의 단계와 관찰값도 시작 상태로 맞춘다
+      setStage('idle')
+      setContextObservation({ recorded: 0, isReverted: false })
+      setBoxes(
+        descriptor.steps.map((step) => ({
+          key: step.key,
+          label: step.label,
+          property: step.property,
+          current: step.from,
+          from: step.from,
+        })),
+      )
+      setStatus('아직 Context를 만들지 않았습니다. 버튼을 눌러 보세요.')
       // 이 컴포넌트가 사라질 때 손으로 만든 Context도 함께 되돌린다 — 이 페이지가 가르치는 정리 그 자체다
       return () => {
         contextRef.current?.revert()

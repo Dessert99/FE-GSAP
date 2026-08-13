@@ -7,9 +7,12 @@ export function RevertKillLab() {
   const { scope, descriptor, hasContext, observation, status, reducedMotion, create, end } = useRevertKillAnimation()
 
   // 실행에 쓰인 descriptor와 마지막으로 고른 종료 방법을 코드 문법으로만 포맷한다
-  const endingCall = endingMethods.find((method) => method.value === observation.endedBy)?.call ?? 'ctx.revert()'
-  const code = `const ctx = gsap.context(() => {
-  gsap.to('${descriptor.selector}', { x: ${descriptor.to}, duration: ${descriptor.duration} })
+  const endingCall = endingMethods.find((method) => method.value === observation.endedBy)?.call ?? '// 아직 종료하지 않았습니다'
+  const code = `const box = containerRef.current.querySelector('${descriptor.selector}')
+gsap.set(box, { x: ${descriptor.from} })
+
+const ctx = gsap.context(() => {
+  gsap.to(box, { x: ${descriptor.to}, duration: ${descriptor.duration}, ease: 'power2.out', onComplete: finishCreation })
 
   // 이 함수는 되돌릴 때 불립니다
   return () => {

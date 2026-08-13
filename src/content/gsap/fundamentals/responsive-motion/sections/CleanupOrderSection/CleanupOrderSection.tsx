@@ -123,19 +123,6 @@ export function CleanupOrderSection() {
           이름이 <code>context</code>인 것도 그래서입니다.
         </p>
       </div>
-
-      <div className="responsive-page__note responsive-page__note--probe">
-        <h3>공식 문서에 없는 것 하나 — revert()를 직접 부를 때</h3>
-        <p>
-          공식 페이지는 반환한 cleanup 함수가 <strong>"조건이 더 이상 매치되지 않을 때"</strong> 불린다고만 적었습니다. 설치본에서
-          확인하면 <code>mm.revert()</code>를 직접 부를 때도 같은 함수가 불리고, 그 시점에 handler가 만든 tween의 값도 원래대로
-          돌아갑니다. 조건 변화든 수동 revert든 정리 경로가 하나라는 뜻입니다.
-        </p>
-        <p className="responsive-page__provenance">
-          이 항목은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다. 실행 순서도 함께 확인했습니다 —
-          정리가 먼저이고 재실행이 나중입니다.
-        </p>
-      </div>
     </section>
   )
 }

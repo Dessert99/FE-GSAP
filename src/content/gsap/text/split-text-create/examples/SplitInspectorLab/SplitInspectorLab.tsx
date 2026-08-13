@@ -17,25 +17,47 @@ export function SplitInspectorLab() {
     rebuild,
   } = useSplitInspectorAnimation()
   // runtime create vars와 reduced-motion stagger policy를 code 문법으로만 보여 준다.
-  const code = `SplitText.create(sentence, {
-  type: '${descriptor.type}',
-  mask: '${descriptor.mask}',
-  aria: '${descriptor.aria}',
-  autoSplit: ${descriptor.autoSplit},
-  linesClass: '${descriptor.linesClass}',
-  wordsClass: '${descriptor.wordsClass}',
-  charsClass: '${descriptor.charsClass}',
-  onSplit(self) {
-    if (reducedMotion) return
-    return gsap.from(self.chars, { yPercent: 100, autoAlpha: 0, stagger: 0.025 })
-  },
-})`
+  const code = `import { gsap } from 'gsap'
+import { SplitText } from 'gsap/SplitText'
+
+gsap.registerPlugin(SplitText)
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+const setup = async () => {
+  await document.fonts.ready
+  const sentence = document.querySelector('.split-inspector-lab__sentence')
+  if (!sentence) throw new Error('split sentence가 필요합니다.')
+  const split = SplitText.create(sentence, {
+    type: '${descriptor.type}',
+    mask: '${descriptor.mask}',
+    aria: '${descriptor.aria}',
+    autoSplit: ${descriptor.autoSplit},
+    linesClass: '${descriptor.linesClass}',
+    wordsClass: '${descriptor.wordsClass}',
+    charsClass: '${descriptor.charsClass}',
+    onSplit(self) {
+      console.log({ chars: self.chars.length, words: self.words.length, lines: self.lines.length, masks: self.masks.length })
+      if (reducedMotion) return
+      return gsap.from(self.chars, {
+        yPercent: 100,
+        autoAlpha: 0,
+        duration: 0.35,
+        stagger: 0.025,
+      })
+    },
+  })
+  return () => split.revert()
+}
+
+const cleanup = await setup()
+// component unmount에서 cleanup()을 호출합니다.`
 
   return (
     <section id="split-inspector-lab">
       <InteractiveExample
-        title="one sentence DOM inspector"
-        description="mask type을 고르거나 rebuild하면 fonts-ready target에 actual SplitText.create()가 실행됩니다. count와 tree는 instance arrays에서 읽습니다."
+        title="한 문장의 SplitText DOM 검사"
+        description="mask type을 고르거나 rebuild하면 font가 준비된 target에 SplitText.create()가 실행됩니다. count와 tree는 instance arrays에서 읽습니다."
         sourcePath="src/content/gsap/text/split-text-create/examples/SplitInspectorLab/useSplitInspectorAnimation.ts"
         controls={
           <div className="split-inspector-lab__controls">
@@ -80,7 +102,7 @@ export function SplitInspectorLab() {
                 <dd>{snapshot?.masks ?? 0}</dd>
               </div>
             </dl>
-            <pre aria-label="actual generated wrapper DOM tree">
+            <pre aria-label="SplitText가 생성한 wrapper DOM tree">
               <code>{snapshot?.tree.join('\n') ?? 'instance를 만드는 중'}</code>
             </pre>
             {reducedMotion ? (
@@ -98,7 +120,7 @@ export function SplitInspectorLab() {
           'aria auto는 semantic heading의 읽을 문장을 유지하고 generated wrapper를 숨깁니다.',
         ]}
         watchFor={[
-          'rebuild 뒤 count가 React text parsing이 아니라 actual instance collections에서 왔는지 봅니다.',
+          'rebuild 뒤 count가 React text parsing이 아니라 SplitText instance collection에서 왔는지 봅니다.',
           'DOM tree의 first mask/line/word/char wrapper와 class가 descriptor와 맞는지 봅니다.',
           'font 또는 width reflow에서 autoSplit이 fresh wrapper를 만들어도 inspector가 새 arrays를 읽는지 봅니다.',
         ]}

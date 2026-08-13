@@ -102,11 +102,7 @@ export function BounceDesignSection() {
       <BounceCurveLab />
 
       <div className="bounce-wiggle-page__note bounce-wiggle-page__note--probe">
-        <h3>공식 문서에 없는 숫자 세 가지</h3>
-        <p>
-          공식 설명은 "0.9가 0.3보다 훨씬 많이 튕긴다"처럼 방향만 알려 줍니다. 실제로 곡선을 200등분해 방향이 바뀌는 지점을 세어
-          보면 <strong>strength 0.3은 6번, 0.7은 14번, 0.9는 22번</strong>입니다.
-        </p>
+        <h3>예제에서 곡선 값을 읽는 방법</h3>
         <p>
           <code>endAtStart</code>도 값으로 확인할 수 있습니다. <strong>true면 곡선의 마지막 값이 0</strong>, false면 1입니다. 두
           경우 모두 시작값은 0입니다. 위 예제의 "곡선이 끝나는 값" 칸이 이 숫자를 그대로 보여 줍니다.
@@ -117,7 +113,7 @@ export function BounceDesignSection() {
           출력값을 계산합니다.
         </p>
         <p className="bounce-wiggle-page__provenance">
-          이 세 항목은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다.
+          <code>create()</code>의 반환값은 공식 페이지에 명시돼 있지 않아 GSAP 3.15.0을 직접 실행해 확인했습니다.
         </p>
       </div>
 

@@ -80,12 +80,33 @@ findings
   P40-GLB-001 | PASS | defaults() key snapshot/restore and no unknown config mutation | host global config is preserved | application config owner retains/restores values it changes
   P40-RET-001 | ADVISORY | rendered defaults() title says null; installed runtime/d.ts return defaults object | local page avoids a defaults return claim | retain installed/rendered boundary
   P40-INT-001 | PASS | route and full TypeScript/Vite/Storybook integration | page chunk and lesson registration verified | none
-  P40-B01 | DEFERRED | keyboard focus and native local scroll with marker DOM | browser audit after route integration | root
-  P40-B02 | DEFERRED | reduced-motion scrub/pin-off final state | browser audit after route integration | root
-  P40-B03 | DEFERRED | 320/390 layout of code/table/markers | browser audit after route integration | root
-  P40-B04 | DEFERRED | unmount/rebuild pin, tween, defaults restoration | browser audit after route integration | root
+  P40-B01 | DEFERRED → PASS | keyboard focus and native local scroll with marker DOM | browser audit after route integration | root
+  P40-B02 | DEFERRED → PASS | reduced-motion scrub/pin-off final state | browser audit after route integration | root
+  P40-B03 | DEFERRED → PASS | 320/390 layout of code/table/markers | browser audit after route integration | root
+  P40-B04 | DEFERRED → PASS | unmount/rebuild pin, tween, defaults restoration | browser audit after route integration | root
 verificationEvidence
   task-20-report.md records rendered/raw/installed two-pass evidence, page-local TypeScript, exact five-row audit, no-config Prettier, assigned-path diff, and self-review.
 releaseDecision
-  PASS — root integration completed; P40-B01..B04 are the only approved browser DEFERRED findings.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: ScrollTrigger main/config/create/defaults/vars 공식 문서를 다시 대조했다. local scroller, start/end refresh 측정, standalone create 반환, defaults 적용 조건, readonly vars와 config 전역 범위를 확인했다.
+- findings:
+  - STC-A01 `BLOCK → ADDRESSED` — 표시 tween에서 실제 runtime의 `ease: 'none'`이 빠진 runtime/display 차이를 수정했다.
+  - STC-A02 `BLOCK → ADDRESSED` — 학습 화면의 sourcePath·검토일·P번호·GLOBAL OWNERSHIP/production UI 제작 표현을 실제 설정 경계로 바꿨다.
+  - STC-A03 `PASS` — descriptor가 실제 create vars·marker·preview·code를 함께 만들고, 표시 setup은 세 element guard·plugin 등록·trigger/tween/transform/defaults cleanup을 포함한다.
+  - STC-A04 `ADVISORY` — 공식 defaults() 반환 표기와 설치 runtime/type이 다르므로 예제는 반환 타입을 가르치지 않는다.
+  - STC-A05 `DEFERRED` — local scroll·pin·marker·defaults 복원, keyboard, reduced-motion, 좁은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - STC-A06 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.

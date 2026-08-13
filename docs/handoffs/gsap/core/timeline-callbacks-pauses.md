@@ -189,7 +189,7 @@ catalog의 `sectionId`가 item별 귀속 authority이며 아래 표가 실제 �
 | XPAGE-TCP-001 | PASS | 등록된 `tween-playback-controls`·`tween-playhead`·`tween-callbacks-promise`만 링크하고 미등록 Timeline slug는 텍스트로만 경계 표시 | dead link 없음 | none |
 | BUILD-TCP-001 | PASS | 미완성 7개 폴더를 제외한 격리 mirror에서 `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook` exit 0 | 이 페이지와 등록 라우트의 production·Storybook 통합 확인 | none |
 | REVIEW-TCP-001 | PASS | 독립 리뷰에서 발견한 callback identity·coverage 근거·주석·exactFiles 4건을 수정하고 재리뷰에서 잔존 Critical/Important 0건 확인 | 취소 runtime과 handoff 재검증성 확보 | none |
-| A11Y-TCP-001 | DEFERRED | 키보드·reduced-motion·320/390px·실제 control 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
+| A11Y-TCP-001 | DEFERRED → PASS | 키보드·reduced-motion·320/390px·실제 control 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
 
 ### verificationEvidence
 
@@ -202,4 +202,39 @@ catalog의 `sectionId`가 item별 귀속 authority이며 아래 표가 실제 �
 
 ### releaseDecision
 
-`PASS` — 공식 coverage·학습 변환·runtime/display·구조·정적 접근성·두 build를 통과했다. 브라우저 상호작용 묶음 검수만 품질 게이트가 허용하는 `DEFERRED`로 남긴다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| RDS-TCP-002 | ADDRESSED | `TimelineEventLab` 표시 코드가 runtime과 다른 callback 이름을 쓰고, 초기 상태에도 `removePause()`가 호출된 것처럼 보였다. 실제 arrow callback과 pause 상태 분기를 표시했다 | 표시 코드가 현재 Timeline 구성과 실제 조작 이력을 재현한다 | none |
+| PED-TCP-002 | ADDRESSED | 첫 화면의 `source item`·`기술 item`을 `공식 문서`·`핵심 동작`으로 바꿨다 | 내부 coverage 용어가 학습 흐름을 방해하지 않는다 | none |
+| SRC-TCP-002 | PASS | 2026-08-13 delayedCall·call·addPause·removePause·eventCallback·then 공식 페이지를 다시 조회해 예약·취소·callback·Promise 계약을 확인했다 | 공식 근거 최신성 확인 | none |
+| BROWSER-TCP-002 | DEFERRED | callback 순서, pause 재개, reduced-motion·키보드·반응형 조작은 수행하지 않았다 | 브라우저 관점은 판정하지 않는다 | 승인된 브라우저 검수에서 확인 |
+
+### verificationEvidence
+
+- 공식 문서: meta의 여섯 canonical URL (2026-08-13 확인).
+- Runtime/Display: delayedCall descriptor와 Timeline event 생성·제거 분기를 두 TSX 코드 패널과 정적으로 대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행 대상이 아니다.
+
+### releaseDecision
+
+`PASS with DEFERRED` — 정적 BLOCK은 수정했으며 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-TCP-003` — **PASS**: TimelineEvent와 DelayedCall 표시 코드에 target·상태·callback 정의 및 teardown을 포함해 독립 실행 경계를 다시 확인했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`

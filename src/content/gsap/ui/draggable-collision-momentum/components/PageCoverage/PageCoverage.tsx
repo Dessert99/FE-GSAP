@@ -1,38 +1,23 @@
-/** P08 공식 item과 source/probe 경계가 모두 연결됐음을 요약한다. */
-import { draggableCollisionMomentumItems } from '../../draggable-collision-momentum.catalog'
-import {
-  draggableCollisionMomentumCoverage,
-  draggableCollisionMomentumSections,
-} from '../../draggable-collision-momentum.meta'
-
-const officialItems = draggableCollisionMomentumItems.filter((item) => item.origin === 'official')
-const sourceItems = draggableCollisionMomentumItems.filter((item) => item.origin === 'source')
-const canonicalCount = new Set(officialItems.map((item) => item.source)).size
+/** 겹침 판정과 release momentum을 이해하는 다섯 학습 단계를 안내한다. */
+import { draggableCollisionMomentumSections } from '../../draggable-collision-momentum.meta'
 
 export function PageCoverage() {
   return (
-    <nav className="draggable-collision-momentum-coverage" aria-label="공식 source 대응 범위">
+    <nav className="draggable-collision-momentum-coverage" aria-label="이 페이지의 학습 순서">
       <div>
-        <strong>
-          {canonicalCount}/{draggableCollisionMomentumCoverage.officialSources}
-        </strong>
-        <span>공식 canonical</span>
+        <strong>학습 순서</strong>
+        <span>겹침과 관성 상태</span>
       </div>
       <div>
-        <strong>
-          {officialItems.length}/{draggableCollisionMomentumCoverage.officialSourceItems}
-        </strong>
-        <span>공식 기술 item</span>
+        <strong>핵심 질문</strong>
+        <span>겹쳤는가, 아직 던져지는 중인가</span>
       </div>
-      <p>
-        설치본 source/type·Node probe {sourceItems.length}/
-        {draggableCollisionMomentumCoverage.sourceVerifiedItems}개는 공식 분모와 분리했습니다.
-      </p>
+      <p>hitTest의 threshold부터 release Tween과 cleanup까지 한 target으로 확인합니다.</p>
       <ol>
         {draggableCollisionMomentumSections.map((section) => (
           <li key={section.id}>
             <a href={`#${section.id}`}>
-              {section.number} · {section.title} <small>{section.sourceItems}개</small>
+              {section.number} · {section.title}
             </a>
           </li>
         ))}

@@ -6,7 +6,24 @@ export function GeometryConverter() {
   const { scope, hostRef, descriptor, snapshot, convert, restoreOriginal } =
     useGeometryConverter()
   // 표시 코드는 convert가 반환한 path d를 다음 두 utility에 넘기는 실제 순서를 직렬화한다
-  const code = `const paths = MorphSVGPlugin.convertToPath(${descriptor.sourceTag}, ${descriptor.swap})\nconst convertedD = paths[0].getAttribute('d')\nconst raw = MorphSVGPlugin.stringToRawPath(convertedD)\nconst d = MorphSVGPlugin.rawPathToString(raw)`
+  const code = `gsap.registerPlugin(MorphSVGPlugin)
+const host = document.querySelector('.geometry-converter g')
+if (!host) throw new Error('conversion host를 찾지 못했습니다.')
+host.replaceChildren()
+const primitive = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
+Object.entries({ x: '10', y: '10', width: '80', height: '80', rx: '8', ry: '8', fill: 'none', stroke: 'currentColor', 'stroke-width': '4' })
+  .forEach(([name, value]) => primitive.setAttribute(name, value))
+host.appendChild(primitive)
+const paths = MorphSVGPlugin.convertToPath(primitive, ${descriptor.swap})
+const path = paths[0]
+if (!path) throw new Error('converted path를 만들지 못했습니다.')
+const convertedD = path.getAttribute('d') || ''
+const raw = MorphSVGPlugin.stringToRawPath(convertedD)
+const serialized = MorphSVGPlugin.rawPathToString(raw)
+
+function cleanup() {
+  host.replaceChildren()
+}`
   return (
     <section
       className="geometry-converter"
@@ -14,7 +31,8 @@ export function GeometryConverter() {
     >
       <h2 id="geometry-converter-title">rect를 path와 RawPath로 읽습니다</h2>
       <p>
-        P18의 morph는 전제 지식이고, 이 예제는 tween 없이 변환 결과만 읽습니다.
+        MorphSVG의 morph 원리는 전제 지식이고, 이 예제는 tween 없이 변환
+        결과만 읽습니다.
       </p>
       <div ref={scope} className="geometry-converter__preview">
         <svg viewBox="0 0 100 100" role="img" aria-label="conversion source">

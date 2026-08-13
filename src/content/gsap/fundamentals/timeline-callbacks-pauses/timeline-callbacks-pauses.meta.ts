@@ -5,7 +5,7 @@ export const timelineCallbacksPausesMeta = {
   summary:
     'Timeline은 animation만 담는 상자가 아닙니다. 시간 위의 특정 지점에 내 함수를 꽂아 둘 수도 있고, 재생을 그 자리에서 멈춰 세울 수도 있습니다. 여기서는 예약하는 여섯 가지 방법과 각각이 언제 실행되는지를 다룹니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-callbacks-pauses/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'gsap.delayedCall()', href: 'https://gsap.com/docs/v3/GSAP/gsap.delayedCall()' },
     { label: 'Timeline.call()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/call()' },

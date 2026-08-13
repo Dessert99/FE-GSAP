@@ -25,10 +25,10 @@ export function MotionPathHelperPage() {
         <p>
           이 lab은{' '}
           <a href={toHref('/fundamentals/morph-svg-path-data')}>
-            P19 MorphSVG path 데이터
+            MorphSVG path 데이터
           </a>
-          에서 준비한 SVG <code>d</code> string을 편집합니다. P21 MotionPath
-          fundamentals는 아직 text-only 다음 경계입니다.
+          에서 준비한 SVG <code>d</code> string을 편집합니다. 실제 경로 이동은
+          MotionPath fundamentals 페이지에서 이어집니다.
         </p>
       </section>
       <MotionPathHelperLab />

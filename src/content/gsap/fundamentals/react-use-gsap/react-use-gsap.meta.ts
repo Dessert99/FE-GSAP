@@ -5,7 +5,7 @@ export const reactUseGsapMeta = {
   summary:
     'React는 컴포넌트를 지웠다 다시 만듭니다. 그때 남은 애니메이션을 치우지 않으면 같은 대상에 두 개가 겹칩니다. useGSAP()은 그 정리를 대신해 주는 훅입니다.',
   sourcePath: 'src/content/gsap/fundamentals/react-use-gsap/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [{ label: 'GSAP & React', href: 'https://gsap.com/resources/React' }],
 } as const
 

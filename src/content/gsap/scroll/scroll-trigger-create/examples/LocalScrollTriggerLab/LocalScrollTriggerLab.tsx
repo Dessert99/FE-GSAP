@@ -21,28 +21,48 @@ export function LocalScrollTriggerLab() {
     refreshSnapshot,
   } = useLocalScrollTriggerRuntime()
   // 표시 code는 현재 descriptor와 runtime이 실제 호출하는 API만 직렬화한다
-  const code = `const previousDefaults = { ...ScrollTrigger.defaults({}) }
-ScrollTrigger.defaults({ toggleActions: '${descriptor.defaults.toggleActions}' })
+  const code = `import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-const tween = gsap.to(follower, { x: ${reducedMotion ? 0 : 96}, duration: ${reducedMotion ? 0 : 0.5}, paused: true })
-const trigger = ScrollTrigger.create({
-  trigger: triggerElement,
-  scroller: localScroller,
-  start: '${descriptor.start}',
-  end: '${descriptor.end}',
-  toggleActions: '${descriptor.toggleActions}',
-  scrub: ${descriptor.scrub},
-  pin: ${descriptor.pin ? 'triggerElement' : 'false'},
-  markers: ${descriptor.markers},
-  animation: tween,
-})
+gsap.registerPlugin(ScrollTrigger)
 
-trigger.refresh()
-trigger.vars
-trigger.kill(true); tween.kill()
-ScrollTrigger.defaults({ toggleActions: previousDefaults.toggleActions })
+const setup = () => {
+  const localScroller = document.querySelector('.local-scroll-trigger-lab__scroller')
+  const triggerElement = document.querySelector('.local-scroll-trigger-lab__trigger')
+  const follower = document.querySelector('.local-scroll-trigger-lab__follower')
+  if (!localScroller || !triggerElement || !follower) {
+    throw new Error('local scroller, trigger, follower가 필요합니다.')
+  }
+  const previousDefaults = { ...ScrollTrigger.defaults({}) }
+  ScrollTrigger.defaults({ toggleActions: '${descriptor.defaults.toggleActions}' })
 
-// snap은 생략하며 normalized descriptor 값은 ${descriptor.snap}다.
+  const tween = gsap.to(follower, { x: ${reducedMotion ? 0 : 96}, duration: ${reducedMotion ? 0 : 0.5}, ease: 'none', paused: true })
+  const trigger = ScrollTrigger.create({
+    trigger: triggerElement,
+    scroller: localScroller,
+    start: '${descriptor.start}',
+    end: '${descriptor.end}',
+    toggleActions: '${descriptor.toggleActions}',
+    scrub: ${descriptor.scrub},
+    pin: ${descriptor.pin ? 'triggerElement' : 'false'},
+    markers: ${descriptor.markers},
+    animation: tween,
+  })
+
+  trigger.refresh()
+  console.log(trigger.vars)
+  return () => {
+    trigger.kill(true)
+    tween.kill()
+    gsap.set(follower, { clearProps: 'transform' })
+    ScrollTrigger.defaults({ toggleActions: previousDefaults.toggleActions })
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.
+
+// snap은 생략하며 현재 설정 값은 ${descriptor.snap}다.
 
 ${getConfigBoundary(descriptor)}`
   // inspector row는 descriptor만 다시 쓰지 않고 actual instance에서 읽는다
@@ -83,7 +103,7 @@ ${getConfigBoundary(descriptor)}`
               >
                 {reducedMotion
                   ? 'reduced motion · scrub / pin off'
-                  : 'owned follower · scrub / pin on'}
+                  : '이 예제의 follower · scrub / pin on'}
               </div>
             </div>
             <div className='local-scroll-trigger-lab__spacer'>
@@ -120,16 +140,16 @@ ${getConfigBoundary(descriptor)}`
         'reduced motion에서는 native local scroll을 유지하고 scrub·pin 이동만 끕니다.',
       ]}
       watchFor={[
-        'marker는 development inspection용이며 production UI가 아닙니다.',
+        'marker는 start/end를 점검할 때만 켜고 실제 화면에서는 끕니다.',
         'pinned trigger 자체가 아니라 안쪽 follower만 tween합니다.',
-        'unmount/rebuild는 owned trigger·tween을 kill하고 pin style과 defaults key를 복원합니다.',
+        'unmount/rebuild는 이 예제가 만든 trigger·tween을 kill하고 pin style과 defaults key를 복원합니다.',
       ]}
       explanation={
         <p>
           <code>defaults()</code>는 vars에 없는 creation value만 채우고,{' '}
           <code>config()</code>는 global behavior를 바꿉니다. public config
-          getter가 없으므로 이 isolated lab은 config를 바꾸지 않습니다. app
-          owner만 자신이 설정한 prior value를 보관해 restore해야 합니다.
+          getter가 없으므로 이 local 예제는 config를 바꾸지 않습니다. application은
+          자신이 설정한 이전 값을 보관해 복원해야 합니다.
         </p>
       }
     />

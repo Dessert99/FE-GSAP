@@ -5,7 +5,7 @@ export const drawSvgMeta = {
   summary:
     'stroke 전체 길이 위의 시작·끝 위치를 drawSVG 값으로 정하고, 실제 길이와 현재 visible interval을 함께 읽습니다.',
   sourcePath: 'src/content/gsap/svg/draw-svg/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'DrawSVG',

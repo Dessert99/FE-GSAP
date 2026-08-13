@@ -21,15 +21,22 @@ export function ScaleSpeedLab() {
     useScaleSpeedAnimation()
 
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `gsap.fromTo(
+  const code = `// 1. 시작·끝 scale과 ease를 공유하는 paused Tween을 준비합니다.
+const tween = gsap.fromTo(
   '${descriptor.selector}',
   { scale: ${descriptor.startScale} },
   {
     scale: ${descriptor.endScale},
     duration: ${descriptor.duration},
     ease: '${descriptor.easeExpression}',
+    paused: true,
   },
-)`
+)
+
+// 2. 실행 버튼을 누르면 준비한 Tween을 처음부터 재생합니다.
+function run() {
+  tween.restart()
+}`
 
   return (
     <section className="scale-speed-lab" aria-labelledby="scale-speed-lab-title">
@@ -153,16 +160,16 @@ export function ScaleSpeedLab() {
         <article>
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
-            사람 눈은 "몇 픽셀 커졌나"가 아니라 <strong>"몇 배 커졌나"</strong>로 크기 변화를 느낍니다. 공식 문서는 이것을 scale을
-            animate할 때 linear ease로도 속도가 변해 보이는 현상이라고 설명하고, ExpoScaleEase가 그에 맞게{' '}
+            <code>none</code>은 같은 progress 간격마다 scale을 같은 양만큼 늘리므로 구간별 배율은 달라집니다. 공식 문서는 scale을
+            animate할 때 linear ease로도 속도가 변해 보이는 현상이 있다고 설명하고, ExpoScaleEase가 그에 맞게{' '}
             <strong>easing curve를 구부려 보정한다</strong>고 적었습니다. 그래서 시작·끝 scale을 문자열에 알려 줘야 합니다.
           </p>
         </article>
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
-            지도 확대, 이미지 갤러리의 zoom in·out, 배경을 천천히 확대하는 Ken Burns 효과처럼 <strong>크기 자체가 주인공</strong>인
-            연출에 씁니다. 반대로 아이콘이 살짝 커지는 hover 같은 작은 변화에서는 차이가 거의 보이지 않아 굳이 쓰지 않습니다.
+            공식 문서가 설명한 zoom·scaling 애니메이션처럼 scale 변화가 크게 보이는 장면에서 비교할 수 있습니다. 작은 변화에 사용할지는
+            실제 화면에서 linear ease와 나란히 비교해 결정하세요.
           </p>
         </article>
       </div>

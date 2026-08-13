@@ -30,6 +30,7 @@ export function useResponsiveRestorationRuntime() {
     const savedStyle = panel.getAttribute('style')
     // browser query listener는 component scope에서만 만들고 cleanup에서 같은 callback을 제거한다
     const media = window.matchMedia(responsiveRestorationDescriptor.legacyQuery)
+    // media query 변화는 연속 값 대신 한 번의 상태 문장만 남긴다
     const onChange = () =>
       setLifecycle('native media listener가 조건 변화를 관찰 중')
     media.addEventListener('change', onChange)

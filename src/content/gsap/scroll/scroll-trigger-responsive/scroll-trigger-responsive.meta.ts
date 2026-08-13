@@ -1,11 +1,11 @@
-/** P45의 official identity와 네 canonical link를 header에 제공한다. */
+/** ScrollTrigger 반응형 API의 공식 문서 링크와 페이지 설명을 고정한다. */
 export const scrollTriggerResponsiveMeta = {
   title: 'responsive 조건이 바뀌면 style과 scroll state를 어떻게 복원할까?',
   category: 'GSAP · Scroll · ScrollTrigger',
   summary:
     'condition cleanup, inline style snapshot, navigation scroll-memory boundary를 host scroll 없이 분리해 읽습니다.',
   sourcePath: 'src/content/gsap/scroll/scroll-trigger-responsive/',
-  reviewedAt: '2026-08-09',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'clearMatchMedia()',

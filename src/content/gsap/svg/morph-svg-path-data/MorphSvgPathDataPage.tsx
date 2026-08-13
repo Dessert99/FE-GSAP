@@ -20,7 +20,7 @@ export function MorphSvgPathDataPage() {
       <section>
         <h2>shape input → path DOM</h2>
         <p>
-          <a href={toHref('/fundamentals/morph-svg')}>P18 MorphSVG 모양 변환</a>
+          <a href={toHref('/fundamentals/morph-svg')}>MorphSVG 모양 변환</a>
           에서 이어집니다. convertToPath는 기본으로 source element 자리에 path를
           swap합니다. listeners나 stored references가 있으면 교체를 의식해야
           합니다.

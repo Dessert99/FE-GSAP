@@ -13,7 +13,7 @@ export function RestorationSection() {
       <p>
         읽기 순서와 focus order는 DOM을 옮기거나 tabindex를 바꾸지 않아
         유지합니다. 이 도구를 쓰기 전에는{' '}
-        <a href={toHref('/fundamentals/flip-first-last')}>P11의 state capture와 from/to cycle</a>을
+        <a href={toHref('/fundamentals/flip-first-last')}>Flip의 state capture와 from/to 순서</a>를
         먼저 확인하세요.
       </p>
     </section>

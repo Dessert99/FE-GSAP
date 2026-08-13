@@ -1,16 +1,4 @@
-/** P13 official item coverage 분모를 표시한다. */
-import { flipBatchInterruptItems } from '../../flip-batch-interrupt.catalog'
-/** official과 implementation item을 분리해 요약한다. */
+/** batch 순서와 실행 중단 정책이라는 두 학습 축을 안내한다. */
 export function PageCoverage() {
-  return (
-    <p>
-      {flipBatchInterruptItems.filter((x) => x.origin === 'official').length}{' '}
-      official items ·{' '}
-      {
-        flipBatchInterruptItems.filter((x) => x.origin === 'implementation')
-          .length
-      }{' '}
-      implementation check
-    </p>
-  )
+  return <p>학습 순서 · 여러 Flip의 상태 측정 순서를 맞춘 뒤 실행 중 animation을 안전하게 중단합니다.</p>
 }

@@ -1,4 +1,4 @@
-/** local Observer mode만 actual 실행하고 native normalization/proxy mode는 architecture로 남긴다. */
+/** local Observer만 실행하고 normalization과 proxy는 정적 설명으로 남긴다. */
 import { useGSAP } from '@gsap/react'
 import { useRef, useState } from 'react'
 import gsap from 'gsap'
@@ -19,7 +19,7 @@ export function useLocalObserverRuntime() {
   // continuous delta 대신 마지막 intentional direction만 polite readout으로 고정한다
   const [readout, setReadout] = useState<ObserverReadout>('ready')
 
-  // target mount 후 actual observe call을 만들고 unmount에서 observer를 kill한다
+  // target mount 후 observe call을 만들고 unmount에서 observer를 kill한다
   useGSAP(
     () => {
       // local target가 없으면 global observer fallback을 만들지 않는다
@@ -33,9 +33,10 @@ export function useLocalObserverRuntime() {
         onUp: () => setReadout('up'),
         onDown: () => setReadout('down'),
       })
-      // owned observer만 kill해 other page Observer를 건드리지 않는다
+      // 이 hook이 만든 observer만 kill해 다른 Observer를 건드리지 않는다
       return () => observer.kill()
     },
+    // selector와 cleanup을 이 예제의 DOM 범위에 한정한다
     { scope },
   )
 

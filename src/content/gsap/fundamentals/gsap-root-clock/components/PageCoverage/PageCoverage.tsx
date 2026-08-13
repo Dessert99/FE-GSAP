@@ -10,22 +10,22 @@ const mappedSourceCount = new Set(gsapRootClockSourceItems.map((item) => item.so
 
 export function PageCoverage() {
   return (
-    <nav className="root-clock-coverage" aria-label="공식 source 대응 범위">
+    <nav className="root-clock-coverage" aria-label="GSAP 시간 구조 학습 순서">
       <div className="root-clock-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{gsapRootClockCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{gsapRootClockCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          globalTimeline·ticker·exportRoot()·updateRoot() 네 문서의 기술 item {gsapRootClockCoverage.officialSourceItems}개를 "누가
+          globalTimeline·ticker·exportRoot()·updateRoot() 네 문서의 핵심 동작 {gsapRootClockCoverage.officialSourceItems}개를 "누가
           움직이나 → 시간의 구조 → 시간의 동력 → 밀렸을 때 → 떼어내기 → 직접 주기"라는 일곱 단계로 다시 묶었습니다. 여기에 공식 문서에
           없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로 표시합니다.
         </p>
@@ -37,7 +37,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

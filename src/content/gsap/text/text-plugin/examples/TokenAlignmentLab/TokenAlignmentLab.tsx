@@ -30,29 +30,50 @@ export function TokenAlignmentLab() {
   // final string도 same descriptor delimiter로 분해해 static representation을 만든다
   const finalTokens = splitTokens(descriptor.value, descriptor.delimiter)
   // actual config form 또는 reduced-motion direct final을 current code panel에 직렬화한다
-  const code = reducedMotion
-    ? `target.textContent = '${descriptor.value}' // reduced motion: direct final`
-    : `gsap.to(target, {
-  duration: ${descriptor.duration},
-  text: {
-    value: '${descriptor.value}',
-    delimiter: '${descriptor.delimiter}',
-    padSpace: ${descriptor.padSpace},
-    newClass: '${descriptor.newClass}',
-    oldClass: '${descriptor.oldClass}',
-    preserveSpaces: ${descriptor.preserveSpaces},
-    rtl: ${descriptor.rtl},
-    speed: ${descriptor.speed},
-    type: '${descriptor.type}',
-  },
-})`
+  const code = `import { gsap } from 'gsap'
+import { TextPlugin } from 'gsap/TextPlugin'
+
+gsap.registerPlugin(TextPlugin)
+
+const setup = () => {
+  const target = document.querySelector('.token-alignment-lab__target')
+  if (!target) throw new Error('text target이 필요합니다.')
+  const originalHTML = target.innerHTML
+  ${
+    reducedMotion
+      ? `target.textContent = ${JSON.stringify(descriptor.value)}
+  const tween = null`
+      : `const tween = gsap.to(target, {
+    duration: ${descriptor.duration},
+    text: {
+      value: ${JSON.stringify(descriptor.value)},
+      delimiter: ${JSON.stringify(descriptor.delimiter)},
+      padSpace: ${descriptor.padSpace},
+      newClass: ${JSON.stringify(descriptor.newClass)},
+      oldClass: ${JSON.stringify(descriptor.oldClass)},
+      preserveSpaces: ${descriptor.preserveSpaces},
+      rtl: ${descriptor.rtl},
+      speed: ${descriptor.speed},
+      type: ${JSON.stringify(descriptor.type)},
+    },
+  })`
+  }
+
+  return () => {
+    tween?.kill()
+    target.innerHTML = originalHTML
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
 
   // descriptor-driven controls·target·token alignment을 one learning frame에 전달한다
   return (
     <section id="token-alignment-lab">
       <InteractiveExample
-        title="one phrase, aligned replacement tokens"
-        description="character 또는 word delimiter와 trailing padding을 고른 뒤 replay하세요. intermediate target은 숨기고 final meaning은 stable sibling으로 둡니다."
+        title="한 문장의 교체 token 정렬"
+        description="character 또는 word delimiter와 trailing padding을 고른 뒤 replay하세요. 중간 target은 숨기고 최종 문장은 별도 sibling으로 둡니다."
         sourcePath="src/content/gsap/text/text-plugin/examples/TokenAlignmentLab/useTokenAlignmentAnimation.ts"
         reducedMotion={reducedMotion}
         controls={

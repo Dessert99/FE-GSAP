@@ -26,7 +26,7 @@ export function TargetsMethodSection() {
         number="04"
         id="targets-method"
         title="targets()가 돌려주는 배열"
-        description="인스턴스에게 물어볼 수 있는 가장 단순한 질문입니다. '너는 결국 누구를 움직이는 거니?' 답은 항상 배열 하나입니다."
+        description="Tween이 animate하는 target 목록을 확인하는 메서드입니다. 반환값은 항상 배열입니다."
       />
 
       <pre className="instance-page__signature">
@@ -85,7 +85,7 @@ export function TargetsMethodSection() {
         </p>
         <p>
           같은 명단을 두 곳에서 볼 뿐입니다. 함수 안에서는 인자로, 바깥에서는 메서드로 받습니다. function-based value 자체의 사용법은
-          07번 단계에서 소유 페이지를 안내합니다.
+          07번 단계에서 자세히 설명하는 페이지를 안내합니다.
         </p>
       </div>
 

@@ -12,14 +12,46 @@ export function ContextSafeEventLab() {
   // runtime이 제공하는 Context-bound handler와 current low-motion config를 받는다.
   const { scope, targetRef, count, reducedMotion, config, pulse } =
     useContextSafeEventAnimation()
-  // same contextSafe wrapper와 actual event tween vars를 code로 직렬화한다.
-  const code = `const { contextSafe } = useGSAP({ scope })\nconst pulse = contextSafe(() => {\n  gsap.fromTo(target, { scale: 1 }, {\n    scale: ${config.scale},\n    duration: ${config.duration},\n    yoyo: ${!reducedMotion},\n    repeat: ${reducedMotion ? 0 : 1},\n  })\n})`
+  // 실제 ref·motion config·contextSafe callback을 단독으로 읽을 수 있게 직렬화한다.
+  const code = `import { useRef, useState } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { useReducedMotion } from '../../../../../../components/demo/InteractiveExample/useReducedMotion'
+
+export function ContextSafeExample() {
+  const scope = useRef(null)
+  const targetRef = useRef(null)
+  const [count, setCount] = useState(0)
+  const reducedMotion = useReducedMotion()
+  const config = { scale: ${config.scale}, duration: ${config.duration} }
+  const { contextSafe } = useGSAP({ scope })
+  const pulse = contextSafe(() => {
+    const target = targetRef.current
+    if (!target) return
+
+    gsap.fromTo(target, { scale: 1 }, {
+      scale: config.scale,
+      duration: config.duration,
+      yoyo: ${!reducedMotion},
+      repeat: ${reducedMotion ? 0 : 1},
+    })
+    setCount((value) => value + 1)
+  })
+
+  return (
+    <div ref={scope}>
+      <button type="button" onClick={pulse}>pulse</button>
+      <div ref={targetRef}>late event target</div>
+      <p role="status">button pulses: {count}</p>
+    </div>
+  )
+}`
 
   return (
     <section id="context-safe-event-lab">
       <InteractiveExample
-        title="context-safe late event"
-        description="click 이후에 새 tween을 만들 때 contextSafe가 그것을 existing Context cleanup에 연결합니다."
+        title="click 뒤 만든 tween도 함께 정리하기"
+        description="click 이후에 새 tween을 만들 때 contextSafe가 그것을 기존 Context cleanup에 연결합니다."
         sourcePath="src/content/gsap/react/react-gsap-patterns/examples/ContextSafeEventLab/useContextSafeEventAnimation.ts"
         reducedMotion={reducedMotion}
         controls={
@@ -48,7 +80,7 @@ export function ContextSafeEventLab() {
         watchFor={[
           'button을 누를 때만 pulse가 만들어지는지 봅니다.',
           'reduced motion에서 target이 final scale로 즉시 가고 다시 흔들리지 않는지 봅니다.',
-          'component cleanup 뒤 늦은 event tween이 남지 않는다는 Context ownership을 code에서 확인합니다.',
+          'component cleanup 뒤 늦은 event tween도 같은 Context에서 정리되는지 code에서 확인합니다.',
         ]}
         explanation={
           <p>

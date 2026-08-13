@@ -161,32 +161,6 @@ var x = getter("x"),
 
       <PropertyReadout />
 
-      <div className="hfu-page__note hfu-page__note--probe">
-        <h3>공식 문서에 없는 경계 — 직접 실행해 확인한 것</h3>
-        <p>
-          위의 문장들은 모두 <strong>DOM element</strong>를 기준으로 적혀 있습니다. GSAP은 일반 JavaScript 객체도 target으로 받는데,
-          그때 어떻게 되는지는 공식 페이지에 없습니다. 그래서 설치본 GSAP 3.15.0을 Node에서 직접 실행해 확인했습니다.
-        </p>
-        <ul className="hfu-page__list">
-          <li>
-            <code>gsap.getProperty({'{ x: 5 }'}, 'x', 'px')</code> → <code>5</code> (<code>number</code>). 일반 객체에서는{' '}
-            <strong>unit 인자가 무시</strong>됩니다.
-          </li>
-          <li>
-            <code>gsap.getProperty({'{ x: 5 }'}, 'nope')</code> → <code>undefined</code>. 공식 문장의 <code>null</code>은 DOM 조회
-            순서를 모두 지나친 뒤의 결과입니다.
-          </li>
-          <li>
-            반면 <code>gsap.quickSetter(obj, 'x', 'px')(42)</code>는 일반 객체에도 단위를 붙여 <code>"42px"</code> 문자열을 씁니다.
-            읽기와 쓰기의 unit 처리가 서로 다릅니다.
-          </li>
-        </ul>
-        <p className="hfu-page__provenance">
-          측정 방법 · <code>node --input-type=module</code>에서 <code>gsap</code>을 import하고 위 세 줄을 그대로 실행해 반환값과{' '}
-          <code>typeof</code>를 읽었습니다. 재현 조건은 GSAP 3.15.0, Node v22.21.0, DOM 없는 환경입니다. DOM element에 대한 동작은 이
-          실행으로 확인할 수 없으므로 공식 문장을 그대로 따릅니다.
-        </p>
-      </div>
     </section>
   )
 }

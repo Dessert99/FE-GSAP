@@ -23,7 +23,6 @@ export function TimelineEffectExample() {
         immediateRender: false
       }
     ),
-  plugins: '${timelineEffectRegistration.plugins}',
   defaults: {
     duration: ${timelineEffectRegistration.defaults.duration},
     ease: '${timelineEffectRegistration.defaults.ease}'
@@ -33,16 +32,16 @@ export function TimelineEffectExample() {
 
 const parent = gsap.timeline({ paused: true })
 
-parent.set('.card', { autoAlpha: 0, x: -48, scale: 1 }, 0)
+parent.set('.${targetClassName}', { autoAlpha: 0, x: -48, scale: 1 }, 0)
 
 parent.${timelineEffectRegistration.name}(
-  '.card',
+  '.${targetClassName}',
   {
     duration: ${descriptor.effectConfig.duration},
     ease: '${descriptor.effectConfig.ease}'
   },
   ${positionCode}
-).to('.card', {
+).to('.${targetClassName}', {
   scale: ${descriptor.followUp.scale},
   duration: ${descriptor.followUp.duration},
   repeat: ${descriptor.followUp.repeat},
@@ -66,7 +65,7 @@ parent.${timelineEffectRegistration.name}(
         ]}
         changes={[`effect 반환 Tween은 parent의 ${position} position에 삽입됩니다.`, `확장 method는 parent를 반환하므로 후속 scale Tween까지 총 ${observation.parentDuration.toFixed(2)}초 sequence로 chaining됩니다.`]}
         watchFor={['+=0.25를 고르면 실행 직후 0.25초의 빈 구간이 생기는지 봅니다.', '관찰 패널에서 callback의 third Timeline과 method 반환값이 모두 parent를 가리키는지 확인합니다.']}
-        explanation={<p><code>extendTimeline: true</code>는 wrapper method를 Timeline prototype에 추가합니다. wrapper는 callback에 parent를 세 번째 인자로 전달하고, callback이 반환한 Tween을 <code>parent.add(animation, position)</code>으로 넣은 뒤 parent 자체를 반환합니다.</p>}
+        explanation={<p><code>extendTimeline: true</code>는 effect 이름의 method를 Timeline prototype에 추가합니다. 현재 설치된 GSAP 3.15.0에서 이 method는 callback에 parent를 세 번째 인자로 전달하고, 반환된 Tween을 <code>parent.add(animation, position)</code>으로 넣은 뒤 parent 자체를 반환합니다.</p>}
         onReplay={run}
         reducedMotion={reducedMotion}
       />

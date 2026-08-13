@@ -7,6 +7,7 @@ import { useReducedMotion } from '../../../../../../components/demo/InteractiveE
 
 /** scrub·batch·snap 중 하나만 runtime과 code에 넘기는 descriptor다. */
 export type MotionMode = 'scrub' | 'batch' | 'snap'
+/** 각 mode가 실제 ScrollTrigger 호출에 넘길 수치만 보관한다. */
 export const motionDescriptor = {
   scrub: { scrub: 0.4 },
   batch: { interval: 0.1, batchMax: 2 },
@@ -17,6 +18,8 @@ export const motionDescriptor = {
 export function useMotionModeRuntime(mode: MotionMode) {
   // GSAP selector와 trigger를 이 example의 DOM으로 한정한다
   const scope = useRef<HTMLElement>(null)
+  // 세 mode가 host page 대신 공유할 local scroll container다
+  const scrollerRef = useRef<HTMLDivElement>(null)
   // 마지막 discrete execution 결과만 status와 code에 남긴다
   const [result, setResult] = useState('mode를 선택하세요.')
   // OS motion preference는 scroll-bound animation을 제거한다
@@ -29,7 +32,9 @@ export function useMotionModeRuntime(mode: MotionMode) {
         '.motion-mode-lab__item',
         scope.current,
       )
-      if (!targets.length || !scope.current) return undefined
+      // 모든 mode가 host page 대신 사용할 local scroll element다
+      const scroller = scrollerRef.current
+      if (!targets.length || !scope.current || !scroller) return undefined
       // actual ScrollTrigger calls 전에 plugin을 GSAP core에 등록한다
       gsap.registerPlugin(ScrollTrigger)
       if (reducedMotion) {
@@ -43,7 +48,8 @@ export function useMotionModeRuntime(mode: MotionMode) {
         const tween = gsap.to(targets[0], {
           x: 48,
           scrollTrigger: {
-            trigger: scope.current,
+            trigger: targets[0],
+            scroller,
             scrub: motionDescriptor.scrub.scrub,
           },
         })
@@ -64,6 +70,7 @@ export function useMotionModeRuntime(mode: MotionMode) {
         gsap.set(targets, { autoAlpha: 0, y: 24 })
         // interval 안 진입을 batchMax 크기로 묶어 한 callback에 전달한다
         const triggers = ScrollTrigger.batch(targets, {
+          scroller,
           interval: motionDescriptor.batch.interval,
           batchMax: motionDescriptor.batch.batchMax,
           onEnter: (items) => gsap.to(items, { autoAlpha: 1, y: 0 }),
@@ -80,7 +87,8 @@ export function useMotionModeRuntime(mode: MotionMode) {
       )
       // snap mode만 section scroll progress에 directional snap을 연결한다
       const trigger = ScrollTrigger.create({
-        trigger: scope.current,
+        trigger: targets[0],
+        scroller,
         snap: {
           snapTo: (value, self) => directional(value, self?.direction ?? 1),
         },
@@ -96,5 +104,11 @@ export function useMotionModeRuntime(mode: MotionMode) {
     },
   )
   // display는 actual scope, result, motion branch와 같은 descriptor를 받는다
-  return { scope, result, reducedMotion, descriptor: motionDescriptor }
+  return {
+    scope,
+    scrollerRef,
+    result,
+    reducedMotion,
+    descriptor: motionDescriptor,
+  }
 }

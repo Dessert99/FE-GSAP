@@ -5,7 +5,7 @@ export const gsdevtoolsMeta = {
   summary:
     'GSDevTools는 개발 중 GSAP animation의 playhead를 직접 조작하는 browser UI이며, 특정 timeline을 연결하면 전역 animation 병합 없이 한 장면을 검사할 수 있습니다.',
   sourcePath: 'src/content/gsap/other/gsdevtools/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'GSDevTools', href: 'https://gsap.com/docs/v3/Plugins/GSDevTools/' },
     {

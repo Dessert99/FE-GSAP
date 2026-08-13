@@ -19,14 +19,14 @@ export function FindByIdSection() {
       <SectionHeading
         number="02"
         id="find-by-id"
-        title="id라는 이름표로 다시 잡는다"
-        description="gsap.getById()는 이름표 하나를 받아 그 animation instance를 돌려줍니다. 대신 언제 찾을 수 있는지에 분명한 시간 제한이 있습니다."
+        title="id로 다시 찾는다"
+        description="gsap.getById()는 id에 연결된 animation instance를 돌려줍니다. 대신 언제 찾을 수 있는지에 분명한 시간 제한이 있습니다."
       />
 
       <div className="find-stop-page__split">
         <div className="find-stop-page__prose">
           <p>
-            <code>gsap.getById()</code>는 <strong>이름표로 instance를 되찾는</strong> 조회입니다. 돌려받는 것은 복사본이 아니라{' '}
+            <code>gsap.getById()</code>는 <strong>id로 instance를 조회하는</strong> 메서드입니다. 돌려받는 것은 복사본이 아니라{' '}
             <strong>바로 그 Tween</strong>이라서, 받자마자 <code>pause()</code>처럼 이어 부를 수 있습니다.
           </p>
           <p>
@@ -34,8 +34,8 @@ export function FindByIdSection() {
             찾아 멈춥니다.
           </p>
           <p>
-            돌려주는 대상은 Tween만이 아닙니다. 공식 문서는 <strong>"tween 또는 timeline"</strong>이라고 적습니다. 같은 이름표 체계를 두
-            종류가 함께 씁니다.
+            돌려주는 대상은 Tween만이 아닙니다. 공식 문서는 <strong>"tween 또는 timeline"</strong>이라고 적습니다. 두 종류 모두 같은 id
+            조회 체계를 씁니다.
           </p>
         </div>
         <pre className="find-stop-page__code">
@@ -82,7 +82,7 @@ export function FindByIdSection() {
         </p>
         <p>
           이유도 함께 적혀 있습니다. <strong>"getById()로 찾을지 모른다는 이유로 모든 animation을 붙잡고 있으면 시스템이 금세 막히고
-          memory leak으로 이어질 수 있다."</strong> 그래서 GSAP은 끝난 것을 놓아 줍니다. 완료 뒤에도 손잡이가 필요하면 앞 단계에서 본{' '}
+          memory leak으로 이어질 수 있다."</strong> 그래서 GSAP은 끝난 것을 놓아 줍니다. 완료 뒤에도 참조가 필요하면 앞 단계에서 본{' '}
           <strong>변수</strong>를 쓰는 것이 공식 권고입니다.
         </p>
       </div>
@@ -96,7 +96,7 @@ export function FindByIdSection() {
         </p>
         <p className="find-stop-page__provenance">
           측정 방법 · <code>{"gsap.to(o, { v: 1, duration: 1, id: 7, paused: true })"}</code>로 만든 뒤 두 호출의 결과를 만들어 둔
-          instance와 <code>===</code>로 비교했습니다. 숫자 조회는 <code>true</code>, 문자열 조회는 <code>false</code>였습니다. 이름표는{' '}
+          instance와 <code>===</code>로 비교했습니다. 숫자 조회는 <code>true</code>, 문자열 조회는 <code>false</code>였습니다. id는{' '}
           <strong>넣은 값 그대로</strong> 쓰는 편이 안전합니다.
         </p>
       </div>

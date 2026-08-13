@@ -1,11 +1,11 @@
-/** P46 normalizeScroll·observe·scrollerProxy canonical identity를 고정한다. */
+/** normalizeScroll·observe·scrollerProxy의 공식 문서 링크를 고정한다. */
 export const scrollTriggerIntegrationsMeta = {
   title: 'native scroll을 보존하며 custom input을 연결하려면?',
   category: 'GSAP · Scroll · ScrollTrigger',
   summary:
-    'normalizer, Observer, and scroller proxy are 서로 다른 ownership boundary이며 local target에서 안전한 mode만 실행합니다.',
+    'normalizer, Observer, scroller proxy의 역할을 나누고 local target에서 Observer만 실행합니다.',
   sourcePath: 'src/content/gsap/scroll/scroll-trigger-integrations/',
-  reviewedAt: '2026-08-09',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'normalizeScroll()',

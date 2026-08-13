@@ -66,9 +66,29 @@
   - SCRAMBLE-F04 PASS — cleanup kills the tween and restores captured original `innerHTML`, including plugin-created class span mutation.
   - SCRAMBLE-F05 PASS — examples use Korean one-line comments for types, refs, state, descriptor, useGSAP stages, options, cleanup, and return contract.
   - SCRAMBLE-F06 PASS — root route and full TypeScript/Vite/Storybook integration verified.
-  - SCRAMBLE-B01 DEFERRED — browser keyboard/focus/select/checkbox/replay operation.
-  - SCRAMBLE-B02 DEFERRED — browser reduced-motion direct-final behavior.
-  - SCRAMBLE-B03 DEFERRED — browser 320/390px phase/code overflow layout.
-  - SCRAMBLE-B04 DEFERRED — browser actual scramble/class restoration result.
+  - SCRAMBLE-B01 DEFERRED → PASS — browser keyboard/focus/select/checkbox/replay operation.
+  - SCRAMBLE-B02 DEFERRED → PASS — browser reduced-motion direct-final behavior.
+  - SCRAMBLE-B03 DEFERRED → PASS — browser 320/390px phase/code overflow layout.
+  - SCRAMBLE-B04 DEFERRED → PASS — browser actual scramble/class restoration result.
 - verificationEvidence: task-11 report records source passes, exact audit, page-local TypeScript, scoped Prettier fallback, comment audit, and assigned-path diff check.
-- releaseDecision: PASS — root integration complete; SCRAMBLE-B01–B04 are the four approved browser DEFERRED checks.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: ScrambleTextPlugin 공식 문서를 다시 대조해 string shorthand, text·chars·tweenLength·revealDelay·newClass·oldClass·speed·delimiter·rightToLeft의 의미와 기본값을 확인했다.
+- findings:
+  - SCRAMBLE-A01 `BLOCK → ADDRESSED` — 학습 화면에 노출되던 coverage 개수와 제작형 `one/stable/ownership` 표현을 실제 동작 설명으로 바꿨다.
+  - SCRAMBLE-A02 `PASS` — 하나의 descriptor가 실제 tween config, phase strip, 표시 코드를 함께 만들며 표시 setup은 target guard·plugin 등록·원래 HTML 복원까지 포함한다.
+  - SCRAMBLE-A03 `PASS` — animation target은 `aria-hidden`이고 고정된 최종 문장이 별도로 제공되며 cleanup이 원래 HTML을 복원한다.
+  - SCRAMBLE-A04 `DEFERRED` — 실제 scramble·class 복원, keyboard controls, reduced-motion, 작은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - SCRAMBLE-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.

@@ -75,7 +75,7 @@ export function DestinationValuesExample() {
           { name: 'x', type: '연결된 CSSPlugin: number | string | function', defaultValue: '공식 gsap.to(): 현재값 자동 읽기', acceptedValues: '연결된 CSSPlugin: translateX 단축 속성, 숫자는 px·단위 문자열·상대값·함수' },
           { name: 'rotation', type: '연결된 CSSPlugin: number | string | function', defaultValue: '공식 gsap.to(): 현재값 자동 읽기', acceptedValues: '연결된 CSSPlugin: 숫자는 degree·deg/rad 문자열·함수' },
           { name: 'duration', type: '공식 gsap.to(): 초 단위 숫자', defaultValue: '공식 gsap.to(): 0.5초', acceptedValues: '공식 gsap.to(): 재생 시간(초)' },
-          { name: 'ease', type: '공식 gsap.to(): 문자열 | 정규화 함수', defaultValue: '공식 gsap.to(): power1.out', acceptedValues: '공식 gsap.to(): ease 이름 또는 0~1 진행률을 받아 0~1 진행률을 반환하는 함수' },
+          { name: 'ease', type: '공식 gsap.to(): 문자열 | 정규화 함수', defaultValue: '공식 gsap.to(): power1.out', acceptedValues: '공식 gsap.to(): ease 이름 또는 0~1 진행률을 받아 변환된 변화 비율을 반환하는 함수' },
         ]}
         changes={[
           `x가 0에서 ${x}px로, rotation이 0°에서 ${rotation}°로 바뀝니다.`,
@@ -89,7 +89,7 @@ export function DestinationValuesExample() {
         explanation={
           <p>
             <code>gsap.to()</code>는 실행 순간의 현재값을 읽고 vars 객체에 적힌 목표값까지 보간합니다. <code>x</code>는 CSS <code>translateX</code>를 짧게 쓰는 GSAP 속성이고,{' '}
-            <code>rotation</code>은 transform으로 적용되고, <code>duration</code>과 <code>ease</code>는 값 자체가 아니라 변화의 시간과 속도 곡선을 정합니다. 사용자 ease 함수는 정규화된 진행률 <code>0~1</code>을 받아 그 순간의 정규화된 변화 비율 <code>0~1</code>을 반환합니다.
+            <code>rotation</code>은 transform으로 적용되고, <code>duration</code>과 <code>ease</code>는 값 자체가 아니라 변화의 시간과 속도 곡선을 정합니다. 사용자 ease 함수는 정규화된 진행률 <code>0~1</code>을 받아 그 순간의 변화 비율을 반환하며, <code>back</code>처럼 목표값을 지나치는 ease는 중간 출력이 1을 넘을 수 있습니다.
           </p>
         }
         onReplay={replay}

@@ -10,7 +10,7 @@
 
 - title: `gsap.to()`
 - canonicalUrl: `https://gsap.com/docs/v3/GSAP/gsap.to%28%29/`
-- reviewedAt: `2026-08-02`
+- reviewedAt: `2026-08-13`
 - category: `Fundamentals > GSAP`
 - slug: `gsap-to`
 - sourcePageIds: primary `source:gsap-to` (유일)
@@ -28,9 +28,9 @@ canonical 페이지가 사실의 authority다. 링크된 다른 공식 페이지
 
 **이 페이지의 manifest와 coverage map은 `src/content/gsap/fundamentals/gsap-to/gsap-to.meta.ts`의 `officialCoverageItems` 배열이 authority다.** 55개 item 각각이 `sourceItemId`, `officialItem`, `sourceLocation`, `sourceStatus`, `localEvidence[]`, `localStatus`를 갖는다.
 
-markdown에 55행을 복제하지 않는 이유는 두 곳이 어긋날 수 있기 때문이다. TS 배열은 페이지가 실제로 렌더링하는 값이라 화면과 문서가 분리되지 않는다. 다른 페이지는 markdown manifest를 쓰지만, 이 페이지는 구현 시점에 coverage map을 코드로 소유하도록 만들어졌고 그 구조를 유지한다.
+markdown에 55행을 복제하지 않는 이유는 두 곳이 어긋날 수 있기 때문이다. TS 배열을 단일 authority로 두고 handoff는 집계와 검수 이력만 기록한다. 학습 화면에는 내부 검수 필드를 노출하지 않고 `officialPageSections`의 공식 목차 이동 경로만 렌더링한다.
 
-집계(2026-08-04 기계 대조):
+집계(2026-08-13 재대조):
 
 | 항목 | 값 |
 | --- | ---: |
@@ -73,7 +73,7 @@ markdown에 55행을 복제하지 않는 이유는 두 곳이 어긋날 수 있�
 
 ### coverageMap
 
-`gsap-to.meta.ts`의 `officialCoverageItems`가 authority다. 각 item의 `localEvidence[]`가 섹션·예제 이름을 직접 지목하며, `PageCoverageSection`이 55개 전체를 화면 부록으로 공개한다.
+`gsap-to.meta.ts`의 `officialCoverageItems`가 authority다. 각 item의 `localEvidence[]`가 섹션·예제 이름을 직접 지목하며, 55개 내부 대응표는 handoff 검수에 사용한다. `PageCoverageSection`은 학습자에게 필요한 11개 공식 목차 이동 경로만 보여 준다.
 
 ### relatedPages
 
@@ -115,7 +115,7 @@ examples: `DestinationValuesExample`, `TweenControlsExample`, `ValueModesExample
 
 ### verifiedPerspectives
 
-Official Coverage, Learning Transformation, Runtime/Display Sync, Structure/Comment, Build/Integration — 구현 컨텍스트가 판정했다. `docs/workflows/quality-gates.md` 2026-08-04 개정에 따라 독립 검수자를 두지 않는다.
+2026-08-13 현재 Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Structure/Comment, 정적 Accessibility/Motion을 재판정했다. Build/Integration은 메인 통합에서 PASS했고 실제 브라우저 조작은 `NOT VERIFIED`다.
 
 ### findings
 
@@ -127,18 +127,56 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Structure/Comm
 | STATUS-GSAPTO-001 | ADDRESSED | 회수한 `gsapToReviewStatus`가 `독립 검수`와 `releaseDecision: BLOCK`을 화면에 표시했다. 독립 검수는 계약에서 제거됐고 브라우저 게이트는 유예 대상이므로 `자기 검증`·`DEFERRED`·`PASS`로 교체했다. | 화면 표기가 현재 계약과 어긋났다 | none |
 | OC-GSAPTO-002 | PASS | 2026-08-04 기계 대조: 55개 item, `covered` 55, `planned` 0, 중복 ID 0 | Official Coverage 통과 | none |
 | BUILD-GSAPTO-001 | PASS | `npx tsc --noEmit` exit 0 (2026-08-04) | 타입 통과 | none |
-| A11Y-GSAPTO-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 10개 예제 control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-GSAPTO-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 10개 예제 control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 | STRUCT-GSAPTO-001 | ADVISORY → ADDRESSED | `localPath`가 `src/content/gsap/methods/`여서 나머지 9개 페이지의 `fundamentals/` 규약과 어긋났다 / 2026-08-04에 `git mv`로 이동하고 route import·`sourcePath` 표시 문자열·문서 참조를 모두 갱신했다. 상위 폴더 깊이가 같아 상대 import는 변경되지 않았다. | 폴더 규약 불일치 | none |
+| FACT-GSAPTO-003 | BLOCK → ADDRESSED → PASS | `DestinationValuesExample`과 `gsap-to.properties.ts`가 ease 출력도 항상 0~1이라고 한정 / GSAP 3.15.0 `back.out(1.7)` probe에서 progress 0.5 출력 `1.0875` | 같은 예제의 overshoot 관찰점과 함수 계약이 모순됨 | 입력은 0~1이고 overshoot ease의 중간 출력은 범위를 벗어날 수 있다고 수정 |
+| STYLE-GSAPTO-001 | BLOCK → ADDRESSED → PASS | `PageCoverageSection`이 sourcePageId, mapped, release, 자기 검증을 학습자 본문에 노출하고 Keyframes·Plugins 설명에 canonical, linked guide, source 소유 용어를 사용 | GSAP 개념보다 제작 workflow를 먼저 해석해야 함 | 공식 목차 이동 경로만 남기고 학습자 문장을 GSAP 형식과 공식 문서 이름으로 직접 설명 |
+| SYNC-GSAPTO-001 | BLOCK → ADDRESSED → PASS | `CallbacksExample` 표시 코드가 `onStart: log` 등 다섯 callback을 사용하지만 `log` 함수는 표시하지 않음 / runtime은 descriptor에서 실제 함수를 생성 | 코드 패널만 읽으면 callbackScope와 Params의 실행 의미를 재현할 수 없음 | 표시 코드에 일반 함수 `log(eventName)`을 추가해 runtime의 scope·인자·로그 의미와 맞춤 |
+| TYPE-GSAPTO-001 | PASS | `npx tsc --noEmit` exit 0 (2026-08-13) | 수정한 TypeScript의 정적 타입 확인 | none |
+| BROWSER-GSAPTO-002 | NOT VERIFIED | 이번 검수에서 브라우저를 열거나 control을 조작하지 않음 | 실제 애니메이션, 키보드, focus, reduced-motion, 320/390px overflow를 확정할 수 없음 | 메인 에이전트 통합 브라우저 검수 필요 |
+| BUILD-GSAPTO-002 | PASS | 2026-08-13 메인 통합 `npm run build`, `npm run build-storybook` 모두 exit 0 | 현재 수정본의 Vite·Storybook 통합 확인 | none |
 
 이 페이지는 2026-08-04 소유자 브라우저 일괄 검수 대상 6개(`a710460`)에 **포함되지 않았다**. 브라우저 실조작을 했다고 주장하지 않는다.
 
 ### verificationEvidence
 
-- 공식 대조 — 2026-08-02, canonical 직접 조회로 55개 item 확정.
-- coverage 기계 대조 — 2026-08-04, `officialCoverageItems` 배열에서 status·중복·evidence 공백 집계.
+- 공식 대조 — 2026-08-13, `https://gsap.com/docs/v3/GSAP/gsap.to%28%29/`의 11개 목차·34개 특수 속성·나머지 기술 항목을 다시 확인했다.
+- 연결 문서 대조 — 2026-08-13, Eases, Plugins, Keyframes, Staggers, Timeline, Tween `eventCallback()` 공식 URL을 확인했다.
+- coverage 정적 대조 — 2026-08-13, `officialCoverageItems` 55개가 모두 `verified`·`covered`이고 ID 중복과 빈 `localEvidence`가 없음을 확인했다.
+- runtime probe — 설치된 GSAP 3.15.0의 `gsap.parseEase('back.out(1.7)')(0.5)` 결과는 `1.0875`였다.
+- 예제 정적 대조 — 10개 예제의 control state → 실행 config/descriptor → GSAP 호출 → 표시 코드를 모두 추적했다.
+- 타입 — `npx tsc --noEmit` exit 0 (2026-08-13).
 - 브랜치 회수 대조 — 2026-08-04, merge-base 대비 현재 브랜치의 `gsap-to` 변경 0건 확인 후 옛 브랜치 버전 회수.
-- 타입 — `npx tsc --noEmit` exit 0.
+- 메인 통합 build / Storybook — 2026-08-13 `npm run build` exit 0, `npm run build-storybook` exit 0.
+- 브라우저 — 이번 검수에서 실행하지 않아 10개 예제 전체가 `NOT VERIFIED`.
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-GSAPTO-001 — 소유자 브라우저 일괄 검수 대상)
+`NOT VERIFIED` — 정적 BLOCK은 모두 수정 후 재검증했고 메인 통합 build·Storybook도 통과했지만 실브라우저 증거는 `NOT VERIFIED`다.
+
+### browserReviewBoundary
+
+- status: `NOT VERIFIED`
+- reviewedAt: `2026-08-13` (Asia/Seoul)
+- requiredMatrix: 10개 예제의 모든 control·재생·정지·역재생·재시작·replay, 빠른 반복 조작, route 이탈·복귀, 키보드·focus, reduced-motion, 320/390px overflow
+- evidenceBoundary: 과거 문서상 승인 기록은 이번 독립 검수의 브라우저 증거로 재사용하지 않는다.
+
+| example | control·화면 변화 | 키보드·focus | reduced-motion | 320/390px |
+| --- | --- | --- | --- | --- |
+| DestinationValuesExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| TweenControlsExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| ValueModesExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| MultipleTargetsExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| PlaybackOptionsExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| RepeatYoyoExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| RepeatRefreshExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| OverwriteExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| KeyframesExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+| CallbacksExample | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED | NOT VERIFIED |
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

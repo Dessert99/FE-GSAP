@@ -77,8 +77,8 @@ export function ImportFormsSection() {
       <div className="installation-page__subheading">
         <h3>TypeScript에서 타입 인식시키기</h3>
         <p>
-          TypeScript 프로젝트에서 자동완성과 타입 검사가 동작하지 않으면 <code>tsconfig.json</code>의 <code>files</code>에 GSAP 타입
-          선언을 직접 넣습니다.
+          먼저 공식 GSAP 타입 정의를 쓰는지 확인합니다. 그래도 compiler에 타입 선언 위치를 직접 알려줘야 한다면, 공식 문서는 아래처럼{' '}
+          <code>tsconfig.json</code>의 <code>files</code>에 경로를 넣는 방법을 안내합니다.
         </p>
       </div>
 
@@ -88,8 +88,9 @@ export function ImportFormsSection() {
 
       <div className="installation-page__note">
         <p>
-          TypeScript 오류가 난다면 <strong>공식 GitHub 저장소에 있는 공식 타입 정의를 쓰고 있는지 먼저 확인하세요.</strong> 다른 출처의
-          정의를 쓰고 있으면 위 설정을 해도 맞지 않습니다.
+          <strong>위 코드는 <code>...</code>로 일부를 생략한 설정 조각입니다.</strong> <code>files</code>는 compiler가 포함할 파일의 허용
+          목록이므로, 기존 <code>files</code>나 <code>include</code> 설정을 지우고 그대로 붙여 넣지 마세요. TypeScript 오류가 난다면 공식
+          GitHub 저장소의 타입 정의를 쓰고 있는지도 먼저 확인해야 합니다.
         </p>
       </div>
     </section>

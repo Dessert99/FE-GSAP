@@ -12,8 +12,57 @@ export function LocalScrollLab() {
   useEffect(() => cleanup, [])
   // 실제 runtime descriptor만 code 문법으로 직렬화한다
   const code = reducedMotion
-    ? `container.scrollTop = container.scrollHeight - container.clientHeight - ${descriptor.offsetY}`
-    : `ScrollToPlugin.config({ autoKill: ${descriptor.autoKill}, autoKillThreshold: ${descriptor.autoKillThreshold} })\ngsap.to(container, { duration: ${descriptor.duration}, scrollTo: { y: '${descriptor.target}', offsetY: ${descriptor.offsetY}, autoKill: ${descriptor.autoKill} } })`
+    ? `const setup = () => {
+  const container = document.querySelector('.local-scroll-lab__viewport')
+  if (!container) throw new Error('local scroll container가 필요합니다.')
+  container.scrollTop = container.scrollHeight - container.clientHeight - ${descriptor.offsetY}
+  return () => undefined
+}
+
+const cleanup = setup()
+// 이 분기는 listener나 tween을 만들지 않으므로 cleanup은 추가 작업이 없습니다.`
+    : `import { gsap } from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollToPlugin)
+
+const setup = () => {
+  const container = document.querySelector('.local-scroll-lab__viewport')
+  if (!container) throw new Error('local scroll container가 필요합니다.')
+  const globalConfig = gsap.config()
+  const previous = {
+    autoKill: globalConfig.autoKill,
+    autoKillThreshold: globalConfig.autoKillThreshold,
+    hadAutoKill: Object.hasOwn(globalConfig, 'autoKill'),
+    hadAutoKillThreshold: Object.hasOwn(globalConfig, 'autoKillThreshold'),
+  }
+
+  ScrollToPlugin.config({
+    autoKill: ${descriptor.autoKill},
+    autoKillThreshold: ${descriptor.autoKillThreshold},
+  })
+  const tween = gsap.to(container, {
+    duration: ${descriptor.duration},
+    scrollTo: {
+      y: '${descriptor.target}',
+      offsetY: ${descriptor.offsetY},
+      autoKill: ${descriptor.autoKill},
+      onAutoKill: () => console.log('사용자 scroll이 tween을 멈췄습니다.'),
+    },
+    onComplete: () => console.log('local max 목적지에 도착했습니다.'),
+  })
+
+  return () => {
+    tween.kill()
+    if (previous.hadAutoKill) globalConfig.autoKill = previous.autoKill
+    else delete globalConfig.autoKill
+    if (previous.hadAutoKillThreshold) globalConfig.autoKillThreshold = previous.autoKillThreshold
+    else delete globalConfig.autoKillThreshold
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
   return (
     <section
       className='local-scroll-lab'

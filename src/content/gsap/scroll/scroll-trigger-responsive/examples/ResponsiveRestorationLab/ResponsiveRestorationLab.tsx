@@ -17,22 +17,36 @@ export function ResponsiveRestorationLab() {
     lifecycle,
     descriptor,
   } = useResponsiveRestorationRuntime()
-  // actual local snapshot/listener/condition cleanup을 먼저 직렬화하고 global API는 static boundary로 구분한다
-  const code = `const condition = '${condition}'
-const savedStyle = panel.getAttribute('style')
-const media = window.matchMedia('${descriptor.legacyQuery}')
-media.addEventListener('change', onChange)
+  // 실제 local snapshot/listener/condition cleanup을 먼저 직렬화하고 global API는 호출하지 않음을 구분한다
+  const code = `import { useEffect } from 'react'
 
-if (condition === 'large') {
-  panel.style.outline = '3px solid var(--color-accent)'
+const setup = () => {
+  const panel = document.querySelector('.responsive-panel')
+  if (!panel) throw new Error('panel이 필요합니다.')
+
+  const condition = '${condition}'
+  const savedStyle = panel.getAttribute('style')
+  const media = window.matchMedia('${descriptor.legacyQuery}')
+  const onChange = () => console.log('media condition changed')
+  media.addEventListener('change', onChange)
+
+  if (condition === 'large') {
+    panel.style.outline = '3px solid var(--color-accent)'
+    panel.style.backgroundColor = 'color-mix(in srgb, var(--color-accent) 12%, transparent)'
+  }
+
+  return () => {
+    media.removeEventListener('change', onChange)
+    savedStyle === null ? panel.removeAttribute('style') : panel.setAttribute('style', savedStyle)
+  }
 }
 
-return () => {
-  media.removeEventListener('change', onChange)
-  savedStyle === null ? panel.removeAttribute('style') : panel.setAttribute('style', savedStyle)
-}
+useEffect(() => {
+  const cleanup = setup()
+  return cleanup
+}, [condition])
 
-// Architecture only — this local simulator does not call global APIs.
+// 아래 전역 API는 이 simulator에서 호출하지 않습니다.
 // ScrollTrigger.saveStyles(panel)
 // gsap.matchMedia().add('${descriptor.coreQuery}', setup)
 // ScrollTrigger.clearScrollMemory()`
@@ -70,7 +84,10 @@ return () => {
       }
       preview={
         <div className='responsive-restoration-lab'>
-          <div ref={panelRef} className='responsive-restoration-lab__panel'>
+          <div
+            ref={panelRef}
+            className='responsive-panel responsive-restoration-lab__panel'
+          >
             <p>effective condition: {condition}</p>
             <p>{lifecycle}</p>
             <p>
@@ -97,21 +114,21 @@ return () => {
         }),
       )}
       changes={[
-        'legacy matchMedia condition이 inactive가 되면 associated trigger와 animation은 revert·kill됩니다.',
+        'ScrollTrigger.matchMedia의 media query가 inactive가 되면 연결된 trigger와 animation은 revert·kill됩니다.',
         'saveStyles는 internal revert 때 적용할 current inline CSS snapshot을 기록합니다.',
         'reduced motion은 large setup보다 우선하는 animation 없는 condition입니다.',
       ]}
       watchFor={[
-        'simulator는 host scroll memory나 global legacy matchMedia registration을 실행하지 않습니다.',
+        'simulator는 페이지 scroll memory나 deprecated matchMedia registration을 변경하지 않습니다.',
         'clearMatchMedia는 registration만 clear하며 associated trigger/animation cleanup을 대신하지 않습니다.',
         'browser history scroll restoration은 ScrollTrigger recorded memory와 별도 policy입니다.',
       ]}
       explanation={
         <p>
           이 panel은 saveStyles의 inline style snapshot과 condition cleanup을
-          local DOM에서만 모사합니다. 실제 application은 core{' '}
-          <code>gsap.matchMedia()</code> context와 owned cleanup을 사용하고,
-          navigation owner가 필요할 때만 scroll-memory timing을 결정합니다.
+          local DOM에서만 모사합니다. 실제 앱은 core{' '}
+          <code>gsap.matchMedia()</code> context와 반환된 cleanup을 사용하고,
+          navigation 처리 지점에서 필요할 때만 scroll-memory timing을 결정합니다.
         </p>
       }
     />

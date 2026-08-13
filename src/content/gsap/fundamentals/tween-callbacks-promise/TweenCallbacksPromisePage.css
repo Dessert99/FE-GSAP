@@ -36,26 +36,8 @@
   margin-top: 24px;
 }
 
-.callbacks-page__path {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-  margin-top: 18px;
-  padding: 13px 15px;
-  border: 1px solid var(--color-border);
-  border-radius: 11px;
-  background: rgb(255 255 255 / 2%);
-  font-size: 13px;
-}
-
-.callbacks-page__path span,
 .callbacks-page__reviewed {
   color: var(--color-muted);
-}
-
-.callbacks-page__path code {
-  color: var(--color-accent);
-  overflow-wrap: anywhere;
 }
 
 .callbacks-page__reviewed {
@@ -73,7 +55,7 @@
 
 .callbacks-coverage__summary {
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 24px;
   padding: 20px 22px;
@@ -280,7 +262,7 @@
   background: rgb(255 191 120 / 7%);
 }
 
-/** 공식 문서에 없고 실행으로만 확인한 사실임을 색이 아닌 테두리와 문장으로 함께 알린다 */
+/** 실행으로 확인한 보충 설명을 색이 아닌 테두리와 문장으로 함께 알린다 */
 .callbacks-page__note--probe {
   border-style: dashed;
 }

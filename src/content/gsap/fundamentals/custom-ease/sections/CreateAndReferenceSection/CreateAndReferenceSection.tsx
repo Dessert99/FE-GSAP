@@ -46,10 +46,10 @@ export function CreateAndReferenceSection() {
       </div>
 
       <div className="custom-ease-page__subheading">
-        <h3>공식 문서가 두 번 보여 주는 최소 형태</h3>
+        <h3>최소 사용 순서</h3>
         <p>
-          Quick Start와 "The code" 절이 같은 예제를 반복합니다. 주석까지 공식 원문 그대로입니다. 두 번째 인자에 들어간 긴 문자열이
-          곡선이고, 04단계에서 그 문법을 봅니다.
+          먼저 <code>create()</code>로 곡선과 ID를 연결하고, 트윈의 <code>ease</code>에 그 ID를 문자열로 넘깁니다. 두 번째 인자의 긴
+          문자열이 곡선이고, 04단계에서 그 문법을 봅니다.
         </p>
       </div>
 
@@ -70,30 +70,30 @@ export function CreateAndReferenceSection() {
       <div className="custom-ease-page__warning">
         <h3>이름을 표준 ease와 같게 짓지 마세요</h3>
         <p>
-          공식 caveat입니다. ease 이름을 <code>"expo"</code>나 <code>"power1"</code> 같은 <strong>표준 ease 이름</strong>과 같게 지으면,
+          ease 이름을 <code>"expo"</code>나 <code>"power1"</code> 같은 <strong>표준 ease 이름</strong>과 같게 지으면,
           그 표준 ease를 덮어써서 내 CustomEase로 <strong>대체해 버립니다.</strong> 그 이름을 쓰던 다른 코드가 조용히 다른 곡선으로
           움직이게 되므로, 보통 좋은 생각이 아닙니다.
         </p>
       </div>
 
       <div className="custom-ease-page__note custom-ease-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용 · 덮어쓰기의 범위</h3>
+        <h3>덮어쓰기 범위</h3>
         <p>
           이 프로젝트에 설치된 GSAP 3.15.0에서 직접 실행해 보니, 덮어쓰기는{' '}
           <strong>정확히 같은 이름 하나에만</strong> 적용됐습니다. <code>CustomEase.create('power1', …)</code> 뒤에도{' '}
           <code>"power1.out"</code>은 표준 곡선 그대로였고(<code>0.5</code>에서 <code>0.75</code>), <code>"power1"</code>만 새 곡선으로
-          바뀌었습니다(<code>0.5</code>에서 <code>0.5</code>). 공식 문서는 이 범위를 적어 두지 않았으니, 실행으로 확인한 사실로만
-          받아들이고 <strong>이름은 그냥 겹치지 않게 짓는 편</strong>이 안전합니다.
+          바뀌었습니다(<code>0.5</code>에서 <code>0.5</code>). 이 세부 범위는 GSAP 3.15.0에서 확인한 결과이며, 실제 코드에서는 <strong>표준 ease와
+          겹치지 않는 이름</strong>을 쓰는 편이 안전합니다.
         </p>
       </div>
 
       <div className="custom-ease-page__note custom-ease-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용 · create()가 돌려주는 값</h3>
+        <h3>create()가 돌려주는 값</h3>
         <p>
           공식 문서는 <strong>문자열 ID로 참조하는 방법만</strong> 게시합니다. 같은 3.15.0에서 실행해 보니{' '}
           <code>create()</code>는 만들어진 <strong>ease 함수 자체를 반환</strong>했고, <code>gsap.parseEase('hop')</code>도 같은 함수를
           돌려줬습니다. 그 함수를 <code>ease</code>에 직접 넘겨도 문자열 ID를 쓸 때와 값이 같았습니다. 문자열 이름이 어떻게 함수로
-          풀리는지는 <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>가 소유합니다.
+          풀리는지는 <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>에서 더 자세히 다룹니다. 이 반환 동작은 GSAP 3.15.0에서 확인했습니다.
         </p>
       </div>
 

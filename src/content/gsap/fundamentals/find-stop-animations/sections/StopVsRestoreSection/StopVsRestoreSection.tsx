@@ -50,8 +50,7 @@ export function StopVsRestoreSection() {
           </p>
           <p>
             인자 없이 <code>kill()</code>만 부르면 여기에 <strong>property tween을 전부 제거</strong>하는 일까지 한 번에 일어납니다.
-            공식 예제가 <code>animation = null</code>을 한 줄 더 붙인 것은, GSAP 쪽 정리가 끝났으니{' '}
-            <strong>우리 쪽 손잡이도 놓으라</strong>는 뜻입니다.
+            공식 예제는 <code>animation = null</code>을 한 줄 더 붙여 애플리케이션의 변수 참조도 제거합니다.
           </p>
           <p>
             그래서 경고도 함께 적혀 있습니다. <strong>"나중에 다시 쓸 animation은 kill()하지 마라. 재사용하려면 pause()를 쓰면

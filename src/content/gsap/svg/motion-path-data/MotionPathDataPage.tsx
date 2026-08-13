@@ -23,7 +23,7 @@ export function MotionPathDataPage() {
         <p>01 · input shapes</p>
         <h2>point의 모양은 달라도 RawPath는 numeric segment입니다</h2>
         <p>
-          먼저 <a href={toHref('/fundamentals/motion-path')}>P21 MotionPath</a>
+          먼저 <a href={toHref('/fundamentals/motion-path')}>MotionPath</a>
           에서 실제 경로 이동의 입력 형식을 확인합니다.{' '}
           <code>pointsToSegment()</code>는 flat alternating x/y numbers를 cubic
           segment로,
@@ -55,7 +55,7 @@ export function MotionPathDataPage() {
           <code>rawPathToString()</code>은 element/string과 numeric cubic
           representation을 연결합니다. original d에 line, arc, quadratic
           command가 있어도 resulting RawPath는 cubic bezier입니다.{' '}
-          <code>resolution</code>은 P21 motion measurement option이지 이 여섯
+          <code>resolution</code>은 motion tween의 측정 option이지 이 여섯
           conversion API의 documented input이 아닙니다.
         </p>
       </section>

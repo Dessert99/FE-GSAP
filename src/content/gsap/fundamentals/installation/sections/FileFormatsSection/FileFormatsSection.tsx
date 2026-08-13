@@ -55,8 +55,9 @@ export function FileFormatsSection() {
       </dl>
 
       <p className="installation-page__note">
-        npm으로 설치하면 이 네 형식이 <code>node_modules/gsap/</code> 아래에 함께 들어옵니다. 폴더를 직접 고를 일은 거의 없고, build
-        tool이 상황에 맞는 파일을 알아서 고릅니다.
+        이 네 이름은 <strong>다운로드 zip의 폴더 구성</strong>입니다. npm 패키지는 같은 폴더 구조를 그대로 복제하지 않으므로,
+        일반적으로는 <code>import {'{ gsap }'} from 'gsap'</code>처럼 패키지 이름으로 가져옵니다. UMD가 필요할 때만 다음 단계의{' '}
+        <code>gsap/dist/</code> 경로를 선택합니다.
       </p>
 
       <div className="installation-page__warning">

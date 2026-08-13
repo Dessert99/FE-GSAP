@@ -1,9 +1,9 @@
-/** 삼중 중첩 위에서 local time 하나가 전역 시각으로 접히는 과정을 층별 시간축·표·코드로 확인하는 학습 패널을 조립한다. */
+/** 삼중 중첩에서 local time 하나가 전역 시각으로 변환되는 과정을 층별 시간축·표·코드로 확인한다. */
 import { innerTimeScaleOptions, useNestedGlobalTimeRuntime } from './useNestedGlobalTimeRuntime'
 import './NestedGlobalTimeLab.css'
 
-// 전역 시간축을 항상 같은 폭으로 그리기 위한 최대 초 — 컨트롤 범위의 상한에서 나온 값이다
-const axisEnd = 10
+// 전역 시간축의 최대 초 — inner 4초 + (tween 3초 + duration 2초) ÷ 최소 배속 0.5다
+const axisEnd = 14
 
 export function NestedGlobalTimeLab() {
   // runtime이 소유한 controls·descriptor·getter 반환값을 그대로 받아 화면에만 쓴다
@@ -38,7 +38,9 @@ tween.startTime()   // ${readout ? round(readout.tweenStartTime) : '…'}  (inne
 inner.startTime()   // ${readout ? round(readout.innerStartTime) : '…'}  (outer 기준)
 outer.startTime()   // ${readout ? round(readout.outerStartTime) : '…'}  (전역 기준)
 
-tween.globalTime(${descriptor.localTime})  // ${readout ? round(readout.globalTime) : '…'}`
+tween.globalTime(${descriptor.localTime}) // ${readout ? round(readout.globalTime) : '…'}
+tween.globalTime(0) // ${readout ? round(readout.globalStart) : '…'}
+tween.globalTime(${descriptor.tweenDuration}) // ${readout ? round(readout.globalEnd) : '…'}`
 
   // 전역 시간축 위에서 tween이 차지하는 구간과 현재 표시자의 위치를 백분율로 배치한다
   const spanLeft = readout ? (readout.globalStart / axisEnd) * 100 : 0
@@ -50,7 +52,8 @@ tween.globalTime(${descriptor.localTime})  // ${readout ? round(readout.globalTi
       <h3 id="nested-lab-title">local time 하나가 전역 시각이 되기까지</h3>
       <p className="nested-lab__goal">
         tween은 inner timeline 안에 있고, inner는 outer timeline 안에 있습니다. 아래 값을 조절하면서{' '}
-        <code>globalTime()</code>이 이 두 겹을 어떻게 한 번에 풀어내는지 보세요. 여기서도 <strong>아무것도 재생되지 않습니다</strong>.
+        <code>globalTime()</code>이 두 timeline의 위치와 배속을 어떻게 반영하는지 보세요. 여기서도{' '}
+        <strong>아무것도 재생되지 않습니다</strong>.
       </p>
 
       <div className="nested-lab__body" ref={scope}>
@@ -183,15 +186,16 @@ tween.globalTime(${descriptor.localTime})  // ${readout ? round(readout.globalTi
           <h4>무엇을 봐야 하나요?</h4>
           <p>
             층 목록의 세 <code>startTime()</code>은 <strong>각자 다른 기준</strong>의 숫자입니다. tween의 1초는 inner 기준이고, inner의
-            3초는 outer 기준입니다. 이 셋을 눈으로 더해 보고, 아래 <code>globalTime()</code> 결과와 맞는지 확인하세요.
+            3초는 outer 기준입니다. 배속이 1이면 위치를 더해 볼 수 있고, 배속이 다르면 local time과 안쪽 위치를 배율로 나눈 뒤 바깥
+            위치에 더해야 합니다.
           </p>
         </article>
         <article>
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
             <code>startTime()</code>은 언제나 <strong>바로 위 부모 하나만</strong> 아는 값입니다. 그래서 층이 깊어지면 혼자서는 답을
-            줄 수 없습니다. <code>globalTime()</code>은 자기 자신부터 부모를 따라 <strong>맨 위까지 올라가며</strong> 각 층의 시작
-            지점과 배속을 차례로 반영해 하나의 숫자로 접습니다.
+            줄 수 없습니다. <code>globalTime()</code>은 자기 자신부터 부모를 따라 올라가며 각 층의 시작 지점과 배속을 차례로 반영해
+            전역 시각을 반환합니다.
           </p>
         </article>
         <article>

@@ -50,7 +50,11 @@ tween.totalDuration()  // ${readout ? round(readout.totalDuration) : '…'}
 tween.startTime()      // ${readout ? round(readout.startTime) : '…'}
 tween.endTime()        // ${readout ? round(readout.endTime) : '…'}
 tween.endTime(false)   // ${readout ? round(readout.endTimeWithoutRepeats) : '…'}
-tween.timeScale()      // ${readout ? round(readout.timeScale) : '…'}`
+tween.timeScale()      // ${readout ? round(readout.timeScale) : '…'}
+
+// 시간축의 회차와 대기 칸도 실제 getter 결과로 만듭니다.
+tween.repeat()         // ${readout ? readout.repeat : '…'}
+tween.repeatDelay()    // ${readout ? round(readout.repeatDelay) : '…'}`
 
   // 시간축 전체 폭을 endTime에 맞춰 각 칸을 백분율로 배치한다
   const axisEnd = readout && readout.endTime > 0 ? readout.endTime : 1
@@ -59,9 +63,9 @@ tween.timeScale()      // ${readout ? round(readout.timeScale) : '…'}`
     <section className="timing-lab" aria-labelledby="timing-lab-title">
       <h3 id="timing-lab-title">다섯 값을 바꾸면 일곱 숫자가 어떻게 움직이나</h3>
       <p className="timing-lab__goal">
-        아래 다섯 개를 조절하면 GSAP이 돌려주는 일곱 개의 숫자가 동시에 바뀝니다. 화면의 모든 숫자는 계산한 값이 아니라 방금{' '}
-        <code>tween</code>에서 읽어 온 값입니다. <strong>아무것도 재생되지 않습니다</strong> — 부모 timeline이 멈춰 있어서 숫자만
-        관찰하게 됩니다.
+        아래 다섯 개를 조절하면 GSAP이 돌려주는 일곱 개의 숫자가 동시에 바뀝니다. 표의 반환값은 방금 <code>tween</code>에서 직접 읽고,
+        시간축의 각 구간은 그 getter 결과로 계산합니다. <strong>아무것도 재생되지 않습니다</strong> — 부모 timeline이 멈춰 있어서
+        숫자만 관찰하게 됩니다.
       </p>
 
       <div className="timing-lab__body" ref={scope}>
@@ -244,9 +248,9 @@ tween.timeScale()      // ${readout ? round(readout.timeScale) : '…'}`
           <h4>무엇이 달라졌나요?</h4>
           <p>
             <strong>repeat</strong>을 올려 보세요. <code>totalDuration()</code>과 <code>endTime()</code>은 커지는데{' '}
-            <code>duration()</code>과 <code>endTime(false)</code>는 꿈쩍도 하지 않습니다. 이번엔 <strong>timeScale</strong>을 2로
-            바꿔 보세요. 이번에는 정반대로 <code>duration()</code>과 <code>totalDuration()</code>이 그대로이고{' '}
-            <code>endTime()</code>만 절반이 됩니다.
+            <code>duration()</code>과 <code>endTime(false)</code>는 그대로입니다. 이번엔 <strong>timeScale</strong>을 2로 바꿔
+            보세요. <code>duration()</code>과 <code>totalDuration()</code>은 유지되고, 재생 구간이 절반으로 줄어{' '}
+            <code>endTime()</code>이 <code>startTime()</code> 쪽으로 당겨집니다.
           </p>
         </article>
         <article>
@@ -260,18 +264,16 @@ tween.timeScale()      // ${readout ? round(readout.timeScale) : '…'}`
         <article>
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
-            <code>duration</code>은 <strong>한 회차의 설계 길이</strong>이고 <code>totalDuration</code>은{' '}
-            <strong>실제로 흘러야 하는 총량</strong>입니다. 서로 다른 질문에 답하므로 값도 따로 놉니다.{' '}
-            <code>timeScale</code>은 그 총량을 <strong>얼마나 빨리 소비하느냐</strong>만 정하므로 길이 자체는 건드리지 않고{' '}
-            <code>endTime</code>의 나눗셈에만 들어갑니다.
+            <code>duration</code>은 <strong>한 회차의 설정 길이</strong>이고 <code>totalDuration</code>은 반복과 반복 대기를 포함한
+            전체 길이입니다. <code>timeScale</code>은 재생 배율이므로 두 길이는 바꾸지 않고 <code>endTime</code> 계산에 반영됩니다.
           </p>
         </article>
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
-            로딩 애니메이션을 <strong>정확히 N초 뒤에 끝내야 할 때</strong> <code>endTime()</code>으로 실제 종료 시각을 확인합니다.
-            반복하는 배경 애니메이션의 <strong>한 주기만 재고 싶을 때</strong>는 <code>endTime(false)</code>를 씁니다. 사용자가 "빨리
-            감기"를 눌렀을 때는 <code>timeScale()</code>만 올리면 되고, 길이를 다시 계산할 필요가 없습니다.
+            부모 timeline 안에서 뒤 애니메이션의 배치 시점을 정하거나 종료 좌표를 비교할 때 <code>endTime()</code>을 읽습니다. 반복을
+            제외한 첫 회차의 종료 좌표가 필요하면 <code>endTime(false)</code>를 쓰고, 한 회차의 길이 자체는 <code>duration()</code>으로
+            읽습니다. 재생 배율을 바꿀 때는 <code>timeScale()</code>을 설정합니다.
           </p>
         </article>
       </div>

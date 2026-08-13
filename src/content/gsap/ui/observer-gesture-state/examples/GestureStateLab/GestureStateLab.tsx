@@ -9,15 +9,36 @@ import './GestureStateLab.css'
 export function GestureStateLab() {
   // runtime이 만든 stable target ref와 discrete snapshot을 받는다
   const { scope, targetRef, state, simulate } = useGestureStateRuntime()
-  // 실제 Observer vars를 학습자가 비교할 code panel로 직렬화한다
-  const code = `Observer.create({
-  target,
-  type: '${gestureDescriptor.type}',
-  dragMinimum: ${gestureDescriptor.dragMinimum},
-  onPress,
-  onDrag,
-  onRelease,
-})`
+  // 실제 Observer vars와 callback에서 읽는 상태를 실행 가능한 code panel로 직렬화한다
+  const code = `import { gsap } from 'gsap'
+import { Observer } from 'gsap/Observer'
+
+gsap.registerPlugin(Observer)
+
+const setup = () => {
+  const target = document.querySelector('.gesture-state-lab__target')
+  if (!target) throw new Error('gesture target이 필요합니다.')
+
+  const publishState = (self, phase) => {
+    console.log({
+      phase,
+      isPressed: self.isPressed,
+      isDragging: self.isDragging,
+    })
+  }
+  const observer = Observer.create({
+    target,
+    type: '${gestureDescriptor.type}',
+    dragMinimum: ${gestureDescriptor.dragMinimum},
+    onPress: (self) => publishState(self, 'pressed'),
+    onDrag: (self) => publishState(self, 'dragging'),
+    onRelease: (self) => publishState(self, 'released'),
+  })
+  return () => observer.kill()
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
 
   return (
     <section
@@ -26,7 +47,7 @@ export function GestureStateLab() {
     >
       <h2 id="gesture-state-lab-title">press → drag → release</h2>
       <p>
-        목표: press는 눌린 상태만, drag는 tolerance를 넘은 뒤의 상태까지 보여
+        목표: press는 눌린 상태만, drag는 dragMinimum을 넘은 뒤의 상태까지 보여
         준다는 점을 확인합니다.
       </p>
       <div ref={scope}>

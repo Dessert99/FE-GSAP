@@ -9,7 +9,7 @@ import { useReducedMotion } from '../../../../../../components/demo/InteractiveE
 const type = 'x,y'
 
 /** Draggable vars·코드·label이 공유할 제약 descriptor다. */
-type ConstraintDescriptor = { type: 'x,y'; lockAxis: boolean; autoScroll: number; boundsLabel: string }
+type ConstraintDescriptor = { type: 'x,y'; lockAxis: boolean; autoScroll: number; inertia: false; boundsLabel: string }
 
 /** 타입 선언에 빠진 공식 lockedAxis property를 읽기 전용 optional field로 좁힌다. */
 type DraggableWithLockedAxis = InstanceType<typeof Draggable> & { lockedAxis?: string | null; zIndex?: number }
@@ -34,7 +34,7 @@ export function useBoundsAxisAnimation() {
   // reduced motion notice와 control 표시에 사용할 사용자 환경 설정이다.
   const reducedMotion = useReducedMotion()
   // runtime vars·code serializer·controls가 함께 쓰는 하나의 descriptor다.
-  const descriptor: ConstraintDescriptor = { type, lockAxis, autoScroll, boundsLabel: 'trayRef.current' }
+  const descriptor: ConstraintDescriptor = { type, lockAxis, autoScroll, inertia: false, boundsLabel: 'trayRef.current' }
 
   // instance의 실제 bounds와 optional lockedAxis 값을 control 단위 snapshot으로 읽는다.
   function readSnapshot(synced: string) {
@@ -73,7 +73,7 @@ export function useBoundsAxisAnimation() {
       const tray = trayRef.current
       if (!target || !tray) return undefined
       // descriptor와 동일한 lockAxis·autoScroll vars로 target 하나의 instance를 만든다.
-      const instance = Draggable.create(target, { type: descriptor.type, bounds: tray, lockAxis: descriptor.lockAxis, autoScroll: descriptor.autoScroll, inertia: false })[0] as DraggableWithLockedAxis
+      const instance = Draggable.create(target, { type: descriptor.type, bounds: tray, lockAxis: descriptor.lockAxis, autoScroll: descriptor.autoScroll, inertia: descriptor.inertia })[0] as DraggableWithLockedAxis
       instanceRef.current = instance
       // 생성 직후 실제 계산 결과를 정적 inspector snapshot으로 읽는다.
       readSnapshot('생성 직후 bounds 측정')

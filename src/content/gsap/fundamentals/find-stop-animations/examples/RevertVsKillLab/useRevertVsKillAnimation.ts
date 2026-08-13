@@ -27,7 +27,7 @@ export type RevertVsKillObservation = {
 /** gsap 선택자이자 box의 className — 실행과 표시가 같은 문자열을 쓴다. */
 const targetSelector = '.revert-vs-kill-lab__box'
 
-/** getById로 다시 찾을 수 있게 붙여 두는 이름표다. */
+/** 중단 뒤 getById 조회 결과를 확인할 Tween id다. */
 const tweenId = 'fadeIn'
 
 /** CSS class가 정해 둔 시작 투명도에서 여기까지 올린다 — 시작값은 stylesheet가 소유한다. */
@@ -61,6 +61,8 @@ export function useRevertVsKillAnimation() {
   const [progress, setProgress] = useState(0)
   // 이미 중단을 실행했는지 구분해 안내 문구와 코드 패널을 다르게 그린다
   const [appliedMode, setAppliedMode] = useState<StopMode | null>(null)
+  // 중단 호출 직전의 progress — 이후 slider 조작과 실행 순서를 코드 패널에 그대로 표시한다
+  const [appliedProgress, setAppliedProgress] = useState<number | null>(null)
   // 값·inline style·registry 상태를 색이 아닌 숫자와 문자로 보여준다
   const [observation, setObservation] = useState<RevertVsKillObservation>({
     opacity: 0,
@@ -78,7 +80,7 @@ export function useRevertVsKillAnimation() {
   useGSAP(
     () => {
       // 조회와 실행이 같은 element를 가리키도록 선택자를 한 번만 풀어 둔다
-      const box = gsap.utils.toArray<HTMLElement>(targetSelector)[0]
+      const box = gsap.utils.toArray<HTMLElement>(targetSelector, scope.current)[0]
       targetRef.current = box
       // 이전 실행이 남긴 inline style을 지워 stylesheet가 정한 시작 투명도에서 출발시킨다
       gsap.set(box, { clearProps: 'opacity' })
@@ -93,6 +95,7 @@ export function useRevertVsKillAnimation() {
       // 새 Tween을 준비했으므로 이전 중단 기록을 지우고 지금 상태를 한 번 읽어 둔다
       setProgress(0)
       setAppliedMode(null)
+      setAppliedProgress(null)
       setObservation({
         opacity: Number(Number.parseFloat(String(gsap.getProperty(box, 'opacity'))).toFixed(3)),
         inlineStyle: readInlineStyle(box),
@@ -147,6 +150,7 @@ export function useRevertVsKillAnimation() {
     }
 
     setAppliedMode(descriptor.mode)
+    setAppliedProgress(descriptor.progress)
     readObservation()
     setStatus(
       descriptor.mode === 'kill'
@@ -162,5 +166,18 @@ export function useRevertVsKillAnimation() {
   }
 
   // TSX가 controls·관찰 패널·코드 패널을 같은 descriptor에서 그리도록 필요한 값만 전달한다
-  return { scope, descriptor, mode, setMode, progress, appliedMode, observation, status, seek, applyStop, reset }
+  return {
+    scope,
+    descriptor,
+    mode,
+    setMode,
+    progress,
+    appliedMode,
+    appliedProgress,
+    observation,
+    status,
+    seek,
+    applyStop,
+    reset,
+  }
 }

@@ -11,8 +11,7 @@ src/
 │   └── <역할>/
 │       └── <ComponentName>/
 │           ├── <ComponentName>.tsx
-│           ├── <ComponentName>.css
-│           └── <ComponentName>.stories.tsx
+│           └── <ComponentName>.css
 ├── content/                          # GSAP 공식 문서와 대응하는 학습 콘텐츠
 │   └── gsap/
 │       └── <공식 문서 분류>/
@@ -71,11 +70,11 @@ src/
 ## 공용 컴포넌트 규칙
 
 - 둘 이상의 페이지에서 사용하는 UI만 `src/components/<역할>/<ComponentName>/`에 둔다.
-- 공용 컴포넌트 폴더에는 구현, 스타일, Storybook 스토리를 함께 둔다.
+- 공용 컴포넌트 폴더에는 구현과 스타일을 함께 둔다.
 - 역할 폴더 바로 아래에 여러 컴포넌트 파일을 평평하게 배치하지 않는다.
 
 ## 검증 규칙
 
 - 자동화 테스트 코드는 작성하지 않는다.
-- TypeScript·Vite 빌드, Storybook 빌드, 브라우저에서 컨트롤과 애니메이션 동작을 확인한다.
+- TypeScript·Vite 빌드, 브라우저에서 컨트롤과 애니메이션 동작을 확인한다.
 - 공식 목차 수와 속성 수가 로컬 명세와 일치하는지 대조한다.

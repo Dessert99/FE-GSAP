@@ -189,7 +189,6 @@ handoff에는 최소한 다음을 남긴다.
 - 해당 페이지 유형에 필요한 관점별 finding
 - 공식 문서가 침묵한 항목의 runtime probe 결과
 - TypeScript·Vite build 결과
-- Storybook build 결과
 - 인터랙티브 페이지의 브라우저·키보드·작은 화면·reduced-motion 결과
 - Cross-page finding 또는 단일 페이지라는 근거
 - 미해결 `BLOCK`이 없다는 release 판정

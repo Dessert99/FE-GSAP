@@ -1,4 +1,4 @@
-/** 공식 Tween 페이지가 함께 싣고 있지만 이 페이지가 소유하지 않는 12개 주제를 사실과 소유처로 함께 남긴다. */
+/** 공식 Tween 페이지가 함께 싣고 있지만 다른 페이지에서 설명하는 12개 주제를 사실과 링크로 남긴다. */
 import { toHref } from '../../../../../../app/routes'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 
@@ -11,7 +11,7 @@ const specialProperties = [
   'runBackwards', 'stagger', 'startAt', 'yoyo', 'yoyoEase', 'keyframes',
 ]
 
-// 공식 Tween 페이지가 싣고 있는 나머지 주제 — 사실을 한 줄로 남기고 소유 페이지를 밝힌다
+// 공식 Tween 페이지가 싣고 있는 나머지 주제 — 사실을 한 줄로 남기고 이어 볼 페이지를 밝힌다
 const delegated = [
   {
     id: 'timeline',
@@ -106,12 +106,12 @@ export function BoundariesSection() {
         number="07"
         id="boundaries"
         title="여기서 다루지 않는 것"
-        description="공식 Tween 페이지는 이 클래스의 목차 역할도 합니다. 그래서 인스턴스와 직접 상관없는 주제도 함께 실려 있습니다. 빠뜨렸다는 오해가 없도록 전부 적고 소유처를 밝힙니다."
+        description="공식 Tween 페이지는 이 클래스의 목차 역할도 합니다. 그래서 인스턴스와 직접 상관없는 주제도 함께 실려 있습니다. 빠뜨렸다는 오해가 없도록 전부 적고 이어 볼 페이지를 밝힙니다."
       />
 
       <div className="instance-page__table-wrap">
         <table className="instance-page__basic-table">
-          <caption>공식 Tween 페이지에 함께 실려 있지만 이 페이지가 소유하지 않는 {delegated.length}개 주제</caption>
+          <caption>공식 Tween 페이지에 함께 실려 있지만 다른 페이지에서 설명하는 {delegated.length}개 주제</caption>
           <thead>
             <tr>
               <th scope="col">주제</th>
@@ -136,7 +136,7 @@ export function BoundariesSection() {
         <p>
           공식 표에 실린 이름을 하나도 빼지 않고 적습니다. 각 값이 무엇을 하는지는{' '}
           <a href={toHref('/fundamentals/gsap-to')}>gsap.to() 페이지</a>와{' '}
-          <a href={toHref('/fundamentals/tween-configuration')}>설정 페이지</a>가 소유합니다.
+          <a href={toHref('/fundamentals/tween-configuration')}>설정 페이지</a>에서 설명합니다.
         </p>
       </div>
 
@@ -165,7 +165,7 @@ export function BoundariesSection() {
         <div>
           <div className="instance-page__subheading">
             <h3>이 페이지가 전제로만 쓴 개념</h3>
-            <p>설명 소유권은 아래 페이지들에 있습니다.</p>
+            <p>자세한 설명은 아래 페이지들에서 이어집니다.</p>
           </div>
           <ul className="instance-page__list">
             <li>

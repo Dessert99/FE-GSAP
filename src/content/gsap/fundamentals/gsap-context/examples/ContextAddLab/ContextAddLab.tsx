@@ -15,26 +15,35 @@ export function ContextAddLab() {
   const { scope, mode, setMode, descriptor, stage, observation, status, reducedMotion, createContext, makeAnimation, revert } =
     useContextAddAnimation()
 
+  // 마지막 단계까지 실행했을 때만 실제 revert 호출을 코드 패널에 표시한다
+  const revertCall = stage === 'reverted' ? 'ctx.revert()' : '// 아직 revert()를 부르지 않았습니다'
+
   // 실행에 쓰인 경로와 값을 코드 문법으로만 포맷한다 — 의미를 다시 조립하지 않는다
   const bodyByMode: Record<string, string> = {
     outside: `// Context를 거치지 않습니다
-gsap.to('${descriptor.selector}', { x: ${descriptor.x}, duration: ${descriptor.duration} })`,
+const tween = gsap.to(box, { x: ${descriptor.x}, duration: ${descriptor.duration}, ease: 'power2.out', onComplete: read })
+looseTweensRef.current.push(tween)`,
     named: `// 만들 때 등록해 둔 메서드로 부릅니다
 ctx.onClick()`,
     immediate: `// 함수를 첫 인자로 넘기면 그 자리에서 실행됩니다
 ctx.add(() => {
-  gsap.to('${descriptor.selector}', { x: ${descriptor.x}, duration: ${descriptor.duration} })
+  gsap.to(box, { x: ${descriptor.x}, duration: ${descriptor.duration}, ease: 'power2.out', onComplete: read })
 })`,
     ignored: `// 일부러 기록에서 뺍니다
 ctx.ignore(() => {
-  gsap.to('${descriptor.selector}', { x: ${descriptor.x}, duration: ${descriptor.duration} })
+  const tween = gsap.to(box, { x: ${descriptor.x}, duration: ${descriptor.duration}, ease: 'power2.out', onComplete: read })
+  looseTweensRef.current.push(tween)
 })`,
   }
 
-  const code = `// 1. 함수 안에서는 이름만 등록하고 애니메이션은 만들지 않습니다
+  const code = `const looseTweensRef = useRef([])
+const box = gsap.utils.toArray('${descriptor.selector}', containerRef.current)[0]
+gsap.set(box, { x: 0 })
+
+// 1. 함수 안에서는 이름만 등록하고 애니메이션은 만들지 않습니다
 const ctx = gsap.context((self) => {
   self.add('onClick', () => {
-    gsap.to('${descriptor.selector}', { x: ${descriptor.x}, duration: ${descriptor.duration} })
+    gsap.to(box, { x: ${descriptor.x}, duration: ${descriptor.duration}, ease: 'power2.out', onComplete: read })
   })
 }, containerRef)
 
@@ -42,7 +51,14 @@ const ctx = gsap.context((self) => {
 ${bodyByMode[descriptor.mode]}
 
 // 3. 기록된 것만 되돌립니다 — 지금 기록 ${observation.recorded}개
-ctx.revert()`
+${revertCall}
+
+// mode·모션 설정이 바뀌거나 컴포넌트가 사라질 때 Context 밖 Tween도 직접 정리합니다.
+function cleanup() {
+  looseTweensRef.current.forEach((tween) => tween.kill())
+  looseTweensRef.current = []
+  ctx.revert()
+}`
 
   return (
     <section className="context-add-lab" aria-labelledby="context-add-lab-title">
@@ -97,10 +113,10 @@ ctx.revert()`
         <button type="button" onClick={createContext}>
           1. Context 만들기
         </button>
-        <button type="button" onClick={makeAnimation} disabled={stage === 'idle'}>
+        <button type="button" onClick={makeAnimation} disabled={stage !== 'ready'}>
           2. 클릭 시점 애니메이션 만들기
         </button>
-        <button type="button" onClick={revert} disabled={stage === 'idle'}>
+        <button type="button" onClick={revert} disabled={stage !== 'made'}>
           3. revert()
         </button>
       </div>
@@ -145,7 +161,7 @@ ctx.revert()`
           <h4>무엇이 달라졌나요?</h4>
           <p>
             <strong>Context 밖에서 그냥 만든</strong> 경우에는 기록 수가 0에서 움직이지 않고, <code>revert()</code>를 눌러도 박스가
-            제자리로 오지 않습니다. 나머지 두 경로(<code>ctx.onClick()</code>, <code>ctx.add()</code>)에서는 기록 수가 1이 되고{' '}
+            제자리로 오지 않습니다. 기록하는 두 경로(<code>ctx.onClick()</code>, <code>ctx.add()</code>)에서는 기록 수가 1이 되고{' '}
             <code>revert()</code>가 박스를 되돌립니다.
           </p>
         </article>
@@ -153,15 +169,15 @@ ctx.revert()`
           <h4>무엇을 봐야 하나요?</h4>
           <p>
             <strong>박스의 지금 x</strong>입니다. <code>revert()</code> 뒤에도 x가 {descriptor.x}에 머물러 있다면 그 애니메이션은
-            아무도 기록하지 않았다는 뜻입니다. 화면을 떠날 때 남는 것이 바로 이런 애니메이션입니다.
+            Context에 기록되지 않았다는 뜻입니다. 화면을 떠날 때 직접 정리해야 하는 애니메이션입니다.
           </p>
         </article>
         <article>
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
-            Context는 <strong>자기 함수가 실행되는 동안</strong>에만 옆에서 기록합니다. 클릭은 그 함수가 끝난 한참 뒤에
-            일어나므로 그냥 만들면 아무도 보고 있지 않습니다. <code>self.add(이름, 함수)</code>와 <code>ctx.add(함수)</code>는
-            "지금부터 이 함수가 실행되는 동안 다시 기록해 달라"고 알리는 방법입니다.
+            Context는 <strong>자기 함수가 실행되는 동안</strong> 만들어진 GSAP 작업을 기록합니다. 클릭은 그 함수가 끝난 뒤에
+            일어나므로 그냥 만든 Tween은 기록에 포함되지 않습니다. <code>self.add(이름, 함수)</code>와 <code>ctx.add(함수)</code>는
+            나중에 실행되는 함수 안의 GSAP 작업도 같은 Context에 기록되게 합니다.
           </p>
         </article>
         <article>

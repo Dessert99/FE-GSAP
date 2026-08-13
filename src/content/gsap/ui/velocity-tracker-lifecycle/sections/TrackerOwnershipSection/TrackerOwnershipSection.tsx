@@ -4,7 +4,7 @@ import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 export function TrackerOwnershipSection() {
   return (
     <section>
-      <SectionHeading number="01" title="tracker ownership" />
+      <SectionHeading number="01" title="tracker 생성" />
       <p>
         VelocityTracker는 대상 값과 시간의 변화를 대신 기록합니다. target
         하나에는 tracker 하나만 연결해야 하므로 constructor를 직접 늘리기보다

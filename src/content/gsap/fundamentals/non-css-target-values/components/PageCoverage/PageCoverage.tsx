@@ -10,23 +10,23 @@ const mappedSourceCount = new Set(nonCssTargetValuesSourceItems.map((item) => it
 
 export function PageCoverage() {
   return (
-    <nav className="non-css-coverage" aria-label="공식 source 대응 범위">
+    <nav className="non-css-coverage" aria-label="공식 문서 학습 범위">
       <div className="non-css-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{nonCssTargetValuesCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{nonCssTargetValuesCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>확인한 설명</span>
         </div>
         <p>
-          Attributes와 EndArray의 기술 item {nonCssTargetValuesCoverage.officialSourceItems}개를 "값을 어느 자리에 적나"라는 선택
-          흐름의 다섯 단계로 다시 묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로 표시합니다.
+          Attributes와 EndArray에서 확인한 설명 {nonCssTargetValuesCoverage.officialSourceItems}개를 "값을 어느 자리에 적나"라는 선택
+          흐름의 다섯 단계로 다시 묶었습니다. 공식 문서에 없어 설치된 GSAP으로 확인한 동작 {probeItemCount}개는 따로 표시합니다.
         </p>
       </div>
       <ol>
@@ -36,7 +36,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 설명</small>
               </div>
             </a>
           </li>

@@ -10,23 +10,23 @@ const mappedSourceCount = new Set(easePackSourceItems.map((item) => item.source)
 
 export function PageCoverage() {
   return (
-    <nav className="ease-pack-coverage" aria-label="공식 source 대응 범위">
+    <nav className="ease-pack-coverage" aria-label="공식 문서 학습 범위">
       <div className="ease-pack-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{easePackCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{easePackCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>확인한 설명</span>
         </div>
         <p>
-          ExpoScaleEase·RoughEase·SlowMo 세 문서의 기술 item {easePackCoverage.officialSourceItems}개를 "이 ease는 어떤 문제를
-          푸는가"라는 흐름의 여섯 단계로 다시 묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로
+          ExpoScaleEase·RoughEase·SlowMo 세 문서에서 확인한 설명 {easePackCoverage.officialSourceItems}개를 "이 ease는 어떤 문제를
+          푸는가"라는 흐름의 여섯 단계로 다시 묶었습니다. 공식 문서에 없어 설치된 GSAP으로 확인한 동작 {probeItemCount}개는 따로
           표시합니다.
         </p>
       </div>
@@ -37,7 +37,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 설명</small>
               </div>
             </a>
           </li>

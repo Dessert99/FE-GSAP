@@ -63,6 +63,8 @@ export function useKillScopeAnimation() {
   const [progress, setProgress] = useState(0)
   // 이미 중단을 실행했는지 구분해 안내 문구와 코드 패널을 다르게 그린다
   const [appliedMode, setAppliedMode] = useState<KillMode | null>(null)
+  // 중단 호출 직전의 progress — 이후 slider 조작과 실행 순서를 코드 패널에 그대로 표시한다
+  const [appliedProgress, setAppliedProgress] = useState<number | null>(null)
   // 중단 뒤 x·opacity·남은 Tween 수를 색이 아닌 숫자로 보여준다
   const [observation, setObservation] = useState<KillScopeObservation>({
     x: baseline.x,
@@ -79,7 +81,7 @@ export function useKillScopeAnimation() {
   useGSAP(
     () => {
       // 조회와 실행이 같은 element를 가리키도록 선택자를 한 번만 풀어 둔다
-      const box = gsap.utils.toArray<HTMLElement>(targetSelector)[0]
+      const box = gsap.utils.toArray<HTMLElement>(targetSelector, scope.current)[0]
       targetRef.current = box
       // 이전 실행이 남긴 위치와 투명도를 지워 항상 같은 지점에서 출발시킨다
       gsap.set(box, baseline)
@@ -94,6 +96,7 @@ export function useKillScopeAnimation() {
       // 새 Tween을 준비했으므로 이전 중단 기록과 관찰값을 지운다
       setProgress(0)
       setAppliedMode(null)
+      setAppliedProgress(null)
       setObservation({ x: baseline.x, opacity: baseline.opacity, remainingTweens: gsap.getTweensOf(box).length })
       // context 정리 뒤 handler가 이전 Tween을 다시 조작하지 않게 참조를 비운다
       return () => {
@@ -149,6 +152,7 @@ export function useKillScopeAnimation() {
     }
 
     setAppliedMode(descriptor.mode)
+    setAppliedProgress(descriptor.progress)
     readObservation()
     setStatus('중단했습니다. 재생 헤드를 더 옮겨 보고 어떤 값이 아직 반응하는지 확인하세요.')
   }
@@ -160,5 +164,18 @@ export function useKillScopeAnimation() {
   }
 
   // TSX가 controls·관찰 패널·코드 패널을 같은 descriptor에서 그리도록 필요한 값만 전달한다
-  return { scope, descriptor, mode, setMode, progress, appliedMode, observation, status, seek, applyStop, reset }
+  return {
+    scope,
+    descriptor,
+    mode,
+    setMode,
+    progress,
+    appliedMode,
+    appliedProgress,
+    observation,
+    status,
+    seek,
+    applyStop,
+    reset,
+  }
 }

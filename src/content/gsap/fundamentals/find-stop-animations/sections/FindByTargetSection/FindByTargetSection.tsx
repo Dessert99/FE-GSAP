@@ -18,7 +18,7 @@ const isTweeningCall = `if (!gsap.isTweening("#id")) {
 const queryRows = [
   {
     api: 'gsap.getById(id)',
-    question: '이 이름표를 단 animation이 아직 있나요?',
+    question: '이 id에 연결된 animation이 아직 있나요?',
     returns: 'Tween 또는 Timeline · 없으면 undefined',
     blind: '완료된 animation, id를 붙이지 않은 animation',
   },
@@ -43,7 +43,7 @@ export function FindByTargetSection() {
         number="03"
         id="find-by-target"
         title="id가 없으면 target으로 찾는다"
-        description="이름표를 미리 붙여 두지 않았어도 방법은 있습니다. 움직이고 있는 대상 자체를 단서로 물어보면 됩니다. 다만 '있느냐'와 '움직이느냐'는 다른 질문입니다."
+        description="id를 미리 붙이지 않았어도 target으로 조회할 수 있습니다. 다만 '등록돼 있느냐'와 '지금 animate 중이냐'는 다른 질문입니다."
       />
 
       <div className="find-stop-page__split">
@@ -72,8 +72,8 @@ export function FindByTargetSection() {
         <h3>여기에도 같은 시간 제한이 있습니다</h3>
         <p>
           공식 문서는 <strong>"아직 garbage collection으로 넘어가지 않은 tween"</strong>만 담긴다고 밝히고, 그 시점은{' '}
-          <strong>보통 tween이 완료될 때</strong>라고 덧붙입니다. 그래서 "만들고, 끝나게 두고, 한참 있다 찾으면{' '}
-          <strong>engine이 이미 놓아줘서 못 찾을 수 있다</strong>"고 적혀 있습니다.
+          <strong>보통 tween이 완료될 때</strong>라고 덧붙입니다. 따라서 tween이 완료되고 시간이 지난 뒤에는 GSAP이 이미 garbage
+          collection 대상으로 넘겨 조회되지 않을 수 있습니다.
         </p>
         <p>
           이것을 단점으로 적어 두지 않았다는 점이 중요합니다. 공식 문서의 문장은{' '}

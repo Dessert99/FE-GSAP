@@ -82,8 +82,8 @@ xTo(3)   // animates it to 5px (snapped)`}</code>
       <p className="hfu-page__note">
         <code>xSetter(150)</code>이 <code>100px</code>이 되는 것은 <code>clamp</code>가 잘랐기 때문이고, <code>xSetter(3)</code>이{' '}
         <code>5px</code>가 되는 것은 <code>snap</code>이 5의 배수로 당겼기 때문입니다. 쓰기 함수는 이미 다듬어진 숫자만 받습니다.{' '}
-        <code>gsap.utils</code>의 각 함수는 이 페이지가 소유하지 않고, 여기서는 <strong>맨 뒤에 붙일 수 있다</strong>는 사실만
-        보존합니다.
+        이 페이지에서는 <code>gsap.utils</code>의 각 함수 자체보다 <strong>쓰기 함수를 맨 뒤에 붙일 수 있다</strong>는 연결 방식에
+        집중합니다.
       </p>
 
       <div className="hfu-page__subheading">

@@ -19,12 +19,12 @@ export function MotionPathMeasurePage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>3 official measurement items covered</p>
+        <p>길이, 위치·각도, 구간 잘라내기를 한 path로 비교합니다.</p>
         <p>
           실제 이동 설정은{' '}
-          <a href={toHref('/fundamentals/motion-path')}>P21 MotionPath</a>에서,
+          <a href={toHref('/fundamentals/motion-path')}>MotionPath</a>에서,
           RawPath 변환은{' '}
-          <a href={toHref('/fundamentals/motion-path-data')}>P22 데이터 변환</a>
+          <a href={toHref('/fundamentals/motion-path-data')}>RawPath 데이터 변환</a>
           에서 먼저 확인할 수 있습니다.
         </p>
       </header>

@@ -13,7 +13,7 @@ GSAP을 처음 접한 학습자가 `gsap` 객체, Tween, Timeline, Core, plugin�
   - `https://gsap.com/docs/v3/`
   - `https://gsap.com/docs/v3/GSAP/`
   - `https://gsap.com/docs/v3/GSAP/gsap.version/`
-- reviewedAt: `2026-08-03`
+- reviewedAt: `2026-08-13`
 - category: `Fundamentals`
 - slug: `gsap-core-map`
 - sourcePageIds: primary `source:docs-home`; related `source:gsap`, `source:gsap-version`
@@ -30,7 +30,7 @@ GSAP을 처음 접한 학습자가 `gsap` 객체, Tween, Timeline, Core, plugin�
 | DH-CORE-BOUNDARY | Core는 모든 브라우저의 빠르고 반응형 animation 기반을 제공하고 drag·scroll·morph 같은 추가 기능은 plugin으로 분리해 필요한 것만 더한다. | docsHome `GSAP Overview` | verified |
 | DH-CORE-ENTRY | Core의 진입점은 GSAP이며 CDN으로도 가져올 수 있다. | docsHome `Included in GSAP's Core > GSAP` | verified |
 | DH-CORE-CONSTRUCTS | Core의 중심 구성은 Tween과 Timeline이다. | docsHome `Included in GSAP's Core` | verified |
-| DH-CORE-TARGETS | Core는 CSS properties, attributes, array values, numeric values, colors, 숫자가 든 complex strings를 움직일 수 있다. | docsHome `Animate anything` + linked official CSS·interpolate pages | verified |
+| DH-CORE-TARGETS | Core는 CSS properties, attributes, array values, numeric values, colors, 숫자가 든 complex strings를 움직일 수 있다. | docsHome `Animate anything` + linked Get Started `What else can I animate?` | verified |
 | DH-CORE-EASES | 내장 ease는 none, power1~4, back, bounce, circ, elastic, expo, sine, steps(n)이다. | docsHome `Eases` | verified |
 | DH-CORE-EFFICIENCY | Core는 stagger, callback, snapping, modifiers, keyframes, lag smoothing ticker, context/revert cleanup, matchMedia responsivity/accessibility를 제공한다. | docsHome `Animate efficiently` | verified |
 | DH-CORE-UTILS | utility 전체는 checkPrefix, clamp, distribute, getUnit, interpolate, mapRange, normalize, pipe, random, selector, shuffle, snap, splitColor, toArray, unitize, wrap, wrapYoyo다. | docsHome `Utility Methods` | verified |
@@ -64,7 +64,7 @@ GSAP을 처음 접한 학습자가 `gsap` 객체, Tween, Timeline, Core, plugin�
 
 ### sourceBlockers
 
-`none` — 세 canonical source가 2026-08-03에 열렸고 모든 기술 item을 공식 본문·목록·코드에서 확인했다.
+`none` — 세 canonical source와 docsHome이 연결한 Get Started 페이지를 2026-08-13에 다시 열었고 모든 기술 item을 공식 본문·목록·코드에서 확인했다.
 
 ### moduleSelection
 
@@ -79,7 +79,7 @@ GSAP을 처음 접한 학습자가 `gsap` 객체, Tween, Timeline, Core, plugin�
 3. `#core-boundary`: 기본 엔진인 Core와 선택 확장인 plugin의 경계를 이해한다.
 4. `#api-map`: 하고 싶은 일에서 target·ease·효율 기능·utility·plugin family로 이동한다.
 5. `#version-check`: 현재 로드된 버전을 문자열 property로 확인한다.
-6. `#next-steps`: 설치, `gsap.to()`, 생성 방식 비교, 설정, target, easing 순으로 이어간다.
+6. `#next-steps`: 설치, `gsap.to()`, 생성 방식 비교, 설정, CSS·non-CSS target, easing, Tween playhead, Timeline 순으로 이어간다.
 
 ### coverageMap
 
@@ -122,11 +122,16 @@ GSAP을 처음 접한 학습자가 `gsap` 객체, Tween, Timeline, Core, plugin�
 
 ### relatedPages
 
-- `/fundamentals/installation`: 설치·환경별 import 상세의 owner이며 아직 미구현이다.
-- `/fundamentals/gsap-to`: 첫 standalone Tween의 owner이며 현재 구현되어 있다.
-- `/fundamentals/tween-start-end-values`: to/from/fromTo/set 비교의 owner이며 아직 미구현이다.
-- `/fundamentals/timeline-basics`: Timeline 구성 상세의 owner이며 아직 미구현이다.
-- `/fundamentals/plugins`: plugin 등록·소유권 상세의 owner이며 아직 미구현이다.
+- `/fundamentals/installation`: 설치·환경별 import 상세를 다루며 현재 구현되어 있다.
+- `/fundamentals/gsap-to`: 첫 독립 Tween을 다루며 현재 구현되어 있다.
+- `/fundamentals/tween-start-end-values`: to/from/fromTo/set 비교를 다루며 현재 구현되어 있다.
+- `/fundamentals/tween-configuration`: 기본값과 전역·지역 설정의 적용 범위를 다루며 현재 구현되어 있다.
+- `/fundamentals/css-animation`: CSS property와 transform 값을 다루며 현재 구현되어 있다.
+- `/fundamentals/non-css-target-values`: 일반 객체와 배열의 값을 다루며 현재 구현되어 있다.
+- `/fundamentals/easing`: ease 곡선과 속도 변화를 다루며 현재 구현되어 있다.
+- `/fundamentals/tween-playhead`: Tween의 시간과 진행률을 다루며 현재 구현되어 있다.
+- `/fundamentals/timeline-basics`: Timeline 구성 상세를 다루며 현재 구현되어 있다.
+- `/fundamentals/plugins`: plugin 등록·사용 경계를 다루며 현재 구현되어 있다.
 
 ## 구현 계약
 
@@ -153,6 +158,19 @@ modify:
 - `src/app/App.tsx`
 - 이 handoff의 coverage, findings, verification, release fields
 
+2026-08-13 audit modify:
+
+- `src/content/gsap/fundamentals/gsap-core-map/GsapCoreMapPage.css`
+- `src/content/gsap/fundamentals/gsap-core-map/gsap-core-map.meta.ts`
+- `src/content/gsap/fundamentals/gsap-core-map/gsap-core-map.catalog.ts`
+- `src/content/gsap/fundamentals/gsap-core-map/components/PageCoverage/PageCoverage.tsx`
+- `src/content/gsap/fundamentals/gsap-core-map/sections/AccessPointSection/AccessPointSection.tsx`
+- `src/content/gsap/fundamentals/gsap-core-map/sections/AnimationModelSection/AnimationModelSection.tsx`
+- `src/content/gsap/fundamentals/gsap-core-map/sections/CoreBoundarySection/CoreBoundarySection.tsx`
+- `src/content/gsap/fundamentals/gsap-core-map/sections/ApiMapSection/ApiMapSection.tsx`
+- `src/content/gsap/fundamentals/gsap-core-map/sections/NextStepsSection/NextStepsSection.tsx`
+- `docs/handoffs/gsap/core/gsap-core-map.md`
+
 ### exampleContracts
 
 - name: `CoreMapStaticGuide`
@@ -164,7 +182,7 @@ modify:
 - sourcePath: `none` — 독립 example/code panel이 없고 section TSX가 정적 근거를 직접 소유한다.
 - runtimeOwnership: `none`
 - displayOwnership: 각 section TSX와 `gsap-core-map.catalog.ts`
-- accessibility: 단일 h1과 순차 heading, 관계를 색·화살표만이 아닌 텍스트로 전달, 미구현 route는 링크로 보이지 않게 표시, code block 작은 화면 가로 스크롤
+- accessibility: 단일 h1과 순차 heading, 관계를 색·화살표만이 아닌 텍스트로 전달, next-step 제목과 실제 route 목적 일치, code block 작은 화면 가로 스크롤
 - motion: `none` — autoplay, tween, animated diagram을 사용하지 않는다.
 
 ### nonGoals
@@ -195,8 +213,8 @@ modify:
 | ID | status | evidence | impact | requiredAction |
 | --- | --- | --- | --- | --- |
 | SC-CORE01-001 | PASS | 세 canonical source와 34개 source item 확인 | 구현 범위 고정 | 모든 ID를 localEvidence에 연결 |
-| SC-CORE01-002 | ADVISORY | docsHome EasePack label과 href가 불일치 | 잘못된 링크 복제 위험 | 정상 개별 공식 URL 사용 |
-| SC-CORE01-003 | ADVISORY | docsHome CustomBounce dependency href `/CustomEasee`가 404 | 깨진 링크 복제 위험 | 정상 CustomEase URL 사용 |
+| SC-CORE01-002 | ADVISORY | 2026-08-13 재확인: docsHome EasePack label이 CustomWiggle URL을 가리킴 | 잘못된 링크 복제 위험 | 정상 개별 공식 URL 사용 |
+| SC-CORE01-003 | ADVISORY | 2026-08-13 재확인: docsHome CustomBounce dependency href `/CustomEasee`가 404 | 깨진 링크 복제 위험 | 정상 CustomEase URL 사용 |
 | SC-CORE01-004 | PASS | `gsap.version`의 값은 current loaded version이며 문서 숫자는 예시 | 최신 버전 하드코딩 방지 | 예시와 현재값을 구분 |
 | CA-CORE01-001 | PASS | learnerFlow와 localEvidence target이 34개 item을 수용 | 학습형 재구성 가능 | 고정한 섹션 순서 유지 |
 | OC-CORE01-001~006 | ADDRESSED | 1차 28/34 판정 뒤 누락된 Core 특성·영상·x shortcut·Timeline 제어·sequencing·matchMedia 접근성을 보완하고 2차 34/34 재검수 | Official Coverage blocker 해소 | none |
@@ -209,6 +227,15 @@ modify:
 | BI-COREMAP-FINAL | PASS | final `npm run build`, `npm run build-storybook`, lazy route·brand·fallback·기존 gsap-to 정적 검수 | code/build integration 통과 | Browser route 조작 증거는 EV-COREMAP-001에서 별도 관리 |
 | EV-COREMAP-001 | PASS | `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정 | Browser behavior evidence 확보 | 항목별 세부 피드백은 전체 페이지 완성 뒤 일괄 검수 |
 | RR-COREMAP-001 | PASS | Independent Release Reviewer가 34/34 coverage·Learning Transformation·build PASS와 해소된 EV-COREMAP-001을 대조 | 최종 release 승인 | none |
+| AU-COREMAP-FACT-001 | ADDRESSED | `gsap-core-map.catalog.ts`가 숫자·색상·복합 문자열 같은 property 값을 Tween의 target이라고 표현하고 Easel을 일반 Canvas renderer처럼 뭉뚱그림 | target과 그 안에서 바뀌는 property value, EaselJS 전용 연결 범위를 혼동할 수 있음 | DOM property·attribute와 배열·일반 객체의 값 계산으로 고치고 renderer 이름을 EaselJS·PixiJS로 명시 |
+| AU-COREMAP-LEARN-001 | ADDRESSED | `PageCoverage`, `AnimationModelSection`, `ApiMapSection`, `NextStepsSection`에 coverage 수치와 source item·handoff·catalog·convenience method·choreography 같은 제작 용어와 미정의 영어가 노출됨 | GSAP 관계를 배우기 전에 내부 제작 어휘를 해석해야 함 | coverage 수치를 여섯 학습 질문 안내로 바꾸고, 학습자가 관찰할 값·시간·순서·기능 분류를 직접 설명하는 문장으로 교체 |
+| AU-COREMAP-INTEGRATION-001 | ADDRESSED | `NextStepsSection.tsx`가 구현된 Tween configuration을 미구현처럼 표시하고 CSS·non-CSS 및 Tween·Timeline 제목을 한쪽 route에만 연결함 | 다음 학습 목적과 실제 도착 페이지가 어긋남 | 현재 route에 맞춰 9개 단일 주제 링크로 분리하고 모두 탐색 가능하게 수정 |
+| AU-COREMAP-FACT-FINAL | PASS | 2026-08-13 세 canonical source와 linked Get Started·Scroll·Text·SVG·UI·React·관련 plugin 문서를 다시 대조하고 target/property value, Tween/Timeline, Core/plugin, version 설명을 재검수 | 사실 정확성 blocker 해소 | none |
+| AU-COREMAP-LEARN-FINAL | PASS | 용어가 gsap → target/property/duration → Tween/Timeline → Core/plugin → API 분류 순서로 정의되고 제작 용어가 학습자 본문에서 제거됨 | Learning Transformation·Pedagogy 통과 | none |
+| AU-COREMAP-SYNC-FINAL | PASS | controls와 runtime source가 없는 정적 guide이며 세 code block이 같은 section의 설명과 의미상 일치함 | 정적 Runtime/Display Sync 통과 | none |
+| AU-COREMAP-STATIC-A11Y | PASS | nav·heading·aria-labelledby·외부 링크 새 탭 예고·focus-visible·responsive CSS·code overflow·motion none을 정적으로 재검수 | 정적 Accessibility/Motion 통과 | none |
+| AU-COREMAP-BUILD-20260813 | PASS | 2026-08-13 메인 통합 `npm run build`, `npm run build-storybook` 모두 exit 0 | 현재 변경의 compile·bundle 통과 | none |
+| AU-COREMAP-BROWSER-20260813 | NOT VERIFIED | 2026-08-13 변경 뒤 브라우저를 조작하지 않았고 과거 EV-COREMAP-001을 현재 증거로 재사용하지 않음 | route·키보드·작은 화면의 현재 실동작은 확정하지 않음 | 메인 에이전트가 현재 diff 기준으로 브라우저 검수 수행 |
 
 ### verificationEvidence
 
@@ -220,7 +247,19 @@ modify:
 - structure/static accessibility/build independent review — Structure/Comment PASS, static Accessibility/Motion PASS, code/build integration PASS
 - Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
 - Independent Release Review — 미해결 `BLOCK` 없음
+- `2026-08-13` official source 재검수 — docsHome, GSAP object, gsap.version, linked Get Started·Scroll·Text·SVG·UI·React 및 관련 plugin 문서의 기술 문구를 다시 확인했고 기존 34개 source item의 추가·삭제는 없었다.
+- `2026-08-13` 정적 Runtime/Display Sync — 실행 상태·GSAP 호출이 없는 static guide이며 `quickStartCode`, `sequencingCode`, `versionCode`와 인접 설명의 의미가 일치한다.
+- `2026-08-13` 메인 통합 `npm run build` — exit 0.
+- `2026-08-13` 메인 통합 `npm run build-storybook` — exit 0.
+- `2026-08-13 Browser 실조작` — `NOT VERIFIED`; 현재 변경 뒤 route·키보드·320/390px·reduced-motion을 조작하지 않았다.
 
 ### releaseDecision
 
-`PASS` — 구현·34/34 coverage·Learning Transformation·구조·정적 접근성·build를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.
+`NOT VERIFIED` — Official Coverage, Learning Transformation, 사실 정확성, 정적 Runtime/Display Sync, 구조·정적 접근성, build·Storybook에는 미해결 `BLOCK`이 없지만 2026-08-13 변경 뒤 브라우저 실조작은 남아 있다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

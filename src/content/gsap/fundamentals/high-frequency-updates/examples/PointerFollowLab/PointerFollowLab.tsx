@@ -36,24 +36,43 @@ export function PointerFollowLab() {
     reducedMotion,
   } = usePointerFollowAnimation()
 
+  // 아직 입력하지 않았다면 실제로 호출하지 않은 쓰기 함수를 코드 패널에서도 실행한 것처럼 보이지 않게 한다
+  const setterCall = observation.writeCalls === 0 ? '// 아직 입력 전입니다.' : `setX(${observation.lastValue})`
+  // quickTo 경로도 마지막 입력이 있을 때만 실제 호출값을 표시한다
+  const quickToCall = observation.writeCalls === 0 ? '// 아직 입력 전입니다.' : `xTo(${observation.lastValue})`
   // 실행에 쓰인 descriptor와 마지막 호출값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
   const code =
     descriptor.effectivePath === 'quickSetter'
-      ? `// 1. 입력 바깥에서 함수를 딱 한 번 만듭니다.
+      ? `// 1. 비교를 시작할 x를 같은 값으로 맞춥니다.
+gsap.set('${descriptor.selector}', { x: ${descriptor.startX} })
+
+// 2. 입력 바깥에서 함수를 딱 한 번 만듭니다.
 const setX = gsap.quickSetter('${descriptor.selector}', 'x', '${descriptor.unit}')
 
-// 2. 입력이 올 때마다 이 함수에 숫자만 흘려보냅니다.
-setX(${observation.lastValue})
+// 3. 입력이 올 때마다 이 함수에 숫자만 흘려보냅니다.
+${setterCall}
 
 // 지금까지 호출한 횟수: ${observation.writeCalls}회 · 만들어진 Tween: ${observation.tweensSeen}개`
-      : `// 1. 입력 바깥에서 함수를 딱 한 번 만듭니다. 이때 Tween 하나가 함께 생깁니다.
+      : `// 1. 비교를 시작할 x를 같은 값으로 맞춥니다.
+gsap.set('${descriptor.selector}', { x: ${descriptor.startX} })
+
+// 2. 입력 바깥에서 함수를 딱 한 번 만듭니다. 이때 Tween 하나가 함께 생깁니다.
 const xTo = gsap.quickTo('${descriptor.selector}', 'x', {
   duration: ${descriptor.duration},
   ease: '${descriptor.ease}',
+  onUpdate: () => {
+    // 매 프레임 실제 x를 다시 읽어 관찰 패널에 표시합니다.
+    const appliedX = gsap.getProperty('${descriptor.selector}', 'x')
+  },
 })
 
-// 2. 입력이 올 때마다 이 함수에 숫자만 흘려보냅니다.
-xTo(${observation.lastValue})
+// 3. 입력이 올 때마다 이 함수에 숫자만 흘려보냅니다.
+${quickToCall}
+
+// 버튼은 반환 함수가 가진 같은 Tween의 paused 상태를 뒤집습니다.
+function togglePaused() {
+  xTo.tween.paused(!xTo.tween.paused())
+}
 
 // 지금까지 호출한 횟수: ${observation.writeCalls}회 · 등장한 Tween 인스턴스: ${observation.tweensSeen}개`
 
@@ -158,7 +177,7 @@ xTo(${observation.lastValue})
         </fieldset>
       </div>
 
-      <dl className="pointer-follow-lab__result" aria-live="polite">
+      <dl className="pointer-follow-lab__result">
         <div>
           <dt>실제로 지금 걸린 경로</dt>
           <dd>{descriptor.effectivePath}</dd>

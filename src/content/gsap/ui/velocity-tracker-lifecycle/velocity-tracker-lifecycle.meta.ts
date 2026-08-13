@@ -5,7 +5,7 @@ export const velocityTrackerLifecycleMeta = {
   summary:
     '하나의 stable target에 x와 rotation을 추적하고, property를 더하거나 빼고, target 전체를 untrack하는 lifecycle을 다룹니다.',
   sourcePath: 'src/content/gsap/ui/velocity-tracker-lifecycle/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'VelocityTracker',
@@ -32,7 +32,7 @@ export const velocityTrackerLifecycleMeta = {
 
 /** 다섯 canonical을 ownership부터 cleanup까지 초보자 흐름으로 배열한다. */
 export const velocityTrackerLifecycleSections = [
-  { number: '01', title: 'tracker ownership', sourceItems: 1 },
+  { number: '01', title: 'tracker 생성', sourceItems: 1 },
   { number: '02', title: 'choose property set', sourceItems: 1 },
   { number: '03', title: 'add / remove', sourceItems: 2 },
   { number: '04', title: 'whole-target untrack', sourceItems: 1 },

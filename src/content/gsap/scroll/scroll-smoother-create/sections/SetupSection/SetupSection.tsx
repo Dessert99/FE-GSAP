@@ -8,10 +8,10 @@ export function SetupSection() {
       <p>01 · root setup</p>
       <h2 id="scroll-smoother-setup-title">한 document, 한 ScrollSmoother</h2>
       <p>
-        ScrollSmoother는 local card 안에서 시험할 plugin이 아닙니다. root page의
+        ScrollSmoother는 작은 card 안에서 격리해 시험할 plugin이 아닙니다. root page의
         native scroll, body 높이, wrapper/content inline style, ScrollTrigger
-        default scroller를 함께 다루므로 application bootstrap owner만 만들고
-        죽여야 합니다.
+        default scroller를 함께 다루므로 application bootstrap에서 만들고
+        정리해야 합니다.
       </p>
       <SmootherStructureDiagram />
       <aside>
@@ -35,10 +35,9 @@ export function SetupSection() {
       <aside>
         <h3>이 페이지에서 실행하지 않는 이유</h3>
         <p>
-          학습 site의 host document scroll을 takeover하면 현재 route와 다른
-          lesson의 focus·scroll·ScrollTrigger 상태까지 바뀔 수 있습니다. 그래서
-          runtimeSource는 none이며, 위 schematic과 descriptor는 production
-          root에서만 실행할 setup을 정확히 설명합니다.
+          이 화면의 document scroll에 직접 적용하면 현재 페이지의
+          focus·scroll·ScrollTrigger 상태까지 바뀔 수 있습니다. 그래서 여기서는
+          실행하지 않고, 위 구조와 code로 root setup을 설명합니다.
         </p>
         <p>
           reduced motion을 선택했거나 한 wrapper 안의 단일 content 구조를 보장할

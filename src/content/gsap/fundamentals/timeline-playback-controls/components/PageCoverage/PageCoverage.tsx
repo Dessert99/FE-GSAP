@@ -11,21 +11,21 @@ const probeItems = timelinePlaybackControlsSourceItems.length - officialItems.le
 
 export function PageCoverage() {
   return (
-    <nav className="timeline-playback-coverage" aria-label="Timeline playback 공식 source 대응 범위">
+    <nav className="timeline-playback-coverage" aria-label="Timeline 재생 제어 학습 순서">
       <div className="timeline-playback-coverage__summary">
         <div>
           <strong>{mappedSources}/{timelinePlaybackControlsCoverage.officialSources}</strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>{officialItems.length}/{timelinePlaybackControlsCoverage.officialSourceItems}</strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <div>
           <strong>{probeItems}/{timelinePlaybackControlsCoverage.probeItems}</strong>
-          <span>runtime probe</span>
+          <span>직접 확인한 동작</span>
         </div>
-        <p>여덟 canonical을 렌더 원문과 raw HTML로 두 번 대조하고, Timeline 고유 label·child cascade와 공식 오류를 따로 확인했습니다.</p>
+        <p>여덟 공식 문서의 재생 명령을 상태 확인 → 위치 지정 → 정방향·역방향 제어 순서로 묶고, 문서에 없는 경계 동작은 직접 확인해 구분했습니다.</p>
       </div>
       <ol>
         {timelinePlaybackControlsSections.map((section) => (
@@ -34,7 +34,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 공식 item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

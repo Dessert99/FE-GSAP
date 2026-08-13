@@ -18,9 +18,9 @@ export function AccessibleDomSection() {
         <code>lines</code>는 font와 width에 따라 달라집니다. 이 lab은{' '}
         <code>document.fonts.ready</code> 뒤에 create하고 <code>autoSplit</code>
         을 켜 reflow를 다시 측정합니다.{' '}
-        <a href={toHref('/fundamentals/scramble-text')}>P31 ScrambleText</a>는
-        text content를 바꾸는 선행 비교이고, re-split·revert·disposal은 P33
-        SplitText lifecycle에서 이어집니다.
+        <a href={toHref('/fundamentals/scramble-text')}>ScrambleText</a>는 text
+        content를 바꾸는 선행 비교이고, re-split·revert·disposal은 SplitText
+        lifecycle 페이지에서 이어집니다.
       </p>
     </section>
   )

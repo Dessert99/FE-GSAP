@@ -5,7 +5,7 @@ export const utilityCollectionsRandomMeta = {
   summary:
     '여러 target 후보를 같은 배열 모양으로 맞춘 뒤, 하나를 뽑거나 순서를 섞을 수 있습니다. 세 utility는 animation을 만들지 않고 값·참조만 다룹니다.',
   sourcePath: 'src/content/gsap/fundamentals/utility-collections-random/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'random()', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods/random()' },
     { label: 'shuffle()', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods/shuffle()' },

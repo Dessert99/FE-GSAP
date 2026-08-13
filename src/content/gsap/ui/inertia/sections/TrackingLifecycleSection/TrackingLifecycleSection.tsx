@@ -11,8 +11,8 @@ export function TrackingLifecycleSection() {
       />
       <p>
         track은 x의 최근 값과 시간을 기록합니다. 공식 문서의 auto 사용은 최소
-        100ms와 2 tick 뒤가 안전합니다. VelocityTracker의 instance lifecycle은
-        P16, instance query API는 P17에서 자세히 다룹니다.
+        100ms와 2 tick 뒤가 안전합니다. tracker 생성·해제와 instance 조회는
+        이어지는 VelocityTracker 페이지에서 자세히 다룹니다.
       </p>
     </section>
   )

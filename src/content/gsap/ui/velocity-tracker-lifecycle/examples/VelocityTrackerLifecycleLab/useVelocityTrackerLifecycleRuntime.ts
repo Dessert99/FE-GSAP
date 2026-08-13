@@ -48,6 +48,10 @@ export function useVelocityTrackerLifecycleRuntime() {
     values: { x: 0, rotation: 0 },
     notice: 'track set을 준비 중입니다.',
   })
+  // 코드 패널에는 가장 최근 control이 실제 실행한 API 호출만 남긴다
+  const [lastActionCode, setLastActionCode] = useState(
+    `VelocityTracker.track(target, '${velocityTrackerSetDescriptor.propertyList}', '${velocityTrackerSetDescriptor.typeList}')`,
+  )
   // OS motion preference는 이 instant-only lab의 motion boundary를 표시한다
   const reducedMotion = useReducedMotion()
   // target transform을 action 시점의 number로 읽어 snapshot이 GSAP mutation과 같게 한다
@@ -82,6 +86,9 @@ export function useVelocityTrackerLifecycleRuntime() {
       >[2],
     )
     trackerRef.current = tracker
+    setLastActionCode(
+      `VelocityTracker.track(target, '${velocityTrackerSetDescriptor.propertyList}', '${velocityTrackerSetDescriptor.typeList}')`,
+    )
     readSnapshot('x,rotation track set을 시작했습니다.')
   }
   // instance add/remove가 property 하나의 membership만 바꾸게 한다
@@ -95,10 +102,12 @@ export function useVelocityTrackerLifecycleRuntime() {
     if (!detail) return
     if (VelocityTracker.isTracking(target, property)) {
       tracker.remove(property)
+      setLastActionCode(`tracker.remove('${property}')`)
       readSnapshot(`${property} tracking을 remove했습니다.`)
       return
     }
     tracker.add(property, detail.type)
+    setLastActionCode(`tracker.add('${property}', '${detail.type}')`)
     readSnapshot(`${property} tracking을 add했습니다.`)
   }
   // static untrack의 property 생략 form으로 target의 set 전체를 끝낸다
@@ -106,6 +115,7 @@ export function useVelocityTrackerLifecycleRuntime() {
     const target = targetRef.current
     if (!target) return
     VelocityTracker.untrack(target)
+    setLastActionCode('VelocityTracker.untrack(target)')
     readSnapshot('target 전체를 untrack했습니다.')
   }
   // native button action은 GSAP set으로 해당 unit의 target value만 즉시 바꾼다
@@ -119,6 +129,7 @@ export function useVelocityTrackerLifecycleRuntime() {
     const next = readTargetValue(target, property) + detail.step * direction
     if (property === 'x') gsap.set(target, { x: next })
     else gsap.set(target, { rotation: next })
+    setLastActionCode(`gsap.set(target, { ${property}: ${next} })`)
     readSnapshot(
       `${property}를 ${direction > 0 ? '+' : '-'}${detail.step}${detail.unit} 변경했습니다${reducedMotion ? ' (reduced motion: instant)' : ''}.`,
     )
@@ -147,6 +158,7 @@ export function useVelocityTrackerLifecycleRuntime() {
     targetRef,
     descriptor: velocityTrackerSetDescriptor,
     snapshot,
+    lastActionCode,
     reducedMotion,
     nudge,
     toggleProperty,

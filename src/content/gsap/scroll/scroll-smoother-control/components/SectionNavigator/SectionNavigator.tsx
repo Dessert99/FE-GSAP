@@ -1,4 +1,4 @@
-/** P38의 command descriptor를 실제 fragment anchor와 동일한 코드 표시에 사용한다. */
+/** ScrollSmoother command와 native fragment anchor의 역할을 같은 navigator에서 구분한다. */
 import { scrollSmootherControlProperties } from '../../scroll-smoother-control.properties'
 import './SectionNavigator.css'
 

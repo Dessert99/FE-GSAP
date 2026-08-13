@@ -9,7 +9,7 @@ const configRows = [
     name: '첫 번째 인자',
     type: 'CustomEase · ease의 ID · 표준 ease 이름',
     fallback: '공식 페이지에 명시 없음',
-    note: '공식 문장 그대로 "CustomEase나 그것에 연결된 ID, 또는 power2 같은 표준 ease"를 받습니다.',
+    note: 'CustomEase, 그 곡선의 ID, 또는 power2 같은 표준 ease를 받습니다.',
   },
   {
     id: 'width',
@@ -81,7 +81,7 @@ export function GetSvgDataSection() {
         </p>
         <p>
           그리고 편의 기능이 하나 더 있습니다. vars 객체에 <code>path</code>를 넣어 주면 그 element의 <code>d</code> attribute를 GSAP이
-          대신 채워 줍니다. 아래가 공식 예제 원문입니다.
+          대신 채워 줍니다. 아래 예제는 곡선을 만들고 <code>#ease</code> path에 결과를 넣는 순서를 보여 줍니다.
         </p>
       </div>
 
@@ -91,7 +91,7 @@ export function GetSvgDataSection() {
 
       <div className="custom-ease-page__table-wrap">
         <table className="custom-ease-page__rules-table">
-          <caption>getSVGData()에 넘기는 값 — 기본값이 공식 문서에 없는 칸은 그렇게 표시했습니다</caption>
+          <caption>getSVGData()에 넘기는 값과 역할</caption>
           <thead>
             <tr>
               <th scope="col">이름</th>
@@ -116,9 +116,9 @@ export function GetSvgDataSection() {
       </div>
 
       <div className="custom-ease-page__note custom-ease-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용 · 반환값과 기본 크기</h3>
+        <h3>반환값과 기본 크기</h3>
         <p>
-          공식 문서는 <code>getSVGData()</code>의 반환값 절도, 기본값 표도 게시하지 않습니다. GSAP 3.15.0에서 직접 실행해 보니 이
+          GSAP 3.15.0에서 확인한 결과, 이
           메서드는 계산한 <strong>d 문자열을 그대로 반환</strong>했고, <code>width</code>와 <code>height</code>를 생략하면{' '}
           <strong>100 × 100</strong>이 쓰였습니다(<code>{'{}'}</code>만 넘겼을 때 결과가 <code>M0,100 C0,100 50,0 100,0</code>).{' '}
           <code>path</code>를 함께 넘겨도 반환값은 똑같이 나오므로, 둘 중 편한 쪽을 쓰면 됩니다.

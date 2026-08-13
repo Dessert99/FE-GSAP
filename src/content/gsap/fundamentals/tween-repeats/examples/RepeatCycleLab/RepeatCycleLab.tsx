@@ -21,7 +21,9 @@ export function RepeatCycleLab() {
   } = useRepeatCycleAnimation()
 
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `const tween = gsap.to('${descriptor.selector}', {
+  const code = `gsap.set('${descriptor.selector}', { x: 0 })
+
+const tween = gsap.to('${descriptor.selector}', {
   x: ${descriptor.distance},
   duration: ${descriptor.duration},
   repeat: ${descriptor.repeat},
@@ -34,9 +36,13 @@ export function RepeatCycleLab() {
 // 재생 대신 반복까지 포함한 전체 시간 위에서 헤드를 옮깁니다.
 tween.totalProgress(${descriptor.totalProgress})
 
+tween.iteration()     // ${observation.iteration}
 tween.duration()      // ${observation.duration}
 tween.totalDuration() // ${observation.totalDuration}
-tween.iteration()     // ${observation.iteration}`
+tween.time()          // ${observation.time}
+tween.totalTime()     // ${observation.totalTime}
+tween.progress()      // ${observation.progress}
+gsap.getProperty('${descriptor.selector}', 'x') // ${observation.x}`
 
   return (
     <section
@@ -182,9 +188,8 @@ tween.iteration()     // ${observation.iteration}`
         <article>
           <h4>무엇을 봐야 하나요?</h4>
           <p>
-            slider를 회차 경계에 정확히 맞춰 보세요. 경계 시각은 <strong>다음 회차가 아니라 끝난 회차</strong>에 속합니다.{' '}
-            <code>repeatDelay</code>를 넣으면 틈 칸에서 상자의 x와 회차 번호가 <strong>둘 다 멈춰</strong> 있습니다.{' '}
-            <code>yoyo</code>를 켜면 짝수 회차 칸이 역방향으로 바뀝니다.
+            slider를 움직이며 <code>iteration()</code>이 1부터 올라가는지 확인하세요. <code>repeatDelay</code>를 넣으면 다음 재생 전의
+            기다리는 구간이 시간표에 생기고, <code>yoyo</code>를 켜면 반복할 때마다 진행 방향이 번갈아 바뀝니다.
           </p>
         </article>
         <article>

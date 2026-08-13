@@ -7,13 +7,13 @@ export function CleanupSection() {
       <p>
         unmount 때 batch와 active flips를 kill합니다.{' '}
         <a href={toHref('/fundamentals/flip-first-last')}>
-          P11 Flip fundamentals
+          Flip의 First/Last 기본 순서
         </a>
         와{' '}
         <a href={toHref('/fundamentals/flip-fit-absolute')}>
-          P12 Flip layout tools
+          fit·absolute 레이아웃 도구
         </a>
-        를 먼저 복습하고 P14 이후 API는 text-only입니다.
+        를 먼저 복습하면 batch의 측정·변경·재생 순서를 이해하기 쉽습니다.
       </p>
     </section>
   )

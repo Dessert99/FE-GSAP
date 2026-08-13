@@ -1,4 +1,4 @@
-/** P38의 command query·native anchor·cleanup boundary를 학습 순서로 조립한다. */
+/** ScrollSmoother command·native anchor·cleanup 경계를 학습 순서로 조립한다. */
 import { toHref } from '../../../../app/routes'
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { SectionNavigator } from './components/SectionNavigator/SectionNavigator'
@@ -20,10 +20,6 @@ export function ScrollSmootherControlPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>
-          <code>{scrollSmootherControlMeta.sourcePath}</code> · official
-          coverage 6 / 6
-        </p>
       </header>
       <SectionNavigator />
       <section
@@ -42,10 +38,10 @@ export function ScrollSmootherControlPage() {
           <code>scrollTop(offset)</code>에 넘길 수 있습니다.
         </p>
         <p>
-          rendered docs는 세 번째 인자를 설명하지 않습니다. installed 3.15
+          공식 문서는 세 번째 인자를 설명하지 않습니다. 설치된 3.15
           source와 d.ts에는 <code>ignoreSpeed</code>가 있으며, <code>true</code>
           일 때 <code>st.start / speed</code>로 계산합니다. 이 version-specific
-          인자는 공식 rendered 계약과 분리해 확인합니다.
+          인자는 공식 계약과 분리해 확인합니다.
         </p>
       </section>
       <section
@@ -60,7 +56,7 @@ export function ScrollSmootherControlPage() {
           scrollbar를 포함한 smoother-controlled 입력을 멈춥니다. pause 중에도
           이 instance의 <code>scrollTop()</code>과 <code>scrollTo()</code>{' '}
           command는 동작합니다. UI가 정한 상태를 다시 <code>paused(false)</code>
-          로 복원하는 owner만 이 setter를 호출합니다.
+          로 복원할 책임이 있는 코드에서만 이 setter를 호출합니다.
         </p>
       </section>
       <section
@@ -84,30 +80,30 @@ export function ScrollSmootherControlPage() {
         <p>
           <code>scrollTop()</code>은 pixel 위치를 읽고,{' '}
           <code>scrollTop(position)</code>은 pause 중에도 즉시 위치를
-          설정합니다. rendered docs는 setter 반환을 <code>void</code>로
-          설명하지만 installed 3.15 source와 d.ts는 instance를 반환하므로,
+          설정합니다. 공식 문서는 setter 반환을 <code>void</code>로 설명하지만
+          설치된 3.15 source와 d.ts는 instance를 반환하므로,
           반환값에 의존한 chaining은 피합니다.
         </p>
       </section>
       <section id='cleanup' tabIndex={-1} aria-labelledby='cleanup-title'>
         <p>05 · restoration</p>
         <h2 id='cleanup-title'>
-          instance owner는 kill로 자신이 만든 smoother를 되돌립니다
+          만든 instance는 kill로 정리합니다
         </h2>
         <p>
           <code>kill()</code>은 whole ScrollSmoother와 적용된 effects를
-          종료합니다. installed implementation은 owned trigger와 listeners를
-          해제하고 wrapper/content의 inline state를 복원하므로, child lesson이
-          아닌 생성 owner의 cleanup에서 한 번 호출합니다.
+          종료합니다. 설치된 implementation은 관련 trigger와 listeners를
+          해제하고 wrapper/content의 inline state를 복원하므로, instance를 만든
+          곳의 cleanup에서 한 번 호출합니다.
         </p>
         <p>
           먼저{' '}
           <a href={toHref('/fundamentals/scroll-smoother-create')}>
-            P36 ScrollSmoother 생성
+            ScrollSmoother 생성
           </a>
-          에서 instance owner를 확인하고,{' '}
+          에서 instance를 만든 위치를 확인하고,{' '}
           <a href={toHref('/fundamentals/scroll-smoother-effects')}>
-            P37 ScrollSmoother 효과
+            ScrollSmoother 효과
           </a>
           에서 effect trigger와 instance 전체 정리의 경계를 이어서 확인할 수
           있습니다.

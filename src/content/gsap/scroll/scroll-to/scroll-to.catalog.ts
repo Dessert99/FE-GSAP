@@ -1,4 +1,4 @@
-/** P39가 소유한 두 canonical을 item-level coverage 기준으로 고정한다. */
+/** ScrollToPlugin의 두 공식 문서 항목을 coverage 기준으로 고정한다. */
 export const scrollToCatalog = [
   {
     id: 'STO-158',
@@ -9,7 +9,7 @@ export const scrollToCatalog = [
   {
     id: 'STO-159',
     officialItem:
-      'ScrollToPlugin.config() sets global autoKill and autoKillThreshold configuration.',
+      'ScrollToPlugin.config() sets global autoKill configuration; installed source also reads autoKillThreshold.',
     sectionId: 'config-restoration',
   },
 ] as const

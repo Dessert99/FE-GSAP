@@ -60,6 +60,10 @@ export function useContextAddAnimation() {
   const scope = useRef<HTMLDivElement>(null)
   // 버튼들이 같은 Context instance를 조작해야 해서 ref에 보관한다
   const contextRef = useRef<gsap.Context | null>(null)
+  // Context가 기록하지 않는 outside·ignored Tween도 재설정과 unmount 때 직접 정리한다
+  const looseTweensRef = useRef<gsap.core.Tween[]>([])
+  // 네 생성 경로가 모두 같은 대상 element를 사용하도록 scope 안에서 한 번만 찾는다
+  const targetRef = useRef<HTMLElement | null>(null)
   // Context 생성 시점에 등록한 handler가 최신 duration을 읽도록 descriptor를 ref로도 들고 있는다
   const descriptorRef = useRef<ContextAddDescriptor | null>(null)
   // 클릭 시점 Tween을 어느 경로로 만들지 고르는 control — 이 예제의 유일한 변수다
@@ -86,14 +90,24 @@ export function useContextAddAnimation() {
 
   useGSAP(
     () => {
+      // Context 밖에서 실행되는 경로도 이 예제의 박스 하나만 가리키게 한다
+      const box = gsap.utils.toArray<HTMLElement>(descriptor.selector, scope.current)[0]
+      targetRef.current = box
       // 등록해 둔 handler가 항상 최신 duration으로 Tween을 만들게 한다
       descriptorRef.current = descriptor
       // 이전 실행이 남긴 위치를 지워 항상 같은 지점에서 출발시킨다
-      gsap.set(targetSelector, { x: 0 })
+      gsap.set(box, { x: 0 })
+      // 모드나 모션 설정이 바뀌면 새 Context부터 만들도록 단계와 관찰값을 초기화한다
+      setStage('idle')
+      setObservation({ recorded: 0, boxX: 0 })
+      setStatus('먼저 Context를 만드세요. 그다음 만드는 방법을 골라 애니메이션을 만듭니다.')
       // 이 컴포넌트가 사라질 때 손으로 만든 Context도 함께 되돌린다
       return () => {
+        looseTweensRef.current.forEach((tween) => tween.kill())
+        looseTweensRef.current = []
         contextRef.current?.revert()
         contextRef.current = null
+        targetRef.current = null
       }
     },
     // 모드나 모션 설정이 바뀌면 시작 상태부터 다시 잡아 관찰을 결정적으로 만든다
@@ -103,17 +117,27 @@ export function useContextAddAnimation() {
   // 클릭 시점에 실행할 Tween 하나 — 네 경로가 모두 같은 호출을 쓰고 감싸는 방법만 다르다
   function animate() {
     const current = descriptorRef.current
-    if (!current) return
+    const box = targetRef.current
+    if (!current || !box) return
 
-    gsap.to(current.selector, { x: current.x, duration: current.duration, ease: 'power2.out' })
+    return gsap.to(box, { x: current.x, duration: current.duration, ease: 'power2.out', onComplete: read })
   }
 
   // 함수 안에서는 아무 애니메이션도 만들지 않고, 나중에 부를 메서드 이름만 Context에 등록한다
   function createContext() {
+    // 초기화와 네 생성 경로가 공유할 scoped target이다
+    const box = targetRef.current
+    if (!box) return
+
+    looseTweensRef.current.forEach((tween) => tween.kill())
+    looseTweensRef.current = []
     contextRef.current?.revert()
+    gsap.set(box, { x: 0 })
     contextRef.current = gsap.context((self) => {
       // 임의의 문자열을 이름으로 주면 ctx.onClick()으로 부를 수 있는 메서드가 생긴다
-      self.add('onClick', animate)
+      self.add('onClick', () => {
+        animate()
+      })
     }, scope)
 
     setStage('ready')
@@ -129,16 +153,23 @@ export function useContextAddAnimation() {
 
     if (descriptor.mode === 'outside') {
       // Context를 거치지 않으므로 이 Tween은 어디에도 기록되지 않는다
-      animate()
+      const tween = animate()
+      if (tween) looseTweensRef.current.push(tween)
     } else if (descriptor.mode === 'named') {
       // 생성 시점에 등록해 둔 메서드를 통해 만들면 지금 만든 것도 기록된다
       context.onClick()
     } else if (descriptor.mode === 'immediate') {
       // 함수를 첫 인자로 넘기면 그 자리에서 실행되면서 기록된다
-      context.add(animate)
+      context.add(() => {
+        animate()
+      })
     } else {
       // 일부러 기록에서 빼는 경로 — revert() 대상에서 제외된다
-      context.ignore(animate)
+      context.ignore(() => {
+        // Context가 정리하지 않으므로 예제 cleanup이 별도로 추적할 Tween이다
+        const tween = animate()
+        if (tween) looseTweensRef.current.push(tween)
+      })
     }
 
     setStage('made')

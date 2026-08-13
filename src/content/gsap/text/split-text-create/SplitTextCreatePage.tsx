@@ -1,4 +1,4 @@
-/** P32 header와 SplitText create 학습 단위를 조립한다. */
+/** SplitText create의 DOM과 instance array 학습 단위를 조립한다. */
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { SplitInspectorLab } from './examples/SplitInspectorLab/SplitInspectorLab'
 import { AccessibleDomSection } from './sections/AccessibleDomSection/AccessibleDomSection'
@@ -19,7 +19,6 @@ export function SplitTextCreatePage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>7 official create-time items covered</p>
       </header>
       <CreateModelSection />
       <SplitInspectorLab />

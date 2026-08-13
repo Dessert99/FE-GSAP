@@ -5,7 +5,7 @@ export const flipFirstLastMeta = {
   summary:
     'Flip은 First state를 기록하고 DOM을 Last state로 바꾼 다음, 보정값을 반대로 재생해 layout jump를 motion으로 바꿉니다.',
   sourcePath: 'src/content/gsap/ui/flip-first-last/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Flip', href: 'https://gsap.com/docs/v3/Plugins/Flip/' },
     { label: 'Flip.from()', href: 'https://gsap.com/docs/v3/Plugins/Flip/static.from()/' },

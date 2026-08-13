@@ -99,6 +99,8 @@ export function useCoordinateMatrixLab() {
     // reduced motion이 아니면 marker의 등장만 짧게 보인다
     if (descriptor.travel)
       gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.35 })
+    // reduced motion에서는 이동 없이 marker의 최종 가시 상태만 즉시 적용한다
+    else gsap.set(overlay, { opacity: 1 })
     // explicit action이 끝난 뒤에만 표와 status snapshot을 갱신한다
     setSnapshot({
       converted,
@@ -119,6 +121,8 @@ export function useCoordinateMatrixLab() {
         if (overlay) {
           gsap.killTweensOf(overlay)
           overlay.removeAttribute('style')
+          overlay.removeAttribute('cx')
+          overlay.removeAttribute('cy')
           overlay.setAttribute('opacity', '0')
         }
       }

@@ -1,10 +1,10 @@
-/** P32의 official identity와 7개 source link를 표시한다. */
+/** SplitText create 학습 페이지의 경로와 공식 문서 링크를 정의한다. */
 export const splitTextCreateMeta = {
   title: '문장을 나누면 어떤 DOM과 배열이 생길까요?',
   category: 'GSAP · Text · SplitText',
   summary:
     '하나의 문장을 chars·words·lines·masks로 나누고, instance가 실제로 만든 wrapper를 검사합니다.',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   sourcePath: 'src/content/gsap/text/split-text-create/',
   officialSources: [
     { label: 'SplitText', href: 'https://gsap.com/docs/v3/Plugins/SplitText/' },

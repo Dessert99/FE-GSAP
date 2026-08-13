@@ -11,23 +11,23 @@ const mappedSourceCount = new Set(rangeInterpolationSourceItems.map((item) => it
 
 export function PageCoverage() {
   return (
-    <nav className="range-coverage" aria-label="공식 source 대응 범위">
+    <nav className="range-coverage" aria-label="범위 변환 학습 순서">
       <div className="range-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{rangeInterpolationCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{rangeInterpolationCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          공식 다섯 문서의 기술 item {rangeInterpolationCoverage.officialSourceItems}개를 하나의 값 변환 흐름으로 다시 묶었습니다. 공식이
-          침묵한 경계는 GSAP 3.15.0 probe {probeItemCount}개로 따로 표시합니다.
+          공식 다섯 문서의 핵심 동작 {rangeInterpolationCoverage.officialSourceItems}개를 하나의 값 변환 흐름으로 묶었습니다. 문서가
+          설명하지 않은 경계 동작 {probeItemCount}개는 직접 확인해 구분했습니다.
         </p>
       </div>
       <ol>
@@ -37,7 +37,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 공식 item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

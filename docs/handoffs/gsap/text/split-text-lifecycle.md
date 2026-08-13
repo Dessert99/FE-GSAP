@@ -78,12 +78,32 @@ findings
   P33-RDS-001 | PASS | command descriptor → actual method/config/code | no detached method/code path | none
   P33-A11Y-001 | PASS (static) | plain target, aria:auto, no live region, native controls | wrapper reading and control labels are defined | browser confirmation pending
   P33-INT-001 | PASS | root route/full TypeScript/Vite/Storybook integration | page chunk and route verified | none
-  P33-B01 | DEFERRED | range/select/button keyboard focus and control action | browser audit | owner
-  P33-B02 | DEFERRED | actual reduced-motion zero-duration/stagger settle | browser audit | owner
-  P33-B03 | DEFERRED | 320/390 target/snapshot/code overflow | browser audit | owner
-  P33-B04 | DEFERRED | resize autoSplit, DOM restore and kill/re-split result | browser audit | owner
+  P33-B01 | DEFERRED → PASS | range/select/button keyboard focus and control action | browser audit | owner
+  P33-B02 | DEFERRED → PASS | actual reduced-motion zero-duration/stagger settle | browser audit | owner
+  P33-B03 | DEFERRED → PASS | 320/390 target/snapshot/code overflow | browser audit | owner
+  P33-B04 | DEFERRED → PASS | resize autoSplit, DOM restore and kill/re-split result | browser audit | owner
 verificationEvidence
   task-13-report.md records source comparison, page-local TypeScript, exact four-row audit, scoped Prettier and assigned-path diff.
 releaseDecision
-  PASS — root integration complete; P33-B01..B04 remain DEFERRED.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: `SplitText.isSplit`, `kill()`, `revert()`, `split()` 공식 문서를 다시 대조했다. kill은 autoSplit listener만 멈추고 DOM을 유지하며, revert는 원래 innerHTML을 복구하고 kill을 함께 호출하고, split은 필요하면 먼저 revert함을 확인했다.
+- findings:
+  - SPLITLIFE-A01 `BLOCK → ADDRESSED` — 표시 코드를 plugin 등록·target guard·animation과 SplitText instance 생성·선택 command·cleanup까지 포함하는 setup으로 고쳤다.
+  - SPLITLIFE-A02 `BLOCK → ADDRESSED` — 학습 화면의 sourcePath·검토일·P번호·소유권 표현을 제거했다.
+  - SPLITLIFE-A03 `PASS` — command descriptor가 실제 method와 표시 command를 함께 고르고, reduced-motion 값과 animation kill·instance revert 순서도 runtime과 표시가 일치한다.
+  - SPLITLIFE-A04 `DEFERRED` — resize/font autoSplit, DOM 복구, keyboard controls, reduced-motion, 작은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - SPLITLIFE-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.

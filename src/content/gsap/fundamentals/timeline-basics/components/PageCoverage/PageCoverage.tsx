@@ -10,23 +10,23 @@ const mappedSourceCount = new Set(timelineBasicsSourceItems.map((item) => item.s
 
 export function PageCoverage() {
   return (
-    <nav className="timeline-coverage" aria-label="공식 source 대응 범위">
+    <nav className="timeline-coverage" aria-label="Timeline 기본 학습 순서">
       <div className="timeline-coverage__summary">
         <div>
           <strong>
             {mappedSourceCount}/{timelineBasicsCoverage.officialSources}
           </strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{timelineBasicsCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          gsap.timeline() 생성자와 Timeline 클래스, vars 명세, 그리고 to · from · fromTo · set 네 메서드 문서의 기술 item{' '}
-          {timelineBasicsCoverage.officialSourceItems}개를 "그릇을 만들고 → 안을 채우고 → 놓을 자리를 정한다"는 여덟 단계로 다시
+          gsap.timeline() 생성자와 Timeline 클래스, vars 명세, 그리고 to · from · fromTo · set 네 메서드 문서의 핵심 동작{' '}
+          {timelineBasicsCoverage.officialSourceItems}개를 "Timeline을 만들고 → child를 채우고 → 놓을 자리를 정한다"는 여덟 단계로 다시
           묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로 표시합니다.
         </p>
       </div>
@@ -37,7 +37,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>

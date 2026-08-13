@@ -13,8 +13,15 @@ const presetOptions: { value: CurvePresetId; label: string; hint: string }[] = [
 
 export function CustomEasePathLab() {
   // runtime이 소유한 controls·descriptor·관찰값을 그대로 받아 화면에만 쓴다
-  const { scope, presetId, setPresetId, descriptor, observation, status, reducedMotion, seek, play } =
+  const { scope, presetId, setPresetId, descriptor, observation, action, status, reducedMotion, seek, play } =
     useCustomEasePathAnimation()
+
+  // 슬라이더와 재생 버튼 중 지금 실제로 실행한 Tween 조작을 표시한다
+  const actionCode = action.type === 'seek'
+    ? `tween.pause().progress(${action.progress})`
+    : action.type === 'play'
+      ? 'tween.restart()'
+      : '// slider를 움직이거나 재생 버튼을 누르세요.'
 
   // 실행에 쓰인 descriptor·관찰값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
   const code = `CustomEase.create('${descriptor.easeId}', '${descriptor.easeData}')
@@ -26,8 +33,7 @@ const tween = gsap.to('${descriptor.targetSelector}', {
   paused: true,
 })
 
-// 재생 대신 헤드를 직접 옮깁니다.
-tween.progress(${observation.progress})
+${actionCode}
 
 // ease 값 ${observation.easeValue} → x = ${observation.offsetX}px`
 

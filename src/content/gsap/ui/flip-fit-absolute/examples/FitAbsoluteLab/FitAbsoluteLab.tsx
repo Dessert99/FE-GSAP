@@ -16,10 +16,50 @@ export function FitAbsoluteLab() {
     makeAbsolute,
     restore,
   } = useFitAbsoluteAnimation()
-  const code =
-    descriptor.mode === 'calculate'
-      ? `Flip.fit(source, destination, { scale: ${descriptor.scale}, getVars: true })`
-      : `Flip.fit(source, destination, { scale: ${descriptor.scale}, absolute: ${descriptor.absolute}, duration: ${descriptor.duration} })`
+  // 선택한 fit 모드가 실제 실행하는 vars와 같은 값을 코드 패널에 직렬화한다
+  const code = `gsap.registerPlugin(Flip)
+
+const source = document.querySelector('.fit-absolute-lab__source')
+const destination = document.querySelector('.fit-absolute-lab__destination')
+if (!(source instanceof HTMLElement) || !(destination instanceof HTMLElement)) {
+  throw new Error('Flip.fit element를 찾지 못했습니다.')
+}
+
+const originalStyle = source.getAttribute('style')
+const mode = '${descriptor.mode}'
+const vars = {
+  scale: ${descriptor.scale},
+  absolute: ${descriptor.absolute},
+  duration: ${descriptor.duration},
+  ease: 'power1.inOut',
+}
+let tween = null
+
+function runFit() {
+  tween?.kill()
+  gsap.killTweensOf(source)
+  if (mode === 'calculate') return Flip.fit(source, destination, { ...vars, getVars: true })
+  if (mode === 'apply') return Flip.fit(source, destination, { ...vars, duration: 0 })
+  tween = Flip.fit(source, destination, vars)
+  return tween
+}
+
+function makeAbsolute() {
+  tween?.kill()
+  gsap.killTweensOf(source)
+  return Flip.makeAbsolute(source)
+}
+
+function restore() {
+  tween?.kill()
+  gsap.killTweensOf(source)
+  if (originalStyle === null) source.removeAttribute('style')
+  else source.setAttribute('style', originalStyle)
+}
+
+function cleanup() {
+  restore()
+}`
   return (
     <section
       className="fit-absolute-lab"

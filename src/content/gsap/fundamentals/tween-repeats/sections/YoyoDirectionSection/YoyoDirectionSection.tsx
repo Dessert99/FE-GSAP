@@ -112,26 +112,6 @@ export function YoyoDirectionSection() {
         </div>
       </div>
 
-      <div className="repeats-page__note repeats-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용</h3>
-        <p>
-          공식 문서는 값의 흐름만 보여줄 뿐, <strong>몇 회차가 역방향인지</strong>는 회차 번호와 연결해 적어 두지 않았습니다. 실행해 보면{' '}
-          <strong>홀수 회차가 정방향, 짝수 회차가 역방향</strong>입니다. 1회차는 정방향, 2회차는 역방향, 3회차는 다시 정방향입니다.
-        </p>
-        <p>
-          <strong>예외가 하나 있습니다.</strong> <code>repeat</code>가 0인데 <code>yoyo: true</code>를 넘기면, GSAP이 이 값을 무시하는 데서
-          그치지 않고 <code>yoyo()</code> getter 자체가 <code>false</code>를 돌려줍니다. 넘긴 값이 그대로 보관되지 않으므로{' '}
-          <code>yoyo()</code>로 "내가 켰는지"를 확인하려던 코드는 어긋날 수 있습니다.
-        </p>
-        <p className="repeats-page__provenance">
-          측정 방법 · GSAP 3.15.0에서{' '}
-          <code>gsap.to(&#123;v:0&#125;, &#123;v:1, duration:1, repeat, yoyo:true, ease:'none', paused:true&#125;)</code>를 만들고 각
-          회차의 25% 지점(<code>totalTime(i + 0.25)</code>)에서 값을 읽었습니다. 값이 0.25면 정방향, 0.75면 역방향입니다. repeat 1·2·3·4
-          전부에서 홀수 정방향·짝수 역방향이었고 <code>repeatDelay: 0.5</code>를 넣어도 같았습니다. repeat 0 예외는{' '}
-          <code>gsap.to(&#123;v:0&#125;, &#123;v:1, duration:1, yoyo:true, paused:true&#125;).yoyo()</code>가 <code>false</code>를 돌려주는
-          것으로 확인했습니다.
-        </p>
-      </div>
     </section>
   )
 }

@@ -40,7 +40,7 @@ export function useCssLifecycleAnimation() {
   // dependency 변경과 새 replay를 구분하도록 마지막 실행 key를 기억한다.
   const executedRunKey = useRef(0)
   // 완료 뒤 inline/computed style 차이를 텍스트로 전달한다.
-  const [result, setResult] = useState('mode를 고른 뒤 실행하세요.')
+  const [result, setResult] = useState('정리 방식을 고른 뒤 실행하세요.')
   // 모션 감소 환경에서는 같은 lifecycle을 0초로 완료한다.
   const reducedMotion = useReducedMotion()
   // 실제 method와 vars를 code panel까지 공유하는 descriptor다.
@@ -89,7 +89,7 @@ export function useCssLifecycleAnimation() {
     executedRunKey.current = 0
     setMode(nextMode)
     setRunKey(0)
-    setResult('mode를 고른 뒤 실행하세요.')
+    setResult('정리 방식을 고른 뒤 실행하세요.')
   }
 
   // 실행 상태 문구를 먼저 알리고 replay key로 현재 config를 시작한다.

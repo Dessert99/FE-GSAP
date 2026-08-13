@@ -6,6 +6,6 @@ export const draggableBoundsAxisProperties = [
   { name: 'lockAxis', type: 'Boolean', defaultValue: '공식 property 페이지에 명시 없음', acceptedValues: 'true | false', timing: 'initial drag direction이 2px를 넘은 뒤', caveat: 'x,y·top,left·scroll type에서만 적용된다.' },
   { name: 'lockedAxis', type: '공식: String', defaultValue: 'press 직후 미설정', acceptedValues: '"x" | "y"', timing: '초기 direction이 결정된 뒤', caveat: '움직이는 축이 아니라 막힌 축이다; installed top-level d.ts에는 누락됐다.' },
   { name: 'autoScroll', type: 'Number', defaultValue: '0', acceptedValues: 'non-zero; 1 normal, 2 double speed 등', timing: 'scrollable container edge 40px 안 drag 중', caveat: 'pointer가 edge에 가까울수록 빠르다.' },
-  { name: 'zIndex', type: 'Number', defaultValue: '공식 페이지에 명시 없음', acceptedValues: 'current z-index', timing: 'Draggable layer state를 읽을 때', caveat: 'zIndexBoost 설정 detail은 P03 creation vars owner다.' },
-  { name: 'update(applyBounds, sticky)', type: 'Boolean, Boolean → Draggable (installed d.ts)', defaultValue: '공식 property page에 명시 없음', acceptedValues: 'applyBounds true로 recalculation', timing: 'external transform/layout change 뒤', caveat: '이 페이지는 external layout resync만 소유하고 P06 lifecycle API detail은 소유하지 않는다.' },
+  { name: 'zIndex', type: 'Number', defaultValue: '공식 페이지에 명시 없음', acceptedValues: 'current z-index', timing: 'Draggable layer state를 읽을 때', caveat: 'zIndexBoost는 Draggable 생성 설정에서 지정한다.' },
+  { name: 'update(applyBounds, sticky)', type: 'Boolean, Boolean → Draggable', defaultValue: '공식 property page에 명시 없음', acceptedValues: 'applyBounds true로 recalculation', timing: 'external transform/layout change 뒤', caveat: '외부 transform이나 layout이 바뀐 뒤 현재 위치와 bounds를 다시 읽을 때 사용한다.' },
 ] as const

@@ -93,8 +93,7 @@
 }
 
 .bounce-wiggle-coverage__summary span,
-.bounce-wiggle-coverage__summary p,
-.bounce-wiggle-coverage small {
+.bounce-wiggle-coverage__summary p {
   color: var(--color-muted);
   font-size: 13px;
 }

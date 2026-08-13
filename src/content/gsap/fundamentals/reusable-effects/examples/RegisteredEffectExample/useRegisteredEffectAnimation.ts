@@ -1,4 +1,4 @@
-/** module-scope effect 등록과 direct paused Tween 실행을 하나의 descriptor로 관리한다. */
+/** module-scope effect 등록과 직접 호출한 paused Tween을 하나의 descriptor로 관리한다. */
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useMemo, useRef, useState } from 'react'
@@ -19,10 +19,9 @@ export type RegisteredEffectDescriptor = {
   effectiveDuration: number
 }
 
-/** 페이지 전체 registry에서 충돌하지 않을 name과 공식 duration 기본값을 고정한다. */
+/** gsap.effects에서 충돌하지 않을 name과 공식 duration 기본값을 고정한다. */
 export const registeredEffectRegistration = {
   name: 'reusableEffectsFadeIn',
-  plugins: '',
   defaults: { duration: 2 },
   extendTimeline: false,
 } as const
@@ -35,7 +34,7 @@ function createFadeInEffect(targets: object[], config: RegisteredEffectConfig) {
   return gsap.fromTo(targets, { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: config.duration, ease: config.ease, paused: config.paused, immediateRender: false, data })
 }
 
-// page-prefixed name으로 recipe를 한 번 등록해 direct 호출과 표시 코드가 같은 registry를 가리키게 한다.
+// page-prefixed name으로 effect를 한 번 등록해 runtime과 표시 코드가 같은 함수를 가리키게 한다.
 gsap.registerEffect({ ...registeredEffectRegistration, effect: createFadeInEffect })
 
 /** radio 선택을 실제 호출 config와 defaults 적용 결과로 정규화한다. */

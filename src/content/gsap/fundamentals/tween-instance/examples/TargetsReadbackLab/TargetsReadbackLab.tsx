@@ -19,17 +19,49 @@ export function TargetsReadbackLab() {
   const { scope, mode, setMode, duration, setDuration, descriptor, observation, status, reducedMotion, run } =
     useTargetsReadbackAnimation()
 
+  // 일반 object 모드의 실제 onUpdate 관찰 단계만 코드 패널에 덧붙인다
+  const onUpdateLines =
+    descriptor.mode === 'plainObject'
+      ? `    onUpdate() {
+      setObservation((previous) => ({
+        ...previous,
+        plainObjectScore: Math.round(plainObject.score),
+      }))
+    },
+`
+      : ''
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `// 1. 첫 인자로 무엇을 넘길지가 targets()의 내용을 정합니다.
-const tween = gsap.to(${descriptor.targetExpression}, {
-  ${descriptor.propertyLine},
-  duration: ${descriptor.effectiveDuration},
-  ease: 'none',
-  paused: true,
-})
+  const code = `const tweenRef = useRef(null)
 
-// 2. 재생하기 전에도 물어볼 수 있습니다.
-tween.targets() // 길이 ${observation.count}`
+useGSAP(() => {
+  const boxes = gsap.utils.toArray('.targets-readback-lab__box', scope.current)
+  const plainObject = { score: 0 }
+
+  // 모든 모드가 같은 출발점에서 시작합니다.
+  gsap.set(boxes, { x: 0 })
+
+  // 1. 첫 인자로 무엇을 넘길지가 targets()의 내용을 정합니다.
+  const tween = gsap.to(${descriptor.targetExpression}, {
+    ${descriptor.propertyLine},
+    duration: ${descriptor.effectiveDuration},
+    ease: 'none',
+    paused: true,
+${onUpdateLines}  })
+
+  // 2. 재생하기 전에도 물어볼 수 있습니다.
+  const targets = tween.targets() // 길이 ${observation.count}
+  targets === tween.targets() // ${observation.sameArrayReference}
+  tweenRef.current = tween
+
+  return () => {
+    tweenRef.current = null
+  }
+}, { scope, dependencies: [descriptor], revertOnUpdate: true })
+
+// 실행 버튼은 준비된 같은 Tween을 처음부터 재생합니다.
+function run() {
+  tweenRef.current?.restart()
+}`
 
   return (
     <section className="targets-readback-lab" aria-labelledby="targets-readback-lab-title">
@@ -167,9 +199,9 @@ tween.targets() // 길이 ${observation.count}`
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
-            selector가 <strong>정말 내가 생각한 개수를 잡았는지</strong> 확인할 때 가장 많이 씁니다. 애니메이션이 "아무 일도 안 일어나는"
-            것처럼 보일 때 <code>tween.targets().length</code>가 <code>0</code>이면 원인이 GSAP이 아니라 selector라는 뜻입니다. 공통
-            함수에서 대상 개수만큼 반복 처리를 할 때도 이 배열을 그대로 씁니다.
+            selector가 예상한 element를 잡았는지 확인할 때 쓸 수 있습니다. <code>tween.targets().length</code>가 <code>0</code>이면
+            Tween을 만들 때 selector와 일치하는 element가 없었다는 뜻입니다. 대상별 정보를 읽어야 한다면 반환된 배열을 순회할 수도
+            있습니다.
           </p>
         </article>
       </div>

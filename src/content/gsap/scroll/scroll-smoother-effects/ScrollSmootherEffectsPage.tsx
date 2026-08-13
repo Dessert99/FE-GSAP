@@ -1,4 +1,4 @@
-/** P37의 instance state·static model·effects lifecycle 학습 순서를 조립한다. */
+/** ScrollSmoother의 smooth·progress·effects 학습 순서를 조립한다. */
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { EffectsMethodModel } from './components/EffectsMethodModel/EffectsMethodModel'
 import { EffectsLifecycleSection } from './sections/EffectsLifecycleSection/EffectsLifecycleSection'
@@ -22,10 +22,6 @@ export function ScrollSmootherEffectsPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p className="scroll-smoother-effects-page__path">
-          source · <code>{scrollSmootherEffectsMeta.sourcePath}</code> ·
-          official coverage 3 / 3
-        </p>
       </header>
       <SetupSection />
       <NativeRenderedBoundarySection />

@@ -84,7 +84,7 @@ xTo(100, 500); // animates to 100 from 500`}</code>
           겁니다. 그리고 <strong>그것은 일반 Tween 인스턴스이므로 <code>delay()</code>를 제외한 어떤 메서드·property든 활용할 수
           있습니다.</strong> 위 예제의 일시정지 버튼이 바로 이 <code>.tween</code>을 부르고, 화면의 <em>Tween 상태</em>는 그 Tween에서
           다시 읽은 값입니다. Tween이 가진 메서드 전반은{' '}
-          <a href={toHref('/fundamentals/tween-playhead')}>Tween playhead 페이지</a>가 소유합니다.
+          <a href={toHref('/fundamentals/tween-playhead')}>Tween playhead 페이지</a>에서 이어서 확인할 수 있습니다.
         </p>
       </div>
 
@@ -95,40 +95,10 @@ xTo(100); // animate to 100
 xTo.tween.pause(); // pause the tween!`}</code>
       </pre>
 
-      <div className="hfu-page__note hfu-page__note--probe">
-        <h3>공식 문서에 없는 네 가지 — 직접 실행해 확인한 것</h3>
-        <ul className="hfu-page__list">
-          <li>
-            <strong>일시정지는 다음 입력까지만 유지됩니다.</strong> <code>xTo.tween.pause()</code>로 멈춘 뒤 quickTo 함수에 새 값을
-            넘기면 <strong>일시정지가 풀리고 다시 움직입니다.</strong> 공식 페이지는 <code>pause()</code> 예제만 싣고 이후 호출과의
-            관계는 밝히지 않습니다. 위 예제의 버튼 표시가 입력 뒤에 되돌아오는 것은 Tween의 실제 상태를 다시 읽기 때문입니다.
-          </li>
-          <li>
-            <strong>quickSetter가 돌려준 함수의 반환값.</strong> 공식 페이지에 명시가 없습니다. 실행해 보면 인자를 1개 받고,{' '}
-            <strong>target이 하나면 넣은 값을 그대로 돌려주지만 target이 여럿이면 <code>undefined</code></strong>를 돌려줍니다. 반환값에
-            기대어 코드를 짜면 대상 수가 바뀌는 순간 조용히 깨집니다.
-          </li>
-          <li>
-            <strong>quickTo가 돌려준 함수의 3번째 인자.</strong> 공식 페이지는 값과 시작값 두 개까지만 설명합니다. 그런데 실행해 보면
-            인자를 3개 받고, TypeScript 선언에는 <code>startIsRelative</code>라는 이름이 있습니다. <code>xTo(200, 50, true)</code>를{' '}
-            <code>x</code>가 100인 대상에 넘기면 <strong>150에서 출발</strong>합니다. 공식 문서에 없는 인자이므로 이 페이지는 존재만
-            기록하고 사용을 권하지 않습니다.
-          </li>
-          <li>
-            <strong>duration에 0을 주면 안 됩니다.</strong> <code>gsap.quickTo(obj, 'x', {'{ duration: 0 }'})</code>로 만들고 값을
-            넘기면 <strong>목표에 도달하지 못하고 내부 초기값에 머뭅니다.</strong> <code>duration: 0.001</code>은 정상 동작합니다. 위
-            예제가 모션 감소 설정에서 duration을 0으로 낮추지 않고 <strong>즉시 쓰기 경로로 아예 바꾸는 이유</strong>가 이것입니다.
-          </li>
-        </ul>
-        <p className="hfu-page__provenance">
-          측정 방법 · <code>node --input-type=module</code>에서 <code>gsap</code>을 import하고, 일반 객체를 target으로 각 호출을 실행해
-          반환값과 <code>fn.length</code>, 그리고 tick 이후의 target 값을 읽었습니다. duration 비교는 <code>0</code>,{' '}
-          <code>0.001</code>, <code>0.3</code> 세 가지로 만들어 400ms 뒤 값을 확인했습니다(각각 <code>0.1</code>, <code>250</code>,{' '}
-          <code>250</code>). 일시정지는 <code>pause()</code> 직후와 다음 호출 직후에 <code>tween.paused()</code>를 읽어{' '}
-          <code>true</code> → <code>false</code>로 바뀌는 것을 확인했습니다. 재현 조건은 GSAP 3.15.0, Node v22.21.0, DOM 없는
-          환경입니다.
-        </p>
-      </div>
+      <p className="hfu-page__note">
+        설치된 GSAP 3.15.0에서는 <code>xTo.tween.pause()</code>로 멈춘 뒤 <code>xTo()</code>에 새 값을 넘기면 다시 재생됩니다. 위
+        예제도 새 입력 뒤에 Tween 상태를 다시 읽어 버튼 문구를 갱신합니다. 이 동작은 공식 페이지에 명시되어 있지 않습니다.
+      </p>
 
       <div className="hfu-page__subheading">
         <h3>공식 문서가 게시한 데모</h3>

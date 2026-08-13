@@ -36,7 +36,7 @@ const createRows = (readout: ObserverSignalReadout) =>
     ['Observer.isTouch', String(readout.isTouch)],
   ] as const
 
-/** pointer·wheel input을 actual Observer signal과 명시적 frozen snapshot으로 비교한다. */
+/** pointer·wheel 입력의 현재 Observer signal과 고정한 snapshot을 비교한다. */
 export function ObserverSignalLab() {
   // runtime의 owned Observer refs와 one descriptor-derived outputs를 받는다
   const {
@@ -57,34 +57,71 @@ export function ObserverSignalLab() {
   // snapshot이 없을 때는 request action 전임을 명시적으로 남긴다
   const snapshotRows = snapshot ? createRows(snapshot) : null
   // descriptor literal과 actual create callbacks를 code panel에만 직렬화한다
-  const code = `const descriptor = {
+  const code = `import { gsap } from 'gsap'
+import { Observer } from 'gsap/Observer'
+
+gsap.registerPlugin(Observer)
+
+const descriptor = {
   id: '${descriptor.id}',
   type: '${descriptor.type}',
   tolerance: ${descriptor.tolerance},
   debounce: ${descriptor.debounce},
 }
 
-const observer = Observer.create({
-  target: inputPad,
-  ...descriptor,
-  onPress: (self) => publishVisual(self, 'press'),
-  onMove: (self) => publishVisual(self, 'move'),
-  onChange: (self) => publishVisual(self, 'change'),
-  onWheel: (self) => publishVisual(self, 'wheel'),
-})
+const setup = () => {
+  const inputPad = document.querySelector('.observer-signal-lab__pad')
+  const freezeButton = document.querySelector('.observer-signal-lab__freeze')
+  if (!inputPad || !freezeButton) throw new Error('input pad와 freeze button이 필요합니다.')
 
-const snapshot = readSignal(observer, 'frozen')`
+  const readSignal = (self, phase) => ({
+    phase,
+    startX: typeof self.startX === 'number' ? self.startX : null,
+    startY: typeof self.startY === 'number' ? self.startY : null,
+    deltaX: self.deltaX,
+    deltaY: self.deltaY,
+    x: self.x,
+    y: self.y,
+    velocityX: self.velocityX,
+    velocityY: self.velocityY,
+    eventType: self.event?.type || 'none',
+    isTouch: Observer.isTouch,
+  })
+  const publishVisual = (self, phase) => console.table(readSignal(self, phase))
+  const observer = Observer.create({
+    target: inputPad,
+    ...descriptor,
+    onPress: (self) => publishVisual(self, 'press'),
+    onMove: (self) => publishVisual(self, 'move'),
+    onChange: (self) => publishVisual(self, 'change'),
+    onWheel: (self) => publishVisual(self, 'wheel'),
+  })
+
+  const onFreeze = () => console.table(readSignal(observer, 'frozen'))
+  freezeButton.addEventListener('click', onFreeze)
+  return () => {
+    freezeButton.removeEventListener('click', onFreeze)
+    observer.kill()
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
 
   // one input scope와 one freeze action을 InteractiveExample에 전달한다
   return (
     <section id="observer-signal-lab">
       <InteractiveExample
-        title="one signal scope: current readout과 frozen snapshot"
+        title="현재 signal과 고정한 snapshot 비교"
         description="pad에서 pointer를 움직이거나 wheel을 돌린 뒤 snapshot을 고정하세요. 움직이는 값은 화면에만, 고정 요청 결과만 상태 메시지로 전달됩니다."
         sourcePath="src/content/gsap/ui/observer-signals/examples/ObserverSignalLab/useObserverSignalRuntime.ts"
         controls={
           <div className="observer-signal-lab__controls">
-            <button type="button" onClick={requestFreeze}>
+            <button
+              type="button"
+              className="observer-signal-lab__freeze"
+              onClick={requestFreeze}
+            >
               현재 signal snapshot 고정
             </button>
             <p>
@@ -126,7 +163,7 @@ const snapshot = readSignal(observer, 'frozen')`
             </p>
             <div className="observer-signal-lab__tables">
               <section aria-labelledby="observer-signal-current-title">
-                <h4 id="observer-signal-current-title">visual readout</h4>
+                <h4 id="observer-signal-current-title">현재 값</h4>
                 <table>
                   <tbody>
                     {visualRows.map(([label, value]) => (
@@ -140,7 +177,7 @@ const snapshot = readSignal(observer, 'frozen')`
               </section>
               <section aria-labelledby="observer-signal-snapshot-title">
                 <h4 id="observer-signal-snapshot-title">
-                  request-to-freeze snapshot
+                  고정한 snapshot
                 </h4>
                 {snapshotRows ? (
                   <table>

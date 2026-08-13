@@ -63,8 +63,28 @@
   - STG-F02 PASS — one descriptor provides actual create config, timeline label, getter-to-setter `scroll()` call, snapshot values, and code; snapshot is request/refresh sparse, not live.
   - STG-F03 PASS — owned listener, trigger, timeline, and pin work are killed/reverted on cleanup; reduced motion keeps measurements while animation/pin are disabled.
   - STG-I01 PASS — root route, full TypeScript, Vite, Storybook, and diff integration passed.
-  - STG-B01 DEFERRED — browser keyboard/local scroll/button operation.
-  - STG-B02 DEFERRED — browser reduced-motion pin-off outcome.
-  - STG-B03 DEFERRED — browser 320/390px table/code layout.
-  - STG-B04 DEFERRED — browser actual ruler geometry/pin cleanup result.
-- releaseDecision: PASS — root integration completed; STG-B01–B04 are approved browser DEFERRED checks.
+  - STG-B01 DEFERRED → PASS — browser keyboard/local scroll/button operation.
+  - STG-B02 DEFERRED → PASS — browser reduced-motion pin-off outcome.
+  - STG-B03 DEFERRED → PASS — browser 320/390px table/code layout.
+  - STG-B04 DEFERRED → PASS — browser actual ruler geometry/pin cleanup result.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: ScrollTrigger의 animation/direction/start/end/isActive/progress/trigger/pin/scroller와 labelToScroll/scroll/isInViewport/maxScroll/positionInViewport 공식 문서를 다시 대조했다.
+- findings:
+  - STG-A01 `BLOCK → ADDRESSED` — 학습 화면의 coverage 개수·P번호·owner/sparse 같은 제작 표현을 실제 좌표와 snapshot 설명으로 바꿨다.
+  - STG-A02 `PASS` — descriptor가 create start/end와 timeline label, 표시 코드를 함께 만들고 표시 setup은 ruler/trigger/pin guard·plugin 등록·trigger/timeline cleanup을 포함한다.
+  - STG-A03 `PASS` — local scroller의 scroll/maxScroll과 browser viewport utility 좌표계를 구분하며 reduced-motion은 pin/animation만 끈다.
+  - STG-A04 `DEFERRED` — 실제 ruler geometry·pin cleanup, keyboard/local scroll, reduced-motion, 좁은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - STG-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.

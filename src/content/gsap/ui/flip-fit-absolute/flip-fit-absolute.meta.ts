@@ -5,7 +5,7 @@ export const flipFitAbsoluteMeta = {
   summary:
     'Flip.fit()으로 source box를 destination의 viewport area에 맞추고, Flip.makeAbsolute()이 flow를 어떻게 바꾸는지 확인합니다.',
   sourcePath: 'src/content/gsap/ui/flip-fit-absolute/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'Flip.fit()',

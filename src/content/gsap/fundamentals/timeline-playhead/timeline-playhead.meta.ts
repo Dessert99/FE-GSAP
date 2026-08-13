@@ -4,7 +4,7 @@ export const timelinePlayheadMeta = {
   category: 'GSAP · Timeline Playhead',
   summary: '같은 playhead 목적지를 초·비율과 local·total 좌표로 고르고, 즉시 setter와 별도 control Tween이 만드는 사용자 경험을 나눠 봅니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-playhead/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.progress()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/progress()' },
     { label: 'Timeline.time()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/time()' },

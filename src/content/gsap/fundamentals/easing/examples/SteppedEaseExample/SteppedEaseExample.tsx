@@ -6,10 +6,12 @@ import { useSteppedEaseAnimation } from './useSteppedEaseAnimation'
 export function SteppedEaseExample() {
   // controls·paused Tween·현재 step text가 공유하는 runtime 상태다.
   const { scope, targetClassName, steps, setSteps, progress, setProgress, descriptor, currentValue, steppedValue, replay } = useSteppedEaseAnimation()
-  // 시작값 0을 포함해 runtime step 수가 만드는 0→100 경계값을 모두 표시한다.
+  // 시작값 0과 runtime step 수가 만드는 적용값을 순서대로 모두 표시한다.
   const stepValues = Array.from({ length: steps + 1 }, (_, index) => Math.round((index / steps) * 100))
   // 실제 paused Tween과 playhead setter를 코드 문법으로만 직렬화한다.
-  const code = `const tween = gsap.to('.box', {
+  const code = `gsap.set('.${targetClassName}', { x: 0 })
+
+const tween = gsap.to('.${targetClassName}', {
   x: ${descriptor.x},
   duration: ${descriptor.duration},
   ease: '${descriptor.easeExpression}',
@@ -39,17 +41,17 @@ tween.progress(${descriptor.progress.toFixed(2)})`
         preview={
           <div className="stepped-ease-example">
             <div className="stepped-ease-example__track"><div className={targetClassName}>{steppedValue}</div></div>
-            <ol className="stepped-ease-example__values" aria-label={`${steps}단계의 경계값`}>{stepValues.map((value) => <li key={value} className={value === steppedValue ? 'is-current' : undefined} aria-current={value === steppedValue ? 'step' : undefined}>{value}</li>)}</ol>
+            <ol className="stepped-ease-example__values" aria-label={`시작값과 ${steps}단계의 적용값`}>{stepValues.map((value) => <li key={value} className={value === steppedValue ? 'is-current' : undefined} aria-current={value === steppedValue ? 'step' : undefined}>{value}</li>)}</ol>
             <p aria-live="polite"><code>{progress.toFixed(2)}</code> progress → <code>{currentValue.toFixed(2)}</code> ratio → <strong>{steppedValue}</strong></p>
           </div>
         }
         code={code}
         propertyDetails={[
-          { name: 'steps()', type: 'number', defaultValue: '없음', acceptedValues: '1 이상의 step 수를 담은 ease 설정 문자열' },
+          { name: 'ease', type: 'string', defaultValue: 'power1.out', acceptedValues: "'steps(n)', n은 1 이상의 정수" },
           { name: 'progress()', type: 'number', defaultValue: '현재 playhead', acceptedValues: '0~1 normalized progress' },
         ]}
         changes={[
-          `0→100이 ${steps}단계로 이동하며 경계값은 ${stepValues.join(', ')}입니다.`,
+          `시작값 0 뒤에 ${steps}개 적용값 ${stepValues.slice(1).join(', ')}이 이어집니다.`,
           `progress ${progress.toFixed(2)}에서 현재 적용값은 ${steppedValue}입니다.`,
         ]}
         watchFor={[

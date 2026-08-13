@@ -1,21 +1,20 @@
 /** reverse()의 인자별 시작 지점과 방향 스위치 변화를 조작·관찰·코드로 확인하는 학습 패널을 조립한다. */
 import { useDirectionFlipAnimation } from './useDirectionFlipAnimation'
-import type { DirectionFlipCommand } from './useDirectionFlipAnimation'
+import type { DirectionFlipAction, DirectionFlipCommand } from './useDirectionFlipAnimation'
 import './DirectionFlipLab.css'
+
+/** 실행 기록을 실제 호출 문법으로만 바꿔 코드와 상태 안내에 함께 쓴다. */
+function formatCall(action: DirectionFlipAction) {
+  if (action.command === 'placeAt') return `tween.pause(${action.time})`
+  if (action.command === 'reverseFromEnd') return 'tween.reverse(0)'
+  if (action.command === 'reverseNegative') return `tween.reverse(${action.time})`
+  return `tween.${action.command}()`
+}
 
 export function DirectionFlipLab() {
   // runtime이 소유한 controls·관찰값·명령 action을 그대로 받아 화면에만 쓴다
-  const { scope, placeAt, setPlaceAt, position, observation, lastCommand, descriptor, reducedMotion, run } =
+  const { scope, placeAt, setPlaceAt, position, observation, lastAction, descriptor, reducedMotion, run } =
     useDirectionFlipAnimation()
-
-  // 방금 실행된 호출을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const callSyntax: Record<DirectionFlipCommand, string> = {
-    placeAt: `tween.pause(${descriptor.placeAt})`,
-    reverse: 'tween.reverse()',
-    reverseFromEnd: 'tween.reverse(0)',
-    reverseNegative: `tween.reverse(${descriptor.negativeFrom})`,
-    play: 'tween.play()',
-  }
 
   // 되감기 버튼들 — 인자만 다르고 부르는 메서드는 하나다
   const reverseCommands: { id: DirectionFlipCommand; label: string; note: string }[] = [
@@ -24,8 +23,9 @@ export function DirectionFlipLab() {
     { id: 'reverseNegative', label: `reverse(${descriptor.negativeFrom})`, note: '공식 설명대로면 끝에서 1초 전' },
   ]
 
-  // 마지막 호출과 그 직후 상태를 한 덩어리 코드로 직렬화한다
-  const code = `// 이 예제가 미리 만들어 둔 Tween 하나입니다. duration이 ${descriptor.duration}초입니다.
+  // 마지막 호출과 현재 관찰 상태를 한 덩어리 코드로 직렬화한다
+  const code = `// 이 예제와 같은 값으로 Tween을 만듭니다. duration은 ${descriptor.duration}초입니다.
+const target = { value: 0 }
 const tween = gsap.to(target, {
   value: 100,
   duration: ${descriptor.duration},
@@ -34,9 +34,9 @@ const tween = gsap.to(target, {
 })
 
 // 방금 누른 버튼이 부른 호출입니다.
-${lastCommand ? callSyntax[lastCommand] : '// 아직 아무 명령도 부르지 않았습니다.'}
+${lastAction ? formatCall(lastAction) : '// 아직 아무 명령도 부르지 않았습니다.'}
 
-// 그 직후 상태를 Tween에서 그대로 읽은 값입니다.
+// 현재 상태를 Tween에서 그대로 읽은 값입니다.
 tween.time()     // → ${observation.time}
 tween.reversed() // → ${observation.reversed}
 tween.paused()   // → ${observation.paused}`
@@ -107,7 +107,7 @@ tween.paused()   // → ${observation.paused}`
 
       {/* 매 프레임 바뀌는 time은 넣지 않는다 — 넣으면 live region이 프레임마다 다시 읽힌다 */}
       <p className="direction-flip-lab__status" role="status">
-        {lastCommand ? `방금 ${callSyntax[lastCommand]} 을(를) 불렀습니다.` : '아직 아무 명령도 부르지 않았습니다.'} 현재 상태 — 뒤로{' '}
+        {lastAction ? `방금 ${formatCall(lastAction)} 을(를) 불렀습니다.` : '아직 아무 명령도 부르지 않았습니다.'} 현재 상태 — 뒤로{' '}
         {String(observation.reversed)}, 멈춤 {String(observation.paused)}, 움직이는 중 {String(observation.active)}.
       </p>
 
@@ -119,21 +119,15 @@ tween.paused()   // → ${observation.paused}`
         </div>
         <div>
           <dt id="dfl-reversed">reversed()</dt>
-          <dd>
-            <output aria-labelledby="dfl-reversed">{String(observation.reversed)}</output>
-          </dd>
+          <dd aria-labelledby="dfl-reversed">{String(observation.reversed)}</dd>
         </div>
         <div>
           <dt id="dfl-paused">paused()</dt>
-          <dd>
-            <output aria-labelledby="dfl-paused">{String(observation.paused)}</output>
-          </dd>
+          <dd aria-labelledby="dfl-paused">{String(observation.paused)}</dd>
         </div>
         <div>
           <dt id="dfl-active">isActive()</dt>
-          <dd>
-            <output aria-labelledby="dfl-active">{String(observation.active)}</output>
-          </dd>
+          <dd aria-labelledby="dfl-active">{String(observation.active)}</dd>
         </div>
       </dl>
 
@@ -162,9 +156,8 @@ tween.paused()   // → ${observation.paused}`
         <article>
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
-            되감는 입장에서는 <strong>0이 출발선</strong>이고 그 출발선이 animation의 끝입니다. 그래서 <code>reverse(0)</code>이
-            맨 끝으로 갑니다. 음수는 공식 문서가 끝 기준이라고 적었지만 설치본 3.15.0은 그렇게 환산하지 않고 0으로 잘랐습니다. 끝에서
-            얼마 전부터 되감고 싶다면 <strong>양수 초를 직접 계산해</strong> 넘기세요.
+            <code>reverse(0)</code>은 GSAP이 맨 끝에서 역재생하도록 정한 특별한 호출입니다. 음수는 공식 문서가 끝 기준이라고 적었지만
+            GSAP 3.15.0에서는 0초로 잘립니다. 끝에서 얼마 전부터 되감고 싶다면 <strong>양수 초를 직접 계산해</strong> 넘기세요.
           </p>
         </article>
         <article>

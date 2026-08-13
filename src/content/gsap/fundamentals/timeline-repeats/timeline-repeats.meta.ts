@@ -5,7 +5,7 @@ export const timelineRepeatsMeta = {
   summary:
     'Timeline의 반복은 children 하나가 아니라 sequence 전체에 걸립니다. 되돌아올 때는 children이 뒤에서부터 거꾸로 재생되고, invalidate()는 자기 기억만이 아니라 품고 있는 children의 기억까지 함께 지웁니다. 이 두 가지가 같은 이름의 Tween 메서드와 갈리는 지점입니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-repeats/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.invalidate()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/invalidate()' },
     { label: 'Timeline.iteration()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/iteration()' },

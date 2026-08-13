@@ -26,7 +26,7 @@ export function ValueGrammarSection() {
           responsive SVG처럼 animation 중 길이가 바뀌는 드문 경우에는{' '}
           <code>'20% 70% live'</code>처럼 suffix를 붙여 매 tick length를 다시
           계산합니다. 여러 stroke의 stagger와 timeline control은 GSAP tween
-          API로 가능하지만 이 lab은 한 stroke range만 소유합니다.
+          API로 가능하지만 이 lab에서는 한 stroke range에만 집중합니다.
         </p>
       </div>
       <pre className="draw-svg-page__code">

@@ -78,7 +78,7 @@ export function CurveGraphSection() {
       </div>
 
       <div className="bounce-wiggle-page__note">
-        <h3>이 페이지가 소유하지 않는 부분</h3>
+        <h3>곡선을 직접 편집하려면</h3>
         <p>
           <code>getSVGData</code>는 원래 CustomEase의 method입니다. CustomBounce 페이지는 <strong>"이 method도 함께 쓸 수
           있다"</strong>는 사실만 밝히고, 곡선 데이터 형식·편집기·직접 그리는 방법은 CustomEase 공식 문서가 다룹니다. 이 페이지는

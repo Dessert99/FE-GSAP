@@ -38,12 +38,12 @@ export function AddAndIgnoreSection() {
         number="04"
         id="add-and-ignore"
         title="함수가 끝난 뒤 생기는 애니메이션"
-        description="Context는 자기 함수가 실행되는 동안만 기록합니다. 그런데 클릭이나 hover로 만드는 애니메이션은 그 함수가 끝난 한참 뒤에 생깁니다."
+        description="Context는 자기 함수가 실행되는 동안만 기록합니다. 그런데 클릭이나 hover로 만드는 애니메이션은 그 함수가 끝난 뒤에 생깁니다."
       />
 
       <div className="context-page__prose">
         <p>
-          여기가 실제 프로젝트에서 가장 자주 새는 지점입니다. 공식 문서도 같은 상황을 짚습니다 — mouse click 같은 event handler가
+          실제 프로젝트에서 기록을 누락하기 쉬운 지점입니다. 공식 문서도 같은 상황을 짚습니다 — mouse click 같은 event handler가
           만드는 새 애니메이션도 Context에 모아야 할 수 있는데, <strong>그 event는 Context의 함수가 이미 실행된 뒤에</strong>{' '}
           일어납니다.
         </p>
@@ -102,13 +102,15 @@ export function AddAndIgnoreSection() {
           기록됩니다. 반면 <code>add(함수)</code>는 그 자리에서 함수를 <strong>바로 실행</strong>합니다.
         </p>
         <p>
-          두 형태 모두 실행 결과로 <code>undefined</code>를 돌려주므로 이어 붙여 쓸 수 없습니다. 패키지에 함께 들어 있는 타입
-          선언에는 반환 타입이 <code>Function</code>으로 적혀 있지만 실제 실행값은 <code>undefined</code>입니다.
+          반환값도 다릅니다. <code>add(이름, 함수)</code>는 Context에 추가한 이름의 메서드와 같은 wrapper 함수를 돌려줍니다.{' '}
+          <code>add(함수)</code>는 그 함수를 즉시 실행한 결과를 돌려주므로, 반환값이 없는 함수를 넘긴 이 예제에서는{' '}
+          <code>undefined</code>입니다.
         </p>
         <p className="context-page__provenance">
           측정 방법 · GSAP 3.15.0을 Node에서 import해 <code>ctx.data.length</code>를 각 호출 전후로 읽었습니다.{' '}
           <code>self.add('onClick', fn)</code> 직후에는 0, <code>ctx.onClick()</code> 뒤에는 1, 이어서{' '}
-          <code>ctx.add(fn)</code> 뒤에는 2였고, 두 호출의 반환값은 모두 <code>undefined</code>였습니다.
+          <code>ctx.add(fn)</code> 뒤에는 2였습니다. 이름을 준 <code>add()</code>의 반환값은 <code>ctx.onClick</code>과 같은 함수였고,
+          반환값이 없는 함수를 즉시 실행한 <code>add(fn)</code>의 결과는 <code>undefined</code>였습니다.
         </p>
       </div>
 

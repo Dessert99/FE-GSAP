@@ -7,14 +7,14 @@ const minimalUsage = `let ctx = gsap.context(() => { gsap.to(...); gsap.from(...
 // then later...
 ctx.revert(); // BOOM! Every GSAP animation created in that function gets reverted!`
 
-// 변수를 손으로 들고 다니는 방식과 Context에 맡기는 방식을 같은 일에 나란히 놓는다
-const beforeAfter = `// 손으로 관리할 때 — 만든 만큼 변수가 늘고, 하나라도 빠뜨리면 남습니다
+// 각 Tween 참조를 직접 관리하는 방식과 Context에 기록하는 방식을 같은 일에 나란히 놓는다
+const beforeAfter = `// 직접 관리할 때 — 만든 만큼 변수가 늘고, 하나라도 빠뜨리면 남습니다
 const t1 = gsap.to('.a', { x: 100 })
 const t2 = gsap.from('.b', { opacity: 0 })
 const t3 = gsap.timeline().to('.c', { y: 20 })
 t1.revert(); t2.revert(); t3.revert()
 
-// Context에 맡길 때 — 변수가 없어도 됩니다
+// Context에 기록할 때 — 각 Tween 변수가 없어도 됩니다
 const ctx = gsap.context(() => {
   gsap.to('.a', { x: 100 })
   gsap.from('.b', { opacity: 0 })
@@ -39,8 +39,8 @@ export function CollectAndRevertSection() {
           열 때 이상한 자리에서 시작합니다.
         </p>
         <p>
-          손으로 하려면 만든 만큼 변수를 들고 있어야 합니다. 아래 두 코드는 같은 일을 합니다. 아래쪽에는 변수가 하나도 없다는 점만
-          다릅니다.
+          직접 관리하려면 만든 만큼 Tween 변수를 보관해야 합니다. 아래 두 코드는 같은 일을 하지만 아래쪽은 각 Tween의 참조를
+          따로 저장하지 않습니다.
         </p>
       </div>
 
@@ -66,8 +66,8 @@ export function CollectAndRevertSection() {
             <tr>
               <th scope="row">Context</th>
               <td>
-                내가 넘긴 함수 안에서 만들어진 GSAP 작업을 <strong>옆에서 목록에 적어 두는 기록원</strong>입니다.{' '}
-                <code>gsap.context()</code>를 부르면 이 기록원을 하나 돌려받습니다.
+                내가 넘긴 함수 안에서 만들어진 GSAP animation과 ScrollTrigger를 <strong>기록하는 객체</strong>입니다.{' '}
+                <code>gsap.context()</code>를 부르면 이 Context 객체를 돌려받습니다.
               </td>
             </tr>
             <tr>

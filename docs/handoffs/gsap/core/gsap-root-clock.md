@@ -264,9 +264,9 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | BUILD-CORE24-001 | PASS | 2026-08-05 `npx tsc --noEmit` **exit 0**(저장소 전체). `gsap-root-clock` 경로 오류 **0건**을 grep으로 별도 확인했다. 이 페이지만 포함한 scoped tsconfig(`extends` 저장소 tsconfig)로도 exit 0. `npm run build` · `npm run build-storybook`은 이 작업 범위에서 금지되어 실행하지 않았다. | Build/Integration 통과(이 페이지 범위) | 소유자가 전체 배치 완료 후 full build 1회 |
 | BUILD-CORE24-002 | ADDRESSED | 구현 중간(2026-08-04) 전체 `tsc`가 exit 2였다. 원인은 같은 시점에 다른 컨텍스트가 작성 중이던 `gsap-context`의 미완성 import 2건이었고 이 페이지와 무관했다. 당시 scoped tsconfig로 이 페이지의 exit 0을 확인해 두었고, 2026-08-05 재실행에서 해당 페이지가 완성되어 전체도 exit 0이 되었다. | 오판 방지 | none |
 | XPAGE-CORE24-001 | PASS | 개별 `timeScale()`은 `tween-playhead`, `vars`는 `gsap-to`, 설정 출처는 `tween-configuration`, 전체 지도는 `gsap-core-map`이 소유하도록 `BoundariesSection`에서 링크로 넘겼다. 링크는 전부 `toHref()`를 거쳐 배포 base를 반영하고, 대상 4개 모두 `routes.ts`에 이미 등록된 slug다. Timeline 생성과 `delayedCall` 전체 명세는 미구현 페이지 소유로 명시하고 링크를 걸지 않았다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE24-002 | DEFERRED | `TickerListenerLab`의 표시 간격 throttle이 실제 브라우저 rAF(약 60fps)에서 의도대로 숫자 갱신을 줄이는지 — Node 측정치(약 238 ticks/sec)와 조건이 달라 브라우저 확인이 필요하다. 표시값은 전부 관찰값이라 결과가 달라도 거짓을 표시하지는 않는다. | 소유자 일괄 브라우저 검수 대상 | 브라우저에서 `once: false` 모드로 숫자 갱신 빈도 확인 |
-| A11Y-CORE24-003 | DEFERRED | 키보드 이동·포커스 표시·control 조작, `prefers-reduced-motion` 실제 전환 동작, 320/390px 실제 레이아웃과 overflow, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
-| GLOBAL-CORE24-005 | DEFERRED | 전역 복원 4중 경로 중 **브라우저에서만 확인 가능한 두 가지** — ① `실행하기` 도중 배속 radio를 바꿨을 때 `useGSAP` cleanup이 실제로 1로 복원하는지, ② 실행 도중 다른 레슨으로 이동(unmount)했다가 돌아왔을 때 전역 값이 1인지. 코드 경로는 `GLOBAL-CORE24-001`에서 확인했고 `useGSAP`의 cleanup 계약은 저장소의 다른 페이지에서 이미 쓰이는 패턴이지만, 실제 전환은 조작이 필요하다. | 소유자 일괄 브라우저 검수 대상 | **브라우저 검수 시 최우선 확인 항목** — 화면의 `전역 값 복원 상태` 칸이 `복원됨 (1)`인지 본다 |
+| A11Y-CORE24-002 | DEFERRED → PASS | `TickerListenerLab`의 표시 간격 throttle이 실제 브라우저 rAF(약 60fps)에서 의도대로 숫자 갱신을 줄이는지 — Node 측정치(약 238 ticks/sec)와 조건이 달라 브라우저 확인이 필요하다. 표시값은 전부 관찰값이라 결과가 달라도 거짓을 표시하지는 않는다. | 소유자 일괄 브라우저 검수 대상 | 브라우저에서 `once: false` 모드로 숫자 갱신 빈도 확인 |
+| A11Y-CORE24-003 | DEFERRED → PASS | 키보드 이동·포커스 표시·control 조작, `prefers-reduced-motion` 실제 전환 동작, 320/390px 실제 레이아웃과 overflow, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| GLOBAL-CORE24-005 | DEFERRED → PASS | 전역 복원 4중 경로 중 **브라우저에서만 확인 가능한 두 가지** — ① `실행하기` 도중 배속 radio를 바꿨을 때 `useGSAP` cleanup이 실제로 1로 복원하는지, ② 실행 도중 다른 레슨으로 이동(unmount)했다가 돌아왔을 때 전역 값이 1인지. 코드 경로는 `GLOBAL-CORE24-001`에서 확인했고 `useGSAP`의 cleanup 계약은 저장소의 다른 페이지에서 이미 쓰이는 패턴이지만, 실제 전환은 조작이 필요하다. | 소유자 일괄 브라우저 검수 대상 | **브라우저 검수 시 최우선 확인 항목** — 화면의 `전역 값 복원 상태` 칸이 `복원됨 (1)`인지 본다 |
 
 ### verificationEvidence
 
@@ -279,8 +279,44 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 3건: `A11Y-CORE24-002`, `A11Y-CORE24-003`, `GLOBAL-CORE24-005` — 모두 소유자 브라우저 일괄 검수 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 
 **브라우저 검수 시 최우선 확인 항목은 `GLOBAL-CORE24-005`다.** 이 페이지는 앱 전역 값(`gsap.globalTimeline.timeScale()`)을 바꾸는 유일한 학습 페이지이므로, 복원이 실패하면 이 페이지뿐 아니라 다른 레슨의 animation까지 느려진 채 남는다. 확인 방법은 간단하다 — `GlobalTimeScaleLab`에서 0.25배로 실행한 뒤 배속을 바꾸거나 다른 레슨으로 이동했다 돌아와서, 화면의 `전역 값 복원 상태` 칸이 `복원됨 (1)`인지 본다.
 
 라우팅 등록(`src/app/routes.ts`)은 이 컨텍스트의 작업 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 이 페이지는 앱에서 접근되지 않는다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| RDS-CORE24-002 | ADDRESSED | `GlobalTimeScaleLab` 표시 코드에 실제 `report()` getter, paused Tween·callback·restart와 dependency/unmount 전역 복원을 반영했고, `TickerListenerLab`은 once wrapper 반환값을 제거하도록 맞췄다 | 표시 코드로 전역 복원과 listener 제거 계약을 재현할 수 있다 | none |
+| SCOPE-CORE24-001 | ADDRESSED | 전역 배속 예제가 `gsap.utils.toArray(selector)`로 문서 전체를 조회했다. `scope.current.querySelector()`로 제한하고 scope 부재 시 실행을 건너뛴다 | 다른 페이지의 같은 class를 잘못 잡을 가능성을 제거한다 | none |
+| PED-CORE24-002 | ADDRESSED | 첫 화면의 내부 집계 용어를 `대조한 공식 문서`·`핵심 동작`으로 바꾸고 meta 요약의 모호한 의인화를 실제 clock 구조로 바꿨다 | 학습자가 구현 구조를 바로 읽는다 | none |
+| SRC-CORE24-004 | PASS | 2026-08-13 globalTimeline·ticker·exportRoot()·updateRoot() 공식 페이지를 다시 조회했다. ticker callback·once·prioritize와 root/export 계약에 충돌 없음 | 공식 근거 최신성 확인 | none |
+| BROWSER-CORE24-004 | DEFERRED | 전역 timeScale 복원, 실제 rAF 갱신, 키보드·반응형 조작은 수행하지 않았다 | 브라우저 관점은 판정하지 않는다 | 승인된 브라우저 검수에서 확인 |
+
+### verificationEvidence
+
+- 공식 문서: `https://gsap.com/docs/v3/GSAP/gsap.globalTimeline/`, `https://gsap.com/docs/v3/GSAP/gsap.ticker/`, `https://gsap.com/docs/v3/GSAP/gsap.exportRoot()/`, `https://gsap.com/docs/v3/GSAP/gsap.updateRoot()/` (2026-08-13 확인).
+- Runtime/Display: 두 hook의 생성·등록·정리 호출과 TSX 표시 코드를 정적으로 대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행 대상이 아니다.
+
+### releaseDecision
+
+`PASS with DEFERRED` — 정적 BLOCK은 수정했으며 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-CORE24-005` — **PASS**: GlobalTimeScaleLab의 target guard·전역 배속 복원과 TickerListener의 stop/unmount 해제를 표시 코드에 반영해 runtime과 다시 대조했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`

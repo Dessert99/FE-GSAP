@@ -1,4 +1,4 @@
-/** 체크박스만으로는 바뀌지 않는 실행을 gsap.matchMediaRefresh()가 어떻게 되돌리고 다시 태우는지 확인하는 학습 패널을 조립한다. */
+/** 체크박스만으로는 바뀌지 않는 실행을 gsap.matchMediaRefresh()가 어떻게 되돌리고 다시 실행하는지 확인하는 학습 패널을 조립한다. */
 import { osQueries, targetClassName, useReduceMotionRefreshAnimation } from './useReduceMotionRefreshAnimation'
 import './ReduceMotionRefreshLab.css'
 
@@ -13,6 +13,8 @@ export function ReduceMotionRefreshLab() {
 let appReduceMotion = ${descriptor.appReduceMotion}
 
 const mm = gsap.matchMedia(scope)
+// 재생 버튼이 같은 Tween을 제어하도록 현재 instance를 보관합니다.
+let tween
 
 mm.add(
   {
@@ -25,7 +27,7 @@ mm.add(
     const reduceMotion = osReduceMotion || appReduceMotion
 
     gsap.set('.${targetClassName}', { rotation: 0 })
-    gsap.to('.${targetClassName}', {
+    tween = gsap.to('.${targetClassName}', {
       rotation: 360,
       duration: ${descriptor.duration},
       paused: true,
@@ -34,7 +36,11 @@ mm.add(
 )
 
 // 체크박스가 바뀐 뒤 이 한 줄이 있어야 handler가 새 값을 다시 읽습니다
-gsap.matchMediaRefresh()`
+gsap.matchMediaRefresh()
+
+function play() {
+  tween.restart()
+}`
     : '// MatchMedia가 아직 조건을 평가하지 않았습니다.'
 
   return (
@@ -145,15 +151,15 @@ gsap.matchMediaRefresh()`
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
             공식 문장 그대로입니다 — <strong>활성·매치 중인 모든 MatchMedia 객체를 즉시 revert한 다음, 현재 매치되는 것을 실행한다.</strong>{' '}
-            조건 자체는 하나도 바뀌지 않았지만 handler를 다시 태우기 때문에, media query 밖에 있는 앱 설정도 그 재실행에 함께 실립니다.
+            조건 자체는 하나도 바뀌지 않았지만 handler를 다시 실행하므로, media query 밖에 있는 앱 설정도 새로 읽을 수 있습니다.
           </p>
         </article>
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
             사이트 안에 "모션 줄이기" 토글을 두는 경우입니다. 운영체제 설정은 우리가 바꿀 수 없지만, 앱 설정은 사용자가 언제든 바꿉니다.
-            그 토글의 <code>onChange</code>에서 <code>gsap.matchMediaRefresh()</code>를 부르면 조건별 setup 코드를 한 벌만 유지한 채 새
-            설정을 적용할 수 있습니다.
+            그 토글의 <code>onChange</code>에서 <code>gsap.matchMediaRefresh()</code>를 부르면 조건별 setup 코드를 한 벌만 유지하면서
+            새 설정을 적용할 수 있습니다.
           </p>
         </article>
       </div>

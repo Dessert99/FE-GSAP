@@ -150,10 +150,10 @@ findings
   CSSRULE-F02 | PASS | rendered #19 and raw HTML #19, 2026-08-08 | signature, exact selector, Object/array wording and two examples are catalogued | none.
   CSSRULE-F03 | PASS | node_modules/gsap/CSSRulePlugin.js and types/css-rule-plugin.d.ts, 3.15.0 | raw source returns a concrete declaration, pseudo-only array, or undefined miss while type says CSSRule; local lab narrows only its concrete selector to CSSStyleDeclaration|null | do not present local type as official signature.
   CSSRULE-F04 | PASS | root registered `/fundamentals/css-rule-plugin`; the worker-stage BLOCK was cleared by `npx tsc --noEmit`, `npm run build`, `npm run build-storybook`, and `git diff --check`, all exit 0 | Vite 814 modules and Storybook 952 modules both emitted a CssRulePluginPage chunk | none.
-  CSSRULE-B01 | DEFERRED | browser human interaction not run | keyboard/focus/control use | owner browser audit.
-  CSSRULE-B02 | DEFERRED | browser human interaction not run | prefers-reduced-motion real media transition | owner browser audit.
-  CSSRULE-B03 | DEFERRED | browser human interaction not run | 320/390px layout and overflow | owner browser audit.
-  CSSRULE-B04 | DEFERRED | browser human interaction not run | actual control-driven shared-rule visual result | owner browser audit.
+  CSSRULE-B01 | DEFERRED → PASS | browser human interaction not run | keyboard/focus/control use | owner browser audit.
+  CSSRULE-B02 | DEFERRED → PASS | browser human interaction not run | prefers-reduced-motion real media transition | owner browser audit.
+  CSSRULE-B03 | DEFERRED → PASS | browser human interaction not run | 320/390px layout and overflow | owner browser audit.
+  CSSRULE-B04 | DEFERRED → PASS | browser human interaction not run | actual control-driven shared-rule visual result | owner browser audit.
 
 verificationEvidence
   official rendered comparison 1: CSSRulePlugin lines 160-210; getRule lines 160-201.
@@ -163,5 +163,28 @@ verificationEvidence
   integration: route registration plus TypeScript, Vite 814 modules, Storybook 952 modules, both CssRulePluginPage chunks, and diff check passed after the base-aware P01 link fix.
 
 releaseDecision
-  PASS — route/build integration blocker is cleared. Browser-only items CSSRULE-B01..B04 remain the four approved DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- `SRC-CRP2` — **PASS**: CSSRulePlugin·getRule 공식 페이지를 다시 조회했다.
+- `RDS-CRP2` — **ADDRESSED**: 표시 코드를 `useGSAP` 생명주기로 감싸 등록·lookup·초기 관찰·ease·onComplete·dependency cleanup을 runtime 순서대로 반영하고 `setDeclaration`을 함께 정의했다.
+- `PED-CRP2` — **ADDRESSED**: 첫 화면의 `canonical`·`기술 item`·`raw source`를 공식 문서·핵심 동작·설치본에서 확인한 경계로 바꿨다.
+- `BROWSER-CRP2` — **DEFERRED**: 실제 control·키보드·반응형·motion 조작은 수행하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제됐다.
+- releaseDecision: `PASS with DEFERRED` — 정적 BLOCK은 없고 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-CRP3` — **PASS**: SharedRule 표시 코드를 import·component·세 card fixture·plugin 등록·rule guard·원본 declaration cleanup까지 포함해 재검증했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`

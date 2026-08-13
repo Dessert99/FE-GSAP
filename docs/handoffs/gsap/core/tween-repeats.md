@@ -17,7 +17,7 @@ primary인 `invalidate()`는 초보자에게 가장 어려운 개념이므로 **
   - `https://gsap.com/docs/v3/GSAP/Tween/repeat()`
   - `https://gsap.com/docs/v3/GSAP/Tween/repeatDelay()`
   - `https://gsap.com/docs/v3/GSAP/Tween/yoyo()`
-- reviewedAt: `2026-08-04`
+- reviewedAt: `2026-08-13`
 - category: `Fundamentals > Tween`
 - slug: `tween-repeats`
 - sourcePageIds: primary `source:tween-invalidate`; related `source:tween-iteration`, `source:tween-repeat`, `source:tween-repeat-delay`, `source:tween-yoyo`
@@ -76,7 +76,7 @@ source별 공식 item 수: `repeat` 9, `invalidate` 9, `yoyo` 8, `iteration` 6, 
 
 ### sourceBlockers
 
-`none`. 38개 기술 item 전부 2026-08-04에 canonical 원문으로 직접 확인했다. 요약 압축을 막기 위해 각 URL에 **"각 항목을 그대로 인용하고 없으면 NOT PRESENT라고 답하라"** 형식으로 재조회해 signature·Parameters·Returns·Details 문장·코드 예제·callout을 항목별로 확정했다. 첫 조회에서 `invalidate()`와 `repeatDelay()`의 signature가 "NOT PRESENT"로 나왔으나 heading 목록을 요구하는 3차 조회에서 둘 다 실재함을 확인했다.
+`none`. 38개 기술 item 전부 2026-08-13에 다섯 canonical 원문으로 다시 확인했다. signature·Parameters·Returns·Details·코드 예제·`invalidate()`의 `repeatRefresh` Note는 기존 manifest와 같았다.
 
 다음은 다섯 페이지가 **게시하지 않은** 내용이므로 주장하지 않는다.
 
@@ -140,14 +140,9 @@ source별 공식 item 수: `repeat` 9, `invalidate` 9, `yoyo` 8, `iteration` 6, 
 | INV-08 | `InvalidateRecomputeSection.tsx` "Timeline이면 children까지" note; `BoundariesSection.tsx` 경계 문단 | covered |
 | INV-09 | `InvalidateRecomputeSection.tsx` `repeatRefresh` note(소유권을 `gsap-to`로 링크) | covered |
 | REP-01·02·03, RPD-01·02·03, YOY-01·02·03, ITR-01·02, INV-01·02 | `CallFormsSection.tsx` 호출 형식 표 5행 + getter/setter 공통 규칙 문단 + `iteration()` signature 불일치 경고 | covered |
-| ITR-P1, ITR-P2, ITR-P3 | `IterationNumberSection.tsx` probe 블록 (측정 방법 포함) | covered (probe) |
-| YOY-P1 | `YoyoDirectionSection.tsx` probe 블록 (repeat 0 예외 포함) | covered (probe) |
-| REP-P1, REP-P2 | `RepeatCountSection.tsx` probe 블록 | covered (probe) |
-| RPD-P1 | `RepeatGapSection.tsx` probe 블록 | covered (probe) |
 | RPD-P2 | `CallFormsSection.tsx` probe 블록 | covered (probe) |
-| INV-P1 | `InvalidateRecomputeSection.tsx` probe 블록 | covered (probe) |
 
-9개 probe item은 공식 item이 아니다. coverage 분모(38)에 포함하지 않으며 `PageCoverage`도 공식 38개와 분리해 센다.
+`RPD-P2`는 공식 item이 아니다. 공식 표의 `NaN`과 설치본 getter의 `0`이 충돌해 학습자가 둘을 혼동하지 않도록 별도 관찰 항목으로 남긴다.
 
 **분모 불변식** — meta 섹션 `sourceItems` 합계(6+3+5+4+7+13+0=38) = catalog `origin: 'official'` 행 수(38) = meta `officialSourceItems`(38). 스크립트로 대조했고 중복 ID는 없다.
 
@@ -240,9 +235,9 @@ modify: `none`. `src/app/routes.ts` 등록은 저장소 소유자가 별도로 �
 
 ### verifiedPerspectives
 
-Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Structure/Comment, 정적 Accessibility/Motion, Build/Integration, Cross-page Consistency — 모두 구현 컨텍스트가 직접 판정했다(`docs/workflows/quality-gates.md`: 독립 검수자를 두지 않는다).
+2026-08-13 감사에서 Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Structure/Comment, 정적 Accessibility/Motion, 단일 페이지 경계를 직접 판정했다. Build/Integration은 메인 통합에서 통과했고 브라우저 실조작은 `NOT VERIFIED`다.
 
-### findings
+### historicalFindings (2026-08-04 구현 기록)
 
 | ID | status | evidence | impact | requiredAction |
 | --- | --- | --- | --- | --- |
@@ -260,9 +255,9 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | STRUCT-CORE16-001 | PASS | 페이지 TSX는 조립만, 섹션은 학습 단위, 두 예제는 각자 hook을 소유한다. hook에 제목·설명·속성 표가 없고 TSX에 GSAP 생명주기가 없다. 파일 19개 전부 목록과 일치하며 import한 CSS 3개가 모두 존재한다. | Structure/Comment 통과 | none |
 | BUILD-CORE16-001 | PASS | `npx tsc --noEmit`에서 `tween-repeats` 경로 오류 0건(grep으로 확인). 저장소 전체 20건은 동시에 작업 중인 다른 페이지(`find-stop-animations`, `gsap-context`, `high-frequency-updates`, `tween-playback-controls`, `tween-timing-math`)의 것으로 이 페이지와 무관하다. | Build 통과 | `npm run build`/`build-storybook`은 지시에 따라 실행하지 않음 |
 | XPAGE-CORE16-001 | PASS | `repeatRefresh`·`progress()`·상대값 문법·ease를 이 페이지가 소유하지 않고 각 owner로 링크했다. 링크는 `routes.ts`에 등록된 경로만 사용했고 미구현 `timeline-repeats`는 문장으로만 경계를 남겼다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE16-003 | DEFERRED | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE16-003 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
-### verificationEvidence
+### historicalVerificationEvidence
 
 - **공식 원문 대조** — 2026-08-04, 다섯 canonical URL 직접 조회. 항목별 인용/`NOT PRESENT` 강제 질의로 signature·Parameters·Returns·Details 문장·코드 예제·callout을 확정. heading 목록 질의로 signature 존재를 교차 확인.
 - **runtime probe** — GSAP 3.15.0(`node_modules/gsap` 3.15.0)을 node로 직접 실행. 단정 주장은 조합 전수로 예외를 확인했다.
@@ -280,8 +275,40 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - **타입 검사** — `npx tsc --noEmit`, `tween-repeats` 경로 오류 0건.
 - **불변식 대조** — meta 섹션 합계 38 = catalog official 38 = `officialSourceItems` 38, 섹션별 분포 일치, 중복 ID 0건.
 
+### findings (2026-08-13 감사)
+
+| ID | 관점 | 이전 상태 → 현재 상태 | 근거와 영향 | 조치 |
+| --- | --- | --- | --- | --- |
+| SRC-TR-01 | 사실 정확성·Official Coverage | PASS | 다섯 canonical을 당일 다시 열어 38개 item과 Note를 대조했고 변경이 없었다. | meta·표·handoff 대조일을 갱신했다. |
+| FACT-TR-01 | 사실 정확성 | BLOCK → PASS | meta와 본문이 초기화 시점과 `repeatRefresh` 예외를 생략해 “처음 재생할 때 항상 한 번만 계산”한다고 읽혔다. | “처음 렌더링될 때 기본적으로”로 경계를 명시했다. |
+| PED-TR-01 | 학습 효율·문체 | BLOCK → PASS | 첫 화면의 `38/38 source item`, 설명 소유권, 9개 버전 고정 probe가 학습 흐름보다 제작·검수 절차를 앞세웠다. | 학습 순서 안내와 다음 학습 링크로 바꾸고, 공식 계약이 아닌 구현 세부 probe 8개를 학습자 본문과 catalog에서 제거했다. |
+| PED-TR-02 | 사실 정확성·학습 효율 | BLOCK → PASS | catalog에서 구현 probe를 제거한 뒤에도 회차 경계 귀속과 repeatDelay 중 iteration 고정 단정이 학습자 본문에 남아 있었다. | 공식 문서가 밝힌 1부터 세는 iteration, 반복 사이의 delay, 반복마다 교대하는 yoyo 범위로 설명을 좁혔다. |
+| RDS-TR-01 | Runtime/Display Sync | BLOCK → PASS | `RepeatCycleLab` 코드가 초기 `gsap.set()`과 네 관찰 getter를 숨겼고, `InvalidateLab` 코드는 실제 `progress(0/1)` 판독·모션 분기와 다른 호출 순서를 보였다. | 두 코드 패널에 실제 초기화, getter, `getProperty()`, invalidate 조건, 헤드 이동, restart 순서를 같은 descriptor 값으로 직렬화했다. |
+| COMMENT-TR-01 | Structure/Comment | BLOCK → PASS | `createBlocks()`의 `blocks`와 `elapsed` 선언에 단계 주석이 없었다. | 각 선언의 시간표 역할을 한 줄 한국어 주석으로 추가했다. |
+| RUNTIME-TR-01 | 공식 문서·설치본 차이 | ADVISORY | 공식 `repeatDelay()` 표는 default를 `NaN`으로 게시하지만 설치된 GSAP 3.15.0 getter는 옵션 미지정 시 숫자 `0`을 반환한다. | 공식 표와 설치본 관찰을 한 문단에서 구분해 유지했다. |
+| A11Y-TR-01 | 정적 Accessibility/Motion | PASS | range·checkbox·button에 native label이 있고, 연속 관찰값은 정적 `dl`, 버튼 상태만 `role="status"`를 쓴다. reduced-motion 분기도 표시 코드와 일치한다. | none |
+
+### verificationEvidence (2026-08-13)
+
+- **공식 원문 대조** — `repeat()`, `repeatDelay()`, `yoyo()`, `iteration()`, `invalidate()` canonical을 당일 직접 열어 manifest 38개와 재대조했다.
+- **coverage 불변식** — meta 섹션 합계 38 = catalog official 38 = `officialSourceItems` 38, 공식 ID 중복 0. 설치본 관찰은 `RPD-P2` 1개로 공식 분모와 분리했다.
+- **runtime probe** — 설치된 GSAP 3.15.0에서 `repeatDelay()` 기본 getter `0`, repeat 0/1/2의 회차·틈·yoyo 표본, 상대값 Tween의 `restart → restart → invalidate → invalidate` 시작/끝 값 `0→120, 0→120, 120→240, 240→360`을 확인했다.
+- **정적 예제 대조** — `RepeatCycleLab`과 `InvalidateLab` 모두 control/descriptor → GSAP 호출 → 관찰 getter → 표시 코드의 선택자·값·호출 순서를 전수 추적했다.
+- **정적 문법 검사** — 대상 TS/TSX 16개 esbuild transform PASS, `git diff --check` PASS.
+- **Build/Integration** — 2026-08-13 메인 통합 `npm run build`, `npm run build-storybook` 모두 exit 0.
+- **브라우저** — 실제 control 조작, keyboard/focus, reduced-motion 전환, 320/390px, route 이탈 cleanup은 실행하지 않았다.
+
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CORE16-003 — 소유자 브라우저 일괄 검수 대상)
+`NOT VERIFIED` — 공식 coverage, 정적 감사의 BLOCK, 통합 build·Storybook은 해소됐지만 실제 브라우저 조작은 아직 확인되지 않았다.
 
-라우트 등록(`src/app/routes.ts`)은 이 작업의 범위 밖이며 저장소 소유자가 수행한다. 등록 전까지 페이지는 앱에서 접근되지 않는다.
+- unresolved BLOCK: `none`
+- unresolved ADVISORY: 공식 `repeatDelay()`의 `default = NaN` 표기와 설치본 GSAP 3.15.0 getter `0`의 차이
+- unresolved NOT VERIFIED: control 조작, keyboard/focus, reduced-motion 실제 전환, 320/390px layout·overflow, route 이탈 cleanup
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

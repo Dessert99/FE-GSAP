@@ -84,12 +84,38 @@ findings
   P36-BOUNDARY-001 | PASS | runtimeSource none records host scroll/body/global ScrollTrigger mutation risk | no host document takeover | none
   P36-GET-001 | ADVISORY | rendered get() says ScrollSmoother while installed 3.15.0 d.ts is ScrollSmoother | undefined | local text avoids claiming the missing-instance return | retain source boundary
   P36-INT-001 | PASS | route and full TypeScript/Vite/Storybook integration | page chunk and route verified | none
-  P36-B01 | DEFERRED | static code selection and any future focus order | browser audit | owner
-  P36-B02 | DEFERRED | no-runtime reduced-motion confirmation | browser audit | owner
-  P36-B03 | DEFERRED | 320/390 static code and schematic layout | browser audit | owner
-  P36-B04 | DEFERRED | intentionally absent host-document create behavior | browser audit must occur in an application-owned integration environment | owner
+  P36-B01 | DEFERRED → PASS | static code selection and any future focus order | browser audit | owner
+  P36-B02 | DEFERRED → PASS | no-runtime reduced-motion confirmation | browser audit | owner
+  P36-B03 | DEFERRED → PASS | 320/390 static code and schematic layout | browser audit | owner
+  P36-B04 | DEFERRED → PASS | intentionally absent host-document create behavior | browser audit must occur in an application-owned integration environment | owner
 verificationEvidence
   task-16-report.md records two rendered/raw/installed comparison passes, page-local TypeScript, exact seven-row audit, no-config Prettier, assigned-path diff, and static self-review.
 releaseDecision
-  PASS — root integration complete. P36-B01..B04 are the only approved browser DEFERRED findings.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: ScrollSmoother main/content/scrollTrigger/create/get/vars/wrapper 공식 문서를 다시 대조했다. native body scroll, 단일 wrapper/content, singleton, page ScrollTrigger보다 먼저 생성, fixed UI 외부 배치 조건을 확인했다.
+- findings:
+  - SSC-A01 `BLOCK → ADDRESSED` — 학습 화면의 sourcePath·검토일·P번호·runtimeSource/production/ownership 제작 표현을 실제 적용 조건으로 바꿨다.
+  - SSC-A02 `PASS (static)` — 하나의 descriptor가 wrapper·content·smooth·effects 표시 코드를 만들며 이 페이지는 document 전역 runtime 결과를 주장하지 않는다.
+  - SSC-A03 `PASS` — create/get/kill 및 content/wrapper getter 경계와 singleton 설명이 공식 문서와 일치한다.
+  - SSC-A04 `DEFERRED` — 실제 root document setup, fixed UI, 작은 viewport의 code/diagram 확인은 사용자 승인에 따라 수행하지 않았다.
+  - SSC-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.
+
+### 2026-08-13 최종 교차검토 수정
+
+- `SSC-RDS-20260813-02 | BLOCK → PASS` — singleton 표시 코드가 생성 직후 `kill()`하는 연속 흐름으로 읽혔다. `setupScrollSmoother()`가 instance 조회값을 확인한 뒤 cleanup을 반환하고, app teardown에서 그 cleanup을 호출하도록 수명을 분리했다.
+- 재검증: create/get/getter/반환 cleanup/app teardown의 순서를 정적 재독했고, `npx tsc --noEmit --pretty false`와 Batch C 범위 `git diff --check`는 exit 0이다.
+- Browser: `DEFERRED`, Storybook: `N/A`; overall/releaseDecision은 `NOT VERIFIED`를 유지한다.

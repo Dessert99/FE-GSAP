@@ -10,10 +10,10 @@
 
 - title: `gsap.config()` + `gsap.defaults()` + `Tween.vars`
 - canonicalUrl:
-  - `https://gsap.com/docs/v3/GSAP/gsap.config()`
-  - `https://gsap.com/docs/v3/GSAP/gsap.defaults()`
-  - `https://gsap.com/docs/v3/GSAP/Tween/vars`
-- reviewedAt: `2026-08-04`
+  - `https://gsap.com/docs/v3/GSAP/gsap.config()/`
+  - `https://gsap.com/docs/v3/GSAP/gsap.defaults()/`
+  - `https://gsap.com/docs/v3/GSAP/Tween/vars/`
+- reviewedAt: `2026-08-13`
 - category: `Fundamentals > GSAP`, `Fundamentals > Tween`
 - slug: `tween-configuration`
 - sourcePageIds: primary `source:gsap-config`; related `source:gsap-defaults`, `source:tween-vars`
@@ -52,11 +52,11 @@
 | DEF-10 | `inherit: false`는 built-in duration 기본값까지 끊어 duration이 `0`이 된다. | Node runtime probe | verified |
 | DEF-11 | 상속은 tween을 만드는 순간에 확정된다. 만든 뒤 defaults를 되돌려도 그 tween은 상속한 값을 유지한다. | `gsap-core.js` `_inheritDefaults`, Node runtime probe | verified |
 | VARS-01 | `Tween.vars`는 생성자에 넘긴 configuration 객체이고 타입은 Object다. | `source:tween-vars` 본문 | verified |
-| VARS-02 | 읽을 수 있는 property이며 생성 이후 설정 수단으로 쓰지 않는다. | `source:tween-vars` 본문 | verified |
+| VARS-02 | `vars.duration`을 직접 바꿔도 tween의 재생 시간은 자동으로 갱신되지 않는다. | GSAP 3.15.0 Node runtime probe | verified |
 | VARS-03 | animate할 property와 special property를 함께 담는다. | `source:tween-vars` 본문 | verified |
 | VARS-04 | vars 문서는 special property 목록을 나열한다. 각 property의 전체 명세는 `gsap.to()` owner가 소유한다. | `source:tween-vars` 목록 | verified |
 
-28개 항목 모두 `verified`다. 공식 세 페이지 본문과 GSAP 3.15.0 설치본(`node_modules/gsap/gsap-core.js`), Node runtime probe를 함께 대조했다.
+28개 항목 모두 `verified`다. 공식 세 페이지 본문을 2026-08-13에 다시 확인하고 GSAP 3.15.0 설치본(`node_modules/gsap/gsap-core.js`), Node runtime probe를 함께 대조했다.
 
 ### sourceBlockers
 
@@ -80,7 +80,7 @@
 3. `#defaults-inheritance`: defaults가 tween에 실리는 순간과 merge 동작(실행 예제)
 4. `#precedence`: 명시값 > defaults, `inherit: false`, 전역 변경의 수명
 5. `#vars-record`: 만들어진 tween의 `vars`에 무엇이 남는가
-6. `#boundaries`: Timeline defaults와 special property catalog의 소유권 경계
+6. `#boundaries`: Timeline defaults와 special property 상세를 이어서 배울 위치
 
 ### coverageMap
 
@@ -111,13 +111,14 @@
 | DEF-10 | `PrecedenceSection.tsx` duration 0 경고 | covered |
 | DEF-11 | `useDefaultsInheritanceAnimation.ts` 생성 직후 복원과 예제 관찰 | covered |
 | VARS-01 | `VarsRecordSection.tsx` 정의 | covered |
-| VARS-02 | `VarsRecordSection.tsx` 읽기 전용 설명 | covered |
+| VARS-02 | `VarsRecordSection.tsx` 직접 쓰기와 `duration()` 메서드의 차이 | covered |
 | VARS-03 | `VarsRecordSection.tsx` 두 종류 구분 | covered |
 | VARS-04 | `VarsRecordSection.tsx` 목록과 `gsap.to()` 경계 링크 | covered |
 
 ### relatedPages
 
 - `/fundamentals/gsap-to`: special property 전체 명세의 owner
+- `/fundamentals/timeline-basics`: Timeline defaults와 자식 애니메이션의 상속 범위
 - `/fundamentals/easing`: defaults로 자주 지정하는 ease
 - `/fundamentals/gsap-core-map`: gsap 객체가 가진 설정 API의 위치
 
@@ -146,6 +147,18 @@ create:
 modify:
 
 - `src/app/routes.ts` — lazy route와 `트윈 기초` lesson 등록
+
+2026-08-13 감사에서 수정한 파일:
+
+- `src/content/gsap/fundamentals/tween-configuration/TweenConfigurationPage.css`
+- `src/content/gsap/fundamentals/tween-configuration/tween-configuration.meta.ts`
+- `src/content/gsap/fundamentals/tween-configuration/tween-configuration.catalog.ts`
+- `src/content/gsap/fundamentals/tween-configuration/components/PageCoverage/PageCoverage.tsx`
+- `src/content/gsap/fundamentals/tween-configuration/sections/BoundariesSection/BoundariesSection.tsx`
+- `src/content/gsap/fundamentals/tween-configuration/sections/ConfigCatalogSection/ConfigCatalogSection.tsx`
+- `src/content/gsap/fundamentals/tween-configuration/sections/VarsRecordSection/VarsRecordSection.tsx`
+- `src/content/gsap/fundamentals/tween-configuration/examples/DefaultsInheritanceExample/DefaultsInheritanceExample.tsx`
+- `docs/handoffs/gsap/core/tween-configuration.md`
 
 ### exampleContracts
 
@@ -198,7 +211,14 @@ modify:
 | A11Y-003 | BLOCK → ADDRESSED → PASS | 관찰값 4개가 정적 `dd`이고 status가 복원 결과를 전달하지 않음 / A11y 재검수 RESOLVED — 관찰값 4개 output, status가 복원 결과 전달 | handoff의 "관찰값은 output" 계약 위반 | none |
 | MOTION-001 | BLOCK → 계약 정정 → PASS(재검수 "정정정당") | 구현이 handoff의 "duration 0으로 실행"과 다르게 `progress(1)`을 씀 | 계약과 구현 불일치 | 구현이 아니라 **계약을 정정했다.** duration을 0으로 덮으면 "duration은 defaults에서 온다"는 이 예제의 학습 주장과 관찰 패널이 어긋난다. `exampleContracts.motion`을 `pause().progress(1)`로 다시 고정하고, 재생 후 헤드를 옮기던 코드를 재생 없이 옮기도록 고쳐 중간 프레임도 없앴다. |
 | RDS-003 | BLOCK → ADDRESSED → PASS | 적용된 ease 관찰값이 없고 복원 판정이 duration만 대조함 / Runtime 4차 재검수 RESOLVED — `useDefaultsInheritanceAnimation.ts:75-98` | handoff의 관찰 계약 미충족과 부정확한 복원 판정 | none |
-| BROWSER-CORE05-001 | DEFERRED | 브라우저 실조작 미실행 | 키보드·작은 화면·control 실제 조작 확인 없음 | 저장소 소유자의 일괄 검수 |
+| BROWSER-CORE05-001 | DEFERRED → PASS | 브라우저 실조작 미실행 | 키보드·작은 화면·control 실제 조작 확인 없음 | 저장소 소유자의 일괄 검수 |
+| AUD-WRITE-001 | BLOCK → ADDRESSED → PASS | 학습 순서에 `3/3`·`source item`·coverage 수치·owner/담당 페이지 같은 제작 용어가 노출됨 / `PageCoverage.tsx`, `BoundariesSection.tsx`를 학습 순서와 다음 학습 링크로 교체 | 학습 흐름보다 제작 현황이 앞에 보임 | none |
+| AUD-FACT-001 | BLOCK → ADDRESSED → PASS | 공식 vars 문서는 객체를 설명할 뿐 읽기 전용이라고 하지 않음. GSAP 3.15.0 probe에서 `tween.vars.duration = 2` 뒤 `tween.duration()`은 기존 1을 유지하고 `tween.duration(3)`에서만 3으로 변경됨 | 공식 근거를 넘는 단정과 변경 방법 누락 | `vars` 직접 쓰기와 전용 메서드 차이를 설명하고 origin을 implementation으로 정정 |
+| AUD-CMT-001 | BLOCK → ADDRESSED → PASS | `DefaultsInheritanceExample.tsx`의 표시 코드 선언에 단계 주석이 없었음 / `const code` 위 한 줄 주석 추가 | `examples/` 단계별 주석 계약 위반 | none |
+| AUD-LEARN-001 | ADVISORY → ADDRESSED → PASS | `autoSleep`·`force3D`의 사용 상황이 측정 없이 값을 바꾸도록 읽힘 / 성능·휴면 전환 비용을 측정하며 비교하는 조건으로 수정 | 성능 설정의 성급한 변경 유도 | none |
+| AUD-RDS-001 | PASS | duration/ease/inherit controls → `descriptor` → `gsap.defaults()`·`gsap.to()` → 직렬화 코드와 관찰값을 정적 추적했고 selector·vars·try/finally 순서가 일치함 | 실행·표시 drift 없음 | none |
+| AUD-BUILD-001 | PASS | 2026-08-13 메인 통합 `npm run build`, `npm run build-storybook` 모두 exit 0 | 변경 후 compile·bundle 통과 | none |
+| AUD-BROWSER-001 | NOT VERIFIED | 현재 변경 뒤 브라우저 실조작 미실행 | controls·focus·reduced-motion·320/390px 실제 동작 미확인 | 메인 통합 검증에서 실행 |
 
 ### verificationEvidence
 
@@ -206,11 +226,29 @@ modify:
 - Codex 독립 검수 — Official Coverage, Runtime/Display Sync + Structure/Comment, Learning Transformation + 정적 Accessibility/Motion을 각각 별도 `codex exec -s read-only` 실행으로 받았다. `BLOCK` 12건 중 12건을 수정 후 재검수로 해소했고, `OC-MANIFEST-001`은 경계 위임으로 미수용(재검수에서 정당 확인), `MOTION-001`은 계약을 정정(재검수에서 정당 확인)했다.
 - Storybook — `npm run build-storybook` exit 0.
 - Runtime probe(2026-08-04) — getter 반환 key `duration/overwrite/delay/ease`, 초기 duration `0.5`, 부분 지정 merge 유지, 반환 객체가 내부와 같은 참조, `inherit:false` duration `0`, 명시값 `0.25` 우선, 생성 직후 복원해도 tween이 `2.5` 유지, 복원 후 다음 tween `0.5`.
+- Source verification(2026-08-13) — 공식 `gsap.config()`·`gsap.defaults()`·`Tween.vars` 본문을 현재 웹에서 다시 대조했다. `autoSleep`·`force3D`·`nullTargetWarn`·`units`, defaults 상속/명시값 우선, 32개 special property와 `easeReverse`/deprecated `yoyoEase`가 기존 manifest와 일치했다.
+- Runtime probe(2026-08-13) — GSAP 3.15.0, config/defaults getter, defaults 객체 동일성, 명시값/defaults/`inherit:false` duration `0.25/0.5/0`, 상속된 `vars`, `vars.duration` 직접 쓰기와 `duration()` setter의 차이를 확인했다.
+- Static verification(2026-08-13) — 모든 예제 control 상태에서 `descriptor`·실행 호출·표시 코드의 값을 대조했고 `git diff --check`를 통과했다.
+- Main integration(2026-08-13) — `npm run build`, `npm run build-storybook` 모두 exit 0.
 
 ### releaseDecision
 
-`PASS` — 28/28 coverage, Learning Transformation, runtime/display 동기화, 구조·주석, 정적 Accessibility/Motion, build, Storybook, route를 모두 통과했고 미해결 `BLOCK`이 없다.
+`NOT VERIFIED` — 2026-08-13 감사의 사실성·학습 변환·runtime/display 정적 동기화·구조/주석과 메인 통합 build·Storybook에는 미해결 `BLOCK`이 없다. 브라우저 증거만 아직 닫지 않았다.
 
-미해결 `DEFERRED` 항목(저장소 소유자의 일괄 브라우저 검수 대상):
+현재 `NOT VERIFIED` 항목(메인 에이전트의 일괄 검수 대상):
 
-- `BROWSER-CORE05-001` — 키보드 이동·포커스 표시·control 조작, `prefers-reduced-motion` 실제 전환, 320/390px 레이아웃·overflow, 실행 예제 control의 실제 조작 결과
+- `AUD-BROWSER-001` — 키보드 이동·포커스 표시·control 조작, `prefers-reduced-motion` 실제 전환, 320/390px 레이아웃·overflow, 실행 예제 control의 실제 조작 결과
+
+### browserReviewClosure
+
+- status: `NOT VERIFIED`
+- reviewedAt: `2026-08-13` (Asia/Seoul)
+- historicalStatus: 기존 `BROWSER-CORE05-001`은 소유자 승인으로 문서상 `PASS` 처리됐지만 실제 조작 증거는 생성되지 않았다.
+- evidenceBoundary: 이번 감사의 코드 변경 뒤 브라우저 증거는 재사용하지 않으며, 메인 에이전트의 통합 검증이 필요하다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

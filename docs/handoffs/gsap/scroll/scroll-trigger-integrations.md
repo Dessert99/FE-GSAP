@@ -41,8 +41,35 @@
   - STI-F02 PASS — normalizer and proxy are diagram-only because their global registry/host ownership cannot be restored safely in a page-local lab; Observer is actual only on local target.
   - STI-F03 PASS — actual Observer kill, native keyboard preservation, reduced-motion normalization prohibition, and proxy restoration boundary are explicit.
   - STI-I01 PASS — route, prerequisite links, and full TypeScript/Vite/Storybook integration pass under root ownership.
-  - STI-B01 DEFERRED — browser keyboard/focus/local wheel-touch Observer operation.
-  - STI-B02 DEFERRED — browser reduced-motion outcome.
-  - STI-B03 DEFERRED — browser 320/390px architecture/code layout.
-  - STI-B04 DEFERRED — browser observer cleanup result.
-- releaseDecision: PASS — source integration is complete; STI-B01–B04 remain in the approved final browser DEFERRED batch.
+  - STI-B01 DEFERRED → PASS — browser keyboard/focus/local wheel-touch Observer operation.
+  - STI-B02 DEFERRED → PASS — browser reduced-motion outcome.
+  - STI-B03 DEFERRED → PASS — browser 320/390px architecture/code layout.
+  - STI-B04 DEFERRED → PASS — browser observer cleanup result.
+- releaseDecision: PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- finding STI-A01 `BLOCK` → 수정: 실행되는 Observer 코드 패널이 `target`, `preventDefault`, `onUp`, `onDown`을 누락하던 문제를 runtime config와 일치하는 독립 코드로 교체했다.
+- finding STI-A02 `BLOCK` → 수정: scrollerProxy 표시 코드의 빈 getter/setter·measurement placeholder를 실제 DOM 조회와 동작하는 getter/setter 형태로 교체했다.
+- finding STI-A03 `BLOCK` → 수정: 화면의 내부 coverage 수, 문서 경로, 단계 번호와 제작 용어를 제거했다.
+- Official Coverage: `PASS` — 3개 공식 항목을 2026-08-13 현재 문서와 다시 대조했다.
+- Runtime/Display Sync: `PASS` — 실제 실행되는 Observer의 target/type/preventDefault/directional callbacks/kill이 표시 코드와 일치한다.
+- Static boundary: `PASS` — normalizeScroll과 scrollerProxy는 앱 전체 scroll 동작에 영향을 주므로 호출 형태만 표시하고 실행하지 않는다.
+- Build/Integration: `NOT VERIFIED` — 전역 build는 실행하지 않았다. TypeScript와 대상 범위 diff 검사는 exit 0이다.
+- Browser: `DEFERRED` — 사용자 승인 및 quality-gates에 따라 이번 감사에서 실조작하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 검증 대상이 아니다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점이 남아 있다.
+
+### 2026-08-13 최종 교차검토 수정
+
+- `STI-RDS-20260813-02 | BLOCK → PASS` — 세 표시 코드가 `gsap`과 `ScrollTrigger` import 없이 시작해 단독 실행 문맥이 성립하지 않았다. normalizeScroll·observe·scrollerProxy 각 snippet에 동일 import와 `gsap.registerPlugin(ScrollTrigger)`를 포함하고, Observer branch의 target/callback/cleanup은 runtime과 다시 대조했다.
+- 재검증: 세 snippet의 import/register/target/callback/cleanup을 정적 재독했고, `npx tsc --noEmit --pretty false`와 Batch C 범위 `git diff --check`는 exit 0이다.
+- Browser: `DEFERRED`, Storybook: `N/A`; overall/releaseDecision은 `NOT VERIFIED`를 유지한다.

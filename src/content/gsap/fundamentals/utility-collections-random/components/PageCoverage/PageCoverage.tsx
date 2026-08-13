@@ -9,13 +9,13 @@ export function PageCoverage() {
   const probeItemCount = utilityCollectionsRandomSourceItems.filter((item) => item.origin === 'probe').length
 
   return (
-    <aside className="utility-collections-coverage" aria-label="공식 문서 coverage">
+    <aside className="utility-collections-coverage" aria-label="컬렉션과 무작위 값 학습 순서">
       <div className="utility-collections-coverage__summary">
         <div><strong>{officialSourceCount}/{utilityCollectionsRandomCoverage.officialSources}</strong><span>공식 문서</span></div>
-        <div><strong>{officialItems.length}/{utilityCollectionsRandomCoverage.officialSourceItems}</strong><span>공식 기술 항목</span></div>
-        <p>공식 사실 {officialItems.length}개와 별도 실행 probe {probeItemCount}개를 구분해 연결했습니다.</p>
+        <div><strong>{officialItems.length}/{utilityCollectionsRandomCoverage.officialSourceItems}</strong><span>설명한 핵심 동작</span></div>
+        <p>공식 문서의 핵심 동작 {officialItems.length}개를 배열 정규화 → 선택 → 섞기 순서로 묶고, 문서에 없는 경계 {probeItemCount}개는 직접 확인했습니다.</p>
       </div>
-      <ol>{utilityCollectionsRandomSections.map((section) => <li key={section.id}><a href={`#${section.id}`}><span>{section.number}</span><div><strong>{section.title}</strong><small>공식 항목 {section.sourceItems}개</small></div></a></li>)}</ol>
+      <ol>{utilityCollectionsRandomSections.map((section) => <li key={section.id}><a href={`#${section.id}`}><span>{section.number}</span><div><strong>{section.title}</strong><small>{section.sourceItems}개 핵심 동작</small></div></a></li>)}</ol>
     </aside>
   )
 }

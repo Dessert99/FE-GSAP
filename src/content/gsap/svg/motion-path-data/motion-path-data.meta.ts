@@ -5,7 +5,7 @@ export const motionPathDataMeta = {
   summary:
     'MotionPathPlugin utility는 point·array·SVG shape·d string·RawPath를 cubic numeric segment와 SVG path data 사이에서 변환합니다.',
   sourcePath: 'src/content/gsap/svg/motion-path-data/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'pointsToSegment()',

@@ -20,7 +20,7 @@ export function TransformOrderExample() {
   // 실제 Tween config와 표시할 선언 순서를 hook에서 함께 받는다.
   const runtime = useTransformOrderAnimation()
   // code panel은 object insertion order를 그대로 보여준다.
-  const code = `gsap.to('.box', {\n${serializeEntries(runtime.descriptor.entries, runtime.animationConfig.duration, runtime.animationConfig.ease)}\n})`
+  const code = `gsap.to('.${runtime.targetClassName}', {\n${serializeEntries(runtime.descriptor.entries, runtime.animationConfig.duration, runtime.animationConfig.ease)}\n})`
 
   return (
     <div ref={runtime.scope}>
@@ -51,7 +51,7 @@ export function TransformOrderExample() {
           { name: 'scale', type: 'number', defaultValue: '1', acceptedValues: 'scaleX와 scaleY에 함께 적용할 배율' },
           { name: 'rotation', type: 'number | string', defaultValue: '0deg', acceptedValues: 'deg 기본 숫자·rad·방향 suffix' },
         ]}
-        changes={['code panel의 key 순서는 바뀌어도 target은 같은 최종 transform에 도달합니다.', 'GSAP은 translation → scale → rotationX → rotationY → skew → rotationZ 순서를 사용합니다.']}
+        changes={['표시된 코드의 key 순서는 바뀌어도 대상은 같은 최종 transform에 도달합니다.', 'GSAP은 translation → scale → rotationX → rotationY → skew → rotationZ 순서를 사용합니다.']}
         watchFor={['두 선언 순서에서 target의 최종 위치·크기·각도가 같은지 봅니다.', 'transform string이 아니라 alias를 쓰면 matrix 재해석을 피할 수 있습니다.']}
         explanation={<p>일반 CSS transform string은 작성 순서가 결과에 영향을 줍니다. GSAP alias는 각 값을 따로 cache하고 일관된 순서로 합쳐 선언 순서의 우연을 제거합니다.</p>}
         onReplay={runtime.replay}

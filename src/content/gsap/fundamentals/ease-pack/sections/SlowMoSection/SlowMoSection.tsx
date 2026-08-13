@@ -136,7 +136,7 @@ export function SlowMoSection() {
         </p>
         <p>
           <strong>yoyoMode 곡선은 0 → 1 → 0입니다.</strong> 값이 올라갔다가 다시 내려오기 때문에 같은 duration의{' '}
-          <code>gsap.from(..., {'{'} opacity: 0 {'}'})</code>이 저절로 fade in 후 fade out이 됩니다.
+          이 ease를 <code>gsap.from(..., {'{'} opacity: 0 {'}'})</code>에 쓰면 fade in 후 fade out 값이 만들어집니다.
         </p>
         <p className="ease-pack-page__provenance">세 항목 모두 GSAP 3.15.0 설치본을 직접 실행해 확인한 내용입니다.</p>
       </div>

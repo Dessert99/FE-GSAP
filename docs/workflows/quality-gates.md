@@ -22,7 +22,7 @@
 - **Pedagogy** — 용어 정의, 한 대상·한 변화, 목표·조작·관찰·원리·사용처·주의점의 학습 흐름을 확인한다.
 - **Structure/Comment** — 페이지·섹션·컴포넌트·예제별 실행 source 경계와 한 줄 한국어 주석 규칙을 확인한다.
 - **Accessibility/Motion** — 인터랙티브 UI가 있을 때 키보드·레이블·상태 전달, 작은 화면, `prefers-reduced-motion`과 대체 상태를 확인한다.
-- **Build/Integration** — TypeScript·Vite 빌드, Storybook 빌드, 라우팅·스타일을 확인한다.
+- **Build/Integration** — TypeScript·Vite 빌드, 라우팅·스타일을 확인한다.
 
 둘 이상의 공식 페이지를 연속으로 작업할 때는 **Cross-page Consistency**를 추가로 판정한다. 용어, 관련 링크, 선행 학습, 중복 설명의 소유권을 확인한다.
 

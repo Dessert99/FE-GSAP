@@ -1,6 +1,4 @@
-/** P21의 #101 technical item coverage 분모를 표시한다. */
-import { motionPathItems } from '../../motion-path.catalog'
-/** official parent source를 세부 item으로 분해한 수를 보여 준다. */
+/** path 입력·정렬·방향·실행 경계를 배우는 순서를 안내한다. */
 export function PageCoverage() {
-  return <p>#101 · {motionPathItems.length} technical items covered</p>
+  return <p>학습 순서 · path를 고르고 target의 기준점을 맞춘 뒤 이동 방향과 반응형 경계를 확인합니다.</p>
 }

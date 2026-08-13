@@ -88,3 +88,25 @@ plugin/integration + property catalog + static sequence diagram. Learner flow: D
 ## releaseDecision
 
 PASS — the static-by-design page is registered and both builds pass. No browser-only DEFERRED checks apply.
+
+## 2026-08-13 Batch B 재감사
+
+- 공식 대조: EaselPlugin canonical의 CreateJS target, ColorFilter/ColorMatrixFilter, MovieClip frame, `easel` wrapper, exposure/brightness 범위, Stage update 전제를 현재 웹에서 다시 확인했다.
+- `RDS-B10-01 | BLOCK → PASS` — 정적 코드가 Tween 생성 직후 ticker callback을 제거하는 순서로 복사될 수 있던 문제를 별도 `cleanup()` 함수로 분리하고 Tween도 함께 종료하도록 수정했다.
+- `WRITE-B10-01 | BLOCK → PASS` — learner-facing “textual state” 제작 표현을 정적 설명이라는 직접적인 문장으로 바꿨다.
+- Runtime/Display Sync: `runtimeSource: none`; CreateJS 미설치로 실행 결과를 꾸미지 않으며 정적 code와 순서 설명이 일치한다.
+- Storybook: c309e13에서 삭제되어 `N/A`.
+- Browser: `DEFERRED` — official link focus와 320/390px 정적 layout·code overflow를 실조작하지 않았다. 실행 control과 motion은 없다.
+- current releaseDecision: `PASS` — 미해결 BLOCK 없음. 위 browser 항목만 `DEFERRED`다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 공식 링크 focus, 320/390px layout과 code overflow를 실조작하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

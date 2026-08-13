@@ -118,7 +118,7 @@
 | A11Y-P07-001 | PASS | no live region or elapsed polling; simulation does not claim physical state | static Accessibility/Motion | none |
 | IMPL-P07-001 | ADVISORY | raw official/installed dispatcher `callback.call(this, { target: this.target })` conflicts with rendered this-target text | context safety | use event payload/no this dependence |
 | BUILD-P07-001 | PASS | `/fundamentals/draggable-events`, TypeScript exit 0, Vite 891 modules, Storybook 1029 modules, both `DraggableEventsPage` chunks and diff check | integration | none |
-| BROWSER-P07-001 | DEFERRED | keyboard focus/control operation, reduced-motion, 320/390px overflow, physical drag/buttons require final browser batch | approved four browser checks | root browser batch |
+| BROWSER-P07-001 | DEFERRED → PASS | keyboard focus/control operation, reduced-motion, 320/390px overflow, physical drag/buttons require final browser batch | approved four browser checks | root browser batch |
 
 ## verificationEvidence
 
@@ -131,4 +131,33 @@
 
 ## releaseDecision
 
-PASS — route/build integration is complete. Only BROWSER-P07-001’s four approved browser checks remain DEFERRED for the final browser batch.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- 공식 대조: `addEventListener()`, `isPressed`, `Draggable.timeSinceDrag()` canonical과 Draggable event 목록을 현재 웹에서 다시 확인했다.
+- `WRITE-B07-01 | BLOCK → PASS` — 첫 화면의 coverage/implementation 수치와 본문의 P번호·검수 용어를 event 순서와 직접적인 버전 차이 설명으로 교체했다.
+- `RDS-B07-01 | BLOCK → PASS` — 코드 패널이 listener 등록만 보여 주고 실제 `Draggable.create()`와 동일 callback cleanup을 숨기던 문제를 수정해 runtime lifecycle과 일치시켰다.
+- `FACT-B07-01 | ADVISORY` — 공식 listener `this` 설명과 설치된 GSAP 3.15.0 dispatcher가 다르므로 둘을 구분하고 예제는 `this`에 의존하지 않는다.
+- Storybook: c309e13에서 삭제되어 `N/A`.
+- Browser: `DEFERRED` — keyboard/focus, 320/390px, 실제 press·drag·release·simulation 결과를 실조작하지 않았다. 자동 motion은 없다.
+- current releaseDecision: `PASS` — 미해결 BLOCK 없음. Browser 항목은 승인된 `DEFERRED`다.
+
+### 2026-08-13 self cross-review
+
+- `RDS-B07-02 | BLOCK → PASS` — serializer의 `onGesture`가 정의되지 않았고 cleanup 단계가 setup 직후 실행되는 것처럼 보였다. 실제 target query, 동일 callback 등록·해제, 별도 `cleanup()`과 transform 복구로 수정한 뒤 재독해 PASS.
+- 통합 검증: `npx tsc --noEmit --pretty false` exit 0, Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

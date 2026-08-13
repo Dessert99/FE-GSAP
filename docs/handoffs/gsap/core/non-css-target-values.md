@@ -12,7 +12,7 @@ CSS property가 아닌 값 — DOM/SVG element의 numeric attribute와 numeric A
 - canonicalUrl:
   - `https://gsap.com/docs/v3/GSAP/CorePlugins/Attributes`
   - `https://gsap.com/docs/v3/GSAP/CorePlugins/EndArray`
-- reviewedAt: `2026-08-04`
+- reviewedAt: `2026-08-13`
 - category: `GSAP > Internal Plugins`
 - slug: `non-css-target-values`
 - sourcePageIds: primary `source:attributes`; related `source:end-array`
@@ -46,7 +46,7 @@ CSS property가 아닌 값 — DOM/SVG element의 numeric attribute와 numeric A
 
 ### sourceBlockers
 
-`none`. 15개 기술 item 전부 2026-08-04에 공식 페이지 원문으로 직접 확인했다.
+`none`. 15개 기술 item 전부 2026-08-13에 공식 페이지 원문으로 직접 확인했다.
 
 다음은 두 공식 페이지가 **게시하지 않은** 내용이므로 주장하지 않는다. 필요해지면 `blocked-source` item을 추가하고 release를 `BLOCK`한다.
 
@@ -149,7 +149,7 @@ src/app/routes.ts
 - controls: 목표 반지름 range, duration range, 실행 버튼
 - runtimeSource: `useSvgAttributeAnimation.ts`
 - sourcePath: `examples/SvgAttributeLab/useSvgAttributeAnimation.ts`
-- runtimeOwnership: hook이 selector, 시작·목표 `attr`, 고정 CSS `x`, 요청·실제 duration, 실행 key, `getAttribute('r')`·`gsap.getProperty(el,'x')` 관찰값, reduced-motion 상태를 담은 단일 descriptor를 소유한다. scoped `useGSAP` 한 개, `revertOnUpdate: true`.
+- runtimeOwnership: hook이 selector, 시작·목표 `attr`, 고정 CSS `x`, 요청·실제 duration, `getAttribute('r')`·`gsap.getProperty(el,'x')` 관찰값, reduced-motion 상태를 담은 단일 descriptor와 paused Tween ref를 소유한다. scoped `useGSAP` 한 개, `revertOnUpdate: true`.
 - displayOwnership: TSX가 descriptor를 문법으로만 직렬화하고 controls·관찰 패널·학습 문단을 그린다. `attr` 객체나 duration을 다시 조립하지 않는다.
 - coveredSourceItemIds: ATTR-03, ATTR-09 (ATTR-02는 섹션 근거로 충분)
 - accessibility: SVG에 접근 가능한 이름과 설명, 현재 반지름·고정 transform은 텍스트 출력, native labeled input, 상태는 polite live region 하나
@@ -162,7 +162,7 @@ src/app/routes.ts
 - controls: progress 0–1 slider, 목적지 길이 선택(`같음 | 짧음`), ease 선택(`none | power1.inOut`)
 - runtimeSource: `useNumericArrayAnimation.ts`
 - sourcePath: `examples/NumericArrayLab/useNumericArrayAnimation.ts`
-- runtimeOwnership: hook이 시작 Array 원본, 변형되는 target Array ref, 목적지 Array, ease, progress를 담은 descriptor와 paused Tween 하나를 소유한다. 매 재구성 전에 시작 Array를 원본에서 복사해 되돌리고, 같은 descriptor progress로 `seek`한 뒤 `onUpdate` 스냅샷을 기록한다.
+- runtimeOwnership: hook이 시작 Array 원본, 변형되는 target Array ref, 목적지 Array, ease, progress를 담은 descriptor와 paused Tween 하나를 소유한다. 매 재구성 전에 시작 Array를 원본에서 복사해 되돌리고, 같은 descriptor 값으로 `progress()`를 호출한 뒤 target Array를 읽어 스냅샷을 기록한다.
 - displayOwnership: TSX가 descriptor의 target·endArray·ease·paused·progress를 그대로 직렬화하고 index 표를 그린다. 보간을 직접 계산하거나 목적지 Array를 모드 이름에서 재구성하지 않는다.
 - coveredSourceItemIds: ARR-03, ARR-04, ARR-06
 - accessibility: native radio group과 labeled slider + numeric output, index 표에 caption·header, 좁은 화면에서 index 카드로 전환, `공유 | 변화 없음`은 텍스트
@@ -173,7 +173,7 @@ src/app/routes.ts
 - CSSPlugin의 property·단위 계약을 이 페이지에서 카탈로그로 만들지 않는다.
 - 일반 JavaScript object property animation을 다루지 않는다. 두 공식 페이지 어느 쪽도 게시하지 않았다.
 - CSS·attribute·Array 채널을 하나의 generic runtime hook에서 분기시키지 않는다. 두 lab은 각자 hook을 소유한다.
-- 짝이 없는 index의 동작, typed/sparse/중첩 Array, 숫자 아닌 값 처리를 추정해 적지 않는다.
+- 짝이 없는 index의 동작을 공식 사실로 추정하지 않는다. 설치본 probe는 공식 문장과 분리하며 typed/sparse/중첩 Array, 숫자 아닌 값 처리는 적지 않는다.
 
 ### preserve
 
@@ -187,27 +187,86 @@ src/app/routes.ts
 
 Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Structure/Comment, 정적 Accessibility/Motion, Build/Integration, Cross-page Consistency — 모두 구현 컨텍스트가 직접 판정했다(`docs/workflows/quality-gates.md` 2026-08-04 개정: 독립 검수자를 두지 않는다).
 
-### findings
+### historicalFindings
+
+아래는 기존 구현 기록이며 2026-08-13 현재 감사의 build·브라우저 증거로 재사용하지 않는다.
 
 | ID | status | evidence | impact | requiredAction |
 | --- | --- | --- | --- | --- |
-| SRC-CORE07-001 | PASS | 2026-08-04에 두 canonical 원문을 직접 조회해 15개 item을 확인했다. Attributes heading은 `Attributes`/`Description`/`Animating CSS` 셋뿐이고 signature·기본값·반환값 절이 없음을 확인했다. | blocker 없이 구현 가능 | 미게시 명세를 `공식 페이지에 명시 없음`으로 표시 |
+| SRC-CORE07-001 | PASS | 2026-08-13에 두 canonical 원문을 직접 조회해 15개 item을 확인했다. Attributes heading은 `Attributes`/`Description`/`Animating CSS` 셋뿐이고 signature·기본값·반환값 절이 없음을 확인했다. | blocker 없이 구현 가능 | 미게시 명세를 `공식 페이지에 명시 없음`으로 표시 |
 | HND-001 | ADDRESSED | 옛 브랜치 `feat/gsap-docs-complete`의 handoff가 2026-08-03 기준 줄 번호를 썼다. 2026-08-04 재조회로 기술 내용 불변을 확인하고 `sourceLocation`을 heading 기준으로 교체했다. | 줄 번호가 현재 렌더링과 어긋났다 | none |
 | STRUCT-CORE07-001 | PASS | 옛 handoff의 `ValueChannelChooser`를 `examples/` 대신 `ValueChannelSection` 안의 정적 표로 구현했다. 실행 코드가 없는 비교 표는 기존 `ConfigCatalogSection` 선례를 따르는 것이 일관된다. | 계획 대비 의도적 편차 | none |
-| PROBE-CORE07-001 | PASS | GSAP 3.15.0 실행 결과, 목적지 Array가 더 길면 target Array가 그 길이로 늘어나고 추가 칸이 0에서부터 보간된다(`[10,20]`→`endArray:[0,0,99,99]`가 progress 0.25에서 `[7.5,15,24.75,24.75]`, length 4). 되감아도 길이는 복구되지 않는다. 공식 문장은 시작 Array가 더 긴 경우만 설명한다. | 공식 문장만 읽으면 예상할 수 없는 동작 | `ARR-P1`로 기록하고 실행 확인 사실임을 페이지에 명시 |
+| PROBE-CORE07-001 | PASS | GSAP 3.15.0 실행 결과, 목적지 Array가 더 길면 target Array가 그 길이로 늘어나고 추가 칸이 0에서부터 보간된다(`[10,20]`→`endArray:[0,0,99,99]`가 progress 0.25에서 `[7.5,15,24.75,24.75]`, length 4). 되감으면 값은 `[10,20,0,0]`이 되고 길이는 4로 남는다. 공식 문장은 길이 차이의 방향을 구분하지 않는다. | 공식 caveat과 설치본 동작의 불일치를 구분해야 함 | `ARR-P1`로 기록하고 실행 확인 사실임을 페이지에 명시 |
 | OC-CORE07-001 | PASS | 공식 15/15 item이 `coverageMap`에서 파일 근거로 연결됐다. 스크립트로 meta 섹션 수(4/4/3/4/0=15), catalog 공식 행 수(15), handoff ID 집합이 서로 일치함을 대조했다. 중복 ID 없음. | Official Coverage 통과 | none |
 | RDS-CORE07-001 | PASS | 두 lab 모두 hook의 descriptor에서 GSAP 호출과 표시 코드가 함께 파생된다. TSX 어느 파일도 `gsap`을 import하지 않음을 grep으로 확인했다(문자열 안의 `gsap.`은 화면에 보여줄 코드 텍스트다). | Runtime/Display Sync 통과 | none |
 | STRUCT-CORE07-002 | ADDRESSED | `SvgAttributeLab`의 `onUpdate`가 선언 전 `tween`을 참조했고, `NumericArrayLab`에 현재 선택지로는 도달할 수 없는 길이 절단 코드가 있었다. element를 먼저 풀어 두고 절단 코드를 제거해 해결했다. | 취약한 참조와 추측성 방어 코드 | none |
 | BUILD-CORE07-001 | PASS | `npm run build` exit 0, `npm run build-storybook` exit 0 (2026-08-04) | build/integration 통과 | none |
 | XPAGE-CORE07-001 | PASS | CSS·ease·progress·`gsap.to()`를 이 페이지가 소유하지 않고 각 owner 페이지로 연결했다. 채널 표의 CSS 행은 coverage를 받지 않는 비교용으로 표시했다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE07-001 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE07-001 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, lab control 실제 조작 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
-- 공식 원문 대조 — 2026-08-04, 두 canonical URL 직접 조회. `unlimited attributes` 문장과 `<rect>` markup 존재를 개별 확인.
+- 공식 원문 대조 — 2026-08-13, 두 canonical URL 직접 조회. `unlimited attributes` 문장과 `<rect>` markup 존재를 개별 확인.
 - runtime probe — `endArray` 길이 불일치 시 짝 없는 index가 그대로 남는지, `attr` 안팎의 `x`가 서로 다른 채널에 쓰이는지 `node`로 실행 확인.
 - build — `npm run build`, `npm run build-storybook`.
 
-### releaseDecision
+## 2026-08-13 현재 감사
 
-`PASS` (미해결 `DEFERRED` 1건: A11Y-CORE07-001 — 소유자 브라우저 일괄 검수 대상)
+### auditTarget
+
+- route: `/fundamentals/non-css-target-values`
+- commit: 현재 working tree (`git status`에 다른 페이지의 병행 변경이 있어 commit hash 대신 범위를 고정함)
+- officialUrls:
+  - `https://gsap.com/docs/v3/GSAP/CorePlugins/Attributes/`
+  - `https://gsap.com/docs/v3/GSAP/CorePlugins/EndArray/`
+- comparedAt: `2026-08-13` (Asia/Seoul)
+- evidenceBoundary: 공식 웹 원문, 설치된 GSAP 3.15.0 probe, 대상 파일 정적 분석만 사용했다. 브라우저와 전역 build/Storybook은 메인 담당이므로 실행하지 않았다.
+
+### currentFindings
+
+| ID | 관점 | 최초 상태 | 위치·근거 | 영향 | 조치 |
+| --- | --- | --- | --- | --- | --- |
+| FACT-NCTV-001 | 사실 정확성 | BLOCK | `EndArraySection.tsx`; 공식 문서는 길이 차이의 방향을 구분하지 않지만 설치본은 목적지가 더 길면 target을 늘린다. 기존 문장은 공식 caveat이 시작 배열이 더 긴 경우만 말한다고 단정했다. | 공식 문장의 범위를 잘못 설명하고, 바로 뒤 probe와 충돌했다. | 공식 문장과 설치본 예외를 분리하고 시작 배열이 더 긴 로컬 예제의 관찰 결과만 확정했다. |
+| FACT-NCTV-002 | 사실 정확성 | BLOCK | `AttrSyntaxSection.tsx`, `AttrCssSplitSection.tsx`, `SvgAttributeLab.tsx`; 공식 페이지에 없는 CSS 단위 변환 가능 여부, 반대 방향 해석, transform 성능·사용 빈도를 사실처럼 단정했다. | 현재 두 canonical로 검증할 수 없는 경계를 학습자가 일반 규칙으로 받아들일 수 있다. | canonical이 말하는 `attr` 단위 변환 없음과 CSS/attribute 작성 위치만 남겼다. |
+| SYNC-NCTV-001 | Runtime/Display Sync | BLOCK | `SvgAttributeLab.tsx`, `useSvgAttributeAnimation.ts`; runtime은 paused Tween을 만들고 버튼에서 `restart()`했으나 표시 코드는 자동 재생 Tween처럼 보였다. runtime의 `gsap.utils.toArray()`도 `scope` 밖의 같은 class를 찾을 수 있었다. | 표시 코드를 복사하면 실제 예제와 다른 시점에 실행되며, scope 계약을 정적으로 보장하지 못했다. | 코드 패널에 `paused`와 `restart()`를 표시하고, element 관찰은 `scope.current.querySelector`, GSAP 호출은 scoped context 안의 동일 selector로 통일했다. |
+| SYNC-NCTV-002 | Runtime/Display Sync | BLOCK → ADDRESSED → PASS (정적) | `SvgAttributeLab` runtime의 `onUpdate`가 현재 `r`과 `x` 관찰값을 갱신하지만 표시 코드는 callback을 생략했다. | 표시 코드로는 관찰 패널을 갱신하는 핵심 실행 단계를 재현할 수 없었다. | 표시 코드에 scoped `circle` 해석과 runtime과 같은 `onUpdate`의 `r`·`x` 읽기를 추가해 정적으로 다시 대조했다. |
+| STYLE-NCTV-001 | 비유·문체 | BLOCK | `PageCoverage.tsx`, `ValueChannelSection.tsx`, `BoundariesSection.tsx`, `EndArraySection.tsx`; 학습자 본문에 `source`, `item`, `소유` 같은 제작 용어가 노출됐다. | 개념 대신 문서 제작 구조를 해석해야 했다. | `공식 문서`, `확인한 설명`, `비교용`, `이어서 볼 개념`처럼 학습자 행동 중심 문구로 바꿨다. |
+| PED-NCTV-001 | 학습 효율 | BLOCK | `SvgAttributeLab.tsx`, `NumericArrayLab.tsx`; “더 가볍다”, “흔하다”, “자주 쓰인다”는 근거 없는 일반론이 핵심 채널 선택을 흐렸다. | 초보자가 성능·관행을 채널 선택 기준으로 오해할 수 있다. | attribute와 transform의 작성 위치, `onUpdate`에서 다시 그릴 수 있다는 직접 설명만 남겼다. |
+
+### changesApplied
+
+- `FACT-NCTV-001`: `EndArraySection.tsx`의 공식 caveat과 GSAP 3.15.0 probe를 서로 충돌하지 않게 구분했다.
+- `FACT-NCTV-002`: `AttrSyntaxSection.tsx`, `AttrCssSplitSection.tsx`, `SvgAttributeLab.tsx`에서 현재 canonical이 보증하지 않는 확장 주장을 제거했다.
+- `SYNC-NCTV-001`: `SvgAttributeLab.tsx`와 `useSvgAttributeAnimation.ts`의 selector, `paused`, 버튼 재생 의미를 동기화했다.
+- `SYNC-NCTV-002`: `SvgAttributeLab.tsx` 표시 코드에 runtime과 같은 `onUpdate` 관찰 callback을 추가했다.
+- `STYLE-NCTV-001`: `PageCoverage.tsx`, `ValueChannelSection.tsx`, `BoundariesSection.tsx`, `EndArraySection.tsx`의 learner-visible 제작 용어를 교체했다.
+- `PED-NCTV-001`: 두 lab의 실제 사용 문단을 관찰 가능한 동작으로 좁혔다.
+- 공식 재대조일을 `non-css-target-values.meta.ts`와 이 handoff에서 `2026-08-13`으로 갱신했다.
+
+### verification
+
+- Official Coverage: 공식 원문 15개 item, catalog 공식 행 15개, section 합계 15개를 정적으로 재대조했다.
+- Runtime probe: GSAP 3.15.0에서 `[1,2,3,4]`→`[5,6]` progress 0.5는 `[3,4,3,4]`; `[10,20]`→`[0,0,99,99]` progress 0.25는 `[7.5,15,24.75,24.75]`; progress 0 복귀는 `[10,20,0,0]` length 4였다.
+- Runtime/Display Sync: `SvgAttributeLab`의 baseline/selector/target/duration/ease/paused/onUpdate/restart와 `NumericArrayLab`의 start/end/ease/duration/paused/progress가 각각 동일 descriptor에서 파생됨을 정적으로 추적했다.
+- TypeScript parse: 대상 14개 TS/TSX 파일, parse diagnostic 0; relative import 미해결 0.
+- Coverage/sourcePath: section 합계 15, meta 분모 15, catalog 공식 item 15(중복 ID 0), implementation probe 1; route의 lazy import와 lesson 등록을 확인했다.
+- `git diff --check -- <대상 page> <handoff>`: exit 0.
+- Vite build·Storybook build: `PASS` — 메인 통합에서 2026-08-13 각각 exit 0.
+- 실제 브라우저 조작·키보드·reduced-motion·320/390px: `NOT VERIFIED`.
+
+### unresolved
+
+- BLOCK: none after static re-verification.
+- ADVISORY: none.
+- NOT VERIFIED: 실제 브라우저에서 두 lab의 controls/replay/cleanup, 키보드, reduced-motion, 320px·390px 레이아웃.
+
+### overallDecision
+
+`NOT VERIFIED` — 공식 대조와 정적 수정, 통합 build·Storybook은 완료했으나 실제 브라우저 증거가 남아 있다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

@@ -5,7 +5,7 @@ export const timelineLabelsMeta = {
   summary:
     'Timeline의 2.4초는 장면을 하나 넣거나 빼는 순간 3.1초가 됩니다. 그래서 GSAP은 시각에 이름을 붙이게 해 둡니다. 이름을 붙이고, 지금 어느 이름 안에 있는지 묻고, 그 이름으로 이동하는 것이 이 페이지의 전부입니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-labels/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.labels', href: 'https://gsap.com/docs/v3/GSAP/Timeline/labels' },
     { label: 'Timeline.addLabel()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/addLabel()' },

@@ -16,12 +16,7 @@ export function ListenerCleanupSection() {
         description="component cleanup에서는 addEventListener에 넘긴 type과 callback reference를 그대로 removeEventListener에 넘긴 뒤 instance를 kill합니다."
       />
       <div className="draggable-events-page__prose">
-        <p>
-          공식 usage는 <code>press</code> listener에서 <code>this</code>{' '}
-          target을 GSAP으로 꾸미는 모습을 보여 줍니다. 하지만 현재 installed
-          dispatcher source는 listener를 Draggable instance에 bind하고 event
-          payload의 <code>target</code>에 DOM target을 담습니다.
-        </p>
+        <p>공식 usage는 <code>press</code> listener의 <code>this</code>를 Draggable target으로 설명합니다. 현재 설치된 GSAP 3.15.0에서는 callback의 <code>this</code>가 Draggable instance이고 event payload의 <code>target</code>이 DOM target입니다.</p>
         <p>
           이 차이 때문에 lab listener는 <code>this</code>에 의존하지 않고 event
           name과 instance state만 log합니다. cleanup은 같은 callback reference로
@@ -31,10 +26,9 @@ export function ListenerCleanupSection() {
       <div className="draggable-events-page__warning">
         <h3>공식 설명과 설치본의 차이</h3>
         <p>
-          rendered docs의 listener <code>this</code> target 설명은 official
-          coverage로 보존했습니다. installed GSAP 3.15 dispatcher 관찰은
-          implementation evidence일 뿐 공식 claim을 바꾸지 않으며, event
-          payload의 target 사용을 더 안전한 경계로 남깁니다.
+          공식 문서와 설치된 버전의 callback context가 다르므로 이 예제는{' '}
+          <code>this</code>에 의존하지 않습니다. DOM target이 필요하면 callback에
+          전달된 event의 <code>target</code>을 확인하세요.
         </p>
       </div>
     </section>

@@ -15,10 +15,10 @@ export function CoreBoundarySection() {
         <article>
           <p className="core-map-page__badge">선택 확장</p>
           <h3>Plugin</h3>
-          <p><strong>plugin</strong>은 Core가 모르는 특수 대상이나 동작을 연결하는 확장입니다. 필요한 plugin만 더하므로 기본 Core는 비교적 작게 유지됩니다.</p>
+          <p><strong>plugin</strong>은 Core에 특정 문제를 해결하는 기능을 더하는 확장입니다. 필요한 plugin만 더하므로 기본 Core는 비교적 작게 유지됩니다.</p>
         </article>
       </div>
-      <p className="core-map-page__boundary-note"><strong>선택 기준</strong> 일반 property를 시간에 따라 바꾸면 Core부터 확인합니다. scroll 위치, drag gesture, SVG morph처럼 도메인 규칙이 필요할 때 해당 plugin family로 이동합니다.</p>
+      <p className="core-map-page__boundary-note"><strong>선택 기준</strong> 일반 property를 시간에 따라 바꾸면 Core부터 확인합니다. scroll 위치, drag gesture, SVG morph처럼 별도 규칙이 필요할 때 해당 plugin 분류로 이동합니다.</p>
     </section>
   )
 }

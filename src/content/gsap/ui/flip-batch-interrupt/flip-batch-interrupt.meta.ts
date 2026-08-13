@@ -2,7 +2,7 @@
 export const flipBatchInterruptMeta = {
   title: 'Flip batch는 새 layout과 이전 flip 충돌을 어떻게 막을까요?',
   category: 'GSAP · UI · Flip',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   sourcePath: 'src/content/gsap/ui/flip-batch-interrupt/',
   officialSources: [
     {

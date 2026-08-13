@@ -4,7 +4,7 @@ export const draggableCreateMeta = {
   category: 'GSAP · UI · Draggable',
   summary: 'DOM target 하나에 연결되는 Draggable instance를 만들고, 같은 target으로 다시 찾아 target과 vars를 읽는 가장 작은 흐름을 살펴봅니다.',
   sourcePath: 'src/content/gsap/ui/draggable-create/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Draggable', href: 'https://gsap.com/docs/v3/Plugins/Draggable/' },
     { label: 'Draggable.create()', href: 'https://gsap.com/docs/v3/Plugins/Draggable/static.create()/' },

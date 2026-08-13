@@ -58,12 +58,10 @@ gsap.registerPlugin(CustomEase)`}</code>
       </pre>
 
       <div className="custom-ease-page__note">
-        <h3>import 두 줄 중 아래 한 줄만 공식 문서의 문장입니다</h3>
+        <h3>import 경로는 설치 방식에 맞춥니다</h3>
         <p>
-          공식 CustomEase 페이지가 게시한 등록 코드는 <code>gsap.registerPlugin(CustomEase)</code>입니다. 그 위 두 줄의 import 경로는 이
-          프로젝트가 실제로 쓰는 ES module 형태이며, 설치 방법과 진입점 자체는{' '}
-          <a href={toHref('/fundamentals/installation')}>설치와 등록 페이지</a>가 소유합니다. 공식 FAQ도 설치 방법은 installation
-          페이지를 보라고 넘깁니다.
+          위 import 경로는 이 프로젝트의 ES module 환경에 맞춘 형태입니다. CDN·NPM·download 중 어느 방식을 쓰는지에 따라
+          가져오는 코드가 달라지므로 <a href={toHref('/fundamentals/installation')}>설치와 등록 페이지</a>에서 환경에 맞는 형태를 확인하세요.
         </p>
       </div>
 

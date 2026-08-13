@@ -9,7 +9,7 @@ export function StateOwnershipSection() {
         number="01"
         id="state-ownership"
         title="누가 시작값과 끝값을 정하나요?"
-        description="현재값은 Tween을 만들 때 대상에 이미 있는 값입니다. method마다 이 값을 읽는지 무시하는지가 다릅니다."
+        description="현재값은 Tween이 처음 값을 계산해 대상에 적용하는 render 시점에 읽는 값입니다. from은 immediateRender 기본값이 true라 보통 생성 직후 이 값을 읽지만, method와 설정에 따라 첫 render 시점은 달라집니다."
       />
       <div className="tween-values-page__matrix-wrap">
         <table className="tween-values-page__matrix">

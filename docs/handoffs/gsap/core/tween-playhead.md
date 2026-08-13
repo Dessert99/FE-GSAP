@@ -16,7 +16,7 @@ current cycle과 전체 반복 위치, raw progress와 eased ratio를 분리해 
   - `https://gsap.com/docs/v3/GSAP/Tween/time%28%29/`
   - `https://gsap.com/docs/v3/GSAP/Tween/totalProgress%28%29/`
   - `https://gsap.com/docs/v3/GSAP/Tween/totalTime%28%29/`
-- reviewedAt: `2026-08-03`
+- reviewedAt: `2026-08-13`
 - category: `Fundamentals`
 - slug: `tween-playhead`
 - sourcePageIds: primary `source:tween-ratio`; related 위 5개 source
@@ -80,6 +80,8 @@ current cycle과 전체 반복 위치, raw progress와 eased ratio를 분리해 
 
 `none` — 6 canonical sources에서 45개 항목을 확인했다.
 
+공식 `time()`·`totalTime()` 문서의 음수 입력 설명은 source item으로 보존한다. 다만 설치본 GSAP 3.15.0의 setter 결과와 충돌하므로 `FACT-TP-001`에서 별도 판정한다.
+
 ### moduleSelection
 
 - callable method + class instance + current-cycle/total, raw/eased concept guide
@@ -97,14 +99,14 @@ current cycle과 전체 반복 위치, raw progress와 eased ratio를 분리해 
 
 | source items | localEvidence | localStatus |
 | --- | --- | --- |
-| TP-RATIO-* 6개 | `tween-playhead.catalog.ts:3-6`, `RawEasedSection.tsx:7-9`, `PlayheadValuesExample.tsx:34-41` | covered |
-| TP-PROGRESS-* 8개 | `tween-playhead.catalog.ts:7-10,31`, `LocalTotalSection.tsx:8-10`, `PlayheadValuesExample.tsx:31-41` | covered |
-| TP-SEEK-* 7개 | `tween-playhead.catalog.ts:11-14,35`, `SeekEventsExample/useSeekEventsAnimation.ts:27-49`, `SeekEventsExample.tsx` | covered |
-| TP-TIME-* 9개 | `tween-playhead.catalog.ts:15-18,32`, `LocalTotalSection.tsx:8-10`, `CallbacksBoundariesSection.tsx:8-12` | covered |
-| TP-TOTAL-PROGRESS-* 6개 | `tween-playhead.catalog.ts:19-22,33`, `PlayheadValuesExample.tsx:31-41` | covered |
-| TP-TOTAL-TIME-* 9개 | `tween-playhead.catalog.ts:23-26,34`, `CallbacksBoundariesSection.tsx:8-12`, `PlayheadValuesExample.tsx:17-23` | covered |
+| TP-RATIO-* 6개 | `tween-playhead.catalog.ts`, `RawEasedSection.tsx`, `PlayheadValuesExample.tsx` | covered |
+| TP-PROGRESS-* 8개 | `tween-playhead.catalog.ts`, `LocalTotalSection.tsx`, `PlayheadValuesExample.tsx` | covered |
+| TP-SEEK-* 7개 | `tween-playhead.catalog.ts`, `SeekEventsExample/useSeekEventsAnimation.ts`, `SeekEventsExample.tsx` | covered |
+| TP-TIME-* 9개 | `tween-playhead.catalog.ts`, `LocalTotalSection.tsx`, `CallbacksBoundariesSection.tsx`, `PlayheadValuesExample.tsx` | covered |
+| TP-TOTAL-PROGRESS-* 6개 | `tween-playhead.catalog.ts`, `PlayheadValuesExample.tsx` | covered |
+| TP-TOTAL-TIME-* 9개 | `tween-playhead.catalog.ts`, `CallbacksBoundariesSection.tsx`, `PlayheadValuesExample.tsx` | covered |
 
-`components/PageCoverage/PageCoverage.tsx`가 stable ID 45개를 학습자에게 compact coverage evidence로 렌더링한다.
+`tween-playhead.catalog.ts`는 stable ID 45개를 내부 근거로 보존한다. `components/PageCoverage/PageCoverage.tsx`는 제작용 ID를 노출하지 않고 여섯 단계 학습 순서만 렌더링한다.
 
 ### relatedPages
 
@@ -122,7 +124,7 @@ create: page/meta/catalog/CSS, SectionHeading/PageCoverage, MentalModel/RawEased
 ### exampleContracts
 
 - `PlayheadValuesExample`: paused duration 2/repeat 1 Tween을 totalProgress slider로 scrub하며 progress/ratio/time/totalProgress/totalTime 표와 code를 같은 descriptor에서 갱신한다.
-- `SeekEventsExample`: suppressEvents checkbox와 jump/reset으로 callback count와 paused/reversed 보존을 관찰한다.
+- `SeekEventsExample`: suppressEvents checkbox와 jump/reset으로 callback count와 paused 상태 보존을 관찰하고, reversed 보존은 공식 설명으로 구분한다.
 - autoplay 없음, range/checkbox/button label, output/table, reduced-motion에서도 즉시 scrub만 사용한다.
 
 ### nonGoals
@@ -140,6 +142,10 @@ create: page/meta/catalog/CSS, SectionHeading/PageCoverage, MentalModel/RawEased
 - Source Curator + Content Architect: `/root/install_source_arch`
 - 구현 후 독립 전문 review와 release reviewer
 
+### verifiedPerspectives
+
+2026-08-13 감사에서 Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Structure/Comment, 정적 Accessibility/Motion을 다시 판정했다. Build/Integration은 메인 통합에서 통과했고 실제 브라우저 동작은 `NOT VERIFIED`다.
+
 ### findings
 
 | ID | status | evidence | impact | requiredAction |
@@ -155,18 +161,46 @@ create: page/meta/catalog/CSS, SectionHeading/PageCoverage, MentalModel/RawEased
 | IR-CORE14-FINAL | PASS | 구현에 참여하지 않은 reviewer가 네 수정과 GSAP seek 순서를 재검증 | 정적 release gate 통과 | Browser gate만 남음 |
 | CROSS-CORE14-001 | ADDRESSED | light-theme ink를 global dark tokens로 통일 | dark-on-dark text blocker 해소 | none |
 | CROSS-CORE14-002 | ADDRESSED | 두 target descriptor x를 180→130으로 줄여 320px track 범위 안에 유지 | small-screen overflow 해소 | Browser 390px 실조작 필요 |
+| SRC-TP-001 | PASS | 2026-08-13 ratio, progress(), seek(), time(), totalProgress(), totalTime() canonical 6개를 다시 조회해 45개 source item을 대조했다 | 현재 공식 coverage 유지 | none |
+| FACT-TP-001 | BLOCK → ADDRESSED → PASS | 공식 문서는 음수 `time()`·`totalTime()`을 끝 기준으로 설명하지만 GSAP 3.15.0 probe에서 `time(-1)`·`totalTime(-2)` 모두 0이었다 / 문서·설치본 차이를 명시하고 `duration - offset` 양수 계산을 안내했다 | 설치본에서 끝 기준 이동을 기대하고 시작점으로 이동하는 오류 방지 | none |
+| UPSTREAM-TP-001 | ADVISORY | 2026-08-13 공식 음수 입력 설명과 설치본 GSAP 3.15.0 결과가 계속 다르다 | 이후 GSAP upgrade에서 동작 또는 문서가 다시 맞춰질 수 있음 | 의존성 갱신 때 canonical과 probe 재확인 |
+| SYNC-TP-001 | BLOCK → ADDRESSED → PASS | 두 코드 패널이 runtime과 다른 `.box` selector를 표시했고, PlayheadValues는 다섯 getter를, SeekEvents는 비교 전 `seek(0, true).pause()`와 count 초기화를 숨겼다 / 실제 class·호출 순서·getter를 표시했다 | control 결과와 복사 코드의 의미 일치 | none |
+| LEARN-TP-001 | BLOCK → ADDRESSED → PASS | playhead·cycle·repeatDelay를 정의하지 않고 사용했으며 `callback traversal` 같은 내부적인 표현과 “두 번 반복” aria 설명이 학습을 방해했다 / 용어를 먼저 정의하고 callback 실행·repeat 1 표현으로 수정했다 | 반복 위치 모델과 조작 목적을 바로 이해할 수 있음 | none |
+| WRITE-TP-001 | BLOCK → ADDRESSED → PASS | 첫 화면이 `OFFICIAL COVERAGE 45/45`와 stable ID를 학습자에게 노출했다 / 여섯 단계의 질문 중심 학습 순서로 교체했다 | 제작 workflow 용어 제거 | none |
+| A11Y-TP-001 | BLOCK → ADDRESSED → PASS | local·total method 표에 caption이 없고 timeline aria-label의 반복 횟수가 부정확했다 / 표 caption과 정확한 repeat 1 설명을 추가했다 | 표 목적과 시각 정보의 대체 설명 명확화 | none |
+| BUILD-TP-001 | PASS | 2026-08-13 메인 통합 `npm run build`, `npm run build-storybook` 모두 exit 0 | 현재 변경의 compile·bundle 통과 | none |
+| BROWSER-TP-001 | PASS → NOT VERIFIED | 2026-08-04 소유자 승인 기록은 현재 diff 뒤의 브라우저 증거로 재사용하지 않는다 | 실제 control·키보드·작은 화면 동작 미확인 | 메인 에이전트 브라우저 검수 |
 
 ### verificationEvidence
 
-- `2026-08-03 npm run build` — `tsc && vite build`, 171 modules, `TweenPlayheadPage` JS/CSS chunk 생성, exit 0.
-- `2026-08-03` 최종 통합 build — 189 modules, 확정 5개 route의 page chunk 포함, exit 0.
-- `2026-08-03 npm run build-storybook` — 327 modules, exit 0; 기존 500 kB size warning만 발생.
+- historical: `2026-08-03 npm run build` — `tsc && vite build`, 171 modules, `TweenPlayheadPage` JS/CSS chunk 생성, exit 0.
+- historical: `2026-08-03` 최종 통합 build — 189 modules, 확정 5개 route의 page chunk 포함, exit 0.
+- historical: `2026-08-03 npm run build-storybook` — 327 modules, exit 0; 기존 500 kB size warning만 발생.
 - static integration — `/fundamentals/tween-playhead` lazy route와 lesson group 등록 확인.
 - local HTTP — 최종 Vite server에서 route `200` 응답 확인.
-- Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 항목별 상세 기록은 남기지 않았고, 세부 검수 피드백은 전체 페이지 완성 뒤 일괄 진행한다.
+- historical Browser 실조작 — `2026-08-04` 저장소 소유자가 브라우저에서 직접 조작하고 PASS로 판정했다. 현재 변경의 증거로 재사용하지 않는다.
 - 독립 review — IR-CORE14-001~004 수정 후 재검수 모두 PASS; seek true→false callback 0→1, paused true 보존 확인.
 - cross-page review — dark theme 상속과 320px target 범위를 수정 후 재검수 PASS.
+- 공식 원문 대조 — 2026-08-13 canonical 6개에서 signature, parameter 기본값, 반환값, 예제, repeat·ease·clamp 설명을 재확인했다.
+- runtime probe — GSAP 3.15.0에서 totalProgress 0.25/0.5/0.51/1 snapshot, seek true/false callback 0/1, paused 보존, totalDuration 11과 음수·범위 밖 totalTime을 확인했다.
+- 정적 검증 — 두 예제의 control → runtime 호출 → 관찰값 → 표시 코드와 catalog 45개 ID를 대조했다.
+- 메인 통합 build·Storybook — 2026-08-13 두 명령 모두 exit 0.
+- 브라우저 — 현재 diff에서는 실행하지 않았다.
 
 ### releaseDecision
 
-`PASS` — 구현·45/45 compact coverage·route·build·독립 정적 review를 완료했고, 남아 있던 Browser interaction gate는 `2026-08-04` 저장소 소유자의 실조작 확인으로 해소했다.
+`NOT VERIFIED` — 정적 BLOCK과 build·Storybook은 통과했으며 실제 브라우저 검수만 남아 있다.
+
+### browserReviewClosure
+
+- status: `NOT VERIFIED`
+- reviewedAt: `2026-08-13` (Asia/Seoul)
+- requiredChecks: 두 slider·checkbox·button의 실제 변화, callback count, 키보드 focus, 320/390px overflow, route 이탈·복귀 cleanup.
+- evidenceBoundary: 이전 승인과 build 기록은 현재 변경 뒤의 증거로 재사용하지 않는다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

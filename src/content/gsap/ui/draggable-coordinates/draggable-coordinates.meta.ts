@@ -7,7 +7,7 @@ export const draggableCoordinatesMeta = {
   summary:
     'drag의 시작·현재·변화·종료 값을 target과 pointer 좌표로 나누어 읽고, rotation mode의 다른 의미도 함께 확인합니다.',
   sourcePath: 'src/content/gsap/ui/draggable-coordinates/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'deltaX',

@@ -1,4 +1,4 @@
-/** P29 header와 physics 학습 단위를 조립한다. */
+/** 두 physics plugin의 선택 기준과 실제 tween 예제를 조립한다. */
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { PhysicsMotionLab } from './examples/PhysicsMotionLab/PhysicsMotionLab'
 import { BoundariesSection } from './sections/BoundariesSection/BoundariesSection'
@@ -19,10 +19,6 @@ export function PhysicsMotionPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>
-          <code>{physicsMotionMeta.sourcePath}</code> · 공식 대조일{' '}
-          {physicsMotionMeta.reviewedAt}
-        </p>
       </header>
       <ModeSelectionSection />
       <PhysicsMotionLab />

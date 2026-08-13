@@ -73,7 +73,7 @@
 
 .tween-config-coverage__summary {
   display: grid;
-  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 24px;
   padding: 20px 22px;
@@ -93,8 +93,7 @@
 }
 
 .tween-config-coverage__summary span,
-.tween-config-coverage__summary p,
-.tween-config-coverage small {
+.tween-config-coverage__summary p {
   color: var(--color-muted);
   font-size: 13px;
 }

@@ -7,26 +7,33 @@ export function InvalidateLab() {
   const { scope, descriptor, runs, status, reducedMotion, run, reset } = useInvalidateAnimation()
 
   // 실행에 쓰인 descriptor 값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `const tween = gsap.to('${descriptor.selector}', {
+  const code = `gsap.set('${descriptor.selector}', { x: 0 })
+
+const tween = gsap.to('${descriptor.selector}', {
   x: '${descriptor.shift}',
   duration: ${descriptor.duration},
   ease: 'none',
   paused: true,
 })
 
-// [restart()만] 버튼
-tween.restart()
+function run(kind) {
+  // [invalidate() 후 restart()] 버튼만 이전 시작값과 끝값을 지웁니다.
+  if (kind === 'invalidate') tween.invalidate()
 
-// [invalidate() 후 restart()] 버튼
-tween.invalidate()
-tween.restart()${
+  // 두 버튼 모두 이번 실행이 실제로 쓰는 시작값과 끝값을 읽습니다.
+  tween.progress(0)
+  const startX = gsap.getProperty('${descriptor.selector}', 'x')
+  tween.progress(1)
+  const endX = gsap.getProperty('${descriptor.selector}', 'x')
+
+  ${
     descriptor.reducedMotion
-      ? `
-
-// 모션 감소 설정이라 재생 대신 헤드를 끝으로 옮깁니다.
-tween.progress(1)`
-      : ''
-  }`
+      ? `// 모션 감소 설정에서는 이미 옮긴 끝 위치에 그대로 둡니다.`
+      : `// 시작 위치로 되감은 뒤 같은 Tween을 실제로 재생합니다.
+  tween.progress(0)
+  tween.restart()`
+  }
+}`
 
   return (
     <section className="invalidate-lab" aria-labelledby="invalidate-lab-title">

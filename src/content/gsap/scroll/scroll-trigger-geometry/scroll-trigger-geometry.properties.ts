@@ -7,12 +7,12 @@ export const scrollTriggerGeometryProperties = [
   [
     'trigger / pin',
     'Element | undefined',
-    'trigger source와 optional pin owner',
+    'trigger element와 선택적 pin element',
   ],
   [
     'scroller / scroll()',
     'Element | Window / Number',
-    'scrolling owner와 current position',
+    'scroll element와 현재 위치',
   ],
   [
     'isInViewport / positionInViewport',

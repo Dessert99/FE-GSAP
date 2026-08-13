@@ -11,7 +11,7 @@ export function CleanupSection() {
         instance remove하고 static <code>untrack(target)</code>으로 whole-target
         lifecycle을 끝냅니다. tracker가 읽은 velocity로 inertia tween을 만드는
         다음 소비자는{' '}
-        <a href={toHref('/fundamentals/inertia')}>P15 InertiaPlugin</a>에서
+        <a href={toHref('/fundamentals/inertia')}>InertiaPlugin 페이지</a>에서
         다룹니다.
       </p>
     </section>

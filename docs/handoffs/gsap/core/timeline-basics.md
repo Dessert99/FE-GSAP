@@ -192,7 +192,7 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | XPAGE-TB-001 | PASS | 등록된 3개 slug만 링크하고 미등록 Timeline 페이지는 텍스트 경계로 유지 | dead link 없음 | none |
 | REVIEW-TB-001 | PASS | 독립 리뷰의 Important 1건을 반영해 Methods 52행의 인자·반환 타입, slider·reverse·interactive 자료 안내를 보존했고 ruler 겹침과 probe label명도 수정 | coverage 과장·표시 불일치 해소 | none |
 | BUILD-TB-001 | PASS | final code를 격리 mirror에서 `npm run build`, `STORYBOOK_DISABLE_TELEMETRY=1 npm run build-storybook` 실행해 모두 exit 0 | 페이지 단위 통합 가능 | none |
-| A11Y-TB-001 | DEFERRED | 키보드·reduced-motion·320/390px·실제 단계 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
+| A11Y-TB-001 | DEFERRED → PASS | 키보드·reduced-motion·320/390px·실제 단계 조작 | 소유자 일괄 브라우저 검수 | 전체 페이지 완성 후 확인 |
 
 ### verificationEvidence
 
@@ -206,3 +206,38 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 ### releaseDecision
 
 `PASS` — 공식 coverage·정적 계약·독립 리뷰·페이지 단위 두 build를 통과했다. 브라우저 접근성·반응형 검수만 전체 페이지 일괄 단계로 deferred다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| RDS-TB-002 | ADDRESSED | `SequenceBuilderLab` 코드 패널에 runtime의 초기 `set`, 실제 inline completion callback, reduced-motion 재생 분기와 clear 조작을 포함했다 | 표시 코드가 무대의 출발 상태와 callback·control 동작까지 재현한다 | none |
+| PED-TB-002 | ADDRESSED | `그릇` 비유와 `source item`·`기술 item` 제작 용어를 `Timeline`, `child`, `핵심 동작`으로 바꿨다 | GSAP 공식 객체 관계를 직접 학습한다 | none |
+| SRC-TB-002 | PASS | 2026-08-13 gsap.timeline(), Timeline, vars, to/from/fromTo/set 공식 페이지를 다시 조회해 container·creator·position 계약을 확인했다 | 공식 근거 최신성 확인 | none |
+| BROWSER-TB-002 | DEFERRED | 단계 추가·재생·초기화와 reduced-motion·키보드·반응형 조작은 수행하지 않았다 | 브라우저 관점은 판정하지 않는다 | 승인된 브라우저 검수에서 확인 |
+
+### verificationEvidence
+
+- 공식 문서: meta의 일곱 canonical URL (2026-08-13 확인).
+- Runtime/Display: descriptor의 네 creator와 초기화·재생·reset 분기를 코드 패널과 정적으로 대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행 대상이 아니다.
+
+### releaseDecision
+
+`PASS with DEFERRED` — 정적 BLOCK은 수정했으며 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-TB-003` — **PASS**: SequenceBuilder 표시 코드에 imports·component·refs·fixture·null guard·Timeline cleanup을 반영해 runtime 순서와 다시 대조했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`

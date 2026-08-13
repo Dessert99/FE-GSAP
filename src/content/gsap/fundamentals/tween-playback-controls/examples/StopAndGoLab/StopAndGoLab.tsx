@@ -1,6 +1,6 @@
 /** 세 명령의 차이를 버튼 조작·상태 관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import { useStopAndGoAnimation } from './useStopAndGoAnimation'
-import type { StopAndGoCommand } from './useStopAndGoAnimation'
+import type { StopAndGoAction, StopAndGoCommand } from './useStopAndGoAnimation'
 import './StopAndGoLab.css'
 
 // 인자 없이 지금 자리를 기준으로 동작하는 세 명령
@@ -16,23 +16,22 @@ const jumpCommands: { id: StopAndGoCommand; label: string }[] = [
   { id: 'pauseAt', label: 'pause(atTime)' },
 ]
 
+/** 실행 기록을 실제 호출 문법으로만 바꿔 코드와 상태 안내에 함께 쓴다. */
+function formatCall(action: StopAndGoAction) {
+  if (action.command === 'pauseAt') return `tween.pause(${action.time})`
+  if (action.command === 'playFrom') return `tween.play(${action.time})`
+  if (action.command === 'turnBackward') return 'tween.reversed(true)'
+  return `tween.${action.command}()`
+}
+
 export function StopAndGoLab() {
   // runtime이 소유한 controls·관찰값·명령 action을 그대로 받아 화면에만 쓴다
-  const { scope, jumpTo, setJumpTo, position, observation, lastCommand, descriptor, reducedMotion, run } =
+  const { scope, jumpTo, setJumpTo, position, observation, lastAction, descriptor, reducedMotion, run } =
     useStopAndGoAnimation()
 
-  // 방금 실행된 호출을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const callSyntax: Record<StopAndGoCommand, string> = {
-    pause: 'tween.pause()',
-    pauseAt: `tween.pause(${descriptor.jumpTo})`,
-    play: 'tween.play()',
-    playFrom: `tween.play(${descriptor.jumpTo})`,
-    resume: 'tween.resume()',
-    turnBackward: 'tween.reversed(true)',
-  }
-
-  // 마지막 호출과 그 직후 상태를 한 덩어리 코드로 직렬화한다
-  const code = `// 이 예제가 미리 만들어 둔 Tween 하나입니다.
+  // 마지막 호출과 현재 관찰 상태를 한 덩어리 코드로 직렬화한다
+  const code = `// 이 예제와 같은 값으로 Tween을 만듭니다.
+const target = { value: 0 }
 const tween = gsap.to(target, {
   value: 100,
   duration: ${descriptor.duration},
@@ -41,9 +40,9 @@ const tween = gsap.to(target, {
 })
 
 // 방금 누른 버튼이 부른 호출입니다.
-${lastCommand ? callSyntax[lastCommand] : '// 아직 아무 명령도 부르지 않았습니다.'}
+${lastAction ? formatCall(lastAction) : '// 아직 아무 명령도 부르지 않았습니다.'}
 
-// 그 직후 상태를 Tween에서 그대로 읽은 값입니다.
+// 현재 상태를 Tween에서 그대로 읽은 값입니다.
 tween.paused()   // → ${observation.paused}
 tween.reversed() // → ${observation.reversed}
 tween.isActive() // → ${observation.active}`
@@ -85,7 +84,7 @@ tween.isActive() // → ${observation.active}`
           </fieldset>
 
           <fieldset>
-            <legend>방향 스위치 준비</legend>
+            <legend>역방향 준비</legend>
             <button type="button" onClick={() => run('turnBackward')}>
               reversed(true)
             </button>
@@ -122,28 +121,22 @@ tween.isActive() // → ${observation.active}`
 
       {/* 매 프레임 바뀌는 time은 넣지 않는다 — 넣으면 live region이 프레임마다 다시 읽힌다 */}
       <p className="stop-and-go-lab__status" role="status">
-        {lastCommand ? `방금 ${callSyntax[lastCommand]} 을(를) 불렀습니다.` : '아직 아무 명령도 부르지 않았습니다.'} 현재 상태 —
+        {lastAction ? `방금 ${formatCall(lastAction)} 을(를) 불렀습니다.` : '아직 아무 명령도 부르지 않았습니다.'} 현재 상태 —
         멈춤 {String(observation.paused)}, 뒤로 {String(observation.reversed)}, 움직이는 중 {String(observation.active)}.
       </p>
 
       <dl className="stop-and-go-lab__observation">
         <div>
           <dt id="sag-paused">paused()</dt>
-          <dd>
-            <output aria-labelledby="sag-paused">{String(observation.paused)}</output>
-          </dd>
+          <dd aria-labelledby="sag-paused">{String(observation.paused)}</dd>
         </div>
         <div>
           <dt id="sag-reversed">reversed()</dt>
-          <dd>
-            <output aria-labelledby="sag-reversed">{String(observation.reversed)}</output>
-          </dd>
+          <dd aria-labelledby="sag-reversed">{String(observation.reversed)}</dd>
         </div>
         <div>
           <dt id="sag-active">isActive()</dt>
-          <dd>
-            <output aria-labelledby="sag-active">{String(observation.active)}</output>
-          </dd>
+          <dd aria-labelledby="sag-active">{String(observation.active)}</dd>
         </div>
         {/* 매 프레임 바뀌는 값이라 output 대신 일반 요소로 둔다 — output은 스스로 live region이 된다 */}
         <div>
@@ -179,8 +172,8 @@ tween.isActive() // → ${observation.active}`
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
             공식 문서가 그렇게 정해 두었습니다. <code>play()</code>는 "instance가 paused도 reversed도 아니게 만든다"고 적혀 있어서{' '}
-            <strong>두 스위치를 모두 건드립니다.</strong> <code>resume()</code>은 "방향을 바꾸지 않고 재개한다"고 적혀 있어서{' '}
-            <strong>멈춤 스위치 하나만 건드립니다.</strong>
+            <strong>멈춤을 풀고 방향을 앞으로 바꿉니다.</strong> <code>resume()</code>은 "방향을 바꾸지 않고 재개한다"고 적혀 있어서{' '}
+            <strong>멈춤만 풉니다.</strong>
           </p>
         </article>
         <article>

@@ -12,19 +12,19 @@ const methods: { value: EndpointMethod; label: string }[] = [
 ]
 
 // runtime descriptor를 의미 변경 없이 GSAP 문법으로만 직렬화한다.
-function createEndpointCode(descriptor: EndpointDescriptor) {
+function createEndpointCode(descriptor: EndpointDescriptor, targetSelector: string) {
   // 네 비교가 공유하는 생성 전 현재 상태도 runtime과 같은 순서로 표시한다.
-  const initialState = `gsap.set('.box', { x: ${descriptor.initialVars.x} }) // 예제의 현재 상태`
-  if (descriptor.method === 'to') return `${initialState}\ngsap.to('.box', { x: ${descriptor.vars.x}, duration: ${descriptor.vars.duration}, ease: '${descriptor.vars.ease}' })`
-  if (descriptor.method === 'from') return `${initialState}\ngsap.from('.box', { x: ${descriptor.vars.x}, duration: ${descriptor.vars.duration}, ease: '${descriptor.vars.ease}' })`
-  if (descriptor.method === 'fromTo') return `${initialState}\ngsap.fromTo('.box',\n  { x: ${descriptor.fromVars.x} },\n  { x: ${descriptor.toVars.x}, duration: ${descriptor.toVars.duration}, ease: '${descriptor.toVars.ease}' }\n)`
-  return `${initialState}\ngsap.set('.box', { x: ${descriptor.vars.x} })`
+  const initialState = `gsap.set('${targetSelector}', { x: ${descriptor.initialVars.x} }) // 예제의 현재 상태`
+  if (descriptor.method === 'to') return `${initialState}\ngsap.to('${targetSelector}', { x: ${descriptor.vars.x}, duration: ${descriptor.vars.duration}, ease: '${descriptor.vars.ease}' })`
+  if (descriptor.method === 'from') return `${initialState}\ngsap.from('${targetSelector}', { x: ${descriptor.vars.x}, duration: ${descriptor.vars.duration}, ease: '${descriptor.vars.ease}' })`
+  if (descriptor.method === 'fromTo') return `${initialState}\ngsap.fromTo('${targetSelector}',\n  { x: ${descriptor.fromVars.x} },\n  { x: ${descriptor.toVars.x}, duration: ${descriptor.toVars.duration}, ease: '${descriptor.toVars.ease}' }\n)`
+  return `${initialState}\ngsap.set('${targetSelector}', { x: ${descriptor.vars.x} })`
 }
 
 /** method를 바꾸며 같은 target의 두 끝이 어디에서 오는지 관찰하게 한다. */
 export function EndpointOwnershipExample() {
   // runtime이 소유한 method·descriptor·실행 action을 화면에 연결한다.
-  const { scope, targetClassName, method, setMethod, descriptor, reducedMotion, replay } = useEndpointOwnershipAnimation()
+  const { scope, targetSelector, targetClassName, method, setMethod, descriptor, reducedMotion, replay } = useEndpointOwnershipAnimation()
   // 현재 선택의 시작값과 끝값을 preview에서 텍스트로도 전달한다.
   const ownershipRows = [
     { label: '생성 전 현재값', value: `x ${descriptor.initialVars.x}` },
@@ -32,7 +32,7 @@ export function EndpointOwnershipExample() {
     { label: '실제 끝값', value: descriptor.ownership.end },
   ]
   // 표시 코드는 실제 호출에 사용된 descriptor만 직렬화한다.
-  const code = createEndpointCode(descriptor)
+  const code = createEndpointCode(descriptor, targetSelector)
 
   return (
     <div ref={scope}>

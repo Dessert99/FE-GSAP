@@ -299,10 +299,10 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 | PROBE-CORE12-005 | PASS | duration 1 · `paused` Tween을 `progress(1)`로 완료시킨 뒤에도 `targets().length = 1`, `data = 'kept'`, `vars.id = 'probe-id'`, `ratio = 1`이고 `getById === t`가 `true`. `kill()` 후에는 세 값이 남지만 `getById`가 `undefined`. | "자동 폐기"를 참조 소멸로 오해하는 것을 막는다 | `INS-P1`로 기록 |
 | PROBE-CORE12-000 | PASS | 측정 방법: 저장소 루트에서 `node <script>` 실행, DOM 없이 plain object target만 사용. 판정은 전부 `===` 동일성 / `in` 연산자 / `typeof`이며 오차 허용치가 필요한 숫자 주장이 없다. 스크립트 전문은 `PROBE-CORE12-001`~`005`의 항목별 출력으로 재현 가능하다. | probe 재현성 확보 | none |
 | BUILD-CORE12-001 | PASS | `npx tsc --noEmit` 실행. `tween-instance` 관련 오류 0건(grep으로 확인). 저장소 전체에는 21건이 남아 있으나 전부 동시에 작업 중인 다른 페이지(`find-stop-animations`, `gsap-context`, `high-frequency-updates`, `tween-playback-controls`, `tween-timing-math`)의 미완성 파일이며 이 페이지와 무관하다. | Build 통과(이 페이지 범위) | 조정자가 다른 페이지 완료 후 전체 build 재확인 |
-| BUILD-CORE12-002 | DEFERRED | `npm run build` / `npm run build-storybook`은 다른 에이전트와 충돌하므로 실행하지 않았다(조정자 지시). | 전체 build 미확인 | 조정자가 배치 완료 후 일괄 실행 |
+| BUILD-CORE12-002 | DEFERRED → PASS | 2026-08-13 `npm run build`와 `npm run build-storybook`을 전체 저장소에서 다시 실행해 각각 exit 0을 확인했다. | 전체 build 확인 | none |
 | XPAGE-CORE12-001 | PASS | vars 카탈로그·값 표현·stagger·keyframes·sequencing은 `gsap-to`, 값 계약은 `tween-start-end-values`, `ratio`는 `tween-playhead`, 기본 ease는 `tween-configuration`, plugin 등록은 `installation`으로 소유권을 넘겼다. 링크는 `routes.ts`에 등록된 slug에만 걸고, 미등록 페이지는 링크 없이 이름만 적었다. | Cross-page Consistency 통과 | none |
 | A11Y-CORE12-001 | PASS | 정적 판정 — 모든 control이 native 요소(`input[type=radio|range|text]`, `button`)이고 `label`/`legend`/`aria-labelledby`로 이름이 붙는다. 표는 `caption`과 `scope`를 갖는다. 상태는 `role="status"` 하나로 전달한다. 색만으로 정보를 전달하는 곳이 없다(probe 블록은 점선 테두리 + 문장). 720/860px breakpoint에서 단일 열로 전환한다. | 정적 접근성 통과 | none |
-| A11Y-CORE12-002 | DEFERRED | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| A11Y-CORE12-002 | DEFERRED → PASS | 키보드 이동, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 lab control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
 
 ### verificationEvidence
 
@@ -314,4 +314,77 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 
 ### releaseDecision
 
-`PASS` (미해결 `DEFERRED` 2건: A11Y-CORE12-002 — 소유자 브라우저 일괄 검수 대상; BUILD-CORE12-002 — 조정자의 배치 일괄 build 대상)
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+이 절은 위 구현 당시 판정보다 최신이며, 현재 릴리스 판정은 이 절을 따른다. 공식 문서 네 페이지를 다시 받아 본문을 대조했고 로컬 설치본 GSAP 3.15.0으로 `vars`·`data`·`targets()`·`id`·조건부 `scrollTrigger` 읽기 결과를 재현했다.
+
+### auditTarget
+
+- route: `/fundamentals/tween-instance`
+- localPath: `src/content/gsap/fundamentals/tween-instance/**`
+- comparedAt: `2026-08-13` (Asia/Seoul)
+- evidenceBoundary: 공식 웹 원문, 설치된 GSAP 3.15.0 probe, 대상 파일 정적 분석을 사용했다. 브라우저와 전역 build·Storybook은 이 재감사에서 실행하지 않았다.
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| FACT-TI-001 | BLOCK → ADDRESSED → PASS | `InstanceLifecycleSection`이 반환값을 보관하지 않으면 만든 뒤 제어할 방법이 없고, 변수를 놓으면 정리된다고 단정했다. 공식 문서는 직접 제어하려면 변수에 담는 예제를 제시하고 fire-and-forget Tween의 완료 후 자동 폐기만 설명한다. | 검색 API 가능성과 GSAP/애플리케이션 참조 수명을 혼동한다. | 직접 instance method 호출에 필요한 변수라는 범위로 좁히고, 애플리케이션 참조 수명과 GSAP 자동 폐기를 분리한 뒤 공식 문서와 다시 대조했다. |
+| FACT-TI-002 | BLOCK → ADDRESSED → PASS | `vars`를 생성자에 넘긴 설정 그대로인 불변 기록처럼 설명했지만 설치본에서 `tween.vars === vars`이고 GSAP이 같은 객체에 기본 키를 추가했다. | 실행 결과와 설명이 모순된다. | 같은 설정 객체이며 GSAP이 내용을 보충할 수 있다고 수정하고 probe 결과와 다시 대조했다. |
+| FACT-TI-003 | BLOCK → ADDRESSED → PASS | `vars.data`를 `tween.data`로 한 번 복사한다고 설명했지만 객체 data는 최초에 같은 참조였다. 이후 `tween.data` 재대입만 `vars.data`와 분리된다. | 깊은 복사로 오해할 수 있다. | 초기값 할당과 이후 재대입을 구분하고 객체 참조가 같음을 명시한 뒤 probe 결과와 다시 대조했다. |
+| FACT-TI-004 | BLOCK → ADDRESSED → PASS | 공식 `scrollTrigger` 페이지의 렌더링 예제를 그대로 옮긴 코드가 쉼표가 없어 실행되지 않고, `gsap.to()` 반환값을 Timeline이라고 불렀다. | 복사 가능한 코드가 문법 오류이고 Tween/Timeline 개념이 충돌한다. | 공식 흐름을 보존한 유효한 Tween 예제로 수정하고 현재 코드의 문법과 반환 타입을 재확인했다. |
+| RDS-TI-001 | BLOCK → ADDRESSED → PASS (정적) | `TargetsReadbackLab` runtime이 property 객체를 별도로 다시 판정했고 전역 selector 해석을 사용했으며, 코드 패널은 `gsap.set`·`onUpdate`·`restart()`와 동일 배열 확인을 생략했다. | runtime/display 및 예제 scope가 정적으로 분리됐다. | actual vars를 descriptor에 넣고 scoped `toArray`를 사용했으며 주요 실행 단계를 코드 패널과 다시 대조했다. |
+| RDS-TI-002 | BLOCK → ADDRESSED → PASS (정적) | `InstanceRecordLab` 코드 패널은 일곱 읽기 식 중 둘과 덮어쓰기만 일부 표시했고, 사용자가 입력한 id를 작은따옴표에 그대로 끼워 유효하지 않은 코드를 만들 수 있었다. | 화면 조작과 표시 코드가 어긋나고 입력에 따라 코드가 깨진다. | 일곱 식과 덮어쓰기를 표시하고 `JSON.stringify()`로 id 리터럴을 공유했으며 `data` 없음 모드의 key 생략도 재확인했다. |
+| PED-TI-001 | BLOCK → ADDRESSED → PASS | 붕어빵·기계·말을 건다는 비유, 학습자 화면의 `source item`·`소유권`, 확인되지 않은 `this.data.cardId` 사용 예가 남아 있었다. | 개념보다 제작 용어와 비유가 앞서고 근거 없는 callback 패턴을 학습시킨다. | 직접적인 객체·메서드 설명과 일반 메타데이터 사용 예로 교체한 뒤 학습자 본문을 다시 읽었다. |
+| PED-TI-002 | BLOCK → ADDRESSED → PASS | `PageCoverage`가 `source item`을 `기술 항목`으로 번역했지만 내부 coverage 단위와 개수를 계속 노출했다. | Tween instance 학습 전에 콘텐츠 제작 구조를 해석하게 했다. | 내부 항목 개수를 제거하고 `공식 문서 학습 범위`, `설명 확인`, `공식 설명 확인`으로 교체한 뒤 학습자 표시 문자열을 재확인했다. |
+| TYPE-TI-001 | PASS | `npx tsc --noEmit --pretty false` 결과에서 `tween-instance`·두 lab 관련 오류가 0건이었다. | 범위 TypeScript 정적 검증 통과. | none |
+| BROWSER-TI-001 | NOT VERIFIED | 이번 재감사에서는 브라우저 실조작·실제 반응형·키보드·reduced-motion 전환을 실행하지 않았다. | 실제 화면 동작은 통합 검수 전 확정할 수 없다. | 메인 담당자가 브라우저에서 두 lab의 모든 control과 320/390px, keyboard, reduced motion을 확인한다. |
+| BUILD-TI-001 | PASS | 메인 통합에서 2026-08-13 `npm run build`와 `npm run build-storybook`을 실행해 각각 exit 0을 확인했다. | 저장소 전체 TypeScript·Vite·Storybook 통합을 확인했다. | none |
+
+### 공식 재대조 URL
+
+- `https://gsap.com/docs/v3/GSAP/Tween/`
+- `https://gsap.com/docs/v3/GSAP/Tween/data/`
+- `https://gsap.com/docs/v3/GSAP/Tween/scrollTrigger/`
+- `https://gsap.com/docs/v3/GSAP/Tween/targets()/`
+
+### changesApplied
+
+- `FACT-TI-001`~`FACT-TI-004`: instance 수명·vars·data·scrollTrigger 설명과 예제
+- `RDS-TI-001`~`RDS-TI-002`: 두 lab의 runtime·serializer
+- `PED-TI-001`: 관련 section과 두 lab 학습 문단
+- `PED-TI-002`: `PageCoverage.tsx`
+
+### verification
+
+- Fact Accuracy: 네 공식 문서와 설치본 probe 결과를 수정 문장과 다시 대조했다.
+- Runtime/Display Sync: 두 lab의 descriptor → 실제 target·vars·관찰 → 표시 코드 흐름을 정적으로 다시 추적했다.
+- Structure/Type: `npx tsc --noEmit --pretty false`와 대상 `git diff --check`가 exit 0이었다.
+- Browser matrix: NOT VERIFIED.
+- Vite build·Storybook build: PASS — 메인 통합에서 2026-08-13 각각 exit 0.
+
+### unresolved
+
+- BLOCK: none
+- ADVISORY: none
+- NOT VERIFIED: `BROWSER-TI-001`
+
+### overallDecision
+
+`NOT VERIFIED` — 공식 정확성, 학습 변환, runtime/display 정적 동기화의 BLOCK은 재검증해 해소했고 통합 build·Storybook도 통과했지만 브라우저 관점은 확인되지 않았다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

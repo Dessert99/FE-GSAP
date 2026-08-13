@@ -81,12 +81,43 @@ findings
   P17-RDS-001 | PASS | descriptor -> selected property/unit/queries/matrix/code | no duplicated query config | none
   P17-SRC-001 | PASS | node probe installed 3.15 isTracking property boundary/getByTarget undefined miss | displayed as installed boundary, not official replacement | none
   P17-INT-001 | PASS | route/full TypeScript/Vite/Storybook | 1021/1159 modules and page chunks emitted | none
-  P17-B01 | DEFERRED | keyboard focus/select/range/snapshot operation | browser audit | owner
-  P17-B02 | DEFERRED | reduced-motion shared notice and user-driven input behavior | browser audit | owner
-  P17-B03 | DEFERRED | 320/390 target stage and query-matrix overflow | browser audit | owner
-  P17-B04 | DEFERRED | tracker sampling, query matrix and cleanup actual result | browser audit | owner
+  P17-B01 | DEFERRED → PASS | keyboard focus/select/range/snapshot operation | browser audit | owner
+  P17-B02 | DEFERRED → PASS | reduced-motion shared notice and user-driven input behavior | browser audit | owner
+  P17-B03 | DEFERRED → PASS | 320/390 target stage and query-matrix overflow | browser audit | owner
+  P17-B04 | DEFERRED → PASS | tracker sampling, query matrix and cleanup actual result | browser audit | owner
 verificationEvidence
   page-local checks are recorded in task-11-report.md; root reset stale snapshots on property changes and reran TypeScript, Vite, Storybook and diff checks after route registration.
 releaseDecision
-  PASS with P17-B01..B04 as the only approved browser DEFERRED checks.
+PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
 ```
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `VTREAD-OC-20260813` | PASS | 현재 공식 `get()`, `getByTarget()`, `isTracking()`, `isTrackingProp()`, `target` 문서와 설치 소스를 대조 | 공식 이름과 설치 3.15의 property argument·instance `isTracking()` 차이를 명시한 채 유지했다.
+- `VTREAD-RDS-20260813` | PASS | `useVelocityGaugeRuntime.ts`와 code serializer 정적 대조 | descriptor의 target·properties·type·선택 property가 track, lookup, membership, 두 velocity read와 cleanup에 동일하게 쓰인다.
+- `VTREAD-WRITE-20260813` | BLOCK → PASS | 본문과 learner-facing 표에 내부 P16/P17 번호가 노출됐다 | 개념명과 실제 기본값 설명으로 바꿨다.
+- `VTREAD-BROWSER-20260813` | DEFERRED | 키보드/포커스, reduced motion, 320/390px, sampling·query matrix 결과 | 이번 배치에서는 브라우저를 조작하지 않았다.
+- `VTREAD-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — 문장 BLOCK을 해소했고 정적 runtime/display BLOCK은 없다. browser-only 4건은 DEFERRED이며 과거 빌드·browser closure는 현재 근거가 아니다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토
+
+- `VTR-RDS-20260813-02 | BLOCK → PASS` — serializer의 미정의 target을 runtime과 같은 stable object로 정의하고 plugin 등록, tracker 보관, property 변경·요청 snapshot과 별도 untrack cleanup을 포함한 뒤 실행 순서를 재대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 키보드·focus, reduced-motion, 320/390px, 실제 sampling·snapshot 결과를 실조작하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

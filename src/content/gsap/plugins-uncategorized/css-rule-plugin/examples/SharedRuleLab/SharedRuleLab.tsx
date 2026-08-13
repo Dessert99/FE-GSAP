@@ -7,15 +7,58 @@ export function SharedRuleLab() {
   // Hook의 descriptor와 declaration snapshot을 UI·code panel에 그대로 연결한다.
   const { scope, targetClassName, color, setColor, size, setSize, descriptor, declaration, lookupStatus, reducedMotion, replay } = useSharedRuleAnimation()
   // 실제 getRule selector와 tween vars를 새 의미 없이 GSAP 문법으로만 포맷한다.
-  const code = `const rule = CSSRulePlugin.getRule('${descriptor.selector}')
-gsap.to(rule, {
-  duration: ${reducedMotion ? 0 : 0.7},
-  cssRule: {
-    backgroundColor: '${descriptor.vars.backgroundColor}',
-    width: '${descriptor.vars.width}',
-    height: '${descriptor.vars.height}',
-  },
-})`
+  const code = `import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { CSSRulePlugin } from 'gsap/CSSRulePlugin'
+import { useRef, useState } from 'react'
+
+function SharedRuleExample() {
+const scope = useRef(null)
+const [runKey, setRunKey] = useState(0)
+const [declaration, setDeclaration] = useState('rule을 찾는 중')
+
+gsap.registerPlugin(CSSRulePlugin)
+
+useGSAP(() => {
+  const rule = CSSRulePlugin.getRule('${descriptor.selector}')
+  if (!rule || Array.isArray(rule)) return
+
+  const originalCssText = rule.cssText
+  setDeclaration(rule.cssText)
+  const tween = gsap.to(rule, {
+    duration: ${reducedMotion ? 0 : 0.7},
+    cssRule: {
+      backgroundColor: '${descriptor.vars.backgroundColor}',
+      width: '${descriptor.vars.width}',
+      height: '${descriptor.vars.height}',
+    },
+    ease: 'power2.out',
+    onComplete: () => setDeclaration(rule.cssText),
+  })
+
+  return () => {
+    tween.kill()
+    rule.cssText = originalCssText
+  }
+}, {
+  scope,
+  dependencies: ['${descriptor.color}', ${descriptor.size}, ${reducedMotion}, runKey],
+  revertOnUpdate: true,
+})
+
+function replay() {
+  setRunKey((key) => key + 1)
+}
+
+return <div ref={scope}>
+  <style>{'.shared-rule-lab__card::before { content: ""; display: block; width: 12px; height: 12px; }'}</style>
+  <article className="${targetClassName}">첫 번째 card</article>
+  <article className="${targetClassName}">두 번째 card</article>
+  <article className="${targetClassName}">세 번째 card</article>
+  <output>{declaration}</output>
+  <button onClick={replay}>다시 재생</button>
+</div>
+}`
 
   return (
     <div ref={scope}>

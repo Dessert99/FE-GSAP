@@ -14,5 +14,5 @@ export const pixiIntegrationDescriptor = {
     tint: '#7c3aed',
     blur: 8,
   },
-  cleanup: ['tween.kill()', 'app.destroy()'],
+  cleanup: ['tween.kill()', 'app.destroy(true, true)'],
 } as const

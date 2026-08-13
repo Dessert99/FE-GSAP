@@ -76,14 +76,14 @@ export const tweenTimingMathSourceItems: SourceItem[] = [
   { id: 'GT-05', officialItem: '기본적으로 tween의 totalTime을 사용하므로 tween.globalTime()은 tween.globalTime(tween.totalTime())과 같다.', source: 'global-time', origin: 'official', sectionId: 'global-time' },
 
   // 공식 문서에 없어 GSAP 3.15.0을 직접 실행해 확인한 항목
-  { id: 'PR-01', officialItem: 'totalDuration = duration × (repeat + 1) + repeatDelay × repeat. 공식은 두 개의 예시 숫자만 보여 주고 식을 적지 않는다.', source: 'total-duration', origin: 'implementation', sectionId: 'duration-total' },
+  { id: 'PR-01', officialItem: '0 이상의 유한한 repeat에서는 totalDuration = duration × (repeat + 1) + repeatDelay × repeat. 공식은 두 개의 예시 숫자만 보여 주고 식을 적지 않는다.', source: 'total-duration', origin: 'implementation', sectionId: 'duration-total' },
   { id: 'PR-02', officialItem: 'duration(v)과 totalDuration(v) setter는 서로를 다시 계산하며 timeScale은 건드리지 않는다. 공식 문서에 이 부작용이 없다.', source: 'total-duration', origin: 'implementation', sectionId: 'duration-total' },
   { id: 'PR-03', officialItem: 'repeat이 -1이면 totalDuration()이 10000000000을 돌려준다. 공식 문서는 무한 반복 시의 반환값을 말하지 않는다.', source: 'total-duration', origin: 'implementation', sectionId: 'duration-total' },
-  { id: 'PR-04', officialItem: 'endTime(true) = startTime + totalDuration ÷ |timeScale|, endTime(false) = startTime + duration ÷ |timeScale|. 공식은 timeScale을 반영한다고만 적고 식을 적지 않는다.', source: 'end-time', origin: 'implementation', sectionId: 'start-end' },
-  { id: 'PR-05', officialItem: 'timeline 안에서 startTime = 배치 위치 + delay다. 공식은 "정의된 delay가 반영된 뒤"라고만 적는다.', source: 'start-time', origin: 'implementation', sectionId: 'start-end' },
+  { id: 'PR-04', officialItem: '재생 가능한 상태이고 timeScale이 0이 아니면 endTime(true) = startTime + totalDuration ÷ |timeScale|, endTime(false) = startTime + duration ÷ |timeScale|. 공식은 timeScale을 반영한다고만 적고 식을 적지 않는다.', source: 'end-time', origin: 'implementation', sectionId: 'start-end' },
+  { id: 'PR-05', officialItem: '자식을 처음 배치하고 이후 timing 변경이 없으면 startTime = 배치 위치 + delay다. 공식은 "정의된 delay가 반영된 뒤"라고만 적는다.', source: 'start-time', origin: 'implementation', sectionId: 'start-end' },
   { id: 'PR-06', officialItem: 'gsap.timeline()으로 만든 timeline의 smoothChildTiming 기본값은 false이고 gsap.globalTimeline만 true다. 그래서 ST-05의 자동 조정은 기본 설정에서 일어나지 않는다.', source: 'start-time', origin: 'implementation', sectionId: 'start-end' },
   { id: 'PR-07', officialItem: 'timeScale을 바꿔도 duration()과 totalDuration()의 반환값은 그대로다. 바뀌는 것은 endTime뿐이다.', source: 'time-scale', origin: 'implementation', sectionId: 'time-scale' },
   { id: 'PR-08', officialItem: 'paused 상태의 animation은 endTime()이 timeScale을 반영하지 않고 1인 것처럼 계산한다.', source: 'time-scale', origin: 'implementation', sectionId: 'time-scale' },
-  { id: 'PR-09', officialItem: 'globalTime은 자기 자신부터 부모를 따라 올라가며 time = startTime + time ÷ |timeScale|을 반복해 계산한다.', source: 'global-time', origin: 'implementation', sectionId: 'global-time' },
-  { id: 'PR-10', officialItem: '인자 없는 globalTime()은 totalTime()이 아니라 재생 헤드 기준 rawTime을 쓴다. 부모 재생 헤드가 tween 위에 있지 않으면 GT-05의 등식이 성립하지 않는다.', source: 'global-time', origin: 'implementation', sectionId: 'global-time' },
+  { id: 'PR-09', officialItem: '이 예제처럼 자식 timeScale이 양수이고 0이 아니면 globalTime은 자기 자신부터 부모를 따라 올라가며 time = startTime + time ÷ |timeScale|을 반복해 계산한다.', source: 'global-time', origin: 'implementation', sectionId: 'global-time' },
+  { id: 'PR-10', officialItem: 'GSAP 3.15.0에서 인자 없는 globalTime()은 totalTime()이 아니라 부모 재생 헤드로부터 환산한 rawTime을 쓴다. 두 local time이 같지 않으면 GT-05의 등식이 성립하지 않는다.', source: 'global-time', origin: 'implementation', sectionId: 'global-time' },
 ]

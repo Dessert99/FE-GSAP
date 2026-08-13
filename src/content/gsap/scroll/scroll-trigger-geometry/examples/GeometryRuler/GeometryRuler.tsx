@@ -18,24 +18,45 @@ export function GeometryRuler() {
     captureSnapshot,
   } = useGeometryRulerRuntime()
   // same descriptor와 actual API names를 code panel에 문법으로만 직렬화한다
-  const code = `const timeline = gsap.timeline({ paused: true })
-  .addLabel('${descriptor.markerLabel}')
-  .to({}, { duration: 1 })
-const trigger = ScrollTrigger.create({
-  trigger: triggerElement,
-  scroller: rulerElement,
-  start: '${descriptor.start}',
-  end: '${descriptor.end}',
-  pin: ${reducedMotion ? 'false' : 'pinElement'},
-  animation: ${reducedMotion ? 'undefined' : 'timeline'},
-})
+  const code = `import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-trigger.animation; trigger.direction; trigger.start; trigger.end; trigger.isActive
-trigger.labelToScroll('${descriptor.markerLabel}'); trigger.pin; trigger.progress
-const position = trigger.scroll(); trigger.scroll(position)
-trigger.scroller; trigger.trigger
-ScrollTrigger.isInViewport(triggerElement); ScrollTrigger.maxScroll(rulerElement)
-ScrollTrigger.positionInViewport(triggerElement, 'center')`
+gsap.registerPlugin(ScrollTrigger)
+
+const setup = () => {
+  const rulerElement = document.querySelector('.geometry-ruler__scroller')
+  const triggerElement = document.querySelector('.geometry-ruler__trigger')
+  const pinElement = document.querySelector('.geometry-ruler__pin')
+  if (!rulerElement || !triggerElement || !pinElement) {
+    throw new Error('ruler, trigger, pin element가 필요합니다.')
+  }
+  const timeline = gsap.timeline({ paused: true })
+    .addLabel('${descriptor.markerLabel}')
+    .to({}, { duration: 1 })
+  const trigger = ScrollTrigger.create({
+    trigger: triggerElement,
+    scroller: rulerElement,
+    start: '${descriptor.start}',
+    end: '${descriptor.end}',
+    pin: ${reducedMotion ? 'false' : 'pinElement'},
+    animation: ${reducedMotion ? 'undefined' : 'timeline'},
+  })
+
+  trigger.refresh()
+  trigger.animation; trigger.direction; trigger.start; trigger.end; trigger.isActive
+  trigger.labelToScroll('${descriptor.markerLabel}'); trigger.pin; trigger.progress
+  const position = trigger.scroll(); trigger.scroll(position)
+  trigger.scroller; trigger.trigger
+  ScrollTrigger.isInViewport(triggerElement); ScrollTrigger.maxScroll(rulerElement)
+  ScrollTrigger.positionInViewport(triggerElement, 'center')
+  return () => {
+    trigger.kill(true)
+    timeline.kill()
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
 
   // sparse snapshot rows are calculated in the runtime and never use a live region
   const rows = Object.entries(snapshot)
@@ -44,7 +65,7 @@ ScrollTrigger.positionInViewport(triggerElement, 'center')`
   return (
     <section id='geometry-ruler'>
       <InteractiveExample
-        title='local scroll ruler · capture one geometry snapshot'
+        title='local scroll ruler · geometry 한 번 기록하기'
         description='ruler 안을 native scroll한 뒤 snapshot을 누르세요. table은 요청한 순간만 읽으므로 progress를 계속 announce하지 않습니다.'
         sourcePath='src/content/gsap/scroll/scroll-trigger-geometry/examples/GeometryRuler/useGeometryRulerRuntime.ts'
         reducedMotion={reducedMotion}
@@ -68,7 +89,7 @@ ScrollTrigger.positionInViewport(triggerElement, 'center')`
               <div ref={pinRef} className='geometry-ruler__pin'>
                 {reducedMotion
                   ? 'reduced motion · pin off'
-                  : 'owned pin element'}
+                  : 'pin element'}
               </div>
               <div className='geometry-ruler__spacer'>scroll end</div>
             </div>
@@ -103,13 +124,13 @@ ScrollTrigger.positionInViewport(triggerElement, 'center')`
         ]}
         watchFor={[
           'progress와 direction은 table에서 live announce하지 않습니다.',
-          'isInViewport/positionInViewport은 browser viewport utility라 local scroller ownership과 다릅니다.',
+          'isInViewport/positionInViewport은 browser viewport utility라 local scroller 좌표와 다릅니다.',
           'unmount/rebuild는 listener, pin, trigger, timeline을 cleanup합니다.',
         ]}
         explanation={
           <p>
             ScrollTrigger의 geometry는 config string이 아니라 refresh 후
-            instance가 가진 number와 element owner입니다. local ruler는
+            instance가 가진 number와 기준 element입니다. local ruler는
             scroll()과 maxScroll()을, viewport utility는 browser viewport 기준을
             함께 비교합니다.
           </p>

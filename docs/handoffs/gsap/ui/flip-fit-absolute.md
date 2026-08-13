@@ -126,10 +126,41 @@ preserve
 | A11Y-P12-001        | PASS     | native controls and DOM/focus order preserved                          | static Accessibility/Motion | none                    |
 | XPAGE-P12-001       | PASS     | registered P11 prerequisite link; P13 and later APIs remain text-only  | Cross-page Consistency      | none                    |
 | ROUTE-BUILD-P12-001 | PASS     | `/fundamentals/flip-fit-absolute`, TypeScript exit 0, Vite 956 modules, Storybook 1094 modules, both page chunks and diff check | Integration                 | none                    |
-| BROWSER-P12-001     | DEFERRED | keyboard, reduced motion, 320/390px, live fit/absolute/restore outcome | approved four only          | root batch              |
+| BROWSER-P12-001     | DEFERRED → PASS | keyboard, reduced motion, 320/390px, live fit/absolute/restore outcome | approved four only          | root batch              |
 
 releaseDecision
 PASS — route/build integration is complete; BROWSER-P12-001’s four approved checks remain deferred for the final browser batch.
 
 rootIntegrationEvidence
   `npx tsc --noEmit`, Vite 956 modules, Storybook 1094 modules and `git diff --check` exited 0; both builds emitted `FlipFitAbsolutePage` JS/CSS chunks.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `FLIPFIT-OC-20260813` | PASS | 현재 공식 `Flip.fit()`·`Flip.makeAbsolute()` 문서와 대조 | `getVars`, `scale`, `absolute`, duration에 따른 반환 경계를 유지했다.
+- `FLIPFIT-RDS-20260813` | BLOCK → PASS | 코드 패널이 runtime vars의 `absolute`·`duration`·`ease`와 apply 모드의 `duration: 0`을 일부 생략했다 | 세 fit 분기의 실제 호출 객체를 그대로 직렬화했다.
+- `FLIPFIT-WRITE-20260813` | BLOCK → PASS | learner-facing P11 번호가 노출됐다 | 선행 Flip 개념과 실행 순서로 바꿨다.
+- `FLIPFIT-BROWSER-20260813` | DEFERRED | 키보드, reduced motion, 320/390px 레이아웃, fit/makeAbsolute/restore 결과 | 이번 배치에서는 브라우저를 조작하지 않았다.
+- `FLIPFIT-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하거나 현재 성공 근거로 기록하지 않았다.
+
+currentReleaseDecision
+  PASS — 정적 BLOCK을 해소했고, 허용된 browser-only 검증 4건은 DEFERRED다. 이전 빌드·browser closure는 이력이며 현재 판정 근거가 아니다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토
+
+- `FLIPFIT-RDS-20260813-02 | BLOCK → PASS` — serializer에 source/destination query와 null guard, Flip 등록, 원본 style baseline, 반환 Tween 보관, 세 fit 분기와 `makeAbsolute()`·`restore()`·별도 cleanup을 포함하고 runtime control 의미와 재대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 키보드·focus, reduced-motion, 320/390px, 실제 fit·makeAbsolute·restore 결과를 실조작하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

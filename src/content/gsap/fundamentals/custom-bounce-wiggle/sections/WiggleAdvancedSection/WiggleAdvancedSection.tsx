@@ -63,7 +63,7 @@ export function WiggleAdvancedSection() {
       <div className="bounce-wiggle-page__split">
         <div className="bounce-wiggle-page__prose">
           <p>
-            앞 섹션의 예제에서 <code>type</code>을 바꿔 보면 봉우리 개수는 그대로인데 <strong>어느 시점이 가장 크게 흔들리는지</strong>{' '}
+            앞 섹션의 예제에서 <code>type</code>을 바꿔 보면 진동 횟수는 그대로인데 <strong>어느 시점이 가장 크게 흔들리는지</strong>{' '}
             달라졌습니다. 그 "얼마나 크게"를 시간에 따라 정하는 것이 <code>amplitudeEase</code>이고, "언제"를 정하는 것이{' '}
             <code>timingEase</code>입니다.
           </p>

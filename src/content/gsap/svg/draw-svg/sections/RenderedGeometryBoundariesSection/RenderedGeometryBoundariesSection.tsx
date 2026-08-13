@@ -17,10 +17,9 @@ export function RenderedGeometryBoundariesSection() {
       />
       <div className="draw-svg-page__prose">
         <p>
-          installed source는 invisible element의 <code>getBBox()</code>가 실패할
-          수 있다고 warn하며, 일부 supported shape는 attribute로 fallback한 뒤
-          length가 없으면 0을 반환합니다. 이 raw behavior는 hidden SVG의
-          measurement를 성공으로 가르치지 않기 위한 boundary입니다.
+          설치된 GSAP 3.15.0은 보이지 않는 element의 <code>getBBox()</code>가 실패할
+          수 있음을 경고하고, 일부 지원 shape는 attribute로 길이를 계산한 뒤
+          길이가 없으면 0을 반환합니다. 따라서 hidden SVG의 측정 성공을 보장하지 않습니다.
         </p>
         <p>
           Firefox path length bug는 100%가 조금 짧게 보이게 할 수 있고, iOS
@@ -34,7 +33,7 @@ export function RenderedGeometryBoundariesSection() {
         <p>
           이 페이지는 하나의 stroke reveal과 measurement만 다룹니다. path
           morphing, motion path, SVG transform/coordinate conversion은 이후 SVG
-          pages의 소유 범위입니다.
+          학습 페이지에서 이어서 다룹니다.
         </p>
       </div>
     </section>

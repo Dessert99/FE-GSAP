@@ -1,11 +1,6 @@
-/** 열두 canonical과 설치본 source 확인이 다섯 학습 단계에 모두 연결됐음을 보여 준다. */
-import { draggableBoundsAxisItems } from '../../draggable-bounds-axis.catalog'
-import { draggableBoundsAxisCoverage, draggableBoundsAxisSections } from '../../draggable-bounds-axis.meta'
-
-const officialItems = draggableBoundsAxisItems.filter((item) => item.origin === 'official')
-const sourceItems = draggableBoundsAxisItems.filter((item) => item.origin === 'source')
-const canonicalCount = new Set(officialItems.map((item) => item.source)).size
+/** bounds·축·scroll·재측정을 익히는 다섯 학습 단계를 안내한다. */
+import { draggableBoundsAxisSections } from '../../draggable-bounds-axis.meta'
 
 export function PageCoverage() {
-  return <nav className="draggable-bounds-axis-coverage" aria-label="공식 source 대응 범위"><div><strong>{canonicalCount}/{draggableBoundsAxisCoverage.officialSources}</strong><span>공식 canonical</span></div><div><strong>{officialItems.length}/{draggableBoundsAxisCoverage.officialSourceItems}</strong><span>공식 기술 item</span></div><p>설치본 source/type 경계 {sourceItems.length}/{draggableBoundsAxisCoverage.sourceVerifiedItems}개는 공식 분모와 따로 기록했습니다.</p><ol>{draggableBoundsAxisSections.map((section) => <li key={section.id}><a href={`#${section.id}`}>{section.number} · {section.title} <small>{section.sourceItems}개</small></a></li>)}</ol></nav>
+  return <nav className="draggable-bounds-axis-coverage" aria-label="이 페이지의 학습 순서"><div><strong>학습 순서</strong><span>Draggable 공간 제약</span></div><div><strong>핵심 질문</strong><span>어디까지, 어느 축으로 움직일 수 있나</span></div><p>bounds 측정부터 축 잠금, edge scroll, 외부 layout 변화 뒤 재측정까지 차례로 살펴봅니다.</p><ol>{draggableBoundsAxisSections.map((section) => <li key={section.id}><a href={`#${section.id}`}>{section.number} · {section.title}</a></li>)}</ol></nav>
 }

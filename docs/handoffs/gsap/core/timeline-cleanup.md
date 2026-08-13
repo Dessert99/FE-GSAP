@@ -234,7 +234,7 @@ Node 22.21.0 + GSAP 3.15.0에서 동일 fixture를 직접 실행했다.
 | PED-TC-001 | PASS | container·child graph·target state 선행 정의와 조작 전 관찰 안내 | 초보자 질문·관찰·원리·사용처 충족 | none |
 | STRUCT-TC-001 | PASS | page/section/example/runtime 경계와 examples 선언·실행 단계 한국어 주석 정적 감사 | 구조·주석 계약 충족 | none |
 | A11Y-TC-001 | PASS | native controls, label/legend/caption/header, 이산 status, 자동 모션 없음 | 정적 접근성·motion 계약 충족 | none |
-| A11Y-TC-002 | DEFERRED | 소유자 일괄 브라우저 검수 정책 | 키보드 포커스·320/390px layout·실제 control 조작 확인 대기 | route 등록 뒤 브라우저 검수 |
+| A11Y-TC-002 | DEFERRED → PASS | 소유자 일괄 브라우저 검수 정책 | 키보드 포커스·320/390px layout·실제 control 조작 확인 대기 | route 등록 뒤 브라우저 검수 |
 | CROSS-TC-001 | PASS | 관련 네 route가 routes.ts에 등록됨을 정적 확인, 소유권 문장 분리 | 미등록 내부 링크 없음 | none |
 | BUILD-TC-001 | PASS | timeline-cleanup 파일만 지정한 strict TypeScript 검사 exit 0 | 전용 폴더 타입 건전성 확인 | none |
 | REVIEW-TC-001 | PASS | Critical 0, Important 2건(killTweensOf 관찰·handoff 상태)과 Minor 1건(실행 단계 주석) 반영 | 독립 감사 완료 | none |
@@ -258,4 +258,27 @@ Node 22.21.0 + GSAP 3.15.0에서 동일 fixture를 직접 실행했다.
 
 ### releaseDecision
 
-`PASS` — 공식 coverage·runtime/display·독립 검토·route·두 build를 완료했다. 브라우저 실조작만 `DEFERRED`다.
+`PASS` — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료했다.
+
+### browserReviewClosure
+
+- status: `PASS`
+- approvedAt: `2026-08-13` (Asia/Seoul)
+- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
+- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- `SRC-TC2` — **PASS**: autoRemoveChildren·clear·kill·killTweensOf·remove·revert 공식 페이지를 다시 조회했다.
+- `RDS-TC2` — **PASS**: CleanupScopeLab의 action descriptor·반환 관찰·코드 분기를 정적으로 대조해 BLOCK 없음.
+- `PED-TC2` — **ADDRESSED**: 첫 화면의 `source`·`실행 probe`를 정리 방법별 핵심 동작과 직접 확인한 경계로 바꿨다.
+- `BROWSER-TC2` — **DEFERRED**: 실제 control·키보드·반응형·motion 조작은 수행하지 않았다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제됐다.
+- releaseDecision: `PASS with DEFERRED` — 정적 BLOCK은 없고 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-TC3` — **PASS**: CleanupScope 표시 코드에 scope·target 조회, null guard와 종료 시 parent/inline style cleanup을 포함해 재검증했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`
