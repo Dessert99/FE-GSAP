@@ -140,3 +140,10 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - reviewedAt: `2026-08-13` (Asia/Seoul)
 - requiredChecks: 키보드 이동, 두 lab의 control→곡선·동작·코드 패널 변화, 재생·스크럽, `prefers-reduced-motion`, 320/390px 레이아웃.
 - evidenceBoundary: 이전 문서상 승인은 현재 변경 뒤의 실제 브라우저 증거로 재사용하지 않는다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

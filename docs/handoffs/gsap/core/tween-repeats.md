@@ -305,3 +305,10 @@ modify: `none`. `src/app/routes.ts` 등록은 저장소 소유자가 별도로 �
 - unresolved BLOCK: `none`
 - unresolved ADVISORY: 공식 `repeatDelay()`의 `default = NaN` 표기와 설치본 GSAP 3.15.0 getter `0`의 차이
 - unresolved NOT VERIFIED: control 조작, keyboard/focus, reduced-motion 실제 전환, 320/390px layout·overflow, route 이탈 cleanup
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

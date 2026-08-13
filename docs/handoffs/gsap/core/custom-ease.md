@@ -140,3 +140,10 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
 - currentAudit: 2026-08-13 수정으로 영향받은 실조작은 이 종료 기록을 재사용하지 않고 `NOT VERIFIED`로 다시 두었다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

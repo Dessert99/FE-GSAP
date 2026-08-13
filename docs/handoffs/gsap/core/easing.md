@@ -174,3 +174,10 @@ create: page/meta/catalog/CSS, SectionHeading/PageCoverage, model/families/steps
 현재 `NOT VERIFIED`:
 
 - `AUD-BROWSER-001` — 키보드·focus·control 조작, reduced-motion 실제 전환, 320/390px layout·overflow, 세 예제 실제 조작 결과
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

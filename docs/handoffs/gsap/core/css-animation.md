@@ -243,3 +243,10 @@ modify: 이 handoff evidence. `src/app/routes.ts`는 공유 파일 충돌 방지
 ### releaseDecision
 
 `NOT VERIFIED` — `2026-08-13` 공식 재대조·학습 문장·세 예제 정적 동기화와 메인 통합 build·Storybook은 PASS이고 남은 BLOCK은 없다. Browser 실조작은 `NOT VERIFIED`다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.

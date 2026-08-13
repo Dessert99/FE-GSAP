@@ -245,3 +245,10 @@ modify:
 - reviewedAt: `2026-08-13` (Asia/Seoul)
 - historicalStatus: 기존 `BROWSER-CORE05-001`은 소유자 승인으로 문서상 `PASS` 처리됐지만 실제 조작 증거는 생성되지 않았다.
 - evidenceBoundary: 이번 감사의 코드 변경 뒤 브라우저 증거는 재사용하지 않으며, 메인 에이전트의 통합 검증이 필요하다.
+
+## 2026-08-13 검증 기록 정정
+
+- `npm run build`: `PASS` — 커밋된 HEAD에서 exit 0.
+- Storybook: `NOT APPLICABLE` — `c309e13 chore: remove storybook`에서 설정·스크립트·의존성을 의도적으로 제거했다.
+- 앞서 적힌 2026-08-13 `npm run build-storybook` 성공 주장은 현재 저장소와 맞지 않아 이 절로 정정한다.
+- Browser: 저장소 소유자 승인으로 이번 완료 범위에서 제외했으며, 실제 브라우저 `PASS`를 주장하지 않는다.
