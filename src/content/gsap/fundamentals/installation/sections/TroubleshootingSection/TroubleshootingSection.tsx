@@ -45,6 +45,16 @@ export function TroubleshootingSection() {
         ))}
       </dl>
 
+      <div className="installation-page__note">
+        <p>
+          예전 private npm 저장소에서 옮기는 프로젝트라면 패키지별 제거 순서와 Yarn 설정까지 다루는{' '}
+          <a href="https://gsap.com/resources/private-repo-migration/" target="_blank" rel="noreferrer">
+            공식 migration guide<span className="installation-page__sr-only"> (새 탭에서 열기)</span>
+          </a>
+          를 이어서 확인하세요.
+        </p>
+      </div>
+
       <div className="installation-page__subheading">
         <h3>이 페이지가 다루지 않는 것</h3>
         <p>

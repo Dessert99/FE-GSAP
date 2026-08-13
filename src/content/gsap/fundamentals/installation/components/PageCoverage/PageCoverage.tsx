@@ -4,19 +4,19 @@ import { installationCoverage, installationSections } from '../../installation.m
 
 export function PageCoverage() {
   return (
-    <nav className="installation-coverage" aria-label="공식 source 대응 범위">
+    <nav className="installation-coverage" aria-label="공식 문서 학습 범위">
       <div className="installation-coverage__summary">
         <div>
           <strong>{installationCoverage.officialSources}/2</strong>
-          <span>공식 source</span>
+          <span>공식 문서</span>
         </div>
         <div>
           <strong>
             {installationSourceItems.length}/{installationCoverage.sourceItems}
           </strong>
-          <span>기술 item</span>
+          <span>확인한 설명</span>
         </div>
-        <p>공식 목차를 그대로 옮기지 않고, 34개 기술 item을 설치 순서대로 이어지는 여섯 질문으로 다시 묶었습니다.</p>
+        <p>공식 설치 문서 두 곳의 설명 34개를 처음 설치하는 순서에 맞춰 여섯 질문으로 묶었습니다.</p>
       </div>
       <ol>
         {installationSections.map((section) => (
@@ -25,7 +25,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>공식 설명 {section.sourceItems}개</small>
               </div>
             </a>
           </li>
