@@ -5,13 +5,21 @@ export function DurationFitLab() {
   // runtime descriptor와 getter snapshot을 select·표·코드에 연결한다
   const { scope, repeat, setRepeat, requestedDuration, setRequestedDuration, descriptor, readout, childDuration, repeatDelay, parentPosition } = useDurationFitRuntime()
   // runtime과 같은 descriptor를 실제 setter 호출 코드로 직렬화한다
-  const code = `const parent = gsap.timeline({ paused: true })
+  const code = `import gsap from 'gsap'
+
+const a = { value: 0 }
+const b = { value: 0 }
+const parent = gsap.timeline({ paused: true })
 const timeline = gsap.timeline({ repeat: ${descriptor.repeat}, repeatDelay: ${repeatDelay} })
   .to(a, { duration: ${childDuration} })
   .to(b, { duration: ${childDuration} })
 
 parent.add(timeline, ${parentPosition})
-timeline.duration(${descriptor.requestedDuration})`
+timeline.duration(${descriptor.requestedDuration})
+
+function cleanup() {
+  parent.kill()
+}`
 
   return <section className="tl-fit-lab" aria-labelledby="tl-fit-title" ref={scope}>
     <h3 id="tl-fit-title">children 20초를 부모가 원하는 길이에 맞추기</h3><p>setter 뒤에도 raw getter와 child 길이는 그대로인지 확인하세요.</p>

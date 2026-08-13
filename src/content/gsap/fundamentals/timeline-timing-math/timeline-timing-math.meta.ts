@@ -5,7 +5,7 @@ export const timelineTimingMathMeta = {
   summary:
     'Tween의 duration은 내가 정하는 값이지만 Timeline의 duration은 children이 정합니다. 그래서 같은 이름의 메서드라도 Timeline에서는 다르게 동작합니다 — 특히 duration()을 setter로 부르면 길이가 아니라 배속이 바뀝니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-timing-math/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.delay()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/delay()' },
     { label: 'Timeline.duration()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/duration()' },
