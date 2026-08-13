@@ -63,3 +63,16 @@
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: ScrollSmoother `getVelocity()`, `kill()`, `offset()`, `paused()`, `scrollTo()`, `scrollTop()` 공식 문서를 다시 대조했다. pause 중 instance command 예외, scrollTo smooth 인자, 즉시 scrollTop setter와 전체 smoother kill 범위를 확인했다.
+- findings:
+  - SSC-A01 `BLOCK → ADDRESSED` — 학습 화면의 sourcePath·coverage·P번호·owner/child lesson 제작 표현을 실제 API 책임 문장으로 바꿨다.
+  - SSC-A02 `PASS (static)` — 하나의 command descriptor가 fragment·상태·signature를 함께 만들며 실제 host scroll 상태를 가장하지 않는다.
+  - SSC-A03 `ADVISORY` — offset의 설치된 `ignoreSpeed?`와 scrollTop setter 반환은 공식 문서와 설치 source/type 사이 차이가 있어 별도로 표시하고 반환 chaining을 피한다.
+  - SSC-A04 `DEFERRED` — fragment navigation, 실제 paused/scrollTo/scrollTop/kill, reduced-motion, 좁은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - SSC-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.
