@@ -140,7 +140,7 @@ export function RawPathPipelineLab() {
           <p>
             RawPath는 segment마다 alternating x/y cubic coordinates를 가진
             numeric array입니다.
-            <code>resolution</code>은 P21 motion tween measurement option이며 이
+            <code>resolution</code>은 motion tween의 측정 option이며 이
             여섯 conversion utility의 input이 아니므로 pipeline control로 추측해
             추가하지 않습니다.
           </p>
@@ -157,30 +157,49 @@ function getPipelineCode(
   descriptor: ReturnType<typeof useRawPathPipelineRuntime>['descriptor'],
 ) {
   if (descriptor.kind === 'points') {
-    return `const segment = MotionPathPlugin.pointsToSegment(${JSON.stringify(descriptor.points)}, ${descriptor.curviness})
+    return `gsap.registerPlugin(MotionPathPlugin)
+const segment = MotionPathPlugin.pointsToSegment(${JSON.stringify(descriptor.points)}, ${descriptor.curviness})
 const raw = [segment]
-const d = MotionPathPlugin.rawPathToString(raw)
-const roundTrip = MotionPathPlugin.stringToRawPath(d)`
+const serialized = MotionPathPlugin.rawPathToString(raw)
+const roundTrip = MotionPathPlugin.stringToRawPath(serialized)`
   }
   if (descriptor.kind === 'array') {
-    return `const raw = MotionPathPlugin.arrayToRawPath(${JSON.stringify(descriptor.values)}, { type: '${descriptor.type}', curviness: ${descriptor.curviness} })
-const d = MotionPathPlugin.rawPathToString(raw)
-const roundTrip = MotionPathPlugin.stringToRawPath(d)`
+    return `gsap.registerPlugin(MotionPathPlugin)
+const raw = MotionPathPlugin.arrayToRawPath(${JSON.stringify(descriptor.values)}, { type: '${descriptor.type}', curviness: ${descriptor.curviness} })
+const serialized = MotionPathPlugin.rawPathToString(raw)
+const roundTrip = MotionPathPlugin.stringToRawPath(serialized)`
   }
   if (descriptor.kind === 'svg') {
-    return `const [path] = MotionPathPlugin.convertToPath(rect, ${descriptor.swap})
+    return `gsap.registerPlugin(MotionPathPlugin)
+const host = document.querySelector('.raw-path-pipeline-lab g')
+if (!host) throw new Error('SVG conversion host를 찾지 못했습니다.')
+host.replaceChildren()
+const source = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
+Object.entries({ x: '32', y: '28', width: '136', height: '76', rx: '14', fill: 'none', stroke: 'currentColor', 'stroke-width': '4' })
+  .forEach(([name, value]) => source.setAttribute(name, value))
+host.appendChild(source)
+const paths = MotionPathPlugin.convertToPath(source, ${descriptor.swap})
+const path = paths[0]
+if (!path) throw new Error('converted path를 만들지 못했습니다.')
+const convertedD = path.getAttribute('d') || ''
 const raw = MotionPathPlugin.getRawPath(path)
-const d = MotionPathPlugin.rawPathToString(raw)
-const roundTrip = MotionPathPlugin.stringToRawPath(d)`
+const serialized = MotionPathPlugin.rawPathToString(raw)
+const roundTrip = MotionPathPlugin.stringToRawPath(serialized)
+
+function cleanup() {
+  host.replaceChildren()
+}`
   }
   if (descriptor.kind === 'string') {
-    return `const parsed = MotionPathPlugin.stringToRawPath('${descriptor.pathData}')
+    return `gsap.registerPlugin(MotionPathPlugin)
+const parsed = MotionPathPlugin.stringToRawPath('${descriptor.pathData}')
 const raw = MotionPathPlugin.getRawPath('${descriptor.pathData}')
-const d = MotionPathPlugin.rawPathToString(raw)
-const roundTrip = MotionPathPlugin.stringToRawPath(d)`
+const serialized = MotionPathPlugin.rawPathToString(raw)
+const roundTrip = MotionPathPlugin.stringToRawPath(serialized)`
   }
-  return `const sourceD = MotionPathPlugin.rawPathToString(${JSON.stringify(descriptor.raw)})
+  return `gsap.registerPlugin(MotionPathPlugin)
+const sourceD = MotionPathPlugin.rawPathToString(${JSON.stringify(descriptor.raw)})
 const raw = MotionPathPlugin.stringToRawPath(sourceD)
-const d = MotionPathPlugin.rawPathToString(raw)
-const roundTrip = MotionPathPlugin.stringToRawPath(d)`
+const serialized = MotionPathPlugin.rawPathToString(raw)
+const roundTrip = MotionPathPlugin.stringToRawPath(serialized)`
 }

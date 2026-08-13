@@ -98,3 +98,26 @@ PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `MPDATA-OC-20260813` | PASS | 현재 공식 `pointsToSegment()`, `arrayToRawPath()`, `convertToPath()`, `getRawPath()`, `rawPathToString()`, `stringToRawPath()` 문서와 대조 | 여섯 input/output 및 DOM swap 경계를 유지했다.
+- `MPDATA-RDS-20260813` | BLOCK → PASS | SVG serializer가 runtime의 baseline 복원·current element·path 선택·converted d 읽기를 생략했고 각 branch의 최종 변수명도 snapshot과 달랐다 | 다섯 branch가 실제 `serialized`→`roundTrip` 흐름을 표시하고 SVG branch는 DOM 순서까지 맞췄다.
+- `MPDATA-WRITE-20260813` | BLOCK → PASS | learner-facing P21 번호가 노출됐다 | MotionPath 개념과 motion tween option으로 직접 설명했다.
+- `MPDATA-BROWSER-20260813` | DEFERRED | 키보드/포커스, 320/390px, 다섯 input branch와 SVG swap/restore | motion은 없으며 이번 배치에서는 브라우저를 조작하지 않았다.
+- `MPDATA-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — runtime/display와 문장 BLOCK을 해소했고 browser-only 검증은 DEFERRED다. 과거 빌드와 browser closure는 현재 근거가 아니다.
+
+### 2026-08-13 self cross-review
+
+- `MPDATA-RDS-20260813-02 | BLOCK → PASS` — SVG serializer가 runtime 내부 `restoreSvgShape`·`currentShapeRef`에 의존했다. runtime과 같은 baseline rect를 imperative host에 만들고 변환·cleanup하는 독립 snippet으로 수정한 뒤 재독해 PASS.
+- 통합 검증: `npx tsc --noEmit --pretty false` exit 0, Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.
