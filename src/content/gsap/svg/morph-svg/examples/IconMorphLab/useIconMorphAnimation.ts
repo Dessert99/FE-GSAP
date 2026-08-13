@@ -111,5 +111,14 @@ export function useIconMorphAnimation() {
     },
     { scope },
   )
-  return { scope, pathRef, descriptor, snapshot, setType, morph, restore }
+  return {
+    scope,
+    pathRef,
+    descriptor,
+    snapshot,
+    reducedMotion,
+    setType,
+    morph,
+    restore,
+  }
 }

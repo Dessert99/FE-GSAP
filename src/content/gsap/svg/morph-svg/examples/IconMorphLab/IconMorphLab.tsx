@@ -3,10 +3,39 @@ import { useIconMorphAnimation } from './useIconMorphAnimation'
 
 export function IconMorphLab() {
   // runtime hook의 실제 descriptor와 완료 snapshot을 화면에 연결한다
-  const { scope, pathRef, descriptor, snapshot, setType, morph, restore } =
-    useIconMorphAnimation()
-  // 코드 패널은 실행 descriptor를 MorphSVG 문법으로만 직렬화한다
-  const code = `gsap.to(path, { duration: ${descriptor.duration}, morphSVG: { shape: starPath, map: '${descriptor.map}', shapeIndex: '${descriptor.shapeIndex}', type: '${descriptor.type}', origin: '${descriptor.origin}' } })`
+  const {
+    scope,
+    pathRef,
+    descriptor,
+    snapshot,
+    reducedMotion,
+    setType,
+    morph,
+    restore,
+  } = useIconMorphAnimation()
+  // runtime과 같은 target·baseline·kill·restore를 포함한 action 코드를 직렬화한다
+  const actionCode = reducedMotion
+    ? `path.setAttribute('d', starPath)
+console.log(path.getAttribute('d'))`
+    : `gsap.to(path, {
+  duration: ${descriptor.duration},
+  ease: 'power2.inOut',
+  morphSVG: { shape: starPath, map: '${descriptor.map}', shapeIndex: '${descriptor.shapeIndex}', type: '${descriptor.type}', origin: '${descriptor.origin}' },
+  onComplete: () => console.log(path.getAttribute('d')),
+})`
+  // selector부터 unmount restoration까지 독립적으로 재현 가능한 snippet을 표시한다
+  const code = `const path = document.querySelector('.icon-morph-lab path')
+if (!path) throw new Error('morph path를 찾지 못했습니다.')
+const originalD = path.getAttribute('d') || ''
+const starPath = ${JSON.stringify(descriptor.shape)}
+gsap.registerPlugin(MorphSVGPlugin)
+gsap.killTweensOf(path)
+${actionCode}
+
+function cleanup() {
+  gsap.killTweensOf(path)
+  path.setAttribute('d', originalD)
+}`
   return (
     <section className="icon-morph-lab" aria-labelledby="icon-morph-title">
       <h2 id="icon-morph-title">한 icon에서 point 순서를 읽어 봅니다</h2>
@@ -58,7 +87,7 @@ export function IconMorphLab() {
       <div className="icon-morph-lab__panels">
         <p>
           <strong>호환성</strong> path/polygon/polyline만 직접 morph합니다.
-          primitive conversion은 P19의 소유입니다.
+          primitive를 path로 바꾸는 방법은 변환 utility 페이지에서 다룹니다.
         </p>
         <p>
           <strong>defaults/hooks</strong>{' '}

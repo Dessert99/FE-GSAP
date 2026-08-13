@@ -5,7 +5,7 @@ export const morphSvgMeta = {
   summary:
     'MorphSVGPlugin은 path d 데이터를 보간하고, point mapping·winding·config가 어색한 중간 모양을 줄이게 합니다.',
   sourcePath: 'src/content/gsap/svg/morph-svg/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'MorphSVGPlugin',
