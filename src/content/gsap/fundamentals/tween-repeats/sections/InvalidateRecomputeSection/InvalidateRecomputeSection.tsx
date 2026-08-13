@@ -41,8 +41,8 @@ export function InvalidateRecomputeSection() {
           <strong>재생될 때마다 어떤 시작값과 끝값을 쓰는가</strong>입니다. 둘은 서로 독립적입니다.
         </p>
         <p>
-          핵심 사실 하나부터 짚겠습니다. <strong>Tween은 값을 매번 다시 계산하지 않습니다.</strong> 처음 화면에 그려질 때 한 번 계산해서
-          내부에 적어 두고, 그 뒤로는 적어 둔 숫자만 씁니다.
+          핵심 사실 하나부터 짚겠습니다. <strong>Tween은 기본적으로 값을 매번 다시 계산하지 않습니다.</strong> 처음 화면에 그려질 때 한 번
+          계산해서 내부에 적어 두고, 그 뒤로는 적어 둔 숫자를 다시 씁니다.
         </p>
       </div>
 
@@ -103,8 +103,8 @@ export function InvalidateRecomputeSection() {
           <strong>
             "tween이 반복할 때마다 invalidate()하고 싶을 뿐이라면 <code>repeatRefresh: true</code> 특수 property를 쓸 수 있다."
           </strong>{' '}
-          이 페이지는 이 관계만 보존합니다. <code>repeatRefresh</code>의 값 계약과 예제는{' '}
-          <a href={toHref('/fundamentals/gsap-to')}>gsap.to() 페이지</a>가 소유합니다.
+          이 페이지에서는 이 관계만 짚습니다. <code>repeatRefresh</code>의 값과 예제는{' '}
+          <a href={toHref('/fundamentals/gsap-to')}>gsap.to() 페이지</a>에서 이어서 확인할 수 있습니다.
         </p>
       </div>
 
@@ -116,29 +116,6 @@ export function InvalidateRecomputeSection() {
         </p>
       </div>
 
-      <div className="repeats-page__note repeats-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용</h3>
-        <p>
-          <strong>첫째, 목적지가 절대값이어도 시작값은 다시 읽습니다.</strong> <code>invalidate()</code>는 상대값(<code>"+=100"</code>)
-          전용 도구처럼 보이지만 그렇지 않습니다. <code>x: 100</code>처럼 고정된 목적지를 쓴 Tween도 <code>invalidate()</code> 뒤에는{' '}
-          <strong>현재 위치에서 출발해</strong> 100으로 갑니다.
-        </p>
-        <p>
-          <strong>둘째, 반복 설정은 지워지지 않습니다.</strong> 공식 문서는 duration·startTime·delay가 안 바뀐다고만 적었는데, 실행해 보면{' '}
-          <code>repeat</code>·<code>yoyo</code>·<code>repeatDelay</code>·<code>totalDuration</code>도 그대로입니다.
-        </p>
-        <p>
-          <strong>셋째, 한 번도 그려지지 않은 Tween에 부르면 아무 효과가 없습니다.</strong> 지울 기억이 아직 없기 때문입니다.
-        </p>
-        <p className="repeats-page__provenance">
-          측정 방법 · GSAP 3.15.0. 절대값은{' '}
-          <code>gsap.to(&#123;x:0&#125;, &#123;x:100, duration:1, ease:'none', paused:true&#125;)</code>를{' '}
-          <code>progress(1)</code>로 끝낸 뒤 <code>o.x</code>를 500으로 바꾸고 <code>invalidate()</code> 후{' '}
-          <code>progress(0)</code>·<code>progress(0.5)</code>·<code>progress(1)</code>에서 500·300·100을 읽어 확인했습니다. 반복 설정은{' '}
-          <code>repeat:2, yoyo:true, repeatDelay:0.5</code> Tween에서 <code>invalidate()</code> 전후로{' '}
-          <code>[2, true, 0.5, 4]</code>가 같음을 확인했습니다.
-        </p>
-      </div>
     </section>
   )
 }

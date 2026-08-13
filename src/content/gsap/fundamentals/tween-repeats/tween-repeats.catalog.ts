@@ -62,14 +62,6 @@ export const tweenRepeatsSourceItems: SourceItem[] = [
   { id: 'YOY-02', officialItem: 'parameter value는 Boolean이고 default = false 이다.', source: 'yoyo', origin: 'official', sectionId: 'call-forms' },
   { id: 'YOY-03', officialItem: '인자를 생략하면 현재 값을 돌려주는 getter이고, 인자를 넘기면 값을 설정하는 setter이며 chaining을 위해 instance 자신을 돌려준다.', source: 'yoyo', origin: 'official', sectionId: 'call-forms' },
 
-  // 공식 문서에 없고 GSAP 3.15.0 실행으로만 확인한 항목 — coverage 분모에 넣지 않는다
-  { id: 'ITR-P1', officialItem: 'iteration()은 어떤 조합에서도 1부터 시작한다. repeat 0·1·2·-1 × yoyo × repeatDelay 조합과 duration 0, gsap.set()까지 totalTime 0에서 전부 1이었고 0인 경우가 없었다.', source: 'iteration', origin: 'implementation', sectionId: 'iteration-number' },
-  { id: 'ITR-P2', officialItem: '회차 경계 시각은 끝난 회차에 속한다. duration 1·repeat 2에서 totalTime 1.0은 iteration 1이고 1.0001에서야 2가 되며, 마지막 끝(3.0)에서도 3에 머문다.', source: 'iteration', origin: 'implementation', sectionId: 'iteration-number' },
-  { id: 'ITR-P3', officialItem: 'iteration() setter는 회차 안의 위치를 유지한 채 점프하고, 범위를 넘는 값은 마지막 회차 끝으로 잘린다. repeat 4에서 totalTime 2.5(3회차)에 iteration(2)를 부르면 totalTime 1.5가 되고, iteration(99)는 totalTime 5로 잘린다.', source: 'iteration', origin: 'implementation', sectionId: 'iteration-number' },
-  { id: 'YOY-P1', officialItem: 'yoyo가 켜지면 홀수 회차가 정방향, 짝수 회차가 역방향이다. repeat 1~4와 repeatDelay 유무에 관계없이 같았다. 예외로 repeat가 0이면 yoyo: true를 넘겨도 yoyo() getter가 false를 돌려준다.', source: 'yoyo', origin: 'implementation', sectionId: 'yoyo-direction' },
-  { id: 'REP-P1', officialItem: 'repeat: -1이면 totalDuration()이 Infinity가 아니라 10000000000이라는 고정 상수를 돌려준다. duration 0.5·1·2·5와 repeatDelay 0·1 조합 전부에서 같은 값이었다.', source: 'repeat', origin: 'implementation', sectionId: 'repeat-count' },
-  { id: 'REP-P2', officialItem: 'repeat가 0 이상일 때 totalDuration은 duration × (repeat + 1) + repeatDelay × repeat이다. duration 0.5·1·2 × repeat 0~3 × repeatDelay 0·0.25·1의 36개 조합에서 어긋난 경우가 없었다.', source: 'repeat', origin: 'implementation', sectionId: 'repeat-count' },
-  { id: 'RPD-P1', officialItem: 'repeatDelay 틈 동안에는 iteration()과 대상 값이 모두 멈춘다. duration 1·repeat 2·repeatDelay 0.5에서 totalTime 1.0~1.5 구간은 iteration 1과 값 1을 유지한다.', source: 'repeat-delay', origin: 'implementation', sectionId: 'repeat-gap' },
+  // 공식 표의 기본값과 설치본 getter 결과가 달라 학습자가 구분해야 하는 항목만 별도로 남긴다
   { id: 'RPD-P2', officialItem: 'repeatDelay를 지정하지 않은 tween의 repeatDelay() getter는 숫자 0을 돌려준다. 공식 parameter 표의 default = NaN과 다르다.', source: 'repeat-delay', origin: 'implementation', sectionId: 'call-forms' },
-  { id: 'INV-P1', officialItem: 'invalidate()는 repeat·yoyo·repeatDelay·totalDuration을 건드리지 않고, 목적지가 절대값이어도 시작값만 다시 읽는다. x: 100 tween을 끝낸 뒤 x를 500으로 바꾸고 invalidate()하면 500에서 100으로 간다. 첫 render 전에 부르면 아무 효과가 없다.', source: 'invalidate', origin: 'implementation', sectionId: 'invalidate-recompute' },
 ]

@@ -118,28 +118,6 @@ export function RepeatCountSection() {
         <code>{officialChain}</code>
       </pre>
 
-      <div className="repeats-page__note repeats-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용</h3>
-        <p>
-          공식 문서는 반복이 <strong>전체 시간</strong>을 얼마로 만드는지 적어 두지 않았습니다. 실행해 보면{' '}
-          <code>totalDuration = duration × (repeat + 1) + repeatDelay × repeat</code>입니다. 마지막 회차 뒤에는 틈이 붙지 않아{' '}
-          <code>repeatDelay</code>가 <code>repeat</code>번만 더해집니다.
-        </p>
-        <p>
-          <code>repeat: -1</code>일 때 <code>totalDuration()</code>은 <code>Infinity</code>가 아니라{' '}
-          <strong>
-            <code>10000000000</code>
-          </strong>
-          이라는 고정 상수를 돌려줍니다. <code>duration</code>이나 <code>repeatDelay</code>를 어떻게 바꿔도 같은 값입니다. 무한 반복
-          Tween의 진행률을 <code>totalProgress()</code>로 재려 하면 이 숫자가 분모가 되므로 사실상 쓸 수 없습니다.
-        </p>
-        <p className="repeats-page__provenance">
-          측정 방법 · GSAP 3.15.0에서 <code>gsap.to(&#123;v:0&#125;, &#123;v:1, duration, repeat, repeatDelay, paused:true&#125;)</code>
-          를 만들고 <code>duration()</code>·<code>totalDuration()</code>을 읽었습니다. 전체 시간 공식은 duration 0.5·1·2 × repeat 0~3 ×
-          repeatDelay 0·0.25·1의 36개 조합에서 어긋난 경우가 없었고, <code>-1</code> 상수는 duration 0.5·1·2·5와 repeatDelay 0·1 조합
-          전부에서 같았습니다.
-        </p>
-      </div>
     </section>
   )
 }

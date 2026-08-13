@@ -73,7 +73,7 @@ export function CallFormsSection() {
 
       <div className="repeats-page__table-wrap">
         <table className="repeats-page__rules-table">
-          <caption>공식 페이지의 signature 블록과 Parameters·Returns 절을 그대로 옮긴 것 · 대조일 2026-08-04</caption>
+          <caption>공식 페이지의 signature 블록과 Parameters·Returns 절을 그대로 옮긴 것 · 대조일 2026-08-13</caption>
           <thead>
             <tr>
               <th scope="col">메서드</th>

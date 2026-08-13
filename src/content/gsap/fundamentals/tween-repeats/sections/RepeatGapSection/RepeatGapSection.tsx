@@ -93,20 +93,6 @@ export function RepeatGapSection() {
         </div>
       </div>
 
-      <div className="repeats-page__note repeats-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용</h3>
-        <p>
-          틈 동안 무엇이 멈추는지는 공식 문서에 없습니다. 실행해 보면 <strong>대상 값과 회차 번호가 둘 다 멈춰 있습니다.</strong> 값은
-          직전 회차가 끝난 자리에 그대로 있고, <code>iteration()</code>도 <strong>방금 끝난 회차 번호</strong>를 유지하다가 다음 회차가
-          실제로 시작할 때 올라갑니다.
-        </p>
-        <p className="repeats-page__provenance">
-          측정 방법 · GSAP 3.15.0에서{' '}
-          <code>gsap.to(&#123;v:0&#125;, &#123;v:1, duration:1, repeat:2, repeatDelay:0.5, ease:'none', paused:true&#125;)</code>를 만들고{' '}
-          <code>totalTime()</code>을 0.5·1·1.2·1.49·1.5·1.75초로 옮기며 <code>iteration()</code>과 값을 읽었습니다. 틈 구간인 1.0~1.5초
-          내내 iteration은 1, 값은 1로 고정이었고 1.75초에서 iteration 2·값 0.25가 됐습니다.
-        </p>
-      </div>
     </section>
   )
 }

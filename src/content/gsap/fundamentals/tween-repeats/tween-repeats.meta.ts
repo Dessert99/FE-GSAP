@@ -3,9 +3,9 @@ export const tweenRepeatsMeta = {
   title: '반복 회차와 값 재계산은 언제 일어나나요?',
   category: 'GSAP · Tween Methods',
   summary:
-    'Tween은 처음 재생할 때 시작값과 끝값을 한 번 기억해 둡니다. 그래서 몇 번을 반복하든 같은 구간을 다시 지나갑니다. 반복 횟수·틈·방향을 정하는 것이 repeat·repeatDelay·yoyo이고, 기억해 둔 값을 지워 다시 읽게 하는 것이 invalidate입니다.',
+    'Tween은 처음 렌더링될 때 기본적으로 시작값과 끝값을 한 번 기록합니다. 그래서 같은 Tween을 반복하면 같은 구간을 다시 지나갑니다. 반복 횟수·틈·방향을 정하는 것이 repeat·repeatDelay·yoyo이고, 기록한 값을 지워 다시 읽게 하는 것이 invalidate입니다.',
   sourcePath: 'src/content/gsap/fundamentals/tween-repeats/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Tween.invalidate()', href: 'https://gsap.com/docs/v3/GSAP/Tween/invalidate()' },
     { label: 'Tween.iteration()', href: 'https://gsap.com/docs/v3/GSAP/Tween/iteration()' },
@@ -23,7 +23,7 @@ export const tweenRepeatsSections = [
   { number: '04', id: 'iteration-number', title: '지금 몇 회차인지 읽고 옮긴다', sourceItems: 4 },
   { number: '05', id: 'invalidate-recompute', title: '기억해 둔 시작값을 지운다', sourceItems: 7 },
   { number: '06', id: 'call-forms', title: '다섯 메서드의 호출 형식', sourceItems: 13 },
-  { number: '07', id: 'boundaries', title: '여기서 다루지 않는 것', sourceItems: 0 },
+  { number: '07', id: 'boundaries', title: '공식 문서가 밝히지 않은 경계', sourceItems: 0 },
 ] as const
 
 /** source 대조와 local mapping의 분모를 페이지에서 명시적으로 드러낸다. */

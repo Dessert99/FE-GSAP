@@ -57,30 +57,6 @@ export function IterationNumberSection() {
         <code>{officialCall}</code>
       </pre>
 
-      <div className="repeats-page__note repeats-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용</h3>
-        <p>
-          <strong>첫째, 1부터 센다는 규칙에 예외가 없습니다.</strong> 반복이 아예 없는 Tween도, <code>duration</code>이 0인 Tween도,{' '}
-          <code>gsap.set()</code>이 만든 Tween도 <code>iteration()</code>이 1입니다. 0이 나오는 경우를 찾지 못했습니다.
-        </p>
-        <p>
-          <strong>둘째, 회차 경계 시각은 끝난 회차에 속합니다.</strong> <code>duration: 1, repeat: 2</code>에서 전체 시간 1.0초는 아직
-          1회차이고, 1.0001초가 되어서야 2회차입니다. 맨 마지막 끝에서도 번호가 하나 더 올라가지 않고 마지막 회차에 머뭅니다.
-        </p>
-        <p>
-          <strong>셋째, setter는 회차 안의 위치를 유지한 채 점프하고 범위를 넘으면 잘립니다.</strong> <code>repeat: 4</code>에서 전체 시간
-          2.5초(3회차의 절반)일 때 <code>iteration(2)</code>를 부르면 1.5초(2회차의 절반)로 갑니다. <code>iteration(99)</code>처럼 없는
-          회차를 넘기면 오류 없이 마지막 회차 끝으로 잘립니다.
-        </p>
-        <p className="repeats-page__provenance">
-          측정 방법 · GSAP 3.15.0. 1부터 세는 규칙은 repeat 0·1·2·-1 × yoyo true·false × repeatDelay 0·0.5의 16개 조합과{' '}
-          <code>duration: 0</code>, <code>gsap.set()</code>에서 <code>totalTime</code> 0일 때의 <code>iteration()</code>을 모두 읽어
-          확인했습니다(전부 1). 경계는 <code>totalTime()</code>을 0.9999·1·1.0001·2.9999·3초로 옮기며 읽었습니다. setter는{' '}
-          <code>repeat: 4</code> Tween에서 <code>totalTime(2.5)</code> 뒤 <code>iteration(2)</code>·<code>iteration(99)</code>를 부르고{' '}
-          <code>totalTime()</code>을 다시 읽어 각각 1.5초·5초를 얻었습니다.
-        </p>
-      </div>
-
       <RepeatCycleLab />
     </section>
   )

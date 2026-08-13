@@ -1,4 +1,4 @@
-/** 다섯 공식 페이지가 게시하지 않은 범위와 다른 페이지가 소유한 개념을 명시해 추측을 막는다. */
+/** 다섯 공식 페이지가 게시하지 않은 범위와 다음 학습 경로를 명시해 추측을 막는다. */
 import { toHref } from '../../../../../../app/routes'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 
@@ -13,8 +13,8 @@ const unpublished = [
   '음수 duration, 소수 repeat 같은 잘못된 입력의 처리',
 ]
 
-// 이 페이지가 전제로만 쓰고 설명 소유권은 다른 페이지에 있는 개념들
-const otherOwners = [
+// 이 페이지에서 전제로만 쓴 개념을 더 자세히 설명하는 다음 학습 페이지들
+const nextTopics = [
   { label: 'gsap.to()의 target·vars와 repeatRefresh 값 계약', href: '/fundamentals/gsap-to' },
   { label: 'vars·defaults·config의 적용 범위', href: '/fundamentals/tween-configuration' },
   { label: 'progress()·totalProgress()와 재생 헤드', href: '/fundamentals/tween-playhead' },
@@ -28,8 +28,8 @@ export function BoundariesSection() {
       <SectionHeading
         number="07"
         id="boundaries"
-        title="여기서 다루지 않는 것"
-        description="공식 문서가 적어 두지 않은 것을 추측해 채우지 않았습니다. 무엇을 모르는지 아는 것도 학습의 일부입니다."
+        title="공식 문서가 밝히지 않은 경계"
+        description="아래 세부 동작은 다섯 공식 문서만으로 확정할 수 없습니다. 예제에서 관찰한 값도 공식 계약처럼 일반화하지 않습니다."
       />
 
       <div className="repeats-page__split">
@@ -37,8 +37,7 @@ export function BoundariesSection() {
           <div className="repeats-page__subheading">
             <h3>공식 페이지에 게시되지 않은 것</h3>
             <p>
-              다섯 페이지 모두 짧은 메서드 문서입니다. 아래 항목은 문서에 없어, 앞 섹션에서 실행으로 확인한 것들은 그렇다고 따로 표시해
-              두었습니다.
+              다섯 페이지 모두 짧은 메서드 문서입니다. 아래 항목은 공식 설명에 없으며 버전별 실행 결과와 구분해서 봐야 합니다.
             </p>
           </div>
           <ul className="repeats-page__list">
@@ -50,13 +49,13 @@ export function BoundariesSection() {
 
         <div>
           <div className="repeats-page__subheading">
-            <h3>다른 페이지가 소유한 개념</h3>
-            <p>이 페이지는 아래 내용을 전제로만 사용했습니다.</p>
+            <h3>다음에 이어서 볼 개념</h3>
+            <p>이 페이지에서 짧게 사용한 개념을 더 자세히 확인할 수 있습니다.</p>
           </div>
           <ul className="repeats-page__list">
-            {otherOwners.map((owner) => (
-              <li key={owner.href}>
-                <a href={toHref(owner.href)}>{owner.label}</a>
+            {nextTopics.map((topic) => (
+              <li key={topic.href}>
+                <a href={toHref(topic.href)}>{topic.label}</a>
               </li>
             ))}
           </ul>
