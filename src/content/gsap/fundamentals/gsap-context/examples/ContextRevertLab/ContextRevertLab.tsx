@@ -1,5 +1,6 @@
 /** 세 Tween을 한 번에 되돌리는 과정의 컨트롤·무대·관찰 표·학습 패널을 조립한다. */
 import { useContextRevertAnimation } from './useContextRevertAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ContextRevertLab.css'
 
 export function ContextRevertLab() {
@@ -148,7 +149,7 @@ ${revertCall}`
       </div>
 
       <p className="context-revert-lab__source">
-        실행 코드 위치 · <code>examples/ContextRevertLab/useContextRevertAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/gsap-context/examples/ContextRevertLab/useContextRevertAnimation.ts" />
       </p>
     </section>
   )

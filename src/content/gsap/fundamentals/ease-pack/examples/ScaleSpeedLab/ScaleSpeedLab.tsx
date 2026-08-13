@@ -1,6 +1,7 @@
 /** scale 구간을 지나는 두 방식의 배율 차이를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { ScaleEaseMode } from './useScaleSpeedAnimation'
 import { useScaleSpeedAnimation } from './useScaleSpeedAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ScaleSpeedLab.css'
 
 // radio에 노출할 시작 scale 후보 — 공식 경고대로 0은 넣지 않는다
@@ -175,7 +176,7 @@ function run() {
       </div>
 
       <p className="scale-speed-lab__source">
-        실행 코드 위치 · <code>examples/ScaleSpeedLab/useScaleSpeedAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/ease-pack/examples/ScaleSpeedLab/useScaleSpeedAnimation.ts" />
       </p>
     </section>
   )

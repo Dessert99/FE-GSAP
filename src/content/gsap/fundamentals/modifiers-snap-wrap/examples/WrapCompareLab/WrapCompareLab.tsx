@@ -2,6 +2,7 @@
 import { sampleRange, sampleValues } from './WrapCompare.example'
 import type { WrapMode } from './useWrapCompareRuntime'
 import { useWrapCompareRuntime } from './useWrapCompareRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './WrapCompareLab.css'
 
 // radio에 노출할 두 모드와 읽기 쉬운 이름이다
@@ -132,7 +133,7 @@ gsap.utils.wrapYoyo(${sampleRange.min}, ${sampleRange.max}, index)  // ${rows.ma
       </div>
 
       <p className="wrap-compare-lab__source">
-        실행 코드 위치 · <code>examples/WrapCompareLab/WrapCompare.example.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/modifiers-snap-wrap/examples/WrapCompareLab/WrapCompare.example.ts" />
       </p>
     </section>
   )

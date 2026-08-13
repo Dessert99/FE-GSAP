@@ -1,5 +1,6 @@
 /** delayedCall의 예약·호출·두 취소 경로를 같은 Tween 관찰값으로 보여준다. */
 import { useDelayedCallAnimation } from './useDelayedCallAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './DelayedCallLab.css'
 
 export function DelayedCallLab() {
@@ -125,7 +126,7 @@ function cleanup() {
         <article><h4>실제로 언제 쓰나요?</h4><p>툴팁 닫기, 입력 완료 뒤 안내처럼 Timeline을 만들 필요가 없는 한 번의 지연 작업에 씁니다.</p></article>
       </div>
 
-      <p className="delayed-call-lab__source">실행 코드 위치 · <code>examples/DelayedCallLab/useDelayedCallAnimation.ts</code></p>
+      <p className="delayed-call-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-callbacks-pauses/examples/DelayedCallLab/useDelayedCallAnimation.ts" /></p>
     </section>
   )
 }

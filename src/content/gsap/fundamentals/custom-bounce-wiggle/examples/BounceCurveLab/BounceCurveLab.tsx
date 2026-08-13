@@ -1,5 +1,6 @@
 /** CustomBounce의 네 option이 곡선과 공 하나의 낙하를 어떻게 바꾸는지 조작·관찰·코드로 함께 확인하는 학습 패널이다. */
 import { graphSize, useBounceCurveAnimation } from './useBounceCurveAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './BounceCurveLab.css'
 
 /** 공식이 범위만 밝힌 strength에서 "적게·기본·많이"를 대표하는 세 값이다. */
@@ -292,7 +293,7 @@ function seek(value) {
       </div>
 
       <p className="bounce-curve-lab__source">
-        실행 코드 위치 · <code>examples/BounceCurveLab/useBounceCurveAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/custom-bounce-wiggle/examples/BounceCurveLab/useBounceCurveAnimation.ts" />
       </p>
     </section>
   )

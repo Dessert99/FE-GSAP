@@ -1,5 +1,6 @@
 /** 체크박스만으로는 바뀌지 않는 실행을 gsap.matchMediaRefresh()가 어떻게 되돌리고 다시 실행하는지 확인하는 학습 패널을 조립한다. */
 import { osQueries, targetClassName, useReduceMotionRefreshAnimation } from './useReduceMotionRefreshAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ReduceMotionRefreshLab.css'
 
 export function ReduceMotionRefreshLab() {
@@ -178,7 +179,7 @@ function play() {
       </div>
 
       <p className="reduce-motion-refresh-lab__source">
-        실행 코드 위치 · <code>examples/ReduceMotionRefreshLab/useReduceMotionRefreshAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/responsive-motion/examples/ReduceMotionRefreshLab/useReduceMotionRefreshAnimation.ts" />
       </p>
     </section>
   )

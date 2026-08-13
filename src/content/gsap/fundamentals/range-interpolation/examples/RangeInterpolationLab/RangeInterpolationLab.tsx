@@ -2,6 +2,7 @@
 import type { CSSProperties } from 'react'
 import type { CallStyle, InterpolationMode } from './useRangeInterpolationRuntime'
 import { useRangeInterpolationRuntime } from './useRangeInterpolationRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './RangeInterpolationLab.css'
 
 // 마지막 값을 지금 넘기는 호출과 재사용 함수를 받는 호출을 고르는 label이다
@@ -196,7 +197,7 @@ const hsl = gsap.utils.splitColor(color, true)`
       </div>
 
       <p className="range-lab__motion">모션 정책 · autoplay와 transition이 없는 직접 조작 계산이라 reduced-motion에서도 같은 정적 결과를 제공합니다.</p>
-      <p className="range-lab__source">실행 코드 위치 · <code>examples/RangeInterpolationLab/useRangeInterpolationRuntime.ts</code></p>
+      <p className="range-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/range-interpolation/examples/RangeInterpolationLab/useRangeInterpolationRuntime.ts" /></p>
     </section>
   )
 }

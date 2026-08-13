@@ -1,6 +1,7 @@
 /** 세 child sequence를 container 명령 하나로 제어하고 단일 snapshot으로 관찰한다. */
 import type { PlaybackCommand } from './useSequencePlaybackAnimation'
 import { useSequencePlaybackAnimation } from './useSequencePlaybackAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './SequencePlaybackLab.css'
 
 // 명령 버튼이 무엇을 바꾸는지 실행 전에 보여 주는 속성 계약이다
@@ -175,7 +176,7 @@ return <div ref={scope}>
         <article><h4>실제로 언제 쓰나요?</h4><p>온보딩 chapter, 제품 tour, 여러 장면이 이어지는 hero처럼 순서를 보존한 채 전체를 멈춤·재개·되감아야 할 때 container 하나만 제어합니다.</p></article>
       </div>
 
-      <p className="sequence-playback-lab__source">실행 코드 위치 · <code>examples/SequencePlaybackLab/useSequencePlaybackAnimation.ts</code></p>
+      <p className="sequence-playback-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-playback-controls/examples/SequencePlaybackLab/useSequencePlaybackAnimation.ts" /></p>
     </section>
   )
 }

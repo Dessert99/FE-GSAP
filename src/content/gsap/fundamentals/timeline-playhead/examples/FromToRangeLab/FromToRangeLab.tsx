@@ -1,5 +1,6 @@
 /** 두 label range와 immediateRender 호출 형태를 직접 비교한다. */
 import { rangePoints, type ImmediateRenderMode, useFromToRangeAnimation } from './useFromToRangeAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './FromToRangeLab.css'
 
 // select가 보여 줄 세 immediateRender 호출 형태다
@@ -52,7 +53,7 @@ function cleanup() {
       <p className="timeline-playhead-lab__status" role="status">{lastAction ? lastAction.reducedMotion ? `${lastAction.to.label} · 실제 time(${lastAction.to.time}) 호출` : `${lastAction.from.label} → ${lastAction.to.label} · ${lastAction.immediateRenderMode} 호출` : '두 label을 고른 뒤 실행하세요.'}</p>
       <pre className="timeline-playhead-lab__code"><code>{code}</code></pre>
       <div className="timeline-playhead-lab__panels"><article><h4>무엇이 달라졌나요?</h4><p>from과 to가 고정되므로 현재 playhead가 어디에 있든 control Tween의 range 길이를 즉시 알 수 있습니다.</p></article><article><h4>무엇을 봐야 하나요?</h4><p>explicit true는 생성 직후 from으로 이동합니다. 생략과 false의 설치본 결과는 공식 설명과 분리해 아래에서 읽습니다.</p></article><article><h4>왜 이렇게 동작하나요?</h4><p>control Tween이 Timeline time()을 from부터 to까지 선형으로 바꾸고, Timeline은 완료 뒤에도 paused로 남습니다.</p></article><article><h4>실제로 언제 쓰나요?</h4><p>chapter A→B, B→처음처럼 여러 구간 이동을 master Timeline에 순서대로 넣을 때 사용합니다.</p></article></div>
-      <p className="timeline-playhead-lab__source">실행 코드 위치 · <code>examples/FromToRangeLab/useFromToRangeAnimation.ts</code></p>
+      <p className="timeline-playhead-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-playhead/examples/FromToRangeLab/useFromToRangeAnimation.ts" /></p>
     </section>
   )
 }

@@ -1,6 +1,7 @@
 /** 입력 단위를 떼고 숫자를 계산한 뒤 보존하거나 강제해 되붙이는 lab이다. */
 import type { UnitMode } from './useUnitLabRuntime'
 import { useUnitLabRuntime } from './useUnitLabRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './UnitLab.css'
 
 // unitize의 선택 인자가 만드는 세 출력 정책이다
@@ -52,7 +53,7 @@ export function UnitLab() {
         <article><h4>왜 이렇게 동작하나요?</h4><p>공식 Note대로 unitize가 parseFloat를 사용하기 때문입니다. 숫자로 시작하지 않는 auto나 calc()는 NaN이 되어 이 pipeline과 호환되지 않습니다.</p></article>
         <article><h4>실제로 언제 쓰나요?</h4><p>modifier가 매번 “143.2px” 같은 문자열을 줄 때 숫자 utility를 재사용하고 CSS 단위를 잃지 않으려는 경우에 씁니다.</p></article>
       </div>
-      <p className="utility-lab__source">실행 코드 위치 · <code>examples/UnitLab/useUnitLabRuntime.ts</code></p>
+      <p className="utility-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/utility-pipelines-units/examples/UnitLab/useUnitLabRuntime.ts" /></p>
     </section>
   )
 }

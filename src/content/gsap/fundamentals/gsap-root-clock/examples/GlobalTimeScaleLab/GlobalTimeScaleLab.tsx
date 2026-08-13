@@ -1,6 +1,7 @@
 /** 전역 배속을 걸었을 때 tween 자신의 설정은 그대로인 것과, 전역 값이 1로 복원되는 것을 함께 관찰하는 학습 패널이다. */
 import type { GlobalSpeed } from './useGlobalTimeScaleAnimation'
 import { useGlobalTimeScaleAnimation } from './useGlobalTimeScaleAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './GlobalTimeScaleLab.css'
 
 // 라디오로 고를 수 있는 배속 — 0.5와 2는 공식 예제가 직접 든 값이다
@@ -216,7 +217,7 @@ return <div ref={scope}>
       </div>
 
       <p className="global-timescale-lab__source">
-        실행 코드 위치 · <code>examples/GlobalTimeScaleLab/useGlobalTimeScaleAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/gsap-root-clock/examples/GlobalTimeScaleLab/useGlobalTimeScaleAnimation.ts" />
       </p>
     </section>
   )

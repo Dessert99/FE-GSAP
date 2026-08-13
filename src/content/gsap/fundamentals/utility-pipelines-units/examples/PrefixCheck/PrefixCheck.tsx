@@ -1,6 +1,7 @@
 /** checkPrefix의 현재 브라우저 결과와 미지원 fallback을 이산 선택으로 보여준다. */
 import type { PrefixProperty } from './usePrefixCheckRuntime'
 import { usePrefixCheckRuntime } from './usePrefixCheckRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 
 // native·prefix 후보·미지원 경계를 확인할 선택지다
 const propertyOptions: { value: PrefixProperty; label: string }[] = [
@@ -33,7 +34,7 @@ export function PrefixCheck() {
       </output>
       <p className="utility-lab__status" role="status">{snapshot.property} 확인 결과는 {visibleResult}입니다.</p>
       <pre className="utility-lab__code"><code>{snapshot.code}</code></pre>
-      <p className="utility-lab__source">실행 코드 위치 · <code>examples/PrefixCheck/usePrefixCheckRuntime.ts</code></p>
+      <p className="utility-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/utility-pipelines-units/examples/PrefixCheck/usePrefixCheckRuntime.ts" /></p>
     </section>
   )
 }

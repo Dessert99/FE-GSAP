@@ -6,6 +6,7 @@ import {
   nestedTimelineId,
   useChildQueryAnimation,
 } from './useChildQueryAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ChildQueryLab.css'
 
 // 공식 Parameters 절의 네 인자를 이름·타입·기본값·설명 그대로 옮긴다
@@ -264,7 +265,7 @@ master.getChildren(${callArguments.join(', ')})
       </div>
 
       <p className="child-query-lab__source">
-        실행 코드 위치 · <code>examples/ChildQueryLab/useChildQueryAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-inspection/examples/ChildQueryLab/useChildQueryAnimation.ts" />
       </p>
     </section>
   )

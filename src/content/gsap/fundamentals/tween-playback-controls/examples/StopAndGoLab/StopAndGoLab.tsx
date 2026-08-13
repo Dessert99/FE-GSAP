@@ -1,6 +1,7 @@
 /** 세 명령의 차이를 버튼 조작·상태 관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import { useStopAndGoAnimation } from './useStopAndGoAnimation'
 import type { StopAndGoAction, StopAndGoCommand } from './useStopAndGoAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './StopAndGoLab.css'
 
 // 인자 없이 지금 자리를 기준으로 동작하는 세 명령
@@ -187,7 +188,7 @@ tween.isActive() // → ${observation.active}`
       </div>
 
       <p className="stop-and-go-lab__source">
-        실행 코드 위치 · <code>examples/StopAndGoLab/useStopAndGoAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-playback-controls/examples/StopAndGoLab/useStopAndGoAnimation.ts" />
       </p>
     </section>
   )

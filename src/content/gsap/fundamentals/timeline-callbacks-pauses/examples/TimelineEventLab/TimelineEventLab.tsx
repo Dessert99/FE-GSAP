@@ -1,5 +1,6 @@
 /** Timeline 위 네 이벤트의 위치·호출 순서·반환 차이를 조작 가능한 track으로 보여준다. */
 import { useTimelineEventAnimation } from './useTimelineEventAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './TimelineEventLab.css'
 
 export function TimelineEventLab() {
@@ -77,7 +78,7 @@ function cleanup() {
         <article><h4>실제로 언제 쓰나요?</h4><p>장면 중간의 분석 이벤트는 call, 사용자 확인 지점은 addPause, 전체 정리는 onComplete나 then으로 나누면 책임이 선명합니다.</p></article>
       </div>
 
-      <p className="timeline-event-lab__source">실행 코드 위치 · <code>examples/TimelineEventLab/useTimelineEventAnimation.ts</code></p>
+      <p className="timeline-event-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-callbacks-pauses/examples/TimelineEventLab/useTimelineEventAnimation.ts" /></p>
     </section>
   )
 }

@@ -1,5 +1,6 @@
 /** scope 인자 하나가 선택 범위를 바꾸는 과정의 컨트롤·두 카드 무대·관찰 표·학습 패널을 조립한다. */
 import { boxesPerCard, useScopedSelectorAnimation } from './useScopedSelectorAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ScopedSelectorLab.css'
 
 /** 두 카드가 같은 개수의 박스를 갖도록 렌더링에 쓰는 index 목록이다. */
@@ -169,7 +170,7 @@ ${didRevert ? 'ctx.revert()' : '// 아직 revert()를 부르지 않았습니다'
       </div>
 
       <p className="scoped-selector-lab__source">
-        실행 코드 위치 · <code>examples/ScopedSelectorLab/useScopedSelectorAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/gsap-context/examples/ScopedSelectorLab/useScopedSelectorAnimation.ts" />
       </p>
     </section>
   )

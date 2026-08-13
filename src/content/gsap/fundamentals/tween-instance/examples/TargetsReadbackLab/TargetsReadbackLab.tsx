@@ -1,6 +1,7 @@
 /** target으로 무엇을 넘겼는지에 따라 targets()가 어떻게 달라지는지를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { TargetMode } from './useTargetsReadbackAnimation'
 import { boxCount, useTargetsReadbackAnimation } from './useTargetsReadbackAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './TargetsReadbackLab.css'
 
 // radio에 노출할 네 가지 target 형태 — 공식 targets 인자 설명이 나열한 순서를 그대로 따른다
@@ -207,7 +208,7 @@ function run() {
       </div>
 
       <p className="targets-readback-lab__source">
-        실행 코드 위치 · <code>examples/TargetsReadbackLab/useTargetsReadbackAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-instance/examples/TargetsReadbackLab/useTargetsReadbackAnimation.ts" />
       </p>
     </section>
   )

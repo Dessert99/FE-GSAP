@@ -1,5 +1,6 @@
 /** TextPlugin의 load → register → vars 흐름을 실제 registry 상태로 보여 준다. */
 import { useRegistrationDiagnosticAnimation } from "./useRegistrationDiagnosticAnimation";
+import { RepoFileLink } from "../../../../../../components/demo/RepoFileLink/RepoFileLink";
 import "./RegistrationDiagnostic.css";
 
 /** 명시적 registration과 replay를 조작·관찰·코드로 함께 보여 주는 예제다. */
@@ -120,10 +121,7 @@ function cleanup() {
         </article>
       </div>
       <p className="registration-diagnostic__source">
-        실행 코드 위치 ·{" "}
-        <code>
-          examples/RegistrationDiagnostic/useRegistrationDiagnosticAnimation.ts
-        </code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/plugins/plugins/examples/RegistrationDiagnostic/useRegistrationDiagnosticAnimation.ts" />
       </p>
     </section>
   );

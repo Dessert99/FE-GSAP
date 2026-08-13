@@ -1,6 +1,7 @@
 /** kill과 revert의 결과 차이를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { StopMode } from './useRevertVsKillAnimation'
 import { useRevertVsKillAnimation } from './useRevertVsKillAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './RevertVsKillLab.css'
 
 // radio에 노출할 중단 방식과 읽기 쉬운 이름이다
@@ -181,7 +182,7 @@ gsap.getTweensOf(box).length     // → ${observation.remainingTweens}`
       </div>
 
       <p className="revert-vs-kill-lab__source">
-        실행 코드 위치 · <code>examples/RevertVsKillLab/useRevertVsKillAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/find-stop-animations/examples/RevertVsKillLab/useRevertVsKillAnimation.ts" />
       </p>
     </section>
   )

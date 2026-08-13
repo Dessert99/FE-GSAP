@@ -2,6 +2,7 @@
 import type { CSSProperties } from 'react'
 import type { DistributionAxis, DistributionEase, DistributionFrom, DistributionLayout, DistributionSpacing } from './useDistributeRuntime'
 import { useDistributeRuntime } from './useDistributeRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './DistributionLab.css'
 
 // 한 줄에서 규칙을 익힌 뒤 2차원 grid로 펼칠 배치 선택지다
@@ -94,7 +95,7 @@ export function DistributionLab() {
         <article><h4>왜 코드와 숫자가 맞나요?</h4><p>controls가 만든 descriptor 하나로 반환 함수를 만들고, 그 snapshot이 각 셀 숫자와 직렬화 코드까지 함께 제공합니다.</p></article>
         <article><h4>언제 쓰나요?</h4><p>DOM을 움직이지 않고도 index별 지연·크기·불투명도 후보를 계산할 수 있습니다. 이 페이지는 계산까지만 소유합니다.</p></article>
       </div>
-      <p className="distribution-lab__source">실행 코드 위치 · <code>examples/DistributionLab/useDistributeRuntime.ts</code></p>
+      <p className="distribution-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/utility-distribute/examples/DistributionLab/useDistributeRuntime.ts" /></p>
     </section>
   )
 }

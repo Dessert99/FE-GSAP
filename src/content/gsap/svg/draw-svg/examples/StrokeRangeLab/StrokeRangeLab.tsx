@@ -1,6 +1,7 @@
 /** 하나의 SVG path range를 조절하고 실제 plugin measurement로 확인하게 만든다. */
 import { drawSvgProperties } from '../../draw-svg.properties'
 import { useStrokeRangeAnimation } from './useStrokeRangeAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './StrokeRangeLab.css'
 
 /** range descriptor가 drawSVG vars·ruler·measurement·code를 같은 값으로 유지하는 lab이다. */
@@ -210,8 +211,7 @@ function cleanup() {
         </table>
       </div>
       <p className="stroke-range-lab__source">
-        실행 코드 위치 ·{' '}
-        <code>examples/StrokeRangeLab/useStrokeRangeAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/svg/draw-svg/examples/StrokeRangeLab/useStrokeRangeAnimation.ts" />
       </p>
     </section>
   )

@@ -1,5 +1,6 @@
 /** getById의 id 후보를 실제 중첩 트리에 조회해 중복·엄격 비교·undefined 결과를 보여준다. */
 import { duplicatedId, idCandidates, nestedTimelineId, useIdLookupRuntime } from './useIdLookupRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './IdLookupLab.css'
 
 export function IdLookupLab() {
@@ -89,7 +90,7 @@ function cleanup() {
         <article><h4>언제 쓰나요?</h4><p>React에서 animation 변수를 멀리 전달하지 않고 local Timeline 안에서 다시 찾을 때 씁니다.</p></article>
       </div>
 
-      <p className="id-lookup-lab__source">실행 코드 위치 · <code>examples/IdLookupLab/useIdLookupRuntime.ts</code></p>
+      <p className="id-lookup-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-inspection/examples/IdLookupLab/useIdLookupRuntime.ts" /></p>
     </section>
   )
 }

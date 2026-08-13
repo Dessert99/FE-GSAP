@@ -1,5 +1,6 @@
 /** 반복 시간표를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import { useRepeatCycleAnimation } from './useRepeatCycleAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './RepeatCycleLab.css'
 
 export function RepeatCycleLab() {
@@ -211,7 +212,7 @@ gsap.getProperty('${descriptor.selector}', 'x') // ${observation.x}`
       </div>
 
       <p className="repeat-cycle-lab__source">
-        실행 코드 위치 · <code>examples/RepeatCycleLab/useRepeatCycleAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-repeats/examples/RepeatCycleLab/useRepeatCycleAnimation.ts" />
       </p>
     </section>
   )

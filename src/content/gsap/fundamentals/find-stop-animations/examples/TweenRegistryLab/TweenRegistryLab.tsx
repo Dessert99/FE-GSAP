@@ -1,5 +1,6 @@
 /** 세 조회 API의 범위 차이를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import { useTweenRegistryAnimation } from './useTweenRegistryAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './TweenRegistryLab.css'
 
 export function TweenRegistryLab() {
@@ -166,7 +167,7 @@ gsap.isTweening(box)                 // → ${query ? String(query.tweening) : '
       </div>
 
       <p className="tween-registry-lab__source">
-        실행 코드 위치 · <code>examples/TweenRegistryLab/useTweenRegistryAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/find-stop-animations/examples/TweenRegistryLab/useTweenRegistryAnimation.ts" />
       </p>
     </section>
   )

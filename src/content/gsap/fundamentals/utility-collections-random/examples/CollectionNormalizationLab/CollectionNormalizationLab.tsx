@@ -1,6 +1,7 @@
 /** toArray()의 selector scope와 세 input 모양을 실제 DOM 후보로 관찰하는 패널이다. */
 import type { CollectionInputMode } from './useCollectionNormalizationRuntime'
 import { useCollectionNormalizationRuntime } from './useCollectionNormalizationRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './CollectionNormalizationLab.css'
 
 // radio에 보일 input 모양과 GSAP 호출에서 맡는 역할이다
@@ -29,7 +30,7 @@ export function CollectionNormalizationLab() {
       <pre className="collection-normalization-lab__code"><code>{snapshot?.code ?? 'DOM을 준비하는 중입니다.'}</code></pre>
       <div className="collection-normalization-lab__result"><p><strong>반환 Array</strong> · [{snapshot?.labels.map((label) => `'${label}'`).join(', ') ?? ''}]</p><p>{snapshot?.scopeDescription}</p></div>
       <div className="collection-normalization-lab__panels"><article><h4>무엇이 달라졌나요?</h4><p>세 input은 서로 다른 모양이지만 출력은 모두 Array입니다. single 모드에서는 첫 후보 하나만 Array의 한 칸이 됩니다.</p></article><article><h4>무엇을 봐야 하나요?</h4><p>selector + scope를 고르면 바깥 decoy는 결과에 없습니다. scope가 document 전체 검색을 local descendant 검색으로 좁혔기 때문입니다.</p></article><article><h4>왜 이렇게 동작하나요?</h4><p><code>scope</code>는 selector text에서만 유용합니다. NodeList나 element를 이미 넘겼다면 무엇을 검색할지 정해져 있어 scope를 더할 일이 없습니다.</p></article><article><h4>실제로 언제 쓰나요?</h4><p>component 안의 card, ref로 얻은 element, selector 목록을 한 번에 Tween target 후보로 정리할 때 씁니다.</p></article></div>
-      <p className="collection-normalization-lab__source">실행 코드 위치 · <code>examples/CollectionNormalizationLab/useCollectionNormalizationRuntime.ts</code></p>
+      <p className="collection-normalization-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/utility-collections-random/examples/CollectionNormalizationLab/useCollectionNormalizationRuntime.ts" /></p>
     </section>
   )
 }

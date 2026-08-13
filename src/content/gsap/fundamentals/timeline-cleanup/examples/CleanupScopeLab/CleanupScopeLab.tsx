@@ -1,6 +1,7 @@
 /** 여섯 cleanup을 같은 fixture에 적용하고 전후 snapshot과 실제 호출 코드를 한 화면에 조립한다. */
 import type { CleanupDescriptor, CleanupMode, CleanupSnapshot } from './useCleanupScopeAnimation'
 import { useCleanupScopeAnimation } from './useCleanupScopeAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './CleanupScopeLab.css'
 
 // radio에 노출할 여섯 공식 선택과 가장 짧은 보존 범위 설명이다
@@ -155,7 +156,7 @@ export function CleanupScopeLab() {
         <article><h4>실제로 언제 쓰나요?</h4><p>편집 가능한 sequence에서는 <code>remove</code>·<code>clear</code>, 특정 대상 충돌 해소에는 <code>killTweensOf</code>, 폐기에는 <code>kill</code>, component나 반응형 style 복원에는 <code>revert</code>를 고릅니다.</p></article>
       </div>
 
-      <p className="cleanup-scope-lab__source">실행 코드 위치 · <code>examples/CleanupScopeLab/useCleanupScopeAnimation.ts</code></p>
+      <p className="cleanup-scope-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-cleanup/examples/CleanupScopeLab/useCleanupScopeAnimation.ts" /></p>
     </section>
   )
 }

@@ -1,6 +1,7 @@
 /** 배열 보간을 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { ArrayEase, DestinationShape } from './useNumericArrayAnimation'
 import { useNumericArrayAnimation } from './useNumericArrayAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './NumericArrayLab.css'
 
 // radio에 노출할 목적지 길이 선택지와 읽기 쉬운 이름이다
@@ -155,7 +156,7 @@ arr // [${rows.map((row) => row.current).join(', ')}]`
       </div>
 
       <p className="numeric-array-lab__source">
-        실행 코드 위치 · <code>examples/NumericArrayLab/useNumericArrayAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/non-css-target-values/examples/NumericArrayLab/useNumericArrayAnimation.ts" />
       </p>
     </section>
   )

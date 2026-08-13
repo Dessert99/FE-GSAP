@@ -1,6 +1,7 @@
 /** defaults 상속을 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { DefaultsEase } from './useDefaultsInheritanceAnimation'
 import { useDefaultsInheritanceAnimation } from './useDefaultsInheritanceAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './DefaultsInheritanceExample.css'
 
 // select에 노출할 ease 후보와 읽기 쉬운 이름이다.
@@ -181,7 +182,7 @@ tween.duration() // ${observation.appliedDuration}`
       </div>
 
       <p className="defaults-inheritance-example__source">
-        실행 코드 위치 · <code>examples/DefaultsInheritanceExample/useDefaultsInheritanceAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-configuration/examples/DefaultsInheritanceExample/useDefaultsInheritanceAnimation.ts" />
       </p>
     </section>
   )

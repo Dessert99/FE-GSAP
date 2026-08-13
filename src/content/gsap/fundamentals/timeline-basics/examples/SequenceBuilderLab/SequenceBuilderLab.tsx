@@ -1,5 +1,6 @@
 /** 단계별 Timeline child, 실제 블록 배치와 실행 코드를 한 화면에서 함께 갱신한다. */
 import { sequenceStages, type SequenceCall, useSequenceBuilderAnimation } from './useSequenceBuilderAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './SequenceBuilderLab.css'
 
 // 한 creator descriptor를 실제 Timeline chaining 문법 한 줄로 직렬화한다
@@ -132,7 +133,7 @@ return <div ref={scope}>
         <article><h4>실제로 언제 쓰나요?</h4><p>카드 진입 → 진행 표시 → 완료 전환처럼 순서를 함께 재생·중단해야 하는 UI 흐름을 한 단위로 묶을 때 씁니다.</p></article>
       </div>
 
-      <p className="sequence-builder__source">실행 코드 위치 · <code>examples/SequenceBuilderLab/useSequenceBuilderAnimation.ts</code></p>
+      <p className="sequence-builder__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-basics/examples/SequenceBuilderLab/useSequenceBuilderAnimation.ts" /></p>
     </section>
   )
 }

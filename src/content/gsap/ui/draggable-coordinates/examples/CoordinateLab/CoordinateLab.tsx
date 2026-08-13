@@ -1,6 +1,7 @@
 /** target 좌표와 pointer 좌표가 달라지는 press→drag→release lab이다. */
 import { draggableCoordinateProperties } from '../../draggable-coordinates.properties'
 import { useCoordinateAnimation } from './useCoordinateAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './CoordinateLab.css'
 
 /** descriptor 하나에서 code와 실제 drag instance를 함께 보여 준다. */
@@ -209,8 +210,7 @@ return <div ref={scope}>
         </table>
       </div>
       <p className="coordinate-lab__source">
-        실행 코드 위치 ·{' '}
-        <code>examples/CoordinateLab/useCoordinateAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/ui/draggable-coordinates/examples/CoordinateLab/useCoordinateAnimation.ts" />
       </p>
     </section>
   )

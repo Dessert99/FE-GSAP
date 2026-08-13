@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import type { UtilityMode } from './ValueOrFunctionLab.example'
 import { createDescriptor, normalizeInput, runValueOrFunction } from './ValueOrFunctionLab.example'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ValueOrFunctionLab.css'
 
 // radio에 노출할 두 호출 방식과 읽기 쉬운 이름이다
@@ -154,7 +155,7 @@ gsap.utils.pipe(limit, gsap.utils.snap(${descriptor.increment}))(${descriptor.in
       </div>
 
       <p className="value-or-function-lab__source">
-        실행 코드 위치 · <code>examples/ValueOrFunctionLab/ValueOrFunctionLab.example.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/gsap-utils/examples/ValueOrFunctionLab/ValueOrFunctionLab.example.ts" />
       </p>
     </section>
   )

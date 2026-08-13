@@ -1,5 +1,6 @@
 /** attribute 채널과 CSS transform 채널의 분리를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import { useSvgAttributeAnimation } from './useSvgAttributeAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './SvgAttributeLab.css'
 
 export function SvgAttributeLab() {
@@ -167,7 +168,7 @@ function run() {
       </div>
 
       <p className="svg-attribute-lab__source">
-        실행 코드 위치 · <code>examples/SvgAttributeLab/useSvgAttributeAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/non-css-target-values/examples/SvgAttributeLab/useSvgAttributeAnimation.ts" />
       </p>
     </section>
   )

@@ -1,5 +1,6 @@
 /** ticker에 listener를 붙여 매 tick 넘어오는 time·deltaTime·frame을 직접 읽어 보는 학습 패널이다. */
 import { useTickerListenerRuntime } from './useTickerListenerRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './TickerListenerLab.css'
 
 export function TickerListenerLab() {
@@ -170,7 +171,7 @@ function readTick(time, deltaTime, frame) {
       </p>
 
       <p className="ticker-listener-lab__source">
-        실행 코드 위치 · <code>examples/TickerListenerLab/useTickerListenerRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/gsap-root-clock/examples/TickerListenerLab/useTickerListenerRuntime.ts" />
       </p>
     </section>
   )

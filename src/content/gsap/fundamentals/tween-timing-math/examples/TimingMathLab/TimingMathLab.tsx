@@ -1,5 +1,6 @@
 /** 다섯 값을 조절하며 일곱 getter의 반환값이 동시에 어떻게 변하는지 시간축·표·코드로 함께 확인하는 학습 패널을 조립한다. */
 import { timeScaleOptions, useTimingMathRuntime } from './useTimingMathRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './TimingMathLab.css'
 
 // 시간축의 세 가지 칸을 화면에서 무슨 구간인지 글로 구분한다 — 색만으로 구분하지 않기 위해서다
@@ -279,7 +280,7 @@ tween.repeatDelay()    // ${readout ? round(readout.repeatDelay) : '…'}`
       </div>
 
       <p className="timing-lab__source">
-        실행 코드 위치 · <code>examples/TimingMathLab/useTimingMathRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-timing-math/examples/TimingMathLab/useTimingMathRuntime.ts" />
       </p>
     </section>
   )

@@ -2,6 +2,7 @@
 import { useReducedMotion } from '../../../../../../components/demo/InteractiveExample/useReducedMotion'
 import type { CoordinateMethod } from './useCoordinateScrubAnimation'
 import { useCoordinateScrubAnimation } from './useCoordinateScrubAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './CoordinateScrubLab.css'
 
 // controls에 표시할 네 setter의 단위와 범위다
@@ -36,7 +37,7 @@ tl.${method}(${argument})`
       <dl className="timeline-playhead-lab__snapshot"><div><dt>progress()</dt><dd>{snapshot.progress.toFixed(2)}</dd></div><div><dt>time()</dt><dd>{snapshot.time.toFixed(2)}초</dd></div><div><dt>totalProgress()</dt><dd>{snapshot.totalProgress.toFixed(2)}</dd></div><div><dt>totalTime()</dt><dd>{snapshot.totalTime.toFixed(2)}초</dd></div></dl>
       <pre className="timeline-playhead-lab__code"><code>{code}</code></pre>
       <div className="timeline-playhead-lab__panels"><article><h4>무엇이 달라졌나요?</h4><p>local setter는 한 cycle 안의 위치를, total setter는 두 cycle과 사이 repeatDelay를 합친 위치를 바꿉니다.</p></article><article><h4>무엇을 봐야 하나요?</h4><p>totalProgress가 repeatDelay 안을 가리킬 때 target이 멈춰 있어도 totalTime은 계속 다른 좌표를 가집니다.</p></article><article><h4>왜 이렇게 동작하나요?</h4><p>비율/초는 단위 선택이고 local/total은 repeat 포함 범위 선택입니다. 서로 다른 두 질문입니다.</p></article><article><h4>실제로 언제 쓰나요?</h4><p>단일 chapter scrub에는 local, 반복 전체를 저장·복원하는 scrubber에는 total 좌표가 맞습니다.</p></article></div>
-      <p className="timeline-playhead-lab__source">실행 코드 위치 · <code>examples/CoordinateScrubLab/useCoordinateScrubAnimation.ts</code></p>
+      <p className="timeline-playhead-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-playhead/examples/CoordinateScrubLab/useCoordinateScrubAnimation.ts" /></p>
     </section>
   )
 }

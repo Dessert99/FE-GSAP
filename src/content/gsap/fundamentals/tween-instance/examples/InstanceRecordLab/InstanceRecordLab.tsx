@@ -1,6 +1,7 @@
 /** id와 data가 instance의 어느 자리에 남는지를 조작·읽기·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { DataChoice } from './useInstanceRecordRuntime'
 import { useInstanceRecordRuntime } from './useInstanceRecordRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './InstanceRecordLab.css'
 
 // radio에 노출할 data 값 종류와 읽기 쉬운 이름이다
@@ -147,7 +148,7 @@ tween.data = '나중에 넣은 값'`
       </div>
 
       <p className="instance-record-lab__source">
-        실행 코드 위치 · <code>examples/InstanceRecordLab/useInstanceRecordRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-instance/examples/InstanceRecordLab/useInstanceRecordRuntime.ts" />
       </p>
     </section>
   )

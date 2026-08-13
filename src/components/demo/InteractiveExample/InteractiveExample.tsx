@@ -1,5 +1,6 @@
 /** 조절형 예제의 화면·코드·속성 설명·관찰 순서를 같은 프레임으로 묶는다. */
 import type { ReactNode } from 'react'
+import { RepoFileLink } from '../RepoFileLink/RepoFileLink'
 import './InteractiveExample.css'
 
 /** 예제에서 다루는 GSAP 속성의 타입과 허용값을 표로 전달한다. */
@@ -69,7 +70,7 @@ export function InteractiveExample({
       <div className="interactive-example__source">
         <div className="interactive-example__source-heading">
           <span>현재 값과 동기화된 코드</span>
-          <code>{sourcePath}</code>
+          <RepoFileLink path={sourcePath} />
         </div>
         <pre>
           <code>{code}</code>

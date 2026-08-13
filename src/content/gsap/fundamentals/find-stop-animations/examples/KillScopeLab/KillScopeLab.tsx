@@ -1,6 +1,7 @@
 /** 네 가지 중단 범위를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { KillMode } from './useKillScopeAnimation'
 import { useKillScopeAnimation } from './useKillScopeAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './KillScopeLab.css'
 
 // radio에 노출할 중단 범위와 읽기 쉬운 이름이다
@@ -186,7 +187,7 @@ gsap.getTweensOf(box).length     // → ${observation.remainingTweens}`
       </div>
 
       <p className="kill-scope-lab__source">
-        실행 코드 위치 · <code>examples/KillScopeLab/useKillScopeAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/find-stop-animations/examples/KillScopeLab/useKillScopeAnimation.ts" />
       </p>
     </section>
   )

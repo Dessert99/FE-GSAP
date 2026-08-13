@@ -1,6 +1,7 @@
 /** 괄호에 값을 넣었는지에 따라 돌려받는 것이 달라지는 것을 조작·반환값 관찰·코드로 확인하는 학습 패널을 조립한다. */
 import { useStateReadoutAnimation } from './useStateReadoutAnimation'
 import type { StateReadoutCommand } from './useStateReadoutAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './StateReadoutLab.css'
 
 // 괄호를 비운 호출들 — 지금 값을 물어보기만 한다
@@ -182,7 +183,7 @@ ${lastCommand ? `const returned = ${callSyntax[lastCommand]}` : '// 아직 아�
       </div>
 
       <p className="state-readout-lab__source">
-        실행 코드 위치 · <code>examples/StateReadoutLab/useStateReadoutAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-playback-controls/examples/StateReadoutLab/useStateReadoutAnimation.ts" />
       </p>
     </section>
   )

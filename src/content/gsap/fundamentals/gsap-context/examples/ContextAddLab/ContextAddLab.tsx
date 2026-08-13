@@ -1,5 +1,6 @@
 /** 클릭 시점 애니메이션의 기록 여부를 네 경로로 비교하는 컨트롤·무대·관찰 패널·학습 패널을 조립한다. */
 import { creationModes, useContextAddAnimation } from './useContextAddAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ContextAddLab.css'
 
 /** 각 경로가 기록되는지 아닌지를 표에서 한 단어로 알려 준다. */
@@ -191,7 +192,7 @@ function cleanup() {
       </div>
 
       <p className="context-add-lab__source">
-        실행 코드 위치 · <code>examples/ContextAddLab/useContextAddAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/gsap-context/examples/ContextAddLab/useContextAddAnimation.ts" />
       </p>
     </section>
   )

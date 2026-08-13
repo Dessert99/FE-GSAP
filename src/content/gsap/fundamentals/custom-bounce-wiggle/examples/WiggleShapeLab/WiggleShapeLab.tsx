@@ -1,6 +1,7 @@
 /** wiggles·type·property 값이 곡선과 바늘 하나의 회전을 어떻게 나눠 맡는지 조작·관찰·코드로 함께 확인하는 학습 패널이다. */
 import type { WiggleType } from './useWiggleShapeAnimation'
 import { graphSize, useWiggleShapeAnimation } from './useWiggleShapeAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './WiggleShapeLab.css'
 
 /** 공식 최소 예제(6)와 기본값(10), 문자열 예제(15)를 그대로 고르게 한다. */
@@ -262,7 +263,7 @@ function seek(value) {
       </div>
 
       <p className="wiggle-shape-lab__source">
-        실행 코드 위치 · <code>examples/WiggleShapeLab/useWiggleShapeAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/custom-bounce-wiggle/examples/WiggleShapeLab/useWiggleShapeAnimation.ts" />
       </p>
     </section>
   )

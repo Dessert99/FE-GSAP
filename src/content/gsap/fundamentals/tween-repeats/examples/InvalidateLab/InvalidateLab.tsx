@@ -1,5 +1,6 @@
 /** 같은 Tween을 다시 재생할 때 시작값이 유지되는지 다시 읽히는지를 조작·기록·코드로 확인하는 학습 패널을 조립한다. */
 import { useInvalidateAnimation } from './useInvalidateAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './InvalidateLab.css'
 
 export function InvalidateLab() {
@@ -140,7 +141,7 @@ function run(kind) {
       </div>
 
       <p className="invalidate-lab__source">
-        실행 코드 위치 · <code>examples/InvalidateLab/useInvalidateAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-repeats/examples/InvalidateLab/useInvalidateAnimation.ts" />
       </p>
     </section>
   )

@@ -1,5 +1,6 @@
 /** position 표기 하나를 실제 Timeline에 넣고 getter 좌표·시간축·실행 코드를 같은 입력에서 보여 준다. */
 import { positionFormOptions, usePositionSyntaxRuntime } from './usePositionSyntaxRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './PositionSyntaxLab.css'
 
 export function PositionSyntaxLab() {
@@ -94,7 +95,7 @@ timeline.add(inserted, ${descriptor.form.code})`
         <article><h4>실제로 언제 쓰나요?</h4><p>고정 초를 다시 계산하지 않고 gap·overlap·label·직전 child 기준으로 sequence를 조립할 때 씁니다.</p></article>
       </div>
 
-      <p className="position-lab__source">실행 코드 위치 · <code>examples/PositionSyntaxLab/usePositionSyntaxRuntime.ts</code></p>
+      <p className="position-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-child-placement/examples/PositionSyntaxLab/usePositionSyntaxRuntime.ts" /></p>
     </section>
   )
 }

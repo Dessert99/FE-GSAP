@@ -1,5 +1,6 @@
 /** 같은 pipe 호출에서 기록한 중간값을 조작·표·코드로 읽는 계산 lab이다. */
 import { usePipelineLabRuntime } from './usePipelineLabRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './PipelineLab.css'
 
 export function PipelineLab() {
@@ -36,7 +37,7 @@ export function PipelineLab() {
         <article><h4>왜 이렇게 동작하나요?</h4><p>공식 설명대로 함수는 넘긴 순서로 호출됩니다. 순서를 바꾸면 계산의 뜻도 달라지므로, 입력 타입과 출력 타입뿐 아니라 단계 순서도 pipeline 계약입니다.</p></article>
         <article><h4>실제로 언제 쓰나요?</h4><p>포인터 비율을 화면 좌표나 각도로 바꾸고 허용 간격에 맞추는 것처럼, 같은 변환을 여러 입력에 반복할 때 재사용합니다.</p></article>
       </div>
-      <p className="utility-lab__source">실행 코드 위치 · <code>examples/PipelineLab/usePipelineLabRuntime.ts</code></p>
+      <p className="utility-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/utility-pipelines-units/examples/PipelineLab/usePipelineLabRuntime.ts" /></p>
     </section>
   )
 }

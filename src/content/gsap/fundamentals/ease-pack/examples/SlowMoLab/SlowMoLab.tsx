@@ -1,5 +1,6 @@
 /** SlowMo의 세 파라미터가 만드는 구간 분배와 companion 동기화를 조작·관찰·코드로 확인하는 학습 패널을 조립한다. */
 import { useSlowMoAnimation } from './useSlowMoAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './SlowMoLab.css'
 
 export function SlowMoLab() {
@@ -176,7 +177,7 @@ function run() {
       </div>
 
       <p className="slow-mo-lab__source">
-        실행 코드 위치 · <code>examples/SlowMoLab/useSlowMoAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/ease-pack/examples/SlowMoLab/useSlowMoAnimation.ts" />
       </p>
     </section>
   )

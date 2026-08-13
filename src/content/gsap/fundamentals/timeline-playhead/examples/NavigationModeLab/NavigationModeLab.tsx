@@ -1,5 +1,6 @@
 /** 같은 label 목적지의 즉시 점프와 부드러운 playhead 이동을 비교한다. */
 import { navigationDestinations, type NavigationMethod, useNavigationModeAnimation } from './useNavigationModeAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './NavigationModeLab.css'
 
 // method 선택 전에 learner가 예상할 사용자 경험을 짧게 표시한다
@@ -50,7 +51,7 @@ function cleanup() {
       <p className="timeline-playhead-lab__status" role="status">{lastAction ? `${lastAction.requestedMethod} 요청 · 실제 ${lastAction.effectiveMethod} · ${lastAction.destination.label}` : '이동 방식을 고른 뒤 실행하세요.'}</p>
       <pre className="timeline-playhead-lab__code"><code>{code}</code></pre>
       <div className="timeline-playhead-lab__panels"><article><h4>무엇이 달라졌나요?</h4><p>도착 위치는 같아도 setter는 즉시 바뀌고 control Tween은 중간 playhead를 차례로 보여 줍니다.</p></article><article><h4>무엇을 봐야 하나요?</h4><p>앞선 label로 tweenTo해 겉으로 뒤로 움직여도 Timeline의 reversed 상태는 바뀌지 않습니다.</p></article><article><h4>왜 이렇게 동작하나요?</h4><p>tweenTo는 Timeline 자체를 재생하는 대신 pause한 Timeline의 time()을 선형으로 tween합니다.</p></article><article><h4>실제로 언제 쓰나요?</h4><p>chapter 버튼, 제품 tour, 미디어 scrubber처럼 위치 전환을 시각적으로 이어 보여 줄 때 사용합니다.</p></article></div>
-      <p className="timeline-playhead-lab__source">실행 코드 위치 · <code>examples/NavigationModeLab/useNavigationModeAnimation.ts</code></p>
+      <p className="timeline-playhead-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-playhead/examples/NavigationModeLab/useNavigationModeAnimation.ts" /></p>
     </section>
   )
 }

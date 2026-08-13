@@ -1,5 +1,6 @@
 /** 끝내는 방법 세 가지의 결과를 비교하는 무대·버튼·관찰 패널·학습 패널을 조립한다. */
 import { endingMethods, useRevertKillAnimation } from './useRevertKillAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './RevertKillLab.css'
 
 export function RevertKillLab() {
@@ -158,7 +159,7 @@ ${endingCall}`
       </div>
 
       <p className="revert-kill-lab__source">
-        실행 코드 위치 · <code>examples/RevertKillLab/useRevertKillAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/gsap-context/examples/RevertKillLab/useRevertKillAnimation.ts" />
       </p>
     </section>
   )

@@ -1,5 +1,6 @@
 /** 조건 boolean이 뒤집힐 때 일어나는 정리와 재실행을 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import { breakpointRange, targetClassName, useConditionRebuildAnimation } from './useConditionRebuildAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ConditionRebuildLab.css'
 
 // 조건 표에 쓸 이름·설명 — runtime이 만든 boolean과 같은 키로 묶는다
@@ -182,7 +183,7 @@ function play() {
       </div>
 
       <p className="condition-rebuild-lab__source">
-        실행 코드 위치 · <code>examples/ConditionRebuildLab/useConditionRebuildAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/responsive-motion/examples/ConditionRebuildLab/useConditionRebuildAnimation.ts" />
       </p>
     </section>
   )

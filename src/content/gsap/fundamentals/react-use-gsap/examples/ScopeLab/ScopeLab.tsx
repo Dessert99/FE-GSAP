@@ -1,5 +1,6 @@
 /** scope가 선택자 범위를 어떻게 좁히는지 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import { useScopeRuntime } from './useScopeRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './ScopeLab.css'
 
 export function ScopeLab() {
@@ -142,7 +143,7 @@ return <>
       </div>
 
       <p className="react-scope-lab__source">
-        실행 코드 위치 · <code>examples/ScopeLab/useScopeRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/react-use-gsap/examples/ScopeLab/useScopeRuntime.ts" />
       </p>
     </section>
   )

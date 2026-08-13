@@ -1,6 +1,7 @@
 /** getProperty()의 반환 형식을 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { CallStyle, ReadUnit, ReadableProperty } from './usePropertyReadoutRuntime'
 import { usePropertyReadoutRuntime } from './usePropertyReadoutRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './PropertyReadout.css'
 
 // radio에 노출할 읽기 대상 property와 그 값이 어디에서 오는지의 짧은 설명이다
@@ -187,7 +188,7 @@ value // ${observation.raw}  (typeof ${observation.valueType})`
       </div>
 
       <p className="property-readout__source">
-        실행 코드 위치 · <code>examples/PropertyReadout/usePropertyReadoutRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/high-frequency-updates/examples/PropertyReadout/usePropertyReadoutRuntime.ts" />
       </p>
     </section>
   )

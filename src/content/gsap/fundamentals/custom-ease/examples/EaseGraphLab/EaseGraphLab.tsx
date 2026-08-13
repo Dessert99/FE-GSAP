@@ -1,6 +1,7 @@
 /** getSVGData()의 인자를 바꿔 가며 반환된 문자열과 그려진 곡선을 함께 확인하는 학습 패널을 조립한다. */
 import type { GraphEaseId } from './useEaseGraphRuntime'
 import { useEaseGraphRuntime } from './useEaseGraphRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './EaseGraphLab.css'
 
 // radio에 노출할 ease 후보와 그것이 직접 만든 곡선인지 표준 ease인지 알려 주는 이름이다
@@ -154,7 +155,7 @@ d // '${data}'`
       </div>
 
       <p className="ease-graph-lab__source">
-        실행 코드 위치 · <code>examples/EaseGraphLab/useEaseGraphRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/custom-ease/examples/EaseGraphLab/useEaseGraphRuntime.ts" />
       </p>
     </section>
   )

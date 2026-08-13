@@ -1,6 +1,7 @@
 /** RoughEase config 여섯 개의 효과를 곡선·이동·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { RoughTaper, RoughTemplate } from './useRoughnessAnimation'
 import { useRoughnessAnimation } from './useRoughnessAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './RoughnessLab.css'
 
 // radio에 노출할 taper 값과 읽기 쉬운 설명이다
@@ -243,7 +244,7 @@ function run() {
       </div>
 
       <p className="roughness-lab__source">
-        실행 코드 위치 · <code>examples/RoughnessLab/useRoughnessAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/ease-pack/examples/RoughnessLab/useRoughnessAnimation.ts" />
       </p>
     </section>
   )

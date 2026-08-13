@@ -1,6 +1,7 @@
 /** reverse()의 인자별 시작 지점과 방향 스위치 변화를 조작·관찰·코드로 확인하는 학습 패널을 조립한다. */
 import { useDirectionFlipAnimation } from './useDirectionFlipAnimation'
 import type { DirectionFlipAction, DirectionFlipCommand } from './useDirectionFlipAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './DirectionFlipLab.css'
 
 /** 실행 기록을 실제 호출 문법으로만 바꿔 코드와 상태 안내에 함께 쓴다. */
@@ -170,7 +171,7 @@ tween.paused()   // → ${observation.paused}`
       </div>
 
       <p className="direction-flip-lab__source">
-        실행 코드 위치 · <code>examples/DirectionFlipLab/useDirectionFlipAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-playback-controls/examples/DirectionFlipLab/useDirectionFlipAnimation.ts" />
       </p>
     </section>
   )

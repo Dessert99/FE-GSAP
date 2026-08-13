@@ -1,6 +1,7 @@
 /** 두 쓰기 경로의 차이를 조작·관찰·코드로 동시에 확인하는 학습 패널을 조립한다. */
 import type { FollowEase, WritePath } from './usePointerFollowAnimation'
 import { inputMax, usePointerFollowAnimation } from './usePointerFollowAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './PointerFollowLab.css'
 
 // radio에 노출할 쓰기 경로와 그 경로가 만드는 결과의 한 줄 요약이다
@@ -249,7 +250,7 @@ function togglePaused() {
       </div>
 
       <p className="pointer-follow-lab__source">
-        실행 코드 위치 · <code>examples/PointerFollowLab/usePointerFollowAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/high-frequency-updates/examples/PointerFollowLab/usePointerFollowAnimation.ts" />
       </p>
     </section>
   )

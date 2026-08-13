@@ -1,5 +1,6 @@
 /** 삼중 중첩에서 local time 하나가 전역 시각으로 변환되는 과정을 층별 시간축·표·코드로 확인한다. */
 import { innerTimeScaleOptions, useNestedGlobalTimeRuntime } from './useNestedGlobalTimeRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './NestedGlobalTimeLab.css'
 
 // 전역 시간축의 최대 초 — inner 4초 + (tween 3초 + duration 2초) ÷ 최소 배속 0.5다
@@ -208,7 +209,7 @@ tween.globalTime(${descriptor.tweenDuration}) // ${readout ? round(readout.globa
       </div>
 
       <p className="nested-lab__source">
-        실행 코드 위치 · <code>examples/NestedGlobalTimeLab/useNestedGlobalTimeRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/tween-timing-math/examples/NestedGlobalTimeLab/useNestedGlobalTimeRuntime.ts" />
       </p>
     </section>
   )

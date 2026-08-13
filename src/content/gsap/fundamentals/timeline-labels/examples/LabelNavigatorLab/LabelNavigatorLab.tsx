@@ -1,5 +1,6 @@
 /** label select와 앞뒤 탐색 결과를 실제 Timeline getter·target 값·호출 코드로 함께 보여 준다. */
 import { labelMarkers, useLabelNavigatorRuntime } from './useLabelNavigatorRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './LabelNavigatorLab.css'
 
 export function LabelNavigatorLab() {
@@ -42,7 +43,7 @@ export function LabelNavigatorLab() {
         <article><h4>왜 이렇게 동작하나요?</h4><p>label getter는 추가 순서가 아니라 Timeline local time의 앞뒤를 찾기 때문입니다.</p></article>
         <article><h4>실제로 언제 쓰나요?</h4><p>챕터·장면·상태 이름으로 preview를 이동하고 중간 callback 실행 여부를 선택할 때 씁니다.</p></article>
       </div>
-      <p className="label-lab__source">실행 코드 위치 · <code>examples/LabelNavigatorLab/useLabelNavigatorRuntime.ts</code></p>
+      <p className="label-lab__source">실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/timeline-labels/examples/LabelNavigatorLab/useLabelNavigatorRuntime.ts" /></p>
     </section>
   )
 }

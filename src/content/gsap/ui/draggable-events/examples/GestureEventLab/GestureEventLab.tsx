@@ -4,6 +4,7 @@ import {
   gestureEventDescriptors,
   useGestureEventRuntime,
 } from './useGestureEventRuntime'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './GestureEventLab.css'
 
 /** 한 draggable target의 gesture event와 recent-drag 결정을 관찰하게 한다. */
@@ -181,8 +182,7 @@ function cleanup() {
         </table>
       </div>
       <p className="gesture-event-lab__source">
-        실행 코드 위치 ·{' '}
-        <code>examples/GestureEventLab/useGestureEventRuntime.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/ui/draggable-events/examples/GestureEventLab/useGestureEventRuntime.ts" />
       </p>
     </section>
   )

@@ -1,6 +1,7 @@
 /** 곡선 데이터를 바꿔 가며 ease 값과 상자 위치를 함께 확인하는 학습 패널을 조립한다. */
 import type { CurvePresetId } from './useCustomEasePathAnimation'
 import { useCustomEasePathAnimation } from './useCustomEasePathAnimation'
+import { RepoFileLink } from '../../../../../../components/demo/RepoFileLink/RepoFileLink'
 import './CustomEasePathLab.css'
 
 // radio에 노출할 곡선 preset과 그 곡선이 무엇을 보여 주려는지 한 줄 설명이다
@@ -161,7 +162,7 @@ ${actionCode}
       </div>
 
       <p className="custom-ease-path-lab__source">
-        실행 코드 위치 · <code>examples/CustomEasePathLab/useCustomEasePathAnimation.ts</code>
+        실행 코드 위치 · <RepoFileLink path="src/content/gsap/fundamentals/custom-ease/examples/CustomEasePathLab/useCustomEasePathAnimation.ts" />
       </p>
     </section>
   )
