@@ -27,7 +27,7 @@ GSAP 공식 문서를 **읽는 문서가 아니라 조작해보는 학습 페이
 
 ## 기술 스택
 
-React 19 · TypeScript 6 · Vite 8 · GSAP 3.15 (`@gsap/react`) · Storybook 10
+React 19 · TypeScript 6 · Vite 8 · GSAP 3.15 (`@gsap/react`)
 
 ## 실행
 
@@ -36,8 +36,6 @@ npm install
 npm run dev              # 개발 서버
 npm run build            # 타입 검사 + 프로덕션 빌드
 npm run preview          # 빌드 결과 확인
-npm run storybook        # 공용 컴포넌트 스토리
-npm run build-storybook  # 스토리북 정적 빌드
 ```
 
 ## 구조
@@ -69,7 +67,7 @@ src/
 
 ## 검증 방식
 
-이 프로젝트는 **자동화 테스트 코드를 작성하지 않습니다.** 대신 TypeScript·Vite 빌드, Storybook 빌드, 그리고 브라우저에서 컨트롤과 애니메이션 동작을 직접 확인하는 방식으로 검증합니다. 자세한 기준은 [docs/workflows/quality-gates.md](docs/workflows/quality-gates.md)에 있습니다.
+이 프로젝트는 **자동화 테스트 코드를 작성하지 않습니다.** 대신 TypeScript·Vite 빌드, 그리고 브라우저에서 컨트롤과 애니메이션 동작을 직접 확인하는 방식으로 검증합니다. 자세한 기준은 [docs/workflows/quality-gates.md](docs/workflows/quality-gates.md)에 있습니다.
 
 2026-08-13 기준 86개 페이지 handoff는 모두 `releaseDecision: PASS`입니다. 기존 browser-only `DEFERRED`는 저장소 소유자의 완료 간주 승인으로 닫았으며, 실제 브라우저 실조작 증거가 별도로 생성된 것은 아닙니다.
 
