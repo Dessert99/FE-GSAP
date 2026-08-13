@@ -1,4 +1,4 @@
-/** P37 method descriptor와 static native/rendered model을 같은 값에서 보여 준다. */
+/** ScrollSmoother effect method와 native/rendered 위치 차이를 정적 model로 보여 준다. */
 import { scrollSmootherEffectsProperties } from '../../scroll-smoother-effects.properties'
 import './EffectsMethodModel.css'
 
@@ -13,22 +13,33 @@ const effectsDescriptor = {
 
 /** existing smoother에 적용할 method sequence를 실행하지 않고 정렬해 보여 준다. */
 export function EffectsMethodModel() {
-  const code = `// P36에서 만든 existing smoother만 사용합니다.
+  const code = `import { ScrollSmoother } from 'gsap/ScrollSmoother'
+
+const smoother = ScrollSmoother.get()
+if (!smoother) throw new Error('root에서 ScrollSmoother를 먼저 만들어야 합니다.')
+const previousSmooth = smoother.smooth()
 smoother.smooth(${effectsDescriptor.smoothSeconds})
 
 const effectTriggers = smoother.effects('${effectsDescriptor.targets}', {
   speed: ${effectsDescriptor.speed},
   lag: ${effectsDescriptor.lag},
 })
+const createdEffects = [...effectTriggers]
 
 const pageProgress = smoother.progress
+console.log(pageProgress)
 
 // reduced motion 또는 effect removal
-smoother.smooth(0)
-smoother.effects('${effectsDescriptor.targets}', { speed: 1, lag: 0 })
+const disableEffects = () => {
+  createdEffects.forEach((trigger) => trigger.kill())
+  smoother.smooth(0)
+}
 
-// owned effect trigger만 정리해야 할 때
-effectTriggers.forEach((trigger) => trigger.kill())`
+const cleanup = () => {
+  createdEffects.forEach((trigger) => trigger.kill())
+  smoother.smooth(previousSmooth)
+}
+// component unmount에서 cleanup()을 호출합니다.`
 
   return (
     <section
@@ -38,7 +49,7 @@ effectTriggers.forEach((trigger) => trigger.kill())`
     >
       <div>
         <p className="effects-method-model__eyebrow">
-          STATIC MODEL · runtimeSource none
+          정적 구조 · document scroll은 실행하지 않음
         </p>
         <h2 id="effects-method-model-title">
           03 · native position과 rendered position은 같은 readout이 아닙니다
@@ -84,13 +95,13 @@ effectTriggers.forEach((trigger) => trigger.kill())`
       </figure>
       <div className="effects-method-model__code-grid">
         <div>
-          <h3>one descriptor → method code</h3>
+          <h3>같은 값으로 만든 method code</h3>
           <pre>
             <code>{code}</code>
           </pre>
           <p>
             <code>smooth(value)</code>의 current v3.15 source return은
-            number이고 d.ts setter는 <code>void</code>입니다. rendered docs의
+            number이고 d.ts setter는 <code>void</code>입니다. 공식 문서의
             chainable setter 설명과 달라서, 여기서는 setter return을 읽지
             않습니다.
           </p>

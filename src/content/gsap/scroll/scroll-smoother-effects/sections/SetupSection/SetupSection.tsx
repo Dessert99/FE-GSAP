@@ -1,7 +1,7 @@
 /** existing smoother의 smooth getter/setter와 return boundary를 먼저 정리한다. */
 import { toHref } from '../../../../../../app/routes'
 
-/** smooth duration의 의미와 evidence mismatch를 설명한다. */
+/** smooth duration의 의미와 공식 문서·설치 타입 차이를 설명한다. */
 export function SetupSection() {
   return (
     <section id="setup" aria-labelledby="scroll-smoother-effects-setup-title">
@@ -15,17 +15,17 @@ export function SetupSection() {
         시간이 길어집니다.
       </p>
       <p>
-        rendered docs는 setter가 chaining을 위해 self를 준다고 하지만, installed
+        공식 문서는 setter가 chaining을 위해 self를 준다고 하지만, 설치된
         v3.15 d.ts는 setter를 <code>void</code>로 선언하고 current source는
         numeric duration을 반환합니다. setter result를 다음 call의 receiver로
         쓰지 않는 것이 세 근거와 모두 안전하게 맞습니다.
       </p>
       <p>
         <a href={toHref('/fundamentals/scroll-smoother-create')}>
-          P36 ScrollSmoother 생성
+          ScrollSmoother 생성
         </a>
-        이 만든 single smoother가 prerequisite입니다. 이 page는 create/get을
-        호출하지 않아 host scroll ownership과 singleton lifecycle을 건드리지
+        이 만든 singleton이 prerequisite입니다. 이 페이지는 create/get을
+        호출하지 않아 document scroll과 singleton lifecycle을 건드리지
         않습니다.
       </p>
     </section>
