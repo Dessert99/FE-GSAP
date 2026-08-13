@@ -5,7 +5,7 @@ export const utilityPipelinesUnitsMeta = {
   summary:
     'raw 숫자를 CSS에 바로 붙이면 계산 순서와 단위가 쉽게 뒤섞입니다. pipe로 함수의 입출력을 왼쪽에서 오른쪽으로 연결하고, getUnit과 unitize로 숫자 계산의 경계에서 단위를 분리했다가 되붙이며, checkPrefix로 현재 브라우저가 알아듣는 property 이름을 확인합니다.',
   sourcePath: 'src/content/gsap/fundamentals/utility-pipelines-units/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { id: 'check-prefix', label: 'gsap.utils.checkPrefix()', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods/checkPrefix()' },
     { id: 'get-unit', label: 'gsap.utils.getUnit()', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods/getUnit()' },

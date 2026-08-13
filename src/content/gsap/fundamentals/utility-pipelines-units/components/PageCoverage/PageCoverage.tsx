@@ -13,18 +13,18 @@ const mappedSourceCount = new Set(utilityPipelineSourceItems.filter((item) => it
 
 export function PageCoverage() {
   return (
-    <nav className="pipeline-units-coverage" aria-label="공식 source 대응 범위">
+    <nav className="pipeline-units-coverage" aria-label="함수 연결과 단위 처리 학습 순서">
       <div className="pipeline-units-coverage__summary">
-        <div><strong>{mappedSourceCount}/{utilityPipelinesUnitsCoverage.officialSources}</strong><span>공식 source</span></div>
-        <div><strong>{officialItemCount}/{utilityPipelinesUnitsCoverage.officialSourceItems}</strong><span>공식 기술 item</span></div>
-        <p>네 전용 문서의 공식 item {officialItemCount}개를 재구성하고, 선행 hub의 공식 오류 {preservedItemCount}개와 실행 probe {probeItemCount}개를 각각 분리했습니다.</p>
+        <div><strong>{mappedSourceCount}/{utilityPipelinesUnitsCoverage.officialSources}</strong><span>대조한 공식 문서</span></div>
+        <div><strong>{officialItemCount}/{utilityPipelinesUnitsCoverage.officialSourceItems}</strong><span>설명한 핵심 동작</span></div>
+        <p>네 문서의 핵심 동작 {officialItemCount}개를 함수 연결 → 단위 분리 → 브라우저 속성 확인 순서로 묶고, 선행 문서의 오류 {preservedItemCount}개와 직접 확인한 경계 {probeItemCount}개를 구분했습니다.</p>
       </div>
       <ol>
         {utilityPipelinesUnitsSections.map((section) => (
           <li key={section.id}>
             <a href={`#${section.id}`}>
               <span>{section.number}</span>
-              <div><strong>{section.title}</strong><small>{section.sourceItems}개 owned 공식 item{'preservedItems' in section ? ` · ${section.preservedItems}개 hub 보존` : ''}</small></div>
+              <div><strong>{section.title}</strong><small>{section.sourceItems}개 핵심 동작{'preservedItems' in section ? ` · 앞 문서에서 이어 온 경계 ${section.preservedItems}개` : ''}</small></div>
             </a>
           </li>
         ))}
