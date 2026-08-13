@@ -6,11 +6,11 @@ export function ContentBoundarySection() {
         04 · text target은 animation이 소유하는 content입니다
       </h2>
       <p>
-        rendered docs는 simple <code>&lt;br&gt;</code> nodes를 honor한다고
-        설명합니다. source는 HTML target의
+        공식 문서는 단순한 <code>&lt;br&gt;</code> node를 보존한다고 설명합니다.
+        plugin은 HTML target의
         <code>innerHTML</code> 또는 SVG text를 intermediate content로 쓰고,
-        class option은 span markup을 만듭니다. 그래서 lab은 plugin이 바꿔도 되는
-        one content target만 사용하고 cleanup에서 original HTML을 복원합니다.
+        class option은 span markup을 만듭니다. 그래서 예제는 plugin이 바꿔도 되는
+        content target 하나만 사용하고 cleanup에서 original HTML을 복원합니다.
       </p>
       <p>
         <code>preserveSpaces</code>와 <code>padSpace</code>는 HTML spacing을

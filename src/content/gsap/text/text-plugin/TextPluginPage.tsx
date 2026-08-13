@@ -1,4 +1,4 @@
-/** P34의 setup, token mental model, actual lab, content boundary를 조립한다. */
+/** TextPlugin의 setup, token 동작, 예제와 content 경계를 조립한다. */
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { TokenAlignmentLab } from './examples/TokenAlignmentLab/TokenAlignmentLab'
 import { textPluginMeta } from './text-plugin.meta'
@@ -20,7 +20,6 @@ export function TextPluginPage() {
             <OfficialDocsLink key={source.href} {...source} />
           ))}
         </div>
-        <p>15 complete technical items covered</p>
       </header>
       <SetupSection />
       <MentalModelSection />
