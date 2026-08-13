@@ -19,7 +19,7 @@ export function EaseGraphLab() {
   const viewBox = `0 0 ${descriptor.width + descriptor.offset * 2} ${descriptor.height + descriptor.offset * 2}`
 
   // 실행에 쓰인 descriptor와 반환값을 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
-  const code = `${descriptor.easeData ? `CustomEase.create('${descriptor.easeId}', '${descriptor.easeData}')\n\n` : "// power2.out은 표준 ease라 만들 필요가 없습니다.\n\n"}const d = CustomEase.getSVGData('${descriptor.easeId}', {
+  const code = `${descriptor.easeData ? `// 앱이 로드될 때 한 번만 만듭니다.\nCustomEase.create('${descriptor.easeId}', '${descriptor.easeData}')\n\n` : "// power2.out은 표준 ease라 만들 필요가 없습니다.\n\n"}const d = CustomEase.getSVGData('${descriptor.easeId}', {
   width: ${descriptor.width},
   height: ${descriptor.height},
   x: ${descriptor.offset},
@@ -139,8 +139,8 @@ d // '${data}'`
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
             SVG 화면 좌표는 <strong>y가 아래로 갈수록 커집니다.</strong> 그래서 GSAP 3.15.0에서 실행해 확인해 보니 값 0이{' '}
-            <code>y = {descriptor.offset + descriptor.height}</code>, 값 1이 <code>y = {descriptor.offset}</code>으로 나왔습니다. 공식
-            문서에는 이 방향이 적혀 있지 않아 실행으로 확인한 내용입니다. 같은 실행에서 <code>width</code>·<code>height</code>를
+            <code>y = {descriptor.offset + descriptor.height}</code>, 값 1이 <code>y = {descriptor.offset}</code>으로 나왔습니다. 이 좌표
+            방향은 GSAP 3.15.0에서 확인했습니다. 같은 확인에서 <code>width</code>·<code>height</code>를
             생략하면 <strong>100 × 100</strong>이 쓰였습니다.
           </p>
         </article>

@@ -10,7 +10,7 @@ export type SourceItem = {
   sectionId: string
 }
 
-/** CustomEase에 관한 기술 주장 전체 목록 — PageCoverage와 각 섹션이 같은 배열을 센다. */
+/** CustomEase의 공식 주장과 실행 확인 항목을 handoff가 재현할 수 있게 보존한다. */
 export const customEaseSourceItems: SourceItem[] = [
   { id: 'CE-01', officialItem: 'CustomEase는 준비된 easing 선택지의 한계에서 벗어나게 해 주며, Ease Visualizer에서 그리거나 SVG path를 복사해 붙여 넣는 것만으로 상상할 수 있는 어떤 easing 곡선이든 만들 수 있다.', source: 'custom-ease', origin: 'official', sectionId: 'curve-as-function' },
   { id: 'CE-02', officialItem: '"Zero limitations." 제어점(control point)을 원하는 만큼 쓸 수 있다.', source: 'custom-ease', origin: 'official', sectionId: 'curve-as-function' },

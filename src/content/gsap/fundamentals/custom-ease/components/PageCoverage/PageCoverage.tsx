@@ -1,33 +1,12 @@
-/** 공식 source와 로컬 학습 섹션의 전체 대응 상태를 첫 화면에서 확인하게 한다. */
-import { customEaseSourceItems } from '../../custom-ease.catalog'
-import { customEaseCoverage, customEaseSections } from '../../custom-ease.meta'
-
-// 공식 문서에 게시된 주장만 coverage 분모에 넣고 실행으로 확인한 항목은 따로 센다
-const officialItemCount = customEaseSourceItems.filter((item) => item.origin === 'official').length
-const probeItemCount = customEaseSourceItems.length - officialItemCount
-// 선언한 source 수가 아니라 catalog가 실제로 근거를 댄 source 수를 세어 분자로 쓴다
-const mappedSourceCount = new Set(customEaseSourceItems.map((item) => item.source)).size
+/** CustomEase를 만들고 쓰는 순서를 일곱 학습 섹션으로 바로 찾게 한다. */
+import { customEaseSections } from '../../custom-ease.meta'
 
 export function PageCoverage() {
   return (
-    <nav className="custom-ease-coverage" aria-label="공식 source 대응 범위">
+    <nav className="custom-ease-coverage" aria-label="CustomEase 학습 목차">
       <div className="custom-ease-coverage__summary">
-        <div>
-          <strong>
-            {mappedSourceCount}/{customEaseCoverage.officialSources}
-          </strong>
-          <span>공식 source</span>
-        </div>
-        <div>
-          <strong>
-            {officialItemCount}/{customEaseCoverage.officialSourceItems}
-          </strong>
-          <span>공식 기술 item</span>
-        </div>
-        <p>
-          CustomEase 문서의 기술 item {customEaseCoverage.officialSourceItems}개를 "곡선을 직접 만들어 쓰기까지"의 일곱 단계로 다시
-          묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로 표시합니다.
-        </p>
+        <strong>어디서부터 읽을까요?</strong>
+        <p>곡선을 직접 만들고 이름으로 재사용하는 과정을 일곱 단계로 나누었습니다. 필요한 주제로 바로 이동하세요.</p>
       </div>
       <ol>
         {customEaseSections.map((section) => (
@@ -36,7 +15,6 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
               </div>
             </a>
           </li>

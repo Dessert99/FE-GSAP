@@ -28,6 +28,12 @@ export type PathLabObservation = {
   offsetX: number
 }
 
+/** 코드 패널이 슬라이더 이동과 재생 중 실제 실행한 메서드를 구분하게 한다. */
+export type PathLabAction =
+  | { type: 'ready' }
+  | { type: 'seek'; progress: number }
+  | { type: 'play' }
+
 /** gsap 선택자이자 상자의 className — 실행과 표시가 같은 문자열을 쓴다. */
 const targetSelector = '.custom-ease-path-lab__box'
 
@@ -86,6 +92,8 @@ export function useCustomEasePathAnimation() {
   const [presetId, setPresetId] = useState<CurvePresetId>('smooth')
   // GSAP이 방금 쓴 progress·ease 값·상자 위치를 그대로 담아 두는 관찰값이다
   const [observation, setObservation] = useState<PathLabObservation>({ progress: 0, easeValue: 0, offsetX: 0 })
+  // 지금 표시할 코드가 slider 이동인지 재생인지 실제 조작과 같게 기록한다
+  const [action, setAction] = useState<PathLabAction>({ type: 'ready' })
   // 준비·이동·재생 상태를 screen reader에도 전달한다
   const [status, setStatus] = useState('아직 움직이지 않았습니다. slider를 끌거나 재생을 눌러 보세요.')
   // 운영체제 모션 감소 설정에서는 재생 대신 끝 상태로 바로 건너뛴다
@@ -120,6 +128,7 @@ export function useCustomEasePathAnimation() {
       tweenRef.current = tween
       // 곡선을 바꾼 직후에도 표가 비지 않도록 준비 시점 값을 한 번 채운다
       setObservation(readObservation(tween.progress(), ease, box))
+      setAction({ type: 'ready' })
       setStatus('현재 곡선으로 멈춰 있는 Tween을 준비했습니다.')
       // context 정리 뒤 handler가 이전 Tween을 다시 건드리지 않게 참조를 비운다
       return () => {
@@ -138,6 +147,7 @@ export function useCustomEasePathAnimation() {
 
     // 드래그마다 status를 바꾸면 화면 낭독이 끊이지 않으므로 값 전달은 slider의 output에 맡긴다
     tween.pause().progress(progress)
+    setAction({ type: 'seek', progress })
   }
 
   // 준비된 Tween을 처음부터 재생한다. 모션 감소 설정에서는 이동 없이 끝 상태만 보여준다
@@ -148,11 +158,13 @@ export function useCustomEasePathAnimation() {
 
     if (reducedMotion) {
       tween.pause().progress(1)
+      setAction({ type: 'seek', progress: 1 })
       setStatus('모션 감소 설정이라 이동 없이 곡선의 끝 값으로 바로 갑니다.')
       return
     }
 
     tween.restart()
+    setAction({ type: 'play' })
     setStatus(`${descriptor.duration}초 동안 곡선을 따라 움직입니다.`)
   }
 
@@ -163,6 +175,7 @@ export function useCustomEasePathAnimation() {
     setPresetId,
     descriptor,
     observation,
+    action,
     status,
     reducedMotion,
     seek,

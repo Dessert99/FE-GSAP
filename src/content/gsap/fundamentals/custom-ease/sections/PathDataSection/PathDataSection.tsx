@@ -103,18 +103,17 @@ export function PathDataSection() {
       </div>
 
       <div className="custom-ease-page__note custom-ease-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용 · cubic-bezier는 숫자 네 개만</h3>
+        <h3>cubic-bezier는 숫자 네 개만 넘깁니다</h3>
         <p>
-          공식 문장은 "네 숫자를 담은 표준 <code>cubic-bezier()</code> 문자열도 인식한다"이고, 예시는{' '}
-          <code>".17,.67,.83,.67"</code>입니다. GSAP 3.15.0에서 실행해 보니 <strong>숫자 네 개만</strong> 넘겨야 했습니다.{' '}
+          <code>".17,.67,.83,.67"</code>처럼 <strong>숫자 네 개만</strong> 넘깁니다. GSAP 3.15.0에서{' '}
           <code>"cubic-bezier(.17,.67,.83,.67)"</code>처럼 껍데기까지 붙이면 <code>malformed path</code> 오류로 실패했습니다.
         </p>
       </div>
 
       <div className="custom-ease-page__note custom-ease-page__note--probe">
-        <h3>공식 문서에 없고 실행으로 확인한 내용 · normalize가 y축도 뒤집습니다</h3>
+        <h3>정규화할 때 SVG의 y축 방향을 맞춥니다</h3>
         <p>
-          공식 문서는 아무 크기의 path도 "내부적으로 normalize한다"고만 적고, 방향은 말하지 않습니다. 실행해 보니{' '}
+          GSAP 3.15.0에서 확인한 결과,{' '}
           <strong>x가 0에서 시작해 1로 끝나지 않는 데이터</strong>는 0-1로 다시 스케일되면서 <strong>y축이 뒤집혔습니다.</strong>{' '}
           SVG 화면 좌표는 y가 아래로 갈수록 커지기 때문입니다. 덕분에 Illustrator에서 왼쪽 아래→오른쪽 위로 그린 곡선을 그대로 붙여
           넣어도 의도한 방향으로 동작합니다.
@@ -130,8 +129,8 @@ export function PathDataSection() {
         <p>
           공식 hop 데이터의 마지막 좌표는 <code>1,0</code>입니다. progress 1에서 값이 0이라는 뜻이고, GSAP 3.15.0에서 실행해 확인해 보니{' '}
           <code>gsap.to(el, {'{'} y: -100, ease: "hop" {'}'})</code>은 progress 1에서 실제로 <code>y = 0</code>, 즉{' '}
-          <strong>시작값으로 되돌아왔습니다.</strong> 공식 문서는 이 결과를 문장으로 적어 두지 않았으므로, 실행으로 확인한 사실로
-          받아들이고 <strong>"곡선의 끝 y가 그 tween의 최종 화면 상태"</strong>라고 기억하면 됩니다.
+          <strong>시작값으로 되돌아왔습니다.</strong> 이 결과는 GSAP 3.15.0에서 확인했으며, <strong>곡선의 끝 y가 그 트윈의 최종 화면
+          상태</strong>라고 읽으면 됩니다.
         </p>
       </div>
 
