@@ -7,7 +7,24 @@ export function PathRulerLab() {
   const { progress, start, end, setProgress, setStart, setEnd, measurement } =
     usePathRulerRuntime()
   // displayed calls는 runtime descriptor와 exact controls를 문법으로만 직렬화한다
-  const code = `const rawPath = MotionPathPlugin.getRawPath('${pathRulerDescriptor.data}')\nMotionPathPlugin.cacheRawPathMeasurements(rawPath)\nconst length = MotionPathPlugin.getLength(rawPath)\nconst point = MotionPathPlugin.getPositionOnPath(rawPath, ${progress}, true)\nconst slice = MotionPathPlugin.sliceRawPath(rawPath, ${start}, ${end})`
+  const code = `gsap.registerPlugin(MotionPathPlugin)
+
+const pathData = '${pathRulerDescriptor.data}'
+
+function measurePath(progress, start, end) {
+  const rawPath = MotionPathPlugin.getRawPath(pathData)
+  MotionPathPlugin.cacheRawPathMeasurements(rawPath)
+  const point = MotionPathPlugin.getPositionOnPath(rawPath, progress, true)
+  const slice = MotionPathPlugin.sliceRawPath(rawPath, start, end)
+  return {
+    point,
+    length: MotionPathPlugin.getLength(rawPath),
+    sliceData: MotionPathPlugin.rawPathToString(slice),
+  }
+}
+
+const measurement = measurePath(${progress}, ${start}, ${end})
+// 이 slice는 Tween·listener·DOM mutation을 만들지 않아 별도 cleanup이 없습니다.`
   return (
     <section className="path-ruler-lab" aria-labelledby="path-ruler-title">
       <h2 id="path-ruler-title">raw path를 정지한 ruler로 읽기</h2>

@@ -47,3 +47,27 @@
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `MPM-OC-20260813` | PASS | 현재 공식 `getLength()`, `getPositionOnPath()`, `sliceRawPath()` 문서와 대조 | cache 선행 조건, degree angle, 새 RawPath slice 반환 경계를 유지했다.
+- `MPM-RDS-20260813` | BLOCK → PASS | serializer가 runtime의 point→slice→length 순서를 바꾸고 slice를 화면 path data로 만드는 `rawPathToString()`을 생략했다 | memoized measurement의 실제 호출 순서와 최종 `sliceData`를 표시했다.
+- `MPM-WRITE-20260813` | BLOCK → PASS | learner-facing coverage 수치와 P21/P22 번호가 노출됐다 | 세 학습 질문과 개념명 링크로 바꿨다.
+- `MPM-BROWSER-20260813` | DEFERRED | 키보드/포커스, 320/390px, 실제 marker·tangent·slice 결과 | motion은 없으며 이번 배치에서는 브라우저를 조작하지 않았다.
+- `MPM-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — runtime/display와 문장 BLOCK을 해소했고 browser-only 검증은 DEFERRED다. 과거 빌드와 browser closure는 현재 근거가 아니다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토
+
+- `MPM-RDS-20260813-02 | BLOCK → PASS` — serializer에 plugin 등록, 실제 path data와 세 control 값을 받는 `measurePath()` 경계를 정의하고, DOM·Tween·listener side effect가 없어 cleanup 대상이 없다는 점까지 명시한 뒤 runtime memo 계산과 재대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 키보드·focus, 320/390px, 실제 marker·tangent·slice 결과를 실조작하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.
