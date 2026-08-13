@@ -12,6 +12,8 @@ export type TargetsDescriptor = {
   mode: TargetMode
   /** 코드 패널에 그대로 찍을 target 표현식 — 실행이 실제로 쓴 값과 같은 문자열이다. */
   targetExpression: string
+  /** gsap.to()에 실제로 펼쳐 넣는 property 객체다. */
+  animatedVars: { x: number } | { score: number }
   /** 이 모드에서 animate하는 property 한 줄 — DOM은 x, 일반 object는 score다. */
   propertyLine: string
   requestedDuration: number
@@ -48,11 +50,16 @@ function createDescriptor(mode: TargetMode, duration: number, reducedMotion: boo
   // 모션 감소 설정에서는 이동 없이 최종 상태만 보여주도록 실제 duration을 0으로 낮춘다
   const effectiveDuration = reducedMotion ? 0 : duration
   // 일반 object만 숫자 property를 움직이고 나머지 세 모드는 DOM의 x를 움직인다
-  const propertyLine = mode === 'plainObject' ? `score: ${targetScore}` : `x: ${targetX}`
+  const animatedVars = mode === 'plainObject' ? { score: targetScore } : { x: targetX }
+  // 실제 property 객체의 첫 항목을 코드 패널에 표시할 한 줄로 직렬화한다
+  const [property, value] = Object.entries(animatedVars)[0]
+  // 실제 실행값을 다시 판정하지 않고 JavaScript 객체 문법으로만 표시한다
+  const propertyLine = `${property}: ${value}`
 
   return {
     mode,
     targetExpression: describeExpression(mode),
+    animatedVars,
     propertyLine,
     requestedDuration: duration,
     effectiveDuration,
@@ -64,7 +71,7 @@ function describeExpression(mode: TargetMode) {
   if (mode === 'selector') return `'${boxSelector}'`
   if (mode === 'element') return 'boxes[0]'
   if (mode === 'elementArray') return '[boxes[0], boxes[1]]'
-  return '{ score: 0 }'
+  return 'plainObject'
 }
 
 /** targets() 배열의 각 원소가 무엇인지 화면에 쓸 수 있는 문장으로 바꾼다. */
@@ -104,7 +111,7 @@ export function useTargetsReadbackAnimation() {
   useGSAP(
     () => {
       // 관찰과 실행이 같은 element를 가리키도록 상자 목록을 한 번만 풀어 둔다
-      const boxes = gsap.utils.toArray<HTMLElement>(boxSelector)
+      const boxes = gsap.utils.toArray<HTMLElement>(boxSelector, scope.current)
       // 이전 실행이 남긴 이동을 지워 어떤 모드로 바꿔도 항상 같은 줄에서 출발시킨다
       gsap.set(boxes, { x: baselineX })
       // DOM이 아닌 target 후보 — 이 객체는 화면에 없고 숫자만 가지고 있다
@@ -119,13 +126,9 @@ export function useTargetsReadbackAnimation() {
               ? [boxes[0], boxes[1]]
               : plainObject
 
-      // 네 모드가 같은 vars 모양을 쓰도록 움직일 property만 갈아 끼운다
-      const animatedVars =
-        descriptor.mode === 'plainObject' ? { score: targetScore } : { x: targetX }
-
       // 아직 재생하지 않은 Tween — 만들자마자 targets()를 물어볼 수 있다는 것이 이 예제의 핵심이다
       const tween = gsap.to(target, {
-        ...animatedVars,
+        ...descriptor.animatedVars,
         duration: descriptor.effectiveDuration,
         ease: 'none',
         paused: true,

@@ -20,12 +20,20 @@ export function InstanceRecordLab() {
   v: 1,
   duration: 0.6,
   paused: true,
-  id: '${descriptor.id}',${descriptor.dataChoice === 'none' ? '' : `\n  data: ${descriptor.dataLiteral},`}
+  id: ${descriptor.idLiteral},${descriptor.dataChoice === 'none' ? '' : `\n  data: ${descriptor.dataLiteral},`}
 })
 
 // 재생하지 않고 곧바로 물어봅니다.
 tween.vars.id
-tween.data`
+'id' in tween
+gsap.getById(${descriptor.idLiteral}) === tween
+tween.data
+'data' in tween
+tween.vars.data
+'scrollTrigger' in tween
+
+// 버튼을 누르면 이 대입을 실행한 뒤 같은 식을 다시 읽습니다.
+tween.data = '나중에 넣은 값'`
 
   return (
     <section className="instance-record-lab" aria-labelledby="instance-record-lab-title">
@@ -125,16 +133,15 @@ tween.data`
           <h4>왜 이렇게 동작하나요?</h4>
           <p>
             공식 <code>data</code> 문서는 이 자리를 <strong>"원하는 어떤 데이터든 저장하는 곳(초기값은 vars.data가 있으면 그 값)"</strong>
-            이라고 정의합니다. <em>초기에 채운다</em>는 말 그대로 <strong>복사는 처음 한 번</strong>이라서, 이후에는 두 자리가 각자
-            움직입니다. <code>id</code>는 GSAP이 조회용 색인으로만 쓰기 때문에 instance에 속성으로 붙이지 않습니다.
+            이라고 정의합니다. 생성 뒤 <code>tween.data</code>를 새 값으로 다시 대입해도 <code>tween.vars.data</code>는 바뀌지 않습니다.
+            다만 객체를 넣으면 최초에는 같은 객체 참조를 가리키므로 깊은 복사가 일어나는 것은 아닙니다.
           </p>
         </article>
         <article>
           <h4>실제로 언제 쓰나요?</h4>
           <p>
-            <code>data</code>는 콜백에서 "이 애니메이션이 무엇이었는지" 알아야 할 때 씁니다. 여러 카드에 같은 함수를 콜백으로 걸어 두고{' '}
-            <code>this.data.cardId</code>로 구분하는 식입니다. <code>id</code>는 화면 어딘가에서 만든 애니메이션을 <strong>참조 없이</strong>{' '}
-            다시 찾아야 할 때, 그리고 GSDevTools에서 이름으로 골라 볼 때 씁니다.
+            <code>data</code>는 애니메이션과 함께 메타데이터를 보관하고 나중에 <code>tween.data</code>로 확인할 때 씁니다. <code>id</code>는
+            화면 어딘가에서 만든 애니메이션을 변수 참조 없이 다시 찾아야 할 때, 그리고 GSDevTools에서 이름으로 골라 볼 때 씁니다.
           </p>
         </article>
       </div>

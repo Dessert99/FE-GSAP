@@ -51,8 +51,9 @@ export function DataAndIdSection() {
             가 전부이고, signature는 <code>data : *</code>입니다. <code>*</code>는 <strong>타입을 제한하지 않는다</strong>는 표기입니다.
           </p>
           <p>
-            핵심은 <strong>"초기에 채워진다"</strong>는 표현입니다. 만들 때 한 번 복사해 주는 것이지, 두 자리가 계속 붙어 다니는 게
-            아닙니다. 아래 예제에서 직접 갈라 보겠습니다.
+            핵심은 <strong>"초기에 채워진다"</strong>는 표현입니다. 생성 시 <code>vars.data</code>의 값을 <code>tween.data</code>의
+            초기값으로 할당하지만, 이후 한쪽을 다시 대입해도 다른 쪽이 함께 바뀌지는 않습니다. 객체를 넣었다면 최초에는 같은 객체 참조를
+            가리키므로 이를 값 복사로 이해하면 안 됩니다.
           </p>
         </div>
         <pre className="instance-page__signature">
@@ -77,7 +78,7 @@ export function DataAndIdSection() {
 
       <div className="instance-page__table-wrap">
         <table className="instance-page__basic-table">
-          <caption>두 표시의 공식 명세 대조</caption>
+          <caption>공식 설명과 설치본 읽기 결과로 대조한 두 표시</caption>
           <thead>
             <tr>
               <th scope="col">표시</th>

@@ -32,7 +32,7 @@ const properties = [
     name: 'vars',
     signature: 'vars : Object',
     kind: '속성',
-    meaning: '생성자에 넘긴 설정 객체 그대로입니다.',
+    meaning: '생성자에 넘긴 설정 객체이며 GSAP이 기본 설정을 추가할 수 있습니다.',
     owner: '이 단계',
     ownerHref: null,
   },
@@ -208,11 +208,11 @@ export function InstanceSurfaceSection() {
       </div>
 
       <div className="instance-page__note">
-        <h3>vars는 "적어 둔 설정 그대로"입니다</h3>
+        <h3>vars는 생성에 사용한 설정 객체입니다</h3>
         <p>
           공식 설명은 <strong>"constructor에 넘긴 설정 객체이며, animate할 property·value 전부와 onComplete·onUpdate 같은 optional
-          special property를 담고 있다"</strong>입니다. 즉 인스턴스는 <strong>무엇을 시켰는지에 대한 기록</strong>을 통째로 들고
-          있습니다. 어떤 설정으로 만들어졌는지 나중에 확인할 수 있다는 뜻입니다.
+          special property를 담고 있다"</strong>입니다. 어떤 설정으로 만들어졌는지 나중에 확인할 수 있지만, 아래 실행 결과처럼 GSAP이
+          같은 객체에 기본 설정을 추가할 수 있으므로 처음 작성한 내용 그대로인 불변 기록은 아닙니다.
         </p>
       </div>
 

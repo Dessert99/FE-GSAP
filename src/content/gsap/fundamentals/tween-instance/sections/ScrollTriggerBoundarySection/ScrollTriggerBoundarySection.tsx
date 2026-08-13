@@ -4,14 +4,16 @@ import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 // 공식 scrollTrigger 전용 페이지가 게시한 signature 한 줄
 const signature = 'scrollTrigger: ScrollTrigger | undefined'
 
-// 공식 페이지의 코드 예제 원문 구조 — vars에 적어 만들고 인스턴스에서 꺼내 쓰는 두 단계를 보여준다
-const officialExample = `// Timeline에 ScrollTrigger를 붙입니다
-let tl = gsap.to("#id" {scrollTrigger: {start: "top center"...}});
+// 공식 페이지의 흐름을 실행 가능한 Tween 코드로 정리해 설정과 인스턴스 접근을 보여준다
+const officialExample = `// Tween에 ScrollTrigger를 붙입니다
+const tween = gsap.to("#id", {
+  scrollTrigger: { start: "top center" },
+});
 
 // 붙은 ScrollTrigger에 접근해 여러 메서드를 부릅니다
-tl.scrollTrigger.refresh();
+tween.scrollTrigger.refresh();
 // 또는
-tl.scrollTrigger.kill();`
+tween.scrollTrigger.kill();`
 
 export function ScrollTriggerBoundarySection() {
   return (
@@ -62,13 +64,13 @@ export function ScrollTriggerBoundarySection() {
       <div className="instance-page__note">
         <h3>흐름은 두 단계입니다</h3>
         <p>
-          공식 예제가 보여주는 순서를 그대로 옮기면 이렇습니다. 첫째, 만들 때 <code>vars</code> 안에{' '}
-          <code>scrollTrigger: {'{ ... }'}</code>를 적습니다. 둘째, 만들어진 인스턴스에서 <code>tl.scrollTrigger</code>를 꺼내{' '}
+          공식 예제의 흐름을 실행 가능한 Tween 코드로 정리하면 이렇습니다. 첫째, 만들 때 <code>vars</code> 안에{' '}
+          <code>scrollTrigger: {'{ ... }'}</code>를 적습니다. 둘째, 만들어진 인스턴스에서 <code>tween.scrollTrigger</code>를 꺼내{' '}
           <code>refresh()</code>나 <code>kill()</code> 같은 메서드를 부릅니다.
         </p>
         <p>
           <strong>설정을 넣는 자리와 결과를 꺼내는 자리가 다릅니다.</strong> 넣을 때는 <code>vars</code> 안의 평범한 설정 객체이고,
-          꺼낼 때는 메서드를 가진 ScrollTrigger 객체입니다. GSAP이 만드는 순간 설정을 실제 객체로 바꿔 인스턴스에 걸어 둡니다.
+          꺼낼 때는 메서드를 가진 ScrollTrigger 객체입니다. ScrollTrigger plugin이 설정에 따라 객체를 만들고 Tween에 연결합니다.
         </p>
       </div>
 

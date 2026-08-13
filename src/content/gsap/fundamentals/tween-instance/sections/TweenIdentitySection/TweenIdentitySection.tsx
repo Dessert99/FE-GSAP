@@ -22,15 +22,17 @@ export function TweenIdentitySection() {
       <div className="instance-page__split">
         <div className="instance-page__prose">
           <p>
-            먼저 용어를 정하겠습니다. <strong>instance</strong>는 "특정 설정으로 실제로 만들어진 하나"를 뜻합니다. 붕어빵 틀이 아니라
-            구워져 나온 붕어빵 하나입니다. <code>gsap.to()</code>를 부를 때마다 Tween instance가 하나씩 만들어집니다.
+            먼저 용어를 정하겠습니다. <strong>instance</strong>는 특정 target과 설정으로 실제 생성된 객체 하나를 뜻합니다.{' '}
+            <code>gsap.to()</code>를 부를 때마다 Tween instance가 하나씩 만들어집니다.
           </p>
           <p>
             공식 문서는 Tween을 <strong>"애니메이션 작업을 실제로 수행하는 것"</strong>이라고 정의하고,{' '}
-            <strong>high-performance property setter</strong>로 생각하라고 안내합니다. 값을 대신 써 주는 기계라는 뜻입니다.
+            <strong>high-performance property setter</strong>로 생각하라고 안내합니다. 시간에 맞춰 target의 property 값을 계산하고
+            적용한다는 뜻입니다.
           </p>
           <p>
-            그 기계에 넣는 것은 세 가지입니다. <strong>targets</strong>(움직일 대상), <strong>duration</strong>(걸리는 시간), 그리고{' '}
+            Tween을 만드는 데 필요한 핵심 정보는 세 가지입니다. <strong>targets</strong>(움직일 대상), <strong>duration</strong>(걸리는
+            시간), 그리고{' '}
             <strong>움직일 property들</strong>입니다. 공식 설명에 따르면 Tween은 자신의 <strong>playhead</strong>가 새 위치로 갈 때마다
             그 시점에 property 값이 얼마여야 하는지 계산해서 적용합니다.
           </p>
@@ -53,7 +55,7 @@ export function TweenIdentitySection() {
         <h3>세 메서드가 모두 같은 것을 돌려줍니다</h3>
         <p>
           공식 문서는 Tween을 만드는 메서드를 셋으로 못 박고, <strong>"이 메서드들은 모두 Tween instance를 반환한다"</strong>고
-          덧붙입니다. 시작·끝 값을 어떻게 적느냐만 다르고, 손에 쥐게 되는 물건은 같습니다.
+          덧붙입니다. 시작·끝 값을 어떻게 적느냐만 다르고, 반환되는 객체의 종류는 같습니다.
         </p>
       </div>
 
@@ -75,7 +77,7 @@ export function TweenIdentitySection() {
                 </th>
                 <td>Tween instance 하나</td>
                 <td>
-                  <a href={toHref('/fundamentals/tween-start-end-values')}>Tween 시작·끝 값 페이지</a>가 소유합니다
+                  <a href={toHref('/fundamentals/tween-start-end-values')}>Tween 시작·끝 값 페이지</a>에서 설명합니다
                 </td>
               </tr>
             ))}
@@ -86,8 +88,8 @@ export function TweenIdentitySection() {
       <p className="instance-page__note">
         세 메서드의 차이는 <strong>이 페이지가 담당하는 네 문서에 정의돼 있지 않습니다.</strong> 다만 Tween 페이지의{' '}
         <code>runBackwards</code> 설명이 한 줄을 흘립니다. <strong>"시작값과 끝값을 뒤집는 것이 from() tween이 내부적으로 하는 일"</strong>
-        이라는 문장입니다. 나머지는 전부 위 링크의 페이지가 소유합니다. 이 페이지는{' '}
-        <strong>어느 메서드로 만들었든 돌아오는 물건이 같다</strong>는 것만 씁니다.
+        이라는 문장입니다. 나머지는 전부 위 링크의 페이지에서 설명합니다. 이 페이지는{' '}
+        <strong>어느 메서드로 만들었든 Tween instance가 반환된다</strong>는 사실만 다룹니다.
       </p>
 
       <div className="instance-page__note">

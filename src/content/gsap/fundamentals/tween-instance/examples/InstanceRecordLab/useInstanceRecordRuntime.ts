@@ -9,7 +9,11 @@ export type DataChoice = 'none' | 'string' | 'object'
 /** controls·GSAP 호출·표시 코드가 공유하는 단일 실행 descriptor다. */
 export type RecordDescriptor = {
   id: string
+  /** 입력값을 안전한 JavaScript 문자열 리터럴로 직렬화한 id다. */
+  idLiteral: string
   dataChoice: DataChoice
+  /** vars.data에 실제로 넣는 값이며 none일 때만 undefined다. */
+  dataValue: string | { step: number } | undefined
   /** vars에 실제로 실린 data 값 — 코드 패널과 GSAP 호출이 같은 값을 쓴다. */
   dataLiteral: string
 }
@@ -37,10 +41,10 @@ function resolveData(choice: DataChoice) {
   return undefined
 }
 
-/** 선택한 data 종류를 코드 패널에 찍을 리터럴 문자열로 바꾼다. */
-function resolveDataLiteral(choice: DataChoice) {
-  if (choice === 'string') return "'step-2'"
-  if (choice === 'object') return '{ step: 2 }'
+/** 실제 data 값을 코드 패널에 찍을 리터럴 문자열로 바꾼다. */
+function resolveDataLiteral(value: string | { step: number } | undefined) {
+  if (typeof value === 'string') return JSON.stringify(value)
+  if (value) return '{ step: 2 }'
   return '(적지 않음)'
 }
 
@@ -58,8 +62,16 @@ export function useInstanceRecordRuntime() {
   const [readings, setReadings] = useState<RecordReading[]>([])
   // 방금 어떤 조작을 했는지 screen reader에도 전달한다
   const [status, setStatus] = useState('아래 값으로 Tween을 만들어 두었습니다. 재생하지 않아도 읽을 수 있습니다.')
+  // 선택한 종류를 실제 vars.data 값으로 한 번만 해석한다
+  const dataValue = resolveData(dataChoice)
   // 코드 패널과 GSAP 호출이 같은 값을 쓰도록 정규화한다
-  const descriptor: RecordDescriptor = { id, dataChoice, dataLiteral: resolveDataLiteral(dataChoice) }
+  const descriptor: RecordDescriptor = {
+    id,
+    idLiteral: JSON.stringify(id),
+    dataChoice,
+    dataValue,
+    dataLiteral: resolveDataLiteral(dataValue),
+  }
 
   // 지금 이 순간의 instance 상태를 일곱 개의 식으로 직접 읽어 온다
   function readBack(tween: gsap.core.Tween) {
@@ -75,7 +87,7 @@ export function useInstanceRecordRuntime() {
         note: 'instance 자체에는 id라는 속성이 없습니다. 실행으로 확인한 사실입니다.',
       },
       {
-        expression: `gsap.getById('${tween.vars.id}') === tween`,
+        expression: `gsap.getById(${JSON.stringify(String(tween.vars.id))}) === tween`,
         result: show(gsap.getById(String(tween.vars.id)) === tween),
         note: '조회는 instance가 아니라 GSAP이 담당합니다.',
       },
@@ -92,7 +104,7 @@ export function useInstanceRecordRuntime() {
       {
         expression: 'tween.vars.data',
         result: show(tween.vars.data),
-        note: '처음 채워 준 원본이며 나중에 tween.data를 바꿔도 따라오지 않습니다.',
+        note: '생성 시 data의 초기값으로 쓴 값이며 나중에 tween.data를 다시 대입해도 따라오지 않습니다.',
       },
       {
         expression: "'scrollTrigger' in tween",
@@ -104,10 +116,12 @@ export function useInstanceRecordRuntime() {
 
   useGSAP(
     () => {
+      // data를 적지 않는 모드에서는 vars 객체에서도 해당 키를 실제로 생략한다
+      const dataVars = descriptor.dataChoice === 'none' ? {} : { data: descriptor.dataValue }
       // 화면 대신 숫자 하나를 가진 일반 object를 target으로 삼아 이 예제가 움직임을 만들지 않게 한다
       const tween = gsap.to(
         { v: 0 },
-        { v: 1, duration: 0.6, paused: true, id: descriptor.id, data: resolveData(descriptor.dataChoice) },
+        { v: 1, duration: 0.6, paused: true, id: descriptor.id, ...dataVars },
       )
 
       tweenRef.current = tween
