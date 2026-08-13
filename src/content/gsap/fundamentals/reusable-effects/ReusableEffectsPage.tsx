@@ -18,7 +18,6 @@ export function ReusableEffectsPage() {
         <h1>{reusableEffectsMeta.title}</h1>
         <p className="reusable-effects-page__summary">{reusableEffectsMeta.summary}</p>
         <div className="reusable-effects-page__official-links">{reusableEffectsMeta.officialSources.map((source) => <OfficialDocsLink key={source.href} {...source} />)}</div>
-        <div className="reusable-effects-page__path"><span>이 페이지의 코드 위치</span><code>{reusableEffectsMeta.sourcePath}</code></div>
         <p className="reusable-effects-page__reviewed">공식 문서 대조일 · {reusableEffectsMeta.reviewedAt}</p>
       </header>
       <PageCoverage />

@@ -1,13 +1,12 @@
-/** 공식 source 21개가 local evidence에 모두 연결됐음을 페이지 앞에서 보여준다. */
-import { reusableEffectsCatalog, reusableEffectsCoverage } from '../../reusable-effects.catalog'
-import { reusableEffectsCoverageSummary } from '../../reusable-effects.meta'
+/** effect 등록부터 Timeline 확장까지 이어지는 여섯 학습 단계의 바로가기를 제공한다. */
+import { reusableEffectsSections } from '../../reusable-effects.meta'
 
-/** canonical source와 source item의 전체 대응 범위를 표시한다. */
+/** 현재 페이지의 학습 순서를 짧은 링크 목록으로 표시한다. */
 export function PageCoverage() {
   return (
-    <aside className="reusable-effects-page__coverage" aria-labelledby="reusable-effects-coverage-title">
-      <div><p>OFFICIAL COVERAGE</p><h2 id="reusable-effects-coverage-title">{reusableEffectsCatalog.length} / {reusableEffectsCoverageSummary.sourceItems}</h2></div>
-      <ul>{reusableEffectsCoverage.map((group) => <li key={group.title}><strong>{group.title}</strong><span>{group.ids.join(' · ')}</span></li>)}</ul>
-    </aside>
+    <nav className="reusable-effects-page__coverage" aria-labelledby="reusable-effects-coverage-title">
+      <div><p>학습 순서</p><h2 id="reusable-effects-coverage-title">{reusableEffectsSections.length}단계</h2></div>
+      <ul>{reusableEffectsSections.map((section) => <li key={section.id}><a href={`#${section.id}`}><strong>{section.number} · {section.title}</strong><span>이 단계로 이동</span></a></li>)}</ul>
+    </nav>
   )
 }

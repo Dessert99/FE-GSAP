@@ -2,7 +2,7 @@
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
 import { RegisteredEffectExample } from '../../examples/RegisteredEffectExample/RegisteredEffectExample'
 
-/** module-scope registration과 수동 replay가 같은 descriptor를 쓰는 예제를 배치한다. */
+/** module-scope 등록과 수동 replay가 같은 descriptor를 쓰는 예제를 배치한다. */
 export function RegisteredExampleSection() {
   return (
     <section className="reusable-effects-page__section" aria-labelledby="registered-example">
