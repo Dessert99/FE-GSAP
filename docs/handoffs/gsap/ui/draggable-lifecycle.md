@@ -189,3 +189,25 @@ releaseDecision
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- 공식 대조: `enable()`, `disable()`, `enabled()`, `startDrag()`, `endDrag()`, `kill()` canonical을 현재 웹에서 다시 확인했다.
+- `WRITE-B06-01 | BLOCK → PASS` — 첫 화면의 coverage 수치와 learner-facing P번호·소유권 표현을 lifecycle 질문과 관련 개념 이름으로 교체했다.
+- `FACT-B06-01 | BLOCK → PASS` — `kill()`을 되돌릴 수 없는 객체 소멸로 읽히던 문장을 공식 범위인 disable+lookup 제거로 좁히고, 새 instance 생성은 이 예제의 선택임을 명시했다.
+- Runtime/Display Sync 재검수: 실제 command descriptor가 method 호출과 마지막 코드 패널을 함께 구동하며 drift 없음.
+- Storybook: c309e13에서 삭제되어 `N/A`이며 실행·성공 근거로 사용하지 않는다.
+- Browser: `DEFERRED` — keyboard/focus, reduced-motion, 320/390px, 실제 pointer start/end/kill/recreate 결과는 실조작하지 않았다.
+- current releaseDecision: `PASS` — 미해결 BLOCK 없음. Browser 네 항목은 승인된 `DEFERRED`다.
+
+### 2026-08-13 Batch B 통합 검증
+
+- `npx tsc --noEmit --pretty false` exit 0.
+- Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.

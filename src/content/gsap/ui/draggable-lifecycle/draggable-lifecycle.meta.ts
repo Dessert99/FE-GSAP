@@ -4,7 +4,7 @@ export const draggableLifecycleMeta = {
   category: 'GSAP · UI · Draggable',
   summary: '이미 만든 Draggable instance를 잠시 disable하고, 실제 pointer 입력으로 programmatic drag를 시작·종료하고, 더 이상 쓰지 않을 때 kill하는 상태 전이를 살펴봅니다.',
   sourcePath: 'src/content/gsap/ui/draggable-lifecycle/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Draggable.disable()', href: 'https://gsap.com/docs/v3/Plugins/Draggable/disable()/' },
     { label: 'Draggable.enable()', href: 'https://gsap.com/docs/v3/Plugins/Draggable/enable()/' },
