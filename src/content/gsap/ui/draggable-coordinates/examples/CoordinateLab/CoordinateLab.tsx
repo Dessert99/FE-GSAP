@@ -9,7 +9,81 @@ export function CoordinateLab() {
   const { scope, targetRef, mode, setMode, descriptor, snapshot, reset } =
     useCoordinateAnimation()
   // 선택한 type만 serialize해 실행 코드와 control을 동기화한다
-  const code = `const [draggable] = Draggable.create(puck, {\n  type: '${descriptor.type}',\n  onPress() { read('press') },\n  onDrag() { read('drag') },\n  onRelease() { read('release') },\n})`
+  const code = `import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { Draggable } from 'gsap/Draggable'
+import { useRef, useState } from 'react'
+
+gsap.registerPlugin(Draggable)
+
+function CoordinateExample() {
+const scope = useRef(null)
+const targetRef = useRef(null)
+const frameRef = useRef(null)
+const [resetKey, setResetKey] = useState(0)
+const [, setSnapshot] = useState({})
+
+useGSAP(() => {
+  const puck = targetRef.current
+  if (!puck) return
+  gsap.set(puck, { clearProps: 'transform' })
+
+  function read(phase, instance) {
+    setSnapshot({
+      phase,
+      x: instance.x,
+      y: instance.y,
+      rotation: instance.rotation,
+      startX: instance.startX,
+      startY: instance.startY,
+      deltaX: instance.deltaX,
+      deltaY: instance.deltaY,
+      endX: instance.endX,
+      endY: instance.endY,
+      endRotation: instance.endRotation,
+      pointerX: instance.pointerX,
+      pointerY: instance.pointerY,
+      pointerEvent: instance.pointerEvent?.type ?? '아직 없음',
+      direction: String(instance.getDirection('start')),
+    })
+  }
+
+  function scheduleRead(phase, instance) {
+    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current)
+    frameRef.current = requestAnimationFrame(() => {
+      frameRef.current = null
+      read(phase, instance)
+    })
+  }
+
+  const [instance] = Draggable.create(puck, {
+    type: '${descriptor.type}',
+    onPress() { scheduleRead('press', instance) },
+    onDrag() { scheduleRead('drag', instance) },
+    onRelease() { scheduleRead('release', instance) },
+  })
+  read('idle', instance)
+
+  return () => {
+    if (frameRef.current !== null) cancelAnimationFrame(frameRef.current)
+    instance.kill()
+    gsap.set(puck, { clearProps: 'transform' })
+  }
+}, {
+  scope,
+  dependencies: ['${descriptor.type}', resetKey],
+  revertOnUpdate: true,
+})
+
+function reset() {
+  setResetKey((key) => key + 1)
+}
+
+return <div ref={scope}>
+  <div ref={targetRef} className="coordinate-lab__puck">drag</div>
+  <button onClick={reset}>처음 위치로 reset</button>
+</div>
+}`
   return (
     <section className="coordinate-lab" aria-labelledby="coordinate-lab-title">
       <h3 id="coordinate-lab-title">
@@ -111,7 +185,7 @@ export function CoordinateLab() {
       </pre>
       <div className="coordinate-lab__table-wrap">
         <table>
-          <caption>이 lab이 읽는 P04 surface</caption>
+          <caption>drag 단계마다 읽을 수 있는 좌표와 방향</caption>
           <thead>
             <tr>
               <th scope="col">이름</th>
