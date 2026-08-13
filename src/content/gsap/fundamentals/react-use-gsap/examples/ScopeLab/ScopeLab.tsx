@@ -7,15 +7,50 @@ export function ScopeLab() {
   const { scope, boxSelector, observation, status, reducedMotion, run } = useScopeRuntime()
 
   // 실행에 쓰인 선택자와 옵션을 코드 문법으로만 포맷한다
-  const code = `const container = useRef(null)
+  const code = `import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { useRef } from 'react'
+import { useReducedMotion } from '../../../../../../components/demo/InteractiveExample/useReducedMotion'
+
+function ScopeExample() {
+const container = useRef(null)
+const tweenRef = useRef(null)
+const reducedMotion = useReducedMotion()
 
 useGSAP(() => {
+  const root = container.current
+  const target = root?.querySelector('${boxSelector}')
+  if (!root || !target) return
   // 문서 전체에 ${observation.matchedInDocument}개가 있지만
-  gsap.to('${boxSelector}', { x: 150 })
+  gsap.set('${boxSelector}', { x: 0 })
+  const tween = gsap.to('${boxSelector}', {
+    x: 150,
+    duration: reducedMotion ? 0 : 0.9,
+    ease: 'none',
+    paused: true,
+  })
+  tweenRef.current = tween
   // 실제로 잡히는 건 container 안의 ${observation.targetedByTween}개입니다.
-}, { scope: container })
+  return () => {
+    tween.kill()
+    tweenRef.current = null
+  }
+}, {
+  scope: container,
+  dependencies: [reducedMotion],
+  revertOnUpdate: true,
+})
 
-return <div ref={container}>...</div>`
+function run() {
+  tweenRef.current?.restart()
+}
+
+return <>
+  <div ref={container}><div className="${boxSelector.slice(1)}">scope 안</div></div>
+  <div className="${boxSelector.slice(1)}">scope 밖</div>
+  <button onClick={run}>실행</button>
+</>
+}`
 
   return (
     <section className="react-scope-lab" aria-labelledby="react-scope-lab-title">

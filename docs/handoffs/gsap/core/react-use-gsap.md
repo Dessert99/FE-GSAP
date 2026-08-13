@@ -135,3 +135,31 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| RDS-RG-002 | ADDRESSED | `ScopeLab` 코드 패널에 runtime의 초기화·duration·ease·paused·restart와 ref cleanup, `dependencies`·`revertOnUpdate` 옵션을 반영했다 | 학습자가 보이는 코드로 같은 동작과 React 정리 계약을 재현할 수 있다 | none |
+| PED-RG-002 | ADDRESSED | `PageCoverage`의 `source item`·`기술 item`을 문서 제작 용어가 아닌 `핵심 동작`과 학습 순서로 바꿨다 | 첫 화면이 내부 집계보다 학습 내용을 먼저 말한다 | none |
+| SRC-RG-002 | PASS | 2026-08-13 `https://gsap.com/resources/React/`에서 `scope`, config 세 옵션, `contextSafe`, SSR·cleanup 계약을 다시 확인했다 | 공식 근거 최신성 확인 | none |
+| BROWSER-RG-002 | DEFERRED | 이번 배치에서는 브라우저 실조작을 수행하지 않았다 | 반응형·키보드·실제 모션은 정적 판정만 가능하다 | 승인된 브라우저 검수에서 확인 |
+
+### verificationEvidence
+
+- 공식 문서: `https://gsap.com/resources/React/` (2026-08-13 확인).
+- Runtime/Display: `useScopeRuntime.ts`의 `set`·`to` 옵션·`restart()`·ref cleanup과 `ScopeLab.tsx` 표시 코드를 정적으로 대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행 대상이 아니다.
+
+### releaseDecision
+
+`PASS with DEFERRED` — 정적 BLOCK은 수정했으며 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-RG-003` — **PASS**: ScopeLab 표시 코드에 import·component·scope 내부/외부 fixture·null guard·Tween cleanup을 반영해 runtime 계약과 다시 대조했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`
