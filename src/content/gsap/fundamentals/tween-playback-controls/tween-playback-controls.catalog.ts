@@ -5,14 +5,14 @@ export type SourceItem = {
   id: string
   officialItem: string
   source: 'is-active' | 'pause' | 'paused' | 'play' | 'restart' | 'resume' | 'reverse' | 'reversed'
-  /** 공식 문서에 게시된 주장인지, 설치본 실행으로만 확인한 사실인지 구분한다. */
+  /** 공식 문서에 게시된 주장인지, 현재 GSAP 실행으로 확인한 사실인지 구분한다. */
   origin: 'official' | 'implementation'
   sectionId: string
 }
 
-/** 재생 제어에 관한 기술 주장 전체 목록 — PageCoverage와 각 섹션이 같은 배열을 센다. */
+/** 재생 제어에 관한 기술 주장 전체 목록 — handoff와 각 섹션이 같은 배열을 근거로 삼는다. */
 export const tweenPlaybackControlsSourceItems: SourceItem[] = [
-  // 01 playback-model — 두 스위치의 의미와 isActive()가 무엇을 계산하는지
+  // 01 playback-model — paused·reversed의 의미와 isActive()가 무엇을 계산하는지
   { id: 'PSD-02', officialItem: "paused()는 animation의 paused 상태, 즉 지금 멈춰 있는지 여부를 가져오거나 설정한다.", source: 'paused', origin: 'official', sectionId: 'playback-model' },
   { id: 'PSD-05', officialItem: 'paused 상태는 조상 timeline을 고려하지 않는다("This does not take into account anscestor timelines." — 원문 오타 포함).', source: 'paused', origin: 'official', sectionId: 'playback-model' },
   { id: 'PSD-06', officialItem: '그래서 멈추지 않은 tween도 부모 timeline(또는 조상 timeline)이 멈춰 있으면 멈춘 것처럼 보일 수 있다.', source: 'paused', origin: 'official', sectionId: 'playback-model' },
@@ -91,11 +91,5 @@ export const tweenPlaybackControlsSourceItems: SourceItem[] = [
   // 공식 문서가 침묵하거나 실행과 어긋나는 지점 — 분모에 넣지 않고 따로 센다
   { id: 'PB-01', officialItem: 'reverse()는 실제로 reversed()를 true로 만든다. 시작·중간·완료 세 지점 모두에서 호출 직후 paused()=false, reversed()=true, timeScale()=-1이었다. 공식 문장의 "neither paused nor reversed" 중 paused 부분만 실행과 일치한다.', source: 'reverse', origin: 'implementation', sectionId: 'reverse-direction' },
   { id: 'PB-02', officialItem: 'reverse(0)은 끝으로 가지만 음수 from은 끝 기준이 아니다. duration 2에서 reverse(0)은 time 2, reverse(-1)과 reverse(-0.5)는 모두 time 0이었다. 공식이 적은 "-1은 끝에서 1초 전"은 재현되지 않았다.', source: 'reverse', origin: 'implementation', sectionId: 'reverse-direction' },
-  { id: 'PB-03', officialItem: '완료 지점에서 reverse()를 부르면 playhead는 끝에 그대로 남고 거기서부터 되감기며, 그 순간 isActive()가 false에서 true로 바뀐다. 되감기가 끝나면 time 0에서 reversed()는 true로 남는다.', source: 'reverse', origin: 'implementation', sectionId: 'reverse-direction' },
-  { id: 'PB-04', officialItem: 'paused(false)와 resume()은 관측 범위에서 결과가 같았다. 거꾸로 향한 채 멈춘 Tween에 둘 중 무엇을 불러도 reversed()=true, timeScale()=-1이 유지됐고, play()만 reversed()=false, timeScale()=1로 되돌렸다.', source: 'resume', origin: 'implementation', sectionId: 'stop-and-go' },
-  { id: 'PB-05', officialItem: 'timeScale이 0일 때 play()/resume()이 1로 바꾼다는 공식 tip은 3.15.0에서 재현되지 않았다. 여섯 경로 모두 timeScale 0이 유지됐고 ticker를 300ms 돌려도 progress가 0이었다. 예외는 하나로, timeScale(0) 뒤 방향을 뒤로 바꿨다가 play()를 부르면 timeScale이 1이 아니라 1e-8이 됐다.', source: 'play', origin: 'implementation', sectionId: 'stop-and-go' },
-  { id: 'PB-06', officialItem: 'restart()는 방향과 멈춤 상태를 함께 초기화한다. 정방향 진행 중·reverse() 뒤·pause() 뒤 세 출발점 모두에서 호출 직후 paused()=false, reversed()=false, time=0, timeScale()=1이었다. 공식 페이지에는 이 두 상태에 대한 언급이 없다.', source: 'restart', origin: 'implementation', sectionId: 'restart-from-start' },
-  { id: 'PB-07', officialItem: 'restart(true)의 delay 반영은 totalTime()이 아니라 startTime()에 나타난다. delay 1·duration 2에서 restart()와 restart(false)는 startTime 0, restart(true)는 startTime 1이었고 totalTime()은 세 경우 모두 0이었다.', source: 'restart', origin: 'implementation', sectionId: 'restart-from-start' },
-  { id: 'PB-08', officialItem: '완료가 paused 상태를 바꾸지 않는다는 공식 문장을 두 경로로 확인했다. paused(true)인 채 끝까지 보내도 paused()=true였고, 재생해서 자연 완료시키면 paused()=false 그대로였다. 완료는 어느 쪽으로도 값을 건드리지 않는다.', source: 'paused', origin: 'implementation', sectionId: 'playback-model' },
-  { id: 'PB-09', officialItem: 'isActive()에는 setter 얼굴이 없다. isActive(true)를 불러도 인자를 무시하고 그 시점의 Boolean을 돌려준다. 반면 paused(true)·reversed(true)와 다섯 개 명령 메서드는 모두 Tween 자신을 돌려준다.', source: 'is-active', origin: 'implementation', sectionId: 'state-getters' },
+  { id: 'PB-05', officialItem: 'timeScale이 0일 때 play()/resume()이 1로 바꾼다는 공식 tip은 3.15.0에서 재현되지 않았다. 대부분의 경로는 timeScale 0이 유지됐고, timeScale(0) 뒤 방향을 뒤로 바꿨다가 play()를 부른 경로도 1이 아니라 1e-8이 됐다.', source: 'play', origin: 'implementation', sectionId: 'stop-and-go' },
 ]

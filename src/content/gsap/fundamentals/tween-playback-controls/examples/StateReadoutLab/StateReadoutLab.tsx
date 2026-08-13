@@ -33,7 +33,8 @@ export function StateReadoutLab() {
   }
 
   // 마지막 호출과 그 호출이 돌려준 것을 한 덩어리 코드로 직렬화한다
-  const code = `// 이 예제가 미리 만들어 둔 Tween 하나입니다. ${descriptor.startAt}초 지점에 멈춰 둡니다.
+  const code = `// 이 예제와 같은 값으로 Tween을 만들고 ${descriptor.startAt}초 지점에 멈춥니다.
+const target = { value: 0 }
 const tween = gsap.to(target, {
   value: 100,
   duration: ${descriptor.duration},
@@ -75,7 +76,7 @@ ${lastCommand ? `const returned = ${callSyntax[lastCommand]}` : '// 아직 아�
             <p className="state-readout-lab__result-value">{result.text}</p>
             <p className="state-readout-lab__result-kind">
               {result.kind === 'tween'
-                ? '값을 넣었으니 setter입니다. 그래서 점을 찍어 이어 쓸 수 있습니다.'
+                ? '이 호출은 Tween 자신을 돌려줍니다. 그래서 점을 찍어 이어 쓸 수 있습니다.'
                 : result.kind === 'boolean'
                   ? '값을 넣지 않았으니 getter입니다. Boolean이라 이어 쓸 수 없습니다.'
                   : '괄호가 비었는지 아닌지에 따라 이 자리의 답이 달라집니다.'}
@@ -123,22 +124,16 @@ ${lastCommand ? `const returned = ${callSyntax[lastCommand]}` : '// 아직 아�
 
       <dl className="state-readout-lab__observation">
         <div>
-          <dt id="srl-paused">paused 스위치</dt>
-          <dd>
-            <output aria-labelledby="srl-paused">{String(observation.paused)}</output>
-          </dd>
+          <dt id="srl-paused">paused 상태</dt>
+          <dd aria-labelledby="srl-paused">{String(observation.paused)}</dd>
         </div>
         <div>
-          <dt id="srl-reversed">reversed 스위치</dt>
-          <dd>
-            <output aria-labelledby="srl-reversed">{String(observation.reversed)}</output>
-          </dd>
+          <dt id="srl-reversed">reversed 상태</dt>
+          <dd aria-labelledby="srl-reversed">{String(observation.reversed)}</dd>
         </div>
         <div>
           <dt id="srl-active">계산된 isActive</dt>
-          <dd>
-            <output aria-labelledby="srl-active">{String(observation.active)}</output>
-          </dd>
+          <dd aria-labelledby="srl-active">{String(observation.active)}</dd>
         </div>
         {/* 매 프레임 바뀌는 값이라 output 대신 일반 요소로 둔다 — output은 스스로 live region이 된다 */}
         <div>
@@ -173,7 +168,7 @@ ${lastCommand ? `const returned = ${callSyntax[lastCommand]}` : '// 아직 아�
           <p>
             공식 signature가 <code>[Boolean | self]</code>로 적혀 있기 때문입니다. GSAP은 <strong>인자를 몇 개 받았는지</strong>를 보고
             읽기와 쓰기를 가릅니다. <code>isActive()</code>만 반환 타입이 <code>Boolean</code> 하나인데, 이 값은 우리가 정하는 게
-            아니라 두 스위치와 playhead 위치로 계산되기 때문입니다.
+            아니라 playhead와 자신·조상 timeline의 재생 상태로 계산되기 때문입니다.
           </p>
         </article>
         <article>

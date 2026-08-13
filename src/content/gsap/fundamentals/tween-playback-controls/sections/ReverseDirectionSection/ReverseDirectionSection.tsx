@@ -110,8 +110,8 @@ export function ReverseDirectionSection() {
           문장을 할애해 짚어 둔 내용입니다 — "animation의 맨 끝으로 점프해 거기서 거꾸로 재생하려면 <code>from</code>에 0을 쓴다."
         </p>
         <p>
-          거꾸로 도는 입장에서 <strong>0은 출발선</strong>이고, 그 출발선이 animation의 끝이라고 생각하면 덜 헷갈립니다. 끝까지 재생된 적
-          없는 Tween을 완성된 모습에서부터 되감고 싶을 때 이 한 줄이면 됩니다.
+          이것은 <code>reverse()</code>가 <code>0</code>을 특별하게 해석하는 규칙입니다. 끝까지 재생된 적 없는 Tween을 완성된
+          모습에서부터 되감고 싶을 때 이 한 줄이면 됩니다.
         </p>
       </div>
 
@@ -143,55 +143,16 @@ export function ReverseDirectionSection() {
       </div>
 
       <div className="playback-page__note playback-page__note--probe">
-        <h3>공식 문장 하나가 실행과 반대입니다</h3>
+        <h3>GSAP 3.15.0에서 확인할 호환성 차이</h3>
         <p>
-          <code>reverse()</code>의 Details에는 이런 문장이 있습니다 — "<strong>Calling reverse() also ensures that the instance is
-          neither paused nor reversed.</strong>" 그대로 읽으면 "reverse()를 부르면 reversed가 아니게 된다"는 뜻이 되어 메서드 이름과
-          정면으로 어긋납니다.
-        </p>
-        <p>
-          <strong>측정 방법</strong> — <code>duration 1</code>인 Tween을 시작 지점, 절반 지점, 완료 지점 세 곳에 각각 두고{' '}
-          <code>reverse()</code>를 한 번 불러 직후 값을 읽었습니다. GSAP 3.15.0에서 <strong>세 지점 모두</strong>{' '}
-          <code>paused()=false</code>, <code>reversed()=true</code>, <code>timeScale()=-1</code>이었습니다. 즉 문장의{' '}
-          <strong>paused 부분만 맞고 reversed 부분은 실행과 반대</strong>입니다. <code>play()</code>의 같은 문장을 옮겨 오면서 남은
-          표현으로 보입니다.
-        </p>
-        <p className="playback-page__provenance">
-          공식 문장은 위에 원문 그대로 옮겨 두었고, 실행 결과를 따로 적었습니다. 이 페이지는 <code>reverse()</code>가{' '}
-          <strong>멈춤을 풀고 방향을 뒤로 만든다</strong>고 가르칩니다. 실행이 그렇게 동작하고, 메서드 이름과도 맞기 때문입니다.
-        </p>
-      </div>
-
-      <div className="playback-page__note playback-page__note--probe">
-        <h3>음수 from은 끝 기준이 아니었습니다</h3>
-        <p>
-          공식 문서는 "음수는 끝을 기준으로 하여 <code>-1</code>이면 끝에서 1초 전"이라고 적고, 예제에도{' '}
-          <code>myAnimation.reverse(-1)</code>이 실려 있습니다.
+          공식 설명에는 <code>reverse()</code>를 부르면 <code>reversed</code>가 <code>false</code>가 된다고 적혀 있지만, GSAP
+          3.15.0에서는 <code>paused()=false</code>, <code>reversed()=true</code>가 됩니다. 실제 동작대로{' '}
+          <strong>멈춤을 풀고 역방향으로 재생한다</strong>고 이해하세요.
         </p>
         <p>
-          <strong>측정 방법</strong> — <code>duration 2</code>인 Tween을 절반 지점에 둔 뒤 <code>from</code>을 일곱 가지로 바꿔 부르고{' '}
-          <code>time()</code>을 읽었습니다(소수 넷째 자리 반올림). <code>reverse(0)</code>은 <code>2</code>,{' '}
-          <code>reverse(2)</code>와 <code>reverse(3)</code>도 <code>2</code>, <code>reverse(0.5)</code>는 <code>0.5</code>였습니다.
-          그런데 <code>reverse(-1)</code>과 <code>reverse(-0.5)</code>는 <strong>둘 다 <code>0</code></strong>이었습니다. 끝에서 1초
-          전인 <code>1</code>이 아닙니다. 음수는 끝 기준으로 환산되지 않고 <code>0</code>으로 잘렸습니다.
-        </p>
-        <p className="playback-page__provenance">
-          공식 문장은 위에 그대로 옮겨 두었고, 재현 결과가 다르다는 사실을 함께 남깁니다. 끝에서 1초 전부터 되감고 싶다면 음수 대신{' '}
-          <strong>양수 초를 직접 계산해</strong> 넘기세요. duration이 2라면 <code>reverse(1)</code>입니다.
-        </p>
-      </div>
-
-      <div className="playback-page__note playback-page__note--probe">
-        <h3>끝난 Tween에 reverse()를 부르면</h3>
-        <p>
-          <strong>측정 방법</strong> — 완료 지점(<code>progress 1</code>)에 둔 Tween에 <code>reverse()</code>를 부르고 직후 값을 읽은
-          뒤, 되감기가 끝날 때까지 두고 다시 읽었습니다. 호출 직후 <code>time</code>은 끝에 그대로 남았고 <code>isActive()</code>가{' '}
-          <code>false</code>에서 <code>true</code>로 바뀌었습니다. 되감기가 끝난 뒤에는 <code>time=0</code>,{' '}
-          <code>reversed()=true</code>, <code>paused()=false</code>, <code>isActive()=false</code>였습니다.
-        </p>
-        <p className="playback-page__provenance">
-          이 항목은 공식 페이지에 게시돼 있지 않습니다. 되감기가 끝나도 <strong>방향 스위치는 뒤로 남아 있다</strong>는 점이 중요합니다.
-          다시 앞으로 보내려면 <code>resume()</code>이 아니라 <code>play()</code>를 불러야 합니다.
+          공식 설명은 음수 <code>from</code>을 끝 기준으로 계산한다고 안내하지만, GSAP 3.15.0에서 <code>reverse(-1)</code>은 0초로
+          이동합니다. 끝에서 일정 시간 전부터 되감아야 한다면 양수 시각을 직접 계산해 넘기세요. duration이 2초라면 끝에서 1초 전은{' '}
+          <code>reverse(1)</code>입니다.
         </p>
       </div>
 
