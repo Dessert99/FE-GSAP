@@ -14,12 +14,13 @@ export function TransitionSection() {
       </p>
       <p>
         drag가 시작된 뒤에는 target 밖의 이동도 release까지 이어집니다. 이
-        페이지는 state timing만 소유합니다. listener 생성과 callback option은{' '}
+        페이지에서는 상태가 바뀌는 시점에 집중합니다. listener 생성과 callback
+        option은{' '}
         <a href={toHref('/fundamentals/observer-create')}>
-          P25 Observer create
+          Observer 만들기와 찾기
         </a>
         에서, 실제 signal 값은{' '}
-        <a href={toHref('/fundamentals/observer-signals')}>P26 Observer 신호</a>
+        <a href={toHref('/fundamentals/observer-signals')}>Observer 신호 읽기</a>
         에서 다룹니다.
       </p>
     </section>
