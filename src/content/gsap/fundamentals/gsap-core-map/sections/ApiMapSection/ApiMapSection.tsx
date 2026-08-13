@@ -17,8 +17,8 @@ export function ApiMapSection() {
         ))}
       </div>
       <div className="core-map-page__subheading">
-        <p className="core-map-page__badge">Plugin catalog</p>
-        <h3>특수 능력은 family에서 찾습니다</h3>
+        <p className="core-map-page__badge">Plugin 목록</p>
+        <h3>특수 능력은 기능 분류에서 찾습니다</h3>
         <p>공식 도구 목록은 plugin별 CDN 입구를 제공하고 React 통합은 npm package로 안내합니다. 아래 이름은 세부 사용법이 아니라 전체 탐색 범위입니다.</p>
       </div>
       <div className="core-map-page__plugin-grid">

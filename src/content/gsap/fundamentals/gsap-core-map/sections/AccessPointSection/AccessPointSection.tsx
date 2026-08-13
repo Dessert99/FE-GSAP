@@ -5,7 +5,7 @@ const quickStartCode = `npm install gsap
 
 import { gsap } from 'gsap'
 
-// standalone Tween 하나
+// Timeline에 넣지 않은 독립 Tween 하나
 gsap.to('.box', { rotation: 27, x: 100, duration: 1 })
 
 // Tween 세 개를 순서대로 담은 Timeline 하나
@@ -22,8 +22,8 @@ export function AccessPointSection() {
       <div className="core-map-page__split">
         <div className="core-map-page__prose">
           <p><strong>access point</strong>는 여러 기능으로 들어가는 공통 입구입니다. <code>gsap</code>은 GSAP Core 대부분의 기능을 제공하는 JavaScript 객체입니다.</p>
-          <p><strong>target</strong>은 바꿀 대상, <strong>property</strong>는 바꿀 값의 이름, <strong>duration</strong>은 변화에 쓸 시간입니다. <strong>Tween</strong>은 한 변화 작업이고 <strong>Timeline</strong>은 여러 Tween을 시간 순서로 담는 컨테이너입니다.</p>
-          <p>오른쪽 첫 호출의 <code>x</code>는 CSS <code>translateX()</code>를 짧게 쓴 property입니다. 두 번째 호출은 세 Tween을 하나의 순서로 묶습니다.</p>
+          <p><strong>target</strong>은 바꿀 대상, <strong>property</strong>는 바꿀 값의 이름, <strong>duration</strong>은 변화에 쓸 시간입니다. <strong>Tween</strong>은 target의 property 값을 시간에 따라 계산하고, <strong>Timeline</strong>은 여러 animation을 원하는 시간에 배치합니다.</p>
+          <p>오른쪽 <code>gsap.to()</code>의 <code>x</code>는 CSS <code>translateX()</code>를 짧게 쓴 property입니다. 그 아래 <code>gsap.timeline()</code> 뒤의 체인은 세 Tween을 하나의 순서로 묶습니다.</p>
           <a className="core-map-page__resource-link" href="https://courses.snorkl.tv/courses/gsap-3-express?ref=44f484" target="_blank" rel="noopener noreferrer" aria-label="공식 페이지가 연결한 GSAP 3 Express 빠른 개요 새 탭에서 열기">공식 페이지가 연결한 GSAP 3 Express 빠른 개요 열기 <span aria-hidden="true">↗</span></a>
         </div>
         <pre className="core-map-page__code"><code>{quickStartCode}</code></pre>

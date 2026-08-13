@@ -2,7 +2,7 @@
 export const coreCapabilityGroups = [
   {
     title: '무엇을 바꿀까요?',
-    description: 'Core는 DOM에만 묶이지 않고 숫자로 계산할 수 있는 다양한 값을 Tween의 target으로 받습니다.',
+    description: 'Core는 DOM 요소의 CSS property·attribute뿐 아니라 배열과 일반 객체의 숫자·색상·숫자가 든 문자열도 시간에 따라 계산합니다.',
     items: ['CSS properties', 'attributes', 'array values', 'numeric values', 'colors', 'numbers in complex strings'],
   },
   {
@@ -17,7 +17,7 @@ export const coreCapabilityGroups = [
   },
   {
     title: 'animation 전후 값은 어떻게 계산할까요?',
-    description: 'utility는 값을 정규화하거나 조합한 뒤 Tween과 Timeline에 전달하게 돕습니다.',
+    description: 'utility는 animation에 쓸 대상을 찾거나 값을 변환·조합하는 작은 함수입니다.',
     items: ['checkPrefix()', 'clamp()', 'distribute()', 'getUnit()', 'interpolate()', 'mapRange()', 'normalize()', 'pipe()', 'random()', 'selector()', 'shuffle()', 'snap()', 'splitColor()', 'toArray()', 'unitize()', 'wrap()', 'wrapYoyo()'],
   },
 ] as const
@@ -28,7 +28,7 @@ export const pluginFamilies = [
   { family: 'Text', useCase: '문장을 글자·단어로 나누거나 표시 문자를 단계적으로 바꿀 때', items: ['SplitText', 'ScrambleText', 'Text Replacement'], dependency: null },
   { family: 'SVG', useCase: '선을 그리거나 shape를 바꾸고 path를 따라 대상을 움직일 때', items: ['DrawSVG', 'MorphSVG', 'MotionPath', 'MotionPathHelper'], dependency: null },
   { family: 'UI', useCase: 'layout 전환, drag, 관성, pointer·wheel gesture를 다룰 때', items: ['Flip', 'Draggable', 'Inertia', 'Observer'], dependency: null },
-  { family: 'Other', useCase: '물리 기반 속도, animation 디버깅, Canvas·Pixi renderer를 연결할 때', items: ['Physics2D', 'PhysicsProps', 'GSDevTools', 'Easel', 'Pixi'], dependency: null },
+  { family: 'Other', useCase: '물리 기반 속도, animation 디버깅, EaselJS·PixiJS renderer를 연결할 때', items: ['Physics2D', 'PhysicsProps', 'GSDevTools', 'Easel', 'Pixi'], dependency: null },
   { family: 'Eases', useCase: '기본 ease로 표현하기 어려운 사용자 정의·불규칙·특수 곡선이 필요할 때', items: ['CustomEase', 'EasePack: rough · slow · expoScale', 'CustomWiggle', 'CustomBounce'], dependency: 'CustomWiggle과 CustomBounce는 CustomEase 필요' },
   { family: 'React', useCase: 'React render lifecycle에 맞춰 GSAP 생성과 cleanup을 묶을 때', items: ['useGSAP()'], dependency: 'React lifecycle에 맞춘 npm integration' },
 ] as const

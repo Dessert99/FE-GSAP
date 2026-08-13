@@ -2,9 +2,9 @@
 export const gsapCoreMapMeta = {
   title: 'GSAP Core 지도',
   category: 'GSAP · Fundamentals',
-  summary: 'gsap은 기능으로 들어가는 객체, Tween은 한 변화 작업, Timeline은 작업을 담는 시간 컨테이너입니다. plugin은 Core에 특수 능력을 더합니다.',
+  summary: 'gsap은 Core 기능으로 들어가는 객체, Tween은 대상의 속성값을 시간에 따라 바꾸는 animation, Timeline은 여러 animation을 시간에 배치하는 컨테이너입니다. plugin은 Core에 특수 능력을 더합니다.',
   sourcePath: 'src/content/gsap/fundamentals/gsap-core-map/',
-  reviewedAt: '2026-08-03',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'GSAP Docs Home', href: 'https://gsap.com/docs/v3/' },
     { label: 'GSAP object', href: 'https://gsap.com/docs/v3/GSAP/' },
