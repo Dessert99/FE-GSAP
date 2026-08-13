@@ -93,3 +93,16 @@ PASS — 기존 browser-only finding은 2026-08-13 소유자 승인으로 종료
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+- officialSourceCheck: Observer의 `disable()`, `enable()`, `isEnabled`, `kill()` 공식 문서를 다시 대조했다. disable은 listener를 제거하되 재활성화할 수 있고, kill은 disable 뒤 내부 registry에서도 제거하는 영구 정리임을 확인했다.
+- findings:
+  - OBSLIFE-A01 `BLOCK → ADDRESSED` — 표시 코드를 plugin 등록·target 조회·instance 생성·선택 command·unmount cleanup을 포함하는 setup으로 바꿨다.
+  - OBSLIFE-A02 `BLOCK → ADDRESSED` — 학습 화면의 P번호·소유권·통합 작업 표현을 일반 학습 문장으로 바꿨다.
+  - OBSLIFE-A03 `PASS` — 선택 command가 실제 disable·enable·kill·recreate 분기와 표시 method를 함께 결정하고, UI는 실제 `isEnabled`를 읽으며 표시 cleanup도 마지막 instance를 kill한다.
+  - OBSLIFE-A04 `DEFERRED` — listener 제거·재연결·kill·recreate, keyboard focus, 작은 viewport 확인은 사용자 승인에 따라 수행하지 않았다.
+  - OBSLIFE-A05 `N/A` — Storybook은 `c309e13`에서 의도적으로 제거되어 검증 대상이 아니다.
+- batchStaticVerification: `PASS` — `npx tsc --noEmit --pretty false`와 대상 범위 `git diff --check`가 exit 0이다.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED` — 정적 BLOCK은 해소했지만 브라우저 관점은 `DEFERRED`다.
