@@ -20,8 +20,37 @@ export function MotionPathLab() {
     setEnd,
     setAutoRotate,
   } = useMotionPathAnimation()
-  // descriptor와 controls가 실행한 same motionPath object를 문법으로만 직렬화한다
-  const code = `gsap.to(follower, {\n  motionPath: {\n    path: '${motionPathDescriptor.path}',\n    align: '${motionPathDescriptor.path}',\n    alignOrigin: [${motionPathDescriptor.alignOrigin.join(', ')}],\n    autoRotate: ${autoRotate},\n    start: ${start},\n    end: ${end},\n  },\n  duration: ${reducedMotion ? 0 : motionPathDescriptor.duration},\n})`
+  // descriptor와 controls가 실행한 same motionPath object를 setup cleanup 경계로 직렬화한다
+  const code = `function setupMotionPath() {
+  const path = document.querySelector('#motion-path-lab-curve')
+  const follower = document.querySelector('.motion-path-lab__follower')
+  if (!path || !follower) throw new Error('motion path lab DOM을 찾지 못했습니다.')
+  gsap.registerPlugin(MotionPathPlugin)
+  gsap.set(follower, { x: 0, y: 0, rotation: 0 })
+  const config = {
+    path,
+    align: path,
+    alignOrigin: [${motionPathDescriptor.alignOrigin.join(', ')}],
+    autoRotate: ${autoRotate},
+    start: ${start},
+    end: ${end},
+  }
+  const tween = gsap.to(follower, {
+    motionPath: config,
+    duration: ${reducedMotion ? 0 : motionPathDescriptor.duration},
+    ease: 'power1.inOut',
+    onComplete: () => console.log(${JSON.stringify(
+    reducedMotion
+      ? `reduced motion: end ${end}에 즉시 배치했습니다.`
+      : `start ${start}에서 end ${end}까지 이동했습니다.`,
+  )}),
+  })
+  return () => {
+    tween.kill()
+    gsap.set(follower, { clearProps: 'transform,transformOrigin' })
+  }
+}
+const cleanup = setupMotionPath()`
   return (
     <section
       className="motion-path-lab"
@@ -38,7 +67,7 @@ export function MotionPathLab() {
         <svg viewBox="0 0 320 180" aria-label="visible motion path">
           <path
             ref={pathRef}
-            id="motion-path-lab-curve"
+            id={motionPathDescriptor.path.slice(1)}
             d="M30 130 C90 20 210 20 290 130"
             fill="none"
             stroke="currentColor"

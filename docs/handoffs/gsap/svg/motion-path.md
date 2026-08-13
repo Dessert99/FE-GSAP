@@ -75,3 +75,26 @@
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 Batch B 재감사
+
+- `MP-OC-20260813` | PASS | 현재 공식 `MotionPathPlugin` 문서와 대조 | path 입력, align/alignOrigin, autoRotate, start/end, one-time align 경계를 유지했다.
+- `MP-RDS-20260813` | BLOCK → PASS | serializer가 runtime의 baseline `gsap.set`, Element ref config, `ease`, 완료 상태, cleanup을 생략하고 selector config로 바꿔 표시했다 | 실제 config 생성부터 tween·cleanup까지 직렬화하고 visible path id만 descriptor와 연결했다.
+- `MP-WRITE-20260813` | BLOCK → PASS | learner-facing owner/workflow/P20 표현을 사용했다 | utility 역할과 직접 편집 목적을 평문으로 설명했다.
+- `MP-BROWSER-20260813` | DEFERRED | 키보드/포커스, reduced motion, 320/390px, 실제 interval·autoRotate 결과 | 이번 배치에서는 브라우저를 조작하지 않았다.
+- `MP-STORYBOOK-20260813` | N/A | Storybook은 c309e13에서 의도적으로 삭제됨 | 실행하지 않았다.
+
+currentReleaseDecision
+  PASS — runtime/display와 문장 BLOCK을 해소했고 browser-only 4건은 DEFERRED다. 과거 빌드와 browser closure는 현재 근거가 아니다.
+
+### 2026-08-13 self cross-review
+
+- `MP-RDS-20260813-02 | BLOCK → PASS` — serializer가 미정의 ref·setter를 사용하고 top-level cleanup을 반환했다. actual selectors와 baseline, Tween completion read, `setupMotionPath()`가 반환하는 cleanup 경계로 수정한 뒤 재독해 PASS.
+- 통합 검증: `npx tsc --noEmit --pretty false` exit 0, Batch B 21 page dir + handoff 범위 `git diff --check` exit 0.
+
+### 2026-08-13 최종 교차검토 판정
+
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행하지 않았다.
+- Browser: `DEFERRED` — 승인된 브라우저 실조작 관점을 수행하지 않았다.
+- overallDecision: `NOT VERIFIED` — 정적 BLOCK은 없지만 Browser 실조작이 `DEFERRED`다.
+- releaseDecision: `NOT VERIFIED` — 브라우저 관점을 현재 증거로 확인하지 않았다.
