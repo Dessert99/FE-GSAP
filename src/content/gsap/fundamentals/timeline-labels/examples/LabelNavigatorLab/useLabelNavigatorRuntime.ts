@@ -54,7 +54,7 @@ export function useLabelNavigatorRuntime() {
   // getter에서 마지막으로 읽은 화면 좌표를 보관한다
   const [readout, setReadout] = useState<LabelReadout>({ time: 0, current: 'intro', previous: undefined, next: 'hold', value: 0 })
   // 마지막 control의 실제 호출과 결과 설명을 코드 패널·status에 함께 쓴다
-  const [action, setAction] = useState<LabelAction>({ code: `timeline.seek('intro')`, message: 'intro label에서 시작합니다.' })
+  const [action, setAction] = useState<LabelAction>({ code: '// Timeline이 0초의 intro label에서 시작합니다.', message: 'intro label에서 시작합니다.' })
   // ruler의 짧은 CSS transition을 제거할지 판단한다
   const reducedMotion = useReducedMotion()
 
@@ -119,7 +119,7 @@ export function useLabelNavigatorRuntime() {
     }
     timeline.seek(next, suppressEvents)
     updateReadout()
-    setAction({ code: `timeline.seek(timeline.nextLabel(), ${suppressEvents})`, message: `${next} label로 이동했습니다.` })
+    setAction({ code: `const next = timeline.nextLabel() // '${next}'\ntimeline.seek(next, ${suppressEvents})`, message: `${next} label로 이동했습니다.` })
   }
 
   // previousLabel() getter가 돌려준 이름으로만 이동해 현재 label과 같은 시각은 건너뛴다
@@ -135,7 +135,7 @@ export function useLabelNavigatorRuntime() {
     }
     timeline.seek(previous, suppressEvents)
     updateReadout()
-    setAction({ code: `timeline.seek(timeline.previousLabel(), ${suppressEvents})`, message: `${previous} label로 이동했습니다.` })
+    setAction({ code: `const previous = timeline.previousLabel() // '${previous}'\ntimeline.seek(previous, ${suppressEvents})`, message: `${previous} label로 이동했습니다.` })
   }
 
   // playhead와 callback 관찰을 초기 intro 상태로 되돌린다
