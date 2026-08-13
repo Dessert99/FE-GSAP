@@ -64,7 +64,12 @@ export function CleanupScopeLab() {
   const cleanupCall = formatCleanupCall(descriptor)
   // fixture와 선택 호출, 실제 반환을 한 코드 snapshot으로 이어 붙인다
   const code = [
-    "const target = scope.current.querySelector('" + descriptor.selector + "')",
+    "import gsap from 'gsap'",
+    '',
+    "const scope = document.querySelector('.cleanup-scope-lab__body')",
+    "if (!scope) throw new Error('cleanup scope를 찾지 못했습니다.')",
+    "const target = scope.querySelector('" + descriptor.selector + "')",
+    "if (!target) throw new Error('animation target을 찾지 못했습니다.')",
     "const parent = gsap.timeline({ paused: true })",
     "const timeline = gsap.timeline({ paused: true, autoRemoveChildren: false, onComplete: () => undefined })",
     "timeline.to(target, { x: 160, opacity: 1, duration: 1, ease: 'none' })",
@@ -76,6 +81,11 @@ export function CleanupScopeLab() {
     '',
     cleanupCall,
     '// 실제 반환 → ' + returnValue,
+    '',
+    'function cleanup() {',
+    '  parent.revert()',
+    "  gsap.set(target, { clearProps: 'all' })",
+    '}',
   ].join('\n')
 
   return (

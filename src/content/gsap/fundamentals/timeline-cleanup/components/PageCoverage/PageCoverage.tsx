@@ -11,13 +11,13 @@ const sourceCount = new Set(timelineCleanupSourceItems.map((item) => item.source
 
 export function PageCoverage() {
   return (
-    <nav className="tl-cleanup-coverage" aria-label="공식 source 대응 범위">
+    <nav className="tl-cleanup-coverage" aria-label="Timeline 정리 방법 학습 순서">
       <div className="tl-cleanup-coverage__summary">
-        <div><strong>{sourceCount}/{timelineCleanupCoverage.officialSources}</strong><span>공식 source</span></div>
-        <div><strong>{officialCount}/{timelineCleanupCoverage.officialSourceItems}</strong><span>공식 기술 item</span></div>
-        <p>여섯 cleanup 선택의 공식 {officialCount}개를 보존 범위로 재배열하고 GSAP 3.15.0 실행 probe {probeCount}개를 분리했습니다.</p>
+        <div><strong>{sourceCount}/{timelineCleanupCoverage.officialSources}</strong><span>대조한 공식 문서</span></div>
+        <div><strong>{officialCount}/{timelineCleanupCoverage.officialSourceItems}</strong><span>설명한 핵심 동작</span></div>
+        <p>여섯 정리 방법의 핵심 동작 {officialCount}개를 무엇이 남는지에 따라 비교하고, 문서에 없는 경계 동작 {probeCount}개는 직접 확인해 구분했습니다.</p>
       </div>
-      <ol>{timelineCleanupSections.map((section) => <li key={section.id}><a href={`#${section.id}`}><span>{section.number}</span><div><strong>{section.title}</strong><small>{section.sourceItems}개 source item</small></div></a></li>)}</ol>
+      <ol>{timelineCleanupSections.map((section) => <li key={section.id}><a href={`#${section.id}`}><span>{section.number}</span><div><strong>{section.title}</strong><small>{section.sourceItems}개 핵심 동작</small></div></a></li>)}</ol>
     </nav>
   )
 }

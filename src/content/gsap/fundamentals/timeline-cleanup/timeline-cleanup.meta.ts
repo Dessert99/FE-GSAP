@@ -5,7 +5,7 @@ export const timelineCleanupMeta = {
   summary:
     '정리는 모두 같은 삭제가 아닙니다. child 하나만 떼기, container를 비우기, target의 property만 멈추기, Timeline을 폐기하기, 화면까지 되돌리기, 완료 child를 자동 배출하기를 “무엇이 남는가”로 비교합니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-cleanup/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.autoRemoveChildren', href: 'https://gsap.com/docs/v3/GSAP/Timeline/autoRemoveChildren' },
     { label: 'Timeline.clear()', href: 'https://gsap.com/docs/v3/GSAP/Timeline/clear()' },
