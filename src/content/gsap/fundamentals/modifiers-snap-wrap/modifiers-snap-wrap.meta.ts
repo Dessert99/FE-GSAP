@@ -5,7 +5,7 @@ export const modifiersSnapWrapMeta = {
   summary:
     'GSAP이 매 프레임 계산한 값을 그대로 쓰지 않고 중간에서 가로채 고칠 수 있습니다. 눈금에 맞추거나, 끝에 닿으면 처음으로 돌리거나, 왕복시키는 일이 여기서 일어납니다.',
   sourcePath: 'src/content/gsap/fundamentals/modifiers-snap-wrap/',
-  reviewedAt: '2026-08-05',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Modifiers', href: 'https://gsap.com/docs/v3/GSAP/CorePlugins/Modifiers' },
     { label: 'Snap', href: 'https://gsap.com/docs/v3/GSAP/CorePlugins/Snap' },
