@@ -64,10 +64,6 @@ export const highFrequencyUpdatesSourceItems: SourceItem[] = [
   { id: 'QS-15', officialItem: '같은 기법이 attribute에도 통한다("attr" 사용). 공식 예제는 var circleSet = gsap.quickSetter("#circle", "attr"); circleSet({ cx: "+=100", cy: "random(-100, 100)" }); 이다.', source: 'quick-setter', origin: 'official', sectionId: 'pipe-and-multi-value' },
   { id: 'QS-16', officialItem: '다만 이 방식은 gsap.quickSetter("#box", "x", "px")처럼 특정 property를 지정할 때만큼의 성능 향상을 주지는 못한다. 그래도 표준 gsap.set()보다는 빠르다.', source: 'quick-setter', origin: 'official', sectionId: 'pipe-and-multi-value' },
 
-  { id: 'HFU-P1', officialItem: '같은 값을 50번 갱신하면 globalTimeline에 gsap.to()는 Tween 50개, quickTo 함수는 1개, quickSetter 함수는 0개를 남긴다. 공식 문서는 "성능이 좋아진다"까지만 적고 남는 Tween 수를 밝히지 않는다.', source: 'quick-to', origin: 'implementation', sectionId: 'input-storm' },
-  { id: 'HFU-P4', officialItem: 'target이 DOM element가 아닌 일반 객체면 getProperty의 unit 인자가 무시되어 숫자가 그대로 돌아오고, 없는 property는 null이 아니라 undefined다. 반면 quickSetter의 unit은 일반 객체에도 붙어 문자열이 된다.', source: 'get-property', origin: 'implementation', sectionId: 'read-current-value' },
-  { id: 'HFU-P2', officialItem: 'quickSetter가 돌려준 함수는 인자를 1개 받으며, target이 하나면 넣은 값을 그대로 돌려주고 target이 여럿이면 undefined를 돌려준다. 공식 페이지에 반환값 명시 없음.', source: 'quick-setter', origin: 'implementation', sectionId: 'follow-the-input' },
-  { id: 'HFU-P3', officialItem: 'quickTo가 돌려준 함수는 인자를 3개 받는다. TypeScript 선언의 3번째 인자 startIsRelative는 공식 페이지에 없으며, true면 넘긴 시작값을 현재 값에 더한 지점에서 출발한다.', source: 'quick-to', origin: 'implementation', sectionId: 'follow-the-input' },
-  { id: 'HFU-P5', officialItem: 'quickTo의 vars에 duration: 0을 주면 값이 목표에 도달하지 못하고 내부 초기값에 머문다. duration: 0.001은 정상 동작한다. 공식 페이지에 duration 하한 언급 없음.', source: 'quick-to', origin: 'implementation', sectionId: 'follow-the-input' },
+  // 예제의 일시정지 버튼과 다음 입력의 관계를 설명하는 데 필요한 설치본 관찰만 별도로 남긴다
   { id: 'HFU-P6', officialItem: '.tween.pause()로 멈춘 뒤 quickTo 함수에 새 값을 넘기면 일시정지가 풀리고 다시 움직인다. 공식 페이지는 pause() 예제만 싣고 이후 호출과의 관계를 밝히지 않는다.', source: 'quick-to', origin: 'implementation', sectionId: 'follow-the-input' },
 ]

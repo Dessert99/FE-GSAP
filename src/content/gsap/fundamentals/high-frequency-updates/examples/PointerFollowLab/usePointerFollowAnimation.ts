@@ -49,7 +49,7 @@ export const inputMax = 100
 
 /** controls와 모션 설정을 실제 gsap 호출 인자 형태로 한 번에 정규화한다. */
 function createDescriptor(path: WritePath, duration: number, ease: FollowEase, reducedMotion: boolean): PointerFollowDescriptor {
-  // 모션 감소 설정에서는 보간을 없애고 즉시 쓰기로 바꾼다. quickTo의 duration을 0으로 낮추는 방법은 값이 목표에 도달하지 않아 쓸 수 없다
+  // 모션 감소 설정에서는 보간을 없애고 즉시 쓰기로 바꾼다
   const effectivePath = reducedMotion ? 'quickSetter' : path
 
   return { selector: targetSelector, unit: setterUnit, requestedPath: path, effectivePath, duration, ease, startX }
@@ -117,6 +117,8 @@ export function usePointerFollowAnimation() {
       writeCountRef.current = 0
       seenTweensRef.current = new Set()
       lastValueRef.current = descriptor.startX
+      // 설정을 바꾸면 slider도 시작 눈금으로 돌려 화면 입력과 실제 위치를 맞춘다
+      setInput(0)
 
       if (descriptor.effectivePath === 'quickSetter') {
         // 입력 바깥에서 딱 한 번 만든다. 이후에는 이 함수만 부르고 Tween은 만들지 않는다
@@ -133,6 +135,8 @@ export function usePointerFollowAnimation() {
           // 보간 중에는 매 프레임 GSAP이 쓴 값을 다시 읽어야 화면 숫자가 실제와 어긋나지 않는다
           onUpdate: () => observe(dot),
         })
+        // quickTo를 만들 때 생긴 Tween부터 세어 입력 전 관찰값도 실제 인스턴스 수와 맞춘다
+        seenTweensRef.current.add(xTo.tween)
         writerRef.current = {
           call: (value) => {
             // 호출이 돌려준 Tween을 집합에 넣어 같은 인스턴스가 재사용되는지 실제로 센다
@@ -142,8 +146,8 @@ export function usePointerFollowAnimation() {
         }
       }
 
-      // 새 설정으로 준비만 끝난 상태를 화면에 반영한다
-      setTweenPaused(false)
+      // 새 설정으로 준비된 Tween의 실제 paused 상태를 그대로 화면에 반영한다
+      setTweenPaused(writerRef.current?.tween?.paused() ?? false)
       observe(dot)
 
       // context 정리 뒤 handler가 사라진 함수를 다시 부르지 않게 참조를 비운다

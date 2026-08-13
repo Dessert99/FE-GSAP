@@ -13,14 +13,14 @@
   - `https://gsap.com/docs/v3/GSAP/gsap.getProperty()`
   - `https://gsap.com/docs/v3/GSAP/gsap.quickSetter()`
   - `https://gsap.com/docs/v3/GSAP/gsap.quickTo()`
-- reviewedAt: `2026-08-04`
+- reviewedAt: `2026-08-13`
 - category: `Fundamentals > GSAP`
 - slug: `high-frequency-updates`
 - sourcePageIds: primary `source:gsap-get-property`; related `source:gsap-quick-setter`, `source:gsap-quick-to`
 
 세 페이지 모두 **formal signature 블록·인자 표·기본값 표가 없다.** 반환 표기만 있다(`Returns : *` / `Returns : Function` / `Returns : Function`). 인자와 반환값은 산문과 코드 예제에만 나온다. 게시되지 않은 명세를 기억이나 TypeScript 선언으로 채우지 않는다. 해당 칸은 `공식 페이지에 명시 없음`으로 표시한다.
 
-heading 구성(2026-08-04 원문 확인):
+heading 구성(2026-08-13 재확인):
 
 - getProperty — `Returns : *` / `Details` / `Examples:` / `Reusable getter function`. 코드 블록 3개, 표 0개, 데모 0개.
 - quickSetter — `Returns : Function` / `Details` / `Combine with utility methods for super-powerful functions!` / `Mouse Follower Demo` / `If you're animating, use gsap.quickTo()` / `Trick for multiple values`. 코드 블록 3개, note admonition 1개, 데모 iframe 2개, 건너뛰기 목록 6항목.
@@ -100,7 +100,7 @@ heading 구성(2026-08-04 원문 확인):
 
 ### sourceBlockers
 
-`none`. 46개 기술 item 전부 2026-08-04에 canonical 원문으로 직접 확인했다.
+`none`. 46개 기술 item 전부 2026-08-13에 canonical 원문으로 다시 확인했다.
 
 다음은 세 공식 페이지가 **게시하지 않은** 내용이므로 주장하지 않는다. 필요해지면 `blocked-source` item을 추가하고 release를 `BLOCK`한다.
 
@@ -190,14 +190,9 @@ signature 표 모듈, 전체 Tween vars 카탈로그, ease visualizer, 설치 �
 | QS-14 | `PipeAndMultiValueSection.tsx` 여러 값 트릭 표 `"css"` 행 + 원문 코드 블록 | covered |
 | QS-15 | `PipeAndMultiValueSection.tsx` 여러 값 트릭 표 `"attr"` 행 + 원문 코드 블록 | covered |
 | QS-16 | `PipeAndMultiValueSection.tsx` "공짜는 아닙니다" 경고 블록 | covered |
-| HFU-P1 | `InputStormSection.tsx` probe 표 + 측정 방법 문단 | covered (probe) |
-| HFU-P2 | `FollowTheInputSection.tsx` probe 목록 1항목 | covered (probe) |
-| HFU-P3 | `FollowTheInputSection.tsx` probe 목록 2항목 | covered (probe) |
-| HFU-P4 | `ReadCurrentValueSection.tsx` probe 블록 3항목 | covered (probe) |
-| HFU-P5 | `FollowTheInputSection.tsx` probe 목록 3항목; `usePointerFollowAnimation.ts` reduced-motion 분기 주석 | covered (probe) |
-| HFU-P6 | `FollowTheInputSection.tsx` probe 목록 4항목; `usePointerFollowAnimation.ts` `write()`의 paused 재조회 | covered (probe) |
+| HFU-P6 | `FollowTheInputSection.tsx` 설치본 관찰 note; `usePointerFollowAnimation.ts` `write()`의 paused 재조회 | covered (implementation observation) |
 
-`HFU-P1`–`HFU-P6`은 공식 item이 아니다. coverage 분모(46)에 포함하지 않으며 `PageCoverage`도 공식 46개와 분리해 센다.
+`HFU-P6`은 일시정지 버튼의 실제 동작을 설명하는 설치본 관찰이며 공식 item이 아니다. 공식 coverage 분모 46개에는 포함하지 않는다.
 
 ### relatedPages
 
@@ -271,8 +266,8 @@ src/app/routes.ts   # 이 컨텍스트는 건드리지 않았다. 라우트 등�
 - runtimeOwnership: hook이 selector, unit, 요청 경로, 정규화된 effective 경로, duration, ease, 시작 x를 담은 단일 descriptor를 소유한다. 입력 정규화(트랙 rect → 0–100 → px 목표값)도 hook이 한다. `quickSetter`/`quickTo` 함수를 `useGSAP` 안에서 한 번만 만들고 handler는 그것만 부른다. `quickTo` 호출이 돌려준 Tween을 `Set`에 넣어 **재사용 여부를 실제로 센다**. scoped `useGSAP` 한 개, `revertOnUpdate: true`.
 - displayOwnership: TSX가 descriptor와 observation을 코드 문법으로만 직렬화하고 controls·readout·학습 패널을 그린다. 보간값을 직접 계산하거나 목표 픽셀을 다시 조립하지 않는다.
 - coveredSourceItemIds: QT-10, QT-11, QT-12, QT-18
-- accessibility: 트랙은 `aria-hidden="true"`이고 **같은 값을 넣는 labeled range가 키보드·스크린리더 경로**다. radio group 2개에 `role="radiogroup"` + `aria-labelledby`, duration은 `<label>` + `<output>`, 관찰값은 `<dl>`에 `aria-live="polite"`, 모션 감소 안내는 `role="status"`, 좁은 화면에서 1열 전환
-- motion: `useReducedMotion()`이 `true`면 **effective 경로를 `quickSetter`로 바꾼다.** `quickTo`의 duration을 0으로 낮추는 방법은 값이 목표에 도달하지 않아 쓸 수 없다(HFU-P5). 이때 duration·ease control은 `disabled`이고 화면에 그 사실을 문장으로 알린다. autoplay 없음 — 사용자가 입력을 넣기 전에는 아무것도 움직이지 않는다.
+- accessibility: 트랙은 `aria-hidden="true"`이고 **같은 값을 넣는 labeled range가 키보드·스크린리더 경로**다. radio group 2개에 `role="radiogroup"` + `aria-labelledby`, duration은 `<label>` + `<output>`, 관찰값은 의미가 있는 `<dl>`, 모션 감소 안내는 `role="status"`, 좁은 화면에서 1열 전환
+- motion: `useReducedMotion()`이 `true`면 **effective 경로를 `quickSetter`로 바꿔 보간을 없앤다.** 이때 duration·ease control은 `disabled`이고 화면에 그 사실을 문장으로 알린다. autoplay 없음 — 사용자가 입력을 넣기 전에는 아무것도 움직이지 않는다.
 
 ### nonGoals
 
@@ -281,7 +276,7 @@ src/app/routes.ts   # 이 컨텍스트는 건드리지 않았다. 라우트 등�
 - `gsap.ticker`와 프레임 루프 소유권을 가져오지 않는다.
 - 두 예제를 하나의 generic runtime hook으로 합치지 않는다. 읽기 예제는 `Runtime`, 되따라가기 예제는 `Animation`으로 각자 소유한다.
 - 두 축(x·y)을 동시에 따라다니는 mouse follower를 로컬에서 재현하지 않는다. 한 축·한 대상·한 변화로 좁히고 공식 데모를 링크한다.
-- 공식 문서에 없는 `startIsRelative` 사용을 권하지 않는다. 존재만 기록한다.
+- 공식 문서에 없는 내부 인자와 반환 규칙을 학습 내용으로 확장하지 않는다.
 
 ### preserve
 
@@ -294,53 +289,41 @@ src/app/routes.ts   # 이 컨텍스트는 건드리지 않았다. 라우트 등�
 
 ### verifiedPerspectives
 
-Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Structure/Comment, 정적 Accessibility/Motion, Build/Integration, Cross-page Consistency — 모두 구현 컨텍스트가 직접 판정했다(`docs/workflows/quality-gates.md` 2026-08-04 개정: 독립 검수자를 두지 않는다).
+2026-08-13 감사에서 Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Structure/Comment, 정적 Accessibility/Motion을 다시 판정했다. 전역 build는 메인 통합에서 통과했고 실제 브라우저 동작은 `NOT VERIFIED`로 남긴다.
+
+### historicalFindings (2026-08-04 구현 기록)
+
+초기 구현 시점의 상세 결과와 runtime probe 수치는 git 이력에 남아 있다. 현재 페이지가 설명하지 않는 내부 동작을 학습 계약처럼 보이게 하지 않도록, 2026-08-13 감사에서는 UI 동작과 직접 연결된 `HFU-P6`만 남겼다.
 
 ### findings
 
-| ID | status | evidence | impact | requiredAction |
-| --- | --- | --- | --- | --- |
-| SRC-CORE19-001 | ADDRESSED | 1차 WebFetch 요약이 quickSetter 건너뛰기 6항목 중 5항목만 반환하고 quickTo의 `Optionally define a start value` 절 전체를 누락했다. `curl`로 canonical HTML을 받아 `<article>`의 heading·`<li>`·`<pre>`를 원문 추출해 46개 item을 다시 세웠다. | 요약본만 믿었으면 기술 item 7개 이상이 소실됐다 | 이어받는 컨텍스트도 원문 인용으로 대조 |
-| OC-CORE19-001 | PASS | 공식 46/46 item이 `coverageMap`에서 파일 근거로 연결됐다. 스크립트로 meta 섹션 합(2+11+7+12+9+5+0=46), catalog 공식 행 수(46), meta 분모(46)가 일치하고 ID 중복·미지정 sectionId가 없음을 대조했다. source별 분포는 getProperty 11, quickSetter 16, quickTo 19. | Official Coverage 통과 | none |
-| LT-CORE19-001 | PASS | 공식 목차 순서(getProperty→quickSetter→quickTo)를 그대로 쓰지 않고 "문제 → 읽기 → 선택 → 대가 → 실행 → 조합 → 경계" 7단계로 재배열했다. 두 문서의 건너뛰기 목록을 6행 대조표로 합쳐 **다섯 번째만 다르다**는 관계를 드러냈고, 각 item에 전제·관찰·원리·사용처를 붙였다. | Learning Transformation 통과 | none |
-| RDS-CORE19-001 | PASS | 두 예제 모두 hook의 단일 descriptor에서 GSAP 호출과 표시 코드가 함께 파생된다. 관찰값은 전부 GSAP이 쓴 결과를 다시 읽어 만든다 — `PropertyReadout`은 `gsap.getProperty()` 반환값을 그대로, `PointerFollowLab`은 `gsap.getProperty(element,'x')` 재조회와 `quickTo` 반환 Tween을 담은 `Set`의 크기, `tween.paused()` 재조회로 만든다. TSX에서 보간값이나 Tween 개수를 직접 계산하는 곳이 없음을 확인했다. TSX 어느 파일도 `gsap`을 import하지 않음을 grep으로 확인했다. | Runtime/Display Sync 통과 | none |
-| RDS-CORE19-002 | ADDRESSED | 초안에서 `quickSetter` 경로만 writer 안에서 `observe()`를 부르고 `quickTo` 경로는 `onUpdate`에만 맡겨, Tween이 일시정지된 상태에서 입력하면 `함수를 부른 횟수`가 화면에서 멈췄다. 두 경로 모두 `write()` 끝에서 `observe()`를 부르도록 통일했다. | 표시값과 실제 호출이 어긋났다 | none |
-| PROBE-CORE19-001 | PASS | GSAP 3.15.0 / Node v22.21.0에서 6개 항목을 실행 확인했다(아래 verificationEvidence에 숫자와 측정 방법 기재). 특히 `duration: 0`이 quickTo를 깨뜨린다는 사실이 reduced-motion 구현 방식을 바꿨다. | 공식 문장만으로는 알 수 없는 동작 6건 | `HFU-P1`–`HFU-P6`으로 기록하고 실행 확인 사실임을 페이지에 명시 |
-| PED-CORE19-001 | PASS | 처음 나오는 용어를 쓰기 전에 정의했다 — `고빈도 입력`(01), `보간`(03), `pipe()`(06). 두 예제 모두 한 대상·한 변화이고 `무엇이 달라졌나요? / 무엇을 봐야 하나요? / 왜 이렇게 동작하나요? / 실제로 언제 쓰나요?` 네 패널을 갖췄다. 07단계에서 "이 도구들은 먼저 쓸 도구가 아니다"로 닫았다. | Pedagogy 통과 | none |
-| STRUCT-CORE19-001 | PASS | 페이지 TSX는 헤더와 섹션 조립만 한다. 섹션 7개·예제 2개가 각자 폴더를 갖고, 실행 source는 성격에 따라 `usePropertyReadoutRuntime.ts`(비애니메이션 상태형)와 `usePointerFollowAnimation.ts`(Tween 생명주기)로 나뉜다. runtime 파일에 제목·설명·속성 표가 없고 TSX에 GSAP 생명주기가 없다. 한 파일 한 컴포넌트, 한 줄 한국어 주석 규칙을 지켰다. | Structure/Comment 통과 | none |
-| STRUCT-CORE19-002 | PASS | 커리큘럼 메모의 "readout only / quickSetter / quickTo 세 모드"를 한 예제에 넣지 않고, 읽기는 `PropertyReadout`이 별도로 소유하게 했다. `learning-design.md`의 "한 예제는 하나의 핵심 질문에 답한다"가 더 강한 계약이고, 메모의 실제 금지 사항("세 점을 동시에 놓지 말 것")은 지켰다. | 계획 대비 의도적 편차 | none |
-| A11Y-CORE19-001 | PASS (정적) | 정적으로 읽어 판정 가능한 부분: 모든 control이 native `input` + `label`이고 radio 묶음마다 `role="radiogroup"` + `aria-labelledby`가 있다. 포인터 트랙은 `aria-hidden="true"`이고 **같은 값을 넣는 labeled range가 키보드 경로로 항상 제공**된다. 관찰값은 색이 아닌 텍스트이며 `aria-live="polite"`, 모션 안내는 `role="status"`다. `:focus-visible` 아웃라인이 두 예제에 모두 있고, 720/860px 미디어 쿼리로 1열 전환한다. 표는 `caption`과 `scope`를 갖췄다. | 정적 접근성 통과 | none |
-| MOTION-CORE19-001 | PASS (정적) | autoplay 없음 — 사용자가 입력을 넣기 전에는 어떤 값도 변하지 않는다. `useReducedMotion()`이 `true`면 `PointerFollowLab`의 effective 경로를 `quickSetter`로 바꿔 보간을 없애고, 그 사실을 화면에 문장으로 알리며 duration·ease control을 `disabled`로 만든다. `PropertyReadout`은 모션 자체가 없어 분기를 두지 않았다(사유를 exampleContracts에 기록). | 정적 motion 통과 | none |
-| BUILD-CORE19-001 | PASS | `npx tsc --noEmit` — 이 페이지 파일에서 오류 0건. 모든 상대 import(`.ts`/`.tsx`/`.css`)가 실제 파일로 해석되는지 스크립트로 확인했고, TSX가 쓰는 className이 모두 CSS에 존재하는지도 대조했다(루트 `hfu-page`만 하위 선택자 전용으로 규칙 없음 — 참조 페이지와 동일한 관례). `src/app/routes.ts`와 `src/components/`는 `git status`로 미변경 확인. | Build/Integration 통과 | `npm run build`·`build-storybook`은 이 작업의 금지 항목이라 실행하지 않았다 |
-| BUILD-CORE19-002 | ADVISORY | 같은 시점 `npx tsc --noEmit`에 다른 페이지(`gsap-context`, `tween-playback-controls`)의 미완성 import 오류 7건이 남아 있다. 이 페이지와 무관한 동시 작업 산출물이다. | 이 페이지의 release를 막지 않음 | 해당 페이지 담당 컨텍스트가 처리 |
-| XPAGE-CORE19-001 | PASS | `gsap.to()`·transform 이름·attr 채널·ease·Tween 메서드·vars 기본값을 이 페이지가 소유하지 않고 각 owner 페이지로 링크했다. 링크한 6개 route가 모두 `src/app/routes.ts`에 등록되어 있음을 확인했다. 아직 페이지가 없는 `gsap.utils`·`gsap.ticker`는 링크 대신 07단계에서 비소유임을 명시했다. | Cross-page Consistency 통과 | none |
-| A11Y-CORE19-002 | DEFERRED → PASS | 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 예제 control의 실제 조작 결과 | 소유자 일괄 브라우저 검수 대상 | 전체 페이지 완성 후 일괄 확인 |
+| ID | initial | current | evidence |
+| --- | --- | --- | --- |
+| SRC-HFU-01 | PASS | PASS | 2026-08-13 canonical 세 페이지에서 반환 표기, 세부 절, quickSetter/quickTo 건너뛰기 6항목, quickTo 시작값·`.tween` 절을 다시 대조했다. 공식 item 46개는 변경 없음. |
+| PED-HFU-01 | BLOCK | PASS | 첫 화면의 `3/3`, `46/46 source item`, 섹션별 수량과 본문의 설명 소유권 표현을 학습 순서와 다음 학습 경로로 바꿨다. 페이지 학습에 불필요한 설치본 내부 probe 5건은 제거하고 일시정지 UI에 필요한 관찰만 남겼다. |
+| RDS-HFU-01 | BLOCK | PASS | 입력 전 코드 패널이 실행하지 않은 `setX(0)`/`xTo(0)`을 표시했고, 실제 baseline·`onUpdate`·pause 상태를 생략했다. 표시 코드를 실제 단계에 맞추고, quickTo 생성 직후 `xTo.tween.paused()`를 읽어 버튼·상태·pause/resume 코드를 동기화하며, 생성 시점의 Tween부터 세고 설정 변경 시 range도 초기화했다. |
+| A11Y-HFU-01 | BLOCK | PASS (정적) | quickTo의 매 프레임 `onUpdate`가 갱신하는 `<dl>`에서 `aria-live="polite"`를 제거했다. 포인터 트랙을 대신하는 labeled range와 native controls는 유지했다. |
+| COMMENT-HFU-01 | PASS | PASS | 변경한 예제 선언과 실행 단계에 한 줄 한국어 주석을 두고, 제거된 probe 전용 CSS도 함께 정리했다. |
 
 ### verificationEvidence
 
-- **공식 원문 대조** — 2026-08-04, 세 canonical URL을 `curl`로 직접 받아 `<article>` 안의 heading·`<li>`·`<pre>`를 원문 추출. 페이지별 구성(코드 블록 3/3/4개, 건너뛰기 목록 6/6항목, note admonition 1개, 데모 iframe 0/2/1개)을 개별 확인.
-- **runtime probe** — 전부 GSAP 3.15.0, Node v22.21.0, DOM 없는 환경. `import gsap from 'gsap'`.
-  - `HFU-P1` Tween 누적. 측정: 실행 전 `gsap.globalTimeline.clear()`, 50회 호출 후 `gsap.globalTimeline.getChildren(true, true, true).length`. 결과 — baseline `0`, `gsap.to()` 50회 → **50**, quickTo 함수 50회 → **1**, quickSetter 함수 50회 → **0**(target `x` = 49).
-  - `HFU-P2` quickSetter 반환 함수. 측정: `fn.length`와 호출 반환값. 결과 — `fn.length` = **1**. 단일 target: `setX(42)` → **42**, target `x` = 42. 다중 target(`[{x:0},{x:0}]`): `setMulti(7)` → **undefined**, 두 target 모두 `x` = 7. 요소 1개짜리 배열은 단일 취급되어 **7**을 돌려준다.
-  - `HFU-P3` quickTo 반환 함수. 측정: `fn.length`, `.tween` 생성자명, 호출 반환값 동일성. 결과 — `fn.length` = **3**, `.tween` = `Tween`, 첫 호출 반환 `=== .tween` **true**, 두 번째 호출 반환 `===` 첫 반환 **true**. 3번째 인자: `x`가 100인 대상에 `uTo(200, 50, true)` → progress 0에서 `x` = **150**, progress 1에서 **200**. `startIsRelative` 이름은 `node_modules/gsap/types/gsap-core.d.ts`의 `QuickToFunc`에만 있고 공식 페이지에는 없다.
-  - `HFU-P4` 일반 객체 target. 측정: 반환값과 `typeof`. 결과 — `gsap.getProperty({x:5},'x')` → **5** (`number`), `gsap.getProperty({x:5},'x','px')` → **5** (`number`, unit 무시), `gsap.getProperty({x:5},'nope')` → **undefined**, 재사용 getter도 동일. 반면 `gsap.quickSetter(obj,'x','px')(42)` → `obj.x` = **"42px"** (`string`).
-  - `HFU-P5` duration 하한. 측정: `duration` 0 / 0.001 / 0.3으로 각각 quickTo를 만들어 `f(250)` 호출 후 400ms 뒤 target 값. 결과 — **0.1**(도달 실패, 내부 초기값 `"+=0.1"`에 머묾) / **250** / **250**. 동기 읽기에서도 duration 0은 0.1이었다. → reduced-motion을 `duration: 0`으로 구현하면 안 되는 근거.
-  - `HFU-P6` 일시정지와 이후 호출. 측정: `pause()` 직후와 다음 호출 직후의 `tween.paused()`. 결과 — `pause()` 후 **true**, `xTo(200)` 호출 후 **false**, 600ms 뒤 target `x` = **200**.
-  - 참고(페이지에 주장하지 않음): `quickTo`의 vars에 `onUpdate`를 넣으면 정상 호출된다(duration 0.2에서 49회). `PointerFollowLab`이 이 방식으로 매 프레임 값을 다시 읽는다.
-- **build** — `npx tsc --noEmit`, 이 페이지 파일 오류 0건. `npm run build`·`npm run build-storybook`은 이 작업에서 금지되어 실행하지 않았다. 라우트 등록 후 코디네이터가 전체 빌드를 확인해야 한다.
-- **정적 검사 스크립트** — (1) meta 섹션 합 = catalog 공식 행 수 = meta 분모 = 46, (2) 모든 상대 import 해석 가능, (3) TSX className이 CSS에 존재, (4) TSX에 `gsap` import 없음, (5) `src/app/routes.ts`·`src/components/` 미변경.
+- **공식 원문 대조** — 2026-08-13, [getProperty](https://gsap.com/docs/v3/GSAP/gsap.getProperty%28%29/), [quickSetter](https://gsap.com/docs/v3/GSAP/gsap.quickSetter%28%29/), [quickTo](https://gsap.com/docs/v3/GSAP/gsap.quickTo%28%29/)의 현재 본문을 직접 대조했다.
+- **정적 변환·연결 검사** — 대상 TypeScript/TSX 16개를 esbuild transform했고 오류가 없었다. CSS와 공용 route registry를 external로 둔 페이지 entry bundle도 통과했다. `git diff --check` 오류 0건.
+- **정적 coverage** — 공식 catalog 행 46개, 설치본 관찰 `HFU-P6` 1개, ID 중복 0개, source별 분포 getProperty 11 / quickSetter 16 / quickTo 19를 확인했다.
+- **정적 runtime/display 검사** — 두 예제의 hook/TSX를 함께 읽고 selector, 초기값, 실제 호출, 코드 패널, 관찰값 출처를 대조한다. PointerFollow는 `gsap.set()` baseline, `quickSetter`/`quickTo` 호출, quickTo `onUpdate` 관찰을 표시한다.
+- **설치본 관찰** — GSAP 3.15.0에서 quickTo 생성 직후 `xTo.tween.paused()`는 `true`, `xTo(100) === xTo.tween`은 `true`, 새 값을 넘긴 직후 `paused()`는 `false`, 100ms 뒤 최종 x는 200임을 재확인했다. 이는 공식 계약이 아니다.
+- **전역 build** — 2026-08-13 메인 통합 `npm run build`, `npm run build-storybook` 모두 exit 0.
+- **브라우저** — 이 감사 컨텍스트에서는 실행하지 않는다.
 
 ### releaseDecision
 
-`PASS` (전체 빌드 확인 조건부).
+`NOT VERIFIED`
 
 - 미해결 `BLOCK`: 없음.
-- 해소된 `DEFERRED → PASS` 1건: `A11Y-CORE19-002` — 키보드 이동·포커스 표시, `prefers-reduced-motion` 실제 전환, 320/390px 실제 레이아웃, 두 예제 control의 실제 조작. 소유자 브라우저 일괄 검수 대상.
-- 남은 통합 조건: `src/app/routes.ts`에 `/fundamentals/high-frequency-updates` 등록과 그 뒤의 `npm run build` / `npm run build-storybook`. 두 작업 모두 이 컨텍스트의 금지 범위라 코디네이터가 수행한다.
+- 남은 `ADVISORY`: `HFU-P6`은 설치된 GSAP 3.15.0의 관찰이며 공식 문서가 보장하는 동작이 아니다.
+- 남은 `NOT VERIFIED`: 실제 브라우저에서 포인터·range·radio·pause 조작, 키보드 포커스, `prefers-reduced-motion`, 320/390px 레이아웃, route 이동·cleanup.
 
 ### browserReviewClosure
 
-- status: `PASS`
-- approvedAt: `2026-08-13` (Asia/Seoul)
-- approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
-- evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+- status: `NOT VERIFIED`
+- evidenceBoundary: 실제 브라우저 조작은 메인 에이전트의 통합 검수 범위다.

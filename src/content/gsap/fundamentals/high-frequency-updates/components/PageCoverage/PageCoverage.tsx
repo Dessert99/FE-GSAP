@@ -1,33 +1,13 @@
-/** 공식 source와 로컬 학습 섹션의 전체 대응 상태를 첫 화면에서 확인하게 한다. */
-import { highFrequencyUpdatesSourceItems } from '../../high-frequency-updates.catalog'
-import { highFrequencyUpdatesCoverage, highFrequencyUpdatesSections } from '../../high-frequency-updates.meta'
-
-// 공식 문서에 게시된 주장만 coverage 분모에 넣고 실행으로 확인한 항목은 따로 센다
-const officialItemCount = highFrequencyUpdatesSourceItems.filter((item) => item.origin === 'official').length
-const probeItemCount = highFrequencyUpdatesSourceItems.length - officialItemCount
-// 선언한 source 수가 아니라 catalog가 실제로 근거를 댄 source 수를 세어 분자로 쓴다
-const mappedSourceCount = new Set(highFrequencyUpdatesSourceItems.map((item) => item.source)).size
+/** 현재 값 읽기부터 고빈도 쓰기 선택까지 이어지는 학습 순서를 안내한다. */
+import { highFrequencyUpdatesSections } from '../../high-frequency-updates.meta'
 
 export function PageCoverage() {
   return (
-    <nav className="hfu-coverage" aria-label="공식 source 대응 범위">
+    <nav className="hfu-coverage" aria-label="학습 순서">
       <div className="hfu-coverage__summary">
-        <div>
-          <strong>
-            {mappedSourceCount}/{highFrequencyUpdatesCoverage.officialSources}
-          </strong>
-          <span>공식 source</span>
-        </div>
-        <div>
-          <strong>
-            {officialItemCount}/{highFrequencyUpdatesCoverage.officialSourceItems}
-          </strong>
-          <span>공식 기술 item</span>
-        </div>
+        <strong>학습 순서</strong>
         <p>
-          getProperty()·quickSetter()·quickTo()의 기술 item {highFrequencyUpdatesCoverage.officialSourceItems}개를 "읽고 → 고르고 →
-          흘려보낸다"라는 갱신 흐름의 일곱 단계로 다시 묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}
-          개를 따로 표시합니다.
+          현재 값을 읽은 뒤 즉시 쓸지 부드럽게 따라가게 할지 고르고, 빠른 경로가 생략하는 편의 기능과 조합 방법을 확인합니다.
         </p>
       </div>
       <ol>
@@ -37,7 +17,6 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
               </div>
             </a>
           </li>

@@ -114,7 +114,7 @@ export function SkippedConveniencesSection() {
           <code>translateX</code>를 적어도 GSAP이 <code>x</code>로 바꿔 주지만, fast path에서는 그 변환을 하지 않습니다. 에러가 나지
           않고 <strong>그냥 아무 일도 일어나지 않기 때문에</strong> 원인을 찾기 어렵습니다. transform은 항상 <code>x</code>,{' '}
           <code>y</code>, <code>rotation</code>, <code>scale</code>처럼 GSAP의 이름으로 적으세요. transform 이름 규칙은{' '}
-          <a href={toHref('/fundamentals/css-animation')}>CSS animation 페이지</a>가 소유합니다.
+          <a href={toHref('/fundamentals/css-animation')}>CSS animation 페이지</a>에서 이어서 확인할 수 있습니다.
         </p>
         <p>
           그리고 <code>quickTo</code>는 <strong>numeric property 하나</strong>만 다룹니다. attribute를 움직이고 싶다면{' '}
