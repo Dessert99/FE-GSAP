@@ -101,7 +101,9 @@ export function useGlobalTimeScaleAnimation() {
   useGSAP(
     () => {
       // 관찰과 실행이 같은 element를 가리키도록 선택자를 한 번만 풀어 둔다
-      const target = gsap.utils.toArray<HTMLElement>(descriptor.selector)[0]
+      const target = scope.current?.querySelector<HTMLElement>(descriptor.selector)
+      // scope가 붙기 전에는 전역 선택자로 대체하지 않고 준비를 건너뛴다
+      if (!target) return
       // 이전 실행이 남긴 위치를 지워 항상 같은 지점에서 출발시킨다
       gsap.set(target, { x: 0 })
       // 전역 배속의 효과만 보이도록 tween 자신은 등속으로 두고 duration도 바꾸지 않는다

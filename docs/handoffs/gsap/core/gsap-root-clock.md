@@ -291,3 +291,32 @@ Official Coverage, Learning Transformation, Runtime/Display Sync, Pedagogy, Stru
 - approvedAt: `2026-08-13` (Asia/Seoul)
 - approvalBasis: 저장소 소유자가 기존 browser-only finding을 완료로 간주하도록 승인했다.
 - evidenceBoundary: 실제 브라우저 실조작 증거는 별도로 생성하지 않았으며, 이 `PASS`는 소유자 승인에 따른 문서상 종료다.
+
+## 2026-08-13 재감사
+
+### findings
+
+| ID | status | evidence | impact | requiredAction |
+| --- | --- | --- | --- | --- |
+| RDS-CORE24-002 | ADDRESSED | `GlobalTimeScaleLab` 표시 코드에 실제 `report()` getter, paused Tween·callback·restart와 dependency/unmount 전역 복원을 반영했고, `TickerListenerLab`은 once wrapper 반환값을 제거하도록 맞췄다 | 표시 코드로 전역 복원과 listener 제거 계약을 재현할 수 있다 | none |
+| SCOPE-CORE24-001 | ADDRESSED | 전역 배속 예제가 `gsap.utils.toArray(selector)`로 문서 전체를 조회했다. `scope.current.querySelector()`로 제한하고 scope 부재 시 실행을 건너뛴다 | 다른 페이지의 같은 class를 잘못 잡을 가능성을 제거한다 | none |
+| PED-CORE24-002 | ADDRESSED | 첫 화면의 내부 집계 용어를 `대조한 공식 문서`·`핵심 동작`으로 바꾸고 meta 요약의 모호한 의인화를 실제 clock 구조로 바꿨다 | 학습자가 구현 구조를 바로 읽는다 | none |
+| SRC-CORE24-004 | PASS | 2026-08-13 globalTimeline·ticker·exportRoot()·updateRoot() 공식 페이지를 다시 조회했다. ticker callback·once·prioritize와 root/export 계약에 충돌 없음 | 공식 근거 최신성 확인 | none |
+| BROWSER-CORE24-004 | DEFERRED | 전역 timeScale 복원, 실제 rAF 갱신, 키보드·반응형 조작은 수행하지 않았다 | 브라우저 관점은 판정하지 않는다 | 승인된 브라우저 검수에서 확인 |
+
+### verificationEvidence
+
+- 공식 문서: `https://gsap.com/docs/v3/GSAP/gsap.globalTimeline/`, `https://gsap.com/docs/v3/GSAP/gsap.ticker/`, `https://gsap.com/docs/v3/GSAP/gsap.exportRoot()/`, `https://gsap.com/docs/v3/GSAP/gsap.updateRoot()/` (2026-08-13 확인).
+- Runtime/Display: 두 hook의 생성·등록·정리 호출과 TSX 표시 코드를 정적으로 대조했다.
+- Storybook: `N/A` — c309e13에서 의도적으로 삭제되어 실행 대상이 아니다.
+
+### releaseDecision
+
+`PASS with DEFERRED` — 정적 BLOCK은 수정했으며 브라우저 관점만 `DEFERRED`다.
+
+## 2026-08-13 최종 교차검토
+
+- `RDS-CORE24-005` — **PASS**: GlobalTimeScaleLab의 target guard·전역 배속 복원과 TickerListener의 stop/unmount 해제를 표시 코드에 반영해 runtime과 다시 대조했다.
+- Static BLOCK: 없음. Browser: 사용자 승인 전 실조작을 수행하지 않아 `DEFERRED`. Storybook: c309e13에서 삭제되어 `N/A`.
+- overallDecision: `NOT VERIFIED`
+- releaseDecision: `NOT VERIFIED`

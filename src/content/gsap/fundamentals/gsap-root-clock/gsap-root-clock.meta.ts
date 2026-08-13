@@ -3,9 +3,9 @@ export const gsapRootClockMeta = {
   title: 'GSAP의 모든 animation은 누가 매 frame 진행시키나요?',
   category: 'GSAP · Core',
   summary:
-    '지금까지는 Tween을 만들면 저절로 움직였습니다. 그 뒤에는 두 가지가 숨어 있습니다. 모든 animation을 자식으로 거느린 시간의 구조(globalTimeline)와, 매 frame 그 구조를 앞으로 밀어 주는 동력(ticker)입니다.',
+    'Tween을 만들면 GSAP의 globalTimeline이 재생 순서를 관리하고 ticker가 매 frame 그 시간을 갱신합니다. 전역 시간 구조와 갱신 신호를 구분해 봅니다.',
   sourcePath: 'src/content/gsap/fundamentals/gsap-root-clock/',
-  reviewedAt: '2026-08-04',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'gsap.globalTimeline', href: 'https://gsap.com/docs/v3/GSAP/gsap.globalTimeline' },
     { label: 'gsap.ticker', href: 'https://gsap.com/docs/v3/GSAP/gsap.ticker' },
