@@ -9,7 +9,7 @@ const strengthChoices = [0.3, 0.7, 0.9]
 const squashChoices = [0, 2, 4]
 
 export function BounceCurveLab() {
-  // runtime이 소유한 controls·descriptor·관찰값을 그대로 받아 화면에만 쓴다
+  // 훅이 제공한 controls·descriptor·관찰값을 그대로 받아 화면에 쓴다
   const {
     scope,
     strength,
@@ -37,17 +37,29 @@ export function BounceCurveLab() {
     ...(descriptor.createConfig.squashID ? [`squashID: '${descriptor.createConfig.squashID}'`] : []),
   ].join(', ')
 
-  // squash 유무에 따라 두 번째 Tween이 있는 코드와 없는 코드를 그대로 보여준다
+  // 실제 paused timeline과 같은 순서로 초기화·Tween 구성·재생·스크럽 코드를 보여준다
   const code = `gsap.registerPlugin(CustomEase, CustomBounce)
 
 // 1. 설정값 하나로 bounce ease를 만듭니다. squash가 0보다 크면 squash ease도 같이 생깁니다.
 CustomBounce.create('${descriptor.bounceId}', { ${createConfigCode} })
 
 // 2. 만든 이름을 그대로 넘겨 곡선을 SVG path 문자열로 받습니다.
-CustomEase.getSVGData('${descriptor.bounceId}', { width: ${graphSize.width}, height: ${graphSize.height} })
+const bouncePath = CustomEase.getSVGData('${descriptor.bounceId}', { width: ${graphSize.width}, height: ${graphSize.height} })
+${
+  descriptor.squashId
+    ? `// squash 곡선도 별도 path로 보관합니다.
+const squashPath = CustomEase.getSVGData('${descriptor.squashId}', { width: ${graphSize.width}, height: ${graphSize.height} })`
+    : ''
+}
 
-// 3. 위치는 위에서 바닥까지 떨어뜨립니다.
-gsap.from('${descriptor.selector}', {
+// 3. 이전 실행이 남긴 위치와 크기를 원래 값으로 되돌립니다.
+gsap.set('${descriptor.selector}', { y: 0, scaleX: 1, scaleY: 1 })
+
+// 4. 재생과 progress 조작에 함께 쓸 timeline을 만듭니다.
+const timeline = gsap.timeline({ paused: true })
+
+// 5. 위치는 위에서 바닥까지 떨어뜨립니다.
+timeline.from('${descriptor.selector}', {
   y: ${descriptor.liftY},
   duration: ${descriptor.duration},
   ease: '${descriptor.bounceId}',
@@ -55,16 +67,33 @@ gsap.from('${descriptor.selector}', {
 ${
   descriptor.squashId
     ? `
-// 4. 같은 대상, 같은 시각에 scale Tween을 겹칩니다.
-gsap.to('${descriptor.selector}', {
-  scaleX: ${descriptor.squashVars.scaleX},
-  scaleY: ${descriptor.squashVars.scaleY},
-  duration: ${descriptor.duration},
-  ease: '${descriptor.squashId}',
-  transformOrigin: '${descriptor.squashVars.transformOrigin}',
-})`
+// 6. 같은 대상, 같은 시각에 scale Tween을 겹칩니다.
+timeline.to(
+  '${descriptor.selector}',
+  {
+    scaleX: ${descriptor.squashVars.scaleX},
+    scaleY: ${descriptor.squashVars.scaleY},
+    duration: ${descriptor.duration},
+    ease: '${descriptor.squashId}',
+    transformOrigin: '${descriptor.squashVars.transformOrigin}',
+  },
+  0,
+)`
     : `
 // squash가 0이라 두 번째 곡선도, 두 번째 Tween도 없습니다.`
+}
+
+// 재생 버튼과 progress 입력은 같은 timeline을 제어합니다.
+function run() {
+  if (reducedMotion) {
+    timeline.progress(1).pause()
+    return
+  }
+  timeline.restart()
+}
+
+function seek(value) {
+  timeline.pause().progress(value)
 }`
 
   // 곡선 위 현재 위치 — progress는 x축, ease 출력값은 y축이라는 관계를 점 하나로 보여준다
@@ -232,7 +261,7 @@ gsap.to('${descriptor.selector}', {
         <article>
           <h4>무엇이 달라졌나요?</h4>
           <p>
-            <code>strength</code>를 0.3에서 0.9로 올리면 곡선의 <strong>꺾이는 지점이 늘어나고</strong> 공도 그만큼 여러 번
+            <code>strength</code>를 0.3에서 0.9로 올리면 <strong>튕기는 횟수가 늘어나고</strong> 공도 그만큼 여러 번
             튑니다. <code>squash</code>를 0에서 2, 4로 올리면 곡선이 <strong>바닥값 근처에 머무는 구간이 길어지고</strong> 두 번째
             곡선(점선)이 생깁니다. <code>endAtStart</code>를 켜면 곡선이 1이 아니라 <strong>0에서 끝납니다.</strong>
           </p>

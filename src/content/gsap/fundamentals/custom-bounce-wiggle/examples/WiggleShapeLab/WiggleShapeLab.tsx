@@ -8,9 +8,9 @@ const wiggleChoices = [6, 10, 15]
 
 /** 공식이 게시한 다섯 type과 각각의 한 줄 관찰 요약이다. */
 const typeChoices: { value: WiggleType; hint: string }[] = [
-  { value: 'easeOut', hint: '처음이 가장 크고 점점 잦아듭니다 (기본값)' },
+  { value: 'easeOut', hint: '처음이 가장 크고 점점 작아집니다 (기본값)' },
   { value: 'easeInOut', hint: '가운데가 가장 큽니다' },
-  { value: 'anticipate', hint: '중반에 최대이고 끝은 거의 0입니다' },
+  { value: 'anticipate', hint: '본 진동 전에 반대 방향으로 움직입니다' },
   { value: 'uniform', hint: '처음부터 끝까지 세기가 같습니다' },
   { value: 'random', hint: '만들 때마다 모양이 달라집니다' },
 ]
@@ -19,7 +19,7 @@ const typeChoices: { value: WiggleType; hint: string }[] = [
 const rotationChoices = [10, 30]
 
 export function WiggleShapeLab() {
-  // runtime이 소유한 controls·descriptor·관찰값을 그대로 받아 화면에만 쓴다
+  // 훅이 제공한 controls·descriptor·관찰값을 그대로 받아 화면에 쓴다
   const {
     scope,
     wiggles,
@@ -37,21 +37,38 @@ export function WiggleShapeLab() {
     seek,
   } = useWiggleShapeAnimation()
 
-  // 실행에 쓰인 config를 코드 문법으로만 포맷한다. 의미를 다시 조립하지 않는다
+  // 실제 paused Tween과 같은 순서로 초기화·생성·재생·스크럽 코드를 보여준다
   const code = `gsap.registerPlugin(CustomEase, CustomWiggle)
 
 // 1. 진동 횟수와 스타일만 넘겨 이름 붙은 곡선을 만듭니다.
 CustomWiggle.create('${descriptor.wiggleId}', { wiggles: ${descriptor.createConfig.wiggles}, type: '${descriptor.createConfig.type}' })
 
 // 2. 만든 이름을 그대로 넘겨 곡선을 SVG path 문자열로 받습니다.
-CustomEase.getSVGData('${descriptor.wiggleId}', { width: ${graphSize.width}, height: ${graphSize.height} })
+const wigglePath = CustomEase.getSVGData('${descriptor.wiggleId}', { width: ${graphSize.width}, height: ${graphSize.height} })
 
-// 3. 세기는 config가 아니라 이 rotation 값이 정합니다.
-gsap.to('${descriptor.selector}', {
+// 3. 이전 실행이 남긴 회전을 0도로 되돌립니다.
+gsap.set('${descriptor.selector}', { rotation: 0 })
+
+// 4. 세기는 config가 아니라 이 rotation 값이 정합니다.
+const tween = gsap.to('${descriptor.selector}', {
   rotation: ${descriptor.rotation},
   duration: ${descriptor.duration},
   ease: '${descriptor.wiggleId}',
-})`
+  paused: true,
+})
+
+// 재생 버튼과 progress 입력은 같은 Tween을 제어합니다.
+function run() {
+  if (reducedMotion) {
+    tween.progress(1).pause()
+    return
+  }
+  tween.restart()
+}
+
+function seek(value) {
+  tween.pause().progress(value)
+}`
 
   // 곡선 좌표계에서 출력값 0은 세로 한가운데다 — 아래로 내려간 값은 반대 방향 회전을 뜻한다
   const zeroLine = graphSize.height
@@ -213,8 +230,8 @@ gsap.to('${descriptor.selector}', {
         <article>
           <h4>무엇이 달라졌나요?</h4>
           <p>
-            <code>wiggles</code>를 6에서 15로 올리면 곡선의 <strong>봉우리 개수가 그만큼 늘어납니다.</strong> <code>type</code>을
-            바꾸면 봉우리 개수는 그대로인데 <strong>어느 시점이 가장 크게 흔들리는지</strong>가 달라집니다.{' '}
+            <code>wiggles</code>를 6에서 15로 올리면 <strong>진동 횟수가 늘어납니다.</strong> <code>type</code>을 바꾸면 횟수는
+            그대로인데 <strong>어느 시점이 가장 크게 흔들리는지</strong>가 달라집니다.{' '}
             <code>rotation</code>을 10과 30 사이에서 바꾸면 <strong>곡선은 그대로인데 바늘이 가는 거리만</strong> 달라집니다.
           </p>
         </article>

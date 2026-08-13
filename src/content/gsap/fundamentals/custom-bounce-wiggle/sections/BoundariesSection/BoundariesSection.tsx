@@ -1,4 +1,4 @@
-/** 두 공식 페이지가 링크로만 남긴 자료와 이 페이지가 소유하지 않는 영역을 정리한다. */
+/** 두 공식 페이지의 추가 자료와 이어서 읽을 학습 페이지를 정리한다. */
 import { OfficialDocsLink } from '../../../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { toHref } from '../../../../../../app/routes'
 import { SectionHeading } from '../../components/SectionHeading/SectionHeading'
@@ -44,7 +44,7 @@ export function BoundariesSection() {
         number="08"
         id="boundaries"
         title="여기서 다루지 않는 것"
-        description="공식 문서가 링크로만 남긴 자료와, 다른 페이지가 소유한 개념을 구분해 둡니다."
+        description="공식 문서의 추가 자료와, 다른 학습 페이지에서 이어서 볼 개념을 정리합니다."
       />
 
       <div className="bounce-wiggle-page__subheading">
@@ -98,7 +98,7 @@ export function BoundariesSection() {
       </div>
 
       <div className="bounce-wiggle-page__note">
-        <h3>다른 페이지가 소유한 개념</h3>
+        <h3>이어서 읽을 내용</h3>
         <ul className="bounce-wiggle-page__list">
           <li>
             <a href={toHref('/fundamentals/installation')}>GSAP 가져오기와 등록하기</a> — import 경로와{' '}
@@ -106,7 +106,7 @@ export function BoundariesSection() {
           </li>
           <li>
             <a href={toHref('/fundamentals/easing')}>Easing</a> — ease의 정의, 내장 ease 목록, 곡선을 읽는 법. 내장{' '}
-            <code>"bounce"</code>의 계약도 여기가 소유합니다.
+            <code>"bounce"</code>의 자세한 사용법도 이 페이지에서 설명합니다.
           </li>
           <li>
             <a href={toHref('/fundamentals/tween-start-end-values')}>Tween 시작·끝 값</a> — 공식 bounce 예제가 쓴{' '}
@@ -135,8 +135,8 @@ export function BoundariesSection() {
 
       <div className="bounce-wiggle-page__official">
         <span>원문 확인</span>
-        <OfficialDocsLink label="CustomBounce" href="https://gsap.com/docs/v3/Eases/CustomBounce" />
-        <OfficialDocsLink label="CustomWiggle" href="https://gsap.com/docs/v3/Eases/CustomWiggle" />
+        <OfficialDocsLink label="CustomBounce" href="https://gsap.com/docs/v3/Eases/CustomBounce/" />
+        <OfficialDocsLink label="CustomWiggle" href="https://gsap.com/docs/v3/Eases/CustomWiggle/" />
       </div>
     </section>
   )

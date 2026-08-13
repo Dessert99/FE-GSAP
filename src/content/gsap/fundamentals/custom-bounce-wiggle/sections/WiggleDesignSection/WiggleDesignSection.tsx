@@ -106,38 +106,13 @@ export function WiggleDesignSection() {
       <WiggleShapeLab />
 
       <div className="bounce-wiggle-page__note bounce-wiggle-page__note--probe">
-        <h3>공식 문서에 없는 숫자 · 다섯 type이 실제로 어떻게 다른가</h3>
+        <h3>random 곡선은 다시 만들 때 달라집니다</h3>
         <p>
-          공식 문서는 다섯 이름만 게시하고 각 type이 어떤 모양인지는 embed된 demo에 맡깁니다. 그 demo는 본문에서 확인할 수 없어,
-          곡선을 직접 실행해 구간별 최대 진폭을 재 보았습니다. <code>wiggles: 6</code> 기준으로 진행률을 4등분한 값입니다.
-        </p>
-        <ul className="bounce-wiggle-page__list">
-          <li>
-            <code>easeOut</code> — 0.99 · 0.98 · 0.71 · 0.37. 처음이 가장 크고 점점 잦아듭니다.
-          </li>
-          <li>
-            <code>easeInOut</code> — 0.44 · 0.90 · 0.97 · 0.43. 가운데가 가장 큽니다.
-          </li>
-          <li>
-            <code>anticipate</code> — 0.75 · 0.99 · 0.90 · 0.08. 중반에 최대이고 끝은 거의 멈춥니다.
-          </li>
-          <li>
-            <code>uniform</code> — 1.00 · 1.00 · 1.00 · 1.00. 처음부터 끝까지 세기가 같습니다.
-          </li>
-          <li>
-            <code>random</code> — 만들 때마다 달라집니다. 같은 설정으로 다시 <code>create()</code>해도 곡선이 같지 않습니다.
-          </li>
-        </ul>
-        <p>
-          <code>wiggles</code>도 대체로 값 그대로 나타납니다. <strong>N을 주면 곡선의 방향 전환이 N번</strong> 일어납니다. 다만{' '}
-          <strong><code>random</code>은 예외</strong>여서, <code>wiggles: 6</code>을 줘도 전환이 2번뿐인 경우가 나왔습니다. 무작위
-          배치라 진동 횟수까지 보장되지 않습니다. 그리고 다섯 type 모두 <strong>시작값과 끝값이 0</strong>이라 어떤 설정에서든
-          제자리로 돌아옵니다.
+          <code>type: "random"</code>은 같은 설정으로 <code>create()</code>를 다시 호출해도 곡선 모양이 달라집니다. 매번 같은
+          흔들림이 필요한 장면이라면 다른 type을 고르세요.
         </p>
         <p className="bounce-wiggle-page__provenance">
-          이 숫자들은 공식 페이지에 게시돼 있지 않습니다. GSAP 3.15.0을 직접 실행해 확인한 내용입니다. 특히{' '}
-          <code>random</code>은 공식 문서가 seed나 재현성을 전혀 언급하지 않으므로, 매번 같은 모양을 기대하는 코드는 쓰지 않는
-          편이 안전합니다.
+          재생성 결과는 GSAP 3.15.0에서 직접 확인했습니다. 공식 문서는 <code>random</code>의 seed나 재현성을 명시하지 않습니다.
         </p>
       </div>
 

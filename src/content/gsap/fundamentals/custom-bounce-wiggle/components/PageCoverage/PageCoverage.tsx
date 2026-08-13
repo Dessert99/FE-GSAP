@@ -1,33 +1,21 @@
-/** 공식 두 source와 로컬 학습 섹션의 전체 대응 상태를 첫 화면에서 확인하게 한다. */
-import { customBounceWiggleSourceItems } from '../../custom-bounce-wiggle.catalog'
-import { customBounceWiggleCoverage, customBounceWiggleSections } from '../../custom-bounce-wiggle.meta'
-
-// 공식 문서에 게시된 주장만 coverage 분모에 넣고 실행으로 확인한 항목은 따로 센다
-const officialItemCount = customBounceWiggleSourceItems.filter((item) => item.origin === 'official').length
-const probeItemCount = customBounceWiggleSourceItems.length - officialItemCount
-// 선언한 source 수가 아니라 catalog가 실제로 근거를 댄 source 수를 세어 분자로 쓴다
-const mappedSourceCount = new Set(customBounceWiggleSourceItems.map((item) => item.source)).size
+/** 두 plugin의 학습 순서와 각 섹션 바로가기를 첫 화면에서 안내한다. */
+import { customBounceWiggleMeta, customBounceWiggleSections } from '../../custom-bounce-wiggle.meta'
 
 export function PageCoverage() {
   return (
-    <nav className="bounce-wiggle-coverage" aria-label="공식 source 대응 범위">
+    <nav className="bounce-wiggle-coverage" aria-label="CustomBounce와 CustomWiggle 학습 순서">
       <div className="bounce-wiggle-coverage__summary">
         <div>
-          <strong>
-            {mappedSourceCount}/{customBounceWiggleCoverage.officialSources}
-          </strong>
-          <span>공식 source</span>
+          <strong>{customBounceWiggleMeta.officialSources.length}개</strong>
+          <span>ease generator</span>
         </div>
         <div>
-          <strong>
-            {officialItemCount}/{customBounceWiggleCoverage.officialSourceItems}
-          </strong>
-          <span>공식 기술 item</span>
+          <strong>{customBounceWiggleSections.length}단계</strong>
+          <span>학습 순서</span>
         </div>
         <p>
-          CustomBounce와 CustomWiggle의 기술 item {customBounceWiggleCoverage.officialSourceItems}개를 "곡선을 만들고 이름으로
-          쓴다"는 흐름의 여덟 단계로 다시 묶었습니다. 여기에 공식 문서에 없어 직접 실행해 확인한 항목 {probeItemCount}개를 따로
-          표시합니다.
+          CustomBounce와 CustomWiggle 모두 설정으로 곡선을 만들고, 그 이름을 Tween의 <code>ease</code>에 넣습니다. 아래 순서대로
+          두 plugin의 공통점과 차이를 확인해 보세요.
         </p>
       </div>
       <ol>
@@ -37,7 +25,6 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
               </div>
             </a>
           </li>

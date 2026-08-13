@@ -1,4 +1,4 @@
-/** 공식 두 문서에서 확인한 기술 item 41개를 로컬 섹션과 1:1로 묶어 coverage 근거로 남긴다. */
+/** 공식 두 문서의 기술 항목 41개와 학습에 필요한 실행 확인 항목 5개를 로컬 섹션에 연결한다. */
 
 /** 어떤 공식 문서의 어떤 주장이 어느 섹션에서 설명되는지를 한 행으로 고정한다. */
 export type SourceItem = {
@@ -62,12 +62,8 @@ export const customBounceWiggleSourceItems: SourceItem[] = [
   { id: 'CB-21', officialItem: 'CustomBounce 페이지의 Demos 섹션은 "CustomBounce demos" CodePen 모음을 연결한다.', source: 'custom-bounce', origin: 'official', sectionId: 'boundaries' },
 
   { id: 'CB-P1', officialItem: 'CustomBounce.create()는 만들어진 ease 함수를 그대로 반환하며, 그 함수는 gsap.parseEase(id)로 얻는 것과 같은 참조다. 공식 문서에는 반환값 명시가 없다.', source: 'custom-bounce', origin: 'implementation', sectionId: 'bounce-design' },
-  { id: 'CB-P2', officialItem: 'strength가 커질수록 곡선의 방향 전환 횟수가 늘어난다. 0~1 구간을 200등분해 세면 0.3은 6회, 0.7은 14회, 0.9는 22회다.', source: 'custom-bounce', origin: 'implementation', sectionId: 'bounce-design' },
   { id: 'CB-P3', officialItem: 'endAtStart: true면 ease(1)이 0이 되고 false면 ease(1)은 1이다. 두 경우 모두 ease(0)은 0이다.', source: 'custom-bounce', origin: 'implementation', sectionId: 'bounce-design' },
   { id: 'CB-P4', officialItem: 'squash가 기본값 0이면 companion squash ease 자체가 만들어지지 않아 gsap.parseEase("<id>-squash")가 undefined다. squash를 1 이상 주면 그때 생긴다.', source: 'custom-bounce', origin: 'implementation', sectionId: 'bounce-squash' },
-  { id: 'CB-P5', officialItem: 'squash 값이 커질수록 곡선이 바닥(ease 값 1) 근처에 머무는 progress 구간이 길어진다. strength 0.7에서 progress를 1000등분해 ease 값이 1과 0.001 이내인 비율을 세면 squash 0은 2.4%, 2는 10.9%, 4는 18.1%다.', source: 'custom-bounce', origin: 'implementation', sectionId: 'bounce-squash' },
-  { id: 'CW-P1', officialItem: 'wiggles: N이면 곡선의 방향 전환이 N번 일어난다. 단 type "random"은 예외로, wiggles 6에서도 전환이 2번뿐이었다. 다섯 type 모두 ease(0)과 ease(1)이 0이라 시작값으로 돌아온다.', source: 'custom-wiggle', origin: 'implementation', sectionId: 'wiggle-design' },
-  { id: 'CW-P2', officialItem: '다섯 type은 진폭이 시간에 따라 줄어드는 방식이 다르다. wiggles 6에서 구간별 최대 진폭은 easeOut 0.99·0.98·0.71·0.37, easeInOut 0.44·0.90·0.97·0.43, anticipate 0.75·0.99·0.90·0.08, uniform 1.00·1.00·1.00·1.00이다.', source: 'custom-wiggle', origin: 'implementation', sectionId: 'wiggle-design' },
   { id: 'CW-P3', officialItem: 'type: "random"은 같은 config로 다시 create()해도 곡선이 달라진다. 공식 문서는 seed나 재현성을 명시하지 않는다.', source: 'custom-wiggle', origin: 'implementation', sectionId: 'wiggle-design' },
   { id: 'CW-P4', officialItem: '이미 쓴 이름으로 다시 create()하면 그 이름의 ease가 새 곡선으로 교체된다. 공식 문서는 중복 이름 처리를 명시하지 않는다.', source: 'custom-wiggle', origin: 'implementation', sectionId: 'setup' },
 ]

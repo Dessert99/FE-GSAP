@@ -59,8 +59,8 @@ export function SetupSection() {
             없었습니다.</strong> 위 코드는 이 저장소에 설치된 <code>gsap</code> 3.15.0에서 확인한 경로입니다.
           </p>
           <p>
-            등록을 언제 어디서 해야 하는지, 왜 필요한지는 이 페이지가 소유하지 않습니다.{' '}
-            <a href={toHref('/fundamentals/installation')}>GSAP 가져오기와 등록하기 페이지</a>가 다룹니다.
+            등록 시점과 일반적인 plugin 등록 규칙은{' '}
+            <a href={toHref('/fundamentals/installation')}>GSAP 가져오기와 등록하기 페이지</a>에서 이어서 설명합니다.
           </p>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function EaseGeneratorSection() {
             <dd>
               Tween이 <strong>0%에서 100%까지 흐르는 동안</strong>, 지금 시점에 값이 어디쯤 있어야 하는지를 정하는 함수입니다.
               입력은 시간 진행률, 출력은 <strong>목표값을 향한 비율</strong>입니다. 자세한 계약은{' '}
-              <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>가 소유합니다.
+              <a href={toHref('/fundamentals/easing')}>Easing 페이지</a>에서 이어서 볼 수 있습니다.
             </dd>
           </div>
           <div>
@@ -114,8 +114,7 @@ export function EaseGeneratorSection() {
         <h3>"물리감"은 물리 계산이 아닙니다</h3>
         <p>
           이 페이지의 제목에 있는 물리감은 <strong>중력·질량·충돌을 계산한다는 뜻이 아닙니다.</strong> 시간 진행률을 튕기거나
-          떨리는 모양으로 다시 배치해 <strong>그렇게 느끼게 만드는 곡선 설계</strong>를 말합니다. 실제 물리 시뮬레이션이 필요하면
-          GSAP의 다른 plugin을 봐야 합니다.
+          떨리는 모양으로 다시 배치해 <strong>그렇게 느끼게 만드는 곡선 설계</strong>를 말합니다.
         </p>
       </div>
     </section>
