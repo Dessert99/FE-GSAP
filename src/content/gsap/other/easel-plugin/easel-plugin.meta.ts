@@ -5,7 +5,7 @@ export const easelPluginMeta = {
   summary:
     'EaselJS display object의 일반 값과 filter 전용 easel vars를 나누고, GSAP update 뒤 Stage draw가 필요한 canvas 경계를 살펴봅니다.',
   sourcePath: 'src/content/gsap/other/easel-plugin/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'EaselPlugin',
