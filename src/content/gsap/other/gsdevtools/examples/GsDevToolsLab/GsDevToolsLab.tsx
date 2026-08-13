@@ -20,15 +20,30 @@ export function GsDevToolsLab() {
     pause,
     rewind,
   } = useGsDevToolsLabAnimation()
-  // actual dynamic development loading과 descriptor-selected config를 code 문법으로만 표현한다.
-  const code = `const timeline = gsap.timeline({ id: '${descriptor.timelineId}', paused: true })
-timeline.addLabel('enter').to('.dot', { x: 164, duration: ${descriptor.duration}, id: '${descriptor.childIds[0]}' })
-timeline.addLabel('settle').to('.dot', { scale: 0.82, duration: ${descriptor.duration}, id: '${descriptor.childIds[1]}' })
+  // actual dynamic loading과 inspector·timeline cleanup을 실행 가능한 setup 경계로 표현한다.
+  const code = `const target = document.querySelector('.gsdevtools-lab__dot')
+const toolContainer = document.querySelector('.gsdevtools-lab__tool-container')
+if (!target || !toolContainer) throw new Error('GSDevTools lab DOM을 찾지 못했습니다.')
+const timeline = gsap.timeline({ id: '${descriptor.timelineId}', paused: true })
+timeline.addLabel('enter').to(target, { x: 164, duration: ${descriptor.duration}, ease: 'power2.out', id: '${descriptor.childIds[0]}' })
+timeline.addLabel('settle').to(target, { scale: 0.82, duration: ${descriptor.duration}, ease: 'power1.inOut', id: '${descriptor.childIds[1]}' })
 
-if (import.meta.env.DEV) {
+let tools = null
+let active = true
+async function connectInspector() {
+  if (!import.meta.env.DEV) return
   const { GSDevTools } = await import('gsap/GSDevTools')
+  if (!active) return
   gsap.registerPlugin(GSDevTools)
-  const tools = GSDevTools.create({ animation: timeline, container: toolContainer, id: '${descriptor.config.id}', paused: ${descriptor.config.paused}, timeScale: ${descriptor.config.timeScale}, minimal: ${descriptor.config.minimal}, visibility: '${descriptor.config.visibility}', keyboard: ${descriptor.config.keyboard}, persist: ${descriptor.config.persist}, hideGlobalTimeline: ${descriptor.config.hideGlobalTimeline} })
+  tools = GSDevTools.create({ animation: timeline, container: toolContainer, id: '${descriptor.config.id}', paused: ${descriptor.config.paused}, timeScale: ${descriptor.config.timeScale}, minimal: ${descriptor.config.minimal}, visibility: '${descriptor.config.visibility}', keyboard: ${descriptor.config.keyboard}, persist: ${descriptor.config.persist}, hideGlobalTimeline: ${descriptor.config.hideGlobalTimeline} })
+}
+void connectInspector()
+
+function cleanup() {
+  active = false
+  tools?.kill()
+  timeline.kill()
+  gsap.set(target, { clearProps: 'transform' })
 }`
   return (
     <section id="gsdevtools-lab">
