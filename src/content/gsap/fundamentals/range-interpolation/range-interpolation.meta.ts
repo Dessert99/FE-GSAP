@@ -5,7 +5,7 @@ export const rangeInterpolationMeta = {
   summary:
     '센서·pointer·slider가 보내는 숫자는 animation에 바로 쓰기 어려울 때가 많습니다. 먼저 안전한 범위로 자르고, 0~1 progress로 바꾸고, 원하는 숫자·색·배열·객체의 값으로 옮기는 순서를 실제 계산으로 확인합니다.',
   sourcePath: 'src/content/gsap/fundamentals/range-interpolation/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'utils.clamp()', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods/clamp()' },
     { label: 'utils.interpolate()', href: 'https://gsap.com/docs/v3/GSAP/UtilityMethods/interpolate()' },
