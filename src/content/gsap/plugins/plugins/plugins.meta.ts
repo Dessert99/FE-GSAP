@@ -5,7 +5,7 @@ export const pluginsMeta = {
   summary:
     "Plugin은 GSAP core에 필요한 능력만 덧붙입니다. 먼저 파일을 load하고, 한 번 register한 뒤, 그 plugin이 읽는 vars key를 Tween에 넘기는 순서를 확인합니다.",
   sourcePath: "src/content/gsap/plugins/plugins/",
-  reviewedAt: "2026-08-08",
+  reviewedAt: "2026-08-13",
   officialSources: [
     { label: "Plugins overview", href: "https://gsap.com/docs/v3/Plugins/" },
   ],

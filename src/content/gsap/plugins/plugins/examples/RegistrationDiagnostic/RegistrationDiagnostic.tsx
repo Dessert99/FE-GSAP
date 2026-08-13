@@ -15,7 +15,23 @@ export function RegistrationDiagnostic() {
     replay,
   } = useRegistrationDiagnosticAnimation();
   // runtime descriptor와 실제 snapshot을 코드 문법으로만 포맷한다
-  const code = `import gsap from 'gsap'\nimport { ${descriptor.registryName} } from '${descriptor.modulePath}'\n\ngsap.registerPlugin(${descriptor.registryName})\n\ngsap.to(message, {\n  ${descriptor.varsKey}: '${descriptor.sampleValue}',\n  duration: ${reducedMotion ? 0 : 0.8},\n})`;
+  const code = `import gsap from 'gsap'
+import { ${descriptor.registryName} } from '${descriptor.modulePath}'
+
+gsap.registerPlugin(${descriptor.registryName})
+
+const message = document.querySelector('.registration-diagnostic__message')
+if (!message) throw new Error('message element를 찾지 못했습니다.')
+const originalText = message.textContent
+const tween = gsap.to(message, {
+  ${descriptor.varsKey}: '${descriptor.sampleValue}',
+  duration: ${reducedMotion ? 0 : 0.8},
+})
+
+function cleanup() {
+  tween.kill()
+  message.textContent = originalText
+}`;
   // 실제 registry 결과만 live region에 넣어 연속 animation 값을 낭독하지 않는다
   const status = snapshot.registered
     ? `registry에 ${descriptor.varsKey} key가 등록되었습니다. ${snapshot.action === "replayed" ? "예제를 다시 재생했습니다." : "replay할 수 있습니다."}`
@@ -47,7 +63,7 @@ export function RegistrationDiagnostic() {
           </p>
         </div>
         <div className="registration-diagnostic__preview">
-          <p ref={previewRef}>등록 전에는 plugin vars를 실행하지 않습니다.</p>
+          <p ref={previewRef} className="registration-diagnostic__message">등록 전에는 plugin vars를 실행하지 않습니다.</p>
           <div className="registration-diagnostic__controls">
             <button type="button" onClick={register}>
               TextPlugin register

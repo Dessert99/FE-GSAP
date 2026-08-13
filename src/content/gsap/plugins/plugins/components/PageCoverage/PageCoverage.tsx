@@ -10,20 +10,20 @@ const officialItemCount = pluginSourceItems.filter(
 /** Plugins overview의 source coverage와 섹션 목차를 표시한다. */
 export function PageCoverage() {
   return (
-    <nav className="plugins-coverage" aria-label="공식 source 대응 범위">
+    <nav className="plugins-coverage" aria-label="GSAP plugin 사용 순서">
       <div className="plugins-coverage__summary">
         <div>
           <strong>1/{pluginsCoverage.officialSources}</strong>
-          <span>공식 source</span>
+          <span>대조한 공식 문서</span>
         </div>
         <div>
           <strong>
             {officialItemCount}/{pluginsCoverage.officialSourceItems}
           </strong>
-          <span>공식 기술 item</span>
+          <span>설명한 핵심 동작</span>
         </div>
         <p>
-          공식 overview의 26개 기술 item을 load → register → vars → 선택 → 경계
+          공식 개요의 핵심 동작 26개를 load → register → vars → 선택 → 경계
           순서로 다시 묶었습니다.
         </p>
       </div>
@@ -34,7 +34,7 @@ export function PageCoverage() {
               <span>{section.number}</span>
               <div>
                 <strong>{section.title}</strong>
-                <small>{section.sourceItems}개 source item</small>
+                <small>{section.sourceItems}개 핵심 동작</small>
               </div>
             </a>
           </li>
