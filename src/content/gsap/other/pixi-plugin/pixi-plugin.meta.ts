@@ -1,11 +1,11 @@
-/** P30의 PixiPlugin canonical identity와 학습 목차를 고정한다. */
+/** PixiPlugin 학습 페이지의 경로와 공식 문서 링크를 정의한다. */
 export const pixiPluginMeta = {
   title: 'PixiPlugin은 PixiJS의 하위 속성을 어떻게 tween할까?',
   category: 'GSAP · Other · PixiPlugin',
   summary:
     'PixiPlugin은 PixiJS display object의 transform·색·filter를 GSAP vars로 연결하지만 renderer를 대신하지는 않습니다.',
   sourcePath: 'src/content/gsap/other/pixi-plugin/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'PixiPlugin',

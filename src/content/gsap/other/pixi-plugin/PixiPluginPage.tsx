@@ -6,7 +6,7 @@ import { RendererSection } from './sections/RendererSection/RendererSection'
 import { SetupSection } from './sections/SetupSection/SetupSection'
 import './PixiPluginPage.css'
 
-/** P30은 PixiJS가 없는 환경에서 실행 경계까지 가르치는 정적 integration page다. */
+/** PixiJS runtime 없이 PixiPlugin의 integration 경계를 설명하는 정적 페이지다. */
 export function PixiPluginPage() {
   return (
     <article className="pixi-plugin-page">
@@ -17,10 +17,6 @@ export function PixiPluginPage() {
         {pixiPluginMeta.officialSources.map((source) => (
           <OfficialDocsLink key={source.href} {...source} />
         ))}
-        <p>
-          <code>{pixiPluginMeta.sourcePath}</code> · 공식 대조일{' '}
-          {pixiPluginMeta.reviewedAt}
-        </p>
       </header>
       <SetupSection />
       <PropertiesSection />

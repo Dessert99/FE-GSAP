@@ -17,10 +17,9 @@ export function RendererSection() {
         app·sprite·renderer는 component가 파괴하지 않습니다.
       </p>
       <p>
-        이 저장소에는 <code>pixi.js</code>가 설치되어 있지 않습니다. 그래서
-        runtime source, sprite, canvas, ticker를 만들지 않았고 reduced motion을
-        위한 가짜 duration-zero 실행도 만들지 않았습니다. 실제 integration은
-        app과 renderer가 존재하는 프로젝트에서 모션 정책을 결정해야 합니다.
+        이 정적 예제는 PixiJS runtime, sprite, canvas, ticker를 만들지 않습니다.
+        실제 integration에서는 app과 renderer가 존재하는 환경에서 모션 정책과
+        cleanup 방식을 함께 결정해야 합니다.
       </p>
     </section>
   )

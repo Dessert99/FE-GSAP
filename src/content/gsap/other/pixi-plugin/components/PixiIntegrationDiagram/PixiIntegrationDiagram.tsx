@@ -10,23 +10,40 @@ import { PixiPlugin } from 'gsap/PixiPlugin'
 gsap.registerPlugin(PixiPlugin)
 PixiPlugin.registerPIXI(PIXI)
 
-const app = new PIXI.Application()
-const sprite = new PIXI.Sprite(texture)
-const tween = gsap.to(sprite, {
-  duration: ${pixiIntegrationDescriptor.duration},
-  pixi: ${JSON.stringify(pixiIntegrationDescriptor.vars, null, 2)},
-})
+async function setupPixi() {
+  const app = new PIXI.Application()
+  await app.init({ width: 320, height: 180, backgroundAlpha: 0 })
+  document.body.appendChild(app.canvas)
 
-// component cleanup owns only this tween and this Pixi application.
-${pixiIntegrationDescriptor.cleanup.join('\n')}`
+  const source = new PIXI.Graphics().circle(24, 24, 24).fill('#7c3aed')
+  const texture = app.renderer.generateTexture(source)
+  source.destroy()
+  const sprite = new PIXI.Sprite(texture)
+  app.stage.addChild(sprite)
+  const tween = gsap.to(sprite, {
+    duration: ${pixiIntegrationDescriptor.duration},
+    pixi: ${JSON.stringify(pixiIntegrationDescriptor.vars, null, 2)},
+  })
+
+  return () => {
+    ${pixiIntegrationDescriptor.cleanup.join('\n    ')}
+  }
+}
+
+const cleanupPixi = await setupPixi()
+
+// application teardown에서 호출합니다.
+function teardownApp() {
+  cleanupPixi()
+}`
 
 /** namespace → display object → GSAP update → Pixi renderer → owned cleanup을 설명한다. */
 export function PixiIntegrationDiagram() {
   return (
     <figure className="pixi-integration-diagram">
       <figcaption>
-        이 저장소에는 PixiJS가 없어서 아래 흐름은 실행하지 않는 integration
-        blueprint입니다.
+        아래 코드는 PixiJS가 있는 프로젝트에 적용할 정적 integration
+        흐름입니다.
       </figcaption>
       <ol>
         <li>
@@ -61,8 +78,8 @@ export function PixiIntegrationDiagram() {
         <li>
           <strong>5. cleanup</strong>
           <span>
-            component가 만든 tween을 kill하고, 자신이 만든 app을 destroy하며, 그
-            app이 붙인 canvas를 함께 정리합니다.
+            component가 만든 tween을 kill하고, <code>destroy(true, true)</code>로
+            자신이 만든 app·child resource·canvas를 함께 정리합니다.
           </span>
         </li>
       </ol>
@@ -70,9 +87,9 @@ export function PixiIntegrationDiagram() {
         <code>{integrationCode}</code>
       </pre>
       <p>
-        위 <code>app.destroy()</code>의 구체적인 옵션은 사용하는 PixiJS 버전과
-        app 생성 방식이 결정합니다. 이 페이지는 PixiJS dependency나 fake sprite,
-        canvas를 만들지 않으므로 실행 결과를 주장하지 않습니다.
+        이 코드는 현재 PixiJS v8 lifecycle을 기준으로 하며 이 화면에서는 실행하지
+        않습니다. 다른 major version에 적용할 때는 <code>init()</code>과{' '}
+        <code>destroy()</code> signature를 다시 확인하세요.
       </p>
     </figure>
   )
