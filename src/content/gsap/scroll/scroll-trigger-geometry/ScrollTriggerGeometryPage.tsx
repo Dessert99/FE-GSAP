@@ -1,4 +1,4 @@
-/** P41 header, geometry ownership explanation, actual ruler를 beginner order로 조립한다. */
+/** ScrollTrigger geometry 설명과 실제 ruler를 학습 순서로 조립한다. */
 import { toHref } from '../../../../app/routes'
 import { OfficialDocsLink } from '../../../../components/demo/OfficialDocsLink/OfficialDocsLink'
 import { GeometryRuler } from './examples/GeometryRuler/GeometryRuler'
@@ -21,9 +21,9 @@ export function ScrollTriggerGeometryPage() {
           ))}
         </div>
         <p>
-          14 complete technical items covered · 먼저{' '}
+          먼저{' '}
           <a href={toHref('/fundamentals/scroll-trigger-create')}>
-            P40 ScrollTrigger 생성
+            ScrollTrigger 생성
           </a>
           에서 create config와 refresh 시점을 확인하세요.
         </p>

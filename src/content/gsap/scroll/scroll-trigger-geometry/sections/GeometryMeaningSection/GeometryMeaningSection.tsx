@@ -13,8 +13,8 @@ export function GeometryMeaningSection() {
       </p>
       <p>
         <code>direction</code>은 moment-by-moment forward 1 또는 backward
-        -1입니다. continuous readout은 assistive technology에 보내지 않고, 이
-        page는 user가 요청한 sparse snapshot에서만 state를 보입니다.
+        -1입니다. 연속 readout은 보조기술에 보내지 않고, 사용자가 요청해 고정한
+        snapshot에서만 state를 보입니다.
       </p>
     </section>
   )

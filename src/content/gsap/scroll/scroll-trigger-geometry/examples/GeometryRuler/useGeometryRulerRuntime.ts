@@ -45,7 +45,9 @@ export function useGeometryRulerRuntime() {
     () => {
       // required local elements가 mount 전이면 unsafe global fallback을 만들지 않는다
       const scroller = scrollerRef.current
+      // start/end와 viewport utility가 읽을 trigger element다
       const triggerElement = triggerRef.current
+      // reduced-motion 여부에 따라 pin에 전달할 별도 element다
       const pinElement = pinRef.current
       if (!scroller || !triggerElement || !pinElement) return undefined
       // labelToScroll과 animation field를 동시에 갖도록 paused timeline에 one label을 둔다
@@ -66,6 +68,7 @@ export function useGeometryRulerRuntime() {
       triggerInstanceRef.current = instance
       // refresh 뒤 start/end numeric px measurement를 초기 snapshot으로 한 번 고정한다
       const capture = () => {
+        // callback 시점에 살아 있는 이 예제의 instance만 읽는다
         const current = triggerInstanceRef.current
         if (!current) return
         // current scroll direction/progress를 live announce하지 않고 user request 때만 문자열로 고정한다
@@ -117,6 +120,7 @@ export function useGeometryRulerRuntime() {
 
   // native scroll control은 only local ruler scrollTop을 바꾸고 then sparse snapshot을 요청한다
   const captureSnapshot = () => {
+    // button이 눌린 시점의 current instance를 고정해 읽는다
     const current = triggerInstanceRef.current
     if (!current) return
     // getter로 읽은 same position을 setter에 넘겨 위치를 바꾸지 않고 양쪽 signature를 실제 호출한다
