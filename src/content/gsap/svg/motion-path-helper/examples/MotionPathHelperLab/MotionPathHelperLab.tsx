@@ -19,8 +19,13 @@ export function MotionPathHelperLab() {
     recreateEditor,
     focusEditorPath,
   } = useMotionPathHelperAnimation()
-  // runtime descriptor와 같은 values를 노출해 복사한 코드가 다른 helper를 설명하지 않게 한다.
+  // runtime과 같은 selectors·readout·실제 cleanup 경계를 포함해 독립 실행 가능하게 표시한다.
   const code = `gsap.registerPlugin(MotionPathPlugin, MotionPathHelper)
+const path = document.querySelector('.motion-path-helper-lab path')
+const follower = document.querySelector('.motion-path-helper-lab__follower')
+const container = document.querySelector('.motion-path-helper-lab')
+if (!path || !follower || !container) throw new Error('MotionPathHelper lab DOM을 찾지 못했습니다.')
+path.setAttribute('d', ${JSON.stringify(descriptor.pathData)})
 const helper = MotionPathHelper.create(follower, {
   path,
   container,
@@ -28,9 +33,14 @@ const helper = MotionPathHelper.create(follower, {
   pathWidth: ${descriptor.pathWidth},
   selected: ${descriptor.selected},
   duration: ${descriptor.duration},
+  ease: '${descriptor.ease}',
+  onUpdate: () => console.log(path.getAttribute('d') || ''),
 })
-// edit anchors/handles, then read path.getAttribute('d')
-helper.kill()`
+${reducedMotion ? 'helper.animation?.pause(0)\n' : ''}// edit anchors/handles, then read path.getAttribute('d')
+
+function cleanup() {
+  helper.kill()
+}`
 
   return (
     <section id="editor-lifecycle">

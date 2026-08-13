@@ -5,7 +5,7 @@ export const motionPathHelperMeta = {
   summary:
     'MotionPathHelper는 path anchor와 handle을 browser에서 편집하고, 수정된 path data를 복사할 수 있게 하는 development editor입니다.',
   sourcePath: 'src/content/gsap/svg/motion-path-helper/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     {
       label: 'MotionPathHelper',
