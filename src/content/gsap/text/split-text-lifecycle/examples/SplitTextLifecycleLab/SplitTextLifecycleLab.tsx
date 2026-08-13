@@ -8,7 +8,7 @@ import { splitTextLifecycleProperties } from '../../split-text-lifecycle.propert
 import { useSplitTextLifecycleRuntime } from './useSplitTextLifecycleRuntime'
 import './SplitTextLifecycleLab.css'
 
-/** P33 command가 실제 split DOM·isSplit·code와 함께 변하는 lab이다. */
+/** command가 실제 split DOM·isSplit·표시 코드와 함께 변하는 예제다. */
 export function SplitTextLifecycleLab() {
   // runtime이 관리하는 실제 target, command descriptor, snapshots를 가져온다.
   const {
@@ -29,29 +29,49 @@ export function SplitTextLifecycleLab() {
   // re-split 전에 stale wrapper animation을 정리하는 실제 순서를 code에 더한다.
   const commandCode =
     command === 'resplit'
-      ? `ownedAnimation?.kill()\n${selectedCommand.code}`
-      : selectedCommand.code
+      ? `animation?.kill()\n${selectedCommand.code}`
+      : command === 'split'
+        ? ''
+        : selectedCommand.code
   // 같은 config descriptor와 selected command를 code panel 문법으로 직렬화한다.
   const code = `import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 
+gsap.registerPlugin(SplitText)
+
 const splitOptions = ${JSON.stringify(splitTextLifecycleConfig, null, 2)}
 
-const onSplit = (split) => gsap.from(split.chars, {
-  autoAlpha: 0,
-  y: ${reducedMotion ? 0 : 10},
-  duration: ${reducedMotion ? 0 : 0.25},
-  stagger: ${reducedMotion ? 0 : 0.015},
-})
-const splitConfig = { ...splitOptions, onSplit }
+const setup = () => {
+  const target = document.querySelector('.split-text-lifecycle-lab__target')
+  if (!target) throw new Error('SplitText target이 필요합니다.')
+  let animation
+  const onSplit = (split) => {
+    animation = gsap.from(split.chars, {
+      autoAlpha: 0,
+      y: ${reducedMotion ? 0 : 10},
+      duration: ${reducedMotion ? 0 : 0.25},
+      stagger: ${reducedMotion ? 0 : 0.015},
+    })
+    return animation
+  }
+  const splitConfig = { ...splitOptions, onSplit }
+  let split = SplitText.create(target, splitConfig)
 
-// ${selectedCommand.label} 명령
-${commandCode}`
+  // ${selectedCommand.label} 명령
+  ${commandCode.replaceAll('\n', '\n  ')}
+  return () => {
+    animation?.kill()
+    split.revert()
+  }
+}
+
+const cleanup = setup()
+// component unmount에서 cleanup()을 호출합니다.`
   return (
     <section id="split-text-lifecycle-lab">
       <InteractiveExample
-        title="resizable SplitText lifecycle"
-        description="너비를 바꾼 뒤 command를 실행하고, 원래 DOM과 split wrapper snapshot이 어떻게 다른지 확인하세요. re-split은 먼저 이 lab이 만든 animation을 멈춥니다."
+        title="너비가 바뀌는 SplitText lifecycle"
+        description="너비를 바꾼 뒤 command를 실행하고, 원래 DOM과 split wrapper snapshot이 어떻게 다른지 확인하세요. re-split은 먼저 이 예제가 만든 animation을 멈춥니다."
         sourcePath="src/content/gsap/text/split-text-lifecycle/examples/SplitTextLifecycleLab/useSplitTextLifecycleRuntime.ts"
         controls={
           <div className="split-text-lifecycle-lab__controls">
@@ -138,9 +158,9 @@ ${commandCode}`
         ]}
         explanation={
           <p>
-            P32 creation에서 만든 wrapper와 array를 전제로 합니다. target에는
-            live region이 없고, SplitText <code>aria: auto</code> supplies one
-            readable label while wrappers are hidden from assistive technology.
+            SplitText.create()가 만든 wrapper와 array를 전제로 합니다. target에는
+            live region이 없고, <code>aria: auto</code>는 읽을 문장 하나를
+            유지하면서 생성된 wrapper를 보조기술에서 숨깁니다.
           </p>
         }
         onReplay={runCommand}

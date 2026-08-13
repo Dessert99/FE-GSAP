@@ -121,7 +121,7 @@ export function useSplitTextLifecycleRuntime() {
       stopOwnedAnimation()
       // split()은 필요하면 revert()를 먼저 호출한 뒤 current config로 다시 나눈다.
       split.split(createConfig())
-      return refreshSnapshot('re-split after owned animation stop', split)
+      return refreshSnapshot('animation을 멈춘 뒤 re-split', split)
     }
     // revert는 original innerHTML과 original aria attributes를 복원하고 kill도 수행한다.
     if (descriptor.action === 'revert') {

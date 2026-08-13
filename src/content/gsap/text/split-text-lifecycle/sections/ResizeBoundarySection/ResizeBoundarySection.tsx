@@ -16,7 +16,7 @@ export function ResizeBoundarySection() {
         </li>
         <li>
           <strong>re-split 전</strong> — old char/word/line wrapper를 target으로
-          한 owned animation을 먼저 멈춥니다. 그런 뒤 <code>split()</code>이
+          이 예제가 만든 animation을 먼저 멈춥니다. 그런 뒤 <code>split()</code>이
           필요하면
           <code>revert()</code>를 거쳐 새 layout을 나눕니다.
         </li>
@@ -29,8 +29,8 @@ export function ResizeBoundarySection() {
       </ol>
       <p>
         selection 또는 focus가 wrapper node에 남아 있다면 re-split 전에 그 UX를
-        별도로 설계해야 합니다. 이 lab은 plain text target의 original DOM과 auto
-        aria state만 소유하며, external element나 animation을 kill하지 않습니다.
+        별도로 설계해야 합니다. 이 예제는 plain text target의 original DOM과
+        자동 aria state만 정리하며, 외부 element나 animation을 kill하지 않습니다.
       </p>
     </section>
   )
