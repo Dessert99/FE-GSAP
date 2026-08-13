@@ -15,23 +15,41 @@ export function ObserverInputPad() {
     registry,
     sendKeyboardDirection,
   } = useObserverInputPadRuntime()
-  // same descriptor literal을 create call code에만 format한다.
-  const code = `const observer = Observer.create({
-  target: inputPad,
-  id: '${descriptor.id}',
-  type: '${descriptor.type}',
-  tolerance: ${descriptor.tolerance},
-  debounce: ${descriptor.debounce},
-  preventDefault: ${descriptor.preventDefault},
-  lockAxis: ${descriptor.lockAxis},
-})
-const all = Observer.getAll()
-const found = Observer.getById('${descriptor.id}')`
+  // same descriptor와 registry read를 selector 기반 setup/cleanup 경계로 format한다.
+  const code = `function setupObserver() {
+  gsap.registerPlugin(Observer)
+  const target = document.querySelector('.observer-input-pad__target')
+  if (!target) throw new Error('Observer input pad를 찾지 못했습니다.')
+  const record = (direction, self) => {
+    console.log(direction, { x: self.deltaX, y: self.deltaY })
+  }
+  const observer = Observer.create({
+    target,
+    id: '${descriptor.id}',
+    type: '${descriptor.type}',
+    tolerance: ${descriptor.tolerance},
+    debounce: ${descriptor.debounce},
+    preventDefault: ${descriptor.preventDefault},
+    lockAxis: ${descriptor.lockAxis},
+    onUp: (self) => record('up', self),
+    onDown: (self) => record('down', self),
+    onLeft: (self) => record('left', self),
+    onRight: (self) => record('right', self),
+    onLockAxis: (self) => record(\`axis \${self.axis || 'pending'}\`, self),
+  })
+  const all = Observer.getAll()
+  const found = Observer.getById('${descriptor.id}')
+  const targetMatches = observer.target === target
+  const varsId = observer.vars.id
+  console.log({ all, found, targetMatches, varsId })
+  return () => observer.kill()
+}
+const cleanup = setupObserver()`
 
   return (
     <section id="observer-lab">
       <InteractiveExample
-        title="owned Observer input pad and registry"
+        title="Observer input pad and registry"
         description="pad 위에서 pointer drag 또는 wheel을 사용하거나 keyboard direction buttons를 누르세요. Observer callback의 discrete direction과 actual registry lookup을 나란히 확인합니다."
         sourcePath="src/content/gsap/ui/observer-create/examples/ObserverInputPad/useObserverInputPadRuntime.ts"
         controls={
@@ -91,7 +109,7 @@ const found = Observer.getById('${descriptor.id}')`
         watchFor={[
           'continuous delta output은 live region이 아니며 screen reader에 매 movement를 말하지 않습니다.',
           'keyboard buttons는 pointer event를 흉내 내지 않고 direction vocabulary의 accessible fallback입니다.',
-          'unmount cleanup은 registry all을 kill하지 않고 this owned observer 하나만 kill합니다.',
+          'unmount cleanup은 registry 전체가 아니라 이 예제가 만든 observer 하나만 kill합니다.',
         ]}
         explanation={
           <p>

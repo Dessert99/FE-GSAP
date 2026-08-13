@@ -39,8 +39,8 @@ export function ObserverCreatePage() {
           <code>getAll()</code>은 not-killed observer array,{' '}
           <code>getById()</code>는 configured id instance를 찾습니다. instance{' '}
           <code>target</code>은 listened Element이고 <code>vars</code>는
-          create에 passed original configuration입니다. 이 page cleanup은 own
-          ref 하나만 <code>kill()</code>합니다.
+          create에 전달한 original configuration입니다. 이 페이지는 직접 만든
+          instance 하나만 <code>kill()</code>합니다.
         </p>
       </section>
     </article>
