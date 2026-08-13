@@ -4,18 +4,18 @@ import './ImmediateRenderExample.css'
 import { type ImmediateMethod, type ImmediateRenderDescriptor, useImmediateRenderAnimation } from './useImmediateRenderAnimation'
 
 // runtime descriptor를 실제 method 문법과 reduced-motion 정적 단계로 직렬화한다.
-function createImmediateRenderCode(descriptor: ImmediateRenderDescriptor) {
+function createImmediateRenderCode(descriptor: ImmediateRenderDescriptor, targetSelector: string) {
   // phase 비교가 항상 같은 현재 x에서 시작하도록 runtime 초기화도 표시한다.
-  const initialState = `gsap.set('.box', { x: ${descriptor.currentX} }) // 생성 전 현재 상태`
+  const initialState = `gsap.set('${targetSelector}', { x: ${descriptor.currentX} }) // 생성 전 현재 상태`
   // 실제 호출에 공통으로 들어가는 timing property를 한 줄씩 표시한다.
   const timing = `duration: ${descriptor.timing.duration}, delay: ${descriptor.timing.delay}, immediateRender: ${descriptor.timing.immediateRender}, ease: 'none', onStart: observeStart, onComplete: observeComplete`
   // 선택한 method의 인자 구조를 descriptor 그대로 옮긴다.
   const call = descriptor.method === 'from'
-    ? `gsap.from('.box', { x: ${descriptor.fromVars.x}, ${timing} })`
-    : `gsap.fromTo('.box',\n  { x: ${descriptor.fromVars.x} },\n  { x: ${descriptor.toVars.x}, ${timing} }\n)`
+    ? `gsap.from('${targetSelector}', { x: ${descriptor.fromVars.x}, ${timing} })`
+    : `gsap.fromTo('${targetSelector}',\n  { x: ${descriptor.fromVars.x} },\n  { x: ${descriptor.toVars.x}, ${timing} }\n)`
   // 모션 감소 환경의 두 정적 snapshot도 runtime 실행 순서와 맞춰 표시한다.
   const staticSteps = descriptor.reducedMotion
-    ? `\n\ngsap.set('.box', { x: ${descriptor.createdX} }) // 생성 직후 snapshot\ngsap.set('.box', { x: ${descriptor.finalX} }) // 완료 snapshot`
+    ? `\n\ngsap.set('${targetSelector}', { x: ${descriptor.createdX} }) // 생성 직후 snapshot\ngsap.set('${targetSelector}', { x: ${descriptor.finalX} }) // 완료 snapshot`
     : ''
 
   return `${initialState}\n${call}${staticSteps}`
@@ -32,9 +32,9 @@ const phaseLabels = {
 /** immediateRender가 delay 전 화면에 미치는 영향을 실제 snapshot으로 비교한다. */
 export function ImmediateRenderExample() {
   // runtime의 control·descriptor·관찰 상태를 학습 UI에 연결한다.
-  const { scope, targetClassName, method, setMethod, immediateRender, setImmediateRender, descriptor, snapshots, reducedMotion, replay } = useImmediateRenderAnimation()
+  const { scope, targetSelector, targetClassName, method, setMethod, immediateRender, setImmediateRender, descriptor, snapshots, reducedMotion, replay } = useImmediateRenderAnimation()
   // 실제 실행 descriptor만 문법으로 바꿔 code panel에 전달한다.
-  const code = createImmediateRenderCode(descriptor)
+  const code = createImmediateRenderCode(descriptor, targetSelector)
   // null인 초기 관찰값을 아직 읽지 않았다는 문장으로 표시한다.
   const formatSnapshot = (value: number | null) => value === null ? '관찰 전' : `x ${value}`
 
@@ -75,7 +75,7 @@ export function ImmediateRenderExample() {
         )}
         code={code}
         propertyDetails={[
-          { name: 'immediateRender', type: 'boolean', defaultValue: 'true', acceptedValues: 'true면 생성 즉시 fromVars 적용, false면 실제 시작까지 현재 상태 유지' },
+          { name: 'immediateRender', type: 'boolean', defaultValue: 'true', acceptedValues: 'true면 from()의 vars 또는 fromTo()의 fromVars를 생성 즉시 적용, false면 실제 시작까지 현재 상태 유지' },
           { name: 'delay', type: 'number', defaultValue: '0초', acceptedValues: 'Tween이 시작되기 전 대기할 0 이상의 초' },
           { name: 'fromVars', type: 'object', defaultValue: '없음', acceptedValues: 'fromTo의 시작 상태, animation 값 중심' },
           { name: 'toVars', type: 'object', defaultValue: '없음', acceptedValues: 'fromTo의 끝 상태와 duration·ease·callback' },

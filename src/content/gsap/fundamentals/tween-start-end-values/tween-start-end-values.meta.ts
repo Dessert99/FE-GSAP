@@ -4,7 +4,7 @@ export const tweenStartEndValuesMeta = {
   category: 'GSAP · Fundamentals',
   summary: '현재 상태를 읽을지, 시작값과 끝값을 직접 적을지에 따라 to, from, fromTo, set 중 맞는 생성 method를 고릅니다.',
   sourcePath: 'src/content/gsap/fundamentals/tween-start-end-values/',
-  reviewedAt: '2026-08-03',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: '공식 gsap.from() 문서', href: 'https://gsap.com/docs/v3/GSAP/gsap.from%28%29/' },
     { label: '공식 gsap.fromTo() 문서', href: 'https://gsap.com/docs/v3/GSAP/gsap.fromTo%28%29/' },

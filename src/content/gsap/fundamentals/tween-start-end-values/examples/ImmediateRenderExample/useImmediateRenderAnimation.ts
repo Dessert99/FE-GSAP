@@ -44,8 +44,10 @@ function readTargetX(target: HTMLElement) {
 export function useImmediateRenderAnimation() {
   // useGSAP selector와 cleanup을 이 예제 DOM 안으로 제한한다.
   const scope = useRef<HTMLDivElement>(null)
-  // runtime 호출과 preview가 공유할 target class다.
-  const targetClassName = 'immediate-render-example__target'
+  // 표시 코드와 실제 GSAP 호출이 공유할 selector다.
+  const targetSelector = '.box'
+  // 공통 selector와 preview 전용 스타일을 target의 class에 함께 연결한다.
+  const targetClassName = 'box immediate-render-example__target'
   // 현재 비교할 from 계열 method를 보존한다.
   const [method, setMethod] = useState<ImmediateMethod>('from')
   // 생성 즉시 시작값을 적용할지 제어한다.
@@ -64,11 +66,11 @@ export function useImmediateRenderAnimation() {
   useGSAP(
     () => {
       // selector 결과를 phase별 getProperty 관찰에 사용할 실제 element로 좁힌다.
-      const target = scope.current?.querySelector<HTMLElement>(`.${targetClassName}`)
+      const target = scope.current?.querySelector<HTMLElement>(targetSelector)
       if (!target) return
 
       // 매 비교 전 현재 상태를 같은 x로 초기화한다.
-      gsap.set(target, { x: descriptor.currentX })
+      gsap.set(targetSelector, { x: descriptor.currentX })
       // 이전 실행의 phase 안내를 새 생성 시점으로 되돌린다.
       setSnapshots({ createdX: null, startedX: null, finalX: null, phase: 'ready' })
       // mount와 control 변경에서는 현재 상태만 준비하고 새 replay action에서만 Tween을 만든다.
@@ -85,17 +87,17 @@ export function useImmediateRenderAnimation() {
 
       if (descriptor.method === 'from') {
         // 명시한 fromVars를 시작으로 쓰고 초기화한 현재 x를 끝으로 보존한다.
-        gsap.from(target, { ...descriptor.fromVars, ...timingVars })
+        gsap.from(targetSelector, { ...descriptor.fromVars, ...timingVars })
       } else {
         // 현재 x와 무관하게 명시한 fromVars와 toVars 사이를 재생한다.
-        gsap.fromTo(target, descriptor.fromVars, { ...descriptor.toVars, ...timingVars })
+        gsap.fromTo(targetSelector, descriptor.fromVars, { ...descriptor.toVars, ...timingVars })
       }
 
       if (descriptor.reducedMotion) {
         // 생성 직후 상태를 이동 없이 한 frame에 적용해 첫 snapshot을 남긴다.
-        gsap.set(target, { x: descriptor.createdX })
+        gsap.set(targetSelector, { x: descriptor.createdX })
         // 모션 없이 시작·끝 차이를 읽도록 최종 상태도 같은 frame에 적용한다.
-        gsap.set(target, { x: descriptor.finalX })
+        gsap.set(targetSelector, { x: descriptor.finalX })
         setSnapshots({ createdX: descriptor.createdX, startedX: descriptor.createdX, finalX: descriptor.finalX, phase: 'finished' })
       } else {
         // normal motion에서는 GSAP이 생성 즉시 실제로 적용한 x를 읽는다.
@@ -109,6 +111,7 @@ export function useImmediateRenderAnimation() {
   // UI가 runtime descriptor와 실제 phase snapshot만 소비하게 한다.
   return {
     scope,
+    targetSelector,
     targetClassName,
     method,
     setMethod,

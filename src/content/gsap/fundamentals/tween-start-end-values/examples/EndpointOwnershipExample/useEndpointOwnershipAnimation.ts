@@ -37,8 +37,10 @@ function createEndpointDescriptor(method: EndpointMethod, reducedMotion: boolean
 export function useEndpointOwnershipAnimation() {
   // useGSAP이 예제 밖의 같은 class를 건드리지 않게 범위를 제한한다.
   const scope = useRef<HTMLDivElement>(null)
-  // 실제 GSAP target과 preview가 공유할 class 이름이다.
-  const targetClassName = 'endpoint-ownership-example__target'
+  // 표시 코드와 실제 GSAP 호출이 공유할 selector다.
+  const targetSelector = '.box'
+  // 공통 selector와 preview 전용 스타일을 target의 class에 함께 연결한다.
+  const targetClassName = 'box endpoint-ownership-example__target'
   // 네 생성 method 중 현재 비교할 항목을 보존한다.
   const [method, setMethod] = useState<EndpointMethod>('to')
   // 같은 설정을 다시 출발점부터 실행하기 위한 key다.
@@ -53,7 +55,7 @@ export function useEndpointOwnershipAnimation() {
   useGSAP(
     () => {
       // 선택한 method가 항상 같은 현재 x를 읽도록 먼저 기준 상태를 만든다.
-      gsap.set(`.${targetClassName}`, descriptor.initialVars)
+      gsap.set(targetSelector, descriptor.initialVars)
       // mount와 control 변경에서는 기준 상태만 준비하고 새 replay action에서만 Tween을 만든다.
       if (runKey === executedRunKey.current) return
       // 이번 replay key를 소비해 같은 key의 dependency 재실행을 자동 재생으로 만들지 않는다.
@@ -61,16 +63,16 @@ export function useEndpointOwnershipAnimation() {
 
       if (descriptor.method === 'to') {
         // 현재 x를 시작값으로 읽고 vars의 목표 x까지 이동한다.
-        gsap.to(`.${targetClassName}`, descriptor.vars)
+        gsap.to(targetSelector, descriptor.vars)
       } else if (descriptor.method === 'from') {
         // vars의 x를 즉시 시작값으로 놓고 미리 만든 현재 x로 돌아온다.
-        gsap.from(`.${targetClassName}`, descriptor.vars)
+        gsap.from(targetSelector, descriptor.vars)
       } else if (descriptor.method === 'fromTo') {
         // 현재 x를 무시하고 fromVars와 toVars에 적은 두 끝을 그대로 사용한다.
-        gsap.fromTo(`.${targetClassName}`, descriptor.fromVars, descriptor.toVars)
+        gsap.fromTo(targetSelector, descriptor.fromVars, descriptor.toVars)
       } else {
         // 중간값 없이 vars의 x를 같은 frame에 즉시 적용한다.
-        gsap.set(`.${targetClassName}`, descriptor.vars)
+        gsap.set(targetSelector, descriptor.vars)
       }
     },
     // method·모션 설정·replay가 바뀌면 이전 inline transform을 되돌리고 다시 비교한다.
@@ -80,6 +82,7 @@ export function useEndpointOwnershipAnimation() {
   // UI가 runtime descriptor와 replay action을 그대로 소비한다.
   return {
     scope,
+    targetSelector,
     targetClassName,
     method,
     setMethod,

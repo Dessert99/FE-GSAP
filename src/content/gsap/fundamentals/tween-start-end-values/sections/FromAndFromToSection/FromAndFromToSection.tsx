@@ -32,6 +32,11 @@ export function FromAndFromToSection() {
 )`}</code></pre>
         </article>
       </div>
+      <p className="tween-values-page__note">
+        <strong>반환 Tween:</strong> 변수에 담으면 <code>pause()</code>, <code>seek()</code>, <code>progress()</code>, <code>play()</code>로
+        나중에 제어할 수 있습니다. 저장하지 않아도 기본으로 바로 재생하지만 <code>delay</code>나 <code>paused</code>를 설정하면 시작 시점이
+        달라지고, 완료된 Tween은 GSAP의 활성 처리에서 정리됩니다.
+      </p>
       <p className="tween-values-page__note"><strong>사용하지 않을 형태:</strong> 예전의 positional <code>duration</code> overload는 deprecated입니다. 초 단위 시간은 항상 <code>vars.duration</code>에 둡니다.</p>
     </section>
   )

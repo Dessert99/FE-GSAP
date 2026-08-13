@@ -17,6 +17,10 @@ export function ChooseMethodSection() {
         <article><h3>명시한 시작 → 명시한 끝</h3><p>렌더 전 상태가 무엇이든 같은 두 끝을 보장하려면 <strong>fromTo</strong>.</p></article>
         <article><h3>시간 없이 즉시</h3><p>중간값 없이 다음 상태를 바로 적용하려면 <strong>set</strong>.</p></article>
       </div>
+      <p className="tween-values-page__note">
+        <strong>from()을 반복 생성할 때:</strong> 이전 Tween이 끝나기 전에 새 <code>from()</code>을 만들면 첫 render 시점의 중간값이 새
+        끝값이 될 수 있습니다. 끝값이 항상 같아야 하면 <code>fromTo()</code>로 양 끝을 쓰거나 Tween을 한 번 만든 뒤 다시 재생하세요.
+      </p>
     </section>
   )
 }
