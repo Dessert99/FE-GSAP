@@ -3,9 +3,9 @@ export const timelineChildPlacementMeta = {
   title: 'child는 부모 시간축의 어디에 놓이고 변경 시 어떻게 따라가나요?',
   category: 'GSAP · Timeline',
   summary:
-    'Timeline은 animation을 담는 상자가 아니라 자식마다 시작 좌표를 하나씩 배정하는 시간축입니다. 다섯 개의 공식 API는 그 좌표를 정하고(add), 방금 정한 좌표를 가리키고(recent), 이미 정한 좌표를 통째로 옮기고(shiftChildren), 좌표가 누구 것인지 밝히고(parent), 값이 바뀔 때 좌표를 다시 맞출지 결정합니다(smoothChildTiming).',
+    'Timeline은 각 child에 부모 시간축 기준의 시작 좌표를 배정합니다. add·recent·shiftChildren·parent·smoothChildTiming으로 좌표를 정하고, 조회하고, 옮기고, 변경 시 재배치할지를 확인합니다.',
   sourcePath: 'src/content/gsap/fundamentals/timeline-child-placement/',
-  reviewedAt: '2026-08-08',
+  reviewedAt: '2026-08-13',
   officialSources: [
     { label: 'Timeline.parent', href: 'https://gsap.com/docs/v3/GSAP/Timeline/parent' },
     { label: 'Timeline.smoothChildTiming', href: 'https://gsap.com/docs/v3/GSAP/Timeline/smoothChildTiming' },
